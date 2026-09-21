@@ -208,3 +208,58 @@ keys. `--expect-voxels` presizes both.
 A POSIX pipe holds 64 KiB; the request is 1.96 MB, so the write blocks until the worker
 drains it and the worker only drains after finishing the previous frame. The payload now
 rides a /dev/shm slot ring and the pipe carries 10-byte requests / 22-byte responses.
+
+---
+## v0.3 DYNAMIC OBJECTS (2026-09-21) — what is now fixed, and what is pose-limited
+
+### D1. The deployed mechanism
+Semantic candidate gate -> range-image free-space EVIDENCE -> publish-time WITHHOLDING.
+`sem_core.FreeSpaceCarver` + `SemanticVoxelMap(dyn=True)` + `snapshot(k_free=...)`.
+No voxel is ever deleted and `VoxelHash` is untouched; a withheld voxel keeps its score,
+rgb and centroid and reappears the moment the evidence is reset.  `--dyn` off allocates
+nothing and is BIT-IDENTICAL to v0.2 (opt/verify_v03.py V1).
+FROZEN operating point: 64 x 150 image, margin 0.6 m, r in [3, 25] m, dilation (1,1),
+reset_on_seen 0, k_free 24.  Every value sits on a measured curve in opt/out/sweep/.
+
+### D2. SEMANTICS SELECT, GEOMETRY DECIDES — measured, not asserted
+The naive "delete every point predicted potentially-movable" arm, run with the node's OWN
+PTv3 argmax over 1086 frames: dynamic recall 97.25 %, static false-kill **9.83 %**,
+parked-vehicle/person false-kill **93.75 %**, 12.18 static points destroyed per moving
+point removed.  The analytic bound with a PERFECT classifier is no better: 100 % / 9.81 %
+/ 96.59 %.  A class-only policy deletes 211 whole parked objects.  Never ship one.
+
+### D3. THE FALSE-KILL FLOOR IS THE TRAJECTORY, NOT THE MECHANISM
+out/seq07_ate.json: the deployed FAST-LIVO2 trajectory has **ATE RMSE 0.879 m** (max 1.84 m)
+— four to nine 0.2 m voxels.  A map-vs-sweep visibility test cannot be more accurate than
+the relative pose error between the sweep that WROTE a voxel and the sweep that TESTS it.
+Measured directly, identical config and frames, only the pose source swapped:
+    FAST-LIVO2 poses   static false-kill 0.260 %   vp 2.454 %   recall 63.49 %
+    SemanticKITTI GT   static false-kill 0.052 %   vp 0.468 %   recall 63.99 %
+i.e. 5.0x / 5.2x lower false-kill at unchanged recall.  Do NOT try to buy that factor back
+by tuning the carver; it is bought in the pose layer.
+
+### D4. reset_on_seen MUST BE OFF ON THIS PIPELINE
+Dynablox's "ever-free = k CONSECUTIVE free observations" rule collapses here: with a 0.88 m
+ATE the "still occupied" observation is itself unreliable, so one spurious re-occupation
+wipes real evidence.  MEASURED at matched false-kill, reset_on_seen 1 leaves 1217 of 2228
+ribbon voxels against 96 for reset_on_seen 0.  Cumulative evidence, not consecutive.
+
+### D5. COARSER AZIMUTH IS SAFER, AND src/eval_report.py CANNOT SEE ANY OF THIS
+Azimuth resolution at k_free 12, dil (1,1) — static false-kill vs ribbon-7 voxel reduction:
+56 col 0.167 %/88.6 %, 75 col 0.189 %/92.5 %, 112 col 0.260 %/93.8 %, 150 col 0.327 %/94.3 %,
+225 col 0.430 %/94.4 %, 450 col 0.646 %/94.6 %, 900 col 0.932 %/94.6 %.  A wider bin keeps a
+nearer return and therefore cannot carve; fine azimuth is the dangerous direction.
+src/eval_report.py scores per-point INFERENCE and never touches the map, and SK_TO_COARSE
+maps 252 and 10 both to `car`, so a map-level change registers as EXACTLY ZERO there.  Its
+three v0.3 repeats (87.247 / 87.280 / 87.334 % point accuracy) sit inside their own K4 spread
+and prove only that the inference path is untouched.  Map-level accuracy is in
+opt/replay_v03.py (`map_accuracy`): withholding moves map point accuracy 91.038 -> 90.999 %
+and coarse mIoU 59.42 -> 58.20 (11 cls) / 68.18 -> 66.91 (9 cls) — it goes DOWN, because the
+coarse label space scores a correctly-classified ghost as a true positive.  That is a property
+of the metric, not a regression.
+
+### D6. PEDESTRIANS ARE OUT OF SCOPE AND SAID SO IN ADVANCE
+Per-moving-class recall at the frozen point: moving-truck 91.25 %, moving-bicyclist 67.66 %,
+moving-car 56.78 %, **moving-person 17.12 %**.  A walking person displaces 0.04-0.17 m per
+sweep, under one 0.2 m voxel, so a free-space test has no separation to work with.  Always
+report recall PER MOVING CLASS; a pooled number hides this.

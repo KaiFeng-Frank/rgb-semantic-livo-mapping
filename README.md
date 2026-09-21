@@ -213,6 +213,82 @@ the map keeps a ~31 m ribbon. Visible in `docs/img/rviz_dynamic_class_zoom.png`.
 
 ---
 
+## Dynamic objects (v0.3): semantics is not a policy
+
+A moving vehicle used to leave a ~31 m ribbon in the map. v0.3 removes it with **semantic candidate
+gating + range-image free-space evidence + publish-time withholding** (no deletion, no ray casting).
+
+The control arm is the point. "Just delete everything classified as a vehicle" is the obvious policy,
+and it fails — *not* because the classifier is imperfect, but because the policy is wrong:
+
+| arm | dynamic recall | **static false-kill** | damage ratio |
+|---|---|---|---|
+| no-op (v0.2) | 0 % | 0 % | — |
+| naive class-delete, real PTv3 output | 97.2 % | **9.83 %** | 12.18 |
+| **naive class-delete, PERFECT classifier** (analytic bound) | 100 % | **9.81 %** | 11.80 |
+| **v0.3** | 60.1 % | **0.161 %** | **0.33** |
+
+Even a zero-error classifier destroys 9.81 % of static points, because a parked car and a moving car
+are the same class. seq 07 has 383 stationary car clusters against 51 moving ones. Ribbon: 2228 → 199
+voxels (−91.1 %). Real-time gate met with 28 ms to spare.
+
+**The precise negative — the false-kill floor is the trajectory, not the mechanism.** Swapping only
+the pose source, identical config and frames:
+
+| pose source | static false-kill | vehicle-parked FK | recall |
+|---|---|---|---|
+| FAST-LIVO2 (ATE 0.879 m) | 0.260 % | 2.454 % | 63.49 % |
+| SemanticKITTI GT poses | **0.052 %** | **0.468 %** | 63.99 % |
+
+**5.0×**, at unchanged recall. ATE 0.879 m is 4–9 voxels at 0.2 m — a map-vs-sweep visibility test
+cannot beat the relative pose error between the sweep that wrote a voxel and the sweep that tests it.
+That factor is bought in the pose layer, not in the carver.
+
+Honest caveats: pooled recall is 60.1 %, not 95 % (truck 91.3 / bicyclist 67.7 / car 56.8 /
+**person 17.1** — a pedestrian displaces 0.04–0.17 m per sweep, less than one 0.2 m voxel, so a
+visibility test has no separation to work with). All three pre-registered gates were *just* missed
+(0.161 vs ≤0.1 %, 1.504 vs ≤1 %, 91.1 vs ≥95 %) and were not relaxed afterwards.
+
+One more instrument trap: conventional per-point mIoU **goes down** after dynamic removal
+(59.42 → 58.20, 11-class), because a coarse label space scores a correctly-classified ghost as a true
+positive. SemanticKITTI's moving-class ids are the only honest instrument here.
+
+---
+
+## "Why not project 2D segmentation onto the points?"
+
+The obvious challenge, answered with a boundary instead of a defence.
+**Full experiment, including the 14 concessions made to the 2D arm: [`docs/2d_vs_3d.md`](docs/2d_vs_3d.md).**
+
+All 1101 frames of seq 07, common-9 label space, one mask built once and passed to both arms:
+
+| arm | coverage | in-frustum mIoU | global mIoU (unlabelled = wrong) |
+|---|---|---|---|
+| **3D** — PTv3 | 100 % | 65.43 ±0.22 | **65.00 ±0.09** |
+| **2D** — EoMT-L (Cityscapes 84.2) projected | **15.24 %** | **77.59** | 14.24 |
+| **Hybrid** — 2D in frustum, 3D outside | 100 % | 75.89 | **66.60 ±0.04** |
+
+**2D wins inside the frustum by 12.2 mIoU — 55× the 3D arm's own run-to-run noise.** It wins 8 of 9
+classes (`person` 75.4 vs 39.8, `sidewalk` 87.9 vs 66.5). That is not a result to hide.
+
+**3D wins the map, entirely on coverage, and the crossover is arithmetic:** at 93.74 % accuracy where
+it speaks, the 2D arm would need to label 93.6 % of all points to match 3D globally. It labels 15.2 %.
+The "but the camera sweeps as you drive" rebuttal gets a number too — over the whole trajectory only
+**35.77 %** of occupied map voxels are *ever* seen by the camera.
+
+**The structural weakness is geometric, and only there.** At depth discontinuities 2D drops 11.60
+accuracy points against 3D's 2.73 (**4.2×**) — the only in-frustum subset 3D wins. At *semantic*
+boundaries 2D still wins, so it is the projection, not the recognition.
+
+The honest conclusion is **both**: the hybrid beats 3D alone on every global metric (66.60 vs 65.00
+mIoU, 18× noise) at full coverage — for 3× the latency (335 ms serial / 253 ms parallel vs 83 ms) and
+a second network. For a global map at 10 Hz, 3D is the backbone; the camera's job here is colour.
+
+*Self-refuting bonus:* the preparation reasoned that KITTI must be upscaled 3.2× to focal-match
+Cityscapes. Measured on a held-out sequence, 3.20× is **worse than native**; the optimum is 1.30×.
+Following the reasoned default would have handicapped the 2D arm by ~2.3 mIoU.
+
+
 ## Architecture
 
 ```
@@ -292,7 +368,8 @@ Two things that will bite you if skipped:
 
 ## Known limits, stated plainly
 
-* **No dynamic-object removal**, so moving vehicles leave trails. By design for this milestone.
+* **Dynamic removal recalls 60.1 % of moving points**, and only 17.1 % for pedestrians — they move
+  less than one voxel per sweep. Its false-kill floor is set by trajectory error, not by the mechanism.
 * **RGB covers 37.7 % of map voxels.** The camera is a narrow forward frustum; the LiDAR is 360°.
 * **The model is not bit-deterministic** and one source of it remains unidentified (see above).
   Confidence is meaningful, so the map is gated at `conf ≥ 0.5`.
@@ -311,8 +388,11 @@ Two things that will bite you if skipped:
 unchanged. Along the way: the obvious lever (`grid_size`) was measured and rejected, and two of the
 three biggest wins turned out to be a wrong comment and a pure-Python loop.
 
-**v0.3 — make the map honest about time.** Dynamic-object handling, so a moving car is a moving car
-and not a 31 m ribbon. SemanticKITTI's moving-class labels mean this can be scored, not eyeballed.
+**v0.3 — make the map honest about time. ✅ done.** Dynamic-object handling scored against
+SemanticKITTI's moving-class ids. Ribbon −91.1 %, static false-kill 0.161 % against the naive
+control arm's 9.83 % — 61× — and 62× against that arm's *perfect-classifier* bound. The finding that
+matters is the precise negative: the false-kill floor is the trajectory (5.0× better on GT poses),
+not the removal mechanism.
 
 **v0.4 — cross-sensor semantics that survive the transfer.** Trap #1 is a symptom of something
 larger: a segmentation network trained on one LiDAR consumes raw geometry and raw intensity from
