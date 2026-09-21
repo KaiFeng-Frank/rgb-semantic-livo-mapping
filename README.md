@@ -380,6 +380,42 @@ Two things that will bite you if skipped:
 
 ---
 
+## v0.4 in progress — preregistered before any arm was trained
+
+**[`docs/v04_preregistration.md`](docs/v04_preregistration.md) was committed before a single arm
+existed.** Its value is entirely in that ordering: published afterwards, nobody could tell whether
+the thresholds were chosen to fit the result. The git timestamp is the evidence.
+
+The question: *a 2D teacher can only see 15.24 % of the points. If it supervises only those, does the
+3D student improve on the other 84.76 % it never saw?* Three published results disagree —
+ImageTo360 (ICCVW'23) says yes, SAL-4D (CVPR'25) says no unless you fix the input distribution, and
+IGNet (WACV'24) measured a purpose-built cross-frustum loss at **+0.2 mIoU**. None of the three ever
+reports the out-of-frustum subset *alone*, which is what this asks.
+
+Fixed in advance:
+
+- **Primary metric = out-of-frustum-only mIoU.** At 15/85 coverage, the teacher's +12.2 in-frustum
+  mechanically yields ~+1.8 *global* with literally zero propagation, so judging on global would make
+  both YES and NO meaningless.
+- **Decision threshold = 0.524 mIoU** (3σ), from **six** independent forward passes of the frozen
+  zero-shot model. The instrument reproduces the published 89.39 / 65.43 ±0.22 before being used.
+- **`two_wheeler` is declared an abstain cell in advance.** Its half-range out of frustum is 3.396 —
+  it alone is **52.5 %** of the primary metric's variance, and arm A's single highest draw turned out
+  to be a two_wheeler outlier rather than a real shift. The preregistered sign test is therefore
+  8 cells, not 9.
+- **Falsifiable sign prediction**, recorded before any number: car, sidewalk, vegetation, person,
+  large_vehicle UP · road FLAT · terrain and manmade DOWN unless excluded. A mismatched sign pattern
+  means the correction/regression reading is wrong — and that is the finding, not something to explain away.
+- **If arm B lands inside arm A's spread, the verdict is "a signal of this magnitude is not enough",
+  NOT "distillation does not work".** Only arm D (GT supervision restricted to the same 15 %) can
+  separate those two, which is why it is not optional.
+
+Arms, cheapest kill first: **B1** freeze the backbone and retrain only the head — if that alone
+captures the gain, the story collapses to class-prior recalibration and the remaining 23 GPU-hours
+are not worth spending · **D** GT, in-frustum only · **B0** pseudo-label distillation · **C** GT
+everywhere (the ceiling). *B vs D prices pseudo-label noise. D vs C prices supervision sparsity.*
+
+
 ## Roadmap
 
 **v0.1 — the honest baseline.** Four components, six criteria, every number against ground truth.

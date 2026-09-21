@@ -1,0 +1,73 @@
+====================================================================================================
+v0.4 STEP 1 -- ARM A (PTv3 zero-shot) INSTRUMENT SPREAD, SemanticKITTI seq 07, common-9
+====================================================================================================
+frames 1101 (all)   draws: 3 independent forwards (ptv3_r4/r5/r6), fresh, this session
+loader: PTv3 Pointcept v1.5.1 nuScenes weights, fp16, intensity x0.2, shuffle_orders=False
+code_sha1 e07ed80e70a2bf4dec73580950a6c9e545849d1b
+arm A never abstains -> abstain-excluded == abstain-wrong; ONE accuracy number.
+
+----------------------------------------------------------------------------------------------------
+0. REPRODUCTION CHECK vs the published v0.3 in-frustum result (out/vs2d/results_eomt.json)
+----------------------------------------------------------------------------------------------------
+  point acc  published  89.3910 +-0.0025   |  this session  89.3732 +-0.0273   |  diff of means -0.0178
+  mIoU-9     published  65.4324 +-0.2200   |  this session  65.2615 +-0.1223   |  diff of means -0.1708
+  published draws acc    ['89.3889', '89.3901', '89.3939']
+  this-session draws acc ['89.4064', '89.3615', '89.3518']
+  published draws mIoU   ['65.2302', '65.6703', '65.3966']
+  this-session draws mIoU['65.3868', '65.1421', '65.2557']
+
+----------------------------------------------------------------------------------------------------
+1. HEADLINE: point accuracy and mIoU-9, mean +- half-range over 3 draws
+----------------------------------------------------------------------------------------------------
+  subset                         n_eval    point acc %       mIoU-9 %     mIoU-freq7 %
+  OUT-OF-FRUSTUM  (PRIMARY)    105671053   87.430+-0.025   65.115+-0.299   72.582+-0.086
+  IN-FRUSTUM                   20215061   89.373+-0.027   65.262+-0.122   75.326+-0.077
+  GLOBAL                      125886114   87.742+-0.026   65.131+-0.262   73.101+-0.084
+
+  coverage split: in-frustum 16.06 % / out-of-frustum 83.94 % of evaluated points
+
+----------------------------------------------------------------------------------------------------
+2. PER-CLASS IoU %, mean +- half-range over 3 draws  (* = half-range > 1.0 -> ABSTAIN CELL)
+----------------------------------------------------------------------------------------------------
+  class            OUT-OF-FRUSTUM (primary) IN-FRUSTUM               GLOBAL                  
+  car                94.398 +- 0.139       89.342 +- 0.047       93.270 +- 0.099    
+  large_vehicle      37.998 +- 0.707       48.759 +- 0.558       39.902 +- 0.689    
+  two_wheeler        39.896 +- 2.864*      20.538 +- 0.945       36.072 +- 2.484*   
+  person             38.071 +- 0.449       39.535 +- 0.455       38.399 +- 0.249    
+  road               81.246 +- 0.062       89.269 +- 0.054       82.954 +- 0.051    
+  sidewalk           69.378 +- 0.074       66.284 +- 0.017       69.012 +- 0.065    
+  terrain            74.336 +- 0.191       77.793 +- 0.039       74.955 +- 0.164    
+  vegetation         67.909 +- 0.129       75.037 +- 0.158       69.043 +- 0.124    
+  manmade            82.805 +- 0.083       80.797 +- 0.068       82.571 +- 0.081    
+
+----------------------------------------------------------------------------------------------------
+3. ABSTAIN CELLS declared in advance (half-range > 1.0 IoU point)
+----------------------------------------------------------------------------------------------------
+  ABSTAIN  subset=outside   class=two_wheeler     IoU 39.896 +- 2.864
+  ABSTAIN  subset=global    class=two_wheeler     IoU 36.072 +- 2.484
+
+----------------------------------------------------------------------------------------------------
+4. GT CLASS DISTRIBUTION -- where the primary metric is computed
+----------------------------------------------------------------------------------------------------
+  class                       OUT n     OUT % |          FRUST n   FRUST % |         GLOBAL n    GLOB %
+  car                       9436225   8.9298 |          2698134  13.3471 |         12134359   9.6392
+  large_vehicle              874156   0.8272 |           227328   1.1245 |          1101484   0.8750
+  two_wheeler                214722   0.2032 |            53382   0.2641 |           268104   0.2130
+  person                     131496   0.1244 |            34639   0.1714 |           166135   0.1320
+  road                     19423836  18.3814 |          5775356  28.5696 |         25199192  20.0175
+  sidewalk                 16145411  15.2789 |          2103194  10.4041 |         18248605  14.4961
+  terrain                   5614732   5.3134 |          1262510   6.2454 |          6877242   5.4631
+  vegetation               17652670  16.7053 |          3493785  17.2831 |         21146455  16.7981
+  manmade                  36177805  34.2362 |          4566733  22.5907 |         40744538  32.3662
+  TOTAL                   105671053 100.0000 |         20215061 100.0000 |        125886114 100.0000
+
+  out-of-frustum support ranking (low support = a cell nobody should lean on):
+      person                 131496 pts   0.1244 % of out-of-frustum GT   (in-frustum  0.1714 %)
+      two_wheeler            214722 pts   0.2032 % of out-of-frustum GT   (in-frustum  0.2641 %)
+      large_vehicle          874156 pts   0.8272 % of out-of-frustum GT   (in-frustum  1.1245 %)
+      terrain               5614732 pts   5.3134 % of out-of-frustum GT   (in-frustum  6.2454 %)
+      car                   9436225 pts   8.9298 % of out-of-frustum GT   (in-frustum 13.3471 %)
+      sidewalk             16145411 pts  15.2789 % of out-of-frustum GT   (in-frustum 10.4041 %)
+      vegetation           17652670 pts  16.7053 % of out-of-frustum GT   (in-frustum 17.2831 %)
+      road                 19423836 pts  18.3814 % of out-of-frustum GT   (in-frustum 28.5696 %)
+      manmade              36177805 pts  34.2362 % of out-of-frustum GT   (in-frustum 22.5907 %)

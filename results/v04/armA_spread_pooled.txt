@@ -1,0 +1,42 @@
+========================================================================================================
+ARM A SPREAD, POOLED OVER 6 INDEPENDENT DRAWS (identical frozen config, identical 1101 frames)
+========================================================================================================
+  r1-r3 = published v0.3 caches out/vs2d/ptv3_r{1,2,3};  r4-r6 = fresh this session out/v04/ptv3_r{4,5,6}
+  evaluated-point set is bit-identical across all 6 draws (n_eval guard passed)
+
+  subset                     point acc %  mean / hr / sd        mIoU-9 %  mean / hr / sd          
+  OUT-OF-FRUSTUM (primary)    87.4541  +-0.0713  sd 0.0509       65.0125  +-0.3198  sd 0.2471
+  IN-FRUSTUM                  89.3821  +-0.0273  sd 0.0209       65.3469  +-0.2641  sd 0.1857
+  GLOBAL                      87.7637  +-0.0633  sd 0.0447       65.0648  +-0.2725  sd 0.2083
+
+  mIoU-9 per draw:
+     OUT-OF-FRUSTUM (primary)   ['64.875', '64.984', '64.870', '65.510', '64.913', '64.923']
+     IN-FRUSTUM                 ['65.230', '65.670', '65.397', '65.387', '65.142', '65.256']
+     GLOBAL                     ['64.925', '65.106', '64.965', '65.470', '64.946', '64.978']
+
+--------------------------------------------------------------------------------------------------------
+PER-CLASS IoU %, 6 draws:  mean  +-half-range  (sd)      * half-range > 1.0
+--------------------------------------------------------------------------------------------------------
+  class            OUT-OF-FRUSTUM (primary)    IN-FRUSTUM                  GLOBAL                     
+  car               94.366+-0.164(0.121)   89.358+-0.084(0.066)   93.249+-0.115(0.087) 
+  large_vehicle     38.119+-0.707(0.508)   48.900+-0.704(0.553)   40.024+-0.689(0.503) 
+  two_wheeler       38.644+-3.396(2.430)*  21.076+-2.636(1.867)*  35.173+-2.710(2.069)*
+  person            38.183+-0.626(0.446)   39.513+-0.506(0.392)   38.481+-0.461(0.321) 
+  road              81.270+-0.090(0.070)   89.289+-0.076(0.052)   82.976+-0.071(0.055) 
+  sidewalk          69.384+-0.197(0.138)   66.376+-0.158(0.129)   69.028+-0.159(0.114) 
+  terrain           74.263+-0.250(0.208)   77.811+-0.093(0.068)   74.898+-0.199(0.169) 
+  vegetation        68.008+-0.245(0.171)   74.998+-0.158(0.121)   69.119+-0.221(0.150) 
+  manmade           82.877+-0.175(0.122)   80.803+-0.097(0.076)   82.636+-0.165(0.114) 
+
+ABSTAIN CELLS (6-draw half-range > 1.0 IoU):
+   subset=outside   class=two_wheeler    IoU 38.644  half-range 3.396  sd 2.430  range [36.193, 42.984]
+   subset=frustum   class=two_wheeler    IoU 21.076  half-range 2.636  sd 1.867  range [18.991, 24.263]
+   subset=global    class=two_wheeler    IoU 35.173  half-range 2.710  sd 2.069  range [33.310, 38.730]
+
+NEAR-THRESHOLD CELLS (half-range 0.4 - 1.0, watch list):
+   subset=outside   class=large_vehicle  IoU 38.119  half-range 0.707
+   subset=frustum   class=large_vehicle  IoU 48.900  half-range 0.704
+   subset=global    class=large_vehicle  IoU 40.024  half-range 0.689
+   subset=outside   class=person         IoU 38.183  half-range 0.626
+   subset=frustum   class=person         IoU 39.513  half-range 0.506
+   subset=global    class=person         IoU 38.481  half-range 0.461
