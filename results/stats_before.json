@@ -1,0 +1,72 @@
+{
+  "traj": "out/kitti_seq07_fastlivo2_tum.txt",
+  "bag_rate": 1.0,
+  "apply_T_I_L": true,
+  "lidar_qos": "RELIABLE/KEEP_LAST(10)",
+  "fastdds_builtin_transports": "LARGE_DATA",
+  "map_voxel": 0.2,
+  "pub_voxel": null,
+  "conf_gate": 0.5,
+  "scans_received": 743,
+  "scans_processed": 738,
+  "scans_dropped_busy": 0,
+  "scans_no_pose": 5,
+  "scans_published_est": 1096,
+  "points_in": 89929740,
+  "points_mapped": 87219872,
+  "points_with_rgb": 13391228,
+  "frac_points_with_rgb": 0.1535341395593885,
+  "map_voxels": 2403722,
+  "published_points": 2403722,
+  "published_frac_has_rgb": 0.3772482841193782,
+  "wall_clock_s": 130.71025347709656,
+  "ptv3_gpu_ms": {
+    "mean": 90.57214925752456,
+    "p50": 90.2786994993221,
+    "p95": 107.28450510214316
+  },
+  "ptv3_ms": {
+    "mean": 96.29738453016026,
+    "p50": 94.7181309966254,
+    "p95": 114.98534468919388,
+    "max": 229.31142400193494
+  },
+  "proj_ms": {
+    "mean": 10.201395018980428,
+    "p95": 11.987771555141077
+  },
+  "map_ms": {
+    "mean": 26.522561775637648,
+    "p95": 33.10862935395562
+  },
+  "total_ms": {
+    "mean": 152.83110630747402,
+    "p50": 147.8688180068275,
+    "p95": 178.63859630233492,
+    "max": 460.2966499951435
+  },
+  "published_voxel_m": 0.2,
+  "snapshot_ms": {
+    "mean": 277.7391323653393,
+    "max": 681.3087589980569
+  },
+  "class_histogram": {
+    "barrier": 707,
+    "bicycle": 424,
+    "bus": 471,
+    "car": 191957,
+    "construction_vehicle": 2916,
+    "motorcycle": 2408,
+    "pedestrian": 3083,
+    "traffic_cone": 14,
+    "trailer": 9032,
+    "truck": 21524,
+    "driveable_surface": 331293,
+    "other_flat": 133,
+    "sidewalk": 103704,
+    "terrain": 147886,
+    "manmade": 744103,
+    "vegetation": 844067
+  },
+  "peak_rss_gb": 1.29176
+}

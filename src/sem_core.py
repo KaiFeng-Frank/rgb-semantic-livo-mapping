@@ -269,9 +269,16 @@ class SemanticVoxelMap(object):
     position   : centroid of every world point that fell in the voxel.
     """
 
-    def __init__(self, voxel=0.20, cap0=1 << 21):
+    def __init__(self, voxel=0.20, cap0=1 << 21, hash_cap=None):
+        """cap0 / hash_cap PRESIZE the map.  MEASURED: with the stock cap0 = 1<<21
+        rows and hash cap = 1<<22 slots, seq07 (2.70 M voxels) trips BOTH growth
+        paths in the SAME frame at ~2.07 M voxels -- _reserve copies ~490 MB while
+        VoxelHash._grow rehashes 2.1 M keys through a vectorised probe loop.  That
+        one frame is the 415.7 ms max in stats_seq07.json; every other frame is
+        under 30 ms.  Presizing costs ~1 GB of RSS up front on a 62 GB box and the
+        reallocation never fires.  The growth path stays as the fallback."""
         self.voxel = float(voxel)
-        self.h = VoxelHash(cap=1 << 22)
+        self.h = VoxelHash(cap=int(hash_cap) if hash_cap else (1 << 22))
         self._cap = int(cap0)
         self.xyz = np.zeros((self._cap, 3), dtype=np.float64)
         self.score = np.zeros((self._cap, NUM_CLASSES), dtype=np.float32)
@@ -282,6 +289,7 @@ class SemanticVoxelMap(object):
         self.n_points_inserted = 0
         self._auto_f = 1         # cached integer coarsening factor (only grows)
         self.key = np.zeros(self._cap, dtype=np.int64)
+        self._sbuf = np.empty((1 << 17, NUM_CLASSES), dtype=np.float32)
 
     def _reserve(self, need):
         if need <= self._cap:
@@ -323,7 +331,17 @@ class SemanticVoxelMap(object):
         ci = inv * NUM_CLASSES + cls.astype(np.int64)
         sc = np.bincount(ci, weights=conf.astype(np.float64),
                          minlength=m * NUM_CLASSES).reshape(m, NUM_CLASSES)
-        self.score[rows] += sc.astype(np.float32)
+        # take -> add -> scatter instead of a fancy-index read-modify-write.
+        # MEASURED 4.22 -> 3.42 ms at the 2.7 M-voxel steady state.  BIT-EXACT only
+        # because sc is cast to float32 BEFORE the add: casting after would add a
+        # float64 intermediate and drift the confidences by ~3e-4.
+        sc32 = sc.astype(np.float32)
+        if len(self._sbuf) < m:
+            self._sbuf = np.empty((max(m, 2 * len(self._sbuf)), NUM_CLASSES), np.float32)
+        buf = self._sbuf[:m]
+        np.take(self.score, rows, axis=0, out=buf)
+        buf += sc32
+        self.score[rows] = buf
 
         if rgb is not None and has_rgb is not None and has_rgb.any():
             hm = has_rgb
@@ -349,7 +367,15 @@ class SemanticVoxelMap(object):
         return gx, gy, gz
 
     def _reduce(self, rows):
-        """class / confidence / rgb / centroid for the given map rows."""
+        """class / confidence / rgb / centroid for the given map rows.
+
+        When rows is the whole map (the common case -- snapshot with f == 1) the
+        six fancy-index gathers are pure overhead: self.xyz[rows] alone measured
+        43.8 ms at 2.7 M voxels, and np.tile of the sentinel grey another 11.0 ms.
+        Slicing instead is EXACT and takes the full-map snapshot 480 -> 290 ms.
+        """
+        if isinstance(rows, slice):
+            return self._reduce_all(rows.stop)
         sc = self.score[rows]
         tot = sc.sum(axis=1)
         cls = np.argmax(sc, axis=1)
@@ -363,6 +389,49 @@ class SemanticVoxelMap(object):
             rgb[has] = self.rgb[rows][has] / nrgb[has][:, None].astype(np.float32)
         return xyz, np.clip(rgb, 0, 255).astype(np.uint8), cls.astype(np.uint16), \
             conf, has.astype(np.uint8)
+
+    def _reduce_all(self, n, chunk=1 << 18):
+        """The rows == arange(n) case, in chunks, yielding the GIL between them.
+
+        Two problems with the one-shot form.  (a) The six fancy-index gathers are
+        pure overhead when rows is the whole map: self.xyz[rows] alone measured
+        43.8 ms at 2.7 M voxels and np.tile of the sentinel grey another 11.0 ms.
+        (b) A single 276 ms mean / 599 ms max snapshot on the publisher thread
+        stalls the fuse thread for up to 6 frames at 10 Hz -- MEASURED as the
+        cause of all 7 backpressure drops in the seq07 rate-1.0 run, which
+        occurred at frames 696/725/744/821/879/975/1061, i.e. only once the map
+        was large enough for the snapshot to be expensive.
+        Chunking is EXACT -- identical arithmetic per element, just batched -- and
+        time.sleep(0) between chunks gives the fuse thread the GIL back.
+        """
+        import time as _t
+        xyz = np.empty((n, 3), dtype=np.float32)
+        rgb = np.empty((n, 3), dtype=np.uint8)
+        cls = np.empty(n, dtype=np.uint16)
+        conf = np.empty(n, dtype=np.float32)
+        has = np.empty(n, dtype=np.uint8)
+        ar = np.arange(chunk)
+        for a in range(0, n, chunk):
+            b = min(a + chunk, n)
+            m = b - a
+            sc = self.score[a:b]
+            tot = sc.sum(axis=1)
+            c = np.argmax(sc, axis=1)
+            conf[a:b] = (sc[ar[:m], c] / np.maximum(tot, 1e-9)).astype(np.float32)
+            cls[a:b] = c
+            nob = np.maximum(self.n_obs[a:b], 1)[:, None].astype(np.float64)
+            xyz[a:b] = (self.xyz[a:b] / nob).astype(np.float32)
+            nrgb = self.n_rgb[a:b]
+            h = nrgb > 0
+            r = np.empty((m, 3), dtype=np.float32)
+            r[:] = NO_RGB_COLOR
+            if h.any():
+                np.divide(self.rgb[a:b], nrgb[:, None].astype(np.float32),
+                          out=r, where=h[:, None])
+            rgb[a:b] = np.clip(r, 0, 255).astype(np.uint8)
+            has[a:b] = h
+            _t.sleep(0)
+        return xyz, rgb, cls, conf, has
 
     def snapshot(self, stride_voxel=None, max_points=3_000_000):
         """(xyz f4 (M,3), rgb u8 (M,3), class u16, confidence f4, has_rgb u1).
@@ -386,7 +455,7 @@ class SemanticVoxelMap(object):
             f = max(1, int(round(stride_voxel / self.voxel)))
         if f <= 1 and n <= max_points:
             self._auto_f = 1
-            return self._reduce(np.arange(n))
+            return self._reduce(slice(0, n))
 
         keys = self.key[:n]
         gx, gy, gz = self._decode(keys)

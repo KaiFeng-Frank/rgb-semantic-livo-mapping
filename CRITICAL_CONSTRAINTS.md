@@ -141,3 +141,70 @@ remap, or drop ANY key to get there. Verify behaviour on data with ground truth.
 
 DO NOT USE /data/livo_sem/src/ptv3_infer.py (it targets HEAD).
 USE /data/livo_sem/src/ptv3_loader_verified.py (it targets Pointcept_v151).
+
+---
+## REAL-TIME WORK (2026-09-21) — measured facts that change earlier conclusions
+
+### R1. The old accuracy harness scored a DIFFERENT MODEL from the one deployed
+`src/eval_report.py` used to `from ptv3_infer import PTv3Segmenter` and instantiate it
+with defaults, i.e. Pointcept **HEAD** at intensity **1.0** — the exact pairing C1 marks
+as broken. Run as-is it reports ~25 % point accuracy and car IoU 0 no matter what is
+being tested. It now imports `ptv3_worker.Segmenter`, literally the class the node's
+co-process runs. Anything scored before this fix against "86.3 % / 61.3 %" was scored
+with an instrument pointed at the wrong model.
+
+### R2. The pipeline output is NON-DETERMINISTIC run to run, and shuffle_orders is only
+### half the reason
+`weights/.../config.py:52` ships `shuffle_orders=True`; `build_ptv3` never overrode it,
+and v1.5.1 applies it inside `forward()` ungated by `self.training`, so `.eval()` does
+not disable it. `build_ptv3` now takes `shuffle_orders=` and the worker pins it False.
+That is NOT sufficient: with shuffle pinned off, two forwards of the SAME scan in the
+SAME process still disagree on ~4-5 % of points. Bisected with forward hooks to
+`SerializedPooling` — `torch.sort(cluster)` (unstable on CUDA) picks a different
+representative per pooled cell, so `serialized_code`/`serialized_order` differ from run
+to run. Forcing `stable=True` there did NOT remove it, so there is at least one more
+source; not chased further. CONSEQUENCE FOR MEASUREMENT: on 20 frames the instrument's
+own run-to-run spread is ~1 point of coarse mIoU — the same size as the acceptance gate.
+Use >= 100 frames for exploration and the full 1101 for a verdict, and always report the
+repeat spread next to the delta.
+
+### R3. The quoted "61.3 % coarse mIoU" is a 9-class mean, not an 11-class one
+GT over the 20 canonical frames contains 11 coarse classes, not 9: bicycle (1579 pts)
+and motorcycle (8077 pts) are present. The 9 IoUs listed under "C1 ESCALATED" average to
+exactly 61.26. eval_report now prints both `coarse_miou` (all GT-present classes) and
+`coarse_miou9` (that subset) so the comparison is like for like.
+
+### R4. "CUDA float64 divide disagrees with numpy" is FALSE for this operation
+The worker kept the voxel divide+floor in numpy on those grounds. Measured over 22 real
+seq07 scans, 8 034 645 cell indices: `torch.floor(coord.double()/grid)` on cuda and
+`np.floor(coord.astype(f8)/grid)` differ in ZERO entries. Both are IEEE-754
+correctly-rounded doubles. The hazard is real for the FLOAT32 form (2904 of 122626 points
+change cell) — which this code never used. The whole voxel prep is now on the device
+(`src/ptv3_fast.py:voxelize_gpu`), verified bit-identical on coord/strength/grid_coord/
+inverse over 22 scans: 10.0 -> 1.0 ms.
+
+### R5. The forward is LAUNCH-bound, and 12.4 ms of it was a pure-python bit loop
+torch.profiler, one warm frame, fp16: 40.4 ms of device time inside a 56 ms forward,
+1924 kernel launches, 13.98 ms of CPU in cudaLaunchKernel. `Point.serialization` costs
+13.76 ms, of which hilbert + hilbert-trans are 12.44 (z / z-trans are LUT-based, 0.43
+each). v1.5.1's `serialization/hilbert.py:encode` runs `for bit: for dim:` with ~8
+elementwise kernels per iteration over an (N,3,depth) byte tensor. `src/ptv3_fast.py:
+hilbert_encode_fast` does the same transform on three packed int64 lanes with a Morton
+spread for the interleave: bit-identical over 2.2 M codes (random coords, depths 10-13,
+both axis orders, plus real scans), 7.6 -> 3.7 ms.
+
+### R6. fp16 weights are accuracy-neutral and worth ~12 ms
+The checkpoint was trained under fp16 autocast (`config.py: enable_amp = True`) and
+flash-attention already casts qkv to fp16 inside every one of the 22 blocks, so fp32 mode
+paid a round trip for nothing. `build_ptv3(half=True)`. Do NOT use torch.autocast
+(spconv implicit_gemm rejects fp16 activations with fp32 weights).
+
+### R7. Presize the map. The 415.7 ms max frame was ONE reallocation
+`cap0 = 1<<21` rows and `VoxelHash(cap = 1<<22)` both grow at ~2.07 M voxels, and seq07
+ends at 2.70 M — so both fire in the SAME frame, copying ~490 MB while rehashing 2.1 M
+keys. `--expect-voxels` presizes both.
+
+### R8. Over stdio, submit/collect CANNOT be split
+A POSIX pipe holds 64 KiB; the request is 1.96 MB, so the write blocks until the worker
+drains it and the worker only drains after finishing the previous frame. The payload now
+rides a /dev/shm slot ring and the pipe carries 10-byte requests / 22-byte responses.

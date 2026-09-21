@@ -1,0 +1,126 @@
+{
+  "traj": "out/kitti_seq07_fastlivo2_tum.txt",
+  "bag_rate": 1.0,
+  "apply_T_I_L": true,
+  "pipeline": true,
+  "shm": true,
+  "ptv3_half": 1,
+  "ptv3_shuffle": 0,
+  "ptv3_grid": 0.05,
+  "ptv3_fast_voxel": 1,
+  "scan_pub": true,
+  "queue_depth": 2,
+  "expect_voxels": 4000000,
+  "lidar_qos": "RELIABLE/KEEP_LAST(10)",
+  "fastdds_builtin_transports": "LARGE_DATA",
+  "map_voxel": 0.2,
+  "pub_voxel": null,
+  "conf_gate": 0.5,
+  "scans_received": 1092,
+  "scans_processed": 1092,
+  "scans_dropped_backpressure": 0,
+  "scans_no_pose": 0,
+  "scans_published_est": 1092,
+  "points_in": 132482728,
+  "points_mapped": 129484353,
+  "points_with_rgb": 20931297,
+  "frac_points_with_rgb": 0.16165116877094796,
+  "map_voxels": 2696028,
+  "published_points": 692716,
+  "published_frac_has_rgb": 0.3722073692537779,
+  "wall_clock_s": 128.13158702850342,
+  "ptv3_gpu_ms": {
+    "mean": 56.43363645671903,
+    "p50": 56.15015299554216,
+    "p95": 58.57731904179673,
+    "max": 69.64938899909612
+  },
+  "stage_a_ms": {
+    "mean": 2.7050433267231377,
+    "p50": 2.459529998304788,
+    "p95": 4.0661834442289555,
+    "max": 34.47362300357781
+  },
+  "wait_ms": {
+    "mean": 55.40370922700367,
+    "p50": 55.91823549912078,
+    "p95": 58.48750059958547,
+    "max": 121.87229200208094
+  },
+  "gate_ms": {
+    "mean": 2.788567956709286,
+    "p50": 2.6435949985170737,
+    "p95": 3.212602506391704,
+    "max": 36.757337002200074
+  },
+  "deskew_ms": {
+    "mean": 5.0657695157210565,
+    "p50": 4.9915279960259795,
+    "p95": 5.713159742299468,
+    "max": 12.554506000014953
+  },
+  "proj_ms": {
+    "mean": 4.143671134369846,
+    "p50": 4.0396794938715175,
+    "p95": 4.6821855517919175,
+    "max": 38.639795006019995
+  },
+  "map_ms": {
+    "mean": 22.187933816614812,
+    "p50": 21.45173399912892,
+    "p95": 28.40963740090956,
+    "max": 78.04590600426309
+  },
+  "scanpub_ms": {
+    "mean": 4.120706509192275,
+    "p50": 3.904702498402912,
+    "p95": 5.923832205007785,
+    "max": 23.21582200238481
+  },
+  "stage_b_ms": {
+    "mean": 38.41819431037728,
+    "p50": 37.620213006448466,
+    "p95": 47.0019597960345,
+    "max": 96.98099100205582
+  },
+  "frame_period_ms": {
+    "mean": 103.88446182493425,
+    "p50": 103.9999060012633,
+    "p95": 117.46368849708233,
+    "max": 172.61451300873887
+  },
+  "latency_ms": {
+    "mean": 95.37609733424787,
+    "p50": 94.23964950838126,
+    "p95": 104.83416944625787,
+    "max": 170.79640399606433
+  },
+  "qdepth": {
+    "mean": 0.0,
+    "max": 0
+  },
+  "published_voxel_m": 0.4,
+  "snapshot_ms": {
+    "mean": 282.4145824569444,
+    "max": 665.3667150094407
+  },
+  "class_histogram": {
+    "barrier": 132,
+    "bicycle": 156,
+    "bus": 272,
+    "car": 50525,
+    "construction_vehicle": 969,
+    "motorcycle": 655,
+    "pedestrian": 760,
+    "traffic_cone": 1,
+    "trailer": 3319,
+    "truck": 6172,
+    "driveable_surface": 86260,
+    "other_flat": 12,
+    "sidewalk": 25833,
+    "terrain": 39234,
+    "manmade": 217934,
+    "vegetation": 260482
+  },
+  "peak_rss_gb": 1.171296
+}

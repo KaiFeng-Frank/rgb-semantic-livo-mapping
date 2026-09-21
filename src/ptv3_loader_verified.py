@@ -49,8 +49,22 @@ def _install_stubs():
             m = _Stub(n); m.__file__ = f"<stub {n}>"; sys.modules[n] = m
 
 
-def build_ptv3(device="cuda", enable_flash=None):
-    """Build PTv3 from the frozen HF config and load the released weights with strict=True."""
+def build_ptv3(device="cuda", enable_flash=None, shuffle_orders=None, half=False):
+    """Build PTv3 from the frozen HF config and load the released weights with strict=True.
+
+    shuffle_orders : the frozen config ships True.  v1.5.1 applies it inside forward()
+        ungated by self.training, so .eval() does NOT disable it and every forward pass
+        draws a fresh torch.randperm over the 4 serialisation orders.  That makes the
+        deployed node non-deterministic run to run, which contaminates every A/B.
+        Pass False to pin it.  MEASURED effect on accuracy: see CRITICAL_CONSTRAINTS.md (R1-R8).
+    half : cast the weights to fp16.  The checkpoint was TRAINED under fp16 autocast
+        (config.py: enable_amp = True) and flash-attention already runs fp16
+        unconditionally inside every block (point_transformer_v3m1_base.py:209 does
+        qkv.half()), so in fp32 mode all 22 blocks pay an fp32->fp16->fp32 round trip
+        for nothing.  Do NOT use torch.autocast instead: spconv's implicit_gemm fails
+        with "can\'t find suitable algorithm" when activations are fp16 and weights fp32
+        (traveller59/spconv#316).
+    """
     import torch
     warnings.filterwarnings("ignore")
     if POINTCEPT_V151 not in sys.path:
@@ -63,13 +77,18 @@ def build_ptv3(device="cuda", enable_flash=None):
     cfg = Config.fromfile(CONFIG_PATH)
     if enable_flash is not None:
         cfg.model.backbone.enable_flash = bool(enable_flash)
+    if shuffle_orders is not None:
+        cfg.model.backbone.shuffle_orders = bool(shuffle_orders)
     model = build_model(cfg.model)
 
     sd = torch.load(CKPT_PATH, map_location="cpu", weights_only=False)
     sd = sd.get("state_dict", sd)
     sd = {(k[7:] if k.startswith("module.") else k): v for k, v in sd.items()}
     model.load_state_dict(sd, strict=True)      # MUST stay strict
-    return model.to(device).eval(), cfg
+    model = model.to(device).eval()
+    if half:
+        model = model.half()
+    return model, cfg
 
 
 if __name__ == "__main__":
