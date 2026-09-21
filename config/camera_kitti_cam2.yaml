@@ -1,0 +1,19 @@
+# KITTI left COLOR camera (cam2), RECTIFIED.
+# The bag publishes image_02 of a _sync drive, which KITTI ships already
+# rectified and cropped to S_rect_02 = 1226 x 370.  Therefore the intrinsics
+# are P_rect_02[:, :3] (NOT the raw K_02) and the distortion is identically
+# zero (NOT D_02).  Source: calib_cam_to_cam.txt, 2011_09_30.
+/**:
+  ros__parameters:
+    cam_model: Pinhole
+    cam_width: 1226
+    cam_height: 370
+    scale: 1.0
+    cam_fx: 707.0912
+    cam_fy: 707.0912
+    cam_cx: 601.8873
+    cam_cy: 183.1104
+    cam_d0: 0.0
+    cam_d1: 0.0
+    cam_d2: 0.0
+    cam_d3: 0.0

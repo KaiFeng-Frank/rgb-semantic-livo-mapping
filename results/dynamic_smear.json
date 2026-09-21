@@ -1,0 +1,37 @@
+{
+  "n_frames_scanned": 92,
+  "moving": {
+    "n_clusters": 51,
+    "L_median": 3.3052228132899426,
+    "L_mean": 4.235645680618997,
+    "L_p90": 9.501402287049391,
+    "W_median": 2.002075468634355
+  },
+  "parked": {
+    "n_clusters": 383,
+    "L_median": 4.071359996674011,
+    "L_mean": 4.655069975862861,
+    "L_p90": 8.115500420793055,
+    "W_median": 2.403519881644187
+  },
+  "tracked_moving_car": {
+    "first_frame": 755,
+    "last_frame": 787,
+    "n_frames": 33,
+    "path_length_m": 22.95901254384048,
+    "duration_s": 3.3248,
+    "speed_mps": 6.905381539894273,
+    "one_sweep_length_median_m": 8.388405995172349,
+    "expected_accumulated_trail_m": 31.34741853901283,
+    "centroid_first": [
+      -79.27727742860985,
+      140.69841932466932,
+      -1.9103076455295482
+    ],
+    "centroid_last": [
+      -78.39686315484933,
+      117.77807045182493,
+      -0.9109402246656408
+    ]
+  }
+}

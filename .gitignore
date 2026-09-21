@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.bak
+# data & artefacts live outside the repo (tens of GB)
+data/
+bags/
+bags_ros1/
+weights/
+logs/
+ros2_ws/
+third_party/
+venv*/
+*.mcap
+*.bag
+*.db3
+*.pcd

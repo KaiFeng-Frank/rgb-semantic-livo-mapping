@@ -1,0 +1,110 @@
+# FAST-LIVO2 config for KITTI raw 2011_09_30 (HDL-64E + OXTS RT3003 + cam2).
+# Every extrinsic below is derived from KITTI's own calibration files by
+# /data/livo_sem/src/fastlivo2_extrinsics.py -- no placeholders.
+/**:
+  ros__parameters:
+    common:
+      lid_topic: "/velodyne_points"
+      imu_topic: "/imu"
+      img_topic: "/camera/image_raw"
+      img_en: 1
+      lidar_en: 1
+      ros_driver_bug_fix: false
+
+    extrin_calib:
+      # extrinsic_R/_T == T_{IMU <- LiDAR}.
+      #   LIVMapper.cpp:727  p_W = R_end*(extR*p_L + extT) + p_end
+      # = inv(calib_imu_to_velo), because that file stores T_{velo <- imu}.
+      extrinsic_T: [0.810543972, -0.307054372, 0.802723995]
+      extrinsic_R: [ 0.999997685, -0.000785403,  0.002024406,
+                     0.000755307,  0.999889850,  0.014824544,
+                    -0.002035826, -0.014822976,  0.999888022]
+      # Rcl/Pcl == T_{camera <- LiDAR}  (vio.cpp:58  Rci = Rcl * Rli).
+      # = T_{rect_cam2 <- cam0_unrect} @ T_{cam0_unrect <- velo}
+      #   where T_{rect_cam2 <- cam0_unrect} = (R_rect_00, K2^-1 * P_rect_02[:,3]).
+      Rcl: [-0.001857739, -0.999965951, -0.008039975,
+            -0.006481466,  0.008051860, -0.999946608,
+             0.999977310, -0.001805529, -0.006496204]
+      Pcl: [0.056246554, -0.074814016, -0.327793583]
+
+    time_offset:
+      lidar_time_offset: 0.0   # header.stamp IS the sweep start
+      imu_time_offset: 0.0
+      img_time_offset: 0.0
+      exposure_time_init: 0.0
+
+    preprocess:
+      lidar_type: 2       # VELO16 branch -> velodyne_handler (common_lib.h:44)
+      scan_line: 64       # HDL-64E; the handler drops ring >= N_SCANS
+      point_filter_num: 3 # ~122k pts/sweep
+      filter_size_surf: 0.5
+      blind: 2.0          # ego vehicle; nearest real ground return is ~3.7 m
+      hilti_en: false
+
+    vio:
+      max_iterations: 5
+      outlier_threshold: 1000
+      img_point_cov: 100
+      patch_size: 8
+      patch_pyrimid_level: 4
+      grid_size: 5        # <=10 -> vio.cpp:75 recomputes it as height/grid_n_height
+      grid_n_height: 17   # -> grid_size 21 px, 58x17 = 986 cells on 1226x370
+      normal_en: true
+      raycast_en: false
+      inverse_composition_en: false
+      exposure_estimate_en: true
+      inv_expo_cov: 0.1
+
+    imu:
+      imu_en: true
+      imu_int_frame: 30
+      acc_cov: 0.5
+      gyr_cov: 0.3
+      b_acc_cov: 0.0001
+      b_gyr_cov: 0.0001
+      gravity_est_en: true
+      ba_bg_est_en: true
+
+    lio:
+      min_iterations: 5   # NOTE: the ROS2 port renamed lio/max_iterations
+                          # to lio.min_iterations (voxel_map.cpp:37) while
+                          # still assigning it to max_iterations_.
+      max_iterations: 5   # harmless: never read by this port
+      dept_err: 0.02      # HDL-64E range sigma ~2 cm
+      beam_err: 0.05
+      min_eigen_value: 0.0025
+      voxel_size: 1.0     # outdoor urban, 64-line
+      max_layer: 2
+      max_points_num: 50
+      layer_init_num: [5, 5, 5, 5, 5]
+
+    local_map:
+      map_sliding_en: false  # 62 GB RAM; keep the smoke run mechanism-free
+      half_map_size: 100
+      sliding_thresh: 8.0
+
+    uav:
+      imu_rate_odom: false
+      gravity_align_en: false
+
+    publish:
+      dense_map_en: false      # we consume the TRAJECTORY, not the cloud
+      pub_effect_point_en: false
+      pub_plane_en: false
+      pub_scan_num: 1
+      blind_rgb_points: 0.0
+
+    evo:
+      seq_name: "kitti_seq04"
+      pose_output_en: true     # TUM, keyed on last_lio_update_time (TRUE sensor time)
+
+    pcd_save:
+      pcd_save_en: false
+      type: 0
+      colmap_output_en: false
+      filter_size_pcd: 0.15
+      interval: -1
+
+    image_save:
+      img_save_en: false
+      interval: 1
