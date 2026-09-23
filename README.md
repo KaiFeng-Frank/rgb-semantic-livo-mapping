@@ -1,10 +1,14 @@
 # rgb-semantic-livo-mapping
 
-**A reproducible baseline that turns an offline rosbag into a world-frame point cloud where every
-point carries `(x, y, z, R, G, B, class, confidence)` — at 10 Hz, with every claim nailed to ground truth.**
+**A reproducible RGB-semantic mapper that sustains 10 Hz rosbag replay using a precomputed
+FAST-LIVO2 trajectory, producing a world-frame point cloud with class, confidence and RGB coverage.**
 
 FAST-LIVO2 supplies the pose. PTv3 supplies the semantics. The camera supplies the real colour.
 ROS 2 Jazzy, KITTI + SemanticKITTI, RTX 4090.
+
+The measured workflow has two passes: first run FAST-LIVO2 and save its TUM trajectory,
+then replay the bag through the semantic/RGB mapper with that trajectory loaded at startup.
+Concurrent FAST-LIVO2 + PTv3 operation with live pose arrival remains an engineering milestone.
 
 ![semantic map](docs/img/rviz_class_final.png)
 
@@ -36,11 +40,11 @@ the interesting problems can be discovered instead of assumed.
 | # | Acceptance criterion | Result |
 |---|---|---|
 | 1 | LIVO runs stably, trajectory matches upstream | **PASS** — ATE 0.880 m, drift **0.127 %** over 693 m; estimator core differs from upstream by 3.7 %, all mechanical ROS 1→2 changes |
-| 2 | Per-point semantics on the same LiDAR frame, real time | **PASS** — saturated frame period **60.98 ms mean / 65.99 ms p95 ⇒ 16.4 Hz ceiling** against a 10 Hz sensor |
+| 2 | Mapper throughput with precomputed poses | **PASS** — saturated frame period **60.98 ms mean / 65.99 ms p95 ⇒ 16.4 Hz ceiling** against 10 Hz replay |
 | 3 | Timestamps correspond, no frame mismatch | **PASS** — 1096 trajectory/image stamp pairs, **max &#124;Δ&#124; = 477 ns** |
 | 4 | RViz shows a continuously accumulating world-frame cloud | **PASS** — 2.70 M voxels @ 0.20 m, real RViz2 captures |
 | 5 | Dynamic objects do not smear from sync error | **PASS** — controlled experiment, see below |
-| 6 | Full bag, no crash / VRAM growth / sustained drops | **PASS** — **1092 / 1092 scans, 0 dropped**, VRAM flat |
+| 6 | Full mapping replay, no crash / VRAM growth / sustained drops | **PASS** — **1092 / 1092 scans, 0 dropped**, VRAM flat |
 
 **Semantic quality**, all 1101 frames of seq 07 against SemanticKITTI ground truth, zero-shot
 (nuScenes-trained weights, never fine-tuned on KITTI):
@@ -60,7 +64,7 @@ contains. Reporting only the first is how a transfer number gets quietly inflate
 
 ---
 
-## Real-time: 152.8 ms → 61.0 ms
+## Mapper replay throughput: 152.8 ms → 61.0 ms
 
 | stage | before | after |
 |---|---|---|
@@ -70,6 +74,13 @@ contains. Reporting only the first is how a transfer number gets quietly inflate
 | voxel-hash map insert | 26.52 ms | **22.19** |
 | **frame period, saturated** | **152.83 / 178.64 p95** | **60.98 / 65.99 p95** |
 | scans processed @ rate 1.0 | 738 / 1096 (67.3 %) | **1092 / 1092 (0 dropped)** |
+
+These measurements cover the mapper with recorded poses already available. The saturated
+frame period measures throughput; sensor-to-output latency with online odometry, pose-wait
+time and resource contention during concurrent operation still need measurement.
+`/semantic_scan` publishes each processed sweep unless disabled. `/semantic_map` uses
+`--map-rate 1.0` by default, with adaptive throttling for expensive snapshots; its actual
+publication rate can be lower. Scan processing and full-map publication have separate rates.
 
 Accuracy across that change: point acc 87.319 → 87.311 %, mIoU(11) 53.065 → 53.180 %.
 **All three deltas are inside the arms' own repeat spread.** The speedup is free.
@@ -292,11 +303,13 @@ Following the reasoned default would have handicapped the 2D arm by ~2.3 mIoU.
 ## Architecture
 
 ```
-rosbag (KITTI -> ROS 2)          FAST-LIVO2 (ROS 2 port)
-  /velodyne_points  10 Hz  ───────►  TUM trajectory  T_{W<-IMU}
-  /camera/image_raw 10 Hz            keyed on TRUE sensor time
-  /camera/camera_info                (evo/pose_output_en, zero code change)
-  /imu             100 Hz
+Pass 1: rosbag -> FAST-LIVO2 (ROS 2 port) -> saved TUM trajectory T_{W<-IMU}
+                                          keyed on true sensor time
+
+Pass 2: rosbag replay                     saved TUM loaded at node startup
+  /velodyne_points  10 Hz                      │
+  /camera/image_raw 10 Hz                      │
+  /camera/camera_info                          │
         │                                     │
    ┌────┴─────────────── stage A (executor thread) ──────────────┐
    │  parse, per-point time, pose gate, write /dev/shm slot      │
@@ -312,12 +325,16 @@ rosbag (KITTI -> ROS 2)          FAST-LIVO2 (ROS 2 port)
    │  -> T_W_L = T_W_I @ T_I_L -> voxel hash insert -> publish   │
    └─────────────────────────────────────────────────────────────┘
                        ▼
-        /semantic_map   PointCloud2, point_step 28
+        /semantic_scan  every processed sweep
+        /semantic_map   default 1 Hz setting, adaptively throttled
+        PointCloud2, point_step 28
         x f4 | y f4 | z f4 | rgb f4 | class u16 | confidence f4 | has_rgb u8
 ```
 
-FAST-LIVO2 is a **pose source only**. Its `/cloud_registered` is deliberately not consumed: in LIVO
-mode ~52 % of those messages are empty and the rest carry only the camera-frustum subset of the scan.
+FAST-LIVO2 is a **pose source only**, via the saved TUM file in this implementation.
+`SemanticMapNode` constructs `TrajInterp(args.traj)` at startup; the pose lookup interpolates
+that complete file. Its `/cloud_registered` is deliberately not consumed: in LIVO mode ~52 %
+of those messages are empty and the rest carry only the camera-frustum subset of the scan.
 
 **Fusion rule.** Class: confidence-weighted vote, `score[voxel][c] += softmax_max_prob`, argmax wins.
 Confidence: winner's share of total vote weight. RGB: mean over observations that actually had camera
@@ -329,6 +346,7 @@ coverage; voxels with none get `has_rgb = 0` and a sentinel grey rather than a m
 ## Reproduce
 
 Requires ROS 2 Jazzy, an NVIDIA GPU, and ~50 GB for KITTI + bags.
+The commands below run trajectory generation and semantic mapping in separate passes.
 
 ```bash
 ./setup_ros2.sh          # ROS 2 Jazzy desktop
@@ -337,7 +355,9 @@ Requires ROS 2 Jazzy, an NVIDIA GPU, and ~50 GB for KITTI + bags.
 ./fetch_ptv3.sh          # Pointcept v1.5.1 + nuScenes PTv3 checkpoint
 ./build_bags.sh          # KITTI -> ROS 2 mcap   (use the _us bags, see below)
 
-./run_fastlivo2_kitti.sh seq07 bags/kitti_seq07_us 0.5     # -> TUM trajectory
+# Pass 1: generate and save the trajectory.
+./run_fastlivo2_kitti.sh seq07 bags/kitti_seq07_us 0.5
+# Pass 2: replay at sensor rate using the saved trajectory.
 ./opt/run.sh after3 src bags/kitti_seq07_us \
     out/kitti_seq07_fastlivo2_tum.txt 1.0 \
     --reliable --conf-gate 0.5 --expect-voxels 4000000
@@ -373,6 +393,8 @@ Two things that will bite you if skipped:
 * **RGB covers 37.7 % of map voxels.** The camera is a narrow forward frustum; the LiDAR is 360°.
 * **The model is not bit-deterministic** and one source of it remains unidentified (see above).
   Confidence is meaningful, so the map is gated at `conf ≥ 0.5`.
+* **The 10 Hz acceptance uses a precomputed trajectory.** Live pose buffering, concurrent
+  odometry/semantic processing and end-to-end online latency remain unvalidated.
 * **Per-point deskew is currently accuracy-neutral** on this data (within ±5 % on every sharpness
   metric). It is kept because camera projection needs per-point world coordinates.
 * **Live `/semantic_map` is capped at 1 M published points** for the visualiser; the saved `.npz`
@@ -428,7 +450,7 @@ python3 tools/summarize_v04.py --check
 
 **v0.1 — the honest baseline.** Four components, six criteria, every number against ground truth.
 
-**v0.2 — real time. ✅ done.** 152.8 → 61.0 ms, a 16.4 Hz ceiling against a 10 Hz sensor, accuracy
+**v0.2 — mapper replay throughput. ✅ done.** 152.8 → 61.0 ms, a 16.4 Hz ceiling against 10 Hz replay, accuracy
 unchanged. Along the way: the obvious lever (`grid_size`) was measured and rejected, and two of the
 three biggest wins turned out to be a wrong comment and a pure-Python loop.
 
@@ -439,8 +461,9 @@ matters is the precise negative: the false-kill floor is the trajectory (5.0× b
 not the removal mechanism.
 
 **v0.4 — camera-supervised transfer. In progress.** First adaptation results and GT diagnostics
-are complete. Next: finish the no-KL pair, improve B0, repeat independent training seeds, evaluate on
-unseen data, then integrate and measure the adapted student in the real-time mapping pipeline.
+are complete. Next: finish the no-KL pair, validate B0 in fixed-trajectory mapping replay,
+improve and independently repeat the method, and evaluate on unseen data. Live-pose integration
+and concurrent FAST-LIVO2/PTv3 acceptance are a separate engineering gate.
 The [detailed milestones](docs/v04_results.md#next-milestones) define those checks.
 
 **v0.5 — beyond the rotating scanner.** Non-repetitive solid-state patterns (Livox) break the

@@ -140,14 +140,41 @@ claim about the KL interaction.
    matched seeds and runtime settings.
 4. Freeze the protocol and evaluate on independent data unseen during method
    development. Do not reuse a training sequence as a new test set.
-5. Integrate the selected student into mapping, holding the odometry trajectory
-   fixed. Measure map semantics, dynamic trails, full-bag 10 Hz processing,
-   latency, dropped scans and GPU memory.
+5. Complete the two engineering gates below: compare the existing B0 checkpoint
+   against the original model in fixed-trajectory mapping replay, then integrate
+   live pose input and measure concurrent FAST-LIVO2/PTv3 operation. The first
+   gate can proceed before further method development is complete.
 6. Package code, configuration, model artifacts and a reproducible demonstration.
    Livox and other non-repetitive scanners remain the subsequent v0.5 phase.
 
-The existing real-time mapping results concern v0.2/v0.3. The fine-tuned v0.4
-student has not yet passed this mapping integration gate.
+The existing mapping throughput results concern v0.2/v0.3 with a precomputed TUM
+trajectory. The fine-tuned v0.4 student has not yet passed either engineering gate.
+
+## Engineering acceptance: replay, then live pose input
+
+**Gate 1 — B0 in the existing mapper.** Load the trained B0 student through the
+mapping inference path, preserving the original 16-way head and common-9 scoring
+contract. Check its output against the experiment inference path before judging
+map quality. Compare B0 and the original nuScenes model on the same bag, saved
+FAST-LIVO2 trajectory, frame set, mapping parameters and hardware. Measure map
+semantics, dynamic trails, scan throughput, per-scan processing latency, dropped
+scans, GPU memory and host memory. Keep scan-output and full-map-output rates
+separate. This establishes whether the adaptation gain survives deployment into
+the mapper; the old model's timings do not establish B0's performance.
+
+**Gate 2 — online pose arrival and concurrent execution.** Add a timestamped pose
+buffer fed by live odometry. Specify the bounded waiting and missing-pose policy
+needed for scan deskew and image projection, then run FAST-LIVO2 and the semantic
+mapper concurrently. Measure pose arrival delay, waiting time, queue backlog,
+resource contention and sensor-to-output latency in addition to Gate 1's metrics.
+Distinguish a bag-based concurrent replay from subsequent live-sensor acceptance.
+
+The current implementation loads `TrajInterp(args.traj)` at startup and
+interpolates a complete saved trajectory. `opt/run.sh` supplies `--traj` and
+launches bag replay. `/semantic_scan` is published per processed sweep unless
+disabled; `/semantic_map` defaults to `--map-rate 1.0` and reduces its cadence
+when snapshot generation is expensive. Thus the recorded 10 Hz scan throughput
+and the map publication cadence describe different parts of the system.
 
 ## Reproduce the reported numbers
 
