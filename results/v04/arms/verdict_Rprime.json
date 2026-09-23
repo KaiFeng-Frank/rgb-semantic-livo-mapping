@@ -1,0 +1,429 @@
+{
+  "name": "Rprime",
+  "n_draws": 3,
+  "subsets": {
+    "outside": {
+      "miou9_A": {
+        "mean": 65.01252862307497,
+        "sd": 0.24712148568330877,
+        "half_range": 0.31983405798924736,
+        "values": [
+          64.87457480017562,
+          64.98416998292025,
+          64.87024201406615,
+          65.50991013004464,
+          64.91282575501434,
+          64.92344905622886
+        ]
+      },
+      "miou9_arm": {
+        "mean": 83.35668510277252,
+        "sd": 0.10985986776693298,
+        "half_range": 0.1092235650904243,
+        "values": [
+          83.25427826648472,
+          83.34305164516725,
+          83.47272539666557
+        ]
+      },
+      "delta_miou9": 18.344156479697546,
+      "miou8_A": {
+        "mean": 68.30862499999999,
+        "sd": 0.11737101963432196,
+        "half_range": 0.17362500000000125,
+        "values": [
+          68.334,
+          68.259625,
+          68.454875,
+          68.32575,
+          68.36987500000001,
+          68.107625
+        ]
+      },
+      "miou8_arm": {
+        "mean": 83.38095833333334,
+        "sd": 0.07546070307341238,
+        "half_range": 0.07531250000000256,
+        "values": [
+          83.308375,
+          83.3755,
+          83.459
+        ]
+      },
+      "delta_miou8": 15.072333333333347,
+      "acc_A": {
+        "mean": 87.45407631485732,
+        "sd": 0.05088756076211415,
+        "half_range": 0.07134262208970199,
+        "values": [
+          87.42630301980618,
+          87.45783861924798,
+          87.54962913069485,
+          87.45787931156511,
+          87.42586392131439,
+          87.40694388651545
+        ]
+      },
+      "acc_arm": {
+        "mean": 94.43120750706755,
+        "sd": 0.019523876765615504,
+        "half_range": 0.016963964577882962,
+        "values": [
+          94.40866364793393,
+          94.4425915770897,
+          94.44236729617901
+        ]
+      },
+      "per_class": {
+        "car": {
+          "A": 94.36616666666667,
+          "arm": 98.33566666666667,
+          "delta": 3.9694999999999965,
+          "thr": 0.2559420832922964,
+          "call": "UP"
+        },
+        "large_vehicle": {
+          "A": 38.11866666666666,
+          "arm": 64.46733333333333,
+          "delta": 26.348666666666666,
+          "thr": 1.0783609785224992,
+          "call": "UP"
+        },
+        "two_wheeler": {
+          "A": 38.64366666666666,
+          "arm": 83.16199999999999,
+          "delta": 44.51833333333333,
+          "thr": 5.154796504227885,
+          "call": "ABSTAIN CELL"
+        },
+        "person": {
+          "A": 38.18316666666666,
+          "arm": 64.40633333333334,
+          "delta": 26.22316666666668,
+          "thr": 0.9453279589645109,
+          "call": "UP"
+        },
+        "road": {
+          "A": 81.26966666666668,
+          "arm": 95.40333333333335,
+          "delta": 14.13366666666667,
+          "thr": 0.1494269052078669,
+          "call": "UP"
+        },
+        "sidewalk": {
+          "A": 69.38383333333333,
+          "arm": 91.66899999999998,
+          "delta": 22.285166666666655,
+          "thr": 0.2919954622935102,
+          "call": "UP"
+        },
+        "terrain": {
+          "A": 74.2625,
+          "arm": 83.47933333333333,
+          "delta": 9.216833333333327,
+          "thr": 0.4403214166946723,
+          "call": "UP"
+        },
+        "vegetation": {
+          "A": 68.00750000000001,
+          "arm": 79.25266666666667,
+          "delta": 11.245166666666663,
+          "thr": 0.3629200325140545,
+          "call": "UP"
+        },
+        "manmade": {
+          "A": 82.8775,
+          "arm": 90.034,
+          "delta": 7.156500000000008,
+          "thr": 0.25868542672520023,
+          "call": "UP"
+        }
+      }
+    },
+    "frustum": {
+      "miou9_A": {
+        "mean": 65.34694266514144,
+        "sd": 0.1857464040240943,
+        "half_range": 0.26409122701912224,
+        "values": [
+          65.23019663435055,
+          65.67028048045974,
+          65.39659782042744,
+          65.38675332948917,
+          65.1420980264215,
+          65.25572969970021
+        ]
+      },
+      "miou9_arm": {
+        "mean": 85.04565693448173,
+        "sd": 0.08694870849814275,
+        "half_range": 0.08187835407700561,
+        "values": [
+          84.98067052170953,
+          85.14442722986354,
+          85.0118730518721
+        ]
+      },
+      "delta_miou9": 19.698714269340286,
+      "miou8_A": {
+        "mean": 70.88081249999999,
+        "sd": 0.06583904379241604,
+        "half_range": 0.08793749999999534,
+        "values": [
+          71.00999999999999,
+          70.846375,
+          70.87225,
+          70.88062500000001,
+          70.8415,
+          70.834125
+        ]
+      },
+      "miou8_arm": {
+        "mean": 85.08683333333333,
+        "sd": 0.03359509202745197,
+        "half_range": 0.030812499999996135,
+        "values": [
+          85.071375,
+          85.06375,
+          85.12537499999999
+        ]
+      },
+      "delta_miou8": 14.20602083333334,
+      "acc_A": {
+        "mean": 89.38208084886149,
+        "sd": 0.020904427876307575,
+        "half_range": 0.027311320010362294,
+        "values": [
+          89.38887693685416,
+          89.3901383725728,
+          89.3938682648546,
+          89.40637873909952,
+          89.361466680709,
+          89.3517560990788
+        ]
+      },
+      "acc_arm": {
+        "mean": 95.46542880413108,
+        "sd": 0.008266452032797232,
+        "half_range": 0.008172124734130648,
+        "values": [
+          95.45797561530979,
+          95.47431986477805,
+          95.46399093230538
+        ]
+      },
+      "per_class": {
+        "car": {
+          "A": 89.3575,
+          "arm": 97.80166666666668,
+          "delta": 8.444166666666675,
+          "thr": 0.2559420832922964,
+          "call": "UP"
+        },
+        "large_vehicle": {
+          "A": 48.89966666666666,
+          "arm": 77.716,
+          "delta": 28.816333333333333,
+          "thr": 1.0783609785224992,
+          "call": "UP"
+        },
+        "two_wheeler": {
+          "A": 21.076333333333334,
+          "arm": 84.71633333333334,
+          "delta": 63.64,
+          "thr": 5.154796504227885,
+          "call": "ABSTAIN CELL"
+        },
+        "person": {
+          "A": 39.51266666666667,
+          "arm": 58.82033333333334,
+          "delta": 19.30766666666667,
+          "thr": 0.9453279589645109,
+          "call": "UP"
+        },
+        "road": {
+          "A": 89.28866666666666,
+          "arm": 96.99333333333334,
+          "delta": 7.704666666666682,
+          "thr": 0.1494269052078669,
+          "call": "UP"
+        },
+        "sidewalk": {
+          "A": 66.376,
+          "arm": 90.54933333333334,
+          "delta": 24.173333333333332,
+          "thr": 0.2919954622935102,
+          "call": "UP"
+        },
+        "terrain": {
+          "A": 77.81066666666666,
+          "arm": 84.98899999999999,
+          "delta": 7.1783333333333275,
+          "thr": 0.4403214166946723,
+          "call": "UP"
+        },
+        "vegetation": {
+          "A": 74.99833333333332,
+          "arm": 84.70100000000001,
+          "delta": 9.702666666666687,
+          "thr": 0.3629200325140545,
+          "call": "UP"
+        },
+        "manmade": {
+          "A": 80.80300000000001,
+          "arm": 89.12400000000001,
+          "delta": 8.320999999999998,
+          "thr": 0.25868542672520023,
+          "call": "UP"
+        }
+      }
+    },
+    "global": {
+      "miou9_A": {
+        "mean": 65.06476427475314,
+        "sd": 0.20828263798471527,
+        "half_range": 0.2724916994523312,
+        "values": [
+          64.92461899530537,
+          65.10580173695608,
+          64.96508641375682,
+          65.46960239421003,
+          64.94553418778352,
+          64.97794192050705
+        ]
+      },
+      "miou9_arm": {
+        "mean": 83.68365137884561,
+        "sd": 0.09196602575063811,
+        "half_range": 0.0915067496319324,
+        "values": [
+          83.58684479700986,
+          83.69425104325325,
+          83.76985829627372
+        ]
+      },
+      "delta_miou9": 18.618887104092465,
+      "miou8_A": {
+        "mean": 68.80122916666667,
+        "sd": 0.09786851564301326,
+        "half_range": 0.14393749999999983,
+        "values": [
+          68.83924999999999,
+          68.756125,
+          68.922125,
+          68.812,
+          68.843625,
+          68.63425
+        ]
+      },
+      "miou8_arm": {
+        "mean": 83.71033333333334,
+        "sd": 0.06711758959716714,
+        "half_range": 0.06687500000000313,
+        "values": [
+          83.64675,
+          83.70375,
+          83.7805
+        ]
+      },
+      "delta_miou8": 14.909104166666665,
+      "acc_A": {
+        "mean": 87.76367939993763,
+        "sd": 0.04473823547842041,
+        "half_range": 0.06326750224413047,
+        "values": [
+          87.74145733023421,
+          87.76813143981869,
+          87.84578098899772,
+          87.77077351041275,
+          87.73668714565294,
+          87.71924598450946
+        ]
+      },
+      "acc_arm": {
+        "mean": 94.59728497139884,
+        "sd": 0.017449374808348413,
+        "half_range": 0.015552152161909305,
+        "values": [
+          94.57716440432819,
+          94.608268708652,
+          94.6064218012163
+        ]
+      },
+      "per_class": {
+        "car": {
+          "A": 93.24883333333332,
+          "arm": 98.21633333333334,
+          "delta": 4.967500000000015,
+          "thr": 0.2559420832922964,
+          "call": "UP"
+        },
+        "large_vehicle": {
+          "A": 40.023833333333336,
+          "arm": 67.09466666666667,
+          "delta": 27.070833333333333,
+          "thr": 1.0783609785224992,
+          "call": "UP"
+        },
+        "two_wheeler": {
+          "A": 35.17333333333333,
+          "arm": 83.47066666666667,
+          "delta": 48.29733333333334,
+          "thr": 5.154796504227885,
+          "call": "ABSTAIN CELL"
+        },
+        "person": {
+          "A": 38.48066666666666,
+          "arm": 63.236999999999995,
+          "delta": 24.756333333333338,
+          "thr": 0.9453279589645109,
+          "call": "UP"
+        },
+        "road": {
+          "A": 82.976,
+          "arm": 95.76366666666667,
+          "delta": 12.787666666666667,
+          "thr": 0.1494269052078669,
+          "call": "UP"
+        },
+        "sidewalk": {
+          "A": 69.02816666666666,
+          "arm": 91.53966666666666,
+          "delta": 22.511499999999998,
+          "thr": 0.2919954622935102,
+          "call": "UP"
+        },
+        "terrain": {
+          "A": 74.89750000000002,
+          "arm": 83.75033333333334,
+          "delta": 8.852833333333322,
+          "thr": 0.4403214166946723,
+          "call": "UP"
+        },
+        "vegetation": {
+          "A": 69.11916666666666,
+          "arm": 80.14933333333333,
+          "delta": 11.030166666666673,
+          "thr": 0.3629200325140545,
+          "call": "UP"
+        },
+        "manmade": {
+          "A": 82.63566666666667,
+          "arm": 89.93166666666666,
+          "delta": 7.295999999999992,
+          "thr": 0.25868542672520023,
+          "call": "UP"
+        }
+      }
+    }
+  },
+  "verdict": "PROPAGATION",
+  "delta_primary": 18.344156479697546,
+  "delta_primary_no_two_wheeler": 15.072333333333347,
+  "p3": {
+    "hits": 5,
+    "tested": 8
+  },
+  "prereg_note": "====================================================================================================\nARM R-PRIME -- PRE-REGISTERED READING RULE\nPART 1 (this section) written 2026-09-23 on machine B, BEFORE arm R' was trained, before\ntools/verify_arm_Rprime.py had ever been run, and before any arm-R' number existed.\nPART 2 is appended from the verification run -- also before training, and never edited after.\nAppended verbatim by tools/arm_verdict.py --note; the file is frozen at\nout/v04/armRprime/preregistered_note_Rprime.txt.\n====================================================================================================\n\nWHAT ARM R' IS.  Identical to arm D in every respect -- SemanticKITTI GROUND TRUTH labels, full\nfine-tune of the released nuScenes PTv3 through the 16-way head with MiB marginalisation, the same\nanti-forgetting KL against the frozen original model on all non-supervised points, the same\nframe-level rare-class resampling from the same JSON under the same seed, the same optimiser, lr,\n10 epochs, batch size 2, the same config lineage, and kl_lambda PINNED to arm D's calibrated\n1.5305520007241327 -- except that the supervised set is drawn uniformly at random from the\nSURVIVING VOXELS of the full 360 deg sweep instead of being the camera-frustum points.\n\nPer frame, arm R' supervises exactly the number of voxels arm D supervises in THAT frame and THAT\nvoxelisation, counted AFTER GridSample(0.05, mode=\"train\") -- not the mask size, which is what arm R\nmatched.  The subset is a deterministic function of a BLAKE2b(salt | sequence | frame) ranking that\ndepends on nothing else; the selector draws no random number at all.\n\nWHY IT EXISTS.  Arm R matches arm D at the MASK level and then loses the match in the voxeliser.\nMeasured over 96 frames of the real training stream (out/v04/armR/gridsample_survival.json):\nfrustum points survive GridSample at 0.8461, uniformly-random points at 0.7078, so arm R feeds\n16.3 % FEWER points into the loss than arm D at identical mask size, and the deficit is wildly\nuneven across classes (post-grid R/D: person 0.316, large_vehicle 0.520, road 0.559, car 0.604,\ntwo_wheeler 0.855, sidewalk 0.884, vegetation 0.973, terrain 1.033, manmade 1.034).  A drop on\nperson or road in arm R is therefore confounded with arm R having one third the supervision there,\nand arm R alone cannot answer \"does the frustum's geometry matter\".  Arm R' removes exactly that\nconfound and nothing else.\n\n----------------------------------------------------------------------------------------------------\nWHAT R' vs D MEANS.  FIXED IN ADVANCE.\n----------------------------------------------------------------------------------------------------\nThe two arms spend the SAME post-voxelisation supervision budget, per frame, on GT labels, under the\nsame anchor strength.  They differ in WHERE that budget is spent: arm D's voxels are the survivors\nof the camera frustum -- contiguous, forward-only, azimuthally narrow, range-dependent, and\nsystematically avoiding the dense near-ground rings under the sensor, which lie below the camera's\nvertical field of view -- while arm R''s are scattered uniformly over the whole sweep.  A difference\nbetween them is therefore attributable to the GEOMETRY of the supervised set, and NOT to how much\nsupervision reached the loss.\n\n    R' ABOVE D   the frustum's shape is a handicap: the same budget spent uniformly teaches the\n                 never-supervised region better than the camera's own footprint does.\n    R' BELOW D   the frustum's contiguity and its forward concentration actually help.\n    R' EQUAL D   at fixed post-voxelisation supervision volume, WHERE the labels sit does not\n                 measurably change what propagates to the unsupervised region.\n\nThe decision band is the pre-registered +-0.60 on out-of-frustum mIoU-9, unchanged.  two_wheeler\nremains an ABSTAIN CELL in all three subsets, unchanged.  Per-class signs are read against their own\n3-sigma thresholds from out/v04/armA_thresholds.json, unchanged.\n\nTWO THINGS THIS CONTRAST DOES NOT CONTROL, DECLARED NOW SO THEY ARE NOT DISCOVERED LATER:\n\n  1. THE CLASS MIX STILL DIFFERS, DELIBERATELY (G3).  The frustum's class composition IS part of\n     what \"geometry\" means here, and equalising it would destroy the comparison.  So the honest\n     phrasing of any R'-vs-D result is \"the geometry of the supervised set, INCLUDING the class mix\n     that geometry induces\" -- never \"geometry at fixed class mix\".  Both distributions are in\n     PART 2; neither is equalised.\n\n  2. THE KL ANCHOR COVERS A DIFFERENTLY SHAPED SET (G6).  In arm D the anti-forgetting KL applies\n     to the out-of-frustum voxels, which is EXACTLY the evaluation region: arm D is anchored\n     precisely where it is scored.  In arm R' the non-supervised voxels are scattered and\n     interleaved with the supervised ones, so the anchor covers a set that overlaps the evaluation\n     region only partially.  The SIZES are nearly equal and are measured in PART 2; the SHAPES\n     cannot be made to agree without either changing what the KL means or breaking the per-frame\n     count match, so this is stated, not corrected.\n     THE SIGN OF ITS EFFECT ON THE PRIMARY METRIC IS NOT MEASURED AND IS NOT PREDICTED HERE.  The\n     anchor pulls the student toward a model that scores 65.01 out-of-frustum while arm D scores\n     74.68, so it is not obvious whether anchoring the evaluation region helps arm D or holds it\n     back, and this experiment contains no arm that separates the two.  Consequently NEITHER\n     direction of the R'-vs-D result may be discounted or inflated by appeal to this asymmetry\n     without new evidence.  Naming it afterwards to explain away an unwelcome sign is exactly the\n     move this paragraph exists to forbid.\n\n----------------------------------------------------------------------------------------------------\nWHAT R vs R' WILL MEAN.  FIXED IN ADVANCE.\n----------------------------------------------------------------------------------------------------\nArm R and arm R' draw uniformly at random over the full sweep, both on GT, both full fine-tune, both\nwith kl_lambda pinned to arm D's value, same resampling, same schedule.  They differ in ONE thing:\nthe LEVEL at which the draw happens -- arm R draws points before the voxeliser and lets the\nvoxeliser decide how many survive; arm R' draws voxels after it and therefore lands on arm D's count\nexactly.  R' minus R is thus the price of the survival artefact, and nothing else of consequence.\n\n    R' ABOVE R, outside the band   arm R's number understated the uniform-geometry arm.  Arm R's\n                                   shortfall against arm D was at least partly the 16.3 % volume\n                                   deficit rather than geometry, and arm R's own pre-registered\n                                   discount rule (\"if R lands below D by a small margin, the honest\n                                   verdict is CONFOUNDED WITH SUPERVISION VOLUME\") was right to\n                                   refuse the geometric reading.\n    R' EQUAL R, inside the band    the 16.3 % deficit did not measurably move the primary metric.\n                                   Arm R's number may then be read as geometry after all, and the\n                                   caution in arm R's note was over-conservative.  Say so plainly;\n                                   do not quietly keep the discount.\n    R' BELOW R, outside the band   not anticipated.  Report it as such.  No explanation is to be\n                                   retrofitted, per P3.\n\nCAVEAT, DECLARED NOW.  Arm R and arm R' use DIFFERENT salts and therefore INDEPENDENT draws\n(\"armR-v04-20260923\" vs \"armRprime-v04-20260923\").  A shared salt would have made arm R' a nested\nsub-selection of arm R's own ranking and put an undisclosed dependency between the two arms; an\nindependent draw instead leaves subset-to-subset variation inside the R-minus-R' difference.  With\none run of each arm that component is NOT separable from the effect, in either design.  It is\ntherefore part of the R-vs-R' error bar and must be named whenever that difference is quoted.\n\nArm R is still running on machine A at the time this note is frozen.  If arm R's verdict does not\nexist when arm R' finishes, the R-vs-R' comparison is DEFERRED, not estimated.\n\n----------------------------------------------------------------------------------------------------\nTHE INSTRUMENT CHECK, PRE-REGISTERED AS A PASS/FAIL\n----------------------------------------------------------------------------------------------------\nArm D's RareClassAudit recorded, per epoch, the number of points that actually entered the\nsupervised loss over the whole 17,228-frame training stream (out/v04/armRprime/armD_rare_class_audit.jsonl):\n\n    epochs 1..10:  271,626,869  271,587,913  271,567,016  271,502,968  271,574,911\n                   271,664,419  271,554,951  271,580,661  271,544,559  271,559,132\n    mean 271,576,340    sd 44,340    (0.016 % of the mean -- 17k frames average hard)\n\nArm R' walks a BIT-IDENTICAL frame multiset (same data_list, same RESAMPLE_SEED 20260922, same\nrare-class weights), so if G1 holds over the whole stream and not merely over the probe frames, arm\nR''s own per-epoch totals must be statistically indistinguishable from these.\n\n    PASS  every one of arm R''s 10 epoch totals lies within mean +- 5 sd, i.e. inside\n          [271,354,640 , 271,798,040].\n    FAIL  any epoch total outside that interval.  The arm is then NOT a voxel-count match to arm D,\n          whatever the probe frames said, and its number must not be compared with arm D's.\n\nThis is a sharp instrument, not a formality: arm R's projected epoch total under the same audit is\nabout 227,176,514, which is roughly one thousand sd below the interval.  A check that can reject arm\nR by that margin can reject a broken arm R'.\n\n----------------------------------------------------------------------------------------------------\nTHE CROSS-MACHINE REPORT, AND EXACTLY HOW MUCH IT IS WORTH\n----------------------------------------------------------------------------------------------------\nArm R' is the first arm trained on machine B; arms A / B1 / D / B0 / C / R were trained on machine A.\nThe verdict is therefore reported twice: against machine A's arm A (out-of-frustum mIoU-9 65.0125\nover 6 draws, the reference every other arm uses) and against machine B's own arm A\n(64.9965 over 3 draws, out/v04/machineB_spread.json).\n\nSTATED NOW, BEFORE THE NUMBER EXISTS, SO IT CANNOT BE OVERSOLD AFTERWARDS: the two deltas differ by\na CONSTANT 0.0160 whatever arm R' scores, because both subtract a fixed reference from the same arm\nR' mean.  The comparison can therefore only disagree in one way -- if arm R' lands within 0.0160 of\na band edge and the two references put it on opposite sides of the +-0.60 threshold.  That, and only\nthat, is what \"the two deltas disagree\" would mean, and it would be reported loudly.  The real\nevidence that the machines are interchangeable is the completed calibration -- zero-shot\nout-of-frustum mIoU-9 B 64.9965 +-0.1044 vs A 65.0125 +-0.2471, difference -0.0160 against a 0.524\nthreshold, and point-level label disagreement cross-machine 3.951 % versus within-machine 4.004 %\n(A) and 3.946 % (B) -- not this arithmetic.\n====================================================================================================\n\n====================================================================================================\nPART 2 -- MEASURED BEFORE TRAINING, APPENDED VERBATIM FROM out/v04/armRprime/verify_Rprime.json\n128 frames x 2 voxelisations of the real training stream, numpy 2.2.6, python 3.10.21.\nGenerated by tools/prereg_part2.py; no number in this section was typed by hand.\n\nPROVENANCE, STATED EXACTLY.  The source file verify_Rprime.json was\nfrozen at 2026-09-23 11:36:49; arm R' began training at 2026-09-23 11:38:44; this section was written to the note at\n2026-09-23 11:40:24.  The append was attempted before training and was SKIPPED BY A BUG in this\nscript's duplicate guard, which matched PART 1's own prose references to \"PART 2\";\nthe guard is fixed and the fact is recorded here rather than hidden.  Nothing in this\nsection depends on the outcome: every number is a supervision statistic read out of a\nJSON that was written before the first optimiser step and has not been touched since,\nand the md5 of PART 1 alone -- the reading rule, which is the part that must not move\nafter a result exists -- was logged as f5fb3dfe48023cf8555a64a4eba3e735 at 11:38:44,\nbefore training started.\n====================================================================================================\n\nG1 -- THE COUNT MATCH AND THE DRAW POOL\n  post-GridSample supervised voxels over the sample:  arm D 4064529   arm R' 4064529   EXACT MATCH\n  per-frame mismatches: 0 of 256 probes\n  surviving voxels 22935373, of which 1295049 (5.647 %) are LABEL-INVALID and can never carry loss in any arm.\n  Arm R' draws from the 21640324 label-valid survivors, not from all 22935373.  Drawing from all of them would\n  have left arm R' with about 5.647 % fewer LOSS-CARRYING voxels than arm D and reinstated, in a\n  smaller form, exactly the count mismatch this arm exists to remove.\n  Arm D's camera frustum covers 18.911 % of survivors; its supervision is 17.722 % of them.\n\nG3 -- CLASS DISTRIBUTION OF THE SUPERVISED VOXELS, DELIBERATELY NOT EQUALISED\n  Arm D's supervised voxels carry the frustum's class mix; arm R''s carry the full-sweep mix.  That\n  difference IS part of what \"geometry\" means here and resampling to equalise it would destroy the\n  comparison.  Post-GridSample, i.e. counted where the loss actually sees them:\n\n    class                     arm D        %           arm R'        %       R'/D\n    car                      221036   5.438           165371   4.069      0.748\n    large_vehicle             17193   0.423             8038   0.198      0.468\n    two_wheeler                6543   0.161             3285   0.081      0.502\n    person                     2232   0.055              905   0.022      0.405\n    road                    1134181  27.904           723658  17.804      0.638\n    sidewalk                 507983  12.498           547569  13.472      1.078\n    terrain                  296092   7.285           366382   9.014      1.237\n    vegetation              1073372  26.408          1248452  30.716      1.163\n    manmade                  805897  19.828          1000869  24.624      1.242\n    TOTAL                   4064529 100.000          4064529 100.000\n\n  READ THIS COLUMN AGAINST ARM R'S.  Arm R's post-GridSample R/D ratios were\n  person 0.316 | large_vehicle 0.520 | road 0.559 | car 0.604 | two_wheeler 0.855 | sidewalk 0.884 |\n  vegetation 0.973 | terrain 1.033 | manmade 1.034, and the TOTAL was 0.837 -- arm R simply had less\n  supervision, most of all on the classes it then lost ground on.  Arm R''s total is 1.000, so whatever\n  per-class imbalance remains above is a property of WHERE the frustum points, not of how much survived\n  the voxeliser.  That is the whole difference between the two arms, and it is why a per-class deficit in\n  arm R' may be read as geometry while the same deficit in arm R may not.\n\nG6 -- THE KL-ANCHOR SETS, MEASURED\n  arm D anchors 18598067 voxels (81.089 % of survivors); arm R' anchors 18870844 (82.278 %), 1.189 pp more.\n  The SIZES are therefore nearly equal.  The SHAPES are not, and that is the part that cannot be fixed:\n  arm D's anchored set IS the evaluation region, arm R''s is interleaved with its supervised voxels.\n  Per PART 1, the sign of this asymmetry's effect on the primary metric is NOT measured and NOT predicted,\n  and it may not be used after the fact to discount either direction of the result.\n====================================================================================================",
+  "prereg_note_file": "/data/wuyou/livo_sem/out/v04/armRprime/preregistered_note_Rprime.txt"
+}

@@ -1,0 +1,93 @@
+====================================================================================================
+ARM R -- PRE-REGISTERED READING RULE AND MEASURED CONFOUNDS
+Written 2026-09-23, BEFORE arm R was trained and before any arm-R number existed.
+Appended verbatim by tools/arm_verdict.py --note; the file is frozen at
+out/v04/armR/preregistered_note_R.txt.
+====================================================================================================
+
+WHAT ARM R IS.  Identical to arm D in every respect -- GT labels, full fine-tune, the same
+KL anchor against the frozen original model on all non-supervised points, the same
+rare-class frame resampling, the same optimiser / lr / epochs / batch size, the same config
+lineage, and kl_lambda PINNED to arm D's calibrated 1.5305520007241327 -- except that the
+supervised points are drawn uniformly at random over the full 360 deg sweep instead of being
+the camera-frustum points.  Per frame, arm R supervises exactly the number of points arm D
+supervised in THAT frame (verified frame by frame, tools/verify_arm_R.py), and the subset is
+fixed across all 10 epochs (verified across processes and across two numpy builds).
+
+    R better than D  -> the frustum's forward-only bias is a handicap
+    R worse than D   -> the frustum's spatial contiguity helps
+    R equal to D     -> only the COUNT of supervised points matters, geometry does not
+
+----------------------------------------------------------------------------------------------------
+CONFOUND 1 -- SUPERVISION VOLUME AFTER VOXELISATION.  MEASURED, NOT CORRECTED.
+----------------------------------------------------------------------------------------------------
+The two arms' supervision MASKS are matched point for point, but the loss is computed after
+GridSample(0.05, mode="train"), which keeps one uniformly chosen representative per occupied
+voxel.  A supervised point therefore reaches the loss with probability 1/count(its voxel).
+Measured over 96 frames of the real training stream (out/v04/armR/gridsample_survival.json):
+
+    arm D   survival 0.8461      projected epoch total    271,559,132  (audited, actual)
+    arm R   survival 0.7078      projected epoch total  ~ 227,176,514  (R/D = 0.8366)
+
+Arm R puts about 16.3 % FEWER points through the loss at identical mask size.  The cause is
+itself geometric: arm D's frustum systematically avoids the very dense near-ground rings
+directly under the sensor, because they sit below the camera's vertical field of view, so its
+points sit in less crowded voxels and survive more often.  This is NOT corrected.  Correcting
+it would mean drawing more densely where the cloud is dense, which is no longer a uniform
+random subset and would erase the very property the arm exists to measure.
+
+The deficit is NOT uniform across classes.  Projected post-GridSample supervised points,
+arm R divided by arm D, same 96 frames:
+
+    person 0.316   large_vehicle 0.520   road 0.559   car 0.604   two_wheeler 0.855
+    sidewalk 0.884   vegetation 0.973   terrain 1.033   manmade 1.034
+
+----------------------------------------------------------------------------------------------------
+THE READING RULE, FIXED IN ADVANCE
+----------------------------------------------------------------------------------------------------
+IF ARM R SCORES BELOW ARM D, THAT DEFICIT CANNOT BE ATTRIBUTED TO GEOMETRY UNLESS IT EXCEEDS
+WHAT A 16.3 % REDUCTION IN SUPERVISED POINTS COULD PLAUSIBLY PRODUCE.  IF R LANDS BELOW D BY A
+SMALL MARGIN, THE HONEST VERDICT IS "CONFOUNDED WITH SUPERVISION VOLUME", NOT "CONTIGUITY
+HELPS".
+
+Corollaries, also fixed in advance:
+
+  * The same rule applies per class, and there it bites harder.  A deficit on person, road,
+    car or large_vehicle is the LEAST attributable to geometry, because arm R supervises
+    0.32x to 0.60x as many points of those classes after voxelisation.  A deficit on terrain,
+    vegetation or manmade is the MOST attributable, because arm R supervises as many or more
+    points of those classes (0.97x to 1.03x).
+  * R ABOVE D is NOT subject to this discount.  Arm R wins, if it wins, while carrying fewer
+    supervised points, so a positive result is conservative and may be read directly.
+  * R EQUAL TO D is ambiguous in one direction only: equality reached while R carries 16 %
+    less supervision is weak evidence that the frustum's shape costs something, not evidence
+    that geometry is irrelevant.  Do not quote it as "only the count matters".
+  * The decision band is the pre-registered +-0.60 on out-of-frustum mIoU-9, unchanged.
+    two_wheeler abstains in all three subsets, unchanged.
+
+----------------------------------------------------------------------------------------------------
+CONFOUND 2 -- THE KL ANCHOR COVERS A DIFFERENT SET.  STATED, NOT FIXABLE.
+----------------------------------------------------------------------------------------------------
+In arm D the anti-forgetting KL applies to the out-of-frustum points, which is EXACTLY the
+evaluation region: arm D is anchored precisely where it is scored.  In arm R the
+non-supervised points are scattered and interleaved with the supervised ones, so the KL
+applies to a differently-shaped set that overlaps the evaluation region only partially, and
+to 0.954 percentage points more of the cloud (arm D's frustum also contains label-EXCLUDED
+points, which receive neither loss nor anchor; arm R has no such gap).
+
+This asymmetry is a real limitation of the D-vs-R comparison and cannot be removed without
+either changing what the KL means or breaking the per-frame count match.  It is recorded here
+so that it is not discovered after the number is known.
+
+----------------------------------------------------------------------------------------------------
+CLASS DISTRIBUTIONS -- DELIBERATELY NOT EQUALISED
+----------------------------------------------------------------------------------------------------
+Arm D's supervised points carry the frustum's class mix; arm R's carry the full-sweep mix.
+That difference IS part of what "geometry" means here and resampling to equalise it would
+destroy the comparison.  Supervision-mask level, 64 frames of the real training stream
+(out/v04/armR/verify_armR.json), arm D vs arm R, percent:
+
+    car           6.257 / 4.330      large_vehicle 0.286 / 0.103    two_wheeler 0.085 / 0.092
+    person        0.043 / 0.065      road         28.966 / 19.535   sidewalk   13.166 / 16.462
+    terrain       7.433 / 8.673      vegetation   27.558 / 27.607   manmade    16.205 / 23.133
+====================================================================================================

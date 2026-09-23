@@ -1,0 +1,58 @@
+{
+  "snapshot_utc": "2026-09-23T17:38:11.610022+00:00",
+  "note": "One-time status capture, not a live monitor. No final no-KL result is included in this update.",
+  "arms": {
+    "D_noKL": {
+      "observed_utc": "2026-09-23T17:38:11.198892+00:00",
+      "phase": "training",
+      "training_seed": 20260923,
+      "completed_epoch_audits": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "completed_epochs_have_zero_KL": true,
+      "service": {
+        "ActiveState": "active",
+        "SubState": "running"
+      },
+      "final_score_available": false,
+      "last_logged_training_progress": {
+        "epoch": 8,
+        "total_epochs": 10,
+        "step": 7701,
+        "steps_per_epoch": 8614
+      }
+    },
+    "Rprime_noKL": {
+      "observed_utc": "2026-09-23T17:38:10.444804+00:00",
+      "phase": "training",
+      "training_seed": 20260923,
+      "completed_epoch_audits": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "completed_epochs_have_zero_KL": true,
+      "service": {
+        "ActiveState": "active",
+        "SubState": "running"
+      },
+      "final_score_available": false,
+      "last_logged_training_progress": {
+        "epoch": 8,
+        "total_epochs": 10,
+        "step": 3765,
+        "steps_per_epoch": 8614
+      }
+    }
+  }
+}

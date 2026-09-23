@@ -1,0 +1,429 @@
+{
+  "name": "R",
+  "n_draws": 3,
+  "subsets": {
+    "outside": {
+      "miou9_A": {
+        "mean": 65.01252862307497,
+        "sd": 0.24712148568330877,
+        "half_range": 0.31983405798924736,
+        "values": [
+          64.87457480017562,
+          64.98416998292025,
+          64.87024201406615,
+          65.50991013004464,
+          64.91282575501434,
+          64.92344905622886
+        ]
+      },
+      "miou9_arm": {
+        "mean": 82.75331827441961,
+        "sd": 0.14389121685426912,
+        "half_range": 0.1412498539852649,
+        "values": [
+          82.91041280192569,
+          82.72162892737798,
+          82.62791309395516
+        ]
+      },
+      "delta_miou9": 17.74078965134464,
+      "miou8_A": {
+        "mean": 68.30862499999999,
+        "sd": 0.11737101963432196,
+        "half_range": 0.17362500000000125,
+        "values": [
+          68.334,
+          68.259625,
+          68.454875,
+          68.32575,
+          68.36987500000001,
+          68.107625
+        ]
+      },
+      "miou8_arm": {
+        "mean": 82.78116666666666,
+        "sd": 0.16682449298089472,
+        "half_range": 0.16656249999999773,
+        "values": [
+          82.953125,
+          82.770375,
+          82.62
+        ]
+      },
+      "delta_miou8": 14.472541666666672,
+      "acc_A": {
+        "mean": 87.45407631485732,
+        "sd": 0.05088756076211415,
+        "half_range": 0.07134262208970199,
+        "values": [
+          87.42630301980618,
+          87.45783861924798,
+          87.54962913069485,
+          87.45787931156511,
+          87.42586392131439,
+          87.40694388651545
+        ]
+      },
+      "acc_arm": {
+        "mean": 94.39612757525943,
+        "sd": 0.009201006271721369,
+        "half_range": 0.008948524436483751,
+        "values": [
+          94.40384018885474,
+          94.39859939694175,
+          94.38594313998178
+        ]
+      },
+      "per_class": {
+        "car": {
+          "A": 94.36616666666667,
+          "arm": 98.32133333333333,
+          "delta": 3.9551666666666563,
+          "thr": 0.2559420832922964,
+          "call": "UP"
+        },
+        "large_vehicle": {
+          "A": 38.11866666666666,
+          "arm": 62.519000000000005,
+          "delta": 24.400333333333343,
+          "thr": 1.0783609785224992,
+          "call": "UP"
+        },
+        "two_wheeler": {
+          "A": 38.64366666666666,
+          "arm": 82.53066666666668,
+          "delta": 43.887000000000015,
+          "thr": 5.154796504227885,
+          "call": "ABSTAIN CELL"
+        },
+        "person": {
+          "A": 38.18316666666666,
+          "arm": 61.818999999999996,
+          "delta": 23.635833333333338,
+          "thr": 0.9453279589645109,
+          "call": "UP"
+        },
+        "road": {
+          "A": 81.26966666666668,
+          "arm": 95.23366666666668,
+          "delta": 13.963999999999999,
+          "thr": 0.1494269052078669,
+          "call": "UP"
+        },
+        "sidewalk": {
+          "A": 69.38383333333333,
+          "arm": 91.509,
+          "delta": 22.125166666666672,
+          "thr": 0.2919954622935102,
+          "call": "UP"
+        },
+        "terrain": {
+          "A": 74.2625,
+          "arm": 83.58033333333333,
+          "delta": 9.317833333333326,
+          "thr": 0.4403214166946723,
+          "call": "UP"
+        },
+        "vegetation": {
+          "A": 68.00750000000001,
+          "arm": 79.21,
+          "delta": 11.202499999999986,
+          "thr": 0.3629200325140545,
+          "call": "UP"
+        },
+        "manmade": {
+          "A": 82.8775,
+          "arm": 90.057,
+          "delta": 7.179500000000004,
+          "thr": 0.25868542672520023,
+          "call": "UP"
+        }
+      }
+    },
+    "frustum": {
+      "miou9_A": {
+        "mean": 65.34694266514144,
+        "sd": 0.1857464040240943,
+        "half_range": 0.26409122701912224,
+        "values": [
+          65.23019663435055,
+          65.67028048045974,
+          65.39659782042744,
+          65.38675332948917,
+          65.1420980264215,
+          65.25572969970021
+        ]
+      },
+      "miou9_arm": {
+        "mean": 84.38041902484999,
+        "sd": 0.12336175109012766,
+        "half_range": 0.1223105942780407,
+        "values": [
+          84.24883049690517,
+          84.49345168546125,
+          84.39897489218353
+        ]
+      },
+      "delta_miou9": 19.033476359708544,
+      "miou8_A": {
+        "mean": 70.88081249999999,
+        "sd": 0.06583904379241604,
+        "half_range": 0.08793749999999534,
+        "values": [
+          71.00999999999999,
+          70.846375,
+          70.87225,
+          70.88062500000001,
+          70.8415,
+          70.834125
+        ]
+      },
+      "miou8_arm": {
+        "mean": 84.47945833333334,
+        "sd": 0.13473917705453636,
+        "half_range": 0.11675000000000324,
+        "values": [
+          84.323875,
+          84.55737500000001,
+          84.557125
+        ]
+      },
+      "delta_miou8": 13.59864583333335,
+      "acc_A": {
+        "mean": 89.38208084886149,
+        "sd": 0.020904427876307575,
+        "half_range": 0.027311320010362294,
+        "values": [
+          89.38887693685416,
+          89.3901383725728,
+          89.3938682648546,
+          89.40637873909952,
+          89.361466680709,
+          89.3517560990788
+        ]
+      },
+      "acc_arm": {
+        "mean": 95.38630792819934,
+        "sd": 0.019384901755944886,
+        "half_range": 0.01932470052897628,
+        "values": [
+          95.36786458373784,
+          95.4065139847958,
+          95.3845452160644
+        ]
+      },
+      "per_class": {
+        "car": {
+          "A": 89.3575,
+          "arm": 97.80333333333334,
+          "delta": 8.44583333333334,
+          "thr": 0.2559420832922964,
+          "call": "UP"
+        },
+        "large_vehicle": {
+          "A": 48.89966666666666,
+          "arm": 77.03033333333333,
+          "delta": 28.13066666666667,
+          "thr": 1.0783609785224992,
+          "call": "UP"
+        },
+        "two_wheeler": {
+          "A": 21.076333333333334,
+          "arm": 83.58833333333332,
+          "delta": 62.511999999999986,
+          "thr": 5.154796504227885,
+          "call": "ABSTAIN CELL"
+        },
+        "person": {
+          "A": 39.51266666666667,
+          "arm": 55.318000000000005,
+          "delta": 15.805333333333337,
+          "thr": 0.9453279589645109,
+          "call": "UP"
+        },
+        "road": {
+          "A": 89.28866666666666,
+          "arm": 96.831,
+          "delta": 7.542333333333346,
+          "thr": 0.1494269052078669,
+          "call": "UP"
+        },
+        "sidewalk": {
+          "A": 66.376,
+          "arm": 90.05666666666667,
+          "delta": 23.680666666666667,
+          "thr": 0.2919954622935102,
+          "call": "UP"
+        },
+        "terrain": {
+          "A": 77.81066666666666,
+          "arm": 85.17066666666666,
+          "delta": 7.359999999999999,
+          "thr": 0.4403214166946723,
+          "call": "UP"
+        },
+        "vegetation": {
+          "A": 74.99833333333332,
+          "arm": 84.62533333333333,
+          "delta": 9.62700000000001,
+          "thr": 0.3629200325140545,
+          "call": "UP"
+        },
+        "manmade": {
+          "A": 80.80300000000001,
+          "arm": 89.00033333333334,
+          "delta": 8.197333333333333,
+          "thr": 0.25868542672520023,
+          "call": "UP"
+        }
+      }
+    },
+    "global": {
+      "miou9_A": {
+        "mean": 65.06476427475314,
+        "sd": 0.20828263798471527,
+        "half_range": 0.2724916994523312,
+        "values": [
+          64.92461899530537,
+          65.10580173695608,
+          64.96508641375682,
+          65.46960239421003,
+          64.94553418778352,
+          64.97794192050705
+        ]
+      },
+      "miou9_arm": {
+        "mean": 83.07215000487436,
+        "sd": 0.09998987513325418,
+        "half_range": 0.09991740163762586,
+        "values": [
+          83.17426497935107,
+          83.06775485919621,
+          82.97443017607581
+        ]
+      },
+      "delta_miou9": 18.007385730121214,
+      "miou8_A": {
+        "mean": 68.80122916666667,
+        "sd": 0.09786851564301326,
+        "half_range": 0.14393749999999983,
+        "values": [
+          68.83924999999999,
+          68.756125,
+          68.922125,
+          68.812,
+          68.843625,
+          68.63425
+        ]
+      },
+      "miou8_arm": {
+        "mean": 83.11275,
+        "sd": 0.1120170885400935,
+        "half_range": 0.11193749999999625,
+        "values": [
+          83.22225,
+          83.117625,
+          82.99837500000001
+        ]
+      },
+      "delta_miou8": 14.311520833333333,
+      "acc_A": {
+        "mean": 87.76367939993763,
+        "sd": 0.04473823547842041,
+        "half_range": 0.06326750224413047,
+        "values": [
+          87.74145733023421,
+          87.76813143981869,
+          87.84578098899772,
+          87.77077351041275,
+          87.73668714565294,
+          87.71924598450946
+        ]
+      },
+      "acc_arm": {
+        "mean": 94.55513285073947,
+        "sd": 0.0077019741656150905,
+        "half_range": 0.007075839992964461,
+        "values": [
+          94.55864528473728,
+          94.56045247373352,
+          94.54630079374759
+        ]
+      },
+      "per_class": {
+        "car": {
+          "A": 93.24883333333332,
+          "arm": 98.20566666666667,
+          "delta": 4.95683333333335,
+          "thr": 0.2559420832922964,
+          "call": "UP"
+        },
+        "large_vehicle": {
+          "A": 40.023833333333336,
+          "arm": 65.38466666666666,
+          "delta": 25.360833333333325,
+          "thr": 1.0783609785224992,
+          "call": "UP"
+        },
+        "two_wheeler": {
+          "A": 35.17333333333333,
+          "arm": 82.74633333333334,
+          "delta": 47.57300000000001,
+          "thr": 5.154796504227885,
+          "call": "ABSTAIN CELL"
+        },
+        "person": {
+          "A": 38.48066666666666,
+          "arm": 60.467000000000006,
+          "delta": 21.98633333333335,
+          "thr": 0.9453279589645109,
+          "call": "UP"
+        },
+        "road": {
+          "A": 82.976,
+          "arm": 95.59533333333333,
+          "delta": 12.61933333333333,
+          "thr": 0.1494269052078669,
+          "call": "UP"
+        },
+        "sidewalk": {
+          "A": 69.02816666666666,
+          "arm": 91.34033333333333,
+          "delta": 22.31216666666667,
+          "thr": 0.2919954622935102,
+          "call": "UP"
+        },
+        "terrain": {
+          "A": 74.89750000000002,
+          "arm": 83.86466666666666,
+          "delta": 8.967166666666643,
+          "thr": 0.4403214166946723,
+          "call": "UP"
+        },
+        "vegetation": {
+          "A": 69.11916666666666,
+          "arm": 80.10600000000001,
+          "delta": 10.986833333333351,
+          "thr": 0.3629200325140545,
+          "call": "UP"
+        },
+        "manmade": {
+          "A": 82.63566666666667,
+          "arm": 89.93833333333333,
+          "delta": 7.302666666666667,
+          "thr": 0.25868542672520023,
+          "call": "UP"
+        }
+      }
+    }
+  },
+  "verdict": "PROPAGATION",
+  "delta_primary": 17.74078965134464,
+  "delta_primary_no_two_wheeler": 14.472541666666672,
+  "p3": {
+    "hits": 5,
+    "tested": 8
+  },
+  "prereg_note": "====================================================================================================\nARM R -- PRE-REGISTERED READING RULE AND MEASURED CONFOUNDS\nWritten 2026-09-23, BEFORE arm R was trained and before any arm-R number existed.\nAppended verbatim by tools/arm_verdict.py --note; the file is frozen at\nout/v04/armR/preregistered_note_R.txt.\n====================================================================================================\n\nWHAT ARM R IS.  Identical to arm D in every respect -- GT labels, full fine-tune, the same\nKL anchor against the frozen original model on all non-supervised points, the same\nrare-class frame resampling, the same optimiser / lr / epochs / batch size, the same config\nlineage, and kl_lambda PINNED to arm D's calibrated 1.5305520007241327 -- except that the\nsupervised points are drawn uniformly at random over the full 360 deg sweep instead of being\nthe camera-frustum points.  Per frame, arm R supervises exactly the number of points arm D\nsupervised in THAT frame (verified frame by frame, tools/verify_arm_R.py), and the subset is\nfixed across all 10 epochs (verified across processes and across two numpy builds).\n\n    R better than D  -> the frustum's forward-only bias is a handicap\n    R worse than D   -> the frustum's spatial contiguity helps\n    R equal to D     -> only the COUNT of supervised points matters, geometry does not\n\n----------------------------------------------------------------------------------------------------\nCONFOUND 1 -- SUPERVISION VOLUME AFTER VOXELISATION.  MEASURED, NOT CORRECTED.\n----------------------------------------------------------------------------------------------------\nThe two arms' supervision MASKS are matched point for point, but the loss is computed after\nGridSample(0.05, mode=\"train\"), which keeps one uniformly chosen representative per occupied\nvoxel.  A supervised point therefore reaches the loss with probability 1/count(its voxel).\nMeasured over 96 frames of the real training stream (out/v04/armR/gridsample_survival.json):\n\n    arm D   survival 0.8461      projected epoch total    271,559,132  (audited, actual)\n    arm R   survival 0.7078      projected epoch total  ~ 227,176,514  (R/D = 0.8366)\n\nArm R puts about 16.3 % FEWER points through the loss at identical mask size.  The cause is\nitself geometric: arm D's frustum systematically avoids the very dense near-ground rings\ndirectly under the sensor, because they sit below the camera's vertical field of view, so its\npoints sit in less crowded voxels and survive more often.  This is NOT corrected.  Correcting\nit would mean drawing more densely where the cloud is dense, which is no longer a uniform\nrandom subset and would erase the very property the arm exists to measure.\n\nThe deficit is NOT uniform across classes.  Projected post-GridSample supervised points,\narm R divided by arm D, same 96 frames:\n\n    person 0.316   large_vehicle 0.520   road 0.559   car 0.604   two_wheeler 0.855\n    sidewalk 0.884   vegetation 0.973   terrain 1.033   manmade 1.034\n\n----------------------------------------------------------------------------------------------------\nTHE READING RULE, FIXED IN ADVANCE\n----------------------------------------------------------------------------------------------------\nIF ARM R SCORES BELOW ARM D, THAT DEFICIT CANNOT BE ATTRIBUTED TO GEOMETRY UNLESS IT EXCEEDS\nWHAT A 16.3 % REDUCTION IN SUPERVISED POINTS COULD PLAUSIBLY PRODUCE.  IF R LANDS BELOW D BY A\nSMALL MARGIN, THE HONEST VERDICT IS \"CONFOUNDED WITH SUPERVISION VOLUME\", NOT \"CONTIGUITY\nHELPS\".\n\nCorollaries, also fixed in advance:\n\n  * The same rule applies per class, and there it bites harder.  A deficit on person, road,\n    car or large_vehicle is the LEAST attributable to geometry, because arm R supervises\n    0.32x to 0.60x as many points of those classes after voxelisation.  A deficit on terrain,\n    vegetation or manmade is the MOST attributable, because arm R supervises as many or more\n    points of those classes (0.97x to 1.03x).\n  * R ABOVE D is NOT subject to this discount.  Arm R wins, if it wins, while carrying fewer\n    supervised points, so a positive result is conservative and may be read directly.\n  * R EQUAL TO D is ambiguous in one direction only: equality reached while R carries 16 %\n    less supervision is weak evidence that the frustum's shape costs something, not evidence\n    that geometry is irrelevant.  Do not quote it as \"only the count matters\".\n  * The decision band is the pre-registered +-0.60 on out-of-frustum mIoU-9, unchanged.\n    two_wheeler abstains in all three subsets, unchanged.\n\n----------------------------------------------------------------------------------------------------\nCONFOUND 2 -- THE KL ANCHOR COVERS A DIFFERENT SET.  STATED, NOT FIXABLE.\n----------------------------------------------------------------------------------------------------\nIn arm D the anti-forgetting KL applies to the out-of-frustum points, which is EXACTLY the\nevaluation region: arm D is anchored precisely where it is scored.  In arm R the\nnon-supervised points are scattered and interleaved with the supervised ones, so the KL\napplies to a differently-shaped set that overlaps the evaluation region only partially, and\nto 0.954 percentage points more of the cloud (arm D's frustum also contains label-EXCLUDED\npoints, which receive neither loss nor anchor; arm R has no such gap).\n\nThis asymmetry is a real limitation of the D-vs-R comparison and cannot be removed without\neither changing what the KL means or breaking the per-frame count match.  It is recorded here\nso that it is not discovered after the number is known.\n\n----------------------------------------------------------------------------------------------------\nCLASS DISTRIBUTIONS -- DELIBERATELY NOT EQUALISED\n----------------------------------------------------------------------------------------------------\nArm D's supervised points carry the frustum's class mix; arm R's carry the full-sweep mix.\nThat difference IS part of what \"geometry\" means here and resampling to equalise it would\ndestroy the comparison.  Supervision-mask level, 64 frames of the real training stream\n(out/v04/armR/verify_armR.json), arm D vs arm R, percent:\n\n    car           6.257 / 4.330      large_vehicle 0.286 / 0.103    two_wheeler 0.085 / 0.092\n    person        0.043 / 0.065      road         28.966 / 19.535   sidewalk   13.166 / 16.462\n    terrain       7.433 / 8.673      vegetation   27.558 / 27.607   manmade    16.205 / 23.133\n====================================================================================================",
+  "prereg_note_file": "/data/wuyou/livo_sem/out/v04/armR/preregistered_note_R.txt"
+}

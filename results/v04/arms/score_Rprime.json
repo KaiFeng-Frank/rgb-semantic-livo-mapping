@@ -1,0 +1,6323 @@
+{
+  "protocol": {
+    "question": "2D Cityscapes segmentation projected onto points vs 3D PTv3 on the point cloud, on SemanticKITTI seq 07",
+    "sequence": "KITTI raw 2011_09_30_drive_0027_sync == SemanticKITTI seq 07, index-aligned, offset 0",
+    "sequence_role": "EVALUATION",
+    "frames_spec": "all",
+    "n_frames": 1101,
+    "frames_first_last": [
+      0,
+      1100
+    ],
+    "label_space": {
+      "name": "common-9 (label_spaces.COARSE)",
+      "classes": [
+        "car",
+        "large_vehicle",
+        "two_wheeler",
+        "person",
+        "road",
+        "sidewalk",
+        "terrain",
+        "vegetation",
+        "manmade"
+      ],
+      "rule": "every class is natively expressible in ALL THREE vocabularies and present in seq07 GT; neither arm is scored on a class its own taxonomy cannot name",
+      "gt": "SemanticKITTI via label_spaces.sk_lut()",
+      "3d": "nuScenes-16 via label_spaces.nusc_lut()",
+      "2d": "Cityscapes-19 via label_spaces.cs_lut() / city19_to_coarse()",
+      "sentinels": {
+        "EXCLUDED(-1)": "GT-side: the point is dropped for BOTH arms",
+        "UNMAPPED(-2)": "prediction-side: always wrong, never dropped (2D sky, 3D other_flat)",
+        "ABSTAIN(-1 in prediction arrays)": "no answer at all"
+      }
+    },
+    "ignore_rule": "points whose GT coarse class is IGNORE are excluded from every denominator for every arm (P2)",
+    "frustum": {
+      "image_wh": [
+        1226,
+        370
+      ],
+      "min_depth_m": 0.5,
+      "fx": 707.0912,
+      "fy": 707.0912,
+      "cx": 601.8873,
+      "cy": 183.1104,
+      "distortion": "none (images are rectified)",
+      "rule": "z > min_depth and 0 <= u <= W-1 and 0 <= v <= H-1",
+      "measured_coverage_101_frames": 0.16041
+    },
+    "2d_label_rule": {
+      "sampling": "auto",
+      "occlusion": "zbuffer",
+      "occ_win_px": 2,
+      "occ_tol_abs_m": 0.5,
+      "occ_tol_rel": 0.02,
+      "sky_policy": "wrong",
+      "rider_maps_to": "two_wheeler"
+    },
+    "abstention_conventions": {
+      "abstain_wrong": "unlabelled counted as wrong; denominator = all evaluated points (what a mapping system needs)",
+      "abstain_excluded": "unlabelled excluded from the denominator (the convention that is fair to the 2D arm)"
+    },
+    "class_subsets": {
+      "all": "every one of the 9 common classes present in GT",
+      "nine": [
+        "car",
+        "large_vehicle",
+        "two_wheeler",
+        "person",
+        "road",
+        "sidewalk",
+        "terrain",
+        "vegetation",
+        "manmade"
+      ],
+      "frequent": "['car', 'large_vehicle', 'road', 'sidewalk', 'terrain', 'vegetation', 'manmade'] -- classes with >=1 % of in-frustum GT support"
+    },
+    "boundary_sets": {
+      "sem_boundary": "GT-only: any of k=10 nearest 3D neighbours within 0.50 m carries a different non-ignore GT coarse class",
+      "depth_edge": "geometry-only, in-frustum: max-min LiDAR depth over an 11x11 pixel window exceeds max(1.0 m, 0.30 * near depth)",
+      "independence": "neither set uses any arm's predictions"
+    },
+    "range_bins_m": [
+      [
+        0,
+        10
+      ],
+      [
+        10,
+        20
+      ],
+      [
+        20,
+        30
+      ],
+      [
+        30,
+        50
+      ],
+      [
+        50,
+        "inf"
+      ]
+    ],
+    "range_axis": "LiDAR range ||xyz||, not camera depth",
+    "repeats": "3 repeat(s); half-range reported",
+    "instrument_noise": "3D arm is non-deterministic: ~4-5 % of points change label between two forwards; ~1 pt mIoU spread on 20 frames. Half-range over repeats is reported for every number.",
+    "pro_2d_concessions": [
+      "Cityscapes-pretrained model, not ADE20K: KITTI is far closer to Cityscapes than to nuScenes, so the 2D arm gets the SMALLER domain gap.",
+      "SemanticKITTI's 19 classes were defined after Cityscapes, so the 2D taxonomy maps almost 1:1 while nuScenes-16 does not.",
+      "occlusion=zbuffer: points the camera cannot see are treated as the 2D arm abstaining, not as wrong answers.",
+      "SKY IS NOT A CONCESSION IN THE HEADLINE RUN: sky_policy=wrong, i.e. a point landing on a sky pixel is UNMAPPED and counted WRONG under BOTH conventions.  sky_policy=abstain (which would let the 2D arm delete those errors) is reported only as a separate sensitivity row.",
+      "R1 common-9 label space: SemanticKITTI other-vehicle (20), parking (44), other-ground (49), other-structure (52) and other-object (99) are all EXCLUDED from scoring because Cityscapes-19 either has no class for them or was trained with them ignored.  5.76 % of all points / 5.49 % in-frustum.  Every one of those exclusions removes points the 2D arm would have been charged for.",
+      "rider / bicycle / motorcycle merged into two_wheeler, which is what all three taxonomies agree on -- the Cityscapes rider/vehicle split can no longer cost the 2D arm anything.",
+      "prob_bilinear sampling used whenever the 2D arm ships probabilities.",
+      "sub-pixel sampling on the UPSAMPLED label map (seg2d_infer.sample_points), not nearest-neighbour on the native 1226x370 grid.",
+      "input scale and TTA chosen by MEASUREMENT on seq 04, a disjoint drive on the same rig and the same calibration day, then frozen.",
+      "both 2D checkpoints run (EoMT-L 84.2 and Mask2Former Swin-L 83.3 Cityscapes val mIoU, single-scale) and the stronger quoted per metric.",
+      "abstain_excluded convention reported alongside abstain_wrong."
+    ],
+    "arms": {
+      "3d": {
+        "dirs": [
+          "/data/wuyou/livo_sem/out/v04/arms/Rprime_r1",
+          "/data/wuyou/livo_sem/out/v04/arms/Rprime_r2",
+          "/data/wuyou/livo_sem/out/v04/arms/Rprime_r3"
+        ],
+        "space": "nusc16",
+        "note": "PTv3 Pointcept v1.5.1 nuScenes weights, fp16, intensity x0.2, shuffle_orders=False"
+      },
+      "2d": {
+        "dirs": [],
+        "space": "cityscapes19",
+        "note": "Cityscapes-pretrained semantic segmentation of image_02, image-space labels; projection, occlusion and sky rules applied by this module"
+      },
+      "2d_naive_projection": {
+        "note": "same 2D cache, occlusion=none"
+      },
+      "hybrid": {
+        "note": "2D where the 2D arm speaks, 3D elsewhere"
+      }
+    },
+    "code_sha1": "e07ed80e70a2bf4dec73580950a6c9e545849d1b"
+  },
+  "timing": {},
+  "timing_schema": {
+    "arm": "3d|2d|hybrid",
+    "hardware": "str, e.g. 'RTX 4090, i9-13900K'",
+    "precision": "fp16|fp32|bf16",
+    "input_hw": "[H, W] actually fed to the network",
+    "input_scale": "float, resize factor applied to the 1226x370 image (2D arm)",
+    "tta": "none|hflip|multiscale:...",
+    "batch": "int",
+    "frames": "int, number of timed frames",
+    "stages_ms": {
+      "<stage name>": {
+        "mean": 0.0,
+        "p50": 0.0,
+        "p95": 0.0,
+        "max": 0.0
+      },
+      "_3d_stages": "pre(voxelize) / forward / post(devoxelize) / total",
+      "_2d_stages": "imread / pre(resize+normalise) / forward / post(argmax+upsample) / project(handled by this module, CPU) / total"
+    }
+  },
+  "repeats": [
+    {
+      "3d": {
+        "global": {
+          "n_eval": 125886114,
+          "n_labelled": 125886114,
+          "n_unmapped_pred": 3855,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 94.57716440432819,
+          "acc_abstain_wrong": 94.57716440432819,
+          "per_class_iou_abstain_excluded": {
+            "car": 98.169,
+            "large_vehicle": 66.6,
+            "two_wheeler": 83.107,
+            "person": 63.371,
+            "road": 95.73,
+            "sidewalk": 91.494,
+            "terrain": 83.765,
+            "vegetation": 80.147,
+            "manmade": 89.898
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 98.169,
+            "large_vehicle": 66.6,
+            "two_wheeler": 83.107,
+            "person": 63.371,
+            "road": 95.73,
+            "sidewalk": 91.494,
+            "terrain": 83.765,
+            "vegetation": 80.147,
+            "manmade": 89.898
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 12134359,
+            "large_vehicle": 1101484,
+            "two_wheeler": 268104,
+            "person": 166135,
+            "road": 25199192,
+            "sidewalk": 18248605,
+            "terrain": 6877242,
+            "vegetation": 21146455,
+            "manmade": 40744538
+          },
+          "miou_all_abstain_excluded": 83.58684479700986,
+          "miou_all_abstain_wrong": 83.58684479700986,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 83.58684479700986,
+          "miou_nine_abstain_wrong": 83.58684479700986,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 86.54330357757388,
+          "miou_frequent_abstain_wrong": 86.54330357757388,
+          "n_classes_frequent": 7
+        },
+        "frustum": {
+          "n_eval": 20215061,
+          "n_labelled": 20215061,
+          "n_unmapped_pred": 216,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 95.45797561530979,
+          "acc_abstain_wrong": 95.45797561530979,
+          "per_class_iou_abstain_excluded": {
+            "car": 97.79,
+            "large_vehicle": 77.699,
+            "two_wheeler": 84.255,
+            "person": 58.733,
+            "road": 96.979,
+            "sidewalk": 90.526,
+            "terrain": 85.056,
+            "vegetation": 84.699,
+            "manmade": 89.089
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 97.79,
+            "large_vehicle": 77.699,
+            "two_wheeler": 84.255,
+            "person": 58.733,
+            "road": 96.979,
+            "sidewalk": 90.526,
+            "terrain": 85.056,
+            "vegetation": 84.699,
+            "manmade": 89.089
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 2698134,
+            "large_vehicle": 227328,
+            "two_wheeler": 53382,
+            "person": 34639,
+            "road": 5775356,
+            "sidewalk": 2103194,
+            "terrain": 1262510,
+            "vegetation": 3493785,
+            "manmade": 4566733
+          },
+          "miou_all_abstain_excluded": 84.98067052170953,
+          "miou_all_abstain_wrong": 84.98067052170953,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 84.98067052170953,
+          "miou_nine_abstain_wrong": 84.98067052170953,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 88.83398378056586,
+          "miou_frequent_abstain_wrong": 88.83398378056586,
+          "n_classes_frequent": 7
+        },
+        "outside": {
+          "n_eval": 105671053,
+          "n_labelled": 105671053,
+          "n_unmapped_pred": 3639,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 94.40866364793393,
+          "acc_abstain_wrong": 94.40866364793393,
+          "per_class_iou_abstain_excluded": {
+            "car": 98.278,
+            "large_vehicle": 63.884,
+            "two_wheeler": 82.822,
+            "person": 64.586,
+            "road": 95.364,
+            "sidewalk": 91.621,
+            "terrain": 83.483,
+            "vegetation": 79.25,
+            "manmade": 90.001
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 98.278,
+            "large_vehicle": 63.884,
+            "two_wheeler": 82.822,
+            "person": 64.586,
+            "road": 95.364,
+            "sidewalk": 91.621,
+            "terrain": 83.483,
+            "vegetation": 79.25,
+            "manmade": 90.001
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 9436225,
+            "large_vehicle": 874156,
+            "two_wheeler": 214722,
+            "person": 131496,
+            "road": 19423836,
+            "sidewalk": 16145411,
+            "terrain": 5614732,
+            "vegetation": 17652670,
+            "manmade": 36177805
+          },
+          "miou_all_abstain_excluded": 83.25427826648472,
+          "miou_all_abstain_wrong": 83.25427826648472,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 83.25427826648472,
+          "miou_nine_abstain_wrong": 83.25427826648472,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 85.98298214288731,
+          "miou_frequent_abstain_wrong": 85.98298214288731,
+          "n_classes_frequent": 7
+        },
+        "sem_boundary": {
+          "n_eval": 0,
+          "n_labelled": 0,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": NaN,
+          "acc_abstain_excluded": NaN,
+          "acc_abstain_wrong": NaN,
+          "per_class_iou_abstain_excluded": {},
+          "per_class_iou_abstain_wrong": {},
+          "classes_present": [],
+          "gt_count_per_class": {},
+          "miou_all_abstain_excluded": NaN,
+          "miou_all_abstain_wrong": NaN,
+          "n_classes_all": 0,
+          "miou_nine_abstain_excluded": NaN,
+          "miou_nine_abstain_wrong": NaN,
+          "n_classes_nine": 0,
+          "miou_frequent_abstain_excluded": NaN,
+          "miou_frequent_abstain_wrong": NaN,
+          "n_classes_frequent": 0
+        },
+        "sem_interior": {
+          "n_eval": 0,
+          "n_labelled": 0,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": NaN,
+          "acc_abstain_excluded": NaN,
+          "acc_abstain_wrong": NaN,
+          "per_class_iou_abstain_excluded": {},
+          "per_class_iou_abstain_wrong": {},
+          "classes_present": [],
+          "gt_count_per_class": {},
+          "miou_all_abstain_excluded": NaN,
+          "miou_all_abstain_wrong": NaN,
+          "n_classes_all": 0,
+          "miou_nine_abstain_excluded": NaN,
+          "miou_nine_abstain_wrong": NaN,
+          "n_classes_nine": 0,
+          "miou_frequent_abstain_excluded": NaN,
+          "miou_frequent_abstain_wrong": NaN,
+          "n_classes_frequent": 0
+        },
+        "depth_edge": {
+          "n_eval": 2375519,
+          "n_labelled": 2375519,
+          "n_unmapped_pred": 1,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 93.51560648430933,
+          "acc_abstain_wrong": 93.51560648430933,
+          "per_class_iou_abstain_excluded": {
+            "car": 98.315,
+            "large_vehicle": 51.21,
+            "two_wheeler": 79.113,
+            "person": 70.85,
+            "road": 88.691,
+            "sidewalk": 78.422,
+            "terrain": 71.493,
+            "vegetation": 86.504,
+            "manmade": 85.456
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 98.315,
+            "large_vehicle": 51.21,
+            "two_wheeler": 79.113,
+            "person": 70.85,
+            "road": 88.691,
+            "sidewalk": 78.422,
+            "terrain": 71.493,
+            "vegetation": 86.504,
+            "manmade": 85.456
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 565788,
+            "large_vehicle": 14421,
+            "two_wheeler": 14302,
+            "person": 10344,
+            "road": 95920,
+            "sidewalk": 77320,
+            "terrain": 83060,
+            "vegetation": 806924,
+            "manmade": 707440
+          },
+          "miou_all_abstain_excluded": 78.8949469218951,
+          "miou_all_abstain_wrong": 78.8949469218951,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 78.8949469218951,
+          "miou_nine_abstain_wrong": 78.8949469218951,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 80.01313748076713,
+          "miou_frequent_abstain_wrong": 80.01313748076713,
+          "n_classes_frequent": 7
+        },
+        "depth_interior": {
+          "n_eval": 17839542,
+          "n_labelled": 17839542,
+          "n_unmapped_pred": 215,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 95.71662209713679,
+          "acc_abstain_wrong": 95.71662209713679,
+          "per_class_iou_abstain_excluded": {
+            "car": 97.652,
+            "large_vehicle": 79.462,
+            "two_wheeler": 86.156,
+            "person": 53.441,
+            "road": 97.126,
+            "sidewalk": 91.005,
+            "terrain": 86.046,
+            "vegetation": 84.165,
+            "manmade": 89.769
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 97.652,
+            "large_vehicle": 79.462,
+            "two_wheeler": 86.156,
+            "person": 53.441,
+            "road": 97.126,
+            "sidewalk": 91.005,
+            "terrain": 86.046,
+            "vegetation": 84.165,
+            "manmade": 89.769
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 2132346,
+            "large_vehicle": 212907,
+            "two_wheeler": 39080,
+            "person": 24295,
+            "road": 5679436,
+            "sidewalk": 2025874,
+            "terrain": 1179450,
+            "vegetation": 2686861,
+            "manmade": 3859293
+          },
+          "miou_all_abstain_excluded": 84.9802495400598,
+          "miou_all_abstain_wrong": 84.9802495400598,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 84.9802495400598,
+          "miou_nine_abstain_wrong": 84.9802495400598,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 89.31783142040024,
+          "miou_frequent_abstain_wrong": 89.31783142040024,
+          "n_classes_frequent": 7
+        },
+        "range_0_10": {
+          "n_eval": 81748087,
+          "n_labelled": 81748087,
+          "n_unmapped_pred": 3854,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 94.5051423649828,
+          "acc_abstain_wrong": 94.5051423649828,
+          "per_class_iou_abstain_excluded": {
+            "car": 98.691,
+            "large_vehicle": 67.595,
+            "two_wheeler": 88.36,
+            "person": 73.679,
+            "road": 95.812,
+            "sidewalk": 92.396,
+            "terrain": 86.609,
+            "vegetation": 75.653,
+            "manmade": 88.131
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 98.691,
+            "large_vehicle": 67.595,
+            "two_wheeler": 88.36,
+            "person": 73.679,
+            "road": 95.812,
+            "sidewalk": 92.396,
+            "terrain": 86.609,
+            "vegetation": 75.653,
+            "manmade": 88.131
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 8847335,
+            "large_vehicle": 759097,
+            "two_wheeler": 225374,
+            "person": 60292,
+            "road": 18479985,
+            "sidewalk": 14691092,
+            "terrain": 3978208,
+            "vegetation": 11243136,
+            "manmade": 23463568
+          },
+          "miou_all_abstain_excluded": 85.21393894517435,
+          "miou_all_abstain_wrong": 85.21393894517435,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 85.21393894517435,
+          "miou_nine_abstain_wrong": 85.21393894517435,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 86.41247149844659,
+          "miou_frequent_abstain_wrong": 86.41247149844659,
+          "n_classes_frequent": 7
+        },
+        "range_10_20": {
+          "n_eval": 32166163,
+          "n_labelled": 32166163,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 95.14278404918858,
+          "acc_abstain_wrong": 95.14278404918858,
+          "per_class_iou_abstain_excluded": {
+            "car": 97.855,
+            "large_vehicle": 68.289,
+            "two_wheeler": 64.609,
+            "person": 58.841,
+            "road": 96.218,
+            "sidewalk": 89.723,
+            "terrain": 83.547,
+            "vegetation": 84.925,
+            "manmade": 92.546
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 97.855,
+            "large_vehicle": 68.289,
+            "two_wheeler": 64.609,
+            "person": 58.841,
+            "road": 96.218,
+            "sidewalk": 89.723,
+            "terrain": 83.547,
+            "vegetation": 84.925,
+            "manmade": 92.546
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 2379571,
+            "large_vehicle": 302727,
+            "two_wheeler": 35651,
+            "person": 90087,
+            "road": 5314798,
+            "sidewalk": 2933960,
+            "terrain": 2102694,
+            "vegetation": 6419302,
+            "manmade": 12587373
+          },
+          "miou_all_abstain_excluded": 81.8393041584998,
+          "miou_all_abstain_wrong": 81.8393041584998,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 81.8393041584998,
+          "miou_nine_abstain_wrong": 81.8393041584998,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 87.58634306626354,
+          "miou_frequent_abstain_wrong": 87.58634306626354,
+          "n_classes_frequent": 7
+        },
+        "range_20_30": {
+          "n_eval": 7993995,
+          "n_labelled": 7993995,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 94.04925822445473,
+          "acc_abstain_wrong": 94.04925822445473,
+          "per_class_iou_abstain_excluded": {
+            "car": 95.607,
+            "large_vehicle": 35.161,
+            "two_wheeler": 46.963,
+            "person": 48.545,
+            "road": 93.711,
+            "sidewalk": 82.001,
+            "terrain": 70.8,
+            "vegetation": 86.269,
+            "manmade": 92.694
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 95.607,
+            "large_vehicle": 35.161,
+            "two_wheeler": 46.963,
+            "person": 48.545,
+            "road": 93.711,
+            "sidewalk": 82.001,
+            "terrain": 70.8,
+            "vegetation": 86.269,
+            "manmade": 92.694
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 658481,
+            "large_vehicle": 20559,
+            "two_wheeler": 5043,
+            "person": 10513,
+            "road": 994176,
+            "sidewalk": 478109,
+            "terrain": 555775,
+            "vegetation": 2224068,
+            "manmade": 3047271
+          },
+          "miou_all_abstain_excluded": 72.416640445905,
+          "miou_all_abstain_wrong": 72.416640445905,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 72.416640445905,
+          "miou_nine_abstain_wrong": 72.416640445905,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 79.46316791636453,
+          "miou_frequent_abstain_wrong": 79.46316791636453,
+          "n_classes_frequent": 7
+        },
+        "range_30_50": {
+          "n_eval": 3972400,
+          "n_labelled": 3972400,
+          "n_unmapped_pred": 1,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 92.54647064746753,
+          "acc_abstain_wrong": 92.54647064746753,
+          "per_class_iou_abstain_excluded": {
+            "car": 90.006,
+            "large_vehicle": 42.46,
+            "two_wheeler": 32.981,
+            "person": 53.287,
+            "road": 90.851,
+            "sidewalk": 68.769,
+            "terrain": 67.198,
+            "vegetation": 84.739,
+            "manmade": 90.613
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 90.006,
+            "large_vehicle": 42.46,
+            "two_wheeler": 32.981,
+            "person": 53.287,
+            "road": 90.851,
+            "sidewalk": 68.769,
+            "terrain": 67.198,
+            "vegetation": 84.739,
+            "manmade": 90.613
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 248784,
+            "large_vehicle": 19094,
+            "two_wheeler": 2033,
+            "person": 5231,
+            "road": 409883,
+            "sidewalk": 145354,
+            "terrain": 240059,
+            "vegetation": 1257739,
+            "manmade": 1644223
+          },
+          "miou_all_abstain_excluded": 68.98920775324703,
+          "miou_all_abstain_wrong": 68.98920775324703,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 68.98920775324703,
+          "miou_nine_abstain_wrong": 68.98920775324703,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 76.37641358733343,
+          "miou_frequent_abstain_wrong": 76.37641358733343,
+          "n_classes_frequent": 7
+        },
+        "range_50_inf": {
+          "n_eval": 5469,
+          "n_labelled": 5469,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 91.04040958127628,
+          "acc_abstain_wrong": 91.04040958127628,
+          "per_class_iou_abstain_excluded": {
+            "car": 74.112,
+            "large_vehicle": 20.0,
+            "two_wheeler": 0.0,
+            "person": 25.0,
+            "road": 83.293,
+            "sidewalk": 41.346,
+            "terrain": 69.871,
+            "vegetation": 85.027,
+            "manmade": 89.373
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 74.112,
+            "large_vehicle": 20.0,
+            "two_wheeler": 0.0,
+            "person": 25.0,
+            "road": 83.293,
+            "sidewalk": 41.346,
+            "terrain": 69.871,
+            "vegetation": 85.027,
+            "manmade": 89.373
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 188,
+            "large_vehicle": 7,
+            "two_wheeler": 3,
+            "person": 12,
+            "road": 350,
+            "sidewalk": 90,
+            "terrain": 506,
+            "vegetation": 2210,
+            "manmade": 2103
+          },
+          "miou_all_abstain_excluded": 54.22460351350118,
+          "miou_all_abstain_wrong": 54.22460351350118,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 54.22460351350118,
+          "miou_nine_abstain_wrong": 54.22460351350118,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 66.14591880307293,
+          "miou_frequent_abstain_wrong": 66.14591880307293,
+          "n_classes_frequent": 7
+        },
+        "frustum_range_0_10": {
+          "n_eval": 6926919,
+          "n_labelled": 6926919,
+          "n_unmapped_pred": 215,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 96.92759508231582,
+          "acc_abstain_wrong": 96.92759508231582,
+          "per_class_iou_abstain_excluded": {
+            "car": 99.005,
+            "large_vehicle": 91.404,
+            "two_wheeler": 94.367,
+            "person": 96.821,
+            "road": 98.04,
+            "sidewalk": 93.902,
+            "terrain": 93.698,
+            "vegetation": 78.649,
+            "manmade": 83.541
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 99.005,
+            "large_vehicle": 91.404,
+            "two_wheeler": 94.367,
+            "person": 96.821,
+            "road": 98.04,
+            "sidewalk": 93.902,
+            "terrain": 93.698,
+            "vegetation": 78.649,
+            "manmade": 83.541
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 1465535,
+            "large_vehicle": 139829,
+            "two_wheeler": 30912,
+            "person": 5477,
+            "road": 2900418,
+            "sidewalk": 696791,
+            "terrain": 370831,
+            "vegetation": 586836,
+            "manmade": 730290
+          },
+          "miou_all_abstain_excluded": 92.15855804890705,
+          "miou_all_abstain_wrong": 92.15855804890705,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 92.15855804890705,
+          "miou_nine_abstain_wrong": 92.15855804890705,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 91.1769154803183,
+          "miou_frequent_abstain_wrong": 91.1769154803183,
+          "n_classes_frequent": 7
+        },
+        "frustum_range_10_20": {
+          "n_eval": 9259986,
+          "n_labelled": 9259986,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 95.1707162408237,
+          "acc_abstain_wrong": 95.1707162408237,
+          "per_class_iou_abstain_excluded": {
+            "car": 97.385,
+            "large_vehicle": 66.589,
+            "two_wheeler": 76.351,
+            "person": 56.121,
+            "road": 96.625,
+            "sidewalk": 90.59,
+            "terrain": 85.657,
+            "vegetation": 85.914,
+            "manmade": 89.258
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 97.385,
+            "large_vehicle": 66.589,
+            "two_wheeler": 76.351,
+            "person": 56.121,
+            "road": 96.625,
+            "sidewalk": 90.59,
+            "terrain": 85.657,
+            "vegetation": 85.914,
+            "manmade": 89.258
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 952209,
+            "large_vehicle": 70756,
+            "two_wheeler": 18626,
+            "person": 23310,
+            "road": 2285205,
+            "sidewalk": 1146364,
+            "terrain": 649563,
+            "vegetation": 1814629,
+            "manmade": 2299324
+          },
+          "miou_all_abstain_excluded": 82.72108282299783,
+          "miou_all_abstain_wrong": 82.72108282299783,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 82.72108282299783,
+          "miou_nine_abstain_wrong": 82.72108282299783,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 87.43103604069043,
+          "miou_frequent_abstain_wrong": 87.43103604069043,
+          "n_classes_frequent": 7
+        },
+        "frustum_range_20_30": {
+          "n_eval": 2803542,
+          "n_labelled": 2803542,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 94.21146535347071,
+          "acc_abstain_wrong": 94.21146535347071,
+          "per_class_iou_abstain_excluded": {
+            "car": 95.349,
+            "large_vehicle": 4.275,
+            "two_wheeler": 53.605,
+            "person": 30.332,
+            "road": 94.314,
+            "sidewalk": 84.754,
+            "terrain": 70.128,
+            "vegetation": 86.253,
+            "manmade": 92.946
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 95.349,
+            "large_vehicle": 4.275,
+            "two_wheeler": 53.605,
+            "person": 30.332,
+            "road": 94.314,
+            "sidewalk": 84.754,
+            "terrain": 70.128,
+            "vegetation": 86.253,
+            "manmade": 92.946
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 187685,
+            "large_vehicle": 9439,
+            "two_wheeler": 2722,
+            "person": 4645,
+            "road": 409089,
+            "sidewalk": 197560,
+            "terrain": 175076,
+            "vegetation": 731310,
+            "manmade": 1086016
+          },
+          "miou_all_abstain_excluded": 67.9949557974657,
+          "miou_all_abstain_wrong": 67.9949557974657,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 67.9949557974657,
+          "miou_nine_abstain_wrong": 67.9949557974657,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 75.4310634378312,
+          "miou_frequent_abstain_wrong": 75.4310634378312,
+          "n_classes_frequent": 7
+        },
+        "frustum_range_30_50": {
+          "n_eval": 1224448,
+          "n_labelled": 1224448,
+          "n_unmapped_pred": 1,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 92.17181946477106,
+          "acc_abstain_wrong": 92.17181946477106,
+          "per_class_iou_abstain_excluded": {
+            "car": 88.522,
+            "large_vehicle": 11.926,
+            "two_wheeler": 43.294,
+            "person": 50.086,
+            "road": 90.929,
+            "sidewalk": 70.987,
+            "terrain": 70.658,
+            "vegetation": 85.131,
+            "manmade": 88.665
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 88.522,
+            "large_vehicle": 11.926,
+            "two_wheeler": 43.294,
+            "person": 50.086,
+            "road": 90.929,
+            "sidewalk": 70.987,
+            "terrain": 70.658,
+            "vegetation": 85.131,
+            "manmade": 88.665
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 92700,
+            "large_vehicle": 7302,
+            "two_wheeler": 1122,
+            "person": 1207,
+            "road": 180638,
+            "sidewalk": 62471,
+            "terrain": 67031,
+            "vegetation": 360960,
+            "manmade": 451017
+          },
+          "miou_all_abstain_excluded": 66.6886251256102,
+          "miou_all_abstain_wrong": 66.6886251256102,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 66.6886251256102,
+          "miou_nine_abstain_wrong": 66.6886251256102,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 72.40262416316423,
+          "miou_frequent_abstain_wrong": 72.40262416316423,
+          "n_classes_frequent": 7
+        },
+        "frustum_range_50_inf": {
+          "n_eval": 166,
+          "n_labelled": 166,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 86.144578313253,
+          "acc_abstain_wrong": 86.144578313253,
+          "per_class_iou_abstain_excluded": {
+            "car": 100.0,
+            "large_vehicle": 0.0,
+            "road": 85.714,
+            "sidewalk": 75.0,
+            "terrain": 66.667,
+            "vegetation": 66.667,
+            "manmade": 81.188
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 100.0,
+            "large_vehicle": 0.0,
+            "road": 85.714,
+            "sidewalk": 75.0,
+            "terrain": 66.667,
+            "vegetation": 66.667,
+            "manmade": 81.188
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 5,
+            "large_vehicle": 2,
+            "road": 6,
+            "sidewalk": 8,
+            "terrain": 9,
+            "vegetation": 50,
+            "manmade": 86
+          },
+          "miou_all_abstain_excluded": 67.89081969421433,
+          "miou_all_abstain_wrong": 67.89081969421433,
+          "n_classes_all": 7,
+          "miou_nine_abstain_excluded": 67.89081969421433,
+          "miou_nine_abstain_wrong": 67.89081969421433,
+          "n_classes_nine": 7,
+          "miou_frequent_abstain_excluded": 67.89081969421433,
+          "miou_frequent_abstain_wrong": 67.89081969421433,
+          "n_classes_frequent": 7
+        },
+        "_class_subsets": {
+          "all": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "nine": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "frequent": [
+            "car",
+            "large_vehicle",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ]
+        }
+      }
+    },
+    {
+      "3d": {
+        "global": {
+          "n_eval": 125886114,
+          "n_labelled": 125886114,
+          "n_unmapped_pred": 1185,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 94.608268708652,
+          "acc_abstain_wrong": 94.608268708652,
+          "per_class_iou_abstain_excluded": {
+            "car": 98.259,
+            "large_vehicle": 67.512,
+            "two_wheeler": 83.619,
+            "person": 62.669,
+            "road": 95.825,
+            "sidewalk": 91.61,
+            "terrain": 83.72,
+            "vegetation": 80.11,
+            "manmade": 89.925
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 98.259,
+            "large_vehicle": 67.512,
+            "two_wheeler": 83.619,
+            "person": 62.669,
+            "road": 95.825,
+            "sidewalk": 91.61,
+            "terrain": 83.72,
+            "vegetation": 80.11,
+            "manmade": 89.925
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 12134359,
+            "large_vehicle": 1101484,
+            "two_wheeler": 268104,
+            "person": 166135,
+            "road": 25199192,
+            "sidewalk": 18248605,
+            "terrain": 6877242,
+            "vegetation": 21146455,
+            "manmade": 40744538
+          },
+          "miou_all_abstain_excluded": 83.69425104325325,
+          "miou_all_abstain_wrong": 83.69425104325325,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 83.69425104325325,
+          "miou_nine_abstain_wrong": 83.69425104325325,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 86.70858320037465,
+          "miou_frequent_abstain_wrong": 86.70858320037465,
+          "n_classes_frequent": 7
+        },
+        "frustum": {
+          "n_eval": 20215061,
+          "n_labelled": 20215061,
+          "n_unmapped_pred": 154,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 95.47431986477805,
+          "acc_abstain_wrong": 95.47431986477805,
+          "per_class_iou_abstain_excluded": {
+            "car": 97.786,
+            "large_vehicle": 77.658,
+            "two_wheeler": 85.79,
+            "person": 58.667,
+            "road": 96.994,
+            "sidewalk": 90.536,
+            "terrain": 84.947,
+            "vegetation": 84.75,
+            "manmade": 89.172
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 97.786,
+            "large_vehicle": 77.658,
+            "two_wheeler": 85.79,
+            "person": 58.667,
+            "road": 96.994,
+            "sidewalk": 90.536,
+            "terrain": 84.947,
+            "vegetation": 84.75,
+            "manmade": 89.172
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 2698134,
+            "large_vehicle": 227328,
+            "two_wheeler": 53382,
+            "person": 34639,
+            "road": 5775356,
+            "sidewalk": 2103194,
+            "terrain": 1262510,
+            "vegetation": 3493785,
+            "manmade": 4566733
+          },
+          "miou_all_abstain_excluded": 85.14442722986354,
+          "miou_all_abstain_wrong": 85.14442722986354,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 85.14442722986354,
+          "miou_nine_abstain_wrong": 85.14442722986354,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 88.83476484737177,
+          "miou_frequent_abstain_wrong": 88.83476484737177,
+          "n_classes_frequent": 7
+        },
+        "outside": {
+          "n_eval": 105671053,
+          "n_labelled": 105671053,
+          "n_unmapped_pred": 1031,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 94.4425915770897,
+          "acc_abstain_wrong": 94.4425915770897,
+          "per_class_iou_abstain_excluded": {
+            "car": 98.395,
+            "large_vehicle": 64.98,
+            "two_wheeler": 83.082,
+            "person": 63.729,
+            "road": 95.482,
+            "sidewalk": 91.75,
+            "terrain": 83.451,
+            "vegetation": 79.197,
+            "manmade": 90.02
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 98.395,
+            "large_vehicle": 64.98,
+            "two_wheeler": 83.082,
+            "person": 63.729,
+            "road": 95.482,
+            "sidewalk": 91.75,
+            "terrain": 83.451,
+            "vegetation": 79.197,
+            "manmade": 90.02
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 9436225,
+            "large_vehicle": 874156,
+            "two_wheeler": 214722,
+            "person": 131496,
+            "road": 19423836,
+            "sidewalk": 16145411,
+            "terrain": 5614732,
+            "vegetation": 17652670,
+            "manmade": 36177805
+          },
+          "miou_all_abstain_excluded": 83.34305164516725,
+          "miou_all_abstain_wrong": 83.34305164516725,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 83.34305164516725,
+          "miou_nine_abstain_wrong": 83.34305164516725,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 86.18227057400168,
+          "miou_frequent_abstain_wrong": 86.18227057400168,
+          "n_classes_frequent": 7
+        },
+        "sem_boundary": {
+          "n_eval": 0,
+          "n_labelled": 0,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": NaN,
+          "acc_abstain_excluded": NaN,
+          "acc_abstain_wrong": NaN,
+          "per_class_iou_abstain_excluded": {},
+          "per_class_iou_abstain_wrong": {},
+          "classes_present": [],
+          "gt_count_per_class": {},
+          "miou_all_abstain_excluded": NaN,
+          "miou_all_abstain_wrong": NaN,
+          "n_classes_all": 0,
+          "miou_nine_abstain_excluded": NaN,
+          "miou_nine_abstain_wrong": NaN,
+          "n_classes_nine": 0,
+          "miou_frequent_abstain_excluded": NaN,
+          "miou_frequent_abstain_wrong": NaN,
+          "n_classes_frequent": 0
+        },
+        "sem_interior": {
+          "n_eval": 0,
+          "n_labelled": 0,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": NaN,
+          "acc_abstain_excluded": NaN,
+          "acc_abstain_wrong": NaN,
+          "per_class_iou_abstain_excluded": {},
+          "per_class_iou_abstain_wrong": {},
+          "classes_present": [],
+          "gt_count_per_class": {},
+          "miou_all_abstain_excluded": NaN,
+          "miou_all_abstain_wrong": NaN,
+          "n_classes_all": 0,
+          "miou_nine_abstain_excluded": NaN,
+          "miou_nine_abstain_wrong": NaN,
+          "n_classes_nine": 0,
+          "miou_frequent_abstain_excluded": NaN,
+          "miou_frequent_abstain_wrong": NaN,
+          "n_classes_frequent": 0
+        },
+        "depth_edge": {
+          "n_eval": 2375519,
+          "n_labelled": 2375519,
+          "n_unmapped_pred": 2,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 93.52621469245247,
+          "acc_abstain_wrong": 93.52621469245247,
+          "per_class_iou_abstain_excluded": {
+            "car": 98.253,
+            "large_vehicle": 50.444,
+            "two_wheeler": 80.459,
+            "person": 70.589,
+            "road": 88.689,
+            "sidewalk": 78.565,
+            "terrain": 71.021,
+            "vegetation": 86.562,
+            "manmade": 85.544
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 98.253,
+            "large_vehicle": 50.444,
+            "two_wheeler": 80.459,
+            "person": 70.589,
+            "road": 88.689,
+            "sidewalk": 78.565,
+            "terrain": 71.021,
+            "vegetation": 86.562,
+            "manmade": 85.544
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 565788,
+            "large_vehicle": 14421,
+            "two_wheeler": 14302,
+            "person": 10344,
+            "road": 95920,
+            "sidewalk": 77320,
+            "terrain": 83060,
+            "vegetation": 806924,
+            "manmade": 707440
+          },
+          "miou_all_abstain_excluded": 78.9028185525595,
+          "miou_all_abstain_wrong": 78.9028185525595,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 78.9028185525595,
+          "miou_nine_abstain_wrong": 78.9028185525595,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 79.86818300588322,
+          "miou_frequent_abstain_wrong": 79.86818300588322,
+          "n_classes_frequent": 7
+        },
+        "depth_interior": {
+          "n_eval": 17839542,
+          "n_labelled": 17839542,
+          "n_unmapped_pred": 152,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 95.73373015966442,
+          "acc_abstain_wrong": 95.73373015966442,
+          "per_class_iou_abstain_excluded": {
+            "car": 97.662,
+            "large_vehicle": 79.483,
+            "two_wheeler": 87.757,
+            "person": 53.426,
+            "road": 97.142,
+            "sidewalk": 91.009,
+            "terrain": 85.969,
+            "vegetation": 84.215,
+            "manmade": 89.851
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 97.662,
+            "large_vehicle": 79.483,
+            "two_wheeler": 87.757,
+            "person": 53.426,
+            "road": 97.142,
+            "sidewalk": 91.009,
+            "terrain": 85.969,
+            "vegetation": 84.215,
+            "manmade": 89.851
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 2132346,
+            "large_vehicle": 212907,
+            "two_wheeler": 39080,
+            "person": 24295,
+            "road": 5679436,
+            "sidewalk": 2025874,
+            "terrain": 1179450,
+            "vegetation": 2686861,
+            "manmade": 3859293
+          },
+          "miou_all_abstain_excluded": 85.16835867621096,
+          "miou_all_abstain_wrong": 85.16835867621096,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 85.16835867621096,
+          "miou_nine_abstain_wrong": 85.16835867621096,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 89.33319190974963,
+          "miou_frequent_abstain_wrong": 89.33319190974963,
+          "n_classes_frequent": 7
+        },
+        "range_0_10": {
+          "n_eval": 81748087,
+          "n_labelled": 81748087,
+          "n_unmapped_pred": 1175,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 94.55040091641533,
+          "acc_abstain_wrong": 94.55040091641533,
+          "per_class_iou_abstain_excluded": {
+            "car": 98.797,
+            "large_vehicle": 68.609,
+            "two_wheeler": 89.179,
+            "person": 73.264,
+            "road": 95.932,
+            "sidewalk": 92.537,
+            "terrain": 86.607,
+            "vegetation": 75.594,
+            "manmade": 88.163
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 98.797,
+            "large_vehicle": 68.609,
+            "two_wheeler": 89.179,
+            "person": 73.264,
+            "road": 95.932,
+            "sidewalk": 92.537,
+            "terrain": 86.607,
+            "vegetation": 75.594,
+            "manmade": 88.163
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 8847335,
+            "large_vehicle": 759097,
+            "two_wheeler": 225374,
+            "person": 60292,
+            "road": 18479985,
+            "sidewalk": 14691092,
+            "terrain": 3978208,
+            "vegetation": 11243136,
+            "manmade": 23463568
+          },
+          "miou_all_abstain_excluded": 85.40924368415979,
+          "miou_all_abstain_wrong": 85.40924368415979,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 85.40924368415979,
+          "miou_nine_abstain_wrong": 85.40924368415979,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 86.60561950142817,
+          "miou_frequent_abstain_wrong": 86.60561950142817,
+          "n_classes_frequent": 7
+        },
+        "range_10_20": {
+          "n_eval": 32166163,
+          "n_labelled": 32166163,
+          "n_unmapped_pred": 7,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 95.14718308179934,
+          "acc_abstain_wrong": 95.14718308179934,
+          "per_class_iou_abstain_excluded": {
+            "car": 97.873,
+            "large_vehicle": 68.94,
+            "two_wheeler": 63.922,
+            "person": 57.882,
+            "road": 96.258,
+            "sidewalk": 89.763,
+            "terrain": 83.424,
+            "vegetation": 84.896,
+            "manmade": 92.57
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 97.873,
+            "large_vehicle": 68.94,
+            "two_wheeler": 63.922,
+            "person": 57.882,
+            "road": 96.258,
+            "sidewalk": 89.763,
+            "terrain": 83.424,
+            "vegetation": 84.896,
+            "manmade": 92.57
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 2379571,
+            "large_vehicle": 302727,
+            "two_wheeler": 35651,
+            "person": 90087,
+            "road": 5314798,
+            "sidewalk": 2933960,
+            "terrain": 2102694,
+            "vegetation": 6419302,
+            "manmade": 12587373
+          },
+          "miou_all_abstain_excluded": 81.72551286565374,
+          "miou_all_abstain_wrong": 81.72551286565374,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 81.72551286565374,
+          "miou_nine_abstain_wrong": 81.72551286565374,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 87.67505547081113,
+          "miou_frequent_abstain_wrong": 87.67505547081113,
+          "n_classes_frequent": 7
+        },
+        "range_20_30": {
+          "n_eval": 7993995,
+          "n_labelled": 7993995,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 94.06229300868965,
+          "acc_abstain_wrong": 94.06229300868965,
+          "per_class_iou_abstain_excluded": {
+            "car": 95.723,
+            "large_vehicle": 35.937,
+            "two_wheeler": 47.093,
+            "person": 49.02,
+            "road": 93.721,
+            "sidewalk": 81.956,
+            "terrain": 70.739,
+            "vegetation": 86.298,
+            "manmade": 92.714
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 95.723,
+            "large_vehicle": 35.937,
+            "two_wheeler": 47.093,
+            "person": 49.02,
+            "road": 93.721,
+            "sidewalk": 81.956,
+            "terrain": 70.739,
+            "vegetation": 86.298,
+            "manmade": 92.714
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 658481,
+            "large_vehicle": 20559,
+            "two_wheeler": 5043,
+            "person": 10513,
+            "road": 994176,
+            "sidewalk": 478109,
+            "terrain": 555775,
+            "vegetation": 2224068,
+            "manmade": 3047271
+          },
+          "miou_all_abstain_excluded": 72.57795487911375,
+          "miou_all_abstain_wrong": 72.57795487911375,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 72.57795487911375,
+          "miou_nine_abstain_wrong": 72.57795487911375,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 79.58411138291964,
+          "miou_frequent_abstain_wrong": 79.58411138291964,
+          "n_classes_frequent": 7
+        },
+        "range_30_50": {
+          "n_eval": 3972400,
+          "n_labelled": 3972400,
+          "n_unmapped_pred": 3,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 92.53854093243379,
+          "acc_abstain_wrong": 92.53854093243379,
+          "per_class_iou_abstain_excluded": {
+            "car": 90.104,
+            "large_vehicle": 43.734,
+            "two_wheeler": 32.941,
+            "person": 51.665,
+            "road": 90.777,
+            "sidewalk": 68.671,
+            "terrain": 67.152,
+            "vegetation": 84.735,
+            "manmade": 90.604
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 90.104,
+            "large_vehicle": 43.734,
+            "two_wheeler": 32.941,
+            "person": 51.665,
+            "road": 90.777,
+            "sidewalk": 68.671,
+            "terrain": 67.152,
+            "vegetation": 84.735,
+            "manmade": 90.604
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 248784,
+            "large_vehicle": 19094,
+            "two_wheeler": 2033,
+            "person": 5231,
+            "road": 409883,
+            "sidewalk": 145354,
+            "terrain": 240059,
+            "vegetation": 1257739,
+            "manmade": 1644223
+          },
+          "miou_all_abstain_excluded": 68.93149563994137,
+          "miou_all_abstain_wrong": 68.93149563994137,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 68.93149563994137,
+          "miou_nine_abstain_wrong": 68.93149563994137,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 76.53959625717775,
+          "miou_frequent_abstain_wrong": 76.53959625717775,
+          "n_classes_frequent": 7
+        },
+        "range_50_inf": {
+          "n_eval": 5469,
+          "n_labelled": 5469,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 91.33296763576523,
+          "acc_abstain_wrong": 91.33296763576523,
+          "per_class_iou_abstain_excluded": {
+            "car": 73.604,
+            "large_vehicle": 20.833,
+            "two_wheeler": 0.0,
+            "person": 25.0,
+            "road": 83.495,
+            "sidewalk": 41.346,
+            "terrain": 70.974,
+            "vegetation": 85.661,
+            "manmade": 89.675
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 73.604,
+            "large_vehicle": 20.833,
+            "two_wheeler": 0.0,
+            "person": 25.0,
+            "road": 83.495,
+            "sidewalk": 41.346,
+            "terrain": 70.974,
+            "vegetation": 85.661,
+            "manmade": 89.675
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 188,
+            "large_vehicle": 7,
+            "two_wheeler": 3,
+            "person": 12,
+            "road": 350,
+            "sidewalk": 90,
+            "terrain": 506,
+            "vegetation": 2210,
+            "manmade": 2103
+          },
+          "miou_all_abstain_excluded": 54.50982741794426,
+          "miou_all_abstain_wrong": 54.50982741794426,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 54.50982741794426,
+          "miou_nine_abstain_wrong": 54.50982741794426,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 66.5126352516426,
+          "miou_frequent_abstain_wrong": 66.5126352516426,
+          "n_classes_frequent": 7
+        },
+        "frustum_range_0_10": {
+          "n_eval": 6926919,
+          "n_labelled": 6926919,
+          "n_unmapped_pred": 151,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 96.9235961904564,
+          "acc_abstain_wrong": 96.9235961904564,
+          "per_class_iou_abstain_excluded": {
+            "car": 98.974,
+            "large_vehicle": 91.233,
+            "two_wheeler": 96.812,
+            "person": 96.528,
+            "road": 98.038,
+            "sidewalk": 93.871,
+            "terrain": 93.695,
+            "vegetation": 78.586,
+            "manmade": 83.548
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 98.974,
+            "large_vehicle": 91.233,
+            "two_wheeler": 96.812,
+            "person": 96.528,
+            "road": 98.038,
+            "sidewalk": 93.871,
+            "terrain": 93.695,
+            "vegetation": 78.586,
+            "manmade": 83.548
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 1465535,
+            "large_vehicle": 139829,
+            "two_wheeler": 30912,
+            "person": 5477,
+            "road": 2900418,
+            "sidewalk": 696791,
+            "terrain": 370831,
+            "vegetation": 586836,
+            "manmade": 730290
+          },
+          "miou_all_abstain_excluded": 92.36498770364078,
+          "miou_all_abstain_wrong": 92.36498770364078,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 92.36498770364078,
+          "miou_nine_abstain_wrong": 92.36498770364078,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 91.13496160148311,
+          "miou_frequent_abstain_wrong": 91.13496160148311,
+          "n_classes_frequent": 7
+        },
+        "frustum_range_10_20": {
+          "n_eval": 9259986,
+          "n_labelled": 9259986,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 95.2033080827552,
+          "acc_abstain_wrong": 95.2033080827552,
+          "per_class_iou_abstain_excluded": {
+            "car": 97.415,
+            "large_vehicle": 67.012,
+            "two_wheeler": 76.939,
+            "person": 55.928,
+            "road": 96.669,
+            "sidewalk": 90.626,
+            "terrain": 85.458,
+            "vegetation": 85.999,
+            "manmade": 89.395
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 97.415,
+            "large_vehicle": 67.012,
+            "two_wheeler": 76.939,
+            "person": 55.928,
+            "road": 96.669,
+            "sidewalk": 90.626,
+            "terrain": 85.458,
+            "vegetation": 85.999,
+            "manmade": 89.395
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 952209,
+            "large_vehicle": 70756,
+            "two_wheeler": 18626,
+            "person": 23310,
+            "road": 2285205,
+            "sidewalk": 1146364,
+            "terrain": 649563,
+            "vegetation": 1814629,
+            "manmade": 2299324
+          },
+          "miou_all_abstain_excluded": 82.82675864544119,
+          "miou_all_abstain_wrong": 82.82675864544119,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 82.82675864544119,
+          "miou_nine_abstain_wrong": 82.82675864544119,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 87.51063036203693,
+          "miou_frequent_abstain_wrong": 87.51063036203693,
+          "n_classes_frequent": 7
+        },
+        "frustum_range_20_30": {
+          "n_eval": 2803542,
+          "n_labelled": 2803542,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 94.24485169118208,
+          "acc_abstain_wrong": 94.24485169118208,
+          "per_class_iou_abstain_excluded": {
+            "car": 95.34,
+            "large_vehicle": 4.238,
+            "two_wheeler": 53.019,
+            "person": 32.131,
+            "road": 94.352,
+            "sidewalk": 84.831,
+            "terrain": 70.094,
+            "vegetation": 86.356,
+            "manmade": 93.012
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 95.34,
+            "large_vehicle": 4.238,
+            "two_wheeler": 53.019,
+            "person": 32.131,
+            "road": 94.352,
+            "sidewalk": 84.831,
+            "terrain": 70.094,
+            "vegetation": 86.356,
+            "manmade": 93.012
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 187685,
+            "large_vehicle": 9439,
+            "two_wheeler": 2722,
+            "person": 4645,
+            "road": 409089,
+            "sidewalk": 197560,
+            "terrain": 175076,
+            "vegetation": 731310,
+            "manmade": 1086016
+          },
+          "miou_all_abstain_excluded": 68.15256451032663,
+          "miou_all_abstain_wrong": 68.15256451032663,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 68.15256451032663,
+          "miou_nine_abstain_wrong": 68.15256451032663,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 75.46043362499765,
+          "miou_frequent_abstain_wrong": 75.46043362499765,
+          "n_classes_frequent": 7
+        },
+        "frustum_range_30_50": {
+          "n_eval": 1224448,
+          "n_labelled": 1224448,
+          "n_unmapped_pred": 3,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 92.14119341940204,
+          "acc_abstain_wrong": 92.14119341940204,
+          "per_class_iou_abstain_excluded": {
+            "car": 88.567,
+            "large_vehicle": 12.217,
+            "two_wheeler": 43.459,
+            "person": 47.562,
+            "road": 90.818,
+            "sidewalk": 70.83,
+            "terrain": 70.666,
+            "vegetation": 85.108,
+            "manmade": 88.632
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 88.567,
+            "large_vehicle": 12.217,
+            "two_wheeler": 43.459,
+            "person": 47.562,
+            "road": 90.818,
+            "sidewalk": 70.83,
+            "terrain": 70.666,
+            "vegetation": 85.108,
+            "manmade": 88.632
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 92700,
+            "large_vehicle": 7302,
+            "two_wheeler": 1122,
+            "person": 1207,
+            "road": 180638,
+            "sidewalk": 62471,
+            "terrain": 67031,
+            "vegetation": 360960,
+            "manmade": 451017
+          },
+          "miou_all_abstain_excluded": 66.42864392183056,
+          "miou_all_abstain_wrong": 66.42864392183056,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 66.42864392183056,
+          "miou_nine_abstain_wrong": 66.42864392183056,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 72.40535783490246,
+          "miou_frequent_abstain_wrong": 72.40535783490246,
+          "n_classes_frequent": 7
+        },
+        "frustum_range_50_inf": {
+          "n_eval": 166,
+          "n_labelled": 166,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 87.34939759036145,
+          "acc_abstain_wrong": 87.34939759036145,
+          "per_class_iou_abstain_excluded": {
+            "car": 100.0,
+            "large_vehicle": 0.0,
+            "road": 85.714,
+            "sidewalk": 87.5,
+            "terrain": 66.667,
+            "vegetation": 68.421,
+            "manmade": 82.828
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 100.0,
+            "large_vehicle": 0.0,
+            "road": 85.714,
+            "sidewalk": 87.5,
+            "terrain": 66.667,
+            "vegetation": 68.421,
+            "manmade": 82.828
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 5,
+            "large_vehicle": 2,
+            "road": 6,
+            "sidewalk": 8,
+            "terrain": 9,
+            "vegetation": 50,
+            "manmade": 86
+          },
+          "miou_all_abstain_excluded": 70.16146969154488,
+          "miou_all_abstain_wrong": 70.16146969154488,
+          "n_classes_all": 7,
+          "miou_nine_abstain_excluded": 70.16146969154488,
+          "miou_nine_abstain_wrong": 70.16146969154488,
+          "n_classes_nine": 7,
+          "miou_frequent_abstain_excluded": 70.16146969154488,
+          "miou_frequent_abstain_wrong": 70.16146969154488,
+          "n_classes_frequent": 7
+        },
+        "_class_subsets": {
+          "all": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "nine": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "frequent": [
+            "car",
+            "large_vehicle",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ]
+        }
+      }
+    },
+    {
+      "3d": {
+        "global": {
+          "n_eval": 125886114,
+          "n_labelled": 125886114,
+          "n_unmapped_pred": 2428,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 94.6064218012163,
+          "acc_abstain_wrong": 94.6064218012163,
+          "per_class_iou_abstain_excluded": {
+            "car": 98.221,
+            "large_vehicle": 67.172,
+            "two_wheeler": 83.686,
+            "person": 63.671,
+            "road": 95.736,
+            "sidewalk": 91.515,
+            "terrain": 83.766,
+            "vegetation": 80.191,
+            "manmade": 89.972
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 98.221,
+            "large_vehicle": 67.172,
+            "two_wheeler": 83.686,
+            "person": 63.671,
+            "road": 95.736,
+            "sidewalk": 91.515,
+            "terrain": 83.766,
+            "vegetation": 80.191,
+            "manmade": 89.972
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 12134359,
+            "large_vehicle": 1101484,
+            "two_wheeler": 268104,
+            "person": 166135,
+            "road": 25199192,
+            "sidewalk": 18248605,
+            "terrain": 6877242,
+            "vegetation": 21146455,
+            "manmade": 40744538
+          },
+          "miou_all_abstain_excluded": 83.76985829627372,
+          "miou_all_abstain_wrong": 83.76985829627372,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 83.76985829627372,
+          "miou_nine_abstain_wrong": 83.76985829627372,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 86.65318336454686,
+          "miou_frequent_abstain_wrong": 86.65318336454686,
+          "n_classes_frequent": 7
+        },
+        "frustum": {
+          "n_eval": 20215061,
+          "n_labelled": 20215061,
+          "n_unmapped_pred": 263,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 95.46399093230538,
+          "acc_abstain_wrong": 95.46399093230538,
+          "per_class_iou_abstain_excluded": {
+            "car": 97.829,
+            "large_vehicle": 77.791,
+            "two_wheeler": 84.104,
+            "person": 59.061,
+            "road": 97.007,
+            "sidewalk": 90.586,
+            "terrain": 84.964,
+            "vegetation": 84.654,
+            "manmade": 89.111
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 97.829,
+            "large_vehicle": 77.791,
+            "two_wheeler": 84.104,
+            "person": 59.061,
+            "road": 97.007,
+            "sidewalk": 90.586,
+            "terrain": 84.964,
+            "vegetation": 84.654,
+            "manmade": 89.111
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 2698134,
+            "large_vehicle": 227328,
+            "two_wheeler": 53382,
+            "person": 34639,
+            "road": 5775356,
+            "sidewalk": 2103194,
+            "terrain": 1262510,
+            "vegetation": 3493785,
+            "manmade": 4566733
+          },
+          "miou_all_abstain_excluded": 85.0118730518721,
+          "miou_all_abstain_wrong": 85.0118730518721,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 85.0118730518721,
+          "miou_nine_abstain_wrong": 85.0118730518721,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 88.84884989435535,
+          "miou_frequent_abstain_wrong": 88.84884989435535,
+          "n_classes_frequent": 7
+        },
+        "outside": {
+          "n_eval": 105671053,
+          "n_labelled": 105671053,
+          "n_unmapped_pred": 2165,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 94.44236729617901,
+          "acc_abstain_wrong": 94.44236729617901,
+          "per_class_iou_abstain_excluded": {
+            "car": 98.334,
+            "large_vehicle": 64.538,
+            "two_wheeler": 83.582,
+            "person": 64.904,
+            "road": 95.364,
+            "sidewalk": 91.636,
+            "terrain": 83.504,
+            "vegetation": 79.311,
+            "manmade": 90.081
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 98.334,
+            "large_vehicle": 64.538,
+            "two_wheeler": 83.582,
+            "person": 64.904,
+            "road": 95.364,
+            "sidewalk": 91.636,
+            "terrain": 83.504,
+            "vegetation": 79.311,
+            "manmade": 90.081
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 9436225,
+            "large_vehicle": 874156,
+            "two_wheeler": 214722,
+            "person": 131496,
+            "road": 19423836,
+            "sidewalk": 16145411,
+            "terrain": 5614732,
+            "vegetation": 17652670,
+            "manmade": 36177805
+          },
+          "miou_all_abstain_excluded": 83.47272539666557,
+          "miou_all_abstain_wrong": 83.47272539666557,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 83.47272539666557,
+          "miou_nine_abstain_wrong": 83.47272539666557,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 86.1098092937592,
+          "miou_frequent_abstain_wrong": 86.1098092937592,
+          "n_classes_frequent": 7
+        },
+        "sem_boundary": {
+          "n_eval": 0,
+          "n_labelled": 0,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": NaN,
+          "acc_abstain_excluded": NaN,
+          "acc_abstain_wrong": NaN,
+          "per_class_iou_abstain_excluded": {},
+          "per_class_iou_abstain_wrong": {},
+          "classes_present": [],
+          "gt_count_per_class": {},
+          "miou_all_abstain_excluded": NaN,
+          "miou_all_abstain_wrong": NaN,
+          "n_classes_all": 0,
+          "miou_nine_abstain_excluded": NaN,
+          "miou_nine_abstain_wrong": NaN,
+          "n_classes_nine": 0,
+          "miou_frequent_abstain_excluded": NaN,
+          "miou_frequent_abstain_wrong": NaN,
+          "n_classes_frequent": 0
+        },
+        "sem_interior": {
+          "n_eval": 0,
+          "n_labelled": 0,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": NaN,
+          "acc_abstain_excluded": NaN,
+          "acc_abstain_wrong": NaN,
+          "per_class_iou_abstain_excluded": {},
+          "per_class_iou_abstain_wrong": {},
+          "classes_present": [],
+          "gt_count_per_class": {},
+          "miou_all_abstain_excluded": NaN,
+          "miou_all_abstain_wrong": NaN,
+          "n_classes_all": 0,
+          "miou_nine_abstain_excluded": NaN,
+          "miou_nine_abstain_wrong": NaN,
+          "n_classes_nine": 0,
+          "miou_frequent_abstain_excluded": NaN,
+          "miou_frequent_abstain_wrong": NaN,
+          "n_classes_frequent": 0
+        },
+        "depth_edge": {
+          "n_eval": 2375519,
+          "n_labelled": 2375519,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 93.51308072046572,
+          "acc_abstain_wrong": 93.51308072046572,
+          "per_class_iou_abstain_excluded": {
+            "car": 98.331,
+            "large_vehicle": 51.638,
+            "two_wheeler": 79.38,
+            "person": 70.42,
+            "road": 88.811,
+            "sidewalk": 78.402,
+            "terrain": 71.523,
+            "vegetation": 86.481,
+            "manmade": 85.433
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 98.331,
+            "large_vehicle": 51.638,
+            "two_wheeler": 79.38,
+            "person": 70.42,
+            "road": 88.811,
+            "sidewalk": 78.402,
+            "terrain": 71.523,
+            "vegetation": 86.481,
+            "manmade": 85.433
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 565788,
+            "large_vehicle": 14421,
+            "two_wheeler": 14302,
+            "person": 10344,
+            "road": 95920,
+            "sidewalk": 77320,
+            "terrain": 83060,
+            "vegetation": 806924,
+            "manmade": 707440
+          },
+          "miou_all_abstain_excluded": 78.93544511069592,
+          "miou_all_abstain_wrong": 78.93544511069592,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 78.93544511069592,
+          "miou_nine_abstain_wrong": 78.93544511069592,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 80.08851677679118,
+          "miou_frequent_abstain_wrong": 80.08851677679118,
+          "n_classes_frequent": 7
+        },
+        "depth_interior": {
+          "n_eval": 17839542,
+          "n_labelled": 17839542,
+          "n_unmapped_pred": 263,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 95.72377474713196,
+          "acc_abstain_wrong": 95.72377474713196,
+          "per_class_iou_abstain_excluded": {
+            "car": 97.696,
+            "large_vehicle": 79.532,
+            "two_wheeler": 85.839,
+            "person": 54.069,
+            "road": 97.152,
+            "sidewalk": 91.069,
+            "terrain": 85.944,
+            "vegetation": 84.114,
+            "manmade": 89.8
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 97.696,
+            "large_vehicle": 79.532,
+            "two_wheeler": 85.839,
+            "person": 54.069,
+            "road": 97.152,
+            "sidewalk": 91.069,
+            "terrain": 85.944,
+            "vegetation": 84.114,
+            "manmade": 89.8
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 2132346,
+            "large_vehicle": 212907,
+            "two_wheeler": 39080,
+            "person": 24295,
+            "road": 5679436,
+            "sidewalk": 2025874,
+            "terrain": 1179450,
+            "vegetation": 2686861,
+            "manmade": 3859293
+          },
+          "miou_all_abstain_excluded": 85.02388712520009,
+          "miou_all_abstain_wrong": 85.02388712520009,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 85.02388712520009,
+          "miou_nine_abstain_wrong": 85.02388712520009,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 89.32954909659341,
+          "miou_frequent_abstain_wrong": 89.32954909659341,
+          "n_classes_frequent": 7
+        },
+        "range_0_10": {
+          "n_eval": 81748087,
+          "n_labelled": 81748087,
+          "n_unmapped_pred": 2419,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 94.53974378629802,
+          "acc_abstain_wrong": 94.53974378629802,
+          "per_class_iou_abstain_excluded": {
+            "car": 98.723,
+            "large_vehicle": 68.194,
+            "two_wheeler": 89.282,
+            "person": 75.681,
+            "road": 95.802,
+            "sidewalk": 92.406,
+            "terrain": 86.656,
+            "vegetation": 75.727,
+            "manmade": 88.231
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 98.723,
+            "large_vehicle": 68.194,
+            "two_wheeler": 89.282,
+            "person": 75.681,
+            "road": 95.802,
+            "sidewalk": 92.406,
+            "terrain": 86.656,
+            "vegetation": 75.727,
+            "manmade": 88.231
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 8847335,
+            "large_vehicle": 759097,
+            "two_wheeler": 225374,
+            "person": 60292,
+            "road": 18479985,
+            "sidewalk": 14691092,
+            "terrain": 3978208,
+            "vegetation": 11243136,
+            "manmade": 23463568
+          },
+          "miou_all_abstain_excluded": 85.63361141635909,
+          "miou_all_abstain_wrong": 85.63361141635909,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 85.63361141635909,
+          "miou_nine_abstain_wrong": 85.63361141635909,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 86.53415475826803,
+          "miou_frequent_abstain_wrong": 86.53415475826803,
+          "n_classes_frequent": 7
+        },
+        "range_10_20": {
+          "n_eval": 32166163,
+          "n_labelled": 32166163,
+          "n_unmapped_pred": 6,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 95.15999157251053,
+          "acc_abstain_wrong": 95.15999157251053,
+          "per_class_iou_abstain_excluded": {
+            "car": 97.948,
+            "large_vehicle": 68.547,
+            "two_wheeler": 63.551,
+            "person": 58.523,
+            "road": 96.279,
+            "sidewalk": 89.792,
+            "terrain": 83.436,
+            "vegetation": 84.918,
+            "manmade": 92.589
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 97.948,
+            "large_vehicle": 68.547,
+            "two_wheeler": 63.551,
+            "person": 58.523,
+            "road": 96.279,
+            "sidewalk": 89.792,
+            "terrain": 83.436,
+            "vegetation": 84.918,
+            "manmade": 92.589
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 2379571,
+            "large_vehicle": 302727,
+            "two_wheeler": 35651,
+            "person": 90087,
+            "road": 5314798,
+            "sidewalk": 2933960,
+            "terrain": 2102694,
+            "vegetation": 6419302,
+            "manmade": 12587373
+          },
+          "miou_all_abstain_excluded": 81.73150298099787,
+          "miou_all_abstain_wrong": 81.73150298099787,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 81.73150298099787,
+          "miou_nine_abstain_wrong": 81.73150298099787,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 87.64413434859118,
+          "miou_frequent_abstain_wrong": 87.64413434859118,
+          "n_classes_frequent": 7
+        },
+        "range_20_30": {
+          "n_eval": 7993995,
+          "n_labelled": 7993995,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 94.07335130932657,
+          "acc_abstain_wrong": 94.07335130932657,
+          "per_class_iou_abstain_excluded": {
+            "car": 95.754,
+            "large_vehicle": 36.599,
+            "two_wheeler": 46.998,
+            "person": 47.411,
+            "road": 93.746,
+            "sidewalk": 82.047,
+            "terrain": 70.824,
+            "vegetation": 86.299,
+            "manmade": 92.711
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 95.754,
+            "large_vehicle": 36.599,
+            "two_wheeler": 46.998,
+            "person": 47.411,
+            "road": 93.746,
+            "sidewalk": 82.047,
+            "terrain": 70.824,
+            "vegetation": 86.299,
+            "manmade": 92.711
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 658481,
+            "large_vehicle": 20559,
+            "two_wheeler": 5043,
+            "person": 10513,
+            "road": 994176,
+            "sidewalk": 478109,
+            "terrain": 555775,
+            "vegetation": 2224068,
+            "manmade": 3047271
+          },
+          "miou_all_abstain_excluded": 72.48769522095404,
+          "miou_all_abstain_wrong": 72.48769522095404,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 72.48769522095404,
+          "miou_nine_abstain_wrong": 72.48769522095404,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 79.71144253086462,
+          "miou_frequent_abstain_wrong": 79.71144253086462,
+          "n_classes_frequent": 7
+        },
+        "range_30_50": {
+          "n_eval": 3972400,
+          "n_labelled": 3972400,
+          "n_unmapped_pred": 3,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 92.5737841103615,
+          "acc_abstain_wrong": 92.5737841103615,
+          "per_class_iou_abstain_excluded": {
+            "car": 90.101,
+            "large_vehicle": 44.873,
+            "two_wheeler": 33.415,
+            "person": 52.459,
+            "road": 90.838,
+            "sidewalk": 68.882,
+            "terrain": 67.32,
+            "vegetation": 84.774,
+            "manmade": 90.635
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 90.101,
+            "large_vehicle": 44.873,
+            "two_wheeler": 33.415,
+            "person": 52.459,
+            "road": 90.838,
+            "sidewalk": 68.882,
+            "terrain": 67.32,
+            "vegetation": 84.774,
+            "manmade": 90.635
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 248784,
+            "large_vehicle": 19094,
+            "two_wheeler": 2033,
+            "person": 5231,
+            "road": 409883,
+            "sidewalk": 145354,
+            "terrain": 240059,
+            "vegetation": 1257739,
+            "manmade": 1644223
+          },
+          "miou_all_abstain_excluded": 69.25524040409614,
+          "miou_all_abstain_wrong": 69.25524040409614,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 69.25524040409614,
+          "miou_nine_abstain_wrong": 69.25524040409614,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 76.7746796470818,
+          "miou_frequent_abstain_wrong": 76.7746796470818,
+          "n_classes_frequent": 7
+        },
+        "range_50_inf": {
+          "n_eval": 5469,
+          "n_labelled": 5469,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 91.02212470287073,
+          "acc_abstain_wrong": 91.02212470287073,
+          "per_class_iou_abstain_excluded": {
+            "car": 73.096,
+            "large_vehicle": 20.0,
+            "two_wheeler": 0.0,
+            "person": 25.0,
+            "road": 83.092,
+            "sidewalk": 43.689,
+            "terrain": 72.067,
+            "vegetation": 84.885,
+            "manmade": 88.855
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 73.096,
+            "large_vehicle": 20.0,
+            "two_wheeler": 0.0,
+            "person": 25.0,
+            "road": 83.092,
+            "sidewalk": 43.689,
+            "terrain": 72.067,
+            "vegetation": 84.885,
+            "manmade": 88.855
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 188,
+            "large_vehicle": 7,
+            "two_wheeler": 3,
+            "person": 12,
+            "road": 350,
+            "sidewalk": 90,
+            "terrain": 506,
+            "vegetation": 2210,
+            "manmade": 2103
+          },
+          "miou_all_abstain_excluded": 54.52048851536709,
+          "miou_all_abstain_wrong": 54.52048851536709,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 54.52048851536709,
+          "miou_nine_abstain_wrong": 54.52048851536709,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 66.52634237690054,
+          "miou_frequent_abstain_wrong": 66.52634237690054,
+          "n_classes_frequent": 7
+        },
+        "frustum_range_0_10": {
+          "n_eval": 6926919,
+          "n_labelled": 6926919,
+          "n_unmapped_pred": 260,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 96.88467556788234,
+          "acc_abstain_wrong": 96.88467556788234,
+          "per_class_iou_abstain_excluded": {
+            "car": 99.002,
+            "large_vehicle": 91.434,
+            "two_wheeler": 94.692,
+            "person": 96.666,
+            "road": 98.029,
+            "sidewalk": 93.876,
+            "terrain": 93.651,
+            "vegetation": 78.25,
+            "manmade": 83.257
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 99.002,
+            "large_vehicle": 91.434,
+            "two_wheeler": 94.692,
+            "person": 96.666,
+            "road": 98.029,
+            "sidewalk": 93.876,
+            "terrain": 93.651,
+            "vegetation": 78.25,
+            "manmade": 83.257
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 1465535,
+            "large_vehicle": 139829,
+            "two_wheeler": 30912,
+            "person": 5477,
+            "road": 2900418,
+            "sidewalk": 696791,
+            "terrain": 370831,
+            "vegetation": 586836,
+            "manmade": 730290
+          },
+          "miou_all_abstain_excluded": 92.0950030889015,
+          "miou_all_abstain_wrong": 92.0950030889015,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 92.0950030889015,
+          "miou_nine_abstain_wrong": 92.0950030889015,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 91.07104829689625,
+          "miou_frequent_abstain_wrong": 91.07104829689625,
+          "n_classes_frequent": 7
+        },
+        "frustum_range_10_20": {
+          "n_eval": 9259986,
+          "n_labelled": 9259986,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 95.19824328028142,
+          "acc_abstain_wrong": 95.19824328028142,
+          "per_class_iou_abstain_excluded": {
+            "car": 97.478,
+            "large_vehicle": 66.64,
+            "two_wheeler": 75.488,
+            "person": 56.52,
+            "road": 96.672,
+            "sidewalk": 90.645,
+            "terrain": 85.522,
+            "vegetation": 85.936,
+            "manmade": 89.371
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 97.478,
+            "large_vehicle": 66.64,
+            "two_wheeler": 75.488,
+            "person": 56.52,
+            "road": 96.672,
+            "sidewalk": 90.645,
+            "terrain": 85.522,
+            "vegetation": 85.936,
+            "manmade": 89.371
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 952209,
+            "large_vehicle": 70756,
+            "two_wheeler": 18626,
+            "person": 23310,
+            "road": 2285205,
+            "sidewalk": 1146364,
+            "terrain": 649563,
+            "vegetation": 1814629,
+            "manmade": 2299324
+          },
+          "miou_all_abstain_excluded": 82.69688530977055,
+          "miou_all_abstain_wrong": 82.69688530977055,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 82.69688530977055,
+          "miou_nine_abstain_wrong": 82.69688530977055,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 87.46629679266721,
+          "miou_frequent_abstain_wrong": 87.46629679266721,
+          "n_classes_frequent": 7
+        },
+        "frustum_range_20_30": {
+          "n_eval": 2803542,
+          "n_labelled": 2803542,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 94.25737156782384,
+          "acc_abstain_wrong": 94.25737156782384,
+          "per_class_iou_abstain_excluded": {
+            "car": 95.397,
+            "large_vehicle": 4.267,
+            "two_wheeler": 52.536,
+            "person": 31.079,
+            "road": 94.512,
+            "sidewalk": 85.107,
+            "terrain": 69.976,
+            "vegetation": 86.305,
+            "manmade": 93.009
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 95.397,
+            "large_vehicle": 4.267,
+            "two_wheeler": 52.536,
+            "person": 31.079,
+            "road": 94.512,
+            "sidewalk": 85.107,
+            "terrain": 69.976,
+            "vegetation": 86.305,
+            "manmade": 93.009
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 187685,
+            "large_vehicle": 9439,
+            "two_wheeler": 2722,
+            "person": 4645,
+            "road": 409089,
+            "sidewalk": 197560,
+            "terrain": 175076,
+            "vegetation": 731310,
+            "manmade": 1086016
+          },
+          "miou_all_abstain_excluded": 68.02098530037057,
+          "miou_all_abstain_wrong": 68.02098530037057,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 68.02098530037057,
+          "miou_nine_abstain_wrong": 68.02098530037057,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 75.51054751665431,
+          "miou_frequent_abstain_wrong": 75.51054751665431,
+          "n_classes_frequent": 7
+        },
+        "frustum_range_30_50": {
+          "n_eval": 1224448,
+          "n_labelled": 1224448,
+          "n_unmapped_pred": 3,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 92.20048544323646,
+          "acc_abstain_wrong": 92.20048544323646,
+          "per_class_iou_abstain_excluded": {
+            "car": 88.621,
+            "large_vehicle": 12.797,
+            "two_wheeler": 43.615,
+            "person": 49.944,
+            "road": 90.949,
+            "sidewalk": 71.125,
+            "terrain": 70.906,
+            "vegetation": 85.138,
+            "manmade": 88.669
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 88.621,
+            "large_vehicle": 12.797,
+            "two_wheeler": 43.615,
+            "person": 49.944,
+            "road": 90.949,
+            "sidewalk": 71.125,
+            "terrain": 70.906,
+            "vegetation": 85.138,
+            "manmade": 88.669
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 92700,
+            "large_vehicle": 7302,
+            "two_wheeler": 1122,
+            "person": 1207,
+            "road": 180638,
+            "sidewalk": 62471,
+            "terrain": 67031,
+            "vegetation": 360960,
+            "manmade": 451017
+          },
+          "miou_all_abstain_excluded": 66.86260536492571,
+          "miou_all_abstain_wrong": 66.86260536492571,
+          "n_classes_all": 9,
+          "miou_nine_abstain_excluded": 66.86260536492571,
+          "miou_nine_abstain_wrong": 66.86260536492571,
+          "n_classes_nine": 9,
+          "miou_frequent_abstain_excluded": 72.60053470803598,
+          "miou_frequent_abstain_wrong": 72.60053470803598,
+          "n_classes_frequent": 7
+        },
+        "frustum_range_50_inf": {
+          "n_eval": 166,
+          "n_labelled": 166,
+          "n_unmapped_pred": 0,
+          "n_abstained": 0,
+          "coverage": 1.0,
+          "acc_abstain_excluded": 87.34939759036145,
+          "acc_abstain_wrong": 87.34939759036145,
+          "per_class_iou_abstain_excluded": {
+            "car": 100.0,
+            "large_vehicle": 0.0,
+            "road": 85.714,
+            "sidewalk": 87.5,
+            "terrain": 66.667,
+            "vegetation": 68.421,
+            "manmade": 82.828
+          },
+          "per_class_iou_abstain_wrong": {
+            "car": 100.0,
+            "large_vehicle": 0.0,
+            "road": 85.714,
+            "sidewalk": 87.5,
+            "terrain": 66.667,
+            "vegetation": 68.421,
+            "manmade": 82.828
+          },
+          "classes_present": [
+            "car",
+            "large_vehicle",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "gt_count_per_class": {
+            "car": 5,
+            "large_vehicle": 2,
+            "road": 6,
+            "sidewalk": 8,
+            "terrain": 9,
+            "vegetation": 50,
+            "manmade": 86
+          },
+          "miou_all_abstain_excluded": 70.16146969154488,
+          "miou_all_abstain_wrong": 70.16146969154488,
+          "n_classes_all": 7,
+          "miou_nine_abstain_excluded": 70.16146969154488,
+          "miou_nine_abstain_wrong": 70.16146969154488,
+          "n_classes_nine": 7,
+          "miou_frequent_abstain_excluded": 70.16146969154488,
+          "miou_frequent_abstain_wrong": 70.16146969154488,
+          "n_classes_frequent": 7
+        },
+        "_class_subsets": {
+          "all": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "nine": [
+            "car",
+            "large_vehicle",
+            "two_wheeler",
+            "person",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ],
+          "frequent": [
+            "car",
+            "large_vehicle",
+            "road",
+            "sidewalk",
+            "terrain",
+            "vegetation",
+            "manmade"
+          ]
+        }
+      }
+    }
+  ],
+  "agg": {
+    "3d": {
+      "global": {
+        "n_eval": {
+          "mean": 125886114.0,
+          "half_range": 0.0,
+          "values": [
+            125886114.0,
+            125886114.0,
+            125886114.0
+          ]
+        },
+        "n_labelled": {
+          "mean": 125886114.0,
+          "half_range": 0.0,
+          "values": [
+            125886114.0,
+            125886114.0,
+            125886114.0
+          ]
+        },
+        "n_unmapped_pred": {
+          "mean": 2489.3333333333335,
+          "half_range": 1335.0,
+          "values": [
+            3855.0,
+            1185.0,
+            2428.0
+          ]
+        },
+        "n_abstained": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "coverage": {
+          "mean": 1.0,
+          "half_range": 0.0,
+          "values": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "acc_abstain_excluded": {
+          "mean": 94.59728497139884,
+          "half_range": 0.015552152161909305,
+          "values": [
+            94.57716440432819,
+            94.608268708652,
+            94.6064218012163
+          ]
+        },
+        "acc_abstain_wrong": {
+          "mean": 94.59728497139884,
+          "half_range": 0.015552152161909305,
+          "values": [
+            94.57716440432819,
+            94.608268708652,
+            94.6064218012163
+          ]
+        },
+        "per_class_iou_abstain_excluded": {
+          "car": 98.169,
+          "large_vehicle": 66.6,
+          "two_wheeler": 83.107,
+          "person": 63.371,
+          "road": 95.73,
+          "sidewalk": 91.494,
+          "terrain": 83.765,
+          "vegetation": 80.147,
+          "manmade": 89.898
+        },
+        "per_class_iou_abstain_wrong": {
+          "car": 98.169,
+          "large_vehicle": 66.6,
+          "two_wheeler": 83.107,
+          "person": 63.371,
+          "road": 95.73,
+          "sidewalk": 91.494,
+          "terrain": 83.765,
+          "vegetation": 80.147,
+          "manmade": 89.898
+        },
+        "classes_present": [
+          "car",
+          "large_vehicle",
+          "two_wheeler",
+          "person",
+          "road",
+          "sidewalk",
+          "terrain",
+          "vegetation",
+          "manmade"
+        ],
+        "gt_count_per_class": {
+          "car": 12134359,
+          "large_vehicle": 1101484,
+          "two_wheeler": 268104,
+          "person": 166135,
+          "road": 25199192,
+          "sidewalk": 18248605,
+          "terrain": 6877242,
+          "vegetation": 21146455,
+          "manmade": 40744538
+        },
+        "miou_all_abstain_excluded": {
+          "mean": 83.68365137884561,
+          "half_range": 0.0915067496319324,
+          "values": [
+            83.58684479700986,
+            83.69425104325325,
+            83.76985829627372
+          ]
+        },
+        "miou_all_abstain_wrong": {
+          "mean": 83.68365137884561,
+          "half_range": 0.0915067496319324,
+          "values": [
+            83.58684479700986,
+            83.69425104325325,
+            83.76985829627372
+          ]
+        },
+        "n_classes_all": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_nine_abstain_excluded": {
+          "mean": 83.68365137884561,
+          "half_range": 0.0915067496319324,
+          "values": [
+            83.58684479700986,
+            83.69425104325325,
+            83.76985829627372
+          ]
+        },
+        "miou_nine_abstain_wrong": {
+          "mean": 83.68365137884561,
+          "half_range": 0.0915067496319324,
+          "values": [
+            83.58684479700986,
+            83.69425104325325,
+            83.76985829627372
+          ]
+        },
+        "n_classes_nine": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_frequent_abstain_excluded": {
+          "mean": 86.6350233808318,
+          "half_range": 0.08263981140038368,
+          "values": [
+            86.54330357757388,
+            86.70858320037465,
+            86.65318336454686
+          ]
+        },
+        "miou_frequent_abstain_wrong": {
+          "mean": 86.6350233808318,
+          "half_range": 0.08263981140038368,
+          "values": [
+            86.54330357757388,
+            86.70858320037465,
+            86.65318336454686
+          ]
+        },
+        "n_classes_frequent": {
+          "mean": 7.0,
+          "half_range": 0.0,
+          "values": [
+            7.0,
+            7.0,
+            7.0
+          ]
+        }
+      },
+      "frustum": {
+        "n_eval": {
+          "mean": 20215061.0,
+          "half_range": 0.0,
+          "values": [
+            20215061.0,
+            20215061.0,
+            20215061.0
+          ]
+        },
+        "n_labelled": {
+          "mean": 20215061.0,
+          "half_range": 0.0,
+          "values": [
+            20215061.0,
+            20215061.0,
+            20215061.0
+          ]
+        },
+        "n_unmapped_pred": {
+          "mean": 211.0,
+          "half_range": 54.5,
+          "values": [
+            216.0,
+            154.0,
+            263.0
+          ]
+        },
+        "n_abstained": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "coverage": {
+          "mean": 1.0,
+          "half_range": 0.0,
+          "values": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "acc_abstain_excluded": {
+          "mean": 95.46542880413108,
+          "half_range": 0.008172124734130648,
+          "values": [
+            95.45797561530979,
+            95.47431986477805,
+            95.46399093230538
+          ]
+        },
+        "acc_abstain_wrong": {
+          "mean": 95.46542880413108,
+          "half_range": 0.008172124734130648,
+          "values": [
+            95.45797561530979,
+            95.47431986477805,
+            95.46399093230538
+          ]
+        },
+        "per_class_iou_abstain_excluded": {
+          "car": 97.79,
+          "large_vehicle": 77.699,
+          "two_wheeler": 84.255,
+          "person": 58.733,
+          "road": 96.979,
+          "sidewalk": 90.526,
+          "terrain": 85.056,
+          "vegetation": 84.699,
+          "manmade": 89.089
+        },
+        "per_class_iou_abstain_wrong": {
+          "car": 97.79,
+          "large_vehicle": 77.699,
+          "two_wheeler": 84.255,
+          "person": 58.733,
+          "road": 96.979,
+          "sidewalk": 90.526,
+          "terrain": 85.056,
+          "vegetation": 84.699,
+          "manmade": 89.089
+        },
+        "classes_present": [
+          "car",
+          "large_vehicle",
+          "two_wheeler",
+          "person",
+          "road",
+          "sidewalk",
+          "terrain",
+          "vegetation",
+          "manmade"
+        ],
+        "gt_count_per_class": {
+          "car": 2698134,
+          "large_vehicle": 227328,
+          "two_wheeler": 53382,
+          "person": 34639,
+          "road": 5775356,
+          "sidewalk": 2103194,
+          "terrain": 1262510,
+          "vegetation": 3493785,
+          "manmade": 4566733
+        },
+        "miou_all_abstain_excluded": {
+          "mean": 85.04565693448173,
+          "half_range": 0.08187835407700561,
+          "values": [
+            84.98067052170953,
+            85.14442722986354,
+            85.0118730518721
+          ]
+        },
+        "miou_all_abstain_wrong": {
+          "mean": 85.04565693448173,
+          "half_range": 0.08187835407700561,
+          "values": [
+            84.98067052170953,
+            85.14442722986354,
+            85.0118730518721
+          ]
+        },
+        "n_classes_all": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_nine_abstain_excluded": {
+          "mean": 85.04565693448173,
+          "half_range": 0.08187835407700561,
+          "values": [
+            84.98067052170953,
+            85.14442722986354,
+            85.0118730518721
+          ]
+        },
+        "miou_nine_abstain_wrong": {
+          "mean": 85.04565693448173,
+          "half_range": 0.08187835407700561,
+          "values": [
+            84.98067052170953,
+            85.14442722986354,
+            85.0118730518721
+          ]
+        },
+        "n_classes_nine": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_frequent_abstain_excluded": {
+          "mean": 88.83919950743099,
+          "half_range": 0.007433056894747381,
+          "values": [
+            88.83398378056586,
+            88.83476484737177,
+            88.84884989435535
+          ]
+        },
+        "miou_frequent_abstain_wrong": {
+          "mean": 88.83919950743099,
+          "half_range": 0.007433056894747381,
+          "values": [
+            88.83398378056586,
+            88.83476484737177,
+            88.84884989435535
+          ]
+        },
+        "n_classes_frequent": {
+          "mean": 7.0,
+          "half_range": 0.0,
+          "values": [
+            7.0,
+            7.0,
+            7.0
+          ]
+        }
+      },
+      "outside": {
+        "n_eval": {
+          "mean": 105671053.0,
+          "half_range": 0.0,
+          "values": [
+            105671053.0,
+            105671053.0,
+            105671053.0
+          ]
+        },
+        "n_labelled": {
+          "mean": 105671053.0,
+          "half_range": 0.0,
+          "values": [
+            105671053.0,
+            105671053.0,
+            105671053.0
+          ]
+        },
+        "n_unmapped_pred": {
+          "mean": 2278.3333333333335,
+          "half_range": 1304.0,
+          "values": [
+            3639.0,
+            1031.0,
+            2165.0
+          ]
+        },
+        "n_abstained": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "coverage": {
+          "mean": 1.0,
+          "half_range": 0.0,
+          "values": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "acc_abstain_excluded": {
+          "mean": 94.43120750706755,
+          "half_range": 0.016963964577882962,
+          "values": [
+            94.40866364793393,
+            94.4425915770897,
+            94.44236729617901
+          ]
+        },
+        "acc_abstain_wrong": {
+          "mean": 94.43120750706755,
+          "half_range": 0.016963964577882962,
+          "values": [
+            94.40866364793393,
+            94.4425915770897,
+            94.44236729617901
+          ]
+        },
+        "per_class_iou_abstain_excluded": {
+          "car": 98.278,
+          "large_vehicle": 63.884,
+          "two_wheeler": 82.822,
+          "person": 64.586,
+          "road": 95.364,
+          "sidewalk": 91.621,
+          "terrain": 83.483,
+          "vegetation": 79.25,
+          "manmade": 90.001
+        },
+        "per_class_iou_abstain_wrong": {
+          "car": 98.278,
+          "large_vehicle": 63.884,
+          "two_wheeler": 82.822,
+          "person": 64.586,
+          "road": 95.364,
+          "sidewalk": 91.621,
+          "terrain": 83.483,
+          "vegetation": 79.25,
+          "manmade": 90.001
+        },
+        "classes_present": [
+          "car",
+          "large_vehicle",
+          "two_wheeler",
+          "person",
+          "road",
+          "sidewalk",
+          "terrain",
+          "vegetation",
+          "manmade"
+        ],
+        "gt_count_per_class": {
+          "car": 9436225,
+          "large_vehicle": 874156,
+          "two_wheeler": 214722,
+          "person": 131496,
+          "road": 19423836,
+          "sidewalk": 16145411,
+          "terrain": 5614732,
+          "vegetation": 17652670,
+          "manmade": 36177805
+        },
+        "miou_all_abstain_excluded": {
+          "mean": 83.35668510277252,
+          "half_range": 0.1092235650904243,
+          "values": [
+            83.25427826648472,
+            83.34305164516725,
+            83.47272539666557
+          ]
+        },
+        "miou_all_abstain_wrong": {
+          "mean": 83.35668510277252,
+          "half_range": 0.1092235650904243,
+          "values": [
+            83.25427826648472,
+            83.34305164516725,
+            83.47272539666557
+          ]
+        },
+        "n_classes_all": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_nine_abstain_excluded": {
+          "mean": 83.35668510277252,
+          "half_range": 0.1092235650904243,
+          "values": [
+            83.25427826648472,
+            83.34305164516725,
+            83.47272539666557
+          ]
+        },
+        "miou_nine_abstain_wrong": {
+          "mean": 83.35668510277252,
+          "half_range": 0.1092235650904243,
+          "values": [
+            83.25427826648472,
+            83.34305164516725,
+            83.47272539666557
+          ]
+        },
+        "n_classes_nine": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_frequent_abstain_excluded": {
+          "mean": 86.09168733688273,
+          "half_range": 0.09964421555718417,
+          "values": [
+            85.98298214288731,
+            86.18227057400168,
+            86.1098092937592
+          ]
+        },
+        "miou_frequent_abstain_wrong": {
+          "mean": 86.09168733688273,
+          "half_range": 0.09964421555718417,
+          "values": [
+            85.98298214288731,
+            86.18227057400168,
+            86.1098092937592
+          ]
+        },
+        "n_classes_frequent": {
+          "mean": 7.0,
+          "half_range": 0.0,
+          "values": [
+            7.0,
+            7.0,
+            7.0
+          ]
+        }
+      },
+      "sem_boundary": {
+        "n_eval": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "n_labelled": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "n_unmapped_pred": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "n_abstained": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "coverage": {
+          "mean": NaN,
+          "half_range": NaN,
+          "values": [
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "acc_abstain_excluded": {
+          "mean": NaN,
+          "half_range": NaN,
+          "values": [
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "acc_abstain_wrong": {
+          "mean": NaN,
+          "half_range": NaN,
+          "values": [
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "per_class_iou_abstain_excluded": {},
+        "per_class_iou_abstain_wrong": {},
+        "classes_present": [],
+        "gt_count_per_class": {},
+        "miou_all_abstain_excluded": {
+          "mean": NaN,
+          "half_range": NaN,
+          "values": [
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "miou_all_abstain_wrong": {
+          "mean": NaN,
+          "half_range": NaN,
+          "values": [
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "n_classes_all": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "miou_nine_abstain_excluded": {
+          "mean": NaN,
+          "half_range": NaN,
+          "values": [
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "miou_nine_abstain_wrong": {
+          "mean": NaN,
+          "half_range": NaN,
+          "values": [
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "n_classes_nine": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "miou_frequent_abstain_excluded": {
+          "mean": NaN,
+          "half_range": NaN,
+          "values": [
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "miou_frequent_abstain_wrong": {
+          "mean": NaN,
+          "half_range": NaN,
+          "values": [
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "n_classes_frequent": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "sem_interior": {
+        "n_eval": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "n_labelled": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "n_unmapped_pred": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "n_abstained": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "coverage": {
+          "mean": NaN,
+          "half_range": NaN,
+          "values": [
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "acc_abstain_excluded": {
+          "mean": NaN,
+          "half_range": NaN,
+          "values": [
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "acc_abstain_wrong": {
+          "mean": NaN,
+          "half_range": NaN,
+          "values": [
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "per_class_iou_abstain_excluded": {},
+        "per_class_iou_abstain_wrong": {},
+        "classes_present": [],
+        "gt_count_per_class": {},
+        "miou_all_abstain_excluded": {
+          "mean": NaN,
+          "half_range": NaN,
+          "values": [
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "miou_all_abstain_wrong": {
+          "mean": NaN,
+          "half_range": NaN,
+          "values": [
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "n_classes_all": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "miou_nine_abstain_excluded": {
+          "mean": NaN,
+          "half_range": NaN,
+          "values": [
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "miou_nine_abstain_wrong": {
+          "mean": NaN,
+          "half_range": NaN,
+          "values": [
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "n_classes_nine": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "miou_frequent_abstain_excluded": {
+          "mean": NaN,
+          "half_range": NaN,
+          "values": [
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "miou_frequent_abstain_wrong": {
+          "mean": NaN,
+          "half_range": NaN,
+          "values": [
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        "n_classes_frequent": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "depth_edge": {
+        "n_eval": {
+          "mean": 2375519.0,
+          "half_range": 0.0,
+          "values": [
+            2375519.0,
+            2375519.0,
+            2375519.0
+          ]
+        },
+        "n_labelled": {
+          "mean": 2375519.0,
+          "half_range": 0.0,
+          "values": [
+            2375519.0,
+            2375519.0,
+            2375519.0
+          ]
+        },
+        "n_unmapped_pred": {
+          "mean": 1.0,
+          "half_range": 1.0,
+          "values": [
+            1.0,
+            2.0,
+            0.0
+          ]
+        },
+        "n_abstained": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "coverage": {
+          "mean": 1.0,
+          "half_range": 0.0,
+          "values": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "acc_abstain_excluded": {
+          "mean": 93.51830063240918,
+          "half_range": 0.006566985993373464,
+          "values": [
+            93.51560648430933,
+            93.52621469245247,
+            93.51308072046572
+          ]
+        },
+        "acc_abstain_wrong": {
+          "mean": 93.51830063240918,
+          "half_range": 0.006566985993373464,
+          "values": [
+            93.51560648430933,
+            93.52621469245247,
+            93.51308072046572
+          ]
+        },
+        "per_class_iou_abstain_excluded": {
+          "car": 98.315,
+          "large_vehicle": 51.21,
+          "two_wheeler": 79.113,
+          "person": 70.85,
+          "road": 88.691,
+          "sidewalk": 78.422,
+          "terrain": 71.493,
+          "vegetation": 86.504,
+          "manmade": 85.456
+        },
+        "per_class_iou_abstain_wrong": {
+          "car": 98.315,
+          "large_vehicle": 51.21,
+          "two_wheeler": 79.113,
+          "person": 70.85,
+          "road": 88.691,
+          "sidewalk": 78.422,
+          "terrain": 71.493,
+          "vegetation": 86.504,
+          "manmade": 85.456
+        },
+        "classes_present": [
+          "car",
+          "large_vehicle",
+          "two_wheeler",
+          "person",
+          "road",
+          "sidewalk",
+          "terrain",
+          "vegetation",
+          "manmade"
+        ],
+        "gt_count_per_class": {
+          "car": 565788,
+          "large_vehicle": 14421,
+          "two_wheeler": 14302,
+          "person": 10344,
+          "road": 95920,
+          "sidewalk": 77320,
+          "terrain": 83060,
+          "vegetation": 806924,
+          "manmade": 707440
+        },
+        "miou_all_abstain_excluded": {
+          "mean": 78.91107019505017,
+          "half_range": 0.02024909440041256,
+          "values": [
+            78.8949469218951,
+            78.9028185525595,
+            78.93544511069592
+          ]
+        },
+        "miou_all_abstain_wrong": {
+          "mean": 78.91107019505017,
+          "half_range": 0.02024909440041256,
+          "values": [
+            78.8949469218951,
+            78.9028185525595,
+            78.93544511069592
+          ]
+        },
+        "n_classes_all": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_nine_abstain_excluded": {
+          "mean": 78.91107019505017,
+          "half_range": 0.02024909440041256,
+          "values": [
+            78.8949469218951,
+            78.9028185525595,
+            78.93544511069592
+          ]
+        },
+        "miou_nine_abstain_wrong": {
+          "mean": 78.91107019505017,
+          "half_range": 0.02024909440041256,
+          "values": [
+            78.8949469218951,
+            78.9028185525595,
+            78.93544511069592
+          ]
+        },
+        "n_classes_nine": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_frequent_abstain_excluded": {
+          "mean": 79.9899457544805,
+          "half_range": 0.11016688545397813,
+          "values": [
+            80.01313748076713,
+            79.86818300588322,
+            80.08851677679118
+          ]
+        },
+        "miou_frequent_abstain_wrong": {
+          "mean": 79.9899457544805,
+          "half_range": 0.11016688545397813,
+          "values": [
+            80.01313748076713,
+            79.86818300588322,
+            80.08851677679118
+          ]
+        },
+        "n_classes_frequent": {
+          "mean": 7.0,
+          "half_range": 0.0,
+          "values": [
+            7.0,
+            7.0,
+            7.0
+          ]
+        }
+      },
+      "depth_interior": {
+        "n_eval": {
+          "mean": 17839542.0,
+          "half_range": 0.0,
+          "values": [
+            17839542.0,
+            17839542.0,
+            17839542.0
+          ]
+        },
+        "n_labelled": {
+          "mean": 17839542.0,
+          "half_range": 0.0,
+          "values": [
+            17839542.0,
+            17839542.0,
+            17839542.0
+          ]
+        },
+        "n_unmapped_pred": {
+          "mean": 210.0,
+          "half_range": 55.5,
+          "values": [
+            215.0,
+            152.0,
+            263.0
+          ]
+        },
+        "n_abstained": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "coverage": {
+          "mean": 1.0,
+          "half_range": 0.0,
+          "values": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "acc_abstain_excluded": {
+          "mean": 95.72470900131106,
+          "half_range": 0.008554031263813044,
+          "values": [
+            95.71662209713679,
+            95.73373015966442,
+            95.72377474713196
+          ]
+        },
+        "acc_abstain_wrong": {
+          "mean": 95.72470900131106,
+          "half_range": 0.008554031263813044,
+          "values": [
+            95.71662209713679,
+            95.73373015966442,
+            95.72377474713196
+          ]
+        },
+        "per_class_iou_abstain_excluded": {
+          "car": 97.652,
+          "large_vehicle": 79.462,
+          "two_wheeler": 86.156,
+          "person": 53.441,
+          "road": 97.126,
+          "sidewalk": 91.005,
+          "terrain": 86.046,
+          "vegetation": 84.165,
+          "manmade": 89.769
+        },
+        "per_class_iou_abstain_wrong": {
+          "car": 97.652,
+          "large_vehicle": 79.462,
+          "two_wheeler": 86.156,
+          "person": 53.441,
+          "road": 97.126,
+          "sidewalk": 91.005,
+          "terrain": 86.046,
+          "vegetation": 84.165,
+          "manmade": 89.769
+        },
+        "classes_present": [
+          "car",
+          "large_vehicle",
+          "two_wheeler",
+          "person",
+          "road",
+          "sidewalk",
+          "terrain",
+          "vegetation",
+          "manmade"
+        ],
+        "gt_count_per_class": {
+          "car": 2132346,
+          "large_vehicle": 212907,
+          "two_wheeler": 39080,
+          "person": 24295,
+          "road": 5679436,
+          "sidewalk": 2025874,
+          "terrain": 1179450,
+          "vegetation": 2686861,
+          "manmade": 3859293
+        },
+        "miou_all_abstain_excluded": {
+          "mean": 85.05749844715695,
+          "half_range": 0.09405456807557755,
+          "values": [
+            84.9802495400598,
+            85.16835867621096,
+            85.02388712520009
+          ]
+        },
+        "miou_all_abstain_wrong": {
+          "mean": 85.05749844715695,
+          "half_range": 0.09405456807557755,
+          "values": [
+            84.9802495400598,
+            85.16835867621096,
+            85.02388712520009
+          ]
+        },
+        "n_classes_all": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_nine_abstain_excluded": {
+          "mean": 85.05749844715695,
+          "half_range": 0.09405456807557755,
+          "values": [
+            84.9802495400598,
+            85.16835867621096,
+            85.02388712520009
+          ]
+        },
+        "miou_nine_abstain_wrong": {
+          "mean": 85.05749844715695,
+          "half_range": 0.09405456807557755,
+          "values": [
+            84.9802495400598,
+            85.16835867621096,
+            85.02388712520009
+          ]
+        },
+        "n_classes_nine": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_frequent_abstain_excluded": {
+          "mean": 89.3268574755811,
+          "half_range": 0.007680244674695302,
+          "values": [
+            89.31783142040024,
+            89.33319190974963,
+            89.32954909659341
+          ]
+        },
+        "miou_frequent_abstain_wrong": {
+          "mean": 89.3268574755811,
+          "half_range": 0.007680244674695302,
+          "values": [
+            89.31783142040024,
+            89.33319190974963,
+            89.32954909659341
+          ]
+        },
+        "n_classes_frequent": {
+          "mean": 7.0,
+          "half_range": 0.0,
+          "values": [
+            7.0,
+            7.0,
+            7.0
+          ]
+        }
+      },
+      "range_0_10": {
+        "n_eval": {
+          "mean": 81748087.0,
+          "half_range": 0.0,
+          "values": [
+            81748087.0,
+            81748087.0,
+            81748087.0
+          ]
+        },
+        "n_labelled": {
+          "mean": 81748087.0,
+          "half_range": 0.0,
+          "values": [
+            81748087.0,
+            81748087.0,
+            81748087.0
+          ]
+        },
+        "n_unmapped_pred": {
+          "mean": 2482.6666666666665,
+          "half_range": 1339.5,
+          "values": [
+            3854.0,
+            1175.0,
+            2419.0
+          ]
+        },
+        "n_abstained": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "coverage": {
+          "mean": 1.0,
+          "half_range": 0.0,
+          "values": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "acc_abstain_excluded": {
+          "mean": 94.5317623558987,
+          "half_range": 0.022629275716262498,
+          "values": [
+            94.5051423649828,
+            94.55040091641533,
+            94.53974378629802
+          ]
+        },
+        "acc_abstain_wrong": {
+          "mean": 94.5317623558987,
+          "half_range": 0.022629275716262498,
+          "values": [
+            94.5051423649828,
+            94.55040091641533,
+            94.53974378629802
+          ]
+        },
+        "per_class_iou_abstain_excluded": {
+          "car": 98.691,
+          "large_vehicle": 67.595,
+          "two_wheeler": 88.36,
+          "person": 73.679,
+          "road": 95.812,
+          "sidewalk": 92.396,
+          "terrain": 86.609,
+          "vegetation": 75.653,
+          "manmade": 88.131
+        },
+        "per_class_iou_abstain_wrong": {
+          "car": 98.691,
+          "large_vehicle": 67.595,
+          "two_wheeler": 88.36,
+          "person": 73.679,
+          "road": 95.812,
+          "sidewalk": 92.396,
+          "terrain": 86.609,
+          "vegetation": 75.653,
+          "manmade": 88.131
+        },
+        "classes_present": [
+          "car",
+          "large_vehicle",
+          "two_wheeler",
+          "person",
+          "road",
+          "sidewalk",
+          "terrain",
+          "vegetation",
+          "manmade"
+        ],
+        "gt_count_per_class": {
+          "car": 8847335,
+          "large_vehicle": 759097,
+          "two_wheeler": 225374,
+          "person": 60292,
+          "road": 18479985,
+          "sidewalk": 14691092,
+          "terrain": 3978208,
+          "vegetation": 11243136,
+          "manmade": 23463568
+        },
+        "miou_all_abstain_excluded": {
+          "mean": 85.41893134856441,
+          "half_range": 0.20983623559236975,
+          "values": [
+            85.21393894517435,
+            85.40924368415979,
+            85.63361141635909
+          ]
+        },
+        "miou_all_abstain_wrong": {
+          "mean": 85.41893134856441,
+          "half_range": 0.20983623559236975,
+          "values": [
+            85.21393894517435,
+            85.40924368415979,
+            85.63361141635909
+          ]
+        },
+        "n_classes_all": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_nine_abstain_excluded": {
+          "mean": 85.41893134856441,
+          "half_range": 0.20983623559236975,
+          "values": [
+            85.21393894517435,
+            85.40924368415979,
+            85.63361141635909
+          ]
+        },
+        "miou_nine_abstain_wrong": {
+          "mean": 85.41893134856441,
+          "half_range": 0.20983623559236975,
+          "values": [
+            85.21393894517435,
+            85.40924368415979,
+            85.63361141635909
+          ]
+        },
+        "n_classes_nine": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_frequent_abstain_excluded": {
+          "mean": 86.51741525271426,
+          "half_range": 0.09657400149078654,
+          "values": [
+            86.41247149844659,
+            86.60561950142817,
+            86.53415475826803
+          ]
+        },
+        "miou_frequent_abstain_wrong": {
+          "mean": 86.51741525271426,
+          "half_range": 0.09657400149078654,
+          "values": [
+            86.41247149844659,
+            86.60561950142817,
+            86.53415475826803
+          ]
+        },
+        "n_classes_frequent": {
+          "mean": 7.0,
+          "half_range": 0.0,
+          "values": [
+            7.0,
+            7.0,
+            7.0
+          ]
+        }
+      },
+      "range_10_20": {
+        "n_eval": {
+          "mean": 32166163.0,
+          "half_range": 0.0,
+          "values": [
+            32166163.0,
+            32166163.0,
+            32166163.0
+          ]
+        },
+        "n_labelled": {
+          "mean": 32166163.0,
+          "half_range": 0.0,
+          "values": [
+            32166163.0,
+            32166163.0,
+            32166163.0
+          ]
+        },
+        "n_unmapped_pred": {
+          "mean": 4.333333333333333,
+          "half_range": 3.5,
+          "values": [
+            0.0,
+            7.0,
+            6.0
+          ]
+        },
+        "n_abstained": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "coverage": {
+          "mean": 1.0,
+          "half_range": 0.0,
+          "values": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "acc_abstain_excluded": {
+          "mean": 95.14998623449948,
+          "half_range": 0.008603761660978648,
+          "values": [
+            95.14278404918858,
+            95.14718308179934,
+            95.15999157251053
+          ]
+        },
+        "acc_abstain_wrong": {
+          "mean": 95.14998623449948,
+          "half_range": 0.008603761660978648,
+          "values": [
+            95.14278404918858,
+            95.14718308179934,
+            95.15999157251053
+          ]
+        },
+        "per_class_iou_abstain_excluded": {
+          "car": 97.855,
+          "large_vehicle": 68.289,
+          "two_wheeler": 64.609,
+          "person": 58.841,
+          "road": 96.218,
+          "sidewalk": 89.723,
+          "terrain": 83.547,
+          "vegetation": 84.925,
+          "manmade": 92.546
+        },
+        "per_class_iou_abstain_wrong": {
+          "car": 97.855,
+          "large_vehicle": 68.289,
+          "two_wheeler": 64.609,
+          "person": 58.841,
+          "road": 96.218,
+          "sidewalk": 89.723,
+          "terrain": 83.547,
+          "vegetation": 84.925,
+          "manmade": 92.546
+        },
+        "classes_present": [
+          "car",
+          "large_vehicle",
+          "two_wheeler",
+          "person",
+          "road",
+          "sidewalk",
+          "terrain",
+          "vegetation",
+          "manmade"
+        ],
+        "gt_count_per_class": {
+          "car": 2379571,
+          "large_vehicle": 302727,
+          "two_wheeler": 35651,
+          "person": 90087,
+          "road": 5314798,
+          "sidewalk": 2933960,
+          "terrain": 2102694,
+          "vegetation": 6419302,
+          "manmade": 12587373
+        },
+        "miou_all_abstain_excluded": {
+          "mean": 81.76544000171714,
+          "half_range": 0.05689564642302969,
+          "values": [
+            81.8393041584998,
+            81.72551286565374,
+            81.73150298099787
+          ]
+        },
+        "miou_all_abstain_wrong": {
+          "mean": 81.76544000171714,
+          "half_range": 0.05689564642302969,
+          "values": [
+            81.8393041584998,
+            81.72551286565374,
+            81.73150298099787
+          ]
+        },
+        "n_classes_all": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_nine_abstain_excluded": {
+          "mean": 81.76544000171714,
+          "half_range": 0.05689564642302969,
+          "values": [
+            81.8393041584998,
+            81.72551286565374,
+            81.73150298099787
+          ]
+        },
+        "miou_nine_abstain_wrong": {
+          "mean": 81.76544000171714,
+          "half_range": 0.05689564642302969,
+          "values": [
+            81.8393041584998,
+            81.72551286565374,
+            81.73150298099787
+          ]
+        },
+        "n_classes_nine": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_frequent_abstain_excluded": {
+          "mean": 87.6351776285553,
+          "half_range": 0.04435620227379644,
+          "values": [
+            87.58634306626354,
+            87.67505547081113,
+            87.64413434859118
+          ]
+        },
+        "miou_frequent_abstain_wrong": {
+          "mean": 87.6351776285553,
+          "half_range": 0.04435620227379644,
+          "values": [
+            87.58634306626354,
+            87.67505547081113,
+            87.64413434859118
+          ]
+        },
+        "n_classes_frequent": {
+          "mean": 7.0,
+          "half_range": 0.0,
+          "values": [
+            7.0,
+            7.0,
+            7.0
+          ]
+        }
+      },
+      "range_20_30": {
+        "n_eval": {
+          "mean": 7993995.0,
+          "half_range": 0.0,
+          "values": [
+            7993995.0,
+            7993995.0,
+            7993995.0
+          ]
+        },
+        "n_labelled": {
+          "mean": 7993995.0,
+          "half_range": 0.0,
+          "values": [
+            7993995.0,
+            7993995.0,
+            7993995.0
+          ]
+        },
+        "n_unmapped_pred": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "n_abstained": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "coverage": {
+          "mean": 1.0,
+          "half_range": 0.0,
+          "values": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "acc_abstain_excluded": {
+          "mean": 94.06163418082365,
+          "half_range": 0.012046542435918184,
+          "values": [
+            94.04925822445473,
+            94.06229300868965,
+            94.07335130932657
+          ]
+        },
+        "acc_abstain_wrong": {
+          "mean": 94.06163418082365,
+          "half_range": 0.012046542435918184,
+          "values": [
+            94.04925822445473,
+            94.06229300868965,
+            94.07335130932657
+          ]
+        },
+        "per_class_iou_abstain_excluded": {
+          "car": 95.607,
+          "large_vehicle": 35.161,
+          "two_wheeler": 46.963,
+          "person": 48.545,
+          "road": 93.711,
+          "sidewalk": 82.001,
+          "terrain": 70.8,
+          "vegetation": 86.269,
+          "manmade": 92.694
+        },
+        "per_class_iou_abstain_wrong": {
+          "car": 95.607,
+          "large_vehicle": 35.161,
+          "two_wheeler": 46.963,
+          "person": 48.545,
+          "road": 93.711,
+          "sidewalk": 82.001,
+          "terrain": 70.8,
+          "vegetation": 86.269,
+          "manmade": 92.694
+        },
+        "classes_present": [
+          "car",
+          "large_vehicle",
+          "two_wheeler",
+          "person",
+          "road",
+          "sidewalk",
+          "terrain",
+          "vegetation",
+          "manmade"
+        ],
+        "gt_count_per_class": {
+          "car": 658481,
+          "large_vehicle": 20559,
+          "two_wheeler": 5043,
+          "person": 10513,
+          "road": 994176,
+          "sidewalk": 478109,
+          "terrain": 555775,
+          "vegetation": 2224068,
+          "manmade": 3047271
+        },
+        "miou_all_abstain_excluded": {
+          "mean": 72.49409684865759,
+          "half_range": 0.0806572166043722,
+          "values": [
+            72.416640445905,
+            72.57795487911375,
+            72.48769522095404
+          ]
+        },
+        "miou_all_abstain_wrong": {
+          "mean": 72.49409684865759,
+          "half_range": 0.0806572166043722,
+          "values": [
+            72.416640445905,
+            72.57795487911375,
+            72.48769522095404
+          ]
+        },
+        "n_classes_all": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_nine_abstain_excluded": {
+          "mean": 72.49409684865759,
+          "half_range": 0.0806572166043722,
+          "values": [
+            72.416640445905,
+            72.57795487911375,
+            72.48769522095404
+          ]
+        },
+        "miou_nine_abstain_wrong": {
+          "mean": 72.49409684865759,
+          "half_range": 0.0806572166043722,
+          "values": [
+            72.416640445905,
+            72.57795487911375,
+            72.48769522095404
+          ]
+        },
+        "n_classes_nine": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_frequent_abstain_excluded": {
+          "mean": 79.5862406100496,
+          "half_range": 0.12413730725004513,
+          "values": [
+            79.46316791636453,
+            79.58411138291964,
+            79.71144253086462
+          ]
+        },
+        "miou_frequent_abstain_wrong": {
+          "mean": 79.5862406100496,
+          "half_range": 0.12413730725004513,
+          "values": [
+            79.46316791636453,
+            79.58411138291964,
+            79.71144253086462
+          ]
+        },
+        "n_classes_frequent": {
+          "mean": 7.0,
+          "half_range": 0.0,
+          "values": [
+            7.0,
+            7.0,
+            7.0
+          ]
+        }
+      },
+      "range_30_50": {
+        "n_eval": {
+          "mean": 3972400.0,
+          "half_range": 0.0,
+          "values": [
+            3972400.0,
+            3972400.0,
+            3972400.0
+          ]
+        },
+        "n_labelled": {
+          "mean": 3972400.0,
+          "half_range": 0.0,
+          "values": [
+            3972400.0,
+            3972400.0,
+            3972400.0
+          ]
+        },
+        "n_unmapped_pred": {
+          "mean": 2.3333333333333335,
+          "half_range": 1.0,
+          "values": [
+            1.0,
+            3.0,
+            3.0
+          ]
+        },
+        "n_abstained": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "coverage": {
+          "mean": 1.0,
+          "half_range": 0.0,
+          "values": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "acc_abstain_excluded": {
+          "mean": 92.55293189675427,
+          "half_range": 0.017621588963855572,
+          "values": [
+            92.54647064746753,
+            92.53854093243379,
+            92.5737841103615
+          ]
+        },
+        "acc_abstain_wrong": {
+          "mean": 92.55293189675427,
+          "half_range": 0.017621588963855572,
+          "values": [
+            92.54647064746753,
+            92.53854093243379,
+            92.5737841103615
+          ]
+        },
+        "per_class_iou_abstain_excluded": {
+          "car": 90.006,
+          "large_vehicle": 42.46,
+          "two_wheeler": 32.981,
+          "person": 53.287,
+          "road": 90.851,
+          "sidewalk": 68.769,
+          "terrain": 67.198,
+          "vegetation": 84.739,
+          "manmade": 90.613
+        },
+        "per_class_iou_abstain_wrong": {
+          "car": 90.006,
+          "large_vehicle": 42.46,
+          "two_wheeler": 32.981,
+          "person": 53.287,
+          "road": 90.851,
+          "sidewalk": 68.769,
+          "terrain": 67.198,
+          "vegetation": 84.739,
+          "manmade": 90.613
+        },
+        "classes_present": [
+          "car",
+          "large_vehicle",
+          "two_wheeler",
+          "person",
+          "road",
+          "sidewalk",
+          "terrain",
+          "vegetation",
+          "manmade"
+        ],
+        "gt_count_per_class": {
+          "car": 248784,
+          "large_vehicle": 19094,
+          "two_wheeler": 2033,
+          "person": 5231,
+          "road": 409883,
+          "sidewalk": 145354,
+          "terrain": 240059,
+          "vegetation": 1257739,
+          "manmade": 1644223
+        },
+        "miou_all_abstain_excluded": {
+          "mean": 69.05864793242819,
+          "half_range": 0.16187238207738375,
+          "values": [
+            68.98920775324703,
+            68.93149563994137,
+            69.25524040409614
+          ]
+        },
+        "miou_all_abstain_wrong": {
+          "mean": 69.05864793242819,
+          "half_range": 0.16187238207738375,
+          "values": [
+            68.98920775324703,
+            68.93149563994137,
+            69.25524040409614
+          ]
+        },
+        "n_classes_all": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_nine_abstain_excluded": {
+          "mean": 69.05864793242819,
+          "half_range": 0.16187238207738375,
+          "values": [
+            68.98920775324703,
+            68.93149563994137,
+            69.25524040409614
+          ]
+        },
+        "miou_nine_abstain_wrong": {
+          "mean": 69.05864793242819,
+          "half_range": 0.16187238207738375,
+          "values": [
+            68.98920775324703,
+            68.93149563994137,
+            69.25524040409614
+          ]
+        },
+        "n_classes_nine": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_frequent_abstain_excluded": {
+          "mean": 76.56356316386432,
+          "half_range": 0.1991330298741829,
+          "values": [
+            76.37641358733343,
+            76.53959625717775,
+            76.7746796470818
+          ]
+        },
+        "miou_frequent_abstain_wrong": {
+          "mean": 76.56356316386432,
+          "half_range": 0.1991330298741829,
+          "values": [
+            76.37641358733343,
+            76.53959625717775,
+            76.7746796470818
+          ]
+        },
+        "n_classes_frequent": {
+          "mean": 7.0,
+          "half_range": 0.0,
+          "values": [
+            7.0,
+            7.0,
+            7.0
+          ]
+        }
+      },
+      "range_50_inf": {
+        "n_eval": {
+          "mean": 5469.0,
+          "half_range": 0.0,
+          "values": [
+            5469.0,
+            5469.0,
+            5469.0
+          ]
+        },
+        "n_labelled": {
+          "mean": 5469.0,
+          "half_range": 0.0,
+          "values": [
+            5469.0,
+            5469.0,
+            5469.0
+          ]
+        },
+        "n_unmapped_pred": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "n_abstained": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "coverage": {
+          "mean": 1.0,
+          "half_range": 0.0,
+          "values": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "acc_abstain_excluded": {
+          "mean": 91.13183397330408,
+          "half_range": 0.15542146644725108,
+          "values": [
+            91.04040958127628,
+            91.33296763576523,
+            91.02212470287073
+          ]
+        },
+        "acc_abstain_wrong": {
+          "mean": 91.13183397330408,
+          "half_range": 0.15542146644725108,
+          "values": [
+            91.04040958127628,
+            91.33296763576523,
+            91.02212470287073
+          ]
+        },
+        "per_class_iou_abstain_excluded": {
+          "car": 74.112,
+          "large_vehicle": 20.0,
+          "two_wheeler": 0.0,
+          "person": 25.0,
+          "road": 83.293,
+          "sidewalk": 41.346,
+          "terrain": 69.871,
+          "vegetation": 85.027,
+          "manmade": 89.373
+        },
+        "per_class_iou_abstain_wrong": {
+          "car": 74.112,
+          "large_vehicle": 20.0,
+          "two_wheeler": 0.0,
+          "person": 25.0,
+          "road": 83.293,
+          "sidewalk": 41.346,
+          "terrain": 69.871,
+          "vegetation": 85.027,
+          "manmade": 89.373
+        },
+        "classes_present": [
+          "car",
+          "large_vehicle",
+          "two_wheeler",
+          "person",
+          "road",
+          "sidewalk",
+          "terrain",
+          "vegetation",
+          "manmade"
+        ],
+        "gt_count_per_class": {
+          "car": 188,
+          "large_vehicle": 7,
+          "two_wheeler": 3,
+          "person": 12,
+          "road": 350,
+          "sidewalk": 90,
+          "terrain": 506,
+          "vegetation": 2210,
+          "manmade": 2103
+        },
+        "miou_all_abstain_excluded": {
+          "mean": 54.41830648227085,
+          "half_range": 0.14794250093295602,
+          "values": [
+            54.22460351350118,
+            54.50982741794426,
+            54.52048851536709
+          ]
+        },
+        "miou_all_abstain_wrong": {
+          "mean": 54.41830648227085,
+          "half_range": 0.14794250093295602,
+          "values": [
+            54.22460351350118,
+            54.50982741794426,
+            54.52048851536709
+          ]
+        },
+        "n_classes_all": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_nine_abstain_excluded": {
+          "mean": 54.41830648227085,
+          "half_range": 0.14794250093295602,
+          "values": [
+            54.22460351350118,
+            54.50982741794426,
+            54.52048851536709
+          ]
+        },
+        "miou_nine_abstain_wrong": {
+          "mean": 54.41830648227085,
+          "half_range": 0.14794250093295602,
+          "values": [
+            54.22460351350118,
+            54.50982741794426,
+            54.52048851536709
+          ]
+        },
+        "n_classes_nine": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_frequent_abstain_excluded": {
+          "mean": 66.39496547720536,
+          "half_range": 0.1902117869138067,
+          "values": [
+            66.14591880307293,
+            66.5126352516426,
+            66.52634237690054
+          ]
+        },
+        "miou_frequent_abstain_wrong": {
+          "mean": 66.39496547720536,
+          "half_range": 0.1902117869138067,
+          "values": [
+            66.14591880307293,
+            66.5126352516426,
+            66.52634237690054
+          ]
+        },
+        "n_classes_frequent": {
+          "mean": 7.0,
+          "half_range": 0.0,
+          "values": [
+            7.0,
+            7.0,
+            7.0
+          ]
+        }
+      },
+      "frustum_range_0_10": {
+        "n_eval": {
+          "mean": 6926919.0,
+          "half_range": 0.0,
+          "values": [
+            6926919.0,
+            6926919.0,
+            6926919.0
+          ]
+        },
+        "n_labelled": {
+          "mean": 6926919.0,
+          "half_range": 0.0,
+          "values": [
+            6926919.0,
+            6926919.0,
+            6926919.0
+          ]
+        },
+        "n_unmapped_pred": {
+          "mean": 208.66666666666666,
+          "half_range": 54.5,
+          "values": [
+            215.0,
+            151.0,
+            260.0
+          ]
+        },
+        "n_abstained": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "coverage": {
+          "mean": 1.0,
+          "half_range": 0.0,
+          "values": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "acc_abstain_excluded": {
+          "mean": 96.91195561355153,
+          "half_range": 0.021459757216739206,
+          "values": [
+            96.92759508231582,
+            96.9235961904564,
+            96.88467556788234
+          ]
+        },
+        "acc_abstain_wrong": {
+          "mean": 96.91195561355153,
+          "half_range": 0.021459757216739206,
+          "values": [
+            96.92759508231582,
+            96.9235961904564,
+            96.88467556788234
+          ]
+        },
+        "per_class_iou_abstain_excluded": {
+          "car": 99.005,
+          "large_vehicle": 91.404,
+          "two_wheeler": 94.367,
+          "person": 96.821,
+          "road": 98.04,
+          "sidewalk": 93.902,
+          "terrain": 93.698,
+          "vegetation": 78.649,
+          "manmade": 83.541
+        },
+        "per_class_iou_abstain_wrong": {
+          "car": 99.005,
+          "large_vehicle": 91.404,
+          "two_wheeler": 94.367,
+          "person": 96.821,
+          "road": 98.04,
+          "sidewalk": 93.902,
+          "terrain": 93.698,
+          "vegetation": 78.649,
+          "manmade": 83.541
+        },
+        "classes_present": [
+          "car",
+          "large_vehicle",
+          "two_wheeler",
+          "person",
+          "road",
+          "sidewalk",
+          "terrain",
+          "vegetation",
+          "manmade"
+        ],
+        "gt_count_per_class": {
+          "car": 1465535,
+          "large_vehicle": 139829,
+          "two_wheeler": 30912,
+          "person": 5477,
+          "road": 2900418,
+          "sidewalk": 696791,
+          "terrain": 370831,
+          "vegetation": 586836,
+          "manmade": 730290
+        },
+        "miou_all_abstain_excluded": {
+          "mean": 92.20618294714977,
+          "half_range": 0.13499230736963597,
+          "values": [
+            92.15855804890705,
+            92.36498770364078,
+            92.0950030889015
+          ]
+        },
+        "miou_all_abstain_wrong": {
+          "mean": 92.20618294714977,
+          "half_range": 0.13499230736963597,
+          "values": [
+            92.15855804890705,
+            92.36498770364078,
+            92.0950030889015
+          ]
+        },
+        "n_classes_all": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_nine_abstain_excluded": {
+          "mean": 92.20618294714977,
+          "half_range": 0.13499230736963597,
+          "values": [
+            92.15855804890705,
+            92.36498770364078,
+            92.0950030889015
+          ]
+        },
+        "miou_nine_abstain_wrong": {
+          "mean": 92.20618294714977,
+          "half_range": 0.13499230736963597,
+          "values": [
+            92.15855804890705,
+            92.36498770364078,
+            92.0950030889015
+          ]
+        },
+        "n_classes_nine": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_frequent_abstain_excluded": {
+          "mean": 91.12764179289923,
+          "half_range": 0.05293359171102452,
+          "values": [
+            91.1769154803183,
+            91.13496160148311,
+            91.07104829689625
+          ]
+        },
+        "miou_frequent_abstain_wrong": {
+          "mean": 91.12764179289923,
+          "half_range": 0.05293359171102452,
+          "values": [
+            91.1769154803183,
+            91.13496160148311,
+            91.07104829689625
+          ]
+        },
+        "n_classes_frequent": {
+          "mean": 7.0,
+          "half_range": 0.0,
+          "values": [
+            7.0,
+            7.0,
+            7.0
+          ]
+        }
+      },
+      "frustum_range_10_20": {
+        "n_eval": {
+          "mean": 9259986.0,
+          "half_range": 0.0,
+          "values": [
+            9259986.0,
+            9259986.0,
+            9259986.0
+          ]
+        },
+        "n_labelled": {
+          "mean": 9259986.0,
+          "half_range": 0.0,
+          "values": [
+            9259986.0,
+            9259986.0,
+            9259986.0
+          ]
+        },
+        "n_unmapped_pred": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "n_abstained": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "coverage": {
+          "mean": 1.0,
+          "half_range": 0.0,
+          "values": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "acc_abstain_excluded": {
+          "mean": 95.19075586795344,
+          "half_range": 0.01629592096575294,
+          "values": [
+            95.1707162408237,
+            95.2033080827552,
+            95.19824328028142
+          ]
+        },
+        "acc_abstain_wrong": {
+          "mean": 95.19075586795344,
+          "half_range": 0.01629592096575294,
+          "values": [
+            95.1707162408237,
+            95.2033080827552,
+            95.19824328028142
+          ]
+        },
+        "per_class_iou_abstain_excluded": {
+          "car": 97.385,
+          "large_vehicle": 66.589,
+          "two_wheeler": 76.351,
+          "person": 56.121,
+          "road": 96.625,
+          "sidewalk": 90.59,
+          "terrain": 85.657,
+          "vegetation": 85.914,
+          "manmade": 89.258
+        },
+        "per_class_iou_abstain_wrong": {
+          "car": 97.385,
+          "large_vehicle": 66.589,
+          "two_wheeler": 76.351,
+          "person": 56.121,
+          "road": 96.625,
+          "sidewalk": 90.59,
+          "terrain": 85.657,
+          "vegetation": 85.914,
+          "manmade": 89.258
+        },
+        "classes_present": [
+          "car",
+          "large_vehicle",
+          "two_wheeler",
+          "person",
+          "road",
+          "sidewalk",
+          "terrain",
+          "vegetation",
+          "manmade"
+        ],
+        "gt_count_per_class": {
+          "car": 952209,
+          "large_vehicle": 70756,
+          "two_wheeler": 18626,
+          "person": 23310,
+          "road": 2285205,
+          "sidewalk": 1146364,
+          "terrain": 649563,
+          "vegetation": 1814629,
+          "manmade": 2299324
+        },
+        "miou_all_abstain_excluded": {
+          "mean": 82.74824225940318,
+          "half_range": 0.06493666783531893,
+          "values": [
+            82.72108282299783,
+            82.82675864544119,
+            82.69688530977055
+          ]
+        },
+        "miou_all_abstain_wrong": {
+          "mean": 82.74824225940318,
+          "half_range": 0.06493666783531893,
+          "values": [
+            82.72108282299783,
+            82.82675864544119,
+            82.69688530977055
+          ]
+        },
+        "n_classes_all": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_nine_abstain_excluded": {
+          "mean": 82.74824225940318,
+          "half_range": 0.06493666783531893,
+          "values": [
+            82.72108282299783,
+            82.82675864544119,
+            82.69688530977055
+          ]
+        },
+        "miou_nine_abstain_wrong": {
+          "mean": 82.74824225940318,
+          "half_range": 0.06493666783531893,
+          "values": [
+            82.72108282299783,
+            82.82675864544119,
+            82.69688530977055
+          ]
+        },
+        "n_classes_nine": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_frequent_abstain_excluded": {
+          "mean": 87.46932106513152,
+          "half_range": 0.03979716067325256,
+          "values": [
+            87.43103604069043,
+            87.51063036203693,
+            87.46629679266721
+          ]
+        },
+        "miou_frequent_abstain_wrong": {
+          "mean": 87.46932106513152,
+          "half_range": 0.03979716067325256,
+          "values": [
+            87.43103604069043,
+            87.51063036203693,
+            87.46629679266721
+          ]
+        },
+        "n_classes_frequent": {
+          "mean": 7.0,
+          "half_range": 0.0,
+          "values": [
+            7.0,
+            7.0,
+            7.0
+          ]
+        }
+      },
+      "frustum_range_20_30": {
+        "n_eval": {
+          "mean": 2803542.0,
+          "half_range": 0.0,
+          "values": [
+            2803542.0,
+            2803542.0,
+            2803542.0
+          ]
+        },
+        "n_labelled": {
+          "mean": 2803542.0,
+          "half_range": 0.0,
+          "values": [
+            2803542.0,
+            2803542.0,
+            2803542.0
+          ]
+        },
+        "n_unmapped_pred": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "n_abstained": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "coverage": {
+          "mean": 1.0,
+          "half_range": 0.0,
+          "values": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "acc_abstain_excluded": {
+          "mean": 94.23789620415887,
+          "half_range": 0.02295310717656207,
+          "values": [
+            94.21146535347071,
+            94.24485169118208,
+            94.25737156782384
+          ]
+        },
+        "acc_abstain_wrong": {
+          "mean": 94.23789620415887,
+          "half_range": 0.02295310717656207,
+          "values": [
+            94.21146535347071,
+            94.24485169118208,
+            94.25737156782384
+          ]
+        },
+        "per_class_iou_abstain_excluded": {
+          "car": 95.349,
+          "large_vehicle": 4.275,
+          "two_wheeler": 53.605,
+          "person": 30.332,
+          "road": 94.314,
+          "sidewalk": 84.754,
+          "terrain": 70.128,
+          "vegetation": 86.253,
+          "manmade": 92.946
+        },
+        "per_class_iou_abstain_wrong": {
+          "car": 95.349,
+          "large_vehicle": 4.275,
+          "two_wheeler": 53.605,
+          "person": 30.332,
+          "road": 94.314,
+          "sidewalk": 84.754,
+          "terrain": 70.128,
+          "vegetation": 86.253,
+          "manmade": 92.946
+        },
+        "classes_present": [
+          "car",
+          "large_vehicle",
+          "two_wheeler",
+          "person",
+          "road",
+          "sidewalk",
+          "terrain",
+          "vegetation",
+          "manmade"
+        ],
+        "gt_count_per_class": {
+          "car": 187685,
+          "large_vehicle": 9439,
+          "two_wheeler": 2722,
+          "person": 4645,
+          "road": 409089,
+          "sidewalk": 197560,
+          "terrain": 175076,
+          "vegetation": 731310,
+          "manmade": 1086016
+        },
+        "miou_all_abstain_excluded": {
+          "mean": 68.0561685360543,
+          "half_range": 0.07880435643046013,
+          "values": [
+            67.9949557974657,
+            68.15256451032663,
+            68.02098530037057
+          ]
+        },
+        "miou_all_abstain_wrong": {
+          "mean": 68.0561685360543,
+          "half_range": 0.07880435643046013,
+          "values": [
+            67.9949557974657,
+            68.15256451032663,
+            68.02098530037057
+          ]
+        },
+        "n_classes_all": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_nine_abstain_excluded": {
+          "mean": 68.0561685360543,
+          "half_range": 0.07880435643046013,
+          "values": [
+            67.9949557974657,
+            68.15256451032663,
+            68.02098530037057
+          ]
+        },
+        "miou_nine_abstain_wrong": {
+          "mean": 68.0561685360543,
+          "half_range": 0.07880435643046013,
+          "values": [
+            67.9949557974657,
+            68.15256451032663,
+            68.02098530037057
+          ]
+        },
+        "n_classes_nine": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_frequent_abstain_excluded": {
+          "mean": 75.46734819316106,
+          "half_range": 0.03974203941155707,
+          "values": [
+            75.4310634378312,
+            75.46043362499765,
+            75.51054751665431
+          ]
+        },
+        "miou_frequent_abstain_wrong": {
+          "mean": 75.46734819316106,
+          "half_range": 0.03974203941155707,
+          "values": [
+            75.4310634378312,
+            75.46043362499765,
+            75.51054751665431
+          ]
+        },
+        "n_classes_frequent": {
+          "mean": 7.0,
+          "half_range": 0.0,
+          "values": [
+            7.0,
+            7.0,
+            7.0
+          ]
+        }
+      },
+      "frustum_range_30_50": {
+        "n_eval": {
+          "mean": 1224448.0,
+          "half_range": 0.0,
+          "values": [
+            1224448.0,
+            1224448.0,
+            1224448.0
+          ]
+        },
+        "n_labelled": {
+          "mean": 1224448.0,
+          "half_range": 0.0,
+          "values": [
+            1224448.0,
+            1224448.0,
+            1224448.0
+          ]
+        },
+        "n_unmapped_pred": {
+          "mean": 2.3333333333333335,
+          "half_range": 1.0,
+          "values": [
+            1.0,
+            3.0,
+            3.0
+          ]
+        },
+        "n_abstained": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "coverage": {
+          "mean": 1.0,
+          "half_range": 0.0,
+          "values": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "acc_abstain_excluded": {
+          "mean": 92.17116610913654,
+          "half_range": 0.02964601191720817,
+          "values": [
+            92.17181946477106,
+            92.14119341940204,
+            92.20048544323646
+          ]
+        },
+        "acc_abstain_wrong": {
+          "mean": 92.17116610913654,
+          "half_range": 0.02964601191720817,
+          "values": [
+            92.17181946477106,
+            92.14119341940204,
+            92.20048544323646
+          ]
+        },
+        "per_class_iou_abstain_excluded": {
+          "car": 88.522,
+          "large_vehicle": 11.926,
+          "two_wheeler": 43.294,
+          "person": 50.086,
+          "road": 90.929,
+          "sidewalk": 70.987,
+          "terrain": 70.658,
+          "vegetation": 85.131,
+          "manmade": 88.665
+        },
+        "per_class_iou_abstain_wrong": {
+          "car": 88.522,
+          "large_vehicle": 11.926,
+          "two_wheeler": 43.294,
+          "person": 50.086,
+          "road": 90.929,
+          "sidewalk": 70.987,
+          "terrain": 70.658,
+          "vegetation": 85.131,
+          "manmade": 88.665
+        },
+        "classes_present": [
+          "car",
+          "large_vehicle",
+          "two_wheeler",
+          "person",
+          "road",
+          "sidewalk",
+          "terrain",
+          "vegetation",
+          "manmade"
+        ],
+        "gt_count_per_class": {
+          "car": 92700,
+          "large_vehicle": 7302,
+          "two_wheeler": 1122,
+          "person": 1207,
+          "road": 180638,
+          "sidewalk": 62471,
+          "terrain": 67031,
+          "vegetation": 360960,
+          "manmade": 451017
+        },
+        "miou_all_abstain_excluded": {
+          "mean": 66.65995813745549,
+          "half_range": 0.21698072154757853,
+          "values": [
+            66.6886251256102,
+            66.42864392183056,
+            66.86260536492571
+          ]
+        },
+        "miou_all_abstain_wrong": {
+          "mean": 66.65995813745549,
+          "half_range": 0.21698072154757853,
+          "values": [
+            66.6886251256102,
+            66.42864392183056,
+            66.86260536492571
+          ]
+        },
+        "n_classes_all": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_nine_abstain_excluded": {
+          "mean": 66.65995813745549,
+          "half_range": 0.21698072154757853,
+          "values": [
+            66.6886251256102,
+            66.42864392183056,
+            66.86260536492571
+          ]
+        },
+        "miou_nine_abstain_wrong": {
+          "mean": 66.65995813745549,
+          "half_range": 0.21698072154757853,
+          "values": [
+            66.6886251256102,
+            66.42864392183056,
+            66.86260536492571
+          ]
+        },
+        "n_classes_nine": {
+          "mean": 9.0,
+          "half_range": 0.0,
+          "values": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "miou_frequent_abstain_excluded": {
+          "mean": 72.46950556870088,
+          "half_range": 0.0989552724358731,
+          "values": [
+            72.40262416316423,
+            72.40535783490246,
+            72.60053470803598
+          ]
+        },
+        "miou_frequent_abstain_wrong": {
+          "mean": 72.46950556870088,
+          "half_range": 0.0989552724358731,
+          "values": [
+            72.40262416316423,
+            72.40535783490246,
+            72.60053470803598
+          ]
+        },
+        "n_classes_frequent": {
+          "mean": 7.0,
+          "half_range": 0.0,
+          "values": [
+            7.0,
+            7.0,
+            7.0
+          ]
+        }
+      },
+      "frustum_range_50_inf": {
+        "n_eval": {
+          "mean": 166.0,
+          "half_range": 0.0,
+          "values": [
+            166.0,
+            166.0,
+            166.0
+          ]
+        },
+        "n_labelled": {
+          "mean": 166.0,
+          "half_range": 0.0,
+          "values": [
+            166.0,
+            166.0,
+            166.0
+          ]
+        },
+        "n_unmapped_pred": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "n_abstained": {
+          "mean": 0.0,
+          "half_range": 0.0,
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "coverage": {
+          "mean": 1.0,
+          "half_range": 0.0,
+          "values": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "acc_abstain_excluded": {
+          "mean": 86.94779116465863,
+          "half_range": 0.6024096385542208,
+          "values": [
+            86.144578313253,
+            87.34939759036145,
+            87.34939759036145
+          ]
+        },
+        "acc_abstain_wrong": {
+          "mean": 86.94779116465863,
+          "half_range": 0.6024096385542208,
+          "values": [
+            86.144578313253,
+            87.34939759036145,
+            87.34939759036145
+          ]
+        },
+        "per_class_iou_abstain_excluded": {
+          "car": 100.0,
+          "large_vehicle": 0.0,
+          "road": 85.714,
+          "sidewalk": 75.0,
+          "terrain": 66.667,
+          "vegetation": 66.667,
+          "manmade": 81.188
+        },
+        "per_class_iou_abstain_wrong": {
+          "car": 100.0,
+          "large_vehicle": 0.0,
+          "road": 85.714,
+          "sidewalk": 75.0,
+          "terrain": 66.667,
+          "vegetation": 66.667,
+          "manmade": 81.188
+        },
+        "classes_present": [
+          "car",
+          "large_vehicle",
+          "road",
+          "sidewalk",
+          "terrain",
+          "vegetation",
+          "manmade"
+        ],
+        "gt_count_per_class": {
+          "car": 5,
+          "large_vehicle": 2,
+          "road": 6,
+          "sidewalk": 8,
+          "terrain": 9,
+          "vegetation": 50,
+          "manmade": 86
+        },
+        "miou_all_abstain_excluded": {
+          "mean": 69.40458635910136,
+          "half_range": 1.1353249986652756,
+          "values": [
+            67.89081969421433,
+            70.16146969154488,
+            70.16146969154488
+          ]
+        },
+        "miou_all_abstain_wrong": {
+          "mean": 69.40458635910136,
+          "half_range": 1.1353249986652756,
+          "values": [
+            67.89081969421433,
+            70.16146969154488,
+            70.16146969154488
+          ]
+        },
+        "n_classes_all": {
+          "mean": 7.0,
+          "half_range": 0.0,
+          "values": [
+            7.0,
+            7.0,
+            7.0
+          ]
+        },
+        "miou_nine_abstain_excluded": {
+          "mean": 69.40458635910136,
+          "half_range": 1.1353249986652756,
+          "values": [
+            67.89081969421433,
+            70.16146969154488,
+            70.16146969154488
+          ]
+        },
+        "miou_nine_abstain_wrong": {
+          "mean": 69.40458635910136,
+          "half_range": 1.1353249986652756,
+          "values": [
+            67.89081969421433,
+            70.16146969154488,
+            70.16146969154488
+          ]
+        },
+        "n_classes_nine": {
+          "mean": 7.0,
+          "half_range": 0.0,
+          "values": [
+            7.0,
+            7.0,
+            7.0
+          ]
+        },
+        "miou_frequent_abstain_excluded": {
+          "mean": 69.40458635910136,
+          "half_range": 1.1353249986652756,
+          "values": [
+            67.89081969421433,
+            70.16146969154488,
+            70.16146969154488
+          ]
+        },
+        "miou_frequent_abstain_wrong": {
+          "mean": 69.40458635910136,
+          "half_range": 1.1353249986652756,
+          "values": [
+            67.89081969421433,
+            70.16146969154488,
+            70.16146969154488
+          ]
+        },
+        "n_classes_frequent": {
+          "mean": 7.0,
+          "half_range": 0.0,
+          "values": [
+            7.0,
+            7.0,
+            7.0
+          ]
+        }
+      }
+    }
+  }
+}

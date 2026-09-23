@@ -1,0 +1,104 @@
+{
+  "arm": "Rprime_noKL",
+  "parent": "Rprime",
+  "seed": 20260923,
+  "parent_seed": 59599306,
+  "prepared_utc": "2026-09-23T12:41:58.016592+00:00",
+  "config": "/data/wuyou/livo_sem/src/Pointcept_v151/configs/semantic_kitti/arm_Rprime_noKL.py",
+  "config_sha256": "3636789b50691ad2b54e81e0848215b004d1f9512f28c011998e5db731ae7303",
+  "parent_config_sha256": "15bf3c16550fec669f739a03fb684134510f8ac82b83172008adf76eb7ec5def",
+  "config_changes": {
+    ".data.train.transform.5.audit_path": [
+      "'/data/wuyou/livo_sem/out/v04/armRprime/voxel_audit.jsonl'",
+      "'/data/wuyou/livo_sem/out/v04/nokl_20260923/Rprime_noKL/voxel_audit.jsonl'"
+    ],
+    ".model.kl_enabled": [
+      "True",
+      "False"
+    ],
+    ".model.kl_lambda": [
+      "1.5305520007241327",
+      "None"
+    ],
+    ".save_path": [
+      "'/data/wuyou/livo_sem/exp/sk/armRprime'",
+      "'/data/wuyou/livo_sem/exp/sk/armRprime_noKL'"
+    ],
+    ".seed": [
+      "59599306",
+      "20260923"
+    ]
+  },
+  "runtime_env": {
+    "NPY_DISABLE_CPU_FEATURES": ""
+  },
+  "numpy_version": "2.2.6",
+  "torch_version": "2.5.1+cu124",
+  "initial_student_sha256": "db9425245957ba2405dc4ba95436f8f11f07c36e480687ce0ba394d3b3478fd5",
+  "strict_loaded_tensors": 488,
+  "train_frames": 17228,
+  "train_sequences": [
+    "00",
+    "01",
+    "02",
+    "04",
+    "05",
+    "06",
+    "09",
+    "10"
+  ],
+  "training_order_sha256": "3ad5db4d4543d54feb3b9b56739c739d2f7568cf7f96b724f620fadd2042eeaf",
+  "normalized_pair_config_sha256": "2718c7830de0893b572a82c3672955c81a2f8b2630d51060b0a1c5836bd0308b",
+  "selected_samples": [
+    {
+      "index": 0,
+      "frame": "10/001135",
+      "voxels": 97422,
+      "n_sup": 17055,
+      "coord_sha256": "cfaec0bc7da719026a3df0f0100c892cbb75a06168518f3b3048c556bd72a4a6"
+    },
+    {
+      "index": 1,
+      "frame": "09/000680",
+      "voxels": 99280,
+      "n_sup": 15790,
+      "coord_sha256": "2b0ef7fe4f20eb18aafc236e4d53b8961a17dc14c35f25d618fd7f53db4a4e19"
+    },
+    {
+      "index": 100,
+      "frame": "10/000515",
+      "voxels": 85203,
+      "n_sup": 16928,
+      "coord_sha256": "018d05dbcaa52d1c727f404042a24ded5e4156db08f6eb8fd8e25fcc9aad1bae"
+    },
+    {
+      "index": 1000,
+      "frame": "09/000029",
+      "voxels": 102242,
+      "n_sup": 17672,
+      "coord_sha256": "ac93217f543e6859fe4dbe7a206fa03934e8275747b708e424789f7dd3a3c2ef"
+    }
+  ],
+  "smoke": {
+    "loss": 1.3009319305419922,
+    "ce": 0.8455115556716919,
+    "lovasz": 0.4554204046726227,
+    "kl": -0.0,
+    "n_sup": 32604.0,
+    "n_kl": 0.0
+  },
+  "finite_nonzero_student_gradients": true,
+  "anchor_was_not_called": true,
+  "shared_sha256": {
+    "tools/train_distil.py": "8b534fe8ebdc9b1f561bfbf4a8c28d6a7ac91e751c212842c81a23d130982b1e",
+    "tools/cache_trained.py": "57b57c022be7fc776fdc20aaa80f9461fbdfd5a8b408490d48f057472e4de674",
+    "tools/arm_verdict.py": "d33f215f8f8bfb9dac98a961d953d4346dac7842b98820ce0a06ef537ea8eae0",
+    "src/distil_ext.py": "0e5ea9e248b8488929580464b5fc992b6f0c2fa5fb08f069a3066d39388d820e",
+    "src/pointcept_ext.py": "ffd19ab64dd56323bebcaf536f422b5df4bfbe141759ccdbe31b3110f45d48a1",
+    "src/score_2d_vs_3d.py": "2632cc71f1830f5d8834f06776b20e0d7485d8ca39c35c9e7675189bd8e33efb",
+    "src/Pointcept_v151/configs/semantic_kitti/semseg-pt-v3m1-distil-common9.py": "2fb3249d95aecccef248aa4187445a7aeff37e50a723cf10041a3ab96887c20c",
+    "out/pseudo/rare_weights.json": "03ae01f21e5d9be05a3c2e4389b55b548406495f50e10981fe9b56eab93973aa"
+  },
+  "protocol_sha256": "9d69ff84094b46055c9125ddcb940d04430ca377df04b280cef1478a9b1f9914",
+  "pass": true
+}

@@ -1,0 +1,65 @@
+{
+  "numpy": "2.2.6",
+  "disabled_features": "AVX512F,AVX512CD,AVX512_SKX,AVX512_CLX",
+  "samples": [
+    {
+      "index": 0,
+      "frame": "10/001135",
+      "voxels": 97422,
+      "n_sup": 17055,
+      "coord_sha256": "cfaec0bc7da719026a3df0f0100c892cbb75a06168518f3b3048c556bd72a4a6"
+    },
+    {
+      "index": 1,
+      "frame": "09/000680",
+      "voxels": 99280,
+      "n_sup": 15790,
+      "coord_sha256": "2b0ef7fe4f20eb18aafc236e4d53b8961a17dc14c35f25d618fd7f53db4a4e19"
+    },
+    {
+      "index": 100,
+      "frame": "10/000515",
+      "voxels": 85203,
+      "n_sup": 16928,
+      "coord_sha256": "018d05dbcaa52d1c727f404042a24ded5e4156db08f6eb8fd8e25fcc9aad1bae"
+    },
+    {
+      "index": 1000,
+      "frame": "09/000029",
+      "voxels": 102242,
+      "n_sup": 17672,
+      "coord_sha256": "ac93217f543e6859fe4dbe7a206fa03934e8275747b708e424789f7dd3a3c2ef"
+    }
+  ],
+  "peer_samples": [
+    {
+      "index": 0,
+      "frame": "10/001135",
+      "voxels": 97422,
+      "n_sup": 17055,
+      "coord_sha256": "cfaec0bc7da719026a3df0f0100c892cbb75a06168518f3b3048c556bd72a4a6"
+    },
+    {
+      "index": 1,
+      "frame": "09/000680",
+      "voxels": 99280,
+      "n_sup": 15790,
+      "coord_sha256": "2b0ef7fe4f20eb18aafc236e4d53b8961a17dc14c35f25d618fd7f53db4a4e19"
+    },
+    {
+      "index": 100,
+      "frame": "10/000515",
+      "voxels": 85203,
+      "n_sup": 16928,
+      "coord_sha256": "018d05dbcaa52d1c727f404042a24ded5e4156db08f6eb8fd8e25fcc9aad1bae"
+    },
+    {
+      "index": 1000,
+      "frame": "09/000029",
+      "voxels": 102242,
+      "n_sup": 17672,
+      "coord_sha256": "ac93217f543e6859fe4dbe7a206fa03934e8275747b708e424789f7dd3a3c2ef"
+    }
+  ],
+  "exact_match": true
+}

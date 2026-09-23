@@ -380,40 +380,48 @@ Two things that will bite you if skipped:
 
 ---
 
-## v0.4 in progress — preregistered before any arm was trained
+## v0.4 — camera-supervised adaptation, first results
 
-**[`docs/v04_preregistration.md`](docs/v04_preregistration.md) was committed before a single arm
-existed.** Its value is entirely in that ordering: published afterwards, nobody could tell whether
-the thresholds were chosen to fit the result. The git timestamp is the evidence.
+**Camera pseudo-label fine-tuning improves outside-frustum mIoU-9 from 65.01 to
+72.98 (+7.96 points)** on all 1,101 frames of SemanticKITTI seq 07. The adapted
+student uses point clouds alone for semantic inference.
 
-The question: *a 2D teacher can only see 15.24 % of the points. If it supervises only those, does the
-3D student improve on the other 84.76 % it never saw?* Three published results disagree —
-ImageTo360 (ICCVW'23) says yes, SAL-4D (CVPR'25) says no unless you fix the input distribution, and
-IGNet (WACV'24) measured a purpose-built cross-frustum loss at **+0.2 mIoU**. None of the three ever
-reports the out-of-frustum subset *alone*, which is what this asks.
+| Arm | Training supervision | Outside mIoU-9 ± SD | Δ vs zero-shot |
+|---|---|---:|---:|
+| A | Frozen nuScenes model | 65.01 ± 0.25 | — |
+| B1 | Camera pseudo-labels, head only | 65.90 ± 0.22 | +0.88 |
+| **B0** | **Camera pseudo-labels, full fine-tuning** | **72.98 ± 0.17** | **+7.96** |
+| D | GT inside the camera frustum | 74.68 ± 0.15 | +9.67 |
+| R | GT on random raw points | 82.75 ± 0.14 | +17.74 |
+| R′ | GT on random surviving voxels | 83.36 ± 0.11 | +18.34 |
+| C | GT everywhere, with KL | 85.94 ± 0.06 | +20.93 |
 
-Fixed in advance:
+Each adapted arm is **one training run with three inference draws**; A has six
+inference draws. ± is inference SD, not variation across training seeds. D/R/R′/C
+are target-3D-GT diagnostic references. B0 is the camera-supervised method; its
+outside-frustum mIoU-8 delta is +8.11 when `two_wheeler` is removed for decomposition.
 
-- **Primary metric = out-of-frustum-only mIoU.** At 15/85 coverage, the teacher's +12.2 in-frustum
-  mechanically yields ~+1.8 *global* with literally zero propagation, so judging on global would make
-  both YES and NO meaningless.
-- **Decision threshold = 0.524 mIoU** (3σ), from **six** independent forward passes of the frozen
-  zero-shot model. The instrument reproduces the published 89.39 / 65.43 ±0.22 before being used.
-- **`two_wheeler` is declared an abstain cell in advance.** Its half-range out of frustum is 3.396 —
-  it alone is **52.5 %** of the primary metric's variance, and arm A's single highest draw turned out
-  to be a two_wheeler outlier rather than a real shift. The preregistered sign test is therefore
-  8 cells, not 9.
-- **Falsifiable sign prediction**, recorded before any number: car, sidewalk, vegetation, person,
-  large_vehicle UP · road FLAT · terrain and manmade DOWN unless excluded. A mismatched sign pattern
-  means the correction/regression reading is wrong — and that is the finding, not something to explain away.
-- **If arm B lands inside arm A's spread, the verdict is "a signal of this magnitude is not enough",
-  NOT "distillation does not work".** Only arm D (GT supervision restricted to the same 15 %) can
-  separate those two, which is why it is not optional.
+The [original preregistration](docs/v04_preregistration.md) remains unchanged.
+B0 exceeds the aggregate score threshold, but its predicted class-sign pattern
+matches only **5/8** cells, so that mechanism explanation did not pass. R′ matches
+D's total supervision after voxelisation (ratio **0.999920**) and scores 8.68 points
+higher, with class composition and KL-region geometry still differing.
 
-Arms, cheapest kill first: **B1** freeze the backbone and retrain only the head — if that alone
-captures the gain, the story collapses to class-prior recalibration and the remaining 23 GPU-hours
-are not worth spending · **D** GT, in-frustum only · **B0** pseudo-label distillation · **C** GT
-everywhere (the ceiling). *B vs D prices pseudo-label noise. D vs C prices supervision sparsity.*
+**Status, 2026-09-24:** D_noKL and Rprime_noKL are running under a new paired
+protocol. Their final scores are pending. The existing 10 Hz mapping result is
+from v0.2/v0.3; deployment of the fine-tuned student is a later validation gate.
+
+See [full results, evaluation conditions and next steps](docs/v04_results.md),
+[all metrics and per-class results](results/v04/completed_summary.md), and the
+[experiment source snapshot](experiments/v04/README.md). Checkpoint selection uses
+seq 08 GT; independent training repeats and evaluation on data unseen during
+method development remain outstanding.
+
+Verify the archived numbers without a GPU or dataset:
+
+```bash
+python3 tools/summarize_v04.py --check
+```
 
 
 ## Roadmap
@@ -430,9 +438,10 @@ control arm's 9.83 % — 61× — and 62× against that arm's *perfect-classifie
 matters is the precise negative: the false-kill floor is the trajectory (5.0× better on GT poses),
 not the removal mechanism.
 
-**v0.4 — cross-sensor semantics that survive the transfer.** Trap #1 is a symptom of something
-larger: a segmentation network trained on one LiDAR consumes raw geometry and raw intensity from
-another. This repo can measure that transfer precisely, on any sequence with per-point ground truth.
+**v0.4 — camera-supervised transfer. In progress.** First adaptation results and GT diagnostics
+are complete. Next: finish the no-KL pair, improve B0, repeat independent training seeds, evaluate on
+unseen data, then integrate and measure the adapted student in the real-time mapping pipeline.
+The [detailed milestones](docs/v04_results.md#next-milestones) define those checks.
 
 **v0.5 — beyond the rotating scanner.** Non-repetitive solid-state patterns (Livox) break the
 implicit assumptions of every model trained on spinning LiDAR. The measurement harness here is the

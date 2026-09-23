@@ -1,0 +1,208 @@
+====================================================================================================
+ARM R-PRIME -- PRE-REGISTERED READING RULE
+PART 1 (this section) written 2026-09-23 on machine B, BEFORE arm R' was trained, before
+tools/verify_arm_Rprime.py had ever been run, and before any arm-R' number existed.
+PART 2 is appended from the verification run -- also before training, and never edited after.
+Appended verbatim by tools/arm_verdict.py --note; the file is frozen at
+out/v04/armRprime/preregistered_note_Rprime.txt.
+====================================================================================================
+
+WHAT ARM R' IS.  Identical to arm D in every respect -- SemanticKITTI GROUND TRUTH labels, full
+fine-tune of the released nuScenes PTv3 through the 16-way head with MiB marginalisation, the same
+anti-forgetting KL against the frozen original model on all non-supervised points, the same
+frame-level rare-class resampling from the same JSON under the same seed, the same optimiser, lr,
+10 epochs, batch size 2, the same config lineage, and kl_lambda PINNED to arm D's calibrated
+1.5305520007241327 -- except that the supervised set is drawn uniformly at random from the
+SURVIVING VOXELS of the full 360 deg sweep instead of being the camera-frustum points.
+
+Per frame, arm R' supervises exactly the number of voxels arm D supervises in THAT frame and THAT
+voxelisation, counted AFTER GridSample(0.05, mode="train") -- not the mask size, which is what arm R
+matched.  The subset is a deterministic function of a BLAKE2b(salt | sequence | frame) ranking that
+depends on nothing else; the selector draws no random number at all.
+
+WHY IT EXISTS.  Arm R matches arm D at the MASK level and then loses the match in the voxeliser.
+Measured over 96 frames of the real training stream (out/v04/armR/gridsample_survival.json):
+frustum points survive GridSample at 0.8461, uniformly-random points at 0.7078, so arm R feeds
+16.3 % FEWER points into the loss than arm D at identical mask size, and the deficit is wildly
+uneven across classes (post-grid R/D: person 0.316, large_vehicle 0.520, road 0.559, car 0.604,
+two_wheeler 0.855, sidewalk 0.884, vegetation 0.973, terrain 1.033, manmade 1.034).  A drop on
+person or road in arm R is therefore confounded with arm R having one third the supervision there,
+and arm R alone cannot answer "does the frustum's geometry matter".  Arm R' removes exactly that
+confound and nothing else.
+
+----------------------------------------------------------------------------------------------------
+WHAT R' vs D MEANS.  FIXED IN ADVANCE.
+----------------------------------------------------------------------------------------------------
+The two arms spend the SAME post-voxelisation supervision budget, per frame, on GT labels, under the
+same anchor strength.  They differ in WHERE that budget is spent: arm D's voxels are the survivors
+of the camera frustum -- contiguous, forward-only, azimuthally narrow, range-dependent, and
+systematically avoiding the dense near-ground rings under the sensor, which lie below the camera's
+vertical field of view -- while arm R''s are scattered uniformly over the whole sweep.  A difference
+between them is therefore attributable to the GEOMETRY of the supervised set, and NOT to how much
+supervision reached the loss.
+
+    R' ABOVE D   the frustum's shape is a handicap: the same budget spent uniformly teaches the
+                 never-supervised region better than the camera's own footprint does.
+    R' BELOW D   the frustum's contiguity and its forward concentration actually help.
+    R' EQUAL D   at fixed post-voxelisation supervision volume, WHERE the labels sit does not
+                 measurably change what propagates to the unsupervised region.
+
+The decision band is the pre-registered +-0.60 on out-of-frustum mIoU-9, unchanged.  two_wheeler
+remains an ABSTAIN CELL in all three subsets, unchanged.  Per-class signs are read against their own
+3-sigma thresholds from out/v04/armA_thresholds.json, unchanged.
+
+TWO THINGS THIS CONTRAST DOES NOT CONTROL, DECLARED NOW SO THEY ARE NOT DISCOVERED LATER:
+
+  1. THE CLASS MIX STILL DIFFERS, DELIBERATELY (G3).  The frustum's class composition IS part of
+     what "geometry" means here, and equalising it would destroy the comparison.  So the honest
+     phrasing of any R'-vs-D result is "the geometry of the supervised set, INCLUDING the class mix
+     that geometry induces" -- never "geometry at fixed class mix".  Both distributions are in
+     PART 2; neither is equalised.
+
+  2. THE KL ANCHOR COVERS A DIFFERENTLY SHAPED SET (G6).  In arm D the anti-forgetting KL applies
+     to the out-of-frustum voxels, which is EXACTLY the evaluation region: arm D is anchored
+     precisely where it is scored.  In arm R' the non-supervised voxels are scattered and
+     interleaved with the supervised ones, so the anchor covers a set that overlaps the evaluation
+     region only partially.  The SIZES are nearly equal and are measured in PART 2; the SHAPES
+     cannot be made to agree without either changing what the KL means or breaking the per-frame
+     count match, so this is stated, not corrected.
+     THE SIGN OF ITS EFFECT ON THE PRIMARY METRIC IS NOT MEASURED AND IS NOT PREDICTED HERE.  The
+     anchor pulls the student toward a model that scores 65.01 out-of-frustum while arm D scores
+     74.68, so it is not obvious whether anchoring the evaluation region helps arm D or holds it
+     back, and this experiment contains no arm that separates the two.  Consequently NEITHER
+     direction of the R'-vs-D result may be discounted or inflated by appeal to this asymmetry
+     without new evidence.  Naming it afterwards to explain away an unwelcome sign is exactly the
+     move this paragraph exists to forbid.
+
+----------------------------------------------------------------------------------------------------
+WHAT R vs R' WILL MEAN.  FIXED IN ADVANCE.
+----------------------------------------------------------------------------------------------------
+Arm R and arm R' draw uniformly at random over the full sweep, both on GT, both full fine-tune, both
+with kl_lambda pinned to arm D's value, same resampling, same schedule.  They differ in ONE thing:
+the LEVEL at which the draw happens -- arm R draws points before the voxeliser and lets the
+voxeliser decide how many survive; arm R' draws voxels after it and therefore lands on arm D's count
+exactly.  R' minus R is thus the price of the survival artefact, and nothing else of consequence.
+
+    R' ABOVE R, outside the band   arm R's number understated the uniform-geometry arm.  Arm R's
+                                   shortfall against arm D was at least partly the 16.3 % volume
+                                   deficit rather than geometry, and arm R's own pre-registered
+                                   discount rule ("if R lands below D by a small margin, the honest
+                                   verdict is CONFOUNDED WITH SUPERVISION VOLUME") was right to
+                                   refuse the geometric reading.
+    R' EQUAL R, inside the band    the 16.3 % deficit did not measurably move the primary metric.
+                                   Arm R's number may then be read as geometry after all, and the
+                                   caution in arm R's note was over-conservative.  Say so plainly;
+                                   do not quietly keep the discount.
+    R' BELOW R, outside the band   not anticipated.  Report it as such.  No explanation is to be
+                                   retrofitted, per P3.
+
+CAVEAT, DECLARED NOW.  Arm R and arm R' use DIFFERENT salts and therefore INDEPENDENT draws
+("armR-v04-20260923" vs "armRprime-v04-20260923").  A shared salt would have made arm R' a nested
+sub-selection of arm R's own ranking and put an undisclosed dependency between the two arms; an
+independent draw instead leaves subset-to-subset variation inside the R-minus-R' difference.  With
+one run of each arm that component is NOT separable from the effect, in either design.  It is
+therefore part of the R-vs-R' error bar and must be named whenever that difference is quoted.
+
+Arm R is still running on machine A at the time this note is frozen.  If arm R's verdict does not
+exist when arm R' finishes, the R-vs-R' comparison is DEFERRED, not estimated.
+
+----------------------------------------------------------------------------------------------------
+THE INSTRUMENT CHECK, PRE-REGISTERED AS A PASS/FAIL
+----------------------------------------------------------------------------------------------------
+Arm D's RareClassAudit recorded, per epoch, the number of points that actually entered the
+supervised loss over the whole 17,228-frame training stream (out/v04/armRprime/armD_rare_class_audit.jsonl):
+
+    epochs 1..10:  271,626,869  271,587,913  271,567,016  271,502,968  271,574,911
+                   271,664,419  271,554,951  271,580,661  271,544,559  271,559,132
+    mean 271,576,340    sd 44,340    (0.016 % of the mean -- 17k frames average hard)
+
+Arm R' walks a BIT-IDENTICAL frame multiset (same data_list, same RESAMPLE_SEED 20260922, same
+rare-class weights), so if G1 holds over the whole stream and not merely over the probe frames, arm
+R''s own per-epoch totals must be statistically indistinguishable from these.
+
+    PASS  every one of arm R''s 10 epoch totals lies within mean +- 5 sd, i.e. inside
+          [271,354,640 , 271,798,040].
+    FAIL  any epoch total outside that interval.  The arm is then NOT a voxel-count match to arm D,
+          whatever the probe frames said, and its number must not be compared with arm D's.
+
+This is a sharp instrument, not a formality: arm R's projected epoch total under the same audit is
+about 227,176,514, which is roughly one thousand sd below the interval.  A check that can reject arm
+R by that margin can reject a broken arm R'.
+
+----------------------------------------------------------------------------------------------------
+THE CROSS-MACHINE REPORT, AND EXACTLY HOW MUCH IT IS WORTH
+----------------------------------------------------------------------------------------------------
+Arm R' is the first arm trained on machine B; arms A / B1 / D / B0 / C / R were trained on machine A.
+The verdict is therefore reported twice: against machine A's arm A (out-of-frustum mIoU-9 65.0125
+over 6 draws, the reference every other arm uses) and against machine B's own arm A
+(64.9965 over 3 draws, out/v04/machineB_spread.json).
+
+STATED NOW, BEFORE THE NUMBER EXISTS, SO IT CANNOT BE OVERSOLD AFTERWARDS: the two deltas differ by
+a CONSTANT 0.0160 whatever arm R' scores, because both subtract a fixed reference from the same arm
+R' mean.  The comparison can therefore only disagree in one way -- if arm R' lands within 0.0160 of
+a band edge and the two references put it on opposite sides of the +-0.60 threshold.  That, and only
+that, is what "the two deltas disagree" would mean, and it would be reported loudly.  The real
+evidence that the machines are interchangeable is the completed calibration -- zero-shot
+out-of-frustum mIoU-9 B 64.9965 +-0.1044 vs A 65.0125 +-0.2471, difference -0.0160 against a 0.524
+threshold, and point-level label disagreement cross-machine 3.951 % versus within-machine 4.004 %
+(A) and 3.946 % (B) -- not this arithmetic.
+====================================================================================================
+
+====================================================================================================
+PART 2 -- MEASURED BEFORE TRAINING, APPENDED VERBATIM FROM out/v04/armRprime/verify_Rprime.json
+128 frames x 2 voxelisations of the real training stream, numpy 2.2.6, python 3.10.21.
+Generated by tools/prereg_part2.py; no number in this section was typed by hand.
+
+PROVENANCE, STATED EXACTLY.  The source file verify_Rprime.json was
+frozen at 2026-09-23 11:36:49; arm R' began training at 2026-09-23 11:38:44; this section was written to the note at
+2026-09-23 11:40:24.  The append was attempted before training and was SKIPPED BY A BUG in this
+script's duplicate guard, which matched PART 1's own prose references to "PART 2";
+the guard is fixed and the fact is recorded here rather than hidden.  Nothing in this
+section depends on the outcome: every number is a supervision statistic read out of a
+JSON that was written before the first optimiser step and has not been touched since,
+and the md5 of PART 1 alone -- the reading rule, which is the part that must not move
+after a result exists -- was logged as f5fb3dfe48023cf8555a64a4eba3e735 at 11:38:44,
+before training started.
+====================================================================================================
+
+G1 -- THE COUNT MATCH AND THE DRAW POOL
+  post-GridSample supervised voxels over the sample:  arm D 4064529   arm R' 4064529   EXACT MATCH
+  per-frame mismatches: 0 of 256 probes
+  surviving voxels 22935373, of which 1295049 (5.647 %) are LABEL-INVALID and can never carry loss in any arm.
+  Arm R' draws from the 21640324 label-valid survivors, not from all 22935373.  Drawing from all of them would
+  have left arm R' with about 5.647 % fewer LOSS-CARRYING voxels than arm D and reinstated, in a
+  smaller form, exactly the count mismatch this arm exists to remove.
+  Arm D's camera frustum covers 18.911 % of survivors; its supervision is 17.722 % of them.
+
+G3 -- CLASS DISTRIBUTION OF THE SUPERVISED VOXELS, DELIBERATELY NOT EQUALISED
+  Arm D's supervised voxels carry the frustum's class mix; arm R''s carry the full-sweep mix.  That
+  difference IS part of what "geometry" means here and resampling to equalise it would destroy the
+  comparison.  Post-GridSample, i.e. counted where the loss actually sees them:
+
+    class                     arm D        %           arm R'        %       R'/D
+    car                      221036   5.438           165371   4.069      0.748
+    large_vehicle             17193   0.423             8038   0.198      0.468
+    two_wheeler                6543   0.161             3285   0.081      0.502
+    person                     2232   0.055              905   0.022      0.405
+    road                    1134181  27.904           723658  17.804      0.638
+    sidewalk                 507983  12.498           547569  13.472      1.078
+    terrain                  296092   7.285           366382   9.014      1.237
+    vegetation              1073372  26.408          1248452  30.716      1.163
+    manmade                  805897  19.828          1000869  24.624      1.242
+    TOTAL                   4064529 100.000          4064529 100.000
+
+  READ THIS COLUMN AGAINST ARM R'S.  Arm R's post-GridSample R/D ratios were
+  person 0.316 | large_vehicle 0.520 | road 0.559 | car 0.604 | two_wheeler 0.855 | sidewalk 0.884 |
+  vegetation 0.973 | terrain 1.033 | manmade 1.034, and the TOTAL was 0.837 -- arm R simply had less
+  supervision, most of all on the classes it then lost ground on.  Arm R''s total is 1.000, so whatever
+  per-class imbalance remains above is a property of WHERE the frustum points, not of how much survived
+  the voxeliser.  That is the whole difference between the two arms, and it is why a per-class deficit in
+  arm R' may be read as geometry while the same deficit in arm R may not.
+
+G6 -- THE KL-ANCHOR SETS, MEASURED
+  arm D anchors 18598067 voxels (81.089 % of survivors); arm R' anchors 18870844 (82.278 %), 1.189 pp more.
+  The SIZES are therefore nearly equal.  The SHAPES are not, and that is the part that cannot be fixed:
+  arm D's anchored set IS the evaluation region, arm R''s is interleaved with its supervised voxels.
+  Per PART 1, the sign of this asymmetry's effect on the primary metric is NOT measured and NOT predicted,
+  and it may not be used after the fact to discount either direction of the result.
+====================================================================================================

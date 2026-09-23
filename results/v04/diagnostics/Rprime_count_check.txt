@@ -1,0 +1,26 @@
+====================================================================================================
+ARM R'  INSTRUMENT CHECK -- WHOLE-STREAM VOXEL-COUNT MATCH (G1), PRE-REGISTERED
+====================================================================================================
+  arm D, 10 epochs: mean 271576340  sd 44347  min 271502968  max 271664419
+  pre-registered acceptance interval  mean +- 5 sd  =  [271354606 , 271798074]
+  for scale: arm R's projected epoch total under the same audit is 227,176,514,
+             which is 1001 sd below the interval's centre.
+
+  epoch       supervised pts dev from D mean        in sd  call
+  1                271525714         -50626        -1.14  OK
+  2                271643722         +67382         1.52  OK
+  3                271583510          +7170         0.16  OK
+  4                271631308         +54968         1.24  OK
+  5                271501746         -74594        -1.68  OK
+  6                271479004         -97336        -2.19  OK
+  7                271505064         -71276        -1.61  OK
+  8                271613473         +37133         0.84  OK
+  9                271586264          +9924         0.22  OK
+  10               271477661         -98679        -2.23  OK
+
+  arm R' mean 271554747   vs arm D mean 271576340   ratio 0.999920
+  epochs outside the interval: 0 / 10
+
+  INSTRUMENT CHECK: PASS.  Arm R' put the same number of voxels through the
+  loss as arm D, over the whole training stream, in every epoch.
+====================================================================================================

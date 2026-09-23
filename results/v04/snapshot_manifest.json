@@ -1,0 +1,571 @@
+{
+  "captured_utc": "2026-09-23T17:31:41.417534+00:00",
+  "description": "Byte-identical copies from the experiment hosts; no checkpoints, caches, datasets, credentials or host addresses.",
+  "hosts": {
+    "A": "original experiment host; Intel Xeon Gold 6248R / RTX 4090",
+    "B": "Rprime experiment host; AMD EPYC 7542 / RTX 4090"
+  },
+  "note": "Original absolute experiment paths are retained as provenance. Host-specific service orchestration is excluded.",
+  "files": [
+    {
+      "host": "A",
+      "source": "src/Pointcept_v151/configs/semantic_kitti/arm_B0.py",
+      "published": "experiments/v04/source/src/Pointcept_v151/configs/semantic_kitti/arm_B0.py",
+      "sha256": "ca8aac4754a7aea4f718400ed26c5ef079a9603497017b3dafd76138a68d7b7e",
+      "bytes": 668
+    },
+    {
+      "host": "A",
+      "source": "src/Pointcept_v151/configs/semantic_kitti/arm_B1.py",
+      "published": "experiments/v04/source/src/Pointcept_v151/configs/semantic_kitti/arm_B1.py",
+      "sha256": "b54123c58215b216641140a016e9bdb1e9fd74cefc4c694b4112bdd62fcfcf99",
+      "bytes": 746
+    },
+    {
+      "host": "A",
+      "source": "src/Pointcept_v151/configs/semantic_kitti/arm_C.py",
+      "published": "experiments/v04/source/src/Pointcept_v151/configs/semantic_kitti/arm_C.py",
+      "sha256": "c65e6a4b3276d7779e010e14c2e22564fa32581b21b1f7d7b0fad9ff55edcb4b",
+      "bytes": 628
+    },
+    {
+      "host": "A",
+      "source": "src/Pointcept_v151/configs/semantic_kitti/arm_D.py",
+      "published": "experiments/v04/source/src/Pointcept_v151/configs/semantic_kitti/arm_D.py",
+      "sha256": "bdbb3a877251ca40edbd7037ca2b0dd8933343013c7d70326426823712393290",
+      "bytes": 649
+    },
+    {
+      "host": "A",
+      "source": "src/Pointcept_v151/configs/semantic_kitti/arm_D_noKL.py",
+      "published": "experiments/v04/source/src/Pointcept_v151/configs/semantic_kitti/arm_D_noKL.py",
+      "sha256": "002858cc702049a2eaa1073289ab7a5143538167fb72ac1f52234d8e595ce63f",
+      "bytes": 5796
+    },
+    {
+      "host": "A",
+      "source": "src/Pointcept_v151/configs/semantic_kitti/arm_R.py",
+      "published": "experiments/v04/source/src/Pointcept_v151/configs/semantic_kitti/arm_R.py",
+      "sha256": "9068da8590ab5c29ecb076dbb19bb9bb031c37809457fc1e26e8e13d0e7f9752",
+      "bytes": 1551
+    },
+    {
+      "host": "B",
+      "source": "src/Pointcept_v151/configs/semantic_kitti/arm_Rprime.py",
+      "published": "experiments/v04/source/src/Pointcept_v151/configs/semantic_kitti/arm_Rprime.py",
+      "sha256": "99e3553c13cd16b9bfc99f696507549647211c032a014521560d45b4d8746ba4",
+      "bytes": 4265
+    },
+    {
+      "host": "B",
+      "source": "src/Pointcept_v151/configs/semantic_kitti/arm_Rprime_noKL.py",
+      "published": "experiments/v04/source/src/Pointcept_v151/configs/semantic_kitti/arm_Rprime_noKL.py",
+      "sha256": "3636789b50691ad2b54e81e0848215b004d1f9512f28c011998e5db731ae7303",
+      "bytes": 6046
+    },
+    {
+      "host": "A",
+      "source": "src/Pointcept_v151/configs/semantic_kitti/semseg-pt-v3m1-distil-common9.py",
+      "published": "experiments/v04/source/src/Pointcept_v151/configs/semantic_kitti/semseg-pt-v3m1-distil-common9.py",
+      "sha256": "2fb3249d95aecccef248aa4187445a7aeff37e50a723cf10041a3ab96887c20c",
+      "bytes": 6949
+    },
+    {
+      "host": "A",
+      "source": "src/distil_ext.py",
+      "published": "experiments/v04/source/src/distil_ext.py",
+      "sha256": "0e5ea9e248b8488929580464b5fc992b6f0c2fa5fb08f069a3066d39388d820e",
+      "bytes": 25479
+    },
+    {
+      "host": "B",
+      "source": "src/distil_ext_rprime.py",
+      "published": "experiments/v04/source/src/distil_ext_rprime.py",
+      "sha256": "660d80f826550578a7d4020dcd6e5cafb3d5d30587fde7b6fc3c25e3894c0f68",
+      "bytes": 7894
+    },
+    {
+      "host": "A",
+      "source": "src/filter_e.py",
+      "published": "experiments/v04/source/src/filter_e.py",
+      "sha256": "fc29cbc73e2d75303445f49b14d87a585d6cefd789dd96cececd9a7732aefd1a",
+      "bytes": 1215
+    },
+    {
+      "host": "A",
+      "source": "src/kitti_calib.py",
+      "published": "experiments/v04/source/src/kitti_calib.py",
+      "sha256": "ffa500dbe1729146f697d12953a9bfbfefdad7c64e72efa29e5c846fa6f1ccb7",
+      "bytes": 17464
+    },
+    {
+      "host": "A",
+      "source": "src/kitti_scan.py",
+      "published": "experiments/v04/source/src/kitti_scan.py",
+      "sha256": "5fa4b91431450773684b8bfb76a3b697c94af5187ebb117d8755bf79984f7d03",
+      "bytes": 4432
+    },
+    {
+      "host": "A",
+      "source": "src/label_spaces.py",
+      "published": "experiments/v04/source/src/label_spaces.py",
+      "sha256": "22855a13045ef86118b8acf3af278360148523575a452e5c0df9c6a988b646a6",
+      "bytes": 43502
+    },
+    {
+      "host": "A",
+      "source": "src/pointcept_ext.py",
+      "published": "experiments/v04/source/src/pointcept_ext.py",
+      "sha256": "ffd19ab64dd56323bebcaf536f422b5df4bfbe141759ccdbe31b3110f45d48a1",
+      "bytes": 9764
+    },
+    {
+      "host": "A",
+      "source": "src/ptv3_loader_verified.py",
+      "published": "experiments/v04/source/src/ptv3_loader_verified.py",
+      "sha256": "bf808bdde1ea6d9389a49b05b07e6ef46444785a3b1bc06d613910b9aa957007",
+      "bytes": 4532
+    },
+    {
+      "host": "A",
+      "source": "src/random_supervise.py",
+      "published": "experiments/v04/source/src/random_supervise.py",
+      "sha256": "284ae7bde231af309ec0343d600f6ff8938ca1a88fcf8efe8901f7a4a08ae3fe",
+      "bytes": 4610
+    },
+    {
+      "host": "A",
+      "source": "src/score_2d_vs_3d.py",
+      "published": "experiments/v04/source/src/score_2d_vs_3d.py",
+      "sha256": "2632cc71f1830f5d8834f06776b20e0d7485d8ca39c35c9e7675189bd8e33efb",
+      "bytes": 72468
+    },
+    {
+      "host": "A",
+      "source": "src/seg2d_cityscapes.py",
+      "published": "experiments/v04/source/src/seg2d_cityscapes.py",
+      "sha256": "b56bd23a9b71c222908359b81307916cd76faf2d3885e174f702f9c56a3723d0",
+      "bytes": 17020
+    },
+    {
+      "host": "A",
+      "source": "src/seg2d_infer.py",
+      "published": "experiments/v04/source/src/seg2d_infer.py",
+      "sha256": "7b5e602e2dc5856e64ae75f0f3d4c2e0b67b946e2de81b9fffdc81fd93703ced",
+      "bytes": 28913
+    },
+    {
+      "host": "A",
+      "source": "src/seqreg.py",
+      "published": "experiments/v04/source/src/seqreg.py",
+      "sha256": "e11b7610daa9b63856417af6985419425330923cd957ffd75f464100ca8c68cd",
+      "bytes": 4803
+    },
+    {
+      "host": "B",
+      "source": "src/voxel_random_supervise.py",
+      "published": "experiments/v04/source/src/voxel_random_supervise.py",
+      "sha256": "5ca202a766ffc667cab0e21ee25c35766e880e0cb2291b16eb9e5b8d70cba3a4",
+      "bytes": 8027
+    },
+    {
+      "host": "A",
+      "source": "tools/align_seq.py",
+      "published": "experiments/v04/source/tools/align_seq.py",
+      "sha256": "34cd63030dec5d289a8b0bff6847cdf815f89100fb001b7a475115971b15d2d0",
+      "bytes": 4667
+    },
+    {
+      "host": "A",
+      "source": "tools/arm_verdict.py",
+      "published": "experiments/v04/source/tools/arm_verdict.py",
+      "sha256": "d33f215f8f8bfb9dac98a961d953d4346dac7842b98820ce0a06ef537ea8eae0",
+      "bytes": 7856
+    },
+    {
+      "host": "A",
+      "source": "tools/cache_seg2d_conf.py",
+      "published": "experiments/v04/source/tools/cache_seg2d_conf.py",
+      "sha256": "10d55dd4410d89178e8c00aba0839d3ac5e696296ce1e61314dea8b051ab7449",
+      "bytes": 5040
+    },
+    {
+      "host": "A",
+      "source": "tools/cache_trained.py",
+      "published": "experiments/v04/source/tools/cache_trained.py",
+      "sha256": "57b57c022be7fc776fdc20aaa80f9461fbdfd5a8b408490d48f057472e4de674",
+      "bytes": 5132
+    },
+    {
+      "host": "A",
+      "source": "tools/make_pseudo.py",
+      "published": "experiments/v04/source/tools/make_pseudo.py",
+      "sha256": "4bf40d4a1d810ea8d4e336b532ddbb53c2858fcce652b50c5d4b5e7e95ef7d63",
+      "bytes": 7555
+    },
+    {
+      "host": "A",
+      "source": "tools/nokl_20260923/prepare.py",
+      "published": "experiments/v04/source/tools/nokl_20260923/prepare.py",
+      "sha256": "149544edd990ce1fee24c935d7e67debd10dac1e9587a63362750760274d9587",
+      "bytes": 7698
+    },
+    {
+      "host": "A",
+      "source": "tools/pseudo_inventory.py",
+      "published": "experiments/v04/source/tools/pseudo_inventory.py",
+      "sha256": "249c1f2315e3cbf4e28268cc6b0a95411c1eb44cb9d741a46225ad72db8e852f",
+      "bytes": 6767
+    },
+    {
+      "host": "A",
+      "source": "tools/smoke_distil.py",
+      "published": "experiments/v04/source/tools/smoke_distil.py",
+      "sha256": "7eaed4d6141520664b7a01a0780d16e80f41988a1d60905a297e1bc7db9249cb",
+      "bytes": 4943
+    },
+    {
+      "host": "B",
+      "source": "tools/smoke_rprime.py",
+      "published": "experiments/v04/source/tools/smoke_rprime.py",
+      "sha256": "2a3f187111f37558dc1fb8590c77f7e6f2ae2f3ced8cc1f606d59d43d82757c0",
+      "bytes": 4032
+    },
+    {
+      "host": "A",
+      "source": "tools/train_distil.py",
+      "published": "experiments/v04/source/tools/train_distil.py",
+      "sha256": "8b534fe8ebdc9b1f561bfbf4a8c28d6a7ac91e751c212842c81a23d130982b1e",
+      "bytes": 1442
+    },
+    {
+      "host": "B",
+      "source": "tools/train_distil_rprime.py",
+      "published": "experiments/v04/source/tools/train_distil_rprime.py",
+      "sha256": "2b7bb0db5475b11aa7247003eb83a47a179cd5054187aa38049b4dbcae0627a1",
+      "bytes": 1687
+    },
+    {
+      "host": "A",
+      "source": "tools/verify_arm_R.py",
+      "published": "experiments/v04/source/tools/verify_arm_R.py",
+      "sha256": "c2ad6cb83e2fe7579e59b203fd53573ed7123e6223cf8512ae46f465b26755af",
+      "bytes": 8067
+    },
+    {
+      "host": "B",
+      "source": "tools/verify_arm_Rprime.py",
+      "published": "experiments/v04/source/tools/verify_arm_Rprime.py",
+      "sha256": "7a54c3b165185247d0e1e67daeaeb115b12b270911d874e82f110ca6e0d1e52b",
+      "bytes": 23984
+    },
+    {
+      "host": "A",
+      "source": "tools/write_arm_configs.py",
+      "published": "experiments/v04/source/tools/write_arm_configs.py",
+      "sha256": "c9cff8fab79cc02f7518ca23064e8cfe6d3e253558d15b8bebf76d4e1c9a7657",
+      "bytes": 5113
+    },
+    {
+      "host": "A",
+      "source": "out/v04/arms/score_B0.json",
+      "published": "results/v04/arms/score_B0.json",
+      "sha256": "53b10c5a27f3186e4cc842af74390740bd59035b002970f4b15fddad162f0ff6",
+      "bytes": 179598
+    },
+    {
+      "host": "A",
+      "source": "out/v04/arms/score_B1.json",
+      "published": "results/v04/arms/score_B1.json",
+      "sha256": "c4d25064733923494e353e721161eebe17505dc0f802138ff7e15c4cd173d791",
+      "bytes": 179646
+    },
+    {
+      "host": "A",
+      "source": "out/v04/arms/score_C.json",
+      "published": "results/v04/arms/score_C.json",
+      "sha256": "0e04626e484a635cb25f63b010db9339399895abb479ae4ec004d96dce644f38",
+      "bytes": 179465
+    },
+    {
+      "host": "A",
+      "source": "out/v04/arms/score_D.json",
+      "published": "results/v04/arms/score_D.json",
+      "sha256": "4c1f5a0bbb72e247e43034bbff7a5b5750a8bb5fa17031268fb60b3908c71db5",
+      "bytes": 179435
+    },
+    {
+      "host": "A",
+      "source": "out/v04/arms/score_R.json",
+      "published": "results/v04/arms/score_R.json",
+      "sha256": "05f5333eab898684afc8d39a998d5675466739b9aa52a0c22280546fbe00c440",
+      "bytes": 179507
+    },
+    {
+      "host": "B",
+      "source": "out/v04/arms/score_Rprime.json",
+      "published": "results/v04/arms/score_Rprime.json",
+      "sha256": "b6f406566191333c830c294c5590f8925c00b08e33d7b4743bdf3846087b2cc2",
+      "bytes": 179562
+    },
+    {
+      "host": "A",
+      "source": "out/v04/arms/verdict_B0.json",
+      "published": "results/v04/arms/verdict_B0.json",
+      "sha256": "8edc160fd0ae5d417b34e6b461753499641aed12274c89f99189d232c532c5e1",
+      "bytes": 11158
+    },
+    {
+      "host": "A",
+      "source": "out/v04/arms/verdict_B1.json",
+      "published": "results/v04/arms/verdict_B1.json",
+      "sha256": "c07f382a82a95caee31ebea49f9b243ce7ff0fe5f305ca906ef07ac1bebbaace",
+      "bytes": 11216
+    },
+    {
+      "host": "A",
+      "source": "out/v04/arms/verdict_C.json",
+      "published": "results/v04/arms/verdict_C.json",
+      "sha256": "44b992393e5eaa9359c38729ed4b96b6908c589e13f93aae870fce53428e5458",
+      "bytes": 11213
+    },
+    {
+      "host": "A",
+      "source": "out/v04/arms/verdict_D.json",
+      "published": "results/v04/arms/verdict_D.json",
+      "sha256": "2160382703cebc7b463494b16336b2d99ffe23c1e18314d57bf0d33a4b230d84",
+      "bytes": 11132
+    },
+    {
+      "host": "A",
+      "source": "out/v04/arms/verdict_R.json",
+      "published": "results/v04/arms/verdict_R.json",
+      "sha256": "a3e3d5f0b797b25b67420d9f6c7e7110baeaa3cddd118fcd6f05ab25c9566039",
+      "bytes": 18009
+    },
+    {
+      "host": "B",
+      "source": "out/v04/arms/verdict_Rprime.json",
+      "published": "results/v04/arms/verdict_Rprime.json",
+      "sha256": "ac10c95e2c2764dd6cdb891bf8dd6d2b8014646931e28f7ab86f701e3541ab6a",
+      "bytes": 27458
+    },
+    {
+      "host": "B",
+      "source": "out/v04/CALIBRATION_REPORT.json",
+      "published": "results/v04/calibration/metrics.json",
+      "sha256": "4c50e9507df12591e90c9c01376c999a3171a9d4ed655e87aae7e06a946c9a38",
+      "bytes": 3098
+    },
+    {
+      "host": "B",
+      "source": "out/v04/point_agreement_full.json",
+      "published": "results/v04/calibration/point_agreement.json",
+      "sha256": "fde2920948b84d3b3e45ed0bf2069761b59b1d7002a759330a9f91dbf1c1d0a5",
+      "bytes": 353
+    },
+    {
+      "host": "A",
+      "source": "out/v04/armR/gridsample_survival.json",
+      "published": "results/v04/diagnostics/R_gridsample_survival.json",
+      "sha256": "991eab50f019a00b1f328cc589fa2ba7f59c7adbec661ab6f17d70d881a49e53",
+      "bytes": 840
+    },
+    {
+      "host": "A",
+      "source": "out/v04/armR/preregistered_note_R.txt",
+      "published": "results/v04/diagnostics/R_protocol.txt",
+      "sha256": "e3976d37ce7cb96f310e88d7d15e1e77c361a6b400444eb74c81fe17d2578282",
+      "bytes": 6603
+    },
+    {
+      "host": "B",
+      "source": "out/v04/armRprime/instrument_check.txt",
+      "published": "results/v04/diagnostics/Rprime_count_check.txt",
+      "sha256": "c44d381ceed18950c7af25d5c03c18a8da558f3eaf66e43d781781797386e95c",
+      "bytes": 1599
+    },
+    {
+      "host": "B",
+      "source": "out/v04/armRprime/verify_Rprime.json",
+      "published": "results/v04/diagnostics/Rprime_preflight.json",
+      "sha256": "a238f40fa5b1d9e5c3e15a99038372adffcfa0b0a6db6fb0de4e5403bb3f122c",
+      "bytes": 259562
+    },
+    {
+      "host": "B",
+      "source": "out/v04/armRprime/preregistered_note_Rprime.txt",
+      "published": "results/v04/diagnostics/Rprime_protocol.txt",
+      "sha256": "a1c65581a90e13822ab053b9c30f734fea42bb1c41df3154935912ab0fb9a03e",
+      "bytes": 15902
+    },
+    {
+      "host": "A",
+      "source": "out/v04/nokl_20260923/D_noKL/preflight.json",
+      "published": "results/v04/nokl_20260923/D_noKL/preflight.json",
+      "sha256": "1f85d5341061e0065940a158c8fa4e6f0df9d8d6100c6154413addfe35ded53c",
+      "bytes": 3308
+    },
+    {
+      "host": "A",
+      "source": "out/v04/nokl_20260923/D_noKL/preflight_initial.json",
+      "published": "results/v04/nokl_20260923/D_noKL/preflight_initial.json",
+      "sha256": "98b691191096b421492c8247d4ac89127b3b8004644e30236f0ef446742a08d1",
+      "bytes": 3148
+    },
+    {
+      "host": "B",
+      "source": "out/v04/nokl_20260923/Rprime_noKL/preflight.json",
+      "published": "results/v04/nokl_20260923/Rprime_noKL/preflight.json",
+      "sha256": "cc2a64fe5b9b0a36a18a3a2c2431fdceb7354a017f7280c973cc86fd92312565",
+      "bytes": 3569
+    },
+    {
+      "host": "B",
+      "source": "out/v04/nokl_20260923/Rprime_noKL/preflight_initial.json",
+      "published": "results/v04/nokl_20260923/Rprime_noKL/preflight_initial.json",
+      "sha256": "1bed7ae14416b862c0ba6d1887e69a4521e117ef5e29149d484fd9758ffa9d29",
+      "bytes": 3448
+    },
+    {
+      "host": "A",
+      "source": "out/v04/nokl_20260923/cpu_dispatch_check.json",
+      "published": "results/v04/nokl_20260923/cpu_dispatch_check.json",
+      "sha256": "d107dfda22e1faefda2e4cfd36a8dbba5f9ed7c6c0c82e2063f8b3640ce0c23a",
+      "bytes": 1710
+    },
+    {
+      "host": "A",
+      "source": "out/v04/nokl_20260923/pair_gate.json",
+      "published": "results/v04/nokl_20260923/pair_gate.json",
+      "sha256": "ef0d553a2d44214952ffe0e0b2a9d9fd6c7f4d082f10011c69e9d5e55b568240",
+      "bytes": 649
+    },
+    {
+      "host": "A",
+      "source": "out/v04/nokl_20260923/protocol.md",
+      "published": "results/v04/nokl_20260923/protocol.md",
+      "sha256": "9d69ff84094b46055c9125ddcb940d04430ca377df04b280cef1478a9b1f9914",
+      "bytes": 5097
+    },
+    {
+      "host": "A",
+      "source": "out/v04/nokl_20260923/protocol_initial.md",
+      "published": "results/v04/nokl_20260923/protocol_initial.md",
+      "sha256": "bff753cb6d1270f20a51f7126b9e6a1bf20023a6d8b610d42a5f4c546a3b680f",
+      "bytes": 3962
+    },
+    {
+      "host": "A",
+      "source": "exp/sk/armB0/config.py",
+      "published": "results/v04/training/B0/config.py",
+      "sha256": "d0921e572c9159d9ccd8e5dfdaf1868a80232f9b4d132bc3e102854aafe8793a",
+      "bytes": 5814
+    },
+    {
+      "host": "A",
+      "source": "exp/sk/armB0/rare_class_audit.jsonl",
+      "published": "results/v04/training/B0/rare_class_audit.jsonl",
+      "sha256": "3d9b3a051a23d5a2990977fe462665401567e812a5b09b1d1ec43f6f8366f3fb",
+      "bytes": 2941
+    },
+    {
+      "host": "A",
+      "source": "exp/sk/armB1/config.py",
+      "published": "results/v04/training/B1/config.py",
+      "sha256": "a117307e28d35c46b0c47e2e4964eda5cc71dccf0b9580f955bc25cc37577b5d",
+      "bytes": 5814
+    },
+    {
+      "host": "A",
+      "source": "exp/sk/armB1/rare_class_audit.jsonl",
+      "published": "results/v04/training/B1/rare_class_audit.jsonl",
+      "sha256": "e6875ab718d0a932e1f5ad6d32f9dfa75a3225397531d4dc5ea8677b9897978c",
+      "bytes": 2941
+    },
+    {
+      "host": "A",
+      "source": "exp/sk/armC/config.py",
+      "published": "results/v04/training/C/config.py",
+      "sha256": "ba3260c2fcff5055f25abd63cb14162eb009295bc934fe881cdfebbcaedd8aae",
+      "bytes": 5785
+    },
+    {
+      "host": "A",
+      "source": "exp/sk/armC/rare_class_audit.jsonl",
+      "published": "results/v04/training/C/rare_class_audit.jsonl",
+      "sha256": "dd5ab433b43fd39dd02eeb4ee10b43496e4e1c415c86e78bb00de0807c728027",
+      "bytes": 3141
+    },
+    {
+      "host": "A",
+      "source": "exp/sk/armD/config.py",
+      "published": "results/v04/training/D/config.py",
+      "sha256": "4cca550f4d39827d5db26802fab64f7c8dc57ef22a041f116070f9aa66627608",
+      "bytes": 5790
+    },
+    {
+      "host": "A",
+      "source": "exp/sk/armD/rare_class_audit.jsonl",
+      "published": "results/v04/training/D/rare_class_audit.jsonl",
+      "sha256": "cc18181987f4118a2f638a8c4c14de4005fd42e375d6d9c243725c7fb22fae4a",
+      "bytes": 3081
+    },
+    {
+      "host": "A",
+      "source": "exp/sk/armD_noKL/config.py",
+      "published": "results/v04/training/D_noKL/config.py",
+      "sha256": "002858cc702049a2eaa1073289ab7a5143538167fb72ac1f52234d8e595ce63f",
+      "bytes": 5796
+    },
+    {
+      "host": "A",
+      "source": "exp/sk/armR/config.py",
+      "published": "results/v04/training/R/config.py",
+      "sha256": "b5fd2d2eb4ace6db2b5f04841eeee3340816da53050a069964ac535e2a5f9041",
+      "bytes": 5803
+    },
+    {
+      "host": "A",
+      "source": "exp/sk/armR/rare_class_audit.jsonl",
+      "published": "results/v04/training/R/rare_class_audit.jsonl",
+      "sha256": "8defe54d492a4cae80507c755c1c9762a41be4a666ff6df6e9e70db2b85388d7",
+      "bytes": 3051
+    },
+    {
+      "host": "B",
+      "source": "exp/sk/armRprime/config.py",
+      "published": "results/v04/training/Rprime/config.py",
+      "sha256": "15bf3c16550fec669f739a03fb684134510f8ac82b83172008adf76eb7ec5def",
+      "bytes": 6025
+    },
+    {
+      "host": "B",
+      "source": "exp/sk/armRprime/rare_class_audit.jsonl",
+      "published": "results/v04/training/Rprime/rare_class_audit.jsonl",
+      "sha256": "073df1391106f4e2f1b47fd3cdd3e11169cca162961d1960eeadb3ed712fd2ac",
+      "bytes": 3069
+    },
+    {
+      "host": "B",
+      "source": "exp/sk/armRprime_noKL/config.py",
+      "published": "results/v04/training/Rprime_noKL/config.py",
+      "sha256": "3636789b50691ad2b54e81e0848215b004d1f9512f28c011998e5db731ae7303",
+      "bytes": 6046
+    },
+    {
+      "host": "A",
+      "source": "out/v04/lambda_calibration.jsonl",
+      "published": "results/v04/training/lambda_calibration.jsonl",
+      "sha256": "c35fb9c228467fe3af1a7962c5e2e1b055d5f8e3c6a5581b8a784fc72e6b9fb6",
+      "bytes": 3075
+    },
+    {
+      "host": "A",
+      "source": "out/pseudo/rare_weights.json",
+      "published": "results/v04/training/rare_weights.json",
+      "sha256": "03ae01f21e5d9be05a3c2e4389b55b548406495f50e10981fe9b56eab93973aa",
+      "bytes": 275874
+    }
+  ]
+}

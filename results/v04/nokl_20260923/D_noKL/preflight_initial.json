@@ -1,0 +1,91 @@
+{
+  "arm": "D_noKL",
+  "parent": "D",
+  "seed": 20260923,
+  "parent_seed": 55331836,
+  "prepared_utc": "2026-09-23T12:35:30.195122+00:00",
+  "config": "/data/wuyou/livo_sem/src/Pointcept_v151/configs/semantic_kitti/arm_D_noKL.py",
+  "config_sha256": "002858cc702049a2eaa1073289ab7a5143538167fb72ac1f52234d8e595ce63f",
+  "parent_config_sha256": "4cca550f4d39827d5db26802fab64f7c8dc57ef22a041f116070f9aa66627608",
+  "config_changes": {
+    ".model.kl_enabled": [
+      "True",
+      "False"
+    ],
+    ".save_path": [
+      "'/data/wuyou/livo_sem/exp/sk/armD'",
+      "'/data/wuyou/livo_sem/exp/sk/armD_noKL'"
+    ],
+    ".seed": [
+      "55331836",
+      "20260923"
+    ]
+  },
+  "initial_student_sha256": "db9425245957ba2405dc4ba95436f8f11f07c36e480687ce0ba394d3b3478fd5",
+  "strict_loaded_tensors": 488,
+  "train_frames": 17228,
+  "train_sequences": [
+    "00",
+    "01",
+    "02",
+    "04",
+    "05",
+    "06",
+    "09",
+    "10"
+  ],
+  "training_order_sha256": "3ad5db4d4543d54feb3b9b56739c739d2f7568cf7f96b724f620fadd2042eeaf",
+  "normalized_pair_config_sha256": "2718c7830de0893b572a82c3672955c81a2f8b2630d51060b0a1c5836bd0308b",
+  "selected_samples": [
+    {
+      "index": 0,
+      "frame": "10/001135",
+      "voxels": 97422,
+      "n_sup": 17056,
+      "coord_sha256": "7f485a9e083237fd31e55c738e8017cbe062cdbb2b70a86aa183628a8302cfab"
+    },
+    {
+      "index": 1,
+      "frame": "09/000680",
+      "voxels": 99280,
+      "n_sup": 15789,
+      "coord_sha256": "25992c3a97d47a6ab269ff18a899c08293197fe2dfba5d5fcc3618aefe15f6a3"
+    },
+    {
+      "index": 100,
+      "frame": "10/000515",
+      "voxels": 85203,
+      "n_sup": 16935,
+      "coord_sha256": "98b81366ccb8333e0ecb9ca3eaa914eb9c0afac695fe0f9aff010a8ab99f128f"
+    },
+    {
+      "index": 1000,
+      "frame": "09/000029",
+      "voxels": 102242,
+      "n_sup": 17674,
+      "coord_sha256": "bb28f816f6ddc9d4494b63ce08e6a391f5eb41f82051dfa1323dcd8e6d8856ac"
+    }
+  ],
+  "smoke": {
+    "loss": 0.7146338224411011,
+    "ce": 0.3424921929836273,
+    "lovasz": 0.37214159965515137,
+    "kl": -0.0,
+    "n_sup": 32606.0,
+    "n_kl": 0.0
+  },
+  "finite_nonzero_student_gradients": true,
+  "anchor_was_not_called": true,
+  "shared_sha256": {
+    "tools/train_distil.py": "8b534fe8ebdc9b1f561bfbf4a8c28d6a7ac91e751c212842c81a23d130982b1e",
+    "tools/cache_trained.py": "57b57c022be7fc776fdc20aaa80f9461fbdfd5a8b408490d48f057472e4de674",
+    "tools/arm_verdict.py": "d33f215f8f8bfb9dac98a961d953d4346dac7842b98820ce0a06ef537ea8eae0",
+    "src/distil_ext.py": "0e5ea9e248b8488929580464b5fc992b6f0c2fa5fb08f069a3066d39388d820e",
+    "src/pointcept_ext.py": "ffd19ab64dd56323bebcaf536f422b5df4bfbe141759ccdbe31b3110f45d48a1",
+    "src/score_2d_vs_3d.py": "2632cc71f1830f5d8834f06776b20e0d7485d8ca39c35c9e7675189bd8e33efb",
+    "src/Pointcept_v151/configs/semantic_kitti/semseg-pt-v3m1-distil-common9.py": "2fb3249d95aecccef248aa4187445a7aeff37e50a723cf10041a3ab96887c20c",
+    "out/pseudo/rare_weights.json": "03ae01f21e5d9be05a3c2e4389b55b548406495f50e10981fe9b56eab93973aa"
+  },
+  "protocol_sha256": "bff753cb6d1270f20a51f7126b9e6a1bf20023a6d8b610d42a5f4c546a3b680f",
+  "pass": true
+}
