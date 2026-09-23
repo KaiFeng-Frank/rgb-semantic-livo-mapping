@@ -1,0 +1,112 @@
+{
+  "completed_utc": "2026-09-23T20:50:08.202993+00:00",
+  "metric": "seq07 outside-frustum mIoU-9",
+  "means": {
+    "D": 74.67754981295883,
+    "Rprime": 83.35668510277252,
+    "D_noKL": 81.43809018658541,
+    "Rprime_noKL": 84.89932230993442
+  },
+  "historical_gap": 8.679135289813686,
+  "noKL_gap": 3.4612321233490064,
+  "D_change": 6.760540373626583,
+  "Rprime_change": 1.5426372071619028,
+  "gap_reduction": 5.21790316646468,
+  "count_match": {
+    "passed": true,
+    "D_mean": 271547032.3,
+    "D_sd": 30176.378709366556,
+    "interval": [
+      271396150.4064532,
+      271697914.19354683
+    ],
+    "Rprime_mean": 271547032.3,
+    "ratio": 1.0,
+    "D_epochs": [
+      271556790,
+      271533504,
+      271509845,
+      271542823,
+      271547204,
+      271552793,
+      271553750,
+      271550995,
+      271616150,
+      271506469
+    ],
+    "Rprime_epochs": [
+      271556790,
+      271533504,
+      271509845,
+      271542823,
+      271547204,
+      271552793,
+      271553750,
+      271550995,
+      271616150,
+      271506469
+    ]
+  },
+  "limitations": [
+    "One training per arm; three draws are inference repeats.",
+    "Historical D/Rprime used different training seeds; this interaction is exploratory.",
+    "Supervision class mix remains different.",
+    "A CPU dispatch was aligned to B for the new pair; historical-vs-new is not an exact replay."
+  ],
+  "per_class": {
+    "car": {
+      "D": 96.497,
+      "Rprime": 98.33566666666667,
+      "D_noKL": 94.81,
+      "Rprime_noKL": 98.198
+    },
+    "large_vehicle": {
+      "D": 48.681000000000004,
+      "Rprime": 64.46733333333333,
+      "D_noKL": 57.248,
+      "Rprime_noKL": 62.093333333333334
+    },
+    "two_wheeler": {
+      "D": 75.59599999999999,
+      "Rprime": 83.16199999999999,
+      "D_noKL": 75.76433333333334,
+      "Rprime_noKL": 82.439
+    },
+    "person": {
+      "D": 45.57900000000001,
+      "Rprime": 64.40633333333334,
+      "D_noKL": 57.22666666666667,
+      "Rprime_noKL": 68.12133333333333
+    },
+    "road": {
+      "D": 86.52499999999999,
+      "Rprime": 95.40333333333335,
+      "D_noKL": 96.11500000000001,
+      "Rprime_noKL": 96.96033333333332
+    },
+    "sidewalk": {
+      "D": 78.61266666666667,
+      "Rprime": 91.66899999999998,
+      "D_noKL": 92.57033333333334,
+      "Rprime_noKL": 93.52833333333332
+    },
+    "terrain": {
+      "D": 80.012,
+      "Rprime": 83.47933333333333,
+      "D_noKL": 83.073,
+      "Rprime_noKL": 83.88033333333333
+    },
+    "vegetation": {
+      "D": 73.742,
+      "Rprime": 79.25266666666667,
+      "D_noKL": 83.51,
+      "Rprime_noKL": 85.666
+    },
+    "manmade": {
+      "D": 86.85366666666665,
+      "Rprime": 90.034,
+      "D_noKL": 92.62533333333333,
+      "Rprime_noKL": 93.207
+    }
+  }
+}

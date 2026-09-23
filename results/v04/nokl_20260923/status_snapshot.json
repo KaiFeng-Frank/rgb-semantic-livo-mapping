@@ -1,60 +1,31 @@
 {
-  "snapshot_utc": "2026-09-23T18:10:14.364146+00:00",
-  "note": "One-time status capture, not a live monitor. No final no-KL result is included in this update.",
+  "snapshot_utc": "2026-09-23T20:52:30.375667+00:00",
+  "note": "Final status captured from the paired comparison on host A after both remote arms completed.",
   "arms": {
     "D_noKL": {
-      "observed_utc": "2026-09-23T18:10:13.391807+00:00",
-      "phase": "training",
+      "phase": "complete",
+      "completed_utc": "2026-09-23T19:03:08.158673+00:00",
       "training_seed": 20260923,
-      "completed_epoch_audits": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8
-      ],
-      "completed_epochs_have_zero_KL": true,
-      "service": {
-        "ActiveState": "active",
-        "SubState": "running"
-      },
-      "final_score_available": false,
-      "last_logged_training_progress": {
-        "epoch": 9,
-        "total_epochs": 10,
-        "step": 6062,
-        "steps_per_epoch": 8614
-      }
+      "selected_epoch": 4,
+      "best_validation_miou": 0.8539782959355073,
+      "epochs": 10,
+      "kl_points_all_zero": true,
+      "checkpoint_finite": true,
+      "primary_miou9_outside": 81.43809018658541
     },
     "Rprime_noKL": {
-      "observed_utc": "2026-09-23T18:10:13.919933+00:00",
-      "phase": "training",
+      "phase": "complete",
+      "completed_utc": "2026-09-23T19:23:52.681370+00:00",
       "training_seed": 20260923,
-      "completed_epoch_audits": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8
-      ],
-      "completed_epochs_have_zero_KL": true,
-      "service": {
-        "ActiveState": "active",
-        "SubState": "running"
-      },
-      "final_score_available": false,
-      "last_logged_training_progress": {
-        "epoch": 9,
-        "total_epochs": 10,
-        "step": 1718,
-        "steps_per_epoch": 8614
-      }
+      "selected_epoch": 2,
+      "best_validation_miou": 0.8678249014320994,
+      "epochs": 10,
+      "kl_points_all_zero": true,
+      "checkpoint_finite": true,
+      "primary_miou9_outside": 84.89932230993442
     }
-  }
+  },
+  "paired_comparison_completed_utc": "2026-09-23T20:50:08.202993+00:00",
+  "paired_count_gate": "PASS",
+  "supervised_count_ratio_Rprime_over_D": 1.0
 }

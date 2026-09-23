@@ -1,0 +1,15 @@
+No-KL paired diagnostic
+Metric: seq07 outside-frustum mIoU-9
+Count gate: PASS
+D: 74.677550
+Rprime: 83.356685
+D_noKL: 81.438090
+Rprime_noKL: 84.899322
+Historical gap: +8.679135
+No-KL gap: +3.461232
+Gap reduction: +5.217903
+Rprime/D supervised-count ratio: 1.00000000
+One training per arm; three draws are inference repeats.
+Historical D/Rprime used different training seeds; this interaction is exploratory.
+Supervision class mix remains different.
+A CPU dispatch was aligned to B for the new pair; historical-vs-new is not an exact replay.

@@ -429,9 +429,12 @@ matches only **5/8** cells, so that mechanism explanation did not pass. R′ mat
 D's total supervision after voxelisation (ratio **0.999920**) and scores 8.68 points
 higher, with class composition and KL-region geometry still differing.
 
-**Status, 2026-09-24:** D_noKL and Rprime_noKL are running under a new paired
-protocol. Their final scores are pending. The existing 10 Hz mapping result is
-from v0.2/v0.3; deployment of the fine-tuned student is a later validation gate.
+**Status, 2026-09-24:** the paired no-KL diagnostic is complete. D_noKL reaches
+81.44 ± 0.55 outside-frustum mIoU-9 and Rprime_noKL reaches 84.90 ± 0.12; the
+supervision-count gate passes at ratio 1.000000, and the gap falls from 8.68 to
+3.46 points. The result remains exploratory because each arm has one training run
+and the historical comparison uses different seeds. The existing 10 Hz mapping
+result is from v0.2/v0.3; deployment of the fine-tuned student is a later gate.
 
 See [full results, evaluation conditions and next steps](docs/v04_results.md),
 [all metrics and per-class results](results/v04/completed_summary.md), and the
@@ -460,10 +463,11 @@ control arm's 9.83 % — 61× — and 62× against that arm's *perfect-classifie
 matters is the precise negative: the false-kill floor is the trajectory (5.0× better on GT poses),
 not the removal mechanism.
 
-**v0.4 — camera-supervised transfer. In progress.** First adaptation results and GT diagnostics
-are complete. Next: finish the no-KL pair, validate B0 in fixed-trajectory mapping replay,
-improve and independently repeat the method, and evaluate on unseen data. Live-pose integration
-and concurrent FAST-LIVO2/PTv3 acceptance are a separate engineering gate.
+**v0.4 — camera-supervised transfer. Diagnostic stage complete.** The no-KL pair is
+complete and the R′ checkpoint is preserved on host 134. Next: validate B0 in
+fixed-trajectory mapping replay, improve and independently repeat the method, and
+evaluate on unseen data. Live-pose integration and concurrent FAST-LIVO2/PTv3
+acceptance are separate engineering gates.
 The [detailed milestones](docs/v04_results.md#next-milestones) define those checks.
 
 **v0.5 — beyond the rotating scanner.** Non-repetitive solid-state patterns (Livox) break the

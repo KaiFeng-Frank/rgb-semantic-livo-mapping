@@ -91,8 +91,35 @@ def verify_snapshot():
                     f"Pinned source hash mismatch: {relative}")
 
 
+def verify_nokl_final():
+    directory = RESULTS / "nokl_20260923"
+    manifest = read(directory / "final_manifest.json")
+    for entry in manifest["files"]:
+        path = directory / entry["path"]
+        require(path.is_file(), f"Missing final no-KL artifact: {path}")
+        data = path.read_bytes()
+        require(len(data) == entry["bytes"], f"Final no-KL size mismatch: {path}")
+        require(hashlib.sha256(data).hexdigest() == entry["sha256"],
+                f"Final no-KL SHA-256 mismatch: {path}")
+    comparison = read(directory / "comparison.json")
+    require(comparison["count_match"]["passed"], "Final no-KL count gate failed")
+    require(comparison["count_match"]["ratio"] == 1.0,
+            "Final no-KL count ratio is not exactly one")
+    require(comparison["means"]["D_noKL"] == 81.43809018658541,
+            "Unexpected D_noKL primary metric")
+    require(comparison["means"]["Rprime_noKL"] == 84.89932230993442,
+            "Unexpected Rprime_noKL primary metric")
+    for arm in ("D_noKL", "Rprime_noKL"):
+        status = read(directory / arm / "status.json")
+        audit = read(directory / arm / "completion_audit.json")
+        require(status["phase"] == "complete", f"No-KL arm not complete: {arm}")
+        require(len(audit["epochs"]) == 10 and audit["kl_points_all_zero"],
+                f"No-KL audit incomplete: {arm}")
+
+
 def build_summary():
     verify_snapshot()
+    verify_nokl_final()
     baseline = read(RESULTS / "armA_spread_pooled.json")
     require(baseline["n_draws"] == 6, "Expected six baseline inference draws")
     a = dict(label=LABELS["A"], training_runs=0, inference_draws=6, subsets={})
@@ -222,7 +249,7 @@ def main():
         elif args.check:
             require((RESULTS / name).read_text() == content, f"Stale generated output: {name}")
     if args.check:
-        print("PASS: hashes, preflights, 6 completed training audits, 18 inference draws, metric tables and voxel-count gate")
+        print("PASS: hashes, preflights, 6 completed training audits, 18 inference draws, metric tables, voxel-count gate and final no-KL pair")
     elif args.write:
         print("Wrote results/v04/completed_summary.{json,md}")
     else:

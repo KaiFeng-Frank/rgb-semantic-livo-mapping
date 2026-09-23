@@ -1,7 +1,7 @@
 # v0.4 results and next steps
 
-Updated 2026-09-24. Six adapted arms have completed training and three full-sequence
-inference draws each. The paired no-KL diagnostic is still running at this snapshot.
+Updated 2026-09-24. Six adapted arms and the paired no-KL diagnostic have completed
+ten-epoch training and three full-sequence inference draws each.
 
 Camera pseudo-label fine-tuning (B0) raises outside-frustum mIoU-9 from **65.01 to
 72.98 (+7.96 points)** on SemanticKITTI sequence 07. The corresponding mIoU-8 delta,
@@ -104,15 +104,33 @@ outside mIoU-9 is 65.0125 on A and 64.9965 on B, a −0.0160 difference. This ch
 the inference instrument; it does not establish equal training behaviour on
 the two CPU architectures.
 
-## Running diagnostic: D_noKL and Rprime_noKL
+## Completed no-KL diagnostic: D_noKL and Rprime_noKL
 
-The two new arms remove the KL term while retaining each supervision selector,
-the original initialization, batch size, augmentation and ten-epoch budget.
-They use the same explicit training seed, **20260923**. The
+The paired diagnostic removed the KL term while retaining each supervision selector,
+the original initialization, batch size, augmentation and ten-epoch budget. Both arms
+used the explicit training seed **20260923**. The
 [protocol](../results/v04/nokl_20260923/protocol.md),
-[paired preflight gate](../results/v04/nokl_20260923/pair_gate.json), and
-[timestamped status snapshot](../results/v04/nokl_20260923/status_snapshot.json)
-are included. No final score is published for an unfinished run.
+[paired preflight gate](../results/v04/nokl_20260923/pair_gate.json),
+[final status snapshot](../results/v04/nokl_20260923/status_snapshot.json), and
+[paired comparison](../results/v04/nokl_20260923/comparison.json) are included.
+The [final artifact manifest](../results/v04/nokl_20260923/final_manifest.json)
+records the hashes of the scores, audits and status files.
+
+| Arm | Selected epoch | Outside mIoU-9 ± SD | Outside mIoU-8 ± SD |
+|---|---:|---:|---:|
+| D_noKL | 4 | **81.44 ± 0.55** | 82.15 ± 0.42 |
+| Rprime_noKL | 2 | **84.90 ± 0.12** | 85.21 ± 0.09 |
+
+The new no-KL gap is **3.46 points**, compared with the historical KL-on gap of
+**8.68 points**. The gap reduction is **5.22 points**. D_noKL changes by +6.76
+points from historical D, while Rprime_noKL changes by +1.54 points from historical
+R′. These historical-versus-new changes are exploratory because the historical arms
+used different seeds and the new A process aligned CPU dispatch to B.
+
+The whole-stream supervision-count gate passes exactly: Rprime_noKL and D_noKL have
+the same supervised-voxel total in all ten epochs, with a mean ratio of **1.000000**.
+The final R′ files and checkpoint were copied back to host 134 before host 133 was
+retired; future work can run from host 134.
 
 Preflight found that identical NumPy versions could select different voxel
 representatives on Intel AVX512 and AMD AVX2. Disabling NumPy AVX512 dispatch for
@@ -121,30 +139,27 @@ match B exactly. The original preflight records and the amendment are preserved.
 This is a four-sample check; the whole-stream supervision-count gate is still
 required after training.
 
-The runners automatically audit all ten epochs, the selected checkpoint,
-zero KL points and finite weights, then score three full inference draws.
-Historical KL-on versus new KL-off comparisons will remain exploratory because
-the historical seeds differ and A's runtime dispatch was aligned for the new
-pair. A matched-seed, matched-environment 2×2 replication is needed for a causal
-claim about the KL interaction.
+The runners audited all ten epochs, the selected checkpoints, zero KL points and
+finite weights, then scored three full inference draws. Historical KL-on versus new
+KL-off comparisons remain exploratory because the historical seeds differ and A's
+runtime dispatch was aligned for the new pair. A matched-seed, matched-environment
+2×2 replication is needed for a causal claim about the KL interaction.
 
 ## Next milestones
 
-1. Finish and audit the no-KL pair; report both arm changes, the new R′−D gap,
-   per-class behaviour and the whole-stream count gate.
-2. Use that diagnostic to improve **B0**: prioritise the preservation loss if it
+1. Use the completed no-KL result to improve **B0**: prioritise the preservation loss if it
    contributes to the gap, or the coverage and quality of valid camera
    pseudo-labels if the gap persists. Keep oracle GT arms as diagnostics.
-3. Repeat the main method and relevant baseline with at least **three independent
+2. Repeat the main method and relevant baseline with at least **three independent
    training seeds**. If making a KL mechanism claim, repeat all four cells under
    matched seeds and runtime settings.
-4. Freeze the protocol and evaluate on independent data unseen during method
+3. Freeze the protocol and evaluate on independent data unseen during method
    development. Do not reuse a training sequence as a new test set.
-5. Complete the two engineering gates below: compare the existing B0 checkpoint
+4. Complete the two engineering gates below: compare the existing B0 checkpoint
    against the original model in fixed-trajectory mapping replay, then integrate
    live pose input and measure concurrent FAST-LIVO2/PTv3 operation. The first
    gate can proceed before further method development is complete.
-6. Package code, configuration, model artifacts and a reproducible demonstration.
+5. Package code, configuration, model artifacts and a reproducible demonstration.
    Livox and other non-repetitive scanners remain the subsequent v0.5 phase.
 
 The existing mapping throughput results concern v0.2/v0.3 with a precomputed TUM

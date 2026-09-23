@@ -1,0 +1,180 @@
+{
+  "arm": "Rprime_noKL",
+  "completed_utc": "2026-09-23T19:23:52.681370+00:00",
+  "epochs": [
+    {
+      "epoch": 1,
+      "kl_points": 0,
+      "supervised_points": 271556790,
+      "per_class": {
+        "car": 11430353,
+        "large_vehicle": 612244,
+        "two_wheeler": 250658,
+        "person": 100429,
+        "road": 48615203,
+        "sidewalk": 35262601,
+        "terrain": 24143179,
+        "vegetation": 85853552,
+        "manmade": 65288571
+      },
+      "kl_lambda": null
+    },
+    {
+      "epoch": 2,
+      "kl_points": 0,
+      "supervised_points": 271533504,
+      "per_class": {
+        "car": 11435133,
+        "large_vehicle": 611865,
+        "two_wheeler": 250480,
+        "person": 100106,
+        "road": 48602471,
+        "sidewalk": 35264125,
+        "terrain": 24142371,
+        "vegetation": 85841548,
+        "manmade": 65285405
+      },
+      "kl_lambda": null
+    },
+    {
+      "epoch": 3,
+      "kl_points": 0,
+      "supervised_points": 271509845,
+      "per_class": {
+        "car": 11433511,
+        "large_vehicle": 614164,
+        "two_wheeler": 250670,
+        "person": 99948,
+        "road": 48592069,
+        "sidewalk": 35254825,
+        "terrain": 24141027,
+        "vegetation": 85844339,
+        "manmade": 65279292
+      },
+      "kl_lambda": null
+    },
+    {
+      "epoch": 4,
+      "kl_points": 0,
+      "supervised_points": 271542823,
+      "per_class": {
+        "car": 11430157,
+        "large_vehicle": 615129,
+        "two_wheeler": 250123,
+        "person": 100061,
+        "road": 48622675,
+        "sidewalk": 35260319,
+        "terrain": 24152724,
+        "vegetation": 85848386,
+        "manmade": 65263249
+      },
+      "kl_lambda": null
+    },
+    {
+      "epoch": 5,
+      "kl_points": 0,
+      "supervised_points": 271547204,
+      "per_class": {
+        "car": 11438266,
+        "large_vehicle": 613563,
+        "two_wheeler": 250000,
+        "person": 100056,
+        "road": 48606887,
+        "sidewalk": 35261737,
+        "terrain": 24149758,
+        "vegetation": 85834872,
+        "manmade": 65292065
+      },
+      "kl_lambda": null
+    },
+    {
+      "epoch": 6,
+      "kl_points": 0,
+      "supervised_points": 271552793,
+      "per_class": {
+        "car": 11434897,
+        "large_vehicle": 615182,
+        "two_wheeler": 250279,
+        "person": 100154,
+        "road": 48612099,
+        "sidewalk": 35255659,
+        "terrain": 24150083,
+        "vegetation": 85844018,
+        "manmade": 65290422
+      },
+      "kl_lambda": null
+    },
+    {
+      "epoch": 7,
+      "kl_points": 0,
+      "supervised_points": 271553750,
+      "per_class": {
+        "car": 11435067,
+        "large_vehicle": 613679,
+        "two_wheeler": 250688,
+        "person": 100068,
+        "road": 48613622,
+        "sidewalk": 35266181,
+        "terrain": 24141422,
+        "vegetation": 85853077,
+        "manmade": 65279946
+      },
+      "kl_lambda": null
+    },
+    {
+      "epoch": 8,
+      "kl_points": 0,
+      "supervised_points": 271550995,
+      "per_class": {
+        "car": 11440663,
+        "large_vehicle": 613372,
+        "two_wheeler": 250089,
+        "person": 100124,
+        "road": 48610918,
+        "sidewalk": 35255761,
+        "terrain": 24142346,
+        "vegetation": 85847486,
+        "manmade": 65290236
+      },
+      "kl_lambda": null
+    },
+    {
+      "epoch": 9,
+      "kl_points": 0,
+      "supervised_points": 271616150,
+      "per_class": {
+        "car": 11442899,
+        "large_vehicle": 612517,
+        "two_wheeler": 250430,
+        "person": 100114,
+        "road": 48628410,
+        "sidewalk": 35269368,
+        "terrain": 24154422,
+        "vegetation": 85866124,
+        "manmade": 65291866
+      },
+      "kl_lambda": null
+    },
+    {
+      "epoch": 10,
+      "kl_points": 0,
+      "supervised_points": 271506469,
+      "per_class": {
+        "car": 11436032,
+        "large_vehicle": 616199,
+        "two_wheeler": 250087,
+        "person": 100268,
+        "road": 48590162,
+        "sidewalk": 35250834,
+        "terrain": 24137847,
+        "vegetation": 85836373,
+        "manmade": 65288667
+      },
+      "kl_lambda": null
+    }
+  ],
+  "selected_epoch": 2,
+  "best_validation_miou": 0.8678249014320994,
+  "kl_points_all_zero": true,
+  "checkpoint_finite": true
+}

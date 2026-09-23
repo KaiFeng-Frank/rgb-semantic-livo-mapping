@@ -1,0 +1,429 @@
+{
+  "name": "D_noKL",
+  "n_draws": 3,
+  "subsets": {
+    "outside": {
+      "miou9_A": {
+        "mean": 65.01252862307497,
+        "sd": 0.24712148568330877,
+        "half_range": 0.31983405798924736,
+        "values": [
+          64.87457480017562,
+          64.98416998292025,
+          64.87024201406615,
+          65.50991013004464,
+          64.91282575501434,
+          64.92344905622886
+        ]
+      },
+      "miou9_arm": {
+        "mean": 81.43809018658541,
+        "sd": 0.5517787472315939,
+        "half_range": 0.4804606772667057,
+        "values": [
+          82.075200497852,
+          81.11427914331858,
+          81.12479091858566
+        ]
+      },
+      "delta_miou9": 16.425561563510442,
+      "miou8_A": {
+        "mean": 68.30862499999999,
+        "sd": 0.11737101963432196,
+        "half_range": 0.17362500000000125,
+        "values": [
+          68.334,
+          68.259625,
+          68.454875,
+          68.32575,
+          68.36987500000001,
+          68.107625
+        ]
+      },
+      "miou8_arm": {
+        "mean": 82.14729166666666,
+        "sd": 0.4194150005762056,
+        "half_range": 0.3849375000000066,
+        "values": [
+          82.628375,
+          81.955,
+          81.85849999999999
+        ]
+      },
+      "delta_miou8": 13.838666666666668,
+      "acc_A": {
+        "mean": 87.45407631485732,
+        "sd": 0.05088756076211415,
+        "half_range": 0.07134262208970199,
+        "values": [
+          87.42630301980618,
+          87.45783861924798,
+          87.54962913069485,
+          87.45787931156511,
+          87.42586392131439,
+          87.40694388651545
+        ]
+      },
+      "acc_arm": {
+        "mean": 95.23060460717342,
+        "sd": 0.0362396184306459,
+        "half_range": 0.03601270065890105,
+        "values": [
+          95.26895506567915,
+          95.19692966436135,
+          95.22592909147977
+        ]
+      },
+      "per_class": {
+        "car": {
+          "A": 94.36616666666667,
+          "arm": 94.81,
+          "delta": 0.4438333333333304,
+          "thr": 0.2559420832922964,
+          "call": "UP"
+        },
+        "large_vehicle": {
+          "A": 38.11866666666666,
+          "arm": 57.248,
+          "delta": 19.129333333333335,
+          "thr": 1.0783609785224992,
+          "call": "UP"
+        },
+        "two_wheeler": {
+          "A": 38.64366666666666,
+          "arm": 75.76433333333334,
+          "delta": 37.12066666666668,
+          "thr": 5.154796504227885,
+          "call": "ABSTAIN CELL"
+        },
+        "person": {
+          "A": 38.18316666666666,
+          "arm": 57.22666666666667,
+          "delta": 19.04350000000001,
+          "thr": 0.9453279589645109,
+          "call": "UP"
+        },
+        "road": {
+          "A": 81.26966666666668,
+          "arm": 96.11500000000001,
+          "delta": 14.845333333333329,
+          "thr": 0.1494269052078669,
+          "call": "UP"
+        },
+        "sidewalk": {
+          "A": 69.38383333333333,
+          "arm": 92.57033333333334,
+          "delta": 23.18650000000001,
+          "thr": 0.2919954622935102,
+          "call": "UP"
+        },
+        "terrain": {
+          "A": 74.2625,
+          "arm": 83.073,
+          "delta": 8.81049999999999,
+          "thr": 0.4403214166946723,
+          "call": "UP"
+        },
+        "vegetation": {
+          "A": 68.00750000000001,
+          "arm": 83.51,
+          "delta": 15.502499999999998,
+          "thr": 0.3629200325140545,
+          "call": "UP"
+        },
+        "manmade": {
+          "A": 82.8775,
+          "arm": 92.62533333333333,
+          "delta": 9.747833333333332,
+          "thr": 0.25868542672520023,
+          "call": "UP"
+        }
+      }
+    },
+    "frustum": {
+      "miou9_A": {
+        "mean": 65.34694266514144,
+        "sd": 0.1857464040240943,
+        "half_range": 0.26409122701912224,
+        "values": [
+          65.23019663435055,
+          65.67028048045974,
+          65.39659782042744,
+          65.38675332948917,
+          65.1420980264215,
+          65.25572969970021
+        ]
+      },
+      "miou9_arm": {
+        "mean": 85.33609596725695,
+        "sd": 0.08030947713950537,
+        "half_range": 0.0700087751430587,
+        "values": [
+          85.42882318954024,
+          85.29065907297651,
+          85.28880563925412
+        ]
+      },
+      "delta_miou9": 19.98915330211551,
+      "miou8_A": {
+        "mean": 70.88081249999999,
+        "sd": 0.06583904379241604,
+        "half_range": 0.08793749999999534,
+        "values": [
+          71.00999999999999,
+          70.846375,
+          70.87225,
+          70.88062500000001,
+          70.8415,
+          70.834125
+        ]
+      },
+      "miou8_arm": {
+        "mean": 84.88783333333333,
+        "sd": 0.10133132022396975,
+        "half_range": 0.09318749999999909,
+        "values": [
+          85.00399999999999,
+          84.81762499999999,
+          84.841875
+        ]
+      },
+      "delta_miou8": 14.007020833333343,
+      "acc_A": {
+        "mean": 89.38208084886149,
+        "sd": 0.020904427876307575,
+        "half_range": 0.027311320010362294,
+        "values": [
+          89.38887693685416,
+          89.3901383725728,
+          89.3938682648546,
+          89.40637873909952,
+          89.361466680709,
+          89.3517560990788
+        ]
+      },
+      "acc_arm": {
+        "mean": 95.9669162841837,
+        "sd": 0.016377443758664227,
+        "half_range": 0.015085287152977855,
+        "values": [
+          95.97832032265448,
+          95.94814974834853,
+          95.97427878154808
+        ]
+      },
+      "per_class": {
+        "car": {
+          "A": 89.3575,
+          "arm": 96.82666666666667,
+          "delta": 7.469166666666666,
+          "thr": 0.2559420832922964,
+          "call": "UP"
+        },
+        "large_vehicle": {
+          "A": 48.89966666666666,
+          "arm": 69.65966666666667,
+          "delta": 20.760000000000005,
+          "thr": 1.0783609785224992,
+          "call": "UP"
+        },
+        "two_wheeler": {
+          "A": 21.076333333333334,
+          "arm": 88.92233333333333,
+          "delta": 67.84599999999999,
+          "thr": 5.154796504227885,
+          "call": "ABSTAIN CELL"
+        },
+        "person": {
+          "A": 39.51266666666667,
+          "arm": 60.45033333333333,
+          "delta": 20.937666666666665,
+          "thr": 0.9453279589645109,
+          "call": "UP"
+        },
+        "road": {
+          "A": 89.28866666666666,
+          "arm": 97.585,
+          "delta": 8.296333333333337,
+          "thr": 0.1494269052078669,
+          "call": "UP"
+        },
+        "sidewalk": {
+          "A": 66.376,
+          "arm": 92.11200000000001,
+          "delta": 25.736000000000004,
+          "thr": 0.2919954622935102,
+          "call": "UP"
+        },
+        "terrain": {
+          "A": 77.81066666666666,
+          "arm": 84.665,
+          "delta": 6.854333333333344,
+          "thr": 0.4403214166946723,
+          "call": "UP"
+        },
+        "vegetation": {
+          "A": 74.99833333333332,
+          "arm": 86.853,
+          "delta": 11.854666666666674,
+          "thr": 0.3629200325140545,
+          "call": "UP"
+        },
+        "manmade": {
+          "A": 80.80300000000001,
+          "arm": 90.95100000000001,
+          "delta": 10.147999999999996,
+          "thr": 0.25868542672520023,
+          "call": "UP"
+        }
+      }
+    },
+    "global": {
+      "miou9_A": {
+        "mean": 65.06476427475314,
+        "sd": 0.20828263798471527,
+        "half_range": 0.2724916994523312,
+        "values": [
+          64.92461899530537,
+          65.10580173695608,
+          64.96508641375682,
+          65.46960239421003,
+          64.94553418778352,
+          64.97794192050705
+        ]
+      },
+      "miou9_arm": {
+        "mean": 82.21183151215523,
+        "sd": 0.46444157056377916,
+        "half_range": 0.40480641660546723,
+        "values": [
+          82.74808847401478,
+          81.93847564080384,
+          81.94893042164705
+        ]
+      },
+      "delta_miou9": 17.147067237402084,
+      "miou8_A": {
+        "mean": 68.80122916666667,
+        "sd": 0.09786851564301326,
+        "half_range": 0.14393749999999983,
+        "values": [
+          68.83924999999999,
+          68.756125,
+          68.922125,
+          68.812,
+          68.843625,
+          68.63425
+        ]
+      },
+      "miou8_arm": {
+        "mean": 82.70029166666667,
+        "sd": 0.36134757188658656,
+        "half_range": 0.3292500000000018,
+        "values": [
+          83.1155,
+          82.52837500000001,
+          82.457
+        ]
+      },
+      "delta_miou8": 13.8990625,
+      "acc_A": {
+        "mean": 87.76367939993763,
+        "sd": 0.04473823547842041,
+        "half_range": 0.06326750224413047,
+        "values": [
+          87.74145733023421,
+          87.76813143981869,
+          87.84578098899772,
+          87.77077351041275,
+          87.73668714565294,
+          87.71924598450946
+        ]
+      },
+      "acc_arm": {
+        "mean": 95.3488431085682,
+        "sd": 0.03273839325543883,
+        "half_range": 0.03265213191027527,
+        "values": [
+          95.38286645340406,
+          95.31756218958351,
+          95.34610068271708
+        ]
+      },
+      "per_class": {
+        "car": {
+          "A": 93.24883333333332,
+          "arm": 95.26166666666667,
+          "delta": 2.0128333333333472,
+          "thr": 0.2559420832922964,
+          "call": "UP"
+        },
+        "large_vehicle": {
+          "A": 40.023833333333336,
+          "arm": 59.64766666666666,
+          "delta": 19.623833333333323,
+          "thr": 1.0783609785224992,
+          "call": "UP"
+        },
+        "two_wheeler": {
+          "A": 35.17333333333333,
+          "arm": 78.304,
+          "delta": 43.13066666666667,
+          "thr": 5.154796504227885,
+          "call": "ABSTAIN CELL"
+        },
+        "person": {
+          "A": 38.48066666666666,
+          "arm": 57.873333333333335,
+          "delta": 19.392666666666678,
+          "thr": 0.9453279589645109,
+          "call": "UP"
+        },
+        "road": {
+          "A": 82.976,
+          "arm": 96.44966666666666,
+          "delta": 13.47366666666666,
+          "thr": 0.1494269052078669,
+          "call": "UP"
+        },
+        "sidewalk": {
+          "A": 69.02816666666666,
+          "arm": 92.51766666666667,
+          "delta": 23.489500000000007,
+          "thr": 0.2919954622935102,
+          "call": "UP"
+        },
+        "terrain": {
+          "A": 74.89750000000002,
+          "arm": 83.35666666666667,
+          "delta": 8.459166666666647,
+          "thr": 0.4403214166946723,
+          "call": "UP"
+        },
+        "vegetation": {
+          "A": 69.11916666666666,
+          "arm": 84.05833333333332,
+          "delta": 14.939166666666665,
+          "thr": 0.3629200325140545,
+          "call": "UP"
+        },
+        "manmade": {
+          "A": 82.63566666666667,
+          "arm": 92.43733333333334,
+          "delta": 9.801666666666677,
+          "thr": 0.25868542672520023,
+          "call": "UP"
+        }
+      }
+    }
+  },
+  "verdict": "PROPAGATION",
+  "delta_primary": 16.425561563510442,
+  "delta_primary_no_two_wheeler": 13.838666666666668,
+  "p3": {
+    "hits": 5,
+    "tested": 8
+  },
+  "prereg_note": "# Paired no-KL diagnostic, frozen before training\nCreated 2026-09-23 after the existing D/R/Rprime/C results were known.\nThis is a new prospective diagnostic, not a preregistration of the earlier results.\n\n## Question and fixed intervention\nCompare D_noKL (camera-frustum GT) with Rprime_noKL (voxel-random GT with the same post-grid count).\nDisable model.kl_enabled. In both arms set the now-inactive kl_lambda=None to prevent calibration-log side effects.\nKeep released nuScenes PTv3 initialization, 16-way head, common-9 supervised loss, augmentations,\noptimizer, batch size 2, 8 workers, rare-class frame resampling, and 10 epochs unchanged.\nUse the same explicit training seed 20260923 for the two NEW arms.\nThe saved historical seeds were D=55331836 and Rprime=59599306.\nTherefore the historical KL-on vs new KL-off interaction is exploratory and includes training-seed variation.\nThree inference draws measure inference variation, not independent training variation.\n\n## Splits and model selection\nTrain: 00,01,02,04,05,06,09,10; 17228 resampled frames per epoch.\nSeq03 stays absent; do not add data to one arm.\nSelect model_best only by seq08 GT validation under the unchanged evaluator.\nSeq07 is accessed for final scoring only, never checkpoint/hyperparameter selection.\nScore all 1101 test frames through the unchanged cache_trained.py and score_2d_vs_3d.py:\nthree independent forward passes, intensity*0.2, grid 0.05, fp16, shuffle_orders=False, no TTA.\nPrimary: seq07 out-of-frustum mIoU-9. Also report mIoU-8 without two_wheeler,\nper-class, in-frustum, and global metrics. No claim of inference-repeat significance as training significance.\n\n## Gates\nBefore starting either training run, require equal initial-student hashes, training-frame order hashes,\nnormalized training config hashes, core-code hashes, and paired sample coordinates/counts across machines.\nA real batch must produce finite nonzero student gradients, KL=0, n_kl=0, loss=CE+Lovasz,\nand must never invoke the anchor forward. Strict released-weight load remains 488 tensors.\nEvery completed epoch must have kl_points=0 and positive supervised counts.\nRequire exactly epochs 1..10, a final checkpoint at epoch10, and model_best selected within 1..10.\nDo not infer successful training from the existence of an early checkpoint.\nRprime_noKL must pass the full-stream voxel-count check against D_noKL:\neach epoch within D_noKL mean +/-5 sample SD; report ratio and every epoch.\nAny check failure is a failed diagnostic gate, even if scores exist; retain all outputs.\nNever alter historical checkpoints, helpers, results, or prior preregistrations.\n\n## Reading the paired outcome\nHistorical gap = Rprime(83.3566851028)-D(74.6775498130)=8.6791352898.\nReport new gap = Rprime_noKL-D_noKL, each arm's change from its own historical reference,\nand gap reduction = historical gap-new gap, including signs rather than selecting a favorable narrative.\nA persistent gap supports the role of supervision distribution INCLUDING its class mix.\nA smaller gap indicates that the existing KL policy may contribute; the different historical training seeds\nprevent a definitive mechanistic attribution without independent paired training replications.\nClass mix remains unmatched. Random GT supervision is a diagnostic oracle, not a deployable camera-pseudo-label method.\nRprime_noKL uses the SAME frozen selector salt as historical Rprime.\nDo not retrofit the existing +/-0.60 inference-noise band into a training-seed confidence interval.\n\n## Operations\nA runs D_noKL; B runs Rprime_noKL. Each GPU has one training job.\nIndependent systemd user services survive this interactive session.\nEach runner checks exit codes, audits, then performs three tests and scoring.\nAfter A finishes scoring it waits, without GPU use, for B and writes the paired comparison on A.\nNew artifacts are confined to exp/sk/arm{D_noKL,Rprime_noKL}, out/v04/nokl_20260923,\nthe two new config files, and tools/nokl_20260923.\n\n## Preflight amendment, before either training run (2026-09-23)\nThe first cross-host check found equal raw scans, flags, grid coordinates and voxel totals,\nbut different representative points from tied sorting keys on Intel Xeon 6248R (A) versus AMD EPYC 7542 (B),\nwith NumPy 2.2.6 on both. The original exact-coordinate/count gate did NOT pass.\nDisabling A's AVX512 NumPy dispatch made all four probed transformed-coordinate hashes\nand post-grid supervised counts exactly equal to B. The production new A runner therefore pins:\nNPY_DISABLE_CPU_FEATURES=AVX512F,AVX512CD,AVX512_SKX,AVX512_CLX.\nB keeps its native AVX2 dispatch. This is scoped to the new runner and its subprocesses.\nNo shared model or transform source is edited. Repeat the real-batch gradient check under this setting\nand require the originally specified exact paired-sample gate before starting either job.\nThe first preflight manifests and this protocol's first version are retained.\nHistorical-vs-new comparisons now additionally include this A runtime-dispatch alignment,\nso do not present them as exact seed-and-runtime paired KL effects. New-vs-new is paired.",
+  "prereg_note_file": "/data/wuyou/livo_sem/out/v04/nokl_20260923/protocol.md"
+}

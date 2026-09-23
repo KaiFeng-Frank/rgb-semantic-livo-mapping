@@ -67,6 +67,15 @@ The host-specific systemd/SSH driver is not included. Its training, checkpoint
 audit, inference and comparison sequence is described by the
 [no-KL protocol](../../results/v04/nokl_20260923/protocol.md).
 
+## Host handoff
+
+The Rprime_noKL run was trained on the second host (133). Before that host was
+retired, its `model_best.pth`, `model_last.pth`, resolved configuration, ten-epoch
+audit and Rprime source modules were copied to the primary host (134) under the
+same `/data/wuyou/livo_sem` layout. The final score files and paired comparison in
+the repository are the preserved copies. Future training, inference and mapping
+integration should use host 134; host 133 is not required for the reported result.
+
 ## Historical output interpretation
 
 `tools/arm_verdict.py` is retained as the code that produced the archived verdict
