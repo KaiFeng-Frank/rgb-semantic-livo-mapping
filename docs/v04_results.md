@@ -1,5 +1,10 @@
 # v0.4 results and next steps
 
+> **Follow-up, 2026-09-26.** Engineering gate 1 below ran as [v0.5](v05_results.md) and
+> gate 2 as [v0.6 online integration](v06_online_integration.md). Independent training seeds
+> and a held-out sequence are the [v0.6 training protocol](v06_training_protocol.md). The
+> Livox phase named in milestone 5 is now v0.8 in the README roadmap.
+
 Updated 2026-09-24. Six adapted arms and the paired no-KL diagnostic have completed
 ten-epoch training and three full-sequence inference draws each.
 

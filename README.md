@@ -8,7 +8,9 @@ ROS 2 Jazzy, KITTI + SemanticKITTI, RTX 4090.
 
 The measured workflow has two passes: first run FAST-LIVO2 and save its TUM trajectory,
 then replay the bag through the semantic/RGB mapper with that trajectory loaded at startup.
-Concurrent FAST-LIVO2 + PTv3 operation with live pose arrival remains an engineering milestone.
+v0.6 also runs both concurrently on bag replay, the mapper fed by live FAST-LIVO2 poses
+([below](#v06--online-integration-live-fast-livo2-poses)); that online mode is archived in
+`experiments/v06/`, and `src/` still carries the two-pass node.
 
 ![semantic map](docs/img/rviz_class_final.png)
 
@@ -76,8 +78,8 @@ contains. Reporting only the first is how a transfer number gets quietly inflate
 | scans processed @ rate 1.0 | 738 / 1096 (67.3 %) | **1092 / 1092 (0 dropped)** |
 
 These measurements cover the mapper with recorded poses already available. The saturated
-frame period measures throughput; sensor-to-output latency with online odometry, pose-wait
-time and resource contention during concurrent operation still need measurement.
+frame period measures throughput; in-node latency, pose arrival and resource contention with
+FAST-LIVO2 running beside the mapper are measured in [v0.6](#v06--online-integration-live-fast-livo2-poses).
 `/semantic_scan` publishes each processed sweep unless disabled. `/semantic_map` uses
 `--map-rate 1.0` by default, with adaptive throttling for expensive snapshots; its actual
 publication rate can be lower. Scan processing and full-map publication have separate rates.
@@ -335,6 +337,8 @@ FAST-LIVO2 is a **pose source only**, via the saved TUM file in this implementat
 `SemanticMapNode` constructs `TrajInterp(args.traj)` at startup; the pose lookup interpolates
 that complete file. Its `/cloud_registered` is deliberately not consumed: in LIVO mode ~52 %
 of those messages are empty and the rest carry only the camera-frustum subset of the scan.
+v0.6 adds a live-pose mode (`--pose-topic`, causal query over the poses that have arrived),
+archived in [`experiments/v06/`](experiments/v06/README.md).
 
 **Fusion rule.** Class: confidence-weighted vote, `score[voxel][c] += softmax_max_prob`, argmax wins.
 Confidence: winner's share of total vote weight. RGB: mean over observations that actually had camera
@@ -393,8 +397,12 @@ Two things that will bite you if skipped:
 * **RGB covers 37.7 % of map voxels.** The camera is a narrow forward frustum; the LiDAR is 360°.
 * **The model is not bit-deterministic** and one source of it remains unidentified (see above).
   Confidence is meaningful, so the map is gated at `conf ≥ 0.5`.
-* **The 10 Hz acceptance uses a precomputed trajectory.** Live pose buffering, concurrent
-  odometry/semantic processing and end-to-end online latency remain unvalidated.
+* **The 10 Hz acceptance uses a precomputed trajectory.** v0.6 runs the online path on bag
+  replay (live poses, FAST-LIVO2 alongside, in-node latency p50 98–108 ms) from its snapshot;
+  live-sensor operation is untested, and FAST-LIVO2 itself varies run to run at real-time
+  rate (ATE 0.888 ± 0.115 m over 15 runs).
+* **Map metrics before the evaluation-unit analysis are per point.** Per map cell the same maps
+  read 6–8 points lower; see [the evaluation unit](#the-evaluation-unit-points-are-not-where-the-map-is).
 * **Per-point deskew is currently accuracy-neutral** on this data (within ±5 % on every sharpness
   metric). It is kept because camera projection needs per-point world coordinates.
 * **Live `/semantic_map` is capped at 1 M published points** for the visualiser; the saved `.npz`
@@ -449,6 +457,154 @@ python3 tools/summarize_v04.py --check
 ```
 
 
+## v0.5 — trained checkpoints in the mapper: the map beats the scan
+
+**The fused map scores higher than the per-scan predictions it is built from, for every
+checkpoint. The margin collapses as the classifier gets stronger, and the strongest
+checkpoint loses road and sidewalk at map level.**
+
+Three checkpoints go through the same mapper with one change, a `--ptv3-ckpt` selector;
+without the flag the node loads the released weights exactly as before. Each trained
+student is proven to be the same model before it is deployed: strict 488/488 load, every
+tensor equal, argmax agreement inside the same-model repeat band, a different student as
+the negative control.
+
+| checkpoint | per-scan prediction | map, all evaluated points | live ROS map (one run) |
+|---|---:|---:|---:|
+| zero-shot (released nuScenes) | 65.01 ± 0.25 | 70.37 ± 0.37 | 72.00 |
+| **B0** — camera pseudo-labels | 72.98 ± 0.17 | **77.49 ± 0.19** | 77.82 |
+| R′ without KL — random target GT, reference | 84.89 ± 0.24 | 85.25 ± 0.14 | 85.54 |
+
+*Out-of-frustum mIoU-9, seq 07, per point. A point that lands in no voxel counts as wrong.
+Per map cell the order holds on the one draw measured so far: B0's map 70.97, per scan 68.74.*
+
+The map wins by confidence-weighted voting over many views of each voxel, and voting can
+only average away noise that exists. R′'s map scores below its own per-scan predictions on
+road (96.9 → 95.3), sidewalk (93.5 → 90.5), car, terrain and manmade: the pipeline's
+geometric cost — 0.20 m voxels on a 0.88 m-ATE trajectory — surfaces once per-scan noise is
+gone. The camera-frustum split dissolves at map level: B0's in-minus-out accuracy gap goes
+from −2.65 per scan to +0.44 in the map.
+
+Latency follows the architecture, not the weights: saturated frame period 57.46 / 57.95 /
+61.34 ms (zero-shot / B0 / R′, mean of three; one R′ run stepped mid-run and did not
+reproduce), peak VRAM 1459 MiB for all three.
+
+[v0.5 results](docs/v05_results.md) · [report](results/v05/REPORT.md) ·
+[source snapshot](experiments/v05/README.md)
+
+---
+
+## v0.6 — online integration: live FAST-LIVO2 poses
+
+**FAST-LIVO2 does not reproduce itself at real-time rate, and the map metric cannot see
+it.** Fifteen rate-1.0 runs of the same bag give ATE RMSE 0.888 ± 0.115 m (min 0.660, max
+1.115); v0.1's 0.880 m is one draw from that spread. Across 18 maps, a map's
+own-trajectory ATE and its mIoU-9 correlate at r = 0.29.
+
+Four arms separate the costs. B0, three paired repetitions, live map, out-of-frustum
+mIoU-9 per point:
+
+| arm | pose source | query | mIoU-9 |
+|---|---|---|---:|
+| OFF | offline trajectory, the v0.5 input | non-causal | 78.10 ± 0.08 |
+| CAUSAL-ISO | the stream an online run received, replayed | non-causal | 77.88 ± 0.12 |
+| **ON-opt** | live `/aft_mapped_to_init` | causal, constant-twist extrapolation | **77.96 ± 0.19** |
+| ON-imu | live `/LIVO2/imu_propagate` | causal | 77.70 ± 0.14 |
+
+* **The causal query costs nothing measurable.** ON-opt − CAUSAL-ISO on the same
+  trajectory: +0.07 ± 0.18. Footprint: |dp| p95 2.6 cm, 4 % of points change voxel.
+* **The online cost is a trajectory draw.** CAUSAL-ISO − OFF: −0.22 ± 0.16, one to two
+  run-to-run standard deviations; the total, ON-opt − OFF: −0.15 ± 0.27, sits inside the
+  spread of a single arm.
+* **The IMU-propagated pose is worse.** ~71 Hz, not 100; its correction jumps grow the map
+  by 6 % (2.86 M vs 2.71 M voxels) and cost 0.26 ± 0.25.
+* **The FAST-LIVO2 ROS 2 port stamps every pose `now()`.** One line of glue gives the
+  odometry its sensor time; the estimator is untouched.
+* **A sweep's pose arrives ~44 ms after the sweep (p50), stamped mid-sweep.** Covering the
+  sweep end would mean waiting 148 ms, longer than the 104 ms period.
+* **`/semantic_scan` reaches a subscriber 56–81 % of the time under plain `LARGE_DATA`.**
+  The tuned transport delivers 99.6–99.9 %, and then the 15 MB RELIABLE `/semantic_map`
+  blocks: 30–50 of ~70 maps arrive, at intervals stretching to 27–38 s. The two topics need
+  different transports, or the map needs increments. v0.5 never saw this: nothing
+  subscribed during its timed runs.
+* **The port's camera-parameter fetch is a 100 ms race.** `fastlivo_mapping` aborted at
+  startup 4/4 under `LARGE_DATA` and 2/4 on the default transport; the v0.1–v0.5 trajectory
+  came from a run that won it. Now 10 s.
+* **No resource competition.** FAST-LIVO2 1.36 → 1.38 cores beside the node, PTv3 58.1 →
+  58.5 ms, frame period 103.9 ms in every arm, in-node latency p50 98–108 ms. The online
+  cost is in the pose chain and the transport, not the machine.
+* **Holding the last pose is invisible where the node put the points** (77.87) and costs
+  1.6–2.0 where they belong (76.18). A causal-pose change is read at both placements.
+
+[Online integration](docs/v06_online_integration.md) · [report](results/v06/online/REPORT.md) ·
+[source snapshot](experiments/v06/README.md)
+
+---
+
+## The evaluation unit: points are not where the map is
+
+**The headline map metric weights every scored point equally, and 90.7 % of B0's scored
+points sit in voxels within 10 m of the trajectory. Voxels observed ≤ 3 times are 42 % of
+the map and hold 1.1 % of its points.** Scored per map cell, the same maps read 6–8 points
+lower:
+
+| map (out-of-frustum, one draw) | mIoU-9 per point | mIoU-9 per cell |
+|---|---:|---:|
+| zero-shot | 70.91 | 64.54 |
+| B0 | 77.83 | 71.85 |
+| R′ without KL | 85.88 | 78.17 |
+
+*Both columns are given on purpose. Per point is the LiDAR-segmentation convention and the
+unit of every earlier map number in this README; per cell is what a consumer of the map
+gets, and how semantic scene completion benchmarks score. Map results carry both from here
+on.*
+
+**The residual is classification, not discretisation.** Preregistered anatomy of B0's map
+errors, per point: 80.3 % DENSE — wrong labels on well-observed geometry — 17.3 % MIX,
+voxel-boundary mixing that a perfect per-voxel classifier would also get wrong, and
+2.5 % SPARSE. The voxel-majority ceiling is 94.82 for every model; B0 sits at 77.83.
+
+**Whether a completion head has a target depends on the unit.** Labelling every sparse
+voxel perfectly moves B0 from 77.83 to 78.40 per point, under the 0.60 decision band, and
+from 71.85 to 84.12 per cell.
+
+**Sparse cells fail at roughly the network's ordinary per-scan error rate.** The
+preregistered test (two amendments) returned NEITHER on B0, and its out-of-sample CONTEXT
+test passed on one of five arms; what follows is the reading of the numbers. Fusion is not
+the cause:
+9.2 % of B0's wrong sparse cells have split votes. Camera reach is not: 21 % were ever
+camera-visible. Isolation is a tail effect: per-scan accuracy is 3–6 points lower where a
+point's 8th neighbour is ≥ 0.5 m away, the same sign on all five unseen arms, past the
+5-point bar on one. The lever is per-scan accuracy, which is supervision.
+
+[The evaluation unit](docs/v06_evaluation_unit.md)
+
+---
+
+## Map-propagated pseudo-labels: the premise holds
+
+Camera pseudo-labels cover a scan's frustum; the accumulated map remembers them. Voting the
+filter-E labels through the map, with each point's own sweep left out, raises supervised
+coverage of seq 07's evaluated points from **14 % to 68 %**, at **93.4 %** precision on the
+propagated out-of-frustum points against **95.9 %** for per-scan labels inside the frustum.
+The preregistered bar was twice the coverage at precision within 5 points.
+
+| propagated label, out-of-frustum | precision |
+|---|---:|
+| road / sidewalk / terrain / manmade | 96.72 / 94.96 / 97.18 / 94.66 |
+| vegetation | 87.08 |
+| car / person | 85.41 / 90.11 |
+| large_vehicle / two_wheeler | 64.90 / 51.48 |
+
+Stuff propagates precisely; things do not. Measured on seq 07; a seq-09 replication is
+running. It reads seq-09 ground truth to measure label precision only: the operating point
+(k ≥ 2, majority ≥ 2/3) and the stuff-only policy were fixed on seq 07 before it ran, and no
+design choice waits on it. The v0.6 protocol's stronger statement, that no design decision
+has looked at seq 09, therefore no longer holds for the propagation premise; it is recorded
+here rather than quietly kept. [Details](docs/v06_evaluation_unit.md#4-map-propagated-camera-pseudo-labels--premise-check-preregistered)
+
+---
+
 ## Roadmap
 
 **v0.1 — the honest baseline.** Four components, six criteria, every number against ground truth.
@@ -463,14 +619,32 @@ control arm's 9.83 % — 61× — and 62× against that arm's *perfect-classifie
 matters is the precise negative: the false-kill floor is the trajectory (5.0× better on GT poses),
 not the removal mechanism.
 
-**v0.4 — camera-supervised transfer. Diagnostic stage complete.** The no-KL pair is
-complete and the R′ checkpoint is preserved on host 134. Next: validate B0 in
-fixed-trajectory mapping replay, improve and independently repeat the method, and
-evaluate on unseen data. Live-pose integration and concurrent FAST-LIVO2/PTv3
-acceptance are separate engineering gates.
-The [detailed milestones](docs/v04_results.md#next-milestones) define those checks.
+**v0.4 — camera-supervised transfer. ✅ diagnostic stage complete.** Camera pseudo-labels
+lift outside-frustum mIoU-9 from 65.01 to 72.98 with zero target 3D labels; the paired
+no-KL diagnostic is complete. The [engineering gates](docs/v04_results.md#next-milestones)
+it defined became v0.5 and v0.6.
 
-**v0.5 — beyond the rotating scanner.** Non-repetitive solid-state patterns (Livox) break the
+**v0.5 — trained checkpoints in the mapper. ✅ done.** The fixed-trajectory gate. The map
+beats the per-scan prediction for every checkpoint, the margin collapses as the classifier
+strengthens, and the strongest checkpoint loses road and sidewalk at map level. Latency
+unchanged.
+
+**v0.6 — online integration, the evaluation unit, a held-out sequence. 🔄 training running.**
+Online integration ✅ on bag replay: live FAST-LIVO2 poses, a causal query at no measurable
+cost, no resource competition, timestamp and startup patches to the FAST-LIVO2 port.
+Evaluation unit ✅: map results per cell beside per point; the residual is classification;
+sparse cells fail at roughly the ordinary per-scan error rate, so the lever is supervision.
+Training 🔄: seq 09 held out, B0 with and without the KL anchor on three seeds each, R′ as
+the reference, scored for decision contamination, the KL anchor's cost, seed-versus-pass
+spread, and whether v0.5's map findings survive on seq 09. Results pending;
+[protocol](docs/v06_training_protocol.md).
+
+**v0.7 — map-propagated stuff-label distillation. Design in progress.** Carry the camera
+pseudo-labels through the accumulated map to points the camera never labels in their own
+scan, for the stuff classes where propagation is precise. The premise holds on seq 07; the
+seq-09 replication is running and decides nothing about the design.
+
+**v0.8 — beyond the rotating scanner.** Non-repetitive solid-state patterns (Livox) break the
 implicit assumptions of every model trained on spinning LiDAR. The measurement harness here is the
 prerequisite for saying anything defensible about it.
 

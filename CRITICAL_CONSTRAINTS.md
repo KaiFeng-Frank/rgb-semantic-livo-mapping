@@ -263,3 +263,137 @@ Per-moving-class recall at the frozen point: moving-truck 91.25 %, moving-bicycl
 moving-car 56.78 %, **moving-person 17.12 %**.  A walking person displaces 0.04-0.17 m per
 sweep, under one 0.2 m voxel, so a free-space test has no separation to work with.  Always
 report recall PER MOVING CLASS; a pooled number hides this.
+
+---
+## v0.5 TRAINED MODELS IN THE LIVE PIPELINE (2026-09-24) -- measured facts, out/v05/REPORT.md
+
+### V1. A DistilSegmentorMiB checkpoint is the released model structure plus a frozen anchor
+exp/sk/arm*/model/model_best.pth holds 976 tensors (no `module.` prefix): backbone.* (486) + seg_head.* (2) =
+the 488-tensor student, IDENTICAL key set / shapes / dtypes to the released checkpoint; frozen_backbone.* +
+frozen_head.* = the fp16 anti-forgetting anchor (never deploy it); plus optimizer/scheduler/scaler state.
+tools/extract_student.py keeps backbone.*+seg_head.* only -> weights/v05/<tag>_student.pth; build_ptv3(ckpt_path=)
+loads it strict=True 488/488.  VERIFY BEHAVIOUR, NOT JUST KEYS (the C1 lesson): every tensor torch.equal to the
+DistilSegmentorMiB student (fp32 and fp16), identical module tree, and on 101 seq07 frames the argmax agreement
+extracted-vs-original equals the SAME-MODEL repeat agreement at every logit-margin stratum (a different student
+drops to 0.90 / 0.92-0.96 at margin>2).  The forward is non-deterministic (R2): never demand bitwise equality.
+
+### V2. Latency is architecture-bound, not weight-bound -- but one run stepped
+Saturated (rate 2.0) frame period, 3 reps each: ZS 57.8/56.5/58.1 ms, B0 57.7/58.6/57.6, Rprime_noKL 65.5/58.1/60.4.
+The 65.5 is a mid-run STEP in the worker stage (58.3 ms for the first 15 s, 68.2 ms after, peak VRAM 1413 instead of
+1459 MiB) that the same checkpoint did not reproduce; charge it to the run, not the model.  Rprime always ran third
+in each interleaved triplet (warmest GPU) -- rotate the order next time.  Rate 1.0: 1075-1086 processed, 6-7
+backpressure drops ALL inside the first ~1.5 s (RELIABLE/KEEP_LAST(10) start-up burst), 0 afterwards.
+
+### V3. The map is BETTER than the per-scan prediction it is built from (offline -> map, out-of-frustum mIoU-9)
+zero-shot 65.01 -> 70.37 (+5.4), B0 72.98 -> 77.49 (+4.5), Rprime_noKL 84.89 -> 85.25 (+0.35); decomposition =
+confidence-gate selection (+2.3 / +2.6 / +0.35) + confidence-weighted multi-view voting on the inserted points
+(+4.4 / +3.5 / +0.7) - coverage of gated-out and no-pose points (-1.3 / -1.6 / -0.7).  The gain shrinks as the
+classifier improves, and for Rprime the map LOSES on the flat/boundary classes (road 96.9->95.3, sidewalk 93.5->90.5,
+manmade 93.2->92.4, car 98.2->97.3): that is the geometric cost of the pipeline (0.2 m voxels + 0.88 m ATE) and it is
+only visible once per-scan noise is gone.  The in-frustum/out-of-frustum split dissolves at map level (B0 in-out
+point-acc gap -2.65 offline -> +0.44 map).  Scorer: opt/replay_v05.py (extends replay_v03.map_accuracy; common-9;
+its offline_all reading reproduces the frozen harness to 3 decimals per draw).  Live maps agree with the replays
+except the two_wheeler abstain cell.
+
+---
+## v0.6 ONLINE INTEGRATION (2026-09-24) -- measured facts, out/v06/REPORT.md
+
+### O1. FAST-LIVO2's ROS 2 topics carry NO sensor time.  Patched: one ROS-glue line
+`/aft_mapped_to_init`, `/cloud_registered`, `/path`, `/mavros/vision_pose/pose`, `/rgb_img` are all stamped
+`now()` (LIVMapper.cpp 1202/1264/1379/1397/1417/1436/1445); only the evo FILE uses `last_lio_update_time`.
+An online consumer that de-skews cannot associate a `now()`-stamped pose with a sweep.  LIVMapper.cpp:1417
+now stamps the odometry with `sec2Stamp(LidarMeasures.last_lio_update_time)`; the pose is the same post-LIO
+state the evo file writes (the recorded stream's ATE equals the run's evo-file ATE).  Estimator untouched.
+Backup: src/_pre_v06_backup/LIVMapper.cpp.
+
+### O2. The port's camera-parameter fetch is a 100 ms discovery race.  Patched: 10 s
+vikit `getRemoteParam` (rpg_vikit/vikit_ros/include/vikit/params_helper.h:117) waits 100 ms for the
+parameter service of `parameter_blackboard`.  MEASURED (opt/fl_start_test.sh): fastlivo_mapping aborts at
+startup with "Camera model not correctly specified" 4/4 under FASTDDS_BUILTIN_TRANSPORTS=LARGE_DATA and
+2/4 on the default transport.  The offline trajectory of v0.1-v0.5 came from a run that won the race.
+Rebuilt with `colcon build --packages-select vikit_ros fast_livo`.
+
+### O3. The pose of a sweep exists only after the whole sweep + ~30 ms of LIO, stamped at the IMAGE instant
+FAST-LIVO2's LIVO scheduler cuts the LiDAR stream at each image (mid-sweep, 0.48 of the way through); the
+LIO update for sweep k needs the whole sweep (delivered at its end) and lands 44 ms (p50) / 63 (p95) / 96
+(max) after the sweep arrives; stage B starts 64 ms (p50) after arrival.  So a causal consumer at 10 Hz
+always has the FIRST half of a sweep covered and NEVER the second half: 100 % of sweeps extrapolate ~53 ms
+(158 ms in the ~1 % where stage B beats the pose).  The sample covering the sweep END is the NEXT sweep's
+update, 148 ms (p50) after arrival -- a wait-for-coverage policy is not affordable inside a 104 ms period.
+Constant-twist extrapolation from the two newest samples costs |dp| p50 0.4 mm / p95 2.6 cm / p99 6.9 cm
+(max ~1 m on the 158 ms cases), 4 % of points change 0.2 m voxel, +3 % voxels in the map, and NOTHING
+measurable at the label level (ON-opt minus CAUSAL-ISO +0.07 +- 0.18 mIoU-9 out-of-frustum, paired).
+HOLDING the newest pose instead costs |dp| p95 41 cm, 35 % of points change voxel, and 1.6-2.0 mIoU-9
+when the map is read where the points should have been -- while scoring the SAME as cv at the node's own
+placement.  RULE: the live label-consistency reading is blind to a coherent displacement of the sweep
+tail; any causal-pose change must be read both at the node's placement and at the corrected placement
+(opt/replay_v06.py `live_lookup_causal` vs `live_lookup_interp`) and with the geometric footprint.
+
+### O4. `/LIVO2/imu_propagate` is off by default and delivers ~71 Hz, not 100
+`uav.imu_rate_odom: false` -> `imu_prop_enable` false -> the topic never publishes.  With
+`-p uav.imu_rate_odom:=true` it publishes from a 4 ms wall timer whenever a new IMU sample arrived (stamp
+spacing p50 10 ms but ~8000 samples in 114 s: ~29 % of the 100 Hz IMU is coalesced), stamped with the IMU
+time, re-based on every LIO update.  It covers the
+sweep end at delivery (nothing extrapolated, ~7.4 samples per sweep) but its correction jumps inflate the map
+by 6 % (2.86 M vs 2.71 M voxels for the same scene) and the map scores 0.26 +- 0.25 mIoU-9 below ON-opt.
+Use the optimised stream + constant-twist extrapolation, not the IMU stream.
+
+### O5. FAST-LIVO2 is NOT reproducible at real-time rate
+15 rate-1.0 runs of the same bag (alone and beside the node): ATE RMSE 0.888 +- 0.115 m, min 0.660, max
+1.115; pairs of runs diverge by up to 1.9 m in the shared W frame.  The offline 0.880 (rate 0.5) is ONE
+draw from this spread; running beside the node does not shift it.  The map metric does not see it
+(r = 0.29 between a map's own-trajectory ATE and its mIoU-9 over 18 maps) -- the label-consistency reading
+is blind to global trajectory error in this range.  CONSEQUENCE: any online-vs-offline map comparison needs
+>= 3 paired repetitions; "the online trajectory's cost" (CAUSAL-ISO minus OFF: -0.22 +- 0.16 live,
+-0.16 +- 0.04 replay, out-of-frustum) is a draw, and a single-run comparison is a lottery ticket.
+
+### O6. /semantic_scan does not reach a subscriber under plain LARGE_DATA, and the fix breaks /semantic_map
+3.2 MB samples at 10 Hz on `FASTDDS_BUILTIN_TRANSPORTS=LARGE_DATA` deliver 56-81 % (15 runs) in bursts of
+losses up to 1-4.7 s, for BEST_EFFORT and RELIABLE alike, writer depth 1 or 10, with or without the 15 MB
+map publishes (out/v06/runs/analysis_smoke_*.json) -- the transport's fragment/socket budget, not the QoS.
+`LARGE_DATA?max_msg_size=5MB&sockets_size=20MB&non_blocking=false` (every process) delivers 99.6-99.9 %
+with interval p99 ~150 ms at +1.5 ms per publish -- but then the RELIABLE/TRANSIENT_LOCAL 15 MB
+/semantic_map sample blocks: 30-50 of ~70 maps reach the subscriber and delivered intervals stretch to
+27-38 s.  The two topics need different transports, or the map must be sent in increments.  v0.5 never saw
+any of this because nothing subscribed during its timed runs (and its ~4.3 ms publish cost was the cost of
+serialising into an unmatched writer).
+
+### O7. Start-up: `ros2 bag play` publishes before discovery.  Use `-d 3`
+The v0.5 runs lost their first ~10 sweeps to subscription matching (recv 1091/1101), and FAST-LIVO2 loses
+its first IMU second the same way (the no-`-d` smoke's first pose came 1.9 s after the offline one).  With
+`-d 3` every v0.6 run received 1100-1101 of 1101 sweeps and FAST-LIVO2 initialised at the same bag time as
+the offline run (first pose 1317386426.0758).
+
+### O8. No resource competition on this 12-core box
+FAST-LIVO2 1.36 cores alone vs 1.38 beside the node (LIO p50 28.0 vs 29.8 ms, p95 42.5 vs 46.0, never above
+104 ms); node 0.61 -> 0.63 cores, PTv3 worker 0.55 cores, PTv3 time 58.1 -> 58.5 ms; system CPU 11 % ->
+23 %; GPU util ~19 %, memory exclusively the worker's 1459 MiB; zero back-pressure or staleness drops in any
+ON run; period 103.9 ms in every arm; in-node latency (sweep arrival -> /semantic_scan published)
+p50 99-108 / p95 110-125 / p99 126-150 / max 159-206 ms in every arm.  The online cost is in the pose
+chain and the transport, not in the machine.
+
+### O9. `pkill -f` self-kill
+A shell whose own command line contains a pattern handed to `pkill -f` kills itself -- the `[p]attern`
+trick only protects the pkill command, not the enclosing `bash -c "..."` or ssh command line.  Three ssh
+sessions died that way.  Only pkill from a script FILE whose cmdline does not contain the patterns.
+
+### O10. Default path unchanged, verified bit for bit
+opt/verify_v06.py: the v0.6 node without `--pose-topic` and the v0.5 node (src/_pre_v06_backup) in one
+process, same cached predictions (PTv3 stub), 40 real sweeps + images: every map array, the hash table,
+the written .npz and the non-timing stats fields identical (19/19 PASS, logs/verify_v06.log).
+
+## H1 (2026-09-25) bags_ros1/ deleted to make room for the v0.6 queue
+The four ROS1 .bag files (seq04, seq04_us, seq07, seq07_us, 11 GB) were removed while the
+v0.6 training queue was running: /data had fallen to 24 GB and the queue still needed
+~17.5 GB (4 training jobs + 32 prediction caches).  They are reproducible from
+data/raw/2011_09_30/ at any time; the ROS2 bags in bags/ are built independently from the
+same raw drives by src/kitti_to_ros2bag.py, not converted from these, so nothing in the
+v0.1-v0.6 chain reads them.  Only src/gen_handoff.py mentions the path, for documentation.
+NOT touched: out/v04/ (holds the B0_r1..r3 prediction caches that every v0.5/v0.6 replay
+reads).
+
+## H2 (2026-09-26) KITTI raw drive archives deleted
+The ten *_sync.zip archives (~92 GiB) were removed after verifying each was already
+extracted under data/raw/<day>/<drive>_sync/ (frame counts checked) and that
+data/pointcept_sk symlinks into data/raw, not into the archives.  Re-downloadable from the
+KITTI S3 bucket.  Kept: the calib zips, data_odometry_labels.zip, data/raw itself.

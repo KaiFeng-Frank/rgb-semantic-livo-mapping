@@ -1,0 +1,14 @@
+================================================================================
+A2 CONFIRMATION -- CONTEXT on arms not looked at before the threshold was chosen
+  B1_r1  acct True  | acc d8<0.5 87.93%  d8>=0.5 83.55% (2049146 pts)  (i') False | d8min wrong 0.479 vs correct 0.446 (ii) True  -> fail
+         split 10.0%  camera-reachable(non-split) 13.3%  of 138201 sparse wrong cells
+  D_r1   acct True  | acc d8<0.5 90.95%  d8>=0.5 88.23% (2049146 pts)  (i') False | d8min wrong 0.458 vs correct 0.451 (ii) True  -> fail
+         split 8.3%  camera-reachable(non-split) 9.8%  of 103860 sparse wrong cells
+  C_r1   acct True  | acc d8<0.5 95.74%  d8>=0.5 90.88% (2049146 pts)  (i') False | d8min wrong 0.492 vs correct 0.449 (ii) True  -> fail
+         split 6.9%  camera-reachable(non-split) 11.1%  of 83372 sparse wrong cells
+  R_r1   acct True  | acc d8<0.5 94.50%  d8>=0.5 89.74% (2049146 pts)  (i') False | d8min wrong 0.491 vs correct 0.448 (ii) True  -> fail
+         split 7.8%  camera-reachable(non-split) 11.7%  of 90910 sparse wrong cells
+  RP_r1  acct True  | acc d8<0.5 96.06%  d8>=0.5 90.36% (2049146 pts)  (i') True  | d8min wrong 0.489 vs correct 0.450 (ii) True  -> PASS
+         split 6.4%  camera-reachable(non-split) 11.2%  of 88619 sparse wrong cells
+
+  -> CONTEXT NOT CONFIRMED  (1 of 5 arms pass; >= 4 required)

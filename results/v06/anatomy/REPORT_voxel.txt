@@ -1,0 +1,73 @@
+======================================================================================
+0. INSTRUMENT (post-hoc run must reproduce the preregistered one exactly)
+  ZS_r1  map_all_lookup same True   point-weighted anatomy same True   voxel ceiling==100 True 
+  B0_r1  map_all_lookup same True   point-weighted anatomy same True   voxel ceiling==100 True 
+  B0_r2  map_all_lookup same True   point-weighted anatomy same True   voxel ceiling==100 True 
+  RP_r1  map_all_lookup same True   point-weighted anatomy same True   voxel ceiling==100 True 
+
+======================================================================================
+1. VOXEL-WEIGHTED, outside (voxels majority out-of-frustum); point-weighted beside it
+arm    |    voxels     wrong  wrong%  SPARSE%   DENSE% | vox-mIoU  sp-orcl ||  pt-mIoU  pt-orcl
+ZS_r1  |   1910107    242593  12.70%    47.5%    52.5% |    64.54    79.09 ||    70.91    71.54
+B0_r1  |   1904525    209207  10.98%    49.1%    50.9% |    71.85    84.12 ||    77.83    78.40
+B0_r2  |   1904446    209592  11.01%    49.0%    51.0% |    71.92    84.23 ||    78.05    78.63
+RP_r1  |   1918988    136262   7.10%    54.0%    46.0% |    78.17    88.97 ||    85.88    86.33
+  sparse voxels (n_obs<=4) are 39.7% of B0's outside voxels
+
+======================================================================================
+2. VERDICT (post-hoc rules, PREREG_voxel.md)
+  pass-to-pass |B0_r1 - B0_r2| = 0.073  ->  band_vox = max(0.60, 2.1 x 0.073) = 0.600
+  B0_r1  model 71.85  sparse-oracle 84.12  (best case 12.27 vs band 0.60)  largest {'2': 'DENSE', '4': 'DENSE', '8': 'SPARSE'}  THRESHOLD-SENSITIVE
+         rule 1: TARGET   rule 2: undecided
+  B0_r2  model 71.92  sparse-oracle 84.23  (best case 12.30 vs band 0.60)  largest {'2': 'DENSE', '4': 'DENSE', '8': 'SPARSE'}  THRESHOLD-SENSITIVE
+         rule 1: TARGET   rule 2: undecided
+
+  -> EVALUATION-DEPENDENT: no target in the point-weighted headline, a real one per
+     map cell.  Reason 2 does not cover these voxels (still sparse after the whole
+     drive); only reason 3 (novelty: JS3C-Net) remains.  The choice is which unit
+     the paper's claim lives in.
+  expectation stated in PREREG_voxel.md: flip.  MET
+
+======================================================================================
+3. B0_r1, outside: wrong-voxel rate by n_obs and by closest-approach range
+    n_obs         voxels     wrong   wrong%
+    1-1           345115     49691   14.40%
+    2-3           317962     41701   13.12%
+    4-7           270520     32710   12.09%
+    8-15          218094     24346   11.16%
+    16-31         177402     18162   10.24%
+    32-63         151994     14537    9.56%
+    64-127        156485     11847    7.57%
+    128-255       156274      9111    5.83%
+    256-inf       110679      7102    6.42%
+    range m       voxels     wrong   wrong%
+    0-10         1036602    100595    9.70%
+    10-20         461101     56614   12.28%
+    20-30         246790     31461   12.75%
+    30-50         160016     20531   12.83%
+    50-inf            16         6   37.50%
+
+======================================================================================
+4. PER CLASS, outside: voxel IoU and where the wrong voxels sit (sparse := n_obs<=4)
+  B0_r1
+    class           vox-IoU    voxels sparse-wrong dense-wrong
+    car               91.29    143869         2485        3551
+    large_vehicle     67.97     14066          982         846
+    two_wheeler       53.01      4065          499         859
+    person            57.89      3926          537         807
+    road              81.56    216635         1865        1301
+    sidewalk          63.08    164560        23179       34235
+    terrain           65.68    155822        23410       17285
+    vegetation        83.39    663854        17710       21549
+    manmade           82.80    537728        32126       25981
+  RP_r1
+    class           vox-IoU    voxels sparse-wrong dense-wrong
+    car               94.38    144242         1829        2486
+    large_vehicle     61.59     13885         3067        2078
+    two_wheeler       69.07      4176          334         485
+    person            56.02      3990          673         957
+    road              95.55    216840         2518        2188
+    sidewalk          84.06    169285         8960        6161
+    terrain           67.26    156743        23920       21173
+    vegetation        86.85    667192        11364        8145
+    manmade           88.73    542635        20979       18945

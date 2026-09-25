@@ -1,0 +1,11 @@
+--- a/src/LIVMapper.cpp
++++ b/src/LIVMapper.cpp
+@@ -1414,7 +1414,7 @@
+ {
+   odomAftMapped.header.frame_id = "camera_init";
+   odomAftMapped.child_frame_id = "aft_mapped";
+-  odomAftMapped.header.stamp = this->node->get_clock()->now(); //.ros::Time()fromSec(last_timestamp_lidar);
++  odomAftMapped.header.stamp = sec2Stamp(LidarMeasures.last_lio_update_time); // v0.6 (2026-09-24): SENSOR time of this LIO update, so an online consumer can associate the pose with the sweep.  Was this->node->get_clock()->now().  ROS-glue only; estimator untouched.
+   set_posestamp(odomAftMapped.pose.pose);
+ 
+   static std::shared_ptr<tf2_ros::TransformBroadcaster> br;

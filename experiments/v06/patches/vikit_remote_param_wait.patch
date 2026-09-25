@@ -1,0 +1,11 @@
+--- a/vikit_ros/include/vikit/params_helper.h
++++ b/vikit_ros/include/vikit/params_helper.h
+@@ -114,7 +114,7 @@
+     try {
+         auto parameters_client = std::make_shared<rclcpp::SyncParametersClient>(nh, remote_node_name);
+         // Wait briefly for the service to be available
+-        if (parameters_client->wait_for_service(std::chrono::milliseconds(100))) {
++        if (parameters_client->wait_for_service(std::chrono::seconds(10))) {  // v0.6 (2026-09-24): was 100 ms -- a discovery race that fails 4/4 under FASTDDS_BUILTIN_TRANSPORTS=LARGE_DATA and 2/4 on the default transport (opt/fl_start_test.sh)
+             auto values = parameters_client->get_parameters({param_name});
+             if (!values.empty() && values[0].get_type() != rclcpp::ParameterType::PARAMETER_NOT_SET) {
+                 return values[0].get_value<T>();

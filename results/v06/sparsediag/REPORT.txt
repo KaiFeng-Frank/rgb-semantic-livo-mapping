@@ -1,0 +1,47 @@
+====================================================================================
+0. GATES
+  B0_r1 shared sections == map_eval control run: True
+  B0_r1  isolation accounting == offline_all: True
+  B0_r2  isolation accounting == offline_all: True
+  ZS_r1  isolation accounting == offline_all: True
+
+====================================================================================
+1. SPARSE WRONG CELLS (n_obs<=4, fused != GT majority), all cells
+  arm        cells |  SINGLE CONSISTENT   SPLIT | cam-reach  nonsplit-cam |  d8min-wrg  d8min-cor
+  B0_r1     143957 |   46.5%      44.3%    9.2% |     21.0%         20.6% |     0.500m     0.444m
+  B0_r2     144232 |   46.5%      44.2%    9.2% |     21.2%         20.8% |     0.500m     0.444m
+  ZS_r1     141677 |   47.4%      42.8%    9.8% |     14.3%         13.6% |     0.474m     0.448m
+  (d8min-wrg = median d8_min of non-SPLIT sparse wrong cells; d8min-cor = of sparse correct)
+  dense wrong cells for contrast:
+  B0_r1     136365 |    1.5%      68.4%   30.1% |     42.4% camera-reachable
+  B0_r2     136696 |    1.5%      68.3%   30.2% |     42.4% camera-reachable
+  ZS_r1     148035 |    1.5%      66.1%   32.4% |     38.3% camera-reachable
+
+====================================================================================
+2. PER-SCAN ACCURACY vs ISOLATION (d8 = distance to 8th nearest same-scan neighbour)
+  B0_r1  out-of-frustum: least isolated quartile (d8<=0.061m) acc 89.30%   most isolated (d8>=0.131m) acc 90.23%
+  B0_r2  out-of-frustum: least isolated quartile (d8<=0.061m) acc 89.28%   most isolated (d8>=0.131m) acc 90.21%
+  ZS_r1  out-of-frustum: least isolated quartile (d8<=0.061m) acc 87.13%   most isolated (d8>=0.131m) acc 88.04%
+  B0_r1 curve (out-of-frustum):
+    d8  0.00-0.02           6677 pts  acc  78.06%
+    d8  0.02-0.05        9803906 pts  acc  90.04%
+    d8  0.05-0.10       56204556 pts  acc  90.03%
+    d8  0.10-0.20       26234619 pts  acc  90.80%
+    d8  0.20-0.50       11372149 pts  acc  90.20%
+    d8  0.50-1.00        1716965 pts  acc  86.58%
+    d8  1.00-2.00         280982 pts  acc  80.08%
+    d8  2.00-5.00          46811 pts  acc  73.86%
+    d8  5.00-inf            4388 pts  acc  65.91%
+
+====================================================================================
+3. SUPERVISION REACH (camera pseudo-label reachability, z-buffer visible)
+  per scan: 15.3% of scored points are camera-labelable in their own scan
+  via the map: 69.6% of out-of-frustum points sit in a cell the camera labelled at SOME time
+  36.1% of labelled cells are camera-labelable at some time
+
+====================================================================================
+4. DECISION (PREREG + A1)
+  B0_r1  FUSION primary: False | SUPERVISION: False | CONTEXT: False (i False, ii True)
+  B0_r2  FUSION primary: False | SUPERVISION: False | CONTEXT: False (i False, ii True)
+  B0_r1 and B0_r2 agree: True
+  -> NEITHER: these three causes do not explain the sparse errors; back to analysis.

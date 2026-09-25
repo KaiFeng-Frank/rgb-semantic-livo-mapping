@@ -1,0 +1,357 @@
+{
+ "captured_utc": "2026-09-25T22:04:27.734797+00:00",
+ "description": "Copies from the experiment host.  Text files are byte-identical except where `changes` says otherwise: the host-specific data root is rewritten to /data/, and marked redactions remove references to work outside this repository.  `sha256`/`bytes` describe the published file; `source_sha256`/`source_bytes` the original, where they differ.  No checkpoints, caches, datasets, logs, credentials or host addresses.",
+ "hosts": {
+  "A": "original experiment host; Intel Xeon Gold 6248R / RTX 4090"
+ },
+ "note": "Remote relative paths are given under `source`.  The four mapper modules are the v0.5 state preserved in src/_pre_v06_backup/; checkpoint_selector.diff shows the v0.5 change against src/_pre_v05_backup/, which matches the repository's src/ apart from path sanitising.",
+ "files": [
+  {
+   "host": "A",
+   "source": "out/v05/REPORT.md",
+   "published": "results/v05/REPORT.md",
+   "sha256": "9c43e4a3ab39996d4bf61292c4ac2086ad0931c836d2e268f12084430dc61d9a",
+   "bytes": 15551
+  },
+  {
+   "host": "A",
+   "source": "out/v05/summary.json",
+   "published": "results/v05/summary.json",
+   "sha256": "bdf6f9b70b1217cb285acfdebeae13c20e77efd673bceffe7e9cf2057b62d1a6",
+   "bytes": 32647,
+   "source_sha256": "5ec51c4c698ac0e95f8f961dae164b5d662ef95239eef22f0488221bc067fb92",
+   "source_bytes": 32695,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (8 occurrences)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "out/v05/extract_ZS.json",
+   "published": "results/v05/extract_ZS.json",
+   "sha256": "d6a9f8643fd5117021563f60613857cf1ca53d6f918ceb44e2ff0ecdae3ac4bc",
+   "bytes": 11318,
+   "source_sha256": "f29f22e9957b7d68e2083bd49fdee0170d772cb57d096d4379c7f4397f4c8000",
+   "source_bytes": 11324,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (1 occurrence)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "out/v05/extract_B0.json",
+   "published": "results/v05/extract_B0.json",
+   "sha256": "10ffc197c48a78d2b146ad792ca26a932067f187d21f93e2563f9c545c28c108",
+   "bytes": 12967,
+   "source_sha256": "1ca687112ac8a0bff020b22824f359cc25a4fdca3ff7481b2c3893d1e956b107",
+   "source_bytes": 12973,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (1 occurrence)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "out/v05/extract_Rprime_noKL.json",
+   "published": "results/v05/extract_Rprime_noKL.json",
+   "sha256": "4cbda5ab4684b02deb8c5d49fb13f069de54c3c949e17d9009a111a49a698598",
+   "bytes": 12982,
+   "source_sha256": "8a5ca28af79194a64eb4f7461a2a984a9a7302f26dbc9277c715c8e0639fc0e1",
+   "source_bytes": 12988,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (1 occurrence)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "out/v05/montage_top_class.png",
+   "published": "docs/img/v05_montage_top_class.png",
+   "sha256": "a553410b451281fe55bec4b90e8892c7b6cb77b7fdbe6fafb87ce25c193cf85e",
+   "bytes": 603751
+  },
+  {
+   "host": "A",
+   "source": "out/v05/montage_zA_class.png",
+   "published": "docs/img/v05_montage_zA_class.png",
+   "sha256": "4cb5c679d4b7adf460cc5889fab8b17f460aa1d9183f8f5e2815d78c7f909acb",
+   "bytes": 472416
+  },
+  {
+   "host": "A",
+   "source": "out/v05/montage_zB_class.png",
+   "published": "docs/img/v05_montage_zB_class.png",
+   "sha256": "f54323a8a6a6e4eed2c02dfbd1c6178ae0f4d98efa1175fd9f94258ee80d7cad",
+   "bytes": 506472
+  },
+  {
+   "host": "A",
+   "source": "src/_pre_v06_backup/ptv3_client.py",
+   "published": "experiments/v05/source/src/ptv3_client.py",
+   "sha256": "7bb1a1f0af86a753244a6a1afd140da5fb9482b389458e932a47ccc7543fed5a",
+   "bytes": 8535,
+   "source_sha256": "65e80b05dcac6f63440dc547c2dcc08d8dfee4275018814f335c2c2fc10fa70d",
+   "source_bytes": 8541,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (1 occurrence)"
+   ],
+   "note": "state at the end of v0.5: the copy taken immediately before v0.6 edited the node"
+  },
+  {
+   "host": "A",
+   "source": "src/_pre_v06_backup/ptv3_loader_verified.py",
+   "published": "experiments/v05/source/src/ptv3_loader_verified.py",
+   "sha256": "e2106724bf8f3585cdfdc6f385f85df0d3b5907de6a417af9929db05dd53a596",
+   "bytes": 4879,
+   "source_sha256": "834d9048c53ce1f04901541fd538198779f15758959dd5b18cf0e7782f464c94",
+   "source_bytes": 4891,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (2 occurrences)"
+   ],
+   "note": "state at the end of v0.5: the copy taken immediately before v0.6 edited the node"
+  },
+  {
+   "host": "A",
+   "source": "src/_pre_v06_backup/ptv3_worker.py",
+   "published": "experiments/v05/source/src/ptv3_worker.py",
+   "sha256": "90714b547c8fe63a5256b8b99d4b61787bb178c84c86071a71e90731318d0051",
+   "bytes": 18687,
+   "source_sha256": "f8f39fd25643702eac9ec5b98057dc13f5fbe801d018fd8468073b653b9cd47a",
+   "source_bytes": 18705,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (3 occurrences)"
+   ],
+   "note": "state at the end of v0.5: the copy taken immediately before v0.6 edited the node"
+  },
+  {
+   "host": "A",
+   "source": "src/_pre_v06_backup/semantic_map_node.py",
+   "published": "experiments/v05/source/src/semantic_map_node.py",
+   "sha256": "84af599405b961a3059eca81eabe70b7117afdc3934c3ad55416be113dcc14aa",
+   "bytes": 41925,
+   "source_sha256": "033617313cdf621b0e731ab8fd91eff84614025315e6ce646f6bb2aaea50f19f",
+   "source_bytes": 41949,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (4 occurrences)"
+   ],
+   "note": "state at the end of v0.5: the copy taken immediately before v0.6 edited the node"
+  },
+  {
+   "host": "A",
+   "source": "tools/extract_student.py",
+   "published": "experiments/v05/source/tools/extract_student.py",
+   "sha256": "27427fa2cdb781316612d877cacc76e943fb7bac0044873ae241df96ec95f565",
+   "bytes": 24985,
+   "source_sha256": "4c31465b8de9b4afa10552e3835db6861d552a2984b17f183bc36da708c07617",
+   "source_bytes": 25003,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (3 occurrences)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "tools/v05_patch.py",
+   "published": "experiments/v05/source/tools/v05_patch.py",
+   "sha256": "77df404b8b835ba929cc2034c98bea0f9a8c2e2a6509a755b87e75114238c14c",
+   "bytes": 6985,
+   "source_sha256": "8741a013a38621a79a4ebe5912307618b92ae7694ff2b59e1aaf1de9e6f12bc5",
+   "source_bytes": 7003,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (3 occurrences)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "tools/v05_report.py",
+   "published": "experiments/v05/source/tools/v05_report.py",
+   "sha256": "ded887d51ae92067c9fda4b2ea7c1bf9a4d5ff55fc817e5fb8dbacf8ada4c630",
+   "bytes": 18929,
+   "source_sha256": "c07f206b455d1217dc3896dd3a888ce4466b6ec9ac21477dbbb02c6e046d1a91",
+   "source_bytes": 18935,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (1 occurrence)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "tools/v05_zoom_region.py",
+   "published": "experiments/v05/source/tools/v05_zoom_region.py",
+   "sha256": "3282acc52c90d17408613f6bf10389d4f4eb92acdd9696ab239d4e7e7882683d",
+   "bytes": 4375,
+   "source_sha256": "4ed0320c68552f274735645c0cc887f96d8ab5c2b7d8612dcc78a586ee408763",
+   "source_bytes": 4381,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (1 occurrence)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "opt/replay_v05.py",
+   "published": "experiments/v05/source/opt/replay_v05.py",
+   "sha256": "ffdb582a6180c39621fefdc1f18023105102a4cf881f9ef98b80dd179fd9d163",
+   "bytes": 17544,
+   "source_sha256": "76839df13e8f1da0e0e602a1c039c577f041be49d74198a547734b6bdadae157",
+   "source_bytes": 17562,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (3 occurrences)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "opt/runs_v05.sh",
+   "published": "experiments/v05/source/opt/runs_v05.sh",
+   "sha256": "73a7e067f34267c9d08b043d4712a2370b1481dd0cc2e464a2a7b977021aa877",
+   "bytes": 2189,
+   "source_sha256": "2a8d02642d353b0ea61363414ae1031c06a7b0e5e74f40cca659a25803c67fa7",
+   "source_bytes": 2201,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (2 occurrences)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "opt/capture_v05.sh",
+   "published": "experiments/v05/source/opt/capture_v05.sh",
+   "sha256": "5ebba95676cf377e07ec466dffd711c8d6ffc301ce9c514fcdc026c9768a087b",
+   "bytes": 1511,
+   "source_sha256": "50fc1ddbc06ab859293be5349e61bef9e3dc56dc3fc0ef528df2f131b9f026a8",
+   "source_bytes": 1517,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (1 occurrence)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "opt/replay_batch_v05.sh",
+   "published": "experiments/v05/source/opt/replay_batch_v05.sh",
+   "sha256": "e3cbfdcba9210049bb7b048ae9ce5e553408f8ba61ab9bfb2f1020665b5582dd",
+   "bytes": 717,
+   "source_sha256": "9c98e928cbe3128be4d2ce3acee952bf595d46075a443d6b38742225ece2eabe",
+   "source_bytes": 729,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (2 occurrences)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "opt/rp_cache_v05.sh",
+   "published": "experiments/v05/source/opt/rp_cache_v05.sh",
+   "sha256": "1547014c43d1427ef9f6b68a080676f4ae919834ead51bb82ae2d08ee90ebfe8",
+   "bytes": 687,
+   "source_sha256": "541b6929933c02c7c7a3ac5f212adbd37468799b8394fa2032ebf2fc0e1ce2bc",
+   "source_bytes": 699,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (2 occurrences)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "opt/v05_orchestrate.sh",
+   "published": "experiments/v05/source/opt/v05_orchestrate.sh",
+   "sha256": "7fdb015d2ba419729ca526d5e518bbc0e90d0902b5a22722f2e3ac4c35163f9b",
+   "bytes": 1783,
+   "source_sha256": "9a31a5d3867218f761d32de798cab58e0e0579ca6f0a1957c646d2d76dd02cb0",
+   "source_bytes": 1801,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (3 occurrences)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "opt/v05_orchestrate2.sh",
+   "published": "experiments/v05/source/opt/v05_orchestrate2.sh",
+   "sha256": "687232d961ebf0c643916306d999b08d470a9f9231f1c076bd9e7b9773112670",
+   "bytes": 437,
+   "source_sha256": "d05090bd6b7c90503f58108de0e67ccc94749ea2203d938d14ed6d2a05770570",
+   "source_bytes": 443,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (1 occurrence)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "opt/v05_post.sh",
+   "published": "experiments/v05/source/opt/v05_post.sh",
+   "sha256": "6a5e1a1a0ee1b814947ea2130fa9c94b2bf9ebd0c840542a659d6019bc9c9df0",
+   "bytes": 1380,
+   "source_sha256": "638466af3cdcdb02de141b8be525a5bf6ee28f93be0e6b9f5b08fe431e3a61c8",
+   "source_bytes": 1392,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (2 occurrences)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "opt/v05_captures.sh",
+   "published": "experiments/v05/source/opt/v05_captures.sh",
+   "sha256": "554932eca1debaf53e9b84d5fb253724866aec35984250dc6d0aef479b1dbb50",
+   "bytes": 1297,
+   "source_sha256": "8a9616436951ef27f5672a92914c6970779bdfdc8993b0813035c91ada9cddbb",
+   "source_bytes": 1303,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (1 occurrence)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "opt/v05_captures2.sh",
+   "published": "experiments/v05/source/opt/v05_captures2.sh",
+   "sha256": "f8ca0fcf060175666327f02b870f572cc86414859b66bb313d05f3846959f863",
+   "bytes": 1542,
+   "source_sha256": "e9bf1479bc04e0c0c7fdfa5a85b308361d6a33ecab634964cea2366e63567a28",
+   "source_bytes": 1548,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (1 occurrence)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "out/v05/chk_b0_rp.py",
+   "published": "experiments/v05/source/out/v05/chk_b0_rp.py",
+   "sha256": "0a78a0c55b7b5663a79bb232263887e02f9630021ee39d5bfbb02619f9dd7db6",
+   "bytes": 1486
+  },
+  {
+   "host": "A",
+   "source": null,
+   "published": "experiments/v05/checkpoint_selector.diff",
+   "sha256": "ee1033d5a3c0f010ad9c30154e8f032631f373bdd3ad689acbb6adb47e6ba966",
+   "bytes": 6673,
+   "derived_from": [
+    {
+     "source": "src/_pre_v05_backup/ptv3_loader_verified.py",
+     "source_sha256": "bf808bdde1ea6d9389a49b05b07e6ef46444785a3b1bc06d613910b9aa957007"
+    },
+    {
+     "source": "src/_pre_v06_backup/ptv3_loader_verified.py",
+     "source_sha256": "834d9048c53ce1f04901541fd538198779f15758959dd5b18cf0e7782f464c94"
+    },
+    {
+     "source": "src/_pre_v05_backup/ptv3_worker.py",
+     "source_sha256": "c4571638503ebcb5de33487f6852bc7a122da7b1d700cfb341af970118a919e1"
+    },
+    {
+     "source": "src/_pre_v06_backup/ptv3_worker.py",
+     "source_sha256": "f8f39fd25643702eac9ec5b98057dc13f5fbe801d018fd8468073b653b9cd47a"
+    },
+    {
+     "source": "src/_pre_v05_backup/ptv3_client.py",
+     "source_sha256": "0c02fe84e1063b9cde8a43c152f6c7edbfa56962e7e2350701fa03b1ef5ffed2"
+    },
+    {
+     "source": "src/_pre_v06_backup/ptv3_client.py",
+     "source_sha256": "65e80b05dcac6f63440dc547c2dcc08d8dfee4275018814f335c2c2fc10fa70d"
+    },
+    {
+     "source": "src/_pre_v05_backup/semantic_map_node.py",
+     "source_sha256": "100eb473b0ae0af695a76b112cf87f7cc565eaa73c068a07bb95d60a2f029671"
+    },
+    {
+     "source": "src/_pre_v06_backup/semantic_map_node.py",
+     "source_sha256": "033617313cdf621b0e731ab8fd91eff84614025315e6ce646f6bb2aaea50f19f"
+    }
+   ],
+   "changes": [
+    "derived: unified diff of the four mapper modules, before v0.5 (src/_pre_v05_backup/) against the end of v0.5 (src/_pre_v06_backup/), both path-sanitised"
+   ]
+  }
+ ]
+}

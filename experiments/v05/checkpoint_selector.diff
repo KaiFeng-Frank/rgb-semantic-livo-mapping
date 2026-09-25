@@ -1,0 +1,133 @@
+--- a/src/ptv3_loader_verified.py
++++ b/src/ptv3_loader_verified.py
+@@ -49,7 +49,8 @@
+             m = _Stub(n); m.__file__ = f"<stub {n}>"; sys.modules[n] = m
+ 
+ 
+-def build_ptv3(device="cuda", enable_flash=None, shuffle_orders=None, half=False):
++def build_ptv3(device="cuda", enable_flash=None, shuffle_orders=None, half=False,
++               ckpt_path=None):
+     """Build PTv3 from the frozen HF config and load the released weights with strict=True.
+ 
+     shuffle_orders : the frozen config ships True.  v1.5.1 applies it inside forward()
+@@ -81,10 +82,16 @@
+         cfg.model.backbone.shuffle_orders = bool(shuffle_orders)
+     model = build_model(cfg.model)
+ 
+-    sd = torch.load(CKPT_PATH, map_location="cpu", weights_only=False)
++    # v0.5: ckpt_path selects a checkpoint that carries the SAME 488-tensor
++    # student structure (tools/extract_student.py writes them).  Default = the
++    # released nuScenes checkpoint, exactly as before.  strict=True either way.
++    path = ckpt_path or CKPT_PATH
++    sd = torch.load(path, map_location="cpu", weights_only=False)
+     sd = sd.get("state_dict", sd)
+     sd = {(k[7:] if k.startswith("module.") else k): v for k, v in sd.items()}
+     model.load_state_dict(sd, strict=True)      # MUST stay strict
++    model._ckpt_path = path
++    model._n_ckpt_tensors = len(sd)
+     model = model.to(device).eval()
+     if half:
+         model = model.half()
+--- a/src/ptv3_worker.py
++++ b/src/ptv3_worker.py
+@@ -87,6 +87,7 @@
+ TF32 = int(os.environ.get("PTV3_TF32", "0")) != 0
+ GPU_VOXEL = int(os.environ.get("PTV3_GPU_VOXEL", "1")) != 0
+ FAST_HILBERT = int(os.environ.get("PTV3_FAST_HILBERT", "1")) != 0
++CKPT = os.environ.get("PTV3_CKPT", "").strip() or None   # v0.5: None = released
+ USE_SHM = int(os.environ.get("PTV3_SHM", "1")) != 0
+ SHM_NAME = os.environ.get("PTV3_SHM_NAME", "")
+ SHM_NSLOT = int(os.environ.get("PTV3_SHM_NSLOT", "4"))
+@@ -164,7 +165,7 @@
+     def __init__(self, device="cuda", intensity_scale=INTENSITY_SCALE,
+                  grid_size=GRID_SIZE, half=HALF, shuffle=SHUFFLE, tf32=TF32,
+                  fast_voxel=FAST_VOXEL, gpu_voxel=GPU_VOXEL,
+-                 fast_hilbert=FAST_HILBERT):
++                 fast_hilbert=FAST_HILBERT, ckpt=CKPT):
+         import torch
+         from ptv3_loader_verified import build_ptv3, NUSCENES_CLASSES
+         self.torch = torch
+@@ -177,7 +178,15 @@
+             except Exception:
+                 pass
+         self.model, self.cfg = build_ptv3(device=device, shuffle_orders=bool(shuffle),
+-                                          half=bool(half))
++                                          half=bool(half), ckpt_path=ckpt)
++        self.ckpt = getattr(self.model, "_ckpt_path", None)
++        self.ckpt_tensors = int(getattr(self.model, "_n_ckpt_tensors", 0))
++        try:
++            import hashlib
++            with open(self.ckpt, "rb") as _f:
++                self.ckpt_sha256 = hashlib.sha256(_f.read()).hexdigest()
++        except Exception:
++            self.ckpt_sha256 = "?"
+         self.device = torch.device(device)
+         self.classes = NUSCENES_CLASSES
+         self.num_classes = int(self.cfg.model.num_classes)
+@@ -304,6 +313,8 @@
+                         seg.fast_voxel, USE_SHM))
+     sys.stderr.write("[ptv3_worker] gpu_voxel=%s fast_hilbert=%s\n"
+                      % (seg.gpu_voxel, seg.fast_hilbert))
++    sys.stderr.write("[ptv3_worker] checkpoint=%s tensors=%d sha256=%s\n"
++                     % (seg.ckpt, seg.ckpt_tensors, seg.ckpt_sha256))
+     sys.stderr.flush()
+ 
+     shm = None
+--- a/src/ptv3_client.py
++++ b/src/ptv3_client.py
+@@ -41,7 +41,8 @@
+ class PTv3Client(object):
+     def __init__(self, log=None, intensity_scale=0.2, stderr_path=None,
+                  use_shm=True, nslot=4, max_pts=200000, grid_size=None,
+-                 half=None, shuffle=None, fast_voxel=None, tf32=None):
++                 half=None, shuffle=None, fast_voxel=None, tf32=None,
++                 ckpt=None):
+         env = dict(os.environ)
+         env["PTV3_INTENSITY_SCALE"] = "%.4f" % intensity_scale
+         if grid_size is not None:
+@@ -50,6 +51,10 @@
+                      ("PTV3_FAST_VOXEL", fast_voxel), ("PTV3_TF32", tf32)):
+             if v is not None:
+                 env[k] = str(int(v))
++        if ckpt:
++            env["PTV3_CKPT"] = str(ckpt)          # v0.5 checkpoint selector
++        else:
++            env.pop("PTV3_CKPT", None)
+         # keep the conda env's own libs first; strip ROS python paths
+         env.pop("PYTHONPATH", None)
+ 
+--- a/src/semantic_map_node.py
++++ b/src/semantic_map_node.py
+@@ -190,10 +190,11 @@
+                                nslot=args.queue_depth + 2,
+                                grid_size=args.grid_size,
+                                half=args.half, shuffle=args.shuffle,
+-                               fast_voxel=args.fast_voxel, tf32=args.tf32)
+-        self.get_logger().info("PTv3 worker ready (%d classes), shm=%s pipeline=%s"
++                               fast_voxel=args.fast_voxel, tf32=args.tf32,
++                               ckpt=args.ptv3_ckpt)
++        self.get_logger().info("PTv3 worker ready (%d classes), shm=%s pipeline=%s ckpt=%s"
+                                % (self.ptv3.num_classes, not args.no_shm,
+-                                  not args.no_pipeline))
++                                  not args.no_pipeline, args.ptv3_ckpt or "released"))
+ 
+         if args.reliable:
+             qos_be = QoSProfile(reliability=ReliabilityPolicy.RELIABLE,
+@@ -631,6 +632,7 @@
+             pipeline=not self.args.no_pipeline, shm=not self.args.no_shm,
+             ptv3_half=self.args.half, ptv3_shuffle=self.args.shuffle,
+             ptv3_grid=self.args.grid_size, ptv3_fast_voxel=self.args.fast_voxel,
++            ptv3_ckpt=self.args.ptv3_ckpt,
+             scan_pub=not self.args.no_scan_pub,
+             queue_depth=self.args.queue_depth, expect_voxels=self.args.expect_voxels,
+             lidar_qos=("RELIABLE/KEEP_LAST(10)" if self.args.reliable
+@@ -799,6 +801,9 @@
+                     help="seconds with no new scan before writing stats and exiting")
+     ap.add_argument("--stats-out", default="/data/livo_sem/out/semantic_map_stats.json")
+     ap.add_argument("--ptv3-log", default="/data/livo_sem/logs/ptv3_worker.log")
++    ap.add_argument("--ptv3-ckpt", default=None,
++                    help="v0.5: a 488-tensor student checkpoint written by "
++                         "tools/extract_student.py; default = the released nuScenes weights")
+     ap.add_argument("--npz-out", default=None)
+     ap.add_argument("--npz-out-raw", default=None,
+                     help="the same map with the v0.3 publish filter OFF")

@@ -1,0 +1,82 @@
+====================================================================================
+0. INSTRUMENT -- negative control against v0.5, and full error accounting
+  ZS_r1  same cache True   map_all_lookup == v0.5 True   accounting True   (out miou9_abstain_excluded 70.9074)
+  B0_r1  same cache True   map_all_lookup == v0.5 True   accounting True   (out miou9_abstain_excluded 77.8252)
+  B0_r2  same cache True   map_all_lookup == v0.5 True   accounting True   (out miou9_abstain_excluded 78.0502)
+  RP_r1  same cache True   map_all_lookup == v0.5 True   accounting True   (out miou9_abstain_excluded 85.8832)
+  -> every number below is the v0.5 map, and every counted error is classified
+
+====================================================================================
+1. OUT-OF-FRUSTUM RESIDUAL (headline subset), sparse := n_obs <= 4
+arm    | model   ceiling sparse-orcl  | errors    MIX    SPARSE  DENSE  | floor    
+ZS_r1  |   70.91   94.82        71.54 |  10566028  14.6%    2.2%  83.2% |   2167321
+B0_r1  |   77.83   94.82        78.40 |   8778422  17.3%    2.5%  80.3% |   2166978
+B0_r2  |   78.05   94.82        78.63 |   8881173  17.1%    2.4%  80.5% |   2167072
+RP_r1  |   85.88   94.82        86.33 |   4581071  35.5%    2.9%  61.5% |   2167468
+  model = headline map mIoU; ceiling = every voxel labelled with its own GT majority;
+  sparse-orcl = only sparse voxels relabelled perfectly (the most completion could buy)
+
+====================================================================================
+2. VERDICT (preregistered; B0 = the deployable arm)
+  B0_r1  model 77.83  sparse-oracle 78.40  -> completion's best case is BELOW the 0.60 band
+         largest residual category at T=2/4/8: {'2': 'DENSE', '4': 'DENSE', '8': 'DENSE'}
+         RULE 1: NO TARGET -- even perfect classification of every sparse voxel
+                 cannot move the headline measurably.
+         R3: DENSE largest -- no completion target, but reason 1 is worded wrongly for B0: its residual is systematic classification on well-observed geometry.
+  B0_r2  model 78.05  sparse-oracle 78.63  -> completion's best case is BELOW the 0.60 band
+         largest residual category at T=2/4/8: {'2': 'DENSE', '4': 'DENSE', '8': 'DENSE'}
+         RULE 1: NO TARGET -- even perfect classification of every sparse voxel
+                 cannot move the headline measurably.
+         R3: DENSE largest -- no completion target, but reason 1 is worded wrongly for B0: its residual is systematic classification on well-observed geometry.
+
+====================================================================================
+3. CONSISTENCY PREDICTIONS (the anatomy is trusted only if these hold)
+  P1 floor model-independent (<=10%): PASS   max deviation 0.0%   {'ZS_r1': 2167321, 'B0_r1': 2166978, 'RP_r1': 2167468}
+  P2 MIX share rises ZS->B0->RP:      PASS   {'ZS_r1': '14.6%', 'B0_r1': '17.3%', 'RP_r1': '35.5%'}
+  P3 Rprime road/sidewalk errors majority MIX: PASS   road MIX 301282 vs CLS 118952,  sidewalk MIX 417698 vs CLS 277483
+
+====================================================================================
+4. WHERE B0's ERRORS SIT (B0_r1, out-of-frustum)
+  by n_obs (confident hits over the whole drive):
+    n_obs         voxels  scored pts    CLS %    MIX %  floor %
+    1-1           627803      364165   16.20%    0.17%    0.27%
+    2-3           501662      777805   14.00%    0.59%    1.00%
+    4-7           382756     1404800   12.60%    0.86%    1.35%
+    8-15          291448     2345530   11.38%    1.11%    1.64%
+    16-31         228352     3887885   10.20%    1.19%    1.76%
+    32-63         187906     6609431    9.27%    1.31%    1.93%
+    64-127        181892    12968112    7.20%    1.26%    1.86%
+    128-255       173235    24165124    5.26%    1.35%    1.93%
+    256-inf       118354    52515627    6.54%    1.62%    2.28%
+  by closest-approach range:
+    range m       voxels  scored pts    CLS %    MIX %
+    0-10         1383907    95302810    6.73%    1.51%
+    10-20         620121     7565986    7.08%    0.82%
+    20-30         330753     1559159   12.30%    0.60%
+    30-50         282005      610504   19.05%    0.29%
+    50-inf         76622          20   40.00%    0.00%
+
+====================================================================================
+5. PER CLASS, out-of-frustum IoU: model vs ceiling, and what the errors are
+  B0_r1
+    class            model  ceiling    MIX pts    CLS pts
+    car              96.99    98.19      95625      81672
+    large_vehicle    70.88    89.23      14201     150913
+    two_wheeler      51.72    93.84       8789      87447
+    person           67.53    94.84       4358      27326
+    road             87.21    96.62     220693      88982
+    sidewalk         79.27    93.62     401584    2318204
+    terrain          83.38    95.02     145934     469475
+    vegetation       76.06    95.30     263463    2533330
+    manmade          87.39    96.74     361242    1505184
+  RP_r1
+    class            model  ceiling    MIX pts    CLS pts
+    car              97.69    98.19      94512      33389
+    large_vehicle    65.97    89.23      14745     225693
+    two_wheeler      85.36    93.81       9088      14503
+    person           74.16    94.84       4425      25761
+    road             95.90    96.62     301282     118952
+    sidewalk         90.96    93.62     417698     277483
+    terrain          83.56    95.02     153390     615654
+    vegetation       86.43    95.30     217689     375492
+    manmade          92.92    96.74     415095    1266220
