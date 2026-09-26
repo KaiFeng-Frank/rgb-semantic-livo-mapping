@@ -1,6 +1,6 @@
 {
   "tag": "armB0_noKL_s2",
-  "ckpt": "exp/sk2/armB0_noKL_s2/model/model_best.pth",
+  "ckpt": "exp/sk2/armB0_noKL_s2_clean/model/model_best.pth",
   "out": "weights/v06/armB0_noKL_s2_student.pth",
   "frames": [
     0,
@@ -105,10 +105,10 @@
     1089,
     1100
   ],
-  "time": "2026-09-26 13:36:23",
+  "time": "2026-09-26 22:57:18",
   "source": {
-    "sha256": "98ef5676ddc9af006fc75f098de8f74674bc57c29c39d66e9a95aa49bac04f25",
-    "bytes": 647048472,
+    "sha256": "93fed75f61a9ce7a220e83ca546a104391e6c7fe9c768f7a0f73c8ae0c5d3279",
+    "bytes": 647043544,
     "top_level_keys": [
       "best_metric_value",
       "epoch",
@@ -117,8 +117,8 @@
       "scheduler",
       "state_dict"
     ],
-    "epoch": 10,
-    "best_metric_value": 0.6179504518350944,
+    "epoch": 2,
+    "best_metric_value": 0.5190046188618128,
     "n_tensors": 976,
     "n_student": 488,
     "n_anchor": 488,
@@ -129,8 +129,8 @@
       "torch.float32": 475
     },
     "anchor_dtypes": {
-      "torch.float16": 475,
-      "torch.int64": 13
+      "torch.int64": 13,
+      "torch.float16": 475
     },
     "student_bytes": 184653480,
     "anchor_bytes": 92326792
@@ -150,7 +150,7 @@
     "ckpt_tensors": 488
   },
   "reused_existing_file": false,
-  "out_sha256": "4a260db097303e8914c8e07834534c9a21432d0acf739f89c907ae2237e2f459",
+  "out_sha256": "0d6d65ba7cca45b45f796f64f975a3fa5bff505e3e069c7896ef87dd9a7572e7",
   "out_bytes": 184813706,
   "plain_loaded_from": "weights/v06/armB0_noKL_s2_student.pth",
   "plain_n_params": 46159312,
@@ -178,7 +178,7 @@
   "neg": "weights/v06/armB0_s1_student.pth",
   "worker": {
     "ckpt": "weights/v06/armB0_noKL_s2_student.pth",
-    "sha256": "4a260db097303e8914c8e07834534c9a21432d0acf739f89c907ae2237e2f459",
+    "sha256": "0d6d65ba7cca45b45f796f64f975a3fa5bff505e3e069c7896ef87dd9a7572e7",
     "tensors": 488,
     "half": true,
     "shuffle": false,
@@ -190,79 +190,79 @@
       "distil_vs_plain": {
         "all": {
           "n": 8342050,
-          "agree": 0.9506005118645896
+          "agree": 0.9709527034721681
         },
         "margin>1": {
-          "n": 7334160,
-          "agree": 0.9839425373866946
+          "n": 7770300,
+          "agree": 0.9917072699895757
         },
         "margin>2": {
-          "n": 6433514,
-          "agree": 0.993868047850677
+          "n": 7195246,
+          "agree": 0.9977280832371819
         },
         "margin>4": {
-          "n": 4933016,
-          "agree": 0.9985653806920554
+          "n": 5865851,
+          "agree": 0.9998179292314108
         }
       },
       "distil_vs_plain_2": {
         "all": {
           "n": 8342050,
-          "agree": 0.9508437374506267
+          "agree": 0.9709935807145725
         },
         "margin>1": {
-          "n": 7326084,
-          "agree": 0.9857518696209325
+          "n": 7752655,
+          "agree": 0.9920192501794547
         },
         "margin>2": {
-          "n": 6442816,
-          "agree": 0.9954834966573622
+          "n": 7176521,
+          "agree": 0.9979137523599527
         },
         "margin>4": {
-          "n": 4936228,
-          "agree": 0.9992309917613206
+          "n": 5860883,
+          "agree": 0.9997795554014642
         }
       },
       "distil_vs_distil": {
         "all": {
           "n": 8342050,
-          "agree": 0.9510516000263725
+          "agree": 0.9697762540382759
         },
         "margin>1": {
-          "n": 7334160,
-          "agree": 0.9855161327268562
+          "n": 7770300,
+          "agree": 0.9909173390988765
         },
         "margin>2": {
-          "n": 6433514,
-          "agree": 0.9954143256702325
+          "n": 7195246,
+          "agree": 0.997376045238759
         },
         "margin>4": {
-          "n": 4933016,
-          "agree": 0.9991323766231449
+          "n": 5865851,
+          "agree": 0.9998134967969694
         }
       },
       "plain_vs_plain": {
         "all": {
           "n": 8342050,
-          "agree": 0.9482551650973082
+          "agree": 0.9707622227150401
         },
         "margin>1": {
-          "n": 7326640,
-          "agree": 0.9830023039210334
+          "n": 7772844,
+          "agree": 0.9914323508872686
         },
         "margin>2": {
-          "n": 6415129,
-          "agree": 0.9934136944089511
+          "n": 7194566,
+          "agree": 0.9975994382426959
         },
         "margin>4": {
-          "n": 4938661,
-          "agree": 0.9987304251091541
+          "n": 5867231,
+          "agree": 0.9998195059986559
         }
       },
       "plain_vs_worker": {
         "all": {
           "n": 12250569,
-          "agree": 0.9456897879600531
+          "agree": 0.9692930181447083
         },
         "margin>1": {
           "n": 0,
@@ -280,299 +280,299 @@
       "plain_vs_NEG": {
         "all": {
           "n": 8342050,
-          "agree": 0.7287735029159499
+          "agree": 0.5728481608237783
         },
         "margin>1": {
-          "n": 7326640,
-          "agree": 0.7671214908880469
+          "n": 7772844,
+          "agree": 0.6055361461004493
         },
         "margin>2": {
-          "n": 6415129,
-          "agree": 0.8079605258132767
+          "n": 7194566,
+          "agree": 0.6406729745755338
         },
         "margin>4": {
-          "n": 4938661,
-          "agree": 0.8789311515813699
+          "n": 5867231,
+          "agree": 0.727544560628344
         }
       }
     },
     "abs_dlogit_max_per_voxel": {
       "distil_vs_plain": {
-        "mean": 1.0846885442733765,
-        "p50": 0.912109375,
-        "p99": 3.78515625,
-        "max": 12.603515625
+        "mean": 0.8235074877738953,
+        "p50": 0.65625,
+        "p99": 3.35546875,
+        "max": 10.1171875
       },
       "distil_vs_plain_2": {
-        "mean": 1.0990195274353027,
-        "p50": 0.922119140625,
-        "p99": 3.9404296875,
-        "max": 10.84765625
+        "mean": 0.8003628253936768,
+        "p50": 0.64453125,
+        "p99": 3.2578125,
+        "max": 9.421875
       },
       "distil_vs_distil": {
-        "mean": 1.096200704574585,
-        "p50": 0.9205322265625,
-        "p99": 3.8828125,
-        "max": 12.7265625
+        "mean": 0.8352945446968079,
+        "p50": 0.6640625,
+        "p99": 3.46875,
+        "max": 11.4765625
       },
       "plain_vs_plain": {
-        "mean": 1.1106594800949097,
-        "p50": 0.931640625,
-        "p99": 3.9609375,
-        "max": 11.4921875
+        "mean": 0.8108612298965454,
+        "p50": 0.64990234375,
+        "p99": 3.365234375,
+        "max": 9.109375
       },
       "plain_vs_NEG": {
-        "mean": 5.259443283081055,
-        "p50": 4.625,
-        "p99": 14.74951171875,
-        "max": 21.712890625
+        "mean": 10.586414337158203,
+        "p50": 10.40625,
+        "p99": 18.548828125,
+        "max": 25.935546875
       }
     },
     "gt_score": {
       "distil": {
-        "point_acc": 76.98508586802178,
-        "miou9": 59.871136248300836,
+        "point_acc": 60.075754899754465,
+        "miou9": 44.999139813981145,
         "per_class_iou": {
-          "car": 91.307,
-          "large_vehicle": 44.336,
-          "two_wheeler": 20.412,
-          "person": 47.164,
-          "road": 92.749,
-          "sidewalk": 83.913,
-          "terrain": 71.627,
-          "vegetation": 46.254,
-          "manmade": 41.078
+          "car": 57.526,
+          "large_vehicle": 63.364,
+          "two_wheeler": 26.983,
+          "person": 54.003,
+          "road": 91.869,
+          "sidewalk": 74.634,
+          "terrain": 0.0,
+          "vegetation": 36.613,
+          "manmade": 0.0
         },
         "n_eval": 11522159
       },
       "distil_2": {
-        "point_acc": 77.23116822116411,
-        "miou9": 60.16216518038627,
+        "point_acc": 60.048329484083666,
+        "miou9": 45.10994654255112,
         "per_class_iou": {
-          "car": 91.063,
-          "large_vehicle": 42.52,
-          "two_wheeler": 21.429,
-          "person": 48.45,
-          "road": 93.134,
-          "sidewalk": 84.372,
-          "terrain": 72.434,
-          "vegetation": 46.482,
-          "manmade": 41.576
+          "car": 57.085,
+          "large_vehicle": 60.655,
+          "two_wheeler": 31.031,
+          "person": 54.276,
+          "road": 91.697,
+          "sidewalk": 74.526,
+          "terrain": 0.0,
+          "vegetation": 36.719,
+          "manmade": 0.0
         },
         "n_eval": 11522159
       },
       "plain": {
-        "point_acc": 76.93460053797209,
-        "miou9": 59.729877049634034,
+        "point_acc": 60.04959660771909,
+        "miou9": 44.78917390997234,
         "per_class_iou": {
-          "car": 91.297,
-          "large_vehicle": 45.187,
-          "two_wheeler": 19.703,
-          "person": 47.282,
-          "road": 92.842,
-          "sidewalk": 83.841,
-          "terrain": 70.1,
-          "vegetation": 46.112,
-          "manmade": 41.206
+          "car": 57.086,
+          "large_vehicle": 61.708,
+          "two_wheeler": 27.447,
+          "person": 53.516,
+          "road": 92.183,
+          "sidewalk": 74.506,
+          "terrain": 0.0,
+          "vegetation": 36.657,
+          "manmade": 0.0
         },
         "n_eval": 11522159
       },
       "plain_2": {
-        "point_acc": 76.95276553638949,
-        "miou9": 59.71789220684028,
+        "point_acc": 60.02803814805888,
+        "miou9": 45.263365410459606,
         "per_class_iou": {
-          "car": 91.212,
-          "large_vehicle": 42.528,
-          "two_wheeler": 19.488,
-          "person": 47.413,
-          "road": 92.994,
-          "sidewalk": 83.979,
-          "terrain": 72.866,
-          "vegetation": 46.193,
-          "manmade": 40.789
+          "car": 57.344,
+          "large_vehicle": 61.443,
+          "two_wheeler": 31.362,
+          "person": 54.688,
+          "road": 91.101,
+          "sidewalk": 74.754,
+          "terrain": 0.0,
+          "vegetation": 36.68,
+          "manmade": 0.0
         },
         "n_eval": 11522159
       },
       "worker": {
-        "point_acc": 77.13662864746095,
-        "miou9": 59.98257468711381,
+        "point_acc": 60.07147618775266,
+        "miou9": 45.03019543041953,
         "per_class_iou": {
-          "car": 91.318,
-          "large_vehicle": 43.72,
-          "two_wheeler": 20.612,
-          "person": 47.904,
-          "road": 93.091,
-          "sidewalk": 84.199,
-          "terrain": 71.18,
-          "vegetation": 46.33,
-          "manmade": 41.49
+          "car": 56.895,
+          "large_vehicle": 63.32,
+          "two_wheeler": 27.158,
+          "person": 55.0,
+          "road": 91.478,
+          "sidewalk": 74.57,
+          "terrain": 0.0,
+          "vegetation": 36.85,
+          "manmade": 0.0
         },
         "n_eval": 11522159
       },
       "NEG": {
-        "point_acc": 89.49106673497562,
-        "miou9": 70.38794074784575,
+        "point_acc": 89.45878111905937,
+        "miou9": 70.8920012657841,
         "per_class_iou": {
-          "car": 90.369,
-          "large_vehicle": 53.337,
-          "two_wheeler": 41.815,
-          "person": 49.05,
-          "road": 89.884,
-          "sidewalk": 81.329,
-          "terrain": 78.034,
-          "vegetation": 68.525,
-          "manmade": 81.148
+          "car": 90.326,
+          "large_vehicle": 55.724,
+          "two_wheeler": 42.03,
+          "person": 51.582,
+          "road": 89.812,
+          "sidewalk": 81.121,
+          "terrain": 77.828,
+          "vegetation": 68.564,
+          "manmade": 81.042
         },
         "n_eval": 11522159
       }
     },
     "class_hist16": {
       "distil": {
-        "barrier": 15265,
-        "bicycle": 1324,
-        "bus": 29986,
-        "car": 1214760,
-        "construction_vehicle": 663,
-        "motorcycle": 7313,
-        "pedestrian": 20823,
-        "traffic_cone": 176,
-        "trailer": 11146,
-        "truck": 119570,
-        "driveable_surface": 2477099,
-        "other_flat": 1423,
-        "sidewalk": 1849071,
-        "terrain": 465446,
-        "manmade": 1713332,
-        "vegetation": 4323172
+        "barrier": 0,
+        "bicycle": 5569,
+        "bus": 14534,
+        "car": 2072492,
+        "construction_vehicle": 0,
+        "motorcycle": 31964,
+        "pedestrian": 13438,
+        "traffic_cone": 0,
+        "trailer": 187,
+        "truck": 124507,
+        "driveable_surface": 2550550,
+        "other_flat": 0,
+        "sidewalk": 2141715,
+        "terrain": 0,
+        "manmade": 0,
+        "vegetation": 5295613
       },
       "distil_2": {
-        "barrier": 23512,
-        "bicycle": 1299,
-        "bus": 25746,
-        "car": 1216046,
-        "construction_vehicle": 743,
-        "motorcycle": 8023,
-        "pedestrian": 20928,
-        "traffic_cone": 176,
-        "trailer": 12067,
-        "truck": 127575,
-        "driveable_surface": 2485775,
-        "other_flat": 738,
-        "sidewalk": 1838960,
-        "terrain": 467004,
-        "manmade": 1699424,
-        "vegetation": 4322553
+        "barrier": 3,
+        "bicycle": 5640,
+        "bus": 306,
+        "car": 2084099,
+        "construction_vehicle": 0,
+        "motorcycle": 31201,
+        "pedestrian": 13127,
+        "traffic_cone": 0,
+        "trailer": 128,
+        "truck": 130454,
+        "driveable_surface": 2561174,
+        "other_flat": 0,
+        "sidewalk": 2138883,
+        "terrain": 0,
+        "manmade": 0,
+        "vegetation": 5285554
       },
       "plain": {
-        "barrier": 19607,
-        "bicycle": 1149,
-        "bus": 16864,
-        "car": 1209908,
-        "construction_vehicle": 486,
-        "motorcycle": 8829,
-        "pedestrian": 20804,
-        "traffic_cone": 249,
-        "trailer": 13147,
-        "truck": 120009,
-        "driveable_surface": 2487320,
-        "other_flat": 1598,
-        "sidewalk": 1846780,
-        "terrain": 452006,
-        "manmade": 1715289,
-        "vegetation": 4336524
+        "barrier": 0,
+        "bicycle": 6349,
+        "bus": 395,
+        "car": 2076955,
+        "construction_vehicle": 134,
+        "motorcycle": 28419,
+        "pedestrian": 12872,
+        "traffic_cone": 0,
+        "trailer": 62,
+        "truck": 127087,
+        "driveable_surface": 2548994,
+        "other_flat": 0,
+        "sidewalk": 2135833,
+        "terrain": 0,
+        "manmade": 0,
+        "vegetation": 5313469
       },
       "plain_2": {
-        "barrier": 15566,
-        "bicycle": 1115,
-        "bus": 28256,
-        "car": 1213060,
-        "construction_vehicle": 915,
-        "motorcycle": 8909,
-        "pedestrian": 21576,
-        "traffic_cone": 197,
-        "trailer": 15863,
-        "truck": 119447,
-        "driveable_surface": 2475509,
-        "other_flat": 1030,
-        "sidewalk": 1847685,
-        "terrain": 472905,
-        "manmade": 1695088,
-        "vegetation": 4333448
+        "barrier": 2,
+        "bicycle": 5955,
+        "bus": 343,
+        "car": 2075696,
+        "construction_vehicle": 0,
+        "motorcycle": 32206,
+        "pedestrian": 13807,
+        "traffic_cone": 0,
+        "trailer": 131,
+        "truck": 131567,
+        "driveable_surface": 2576293,
+        "other_flat": 0,
+        "sidewalk": 2124773,
+        "terrain": 0,
+        "manmade": 0,
+        "vegetation": 5289796
       },
       "worker": {
-        "barrier": 23108,
-        "bicycle": 1158,
-        "bus": 27387,
-        "car": 1218915,
-        "construction_vehicle": 526,
-        "motorcycle": 8969,
-        "pedestrian": 20650,
-        "traffic_cone": 224,
-        "trailer": 11070,
-        "truck": 120266,
-        "driveable_surface": 2476682,
-        "other_flat": 783,
-        "sidewalk": 1849804,
-        "terrain": 462058,
-        "manmade": 1682662,
-        "vegetation": 4346307
+        "barrier": 3,
+        "bicycle": 5887,
+        "bus": 4659,
+        "car": 2092931,
+        "construction_vehicle": 115,
+        "motorcycle": 31500,
+        "pedestrian": 13403,
+        "traffic_cone": 0,
+        "trailer": 63,
+        "truck": 123531,
+        "driveable_surface": 2570110,
+        "other_flat": 0,
+        "sidewalk": 2132178,
+        "terrain": 0,
+        "manmade": 0,
+        "vegetation": 5276189
       },
       "NEG": {
-        "barrier": 4740,
-        "bicycle": 3293,
-        "bus": 7550,
-        "car": 1290069,
-        "construction_vehicle": 5197,
-        "motorcycle": 10944,
-        "pedestrian": 13306,
+        "barrier": 5313,
+        "bicycle": 3060,
+        "bus": 5736,
+        "car": 1298615,
+        "construction_vehicle": 4003,
+        "motorcycle": 11269,
+        "pedestrian": 13911,
         "traffic_cone": 0,
-        "trailer": 4639,
-        "truck": 168746,
-        "driveable_surface": 2675136,
-        "other_flat": 1874,
-        "sidewalk": 1526020,
-        "terrain": 600089,
-        "manmade": 3958082,
-        "vegetation": 1980884
+        "trailer": 5529,
+        "truck": 164373,
+        "driveable_surface": 2675424,
+        "other_flat": 1355,
+        "sidewalk": 1524202,
+        "terrain": 597108,
+        "manmade": 3944635,
+        "vegetation": 1996036
       }
     },
-    "seconds": 38.00384020805359,
+    "seconds": 44.89020562171936,
     "verdict_inputs": {
       "all": {
-        "cross": 0.9506005118645896,
-        "within": 0.9482551650973082,
+        "cross": 0.9709527034721681,
+        "within": 0.9697762540382759,
         "ok": true
       },
       "margin>1": {
-        "cross": 0.9839425373866946,
-        "within": 0.9830023039210334,
+        "cross": 0.9917072699895757,
+        "within": 0.9909173390988765,
         "ok": true
       },
       "margin>2": {
-        "cross": 0.993868047850677,
-        "within": 0.9934136944089511,
+        "cross": 0.9977280832371819,
+        "within": 0.997376045238759,
         "ok": true
       },
       "margin>4": {
-        "cross": 0.9985653806920554,
-        "within": 0.9987304251091541,
+        "cross": 0.9997795554014642,
+        "within": 0.9998134967969694,
         "ok": true
       },
       "worker": {
-        "plain_vs_worker": 0.9456897879600531,
-        "within_all": 0.9482551650973082,
+        "plain_vs_worker": 0.9692930181447083,
+        "within_all": 0.9697762540382759,
         "ok": true
       },
       "neg": {
-        "neg_all": 0.7287735029159499,
-        "cross_all": 0.9506005118645896,
+        "neg_all": 0.5728481608237783,
+        "cross_all": 0.9709527034721681,
         "separated": true
       },
       "gt": {
-        "distil_mean_acc": 77.10812704459295,
-        "within_model_acc_spread": 0.2460823531423273,
-        "within_model_miou_spread": 0.2910289320854318,
-        "cross_model_miou_spread": 0.44427297354598494
+        "distil_mean_acc": 60.06204219191906,
+        "within_model_acc_spread": 0.02742541567079826,
+        "within_model_miou_spread": 0.4741915004872652,
+        "cross_model_miou_spread": 0.3207726325787803
       }
     }
   },

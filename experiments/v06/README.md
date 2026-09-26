@@ -1,7 +1,9 @@
 # v0.6 experiment source snapshot
 
 This directory archives the v0.6 code, captured on 2026-09-26: online integration, the
-evaluation-unit analyses, and the training queue with the seq-09 hold-out. It accompanies
+evaluation-unit analyses, and the training queue with the seq-09 hold-out. Four files for
+the from-scratch rerun of one seed and the replacement resume path were added on 2026-09-27
+([below](#the-seed-2-rerun-and-the-replacement-resume-path)). It accompanies
 [online integration](../../docs/v06_online_integration.md),
 [the evaluation unit](../../docs/v06_evaluation_unit.md) and
 [the training protocol](../../docs/v06_training_protocol.md). Files under `source/` keep
@@ -61,7 +63,7 @@ are in [`results/v06/mapeval/`](../../results/v06/mapeval/).
 | `tools/train_distil_v2.py` | the single-GPU training entry point with the v0.6 split registered |
 | `opt/prep_seq09.sh` | the seq-09 rig: 100 Hz IMU stream, bags, FAST-LIVO2 trajectory, then hand-off to the queue |
 | `opt/train_queue_v06.sh` | the serial queue with its split self-check |
-| `opt/train_queue_v06_resume.sh` | the resumable restart after the host out-of-memory event |
+| `opt/train_queue_v06_resume.sh` | the resumable restart after the host out-of-memory event, as it ran; its resume path is the defective one (see below) |
 | `opt/score_v06.sh`, `tools/v06_report.py` | extraction, 32 prediction caches, map-level replay, and the four-question report |
 
 The v2 configurations inherit the v0.4 arm configurations archived in
@@ -74,7 +76,39 @@ Results: [v0.6 results](../../docs/v06_results.md). Two notes on running these f
   2. The as-run hashes are in the manifest's `updates` record.
 - `opt/train_queue_v06_resume.sh` resumes through Pointcept v1.5.1's `CheckpointLoader`. On
   one GPU that loader loaded the frozen anchor into the student instead of restoring it
-  ([deviation 1](../../docs/v06_results.md#protocol-deviations-and-disclosures)).
+  ([deviation 1](../../docs/v06_results.md#protocol-deviations-and-disclosures)). Do not
+  resume with it; the next section has the replacement.
+
+## The seed-2 rerun and the replacement resume path
+
+The seed that resume damaged, armB0_noKL_s2, was withdrawn, retrained from scratch and
+rescored; the B0-without-KL aggregates now use the clean rerun for seed 2. The four files, added on 2026-09-27:
+
+| source path | role |
+|---|---|
+| `opt/rerun_B0_noKL_s2.sh` | seed 2 without KL from scratch, no resume, into `exp/sk2/armB0_noKL_s2_clean`; appends its lines to the queue log |
+| `opt/rescore_s2_clean.sh` | moves the defective seed's student, extraction report, caches, replays, report and logs into an archive directory (never deletes), then runs `score_v06.sh`'s extraction, caching and replay steps for the rerun under the same tag, with the scoring code pinned by SHA-256, and regenerates the report |
+| `tools/train_distil_v2_resume.py` | the replacement resume entry point: Pointcept's loader loads nothing, the state dict is restored `strict=True` under exact key names and every tensor compared with the checkpoint, then optimizer, scheduler, scaler, epoch, best value and a KL arm's `kl_lambda` |
+| `tools/verify_resume_restore.py` | CPU check of that restore on real checkpoints (`--path fixed`), the negative control on Pointcept's own path (`--path pointcept`) and the tool's refusals (`--path guards`) |
+
+The five outputs of `tools/verify_resume_restore.py` are in
+[`results/v06/training/`](../../results/v06/training/) (`resume_restore_*.txt`): the
+restore passes on armB0_noKL_s2's `model_last.pth` and on the final checkpoints of
+armB0_noKL_s3 and armB0_s1, Pointcept's path reproduces the 477 missing keys on the same
+file, and 18 of 18 refusals pass. They were run on CPU, one at a time, as
+
+```bash
+CUDA_VISIBLE_DEVICES="" python tools/verify_resume_restore.py --path fixed \
+    --config src/Pointcept_v151/configs/semantic_kitti/arm_B0_noKL_v2_s2.py \
+    --ckpt exp/sk2/armB0_noKL_s2/model/model_last.pth --out out/v06_train/resume_restore_verify.txt
+```
+
+with `--path pointcept` and `--path guards` on the same file, and `--path fixed` on the other
+two runs. On the host, `opt/train_queue_v06_resume.sh` has since been changed to resume only
+through `tools/train_distil_v2_resume.py` and to fail a job whose log contains
+`Missing keys`. That version has not run and is not published; its hash is in the
+manifest's second `updates` record. The rerun did not resume. The mechanism and how to
+recognise it in a log: [`CRITICAL_CONSTRAINTS.md`](../../CRITICAL_CONSTRAINTS.md), T1.
 
 ## Environment and replay
 
@@ -96,14 +130,16 @@ python3 tools/v06_online_report.py
 source /opt/ros/jazzy/setup.bash && python3 opt/verify_v06.py --frames 40
 ```
 
-Verify the published files against the manifest:
+Verify the published files against the manifest. A later entry for the same published path
+supersedes an earlier one, so the check reads the last entry of each path:
 
 ```bash
 python3 - <<'PY'
 import hashlib, json, pathlib
-for e in json.load(open("results/v06/snapshot_manifest.json"))["files"]:
-    d = pathlib.Path(e["published"]).read_bytes()
-    assert len(d) == e["bytes"] and hashlib.sha256(d).hexdigest() == e["sha256"], e["published"]
+latest = {e["published"]: e for e in json.load(open("results/v06/snapshot_manifest.json"))["files"]}
+for path, e in latest.items():
+    d = pathlib.Path(path).read_bytes()
+    assert len(d) == e["bytes"] and hashlib.sha256(d).hexdigest() == e["sha256"], path
 print("ok")
 PY
 ```

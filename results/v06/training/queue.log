@@ -21,3 +21,6 @@ test     2692 frames  {'07': 1101, '09': 1591}
 [2026-09-26 06:40:56] job 7/7  armRprime_noKL_s1  <- arm_Rprime_noKL_v2_s1.py
 [2026-09-26 13:28:57] job 7  armRprime_noKL_s1  OK   408 min  Best mIoU: 0.8697
 [2026-09-26 13:28:57] queue done
+[2026-09-26 16:50:27] rerun armB0_noKL_s2 (clean, no resume) -> exp/sk2/armB0_noKL_s2_clean
+[2026-09-26 22:55:32] rerun armB0_noKL_s2_clean  OK   365 min  Best mIoU: 0.5190
+RERUN_DONE

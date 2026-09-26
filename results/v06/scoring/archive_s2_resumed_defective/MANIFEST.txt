@@ -1,0 +1,28 @@
+# out/v06_score/archive_s2_resumed_defective -- written 2026-09-26 22:57:14 by opt/rescore_s2_clean.sh right after the move
+# files: bytes + sha256 | cache dirs: bytes, file count, meta.json
+REPORT.txt                                                4814  a8e79c6011d3aa99c93029ed2da6ca947c2ab154667fec6341efebbf4519cc33
+armB0_noKL_s2_07_r1/                                 401306365  1103 files; meta ckpt=weights/v06/armB0_noKL_s2_student.pth seq=07 n_frames=1101
+armB0_noKL_s2_07_r2/                                 401306365  1103 files; meta ckpt=weights/v06/armB0_noKL_s2_student.pth seq=07 n_frames=1101
+armB0_noKL_s2_09_r1/                                 594482152  1593 files; meta ckpt=weights/v06/armB0_noKL_s2_student.pth seq=09 n_frames=1591
+armB0_noKL_s2_09_r2/                                 594482151  1593 files; meta ckpt=weights/v06/armB0_noKL_s2_student.pth seq=09 n_frames=1591
+armB0_noKL_s2_student.pth                            184813706  4a260db097303e8914c8e07834534c9a21432d0acf739f89c907ae2237e2f459
+extract_armB0_noKL_s2.json                               13075  ba16deeacec2b9188456ea65946970469f20ede95beef2eae084d4cfcd5dbbfc
+logs/cache_v06_armB0_noKL_s2_07_r1.log                     645  8f1a7d14f731a336ff79a215ff5068c94ad731bb86f4bb111fdc25c3c6e750dc
+logs/cache_v06_armB0_noKL_s2_07_r2.log                     645  9294d26b36ddcdf4e9195bedfea4ae274254dd44d145cbb2dcd038d674a14159
+logs/cache_v06_armB0_noKL_s2_09_r1.log                     688  b4599706d6231cc2a88c483418e2ced1f5cc9fd4492d252f2642736d226a4c83
+logs/cache_v06_armB0_noKL_s2_09_r2.log                     688  c6a79b7c9a590c27e9013bd09a7b5770e42dcd836672493f1b6861e2c81772cd
+logs/extract_v06_armB0_noKL_s2.log                       15295  3c353a5a5ff95c91bccf2dcfac9240e6896897de9162fc3c27c49a7be86c60f7
+logs/replay_v06_armB0_noKL_s2_07_r1.log                   1310  2290cd0d973e188b891b0a1ca2c526f0fc7e1f5d3897a1f5619ba881d63c026b
+logs/replay_v06_armB0_noKL_s2_07_r2.log                   1308  7819b67d26b3f391a9a3681c29ffee6c3e37591799941a527b04a8d64da3f523
+logs/replay_v06_armB0_noKL_s2_09_r1.log                   1536  92d1847a77e0e3d9f95939ab35674eba6305a8559e56ef0b89d011265d3a35fd
+logs/replay_v06_armB0_noKL_s2_09_r2.log                   1537  39c68b6ffc085aad6a744ae8eab1e53ba4aeac89f9f61e0b6617b2efc1d9e95f
+map_armB0_noKL_s2_07_r1.json                             51297  24a40f654dfe80fe490f0d1163868ad128e2994859cd891d600ebc94262e18be
+map_armB0_noKL_s2_07_r2.json                             51303  3313cf52a60434ecbce7e2ba6149a2a8b57490b4fe30f5abc08e105e2229a7d5
+map_armB0_noKL_s2_09_r1.json                             51381  72885c5da5e72c990c83978f327c3dc7f33df6d9a0d5dcb98e33b9b823915e03
+map_armB0_noKL_s2_09_r2.json                             51343  40a981a51e0f195209e1dc93559211c726fb266974af1b2eecbc7ca5e3601f2a
+
+# out-of-frustum mIoU-9 of the archived (defective) runs, the fields tools/v06_report.py reads
+map_armB0_noKL_s2_07_r1.json               offline_all  60.54   map_all_lookup  67.03
+map_armB0_noKL_s2_07_r2.json               offline_all  60.25   map_all_lookup  66.52
+map_armB0_noKL_s2_09_r1.json               offline_all  57.98   map_all_lookup  65.66
+map_armB0_noKL_s2_09_r2.json               offline_all  58.07   map_all_lookup  66.30

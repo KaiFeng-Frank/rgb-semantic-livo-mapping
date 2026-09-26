@@ -92,8 +92,10 @@ scoring. It was not the same class of perturbation as run-to-run non-determinism
 resume changed the weights, not only the data order. On one GPU, Pointcept v1.5.1's
 `CheckpointLoader` loaded the frozen KL anchor, which holds the released weights, into the
 student, and did not restore the student head. Epoch 10 therefore restarted from the
-released model, with epoch 9's optimizer state and final learning rate. The scored
-armB0_noKL_s2 checkpoint is that one epoch, not a ten-epoch no-KL run. See
+released model, with epoch 9's optimizer state and final learning rate. The armB0_noKL_s2
+checkpoint first scored was that one epoch, not a ten-epoch no-KL run. It has since been
+withdrawn and archived, and seed 2 retrained from scratch without resuming; every
+B0-without-KL result is the rerun's. See
 [deviation 1 of the results](v06_results.md#protocol-deviations-and-disclosures).
 
 ## Results

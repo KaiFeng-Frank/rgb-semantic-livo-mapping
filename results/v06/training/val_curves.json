@@ -1,5 +1,5 @@
 {
- "description": "Per-epoch validation readouts of the seven v0.6 training jobs, extracted from their Pointcept training logs, which are not published (each log's SHA-256 is given). After every epoch Pointcept evaluates the val split and prints 'Val result: mIoU/mAcc/allAcc'; the epoch with the highest val mIoU is saved as model_best.pth, and that checkpoint was extracted and scored.",
+ "description": "Per-epoch validation readouts of the v0.6 training jobs, extracted from their Pointcept training logs, which are not published (each log's SHA-256 is given): the seven queue jobs, and armB0_noKL_s2_clean, the from-scratch rerun that replaced the defective armB0_noKL_s2 (kept below, labelled by its 'status'). After every epoch Pointcept evaluates the val split and prints 'Val result: mIoU/mAcc/allAcc'; the epoch with the highest val mIoU is saved as model_best.pth, and that checkpoint was extracted and scored.",
  "val_metric": "Pointcept SemSegEvaluator on seq 08, common-9 classes, intersections and unions pooled over all val points (point-weighted); fractions, not percent",
  "splits": {
   "train": {
@@ -29,7 +29,7 @@
   }
  },
  "steps_per_epoch": 7818,
- "selection_cross_checks": "selected epoch and value equal the checkpoint's own 'epoch' and 'best_metric_value' (scoring/extract_<job>.json, source) and the queue log's 'Best mIoU' for every job",
+ "selection_cross_checks": "selected epoch and value equal the checkpoint's own 'epoch' and 'best_metric_value' and the queue log's 'Best mIoU' for every job. The checkpoint values are those of scoring/extract_<tag>.json (source); armB0_noKL_s2_clean is scored under the tag armB0_noKL_s2, so its report is scoring/extract_armB0_noKL_s2.json, and its queue-log line is the rerun's. The defective armB0_noKL_s2's own extraction report, published under that name before the rerun, is archived on the host (SHA-256 in scoring/archive_s2_resumed_defective/MANIFEST.txt).",
  "jobs": {
   "armB0_s1": {
    "arm": "B0",
@@ -429,6 +429,8 @@
   },
   "armB0_noKL_s2": {
    "arm": "B0_noKL",
+   "status": "DEFECTIVE, withdrawn. Its epoch 10 came from a resume through Pointcept v1.5.1's CheckpointLoader, which loaded the frozen KL anchor (the released weights) into the student (resume_audit). The checkpoint selected from it was scored until the from-scratch rerun armB0_noKL_s2_clean replaced it; its scoring artefacts are archived (scoring/archive_s2_resumed_defective/) and the report that included it is scoring/REPORT_with_resumed_seed2.txt. No current aggregate uses it.",
+   "superseded_by": "armB0_noKL_s2_clean",
    "training_seed": 20260925,
    "kl_enabled": false,
    "config": "results/v06/training/configs/armB0_noKL_s2.py",
@@ -597,6 +599,136 @@
      "best_before_interruption_epoch": 5,
      "epoch_9": 0.509,
      "resumed_epoch_10": 0.618
+    }
+   }
+  },
+  "armB0_noKL_s2_clean": {
+   "arm": "B0_noKL",
+   "status": "from-scratch rerun of armB0_noKL_s2, no resume; scored under the tag armB0_noKL_s2 in place of the defective run (scoring/armB0_noKL_s2_SOURCE.txt)",
+   "replaces": "armB0_noKL_s2",
+   "training_seed": 20260925,
+   "kl_enabled": false,
+   "config": "results/v06/training/configs/armB0_noKL_s2_clean.py",
+   "config_note": "the same configuration file as armB0_noKL_s2 (arm_B0_noKL_v2_s2.py); the realised config.py differs from that job's only in save_path",
+   "selected_epoch": 2,
+   "selected_val_miou": 0.519,
+   "epochs": [
+    {
+     "epoch": 1,
+     "miou": 0.4922,
+     "macc": 0.7255,
+     "allacc": 0.6672,
+     "new_best": true
+    },
+    {
+     "epoch": 2,
+     "miou": 0.519,
+     "macc": 0.7164,
+     "allacc": 0.6637,
+     "new_best": true
+    },
+    {
+     "epoch": 3,
+     "miou": 0.4617,
+     "macc": 0.7184,
+     "allacc": 0.6572,
+     "new_best": false
+    },
+    {
+     "epoch": 4,
+     "miou": 0.5172,
+     "macc": 0.7179,
+     "allacc": 0.665,
+     "new_best": false
+    },
+    {
+     "epoch": 5,
+     "miou": 0.5036,
+     "macc": 0.7183,
+     "allacc": 0.6616,
+     "new_best": false
+    },
+    {
+     "epoch": 6,
+     "miou": 0.4875,
+     "macc": 0.7165,
+     "allacc": 0.659,
+     "new_best": false
+    },
+    {
+     "epoch": 7,
+     "miou": 0.4803,
+     "macc": 0.7133,
+     "allacc": 0.6595,
+     "new_best": false
+    },
+    {
+     "epoch": 8,
+     "miou": 0.4822,
+     "macc": 0.7151,
+     "allacc": 0.6585,
+     "new_best": false
+    },
+    {
+     "epoch": 9,
+     "miou": 0.4882,
+     "macc": 0.7153,
+     "allacc": 0.6601,
+     "new_best": false
+    },
+    {
+     "epoch": 10,
+     "miou": 0.4875,
+     "macc": 0.7143,
+     "allacc": 0.6591,
+     "new_best": false
+    }
+   ],
+   "logs": [
+    {
+     "source": "out/v06_train/armB0_noKL_s2_clean.log",
+     "sha256": "efe8beb98f186edd8b221844b18492fb10e288feac3036e01cbf3c3391dce9bb",
+     "bytes": 21661995,
+     "val_epochs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ]
+    }
+   ],
+   "from_scratch_check": "where Pointcept's CheckpointLoader reports what it loaded, the log prints 'No weight found at: None'; it contains no 'Missing keys' line; its first step logs loss 0.8018, as epoch 1 step 1 of armB0_noKL_s2 did",
+   "same_seed_check": {
+    "summary": "the per-epoch supervised-point audit (points per class) equals armB0_noKL_s2's, field for field, in epochs 1-9, as expected when the same seed draws the same samples and augmentations; the validation readouts of those epochs differ. Epoch 10 matches no epoch of armB0_noKL_s2, whose resumed epoch 10 repeats its own epoch 1",
+    "rerun": {
+     "source": "exp/sk2/armB0_noKL_s2_clean/rare_class_audit.jsonl",
+     "sha256": "7145c132e9cf6c4e9fbe57748db2ea49be3df19c232f36b5d63e77fd30096f53"
+    },
+    "original": {
+     "source": "exp/sk2/armB0_noKL_s2/rare_class_audit.jsonl",
+     "sha256": "c52cf9e5bcba152228731bc6a3c07494d66c72481f5ca8a9d6c823ba2ea0f17f"
+    },
+    "epochs_equal": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "supervised_points_epoch_10": {
+     "rerun": 160754735,
+     "original_resumed": 160763879,
+     "original_epoch_1": 160763879
     }
    }
   },

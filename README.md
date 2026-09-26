@@ -601,7 +601,7 @@ out-of-frustum mIoU-9, three training seeds × two forward passes.
 |---|---:|---:|---:|---:|
 | zero-shot | 64.96 ± 0.11 | 71.07 ± 0.16 | 60.99 ± 0.11 | 67.25 ± 0.07 |
 | **B0** — camera pseudo-labels, KL anchor | **71.50 ± 0.92** | **77.51 ± 1.87** | **68.31 ± 0.82** | **74.12 ± 0.89** |
-| B0 without KL | 50.64 ± 6.90 | 55.53 ± 7.96 | 54.15 ± 3.04 | 60.96 ± 3.74 |
+| B0 without KL | 45.32 ± 0.64 | 49.14 ± 1.10 | 52.10 ± 1.33 | 58.44 ± 1.16 |
 | R′ without KL — random target GT, reference | 85.37 ± 0.13 | 86.12 ± 0.07 | 83.57 ± 0.12 | 83.86 ± 0.08 |
 
 *Seq 07 is the sequence every v0.4/v0.5 decision was made on; seq 09 is clean. ± is the
@@ -612,10 +612,10 @@ out, as in the evaluation-unit tables.*
 * **No decision contamination is measurable.** Difference-in-differences against the
   zero-shot model: B0 −0.78, inside its 0.91 seed spread. Seq 09 is 3.97 points harder per
   scan for the zero-shot model and 3.19 for B0.
-* **The KL anchor is necessary for camera pseudo-label distillation.** 71.50 vs 50.64 on
-  seq 07, 68.31 vs 54.15 on seq 09; every B0 run beats every run without it. Without it the
-  three seeds spread 6.90, and one of them is the resumed seed below. On GT supervision
-  v0.4 measured the opposite: removing the anchor raised D from 74.68 to 81.44.
+* **The KL anchor is necessary for camera pseudo-label distillation.** 71.50 vs 45.32 on
+  seq 07, 68.31 vs 52.10 on seq 09; every B0 run beats every run without it. Without it the
+  three seeds spread 0.629 per scan on seq 07 and 1.319 on seq 09. On GT supervision v0.4
+  measured the opposite: removing the anchor raised D from 74.68 to 81.44.
 * **Seed spread is real:** 0.91 between seeds against 0.06 between forward passes (B0,
   seq 07). v0.4's ± was one training run's inference spread.
 * **v0.5's findings on seq 09.** (a), the map beats the scan, holds. (b), the margin shrinks
@@ -623,11 +623,13 @@ out, as in the evaluation-unit tables.*
   does not lose at map level (92.80 → 93.00), and sidewalk goes 85.79 → 85.59.
 * **Per cell** the map still beats the scan for every arm except R′ on seq 07
   (78.59 → 78.34).
-* **One arm carries a defect.** The host's OOM killer ended armB0_noKL_s2 in its last
-  epoch. On one GPU, Pointcept v1.5.1's resume loaded the frozen anchor, which holds the
-  released weights, into the student. Its scored checkpoint is one no-KL epoch from the
-  released model: val 0.6180 against 0.5326 / 0.5268. Every B0-without-KL aggregate
-  includes it.
+* **One seed was retrained.** The host's OOM killer ended armB0_noKL_s2 in its last epoch,
+  and on one GPU Pointcept v1.5.1's resume loaded the frozen anchor, which holds the released
+  weights, into the student. That checkpoint was withdrawn and archived, the seed was
+  retrained from scratch, and the B0-without-KL aggregates above include the clean rerun. The
+  aggregates first published with the defective seed are kept in
+  [`REPORT_with_resumed_seed2.txt`](results/v06/scoring/REPORT_with_resumed_seed2.txt). The
+  resume path is now a strict, key-exact restore, checked against Pointcept's own path.
 
 [v0.6 results](docs/v06_results.md) · [report](results/v06/scoring/REPORT.txt) ·
 [protocol](docs/v06_training_protocol.md)
@@ -693,11 +695,12 @@ Evaluation unit ✅: map results per cell beside per point; the residual is clas
 sparse cells fail at roughly the ordinary per-scan error rate, so the lever is supervision.
 Training ✅: seq 09 held out, B0 with and without the KL anchor on three seeds each, R′ as
 the reference. Decision contamination is −0.78 for B0, inside its 0.91 seed spread. The KL
-anchor is necessary for camera pseudo-label distillation (71.50 vs 50.64 on seq 07, 68.31
-vs 54.15 on seq 09), where v0.4 found it harmful for GT supervision. Seed spread is 0.91
+anchor is necessary for camera pseudo-label distillation (71.50 vs 45.32 on seq 07, 68.31
+vs 52.10 on seq 09), where v0.4 found it harmful for GT supervision. Seed spread is 0.91
 against a pass spread of 0.06. v0.5's (a) and (b) hold on seq 09; (c) does not generalise.
-B0 on seq 09: 74.12 per point, 61.94 per cell. One no-KL seed resumed onto the released
-weights after a host OOM kill. [Results](docs/v06_results.md).
+B0 on seq 09: 74.12 per point, 61.94 per cell. One no-KL seed, resumed onto the released
+weights after a host OOM kill, was withdrawn and retrained from scratch.
+[Results](docs/v06_results.md).
 
 **v0.7 — map-propagated stuff-label distillation. Design in progress.** Carry the camera
 pseudo-labels through the accumulated map to points the camera never labels in their own

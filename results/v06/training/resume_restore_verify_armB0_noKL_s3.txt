@@ -1,0 +1,51 @@
+verify_resume_restore.py --path fixed        2026-09-26 17:40:22  host [host name removed from the public copy]
+torch 2.5.1+cu124, CUDA visible: False, threads 2
+scripts     tools/verify_resume_restore.py sha256 9d6a132e97199a35, tools/train_distil_v2_resume.py sha256 0520a081662e0ebd
+config      /data/livo_sem/src/Pointcept_v151/configs/semantic_kitti/arm_B0_noKL_v2_s3.py
+checkpoint  /data/livo_sem/exp/sk2/armB0_noKL_s3/model/model_last.pth
+            647043544 bytes, mtime 2026-09-26 06:40:54.057671, sha256 0ab23f8cda1834f09a07102ef940b66c7c27641882d87095e3841fe3fd809f11
+run dir     /data/livo_sem/exp/sk2/armB0_noKL_s3   (read only)
+scratch     /data/livo_sem/out/v06_train/resume_verify_work/armB0_noKL_s3_fixed   (train.log / events of this check)
+
+checkpoint holds: epoch 10, best_metric_value np.float64(0.5268407150259279), 976 state_dict tensors {'backbone': 486, 'seg_head': 2, 'frozen_backbone': 486, 'frozen_head': 2}
+trainer class CPUTrainer; restore ran before training started: True; hooks: ['CheckpointLoader', 'IterationTimer', 'InformationWriter', 'SemSegEvaluator', 'CheckpointSaver', 'RareClassAudit']
+torch.load calls during before_train: 0 []
+
+(a) model load
+    build+restore load_state_dict(strict=True): 976 keys given -> 0 missing, 0 unexpected
+    restore: strict=True, 0 missing / 0 unexpected; CheckpointLoader loaded nothing
+    'module.' stripped from 0 keys, 0 dtype casts
+    (a) PASS
+
+(b) every tensor of model.state_dict() vs the checkpoint tensor of the SAME name
+    backbone         486 equal    0 differ  0 absent
+    seg_head           2 equal    0 differ  0 absent
+    frozen_backbone  486 equal    0 differ  0 absent
+    frozen_head        2 equal    0 differ  0 absent
+    total 976 / 976 model tensors equal; checkpoint tensors not in the model: 0; dtype casts needed: 0
+    counter-check, inside the checkpoint: backbone.* differs from frozen_backbone.* (student rounded to fp16) in 486 / 486 tensors, 46035438 / 46162304 float elements (99.7 %)
+    model trunk after this path: equals checkpoint backbone.* in 486 / 486, equals checkpoint frozen_backbone.* in 0 / 486
+    model seg_head: equals checkpoint seg_head.* True; equals the RELEASED head (weights/nuscenes-semseg-pt-v3m1-0-base) False
+    (b) PASS
+
+(c) optimizer / scheduler / scaler vs the checkpoint (independent load)
+    param_groups equal (lr, betas, weight_decay, initial/max/min lr, param indices): True
+    group sizes [106, 792]; state entries 449 (checkpoint 449), same indices: True
+    step values: {78148.0: 449};  entries with any of step/exp_avg/exp_avg_sq different: 0;  storages shared with the reference: 0
+      state[0]: step 78148.0/78148.0  |exp_avg| 4.308760e-01/4.308760e-01  |exp_avg_sq| 5.739635e-01/5.739635e-01  (restored/ckpt)
+      state[1]: step 78148.0/78148.0  |exp_avg| 1.605478e-02/1.605478e-02  |exp_avg_sq| 6.020672e-04/6.020672e-04  (restored/ckpt)
+      state[2]: step 78148.0/78148.0  |exp_avg| 7.871816e-03/7.871816e-03  |exp_avg_sq| 1.754978e-04/1.754978e-04  (restored/ckpt)
+    scheduler state_dict equal: True  (last_epoch 78148/78148, _step_count 78149/78149, total_steps 78180/78180)
+    optimizer lr now [2.000841055715345e-07, 2.0008410557153452e-08] == scheduler last lr [2.000841055715345e-07, 2.0008410557153452e-08]: True
+    scaler state_dict {'scale': 4096.0, 'growth_factor': 2.0, 'backoff_factor': 0.5, 'growth_interval': 2000, '_growth_tracker': 23} == checkpoint {'scale': 4096.0, 'growth_factor': 2.0, 'backoff_factor': 0.5, 'growth_interval': 2000, '_growth_tracker': 23}: True
+    (c) PASS
+
+(d) epoch / best metric / what the hooks saw
+    start_epoch 10 (checkpoint 10), max_epoch 10 -> epochs left: none
+    best_metric_value np.float64(0.5268407150259279) (checkpoint np.float64(0.5268407150259279))
+    InformationWriter iteration counter 78180 == start_epoch * len(train_loader) = 10 * 7818: True
+    kl_enabled False, kl_lambda None  <- not needed (kl_enabled=False)
+    (d) PASS
+
+VERDICT: PASS -- resume via tools/train_distil_v2_resume.py restores this checkpoint exactly
+wall 6.9 s, peak RSS 2.49 GB

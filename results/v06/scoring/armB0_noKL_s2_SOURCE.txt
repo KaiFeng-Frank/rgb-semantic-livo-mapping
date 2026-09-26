@@ -1,0 +1,21 @@
+# out/v06_score/armB0_noKL_s2_SOURCE.txt -- where the weights scored under tag armB0_noKL_s2 come from
+# written 2026-09-26 22:58:37 by opt/rescore_s2_clean.sh
+tag                 armB0_noKL_s2  (kept, so tools/v06_report.py counts it as seed 2 of the B0_noKL family)
+source_checkpoint   exp/sk2/armB0_noKL_s2_clean/model/model_best.pth
+source_sha256       93fed75f61a9ce7a220e83ca546a104391e6c7fe9c768f7a0f73c8ae0c5d3279
+source_bytes        647043544
+source_epoch        2  (as recorded in the checkpoint)
+source_best_val     0.5190046188618128  (seq 08 val mIoU)
+queue_line          [2026-09-26 22:55:32] rerun armB0_noKL_s2_clean  OK   365 min  Best mIoU: 0.5190
+training            opt/rerun_B0_noKL_s2.sh (unit livo_v06_rerun_s2): from scratch, no resume;
+                    log out/v06_train/armB0_noKL_s2_clean.log: 'No weight found at: None', no 'Missing keys'
+student             weights/v06/armB0_noKL_s2_student.pth  sha256 0d6d65ba7cca45b45f796f64f975a3fa5bff505e3e069c7896ef87dd9a7572e7  (184813706 bytes; backbone.* + seg_head.* = 488 tensors, frozen_* dropped)
+extraction_report   out/v06_score/extract_armB0_noKL_s2.json  PASS (S1-S4), extracted 2026-09-26 22:57:18, negative control weights/v06/armB0_s1_student.pth
+replaces            exp/sk2/armB0_noKL_s2/model/model_best.pth  sha256 98ef5676ddc9af006fc75f098de8f74674bc57c29c39d66e9a95aa49bac04f25
+                    resumed through Pointcept v1.5.1's CheckpointLoader, frozen_backbone.* loaded into
+                    backbone.* (CRITICAL_CONSTRAINTS.md T1); its artefacts: out/v06_score/archive_s2_resumed_defective/
+scoring_code        identical to the 2026-09-26 13:32 scoring of the other arms (sha256-pinned in opt/rescore_s2_clean.sh):
+  4c31465b8de9b4afa10552e3835db6861d552a2984b17f183bc36da708c07617  tools/extract_student.py
+  57b57c022be7fc776fdc20aaa80f9461fbdfd5a8b408490d48f057472e4de674  tools/cache_trained.py
+  0896156c9606a62d45d90bdcc83c072797619415633b7c5f5ce22fd16c6d0c6b  tools/map_eval.py
+  782d0d6b9a4ed3097f5d1d8dd900d75950e147e662c458a29563ce66773ca561  tools/v06_report.py

@@ -398,6 +398,56 @@ extracted under data/raw/<day>/<drive>_sync/ (frame counts checked) and that
 data/pointcept_sk symlinks into data/raw, not into the archives.  Re-downloadable from the
 KITTI S3 bucket.  Kept: the calib zips, data_odometry_labels.zip, data/raw itself.
 
+## T1 (2026-09-26) NEVER resume a DistilSegmentorMiB run through Pointcept's CheckpointLoader
+MECHANISM.  Pointcept v1.5.1 CheckpointLoader.before_train (src/Pointcept_v151/pointcept/engines/hooks/misc.py
+lines 227-236) adds "module." only when world_size > 1, but whenever world_size == 1 it does `key = key[7:]` on
+EVERY key, prefixed or not, and loads with strict=False.  Our checkpoints have no "module." prefix (V1), so on
+this one-GPU box: frozen_backbone.X -> backbone.X (the fp16 anchor = the RELEASED weights overwrite the student
+trunk), backbone.X -> e.X, seg_head.X -> d.X, frozen_head.X -> head.X (490 keys dropped as unexpected), and the
+student head keeps the released head the model constructor loaded.  477 keys are reported missing = 473
+frozen_backbone + 2 seg_head + 2 frozen_head (the other 13 frozen_backbone num_batches_tracked are filled silently
+by BatchNorm's version-compat path -- hence 477, not 490).  Epoch, best_metric_value, optimizer, scheduler and
+scaler are then restored correctly, so the run LOOKS resumed.  `weight=<ckpt>` without resume=True does the same
+load.
+WHICH RUN.  Job 5 of the v0.6 queue, armB0_noKL_s2, resumed 2026-09-25 23:35 from its epoch-9 model_last.pth by
+opt/train_queue_v06_resume.sh (`--options resume=True weight=...`).  Its epoch 10 trained the released model.  At
+00:15:04 CheckpointSaver overwrote model_last.pth AND model_best.pth with that state, so the epoch-9 checkpoint and
+the seed's own best checkpoint no longer exist; both files now hold epoch 10, best 0.6179504518350944 -- the
+released model plus one epoch, not seed 2 of B0_noKL, never to be scored as such.  queue.log's "job 5
+armB0_noKL_s2  OK   40 min  Best mIoU: 0.6180" is this run.  Clean from-scratch rerun: opt/rerun_B0_noKL_s2.sh ->
+exp/sk2/armB0_noKL_s2_clean.
+HOW TO TELL FROM A LOG.  (1) After `Loading weight at:` a line `misc.py line 240 ... Missing keys: [...]` with a
+non-empty list (477 entries; out/v06_train/armB0_noKL_s2.resume_ep9.log line 220).  A correct run logs `No weight
+found at: None` there -- every other v0.6 training log does.  (2) The first step of the resumed epoch sits at the
+EPOCH-1 level, not where the previous epoch ended: `Train: [10/10][1/7818] loss: 0.8021 ce: 0.5367 lovasz: 0.2654`
+vs epoch 1 step 1 `0.8018 / 0.5366 / 0.2653` and ~0.07 at the end of epoch 9; epoch train mean 0.1010 (ep 9) ->
+0.3868 (ep 10); val mIoU 0.5090 (ep 9) -> 0.6180 (ep 10).
+ALSO MEASURED -- inherent to ANY resume, not to the defect: default_setup re-seeds at start, so the first resumed
+epoch replays EPOCH 1's sample order and augmentations exactly (job 5's epoch-10 rare_class_audit counts equal
+epoch 1's -- 160763879 supervised points, every class -- and no other epoch's).
+FIX.  tools/train_distil_v2_resume.py --resume-from <model_last.pth>; tools/train_distil_v2.py is unchanged for
+fresh runs (.pre_resume = its byte copy).  opt/train_queue_v06_resume.sh resumes only through it (.pre_fix = the
+old script) and fails any job whose log contains "Missing keys".  The tool refuses --options resume= / weight=,
+forces cfg.resume=False, cfg.weight=None (the hook loads nothing), builds the trainer with TRAINERS.build and
+restores BEFORE .train(), i.e. before every before_train hook: state_dict strict=True ("module." removed only if
+EVERY key carries it; a mix is refused), then every tensor torch.equal to the same-name checkpoint tensor;
+optimizer / scheduler / scaler after group-size, moment-shape and total_steps checks; start_epoch and
+best_metric_value from the checkpoint; a KL arm's calibrated kl_lambda from <run>/rare_class_audit.jsonl (it is
+NOT in the checkpoint -- left alone, the first resumed step re-calibrates it on the trained student); train.log
+appended, not truncated; config.py not re-dumped, and the current config must equal it.
+VERIFIED ON CPU (tools/verify_resume_restore.py: the tool's own build_resumed_trainer, then the hooks'
+before_train, then an independent load of the checkpoint).  resume_restore_verify.txt (this file): 0 missing /
+0 unexpected, 976/976 tensors equal by name, trunk = checkpoint backbone.* 486/486 (backbone.* differs from
+frozen_backbone.* in 485/486), optimizer 449 entries at step 78148, scheduler and scaler equal, start_epoch 10,
+best 0.6179504518350944.  resume_restore_negctl.txt (Pointcept's path, same file): 477 missing / 490 unexpected,
+trunk = frozen anchor 486/486, head = released head, while optimizer / scheduler / epoch / best all "restore".
+resume_restore_guards.txt: 18/18 refusals.  resume_restore_verify_armB0_noKL_s3.txt and _armB0_s1.txt: clean
+10-epoch checkpoints (trunk vs anchor differ 486/486), incl. the KL arm's kl_lambda 0.6693611546824091.
+Never pass resume= / weight= to a DistilSegmentorMiB run.
+IN THIS REPOSITORY.  experiments/v06/source/opt/train_queue_v06_resume.sh is the OLD script, as it ran on
+2026-09-25 (the host's .pre_fix); do not resume with it.  The resume tool and its verifier are in
+experiments/v06/source/tools/, the five resume_restore_*.txt outputs in results/v06/training/.
+
 ## P1 (2026-09-26) sequences/<seq>/poses.txt is SemanticKITTI's, not KITTI's odometry ground truth
 fetch_kitti.sh never fetched data_odometry_poses.zip; the poses.txt under data/odometry/dataset/
 sequences/ comes from SemanticKITTI's labels archive. Against KITTI's own poses (now in

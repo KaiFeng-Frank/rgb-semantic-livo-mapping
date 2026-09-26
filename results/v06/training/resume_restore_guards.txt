@@ -1,0 +1,32 @@
+verify_resume_restore.py --path guards        2026-09-26 17:39:56  host [host name removed from the public copy]
+torch 2.5.1+cu124, CUDA visible: False, threads 2
+scripts     tools/verify_resume_restore.py sha256 9d6a132e97199a35, tools/train_distil_v2_resume.py sha256 0520a081662e0ebd
+config      /data/livo_sem/src/Pointcept_v151/configs/semantic_kitti/arm_B0_noKL_v2_s2.py
+checkpoint  /data/livo_sem/exp/sk2/armB0_noKL_s2/model/model_last.pth
+            647048472 bytes, mtime 2026-09-26 00:15:04.738449, sha256 98ef5676ddc9af006fc75f098de8f74674bc57c29c39d66e9a95aa49bac04f25
+run dir     /data/livo_sem/exp/sk2/armB0_noKL_s2   (read only)
+scratch     /data/livo_sem/out/v06_train/resume_verify_work/armB0_noKL_s2_guards   (train.log / events of this check)
+
+--path guards: the resume tool's refusals, on the real config and checkpoint
+
+G1 PASS --options save_path=/nonexistent resume=True -> exit 2: train_distil_v2_resume.py: error: --resume-from replaces resume: do not pass them (CRITICAL_CONSTRAINTS.md T1)
+G1 PASS --options save_path=/nonexistent weight=/data/livo_sem/exp/sk2/armB0_noKL_s2/model/model_last.pth -> exit 2: train_distil_v2_resume.py: error: --resume-from replaces weight: do not pass them (CRITICAL_CONSTRAINTS.md T1)
+G1 PASS (no --resume-from)                       -> exit 2: train_distil_v2_resume.py: error: the following arguments are required: --resume-from
+G2 PASS parsing with the tool's options wrote no config.py into save_path
+G2 PASS train.log still starts with the marker and now holds the RESUME lines (49563 bytes)
+G3 PASS save_path != checkpoint's run dir -> save_path /data/livo_sem/out/v06_train/resume_verify_work/armB0_noKL_s2_guards is not the run /data/livo_sem/exp/sk2/armB0_noKL_s2 that /data/livo_sem/exp/sk2/armB0_noKL_s2/model/model_last.pth belongs to
+G4 PASS unchanged config accepted; optimizer.lr 0.0002 -> 0.0003 refused, diff ["-optimizer = dict(type='AdamW', lr=0.0002, weight_decay=0.005)", "+optimizer = dict(type='AdamW', lr=0.0003, weight_decay=0.005)"]
+G5 PASS cfg.weight set -> cfg.weight / cfg.resume are set: Pointcept's CheckpointLoader would load on top of this re
+G5 PASS EventStorage exists -> restore called after training started (EventStorage exists)
+G6 PASS all 976 keys 'module.'-prefixed -> stripped 976, strict load 0/0, every tensor equal
+G6 PASS 1 prefixed key among 976 -> checkpoint state_dict mixes 1 'module.'-prefixed keys with 975 unprefixed ones; refusing to guess which are real
+G7 PASS one moment with a wrong shape -> optimizer state does not fit the rebuilt parameters: [(0, 'exp_avg (1,) != parameter (32, 5, 5, 5, 4)')]
+G7 PASS moments for frozen param #53 -> optimizer state does not fit the rebuilt parameters: [(53, 'moments saved for a parameter 
+G7 PASS total_steps +1 -> scheduler total_steps: 78180 rebuilt from this config and loader, 78181 in the checkpoint -- the epo
+G8 PASS calibrated arm -> restored 0.6693611546824091 from /data/livo_sem/exp/sk2/armB0_s1/rare_class_audit.jsonl (10 epoch records <= 10, all identical)
+G8 PASS no audit -> refusing to resume a KL arm: kl_lambda was calibrated at step 0, is not in the checkpoint, and /data/livo_sem/out/
+G9 PASS [k[7:] for k in checkpoint] -> RuntimeError (Error(s) in loading state_dict for DistilSegmentorMiB: ...).  NB torch copies the matching keys BEFORE raising, so the exception must never be caught and ignored -- the tool lets it end the process
+G10 PASS queue argv -> launch(main_worker, cfg=(cfg, model_last.pth)); parse-time resume=True weight=None; run config.py untouched (mtime+sha256): True; config check on it: accepted
+
+GUARDS: 18 / 18 PASS
+wall 6.3 s, peak RSS 2.67 GB

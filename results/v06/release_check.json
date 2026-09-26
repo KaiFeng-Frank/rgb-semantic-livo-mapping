@@ -1,0 +1,343 @@
+{
+  "checked_utc": "2026-09-26T17:35:15.820866+00:00",
+  "base_commit": "24da70e31caac22ec4c52b59f024ce6a22be75cb",
+  "workflow": "release-v06-clean-seed",
+  "checks": [
+    {
+      "check": "manifest_current_files",
+      "pass": true,
+      "detail": {
+        "checked": 94,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "changed_artifact_source_hashes",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "artifact_bytes_after_documented_redactions",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "current_matrix_size",
+      "pass": true,
+      "detail": 32
+    },
+    {
+      "check": "all_summary_metrics_classes_counts_and_source_hashes",
+      "pass": true,
+      "detail": {
+        "checked_runs": 32,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "other_28_runs_unchanged",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "historical_report_preserved",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "current_report_recomputed_byte_for_byte",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "historical_report_recomputed_byte_for_byte",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "clean_checkpoint_provenance",
+      "pass": true,
+      "detail": {
+        "replaced_runs": 4,
+        "checkpoint_sha256": "93fed75f61a9ce7a220e83ca546a104391e6c7fe9c768f7a0f73c8ae0c5d3279",
+        "selected_epoch": 2
+      }
+    },
+    {
+      "check": "validation_log_hashes",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "clean_training_curve_and_fresh_start",
+      "pass": true,
+      "detail": [
+        0.4922,
+        0.519,
+        0.4617,
+        0.5172,
+        0.5036,
+        0.4875,
+        0.4803,
+        0.4822,
+        0.4882,
+        0.4875
+      ]
+    },
+    {
+      "check": "published_numeric_tables_recomputed",
+      "pass": true,
+      "detail": [
+        {
+          "table": "main",
+          "arm": "ZS",
+          "values": [
+            "64.96",
+            "0.11",
+            "71.07",
+            "0.16",
+            "60.99",
+            "0.11",
+            "67.25",
+            "0.07"
+          ],
+          "pass": true
+        },
+        {
+          "table": "main",
+          "arm": "B0",
+          "values": [
+            "71.50",
+            "0.92",
+            "77.51",
+            "1.87",
+            "68.31",
+            "0.82",
+            "74.12",
+            "0.89"
+          ],
+          "pass": true
+        },
+        {
+          "table": "main",
+          "arm": "B0_noKL",
+          "values": [
+            "45.32",
+            "0.64",
+            "49.14",
+            "1.10",
+            "52.10",
+            "1.33",
+            "58.44",
+            "1.16"
+          ],
+          "pass": true
+        },
+        {
+          "table": "main",
+          "arm": "Rprime_noKL",
+          "values": [
+            "85.37",
+            "0.13",
+            "86.12",
+            "0.07",
+            "83.57",
+            "0.12",
+            "83.86",
+            "0.08"
+          ],
+          "pass": true
+        },
+        {
+          "table": "difference_in_differences",
+          "values": [
+            "45.32",
+            "52.10",
+            "-6.77",
+            "-10.74"
+          ],
+          "pass": true
+        },
+        {
+          "table": "kl_difference",
+          "seq": "07",
+          "metric": "offline_all",
+          "values": [
+            "71.50",
+            "45.32",
+            "+26.18"
+          ],
+          "pass": true
+        },
+        {
+          "table": "kl_difference",
+          "seq": "07",
+          "metric": "map_all_lookup",
+          "values": [
+            "77.51",
+            "49.14",
+            "+28.37"
+          ],
+          "pass": true
+        },
+        {
+          "table": "seed_and_pass_spread",
+          "seq": "07",
+          "values": [
+            "0.629",
+            "0.088"
+          ],
+          "pass": true
+        },
+        {
+          "table": "kl_difference",
+          "seq": "09",
+          "metric": "offline_all",
+          "values": [
+            "68.31",
+            "52.10",
+            "+16.21"
+          ],
+          "pass": true
+        },
+        {
+          "table": "kl_difference",
+          "seq": "09",
+          "metric": "map_all_lookup",
+          "values": [
+            "74.12",
+            "58.44",
+            "+15.67"
+          ],
+          "pass": true
+        },
+        {
+          "table": "seed_and_pass_spread",
+          "seq": "09",
+          "values": [
+            "1.319",
+            "0.161"
+          ],
+          "pass": true
+        },
+        {
+          "table": "map_gain",
+          "values": [
+            "45.32",
+            "49.14",
+            "52.10",
+            "58.44"
+          ],
+          "pass": true
+        },
+        {
+          "table": "voxel_reweighted",
+          "values": [
+            "45.01",
+            "46.26",
+            "44.21",
+            "47.54"
+          ],
+          "pass": true
+        },
+        {
+          "table": "voxel_and_point_units",
+          "values": [
+            "49.14",
+            "46.94",
+            "66.48",
+            "39.27",
+            "58.44",
+            "47.91",
+            "69.51",
+            "31.19"
+          ],
+          "pass": true
+        },
+        {
+          "table": "per_seed",
+          "seed": 1,
+          "values": [
+            "0.5326",
+            "45.82",
+            "45.99",
+            "50.15",
+            "50.18",
+            "53.69",
+            "53.94",
+            "59.82",
+            "59.91"
+          ],
+          "pass": true
+        },
+        {
+          "table": "per_seed",
+          "seed": 2,
+          "values": [
+            "0.5190",
+            "44.46",
+            "44.43",
+            "47.63",
+            "47.59",
+            "51.67",
+            "52.05",
+            "58.35",
+            "58.53"
+          ],
+          "pass": true
+        },
+        {
+          "table": "per_seed",
+          "seed": 3,
+          "values": [
+            "0.5268",
+            "45.78",
+            "45.46",
+            "49.71",
+            "49.59",
+            "50.78",
+            "50.44",
+            "56.97",
+            "57.07"
+          ],
+          "pass": true
+        }
+      ]
+    },
+    {
+      "check": "obsolete_aggregates_removed_from_current_docs",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "added_source_syntax",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "release_scope_and_sanitization",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "changed_markdown_local_links",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "no_deleted_files",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "pass": true,
+  "scope": "Completion review of the clean-seed release: 94 existing snapshot files, 32 scoring runs and the changed documentation. This receipt is then appended to the snapshot manifest.",
+  "documentation_sha256": {
+    "CRITICAL_CONSTRAINTS.md": "abe7af21d3158b5951e1f2296ec68d4fb5c218a7ea2b72f6c8ca6fe015011cbc",
+    "README.md": "ce10f3701c4e6c04cf729249fe2822f62ae3170ddd062b6288f3bcd219a943bc",
+    "docs/v06_results.md": "3770c21a0fdf90f48d6757af2d03fc8258c1e25588ebb42f6dec2fa47597eaed",
+    "docs/v06_training_protocol.md": "041c88f96fee68a143fe918945594aeced4a9b699c5e95cf32669298a544d18e",
+    "experiments/v06/README.md": "69cd1a2a2832c218566cfed1868a0136e6423bcb6cff19db723ad8d661fbd403"
+  },
+  "source_log_whitespace": "The appended scoring log retains one trailing space from the experiment host; its bytes are preserved for source fidelity."
+}

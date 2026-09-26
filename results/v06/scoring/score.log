@@ -128,3 +128,27 @@ Rprime_noKL   |    79.58     89.63    6.63 |    78.76     89.22    8.29
      seq09 B0_noKL      per-scan 45.81 -> map 48.90   map WINS
      seq09 Rprime_noKL  per-scan 77.09 -> map 77.98   map WINS
 [2026-09-26 15:42:38] v0.6 scoring done
+[2026-09-26 18:37:13] rescore_s2: start, unit shell pid 384722: oom_score_adj=-900, inherited by every child
+[2026-09-26 18:37:13] rescore_s2:     scoring code identical to the 2026-09-26 13:32:03 scoring run (19 files sha256-pinned; no Pointcept models/*.py newer)
+[2026-09-26 18:37:13] rescore_s2: 0/5 waiting for RERUN_DONE in out/v06_train/queue.log (unit livo_v06_rerun_s2; 5-min polls, 12 h cap); GPU untouched until then
+[2026-09-26 22:57:13] rescore_s2: 0/5 RERUN_DONE present (waited 260 min)
+[2026-09-26 22:57:13] rescore_s2:     scoring code identical to the 2026-09-26 13:32:03 scoring run (19 files sha256-pinned; no Pointcept models/*.py newer)
+[2026-09-26 22:57:13] rescore_s2:     queue.log: rerun started 2026-09-26 16:50:27 (line 24); status line 25: [2026-09-26 22:55:32] rerun armB0_noKL_s2_clean  OK   365 min  Best mIoU: 0.5190; last RERUN_DONE line 26
+[2026-09-26 22:57:13] rescore_s2:     exp/sk2/armB0_noKL_s2_clean/model/model_best.pth present; out/v06_train/armB0_noKL_s2_clean.log: 'No weight found at: None', no 'Missing keys' (from scratch, T1 signature absent)
+[2026-09-26 22:57:13] rescore_s2: 1/5 archiving the resumed-defective seed -> out/v06_score/archive_s2_resumed_defective
+[2026-09-26 22:57:15] rescore_s2:     moved 4 caches, 4 map JSONs, the extraction report, the student, REPORT.txt and 9 logs; README.txt + MANIFEST.txt written
+[2026-09-26 22:57:15] rescore_s2: 2/5 extracting the clean student: exp/sk2/armB0_noKL_s2_clean/model/model_best.pth -> weights/v06/armB0_noKL_s2_student.pth (tag armB0_noKL_s2)
+[2026-09-26 22:57:15] rescore_s2:     GPU now: 15 MiB, 24564 MiB; compute apps: 
+[2026-09-26 22:58:37] rescore_s2: 3/5 caching predictions (GPU, serial)
+[2026-09-26 23:00:52] rescore_s2:     armB0_noKL_s2_07_r1 cached (1101 frames)
+[2026-09-26 23:03:00] rescore_s2:     armB0_noKL_s2_07_r2 cached (1101 frames)
+[2026-09-26 23:05:39] rescore_s2:     armB0_noKL_s2_09_r1 cached (1591 frames)
+[2026-09-26 23:08:35] rescore_s2:     armB0_noKL_s2_09_r2 cached (1591 frames)
+[2026-09-26 23:08:35] rescore_s2: 4/5 map-level replay (CPU, 2-way)
+done armB0_noKL_s2_07_r2 rc=0
+done armB0_noKL_s2_07_r1 rc=0
+done armB0_noKL_s2_09_r2 rc=0
+done armB0_noKL_s2_09_r1 rc=0
+[2026-09-26 23:15:40] rescore_s2: 5/5 checking the new artefacts against the archived ones, then the report
+[2026-09-26 23:15:40] rescore_s2: REPORT.txt regenerated with the CLEAN seed 2 of B0_noKL (exp/sk2/armB0_noKL_s2_clean/model/model_best.pth, sha256 93fed75f61a9ce7a; provenance out/v06_score/armB0_noKL_s2_SOURCE.txt; defective seed in out/v06_score/archive_s2_resumed_defective): loaded 16 (arm, seq) groups, 32 runs | B0_noKL row: B0_noKL | 45.32±0.64 49.14±1.10 | 52.10±1.33 58.44±1.16
+RESCORE_DONE
