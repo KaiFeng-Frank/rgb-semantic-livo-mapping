@@ -313,7 +313,10 @@ Caveats, as the report states them: votes come from all other frames, past and f
 (offline label generation, as for training — a causal variant would reach fewer points);
 leave-own-frame-out removes only the query point's own sweep; point-weighted numbers are
 dominated by near range (52898537 of the 66400637 propagated-only out-of-frustum points lie
-within 10 m); one sequence, and it is the test sequence. **A seq-09 replication is pending.**
+within 10 m); one sequence, and it is the test sequence. **The seq-09 replication holds** (same operating point, out of sample): coverage 66.99 % (5.03×),
+propagated-only out-of-frustum precision 90.03 % against 93.86 % per scan. Its class pattern differs
+from seq 07 (car 90.94, large_vehicle 98.00, terrain 74.65, person 61.18, two_wheeler 64.45 at k ≥ 2),
+so a fixed stuff/thing rule is not supported; reliability depends on the sequence and the teacher.
 
 ## Files
 
