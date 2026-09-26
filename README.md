@@ -447,8 +447,8 @@ result is from v0.2/v0.3; deployment of the fine-tuned student is a later gate.
 See [full results, evaluation conditions and next steps](docs/v04_results.md),
 [all metrics and per-class results](results/v04/completed_summary.md), and the
 [experiment source snapshot](experiments/v04/README.md). Checkpoint selection uses
-seq 08 GT; independent training repeats and evaluation on data unseen during
-method development remain outstanding.
+seq 08 GT. Independent training repeats and a held-out sequence followed in
+[v0.6](#v06--a-held-out-sequence-three-seeds-the-kl-anchor).
 
 Verify the archived numbers without a GPU or dataset:
 
@@ -488,6 +488,10 @@ from −2.65 per scan to +0.44 in the map.
 Latency follows the architecture, not the weights: saturated frame period 57.46 / 57.95 /
 61.34 ms (zero-shot / B0 / R′, mean of three; one R′ run stepped mid-run and did not
 reproduce), peak VRAM 1459 MiB for all three.
+
+**Follow-up, v0.6:** on the held-out seq 09 the first two findings hold and the third does
+not. R′'s road does not lose at map level there (92.80 → 93.00), and sidewalk goes
+85.79 → 85.59 ([v0.6](#v06--a-held-out-sequence-three-seeds-the-kl-anchor)).
 
 [v0.5 results](docs/v05_results.md) · [report](results/v05/REPORT.md) ·
 [source snapshot](experiments/v05/README.md)
@@ -581,6 +585,49 @@ point's 8th neighbour is ≥ 0.5 m away, the same sign on all five unseen arms, 
 
 ---
 
+## v0.6 — a held-out sequence: three seeds, the KL anchor
+
+**Seq 09 was held out from training and from every design decision the trained arms depend
+on. B0 on it: 68.31 per scan, 74.12 on the map per point, 61.94 per cell.** These are
+out-of-frustum mIoU-9, three training seeds × two forward passes.
+
+| arm | seq 07 per scan | seq 07 map | seq 09 per scan | seq 09 map |
+|---|---:|---:|---:|---:|
+| zero-shot | 64.96 ± 0.11 | 71.07 ± 0.16 | 60.99 ± 0.11 | 67.25 ± 0.07 |
+| **B0** — camera pseudo-labels, KL anchor | **71.50 ± 0.92** | **77.51 ± 1.87** | **68.31 ± 0.82** | **74.12 ± 0.89** |
+| B0 without KL | 50.64 ± 6.90 | 55.53 ± 7.96 | 54.15 ± 3.04 | 60.96 ± 3.74 |
+| R′ without KL — random target GT, reference | 85.37 ± 0.13 | 86.12 ± 0.07 | 83.57 ± 0.12 | 83.86 ± 0.08 |
+
+*Seq 07 is the sequence every v0.4/v0.5 decision was made on; seq 09 is clean. ± is the
+population SD over an arm's runs: three seeds × two passes for B0 and B0 without KL, and two
+passes of one checkpoint for zero-shot and R′. Map is per point; a point in no voxel is left
+out, as in the evaluation-unit tables.*
+
+* **No decision contamination is measurable.** Difference-in-differences against the
+  zero-shot model: B0 −0.78, inside its 0.91 seed spread. Seq 09 is 3.97 points harder per
+  scan for the zero-shot model and 3.19 for B0.
+* **The KL anchor is necessary for camera pseudo-label distillation.** 71.50 vs 50.64 on
+  seq 07, 68.31 vs 54.15 on seq 09; every B0 run beats every run without it. Without it the
+  three seeds spread 6.90, and one of them is the resumed seed below. On GT supervision
+  v0.4 measured the opposite: removing the anchor raised D from 74.68 to 81.44.
+* **Seed spread is real:** 0.91 between seeds against 0.06 between forward passes (B0,
+  seq 07). v0.4's ± was one training run's inference spread.
+* **v0.5's findings on seq 09.** (a), the map beats the scan, holds. (b), the margin shrinks
+  as the classifier strengthens, holds. **(c) does not generalise:** on seq 09 R′'s road
+  does not lose at map level (92.80 → 93.00), and sidewalk goes 85.79 → 85.59.
+* **Per cell** the map still beats the scan for every arm except R′ on seq 07
+  (78.59 → 78.34).
+* **One arm carries a defect.** The host's OOM killer ended armB0_noKL_s2 in its last
+  epoch. On one GPU, Pointcept v1.5.1's resume loaded the frozen anchor, which holds the
+  released weights, into the student. Its scored checkpoint is one no-KL epoch from the
+  released model: val 0.6180 against 0.5326 / 0.5268. Every B0-without-KL aggregate
+  includes it.
+
+[v0.6 results](docs/v06_results.md) · [report](results/v06/scoring/REPORT.txt) ·
+[protocol](docs/v06_training_protocol.md)
+
+---
+
 ## Map-propagated pseudo-labels: the premise holds
 
 Camera pseudo-labels cover a scan's frustum; the accumulated map remembers them. Voting the
@@ -596,8 +643,12 @@ The preregistered bar was twice the coverage at precision within 5 points.
 | car / person | 85.41 / 90.11 |
 | large_vehicle / two_wheeler | 64.90 / 51.48 |
 
-Stuff propagates precisely; things do not. Measured on seq 07; a seq-09 replication is
-running. It reads seq-09 ground truth to measure label precision only: the operating point
+Measured on seq 07. The seq-09 replication (out-of-sample, same operating point) also holds:
+coverage 66.99 % (5.03×) at 90.03 % propagated-only out-of-frustum precision against 93.86 %
+per scan. The class pattern does not replicate: on seq 09 car 90.94 and large_vehicle 98.00
+are fine while terrain 74.65, person 61.18 and two_wheeler 64.45 are not, so a fixed
+stuff/thing rule is wrong; reliability depends on the sequence and the teacher. The
+replication reads seq-09 ground truth to measure label precision only: the operating point
 (k ≥ 2, majority ≥ 2/3) and the stuff-only policy were fixed on seq 07 before it ran, and no
 design choice waits on it. The v0.6 protocol's stronger statement, that no design decision
 has looked at seq 09, therefore no longer holds for the propagation premise; it is recorded
@@ -626,23 +677,28 @@ it defined became v0.5 and v0.6.
 
 **v0.5 — trained checkpoints in the mapper. ✅ done.** The fixed-trajectory gate. The map
 beats the per-scan prediction for every checkpoint, the margin collapses as the classifier
-strengthens, and the strongest checkpoint loses road and sidewalk at map level. Latency
-unchanged.
+strengthens, and the strongest checkpoint loses road and sidewalk at map level on seq 07; on
+the held-out seq 09 road does not lose (v0.6). Latency unchanged.
 
-**v0.6 — online integration, the evaluation unit, a held-out sequence. 🔄 training running.**
+**v0.6 — online integration, the evaluation unit, a held-out sequence. ✅ done.**
 Online integration ✅ on bag replay: live FAST-LIVO2 poses, a causal query at no measurable
 cost, no resource competition, timestamp and startup patches to the FAST-LIVO2 port.
 Evaluation unit ✅: map results per cell beside per point; the residual is classification;
 sparse cells fail at roughly the ordinary per-scan error rate, so the lever is supervision.
-Training 🔄: seq 09 held out, B0 with and without the KL anchor on three seeds each, R′ as
-the reference, scored for decision contamination, the KL anchor's cost, seed-versus-pass
-spread, and whether v0.5's map findings survive on seq 09. Results pending;
-[protocol](docs/v06_training_protocol.md).
+Training ✅: seq 09 held out, B0 with and without the KL anchor on three seeds each, R′ as
+the reference. Decision contamination is −0.78 for B0, inside its 0.91 seed spread. The KL
+anchor is necessary for camera pseudo-label distillation (71.50 vs 50.64 on seq 07, 68.31
+vs 54.15 on seq 09), where v0.4 found it harmful for GT supervision. Seed spread is 0.91
+against a pass spread of 0.06. v0.5's (a) and (b) hold on seq 09; (c) does not generalise.
+B0 on seq 09: 74.12 per point, 61.94 per cell. One no-KL seed resumed onto the released
+weights after a host OOM kill. [Results](docs/v06_results.md).
 
 **v0.7 — map-propagated stuff-label distillation. Design in progress.** Carry the camera
 pseudo-labels through the accumulated map to points the camera never labels in their own
-scan, for the stuff classes where propagation is precise. The premise holds on seq 07; the
-seq-09 replication is running and decides nothing about the design.
+scan, for the classes where propagation is precise. The premise holds on seq 07 and seq 09;
+the class pattern differs between them, so any class policy must be estimated, not fixed.
+The mechanism itself is published (LeAP, ICRA 2025; LOSC, 3DV 2026; UniLiPs, 3DV 2026;
+Bultmann et al., RAS 2022); what is done with it here is engineering, not a claim.
 
 **v0.8 — beyond the rotating scanner.** Non-repetitive solid-state patterns (Livox) break the
 implicit assumptions of every model trained on spinning LiDAR. The measurement harness here is the

@@ -1,0 +1,802 @@
+{
+ "description": "Per-epoch validation readouts of the seven v0.6 training jobs, extracted from their Pointcept training logs, which are not published (each log's SHA-256 is given). After every epoch Pointcept evaluates the val split and prints 'Val result: mIoU/mAcc/allAcc'; the epoch with the highest val mIoU is saved as model_best.pth, and that checkpoint was extracted and scored.",
+ "val_metric": "Pointcept SemSegEvaluator on seq 08, common-9 classes, intersections and unions pooled over all val points (point-weighted); fractions, not percent",
+ "splits": {
+  "train": {
+   "frames": 15637,
+   "per_sequence": {
+    "00": 4541,
+    "01": 1101,
+    "02": 4661,
+    "04": 271,
+    "05": 2761,
+    "06": 1101,
+    "10": 1201
+   }
+  },
+  "val": {
+   "frames": 4071,
+   "per_sequence": {
+    "08": 4071
+   }
+  },
+  "test": {
+   "frames": 2692,
+   "per_sequence": {
+    "07": 1101,
+    "09": 1591
+   }
+  }
+ },
+ "steps_per_epoch": 7818,
+ "selection_cross_checks": "selected epoch and value equal the checkpoint's own 'epoch' and 'best_metric_value' (scoring/extract_<job>.json, source) and the queue log's 'Best mIoU' for every job",
+ "jobs": {
+  "armB0_s1": {
+   "arm": "B0",
+   "training_seed": 20260924,
+   "kl_enabled": true,
+   "config": "results/v06/training/configs/armB0_s1.py",
+   "selected_epoch": 3,
+   "selected_val_miou": 0.6703,
+   "epochs": [
+    {
+     "epoch": 1,
+     "miou": 0.663,
+     "macc": 0.8476,
+     "allacc": 0.856,
+     "new_best": true
+    },
+    {
+     "epoch": 2,
+     "miou": 0.6638,
+     "macc": 0.8481,
+     "allacc": 0.8558,
+     "new_best": true
+    },
+    {
+     "epoch": 3,
+     "miou": 0.6703,
+     "macc": 0.8455,
+     "allacc": 0.8569,
+     "new_best": true
+    },
+    {
+     "epoch": 4,
+     "miou": 0.6612,
+     "macc": 0.8468,
+     "allacc": 0.851,
+     "new_best": false
+    },
+    {
+     "epoch": 5,
+     "miou": 0.6517,
+     "macc": 0.8445,
+     "allacc": 0.8505,
+     "new_best": false
+    },
+    {
+     "epoch": 6,
+     "miou": 0.66,
+     "macc": 0.8382,
+     "allacc": 0.8549,
+     "new_best": false
+    },
+    {
+     "epoch": 7,
+     "miou": 0.6546,
+     "macc": 0.8372,
+     "allacc": 0.8497,
+     "new_best": false
+    },
+    {
+     "epoch": 8,
+     "miou": 0.6567,
+     "macc": 0.8367,
+     "allacc": 0.8507,
+     "new_best": false
+    },
+    {
+     "epoch": 9,
+     "miou": 0.6553,
+     "macc": 0.8338,
+     "allacc": 0.8506,
+     "new_best": false
+    },
+    {
+     "epoch": 10,
+     "miou": 0.6546,
+     "macc": 0.8385,
+     "allacc": 0.8506,
+     "new_best": false
+    }
+   ],
+   "logs": [
+    {
+     "source": "out/v06_train/armB0_s1.log",
+     "sha256": "7510f40a5b8da6a3fcc135bf09882c7350f72af34194b624db7af2e8b68e7c0e",
+     "bytes": 21975116,
+     "val_epochs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ]
+    }
+   ]
+  },
+  "armB0_s2": {
+   "arm": "B0",
+   "training_seed": 20260925,
+   "kl_enabled": true,
+   "config": "results/v06/training/configs/armB0_s2.py",
+   "selected_epoch": 4,
+   "selected_val_miou": 0.6731,
+   "epochs": [
+    {
+     "epoch": 1,
+     "miou": 0.664,
+     "macc": 0.861,
+     "allacc": 0.8616,
+     "new_best": true
+    },
+    {
+     "epoch": 2,
+     "miou": 0.6506,
+     "macc": 0.8471,
+     "allacc": 0.8463,
+     "new_best": false
+    },
+    {
+     "epoch": 3,
+     "miou": 0.6456,
+     "macc": 0.8442,
+     "allacc": 0.8526,
+     "new_best": false
+    },
+    {
+     "epoch": 4,
+     "miou": 0.6731,
+     "macc": 0.8522,
+     "allacc": 0.8619,
+     "new_best": true
+    },
+    {
+     "epoch": 5,
+     "miou": 0.6437,
+     "macc": 0.8431,
+     "allacc": 0.8502,
+     "new_best": false
+    },
+    {
+     "epoch": 6,
+     "miou": 0.6641,
+     "macc": 0.8428,
+     "allacc": 0.8528,
+     "new_best": false
+    },
+    {
+     "epoch": 7,
+     "miou": 0.6582,
+     "macc": 0.8425,
+     "allacc": 0.8523,
+     "new_best": false
+    },
+    {
+     "epoch": 8,
+     "miou": 0.6545,
+     "macc": 0.8385,
+     "allacc": 0.8525,
+     "new_best": false
+    },
+    {
+     "epoch": 9,
+     "miou": 0.656,
+     "macc": 0.836,
+     "allacc": 0.8512,
+     "new_best": false
+    },
+    {
+     "epoch": 10,
+     "miou": 0.6544,
+     "macc": 0.837,
+     "allacc": 0.851,
+     "new_best": false
+    }
+   ],
+   "logs": [
+    {
+     "source": "out/v06_train/armB0_s2.log",
+     "sha256": "4ef88767cc8a0b3b8503a8ce97d7b64e57b6fb9192a737ce8d335f012b603980",
+     "bytes": 21975017,
+     "val_epochs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ]
+    }
+   ]
+  },
+  "armB0_s3": {
+   "arm": "B0",
+   "training_seed": 20260926,
+   "kl_enabled": true,
+   "config": "results/v06/training/configs/armB0_s3.py",
+   "selected_epoch": 1,
+   "selected_val_miou": 0.6707,
+   "epochs": [
+    {
+     "epoch": 1,
+     "miou": 0.6707,
+     "macc": 0.8508,
+     "allacc": 0.8639,
+     "new_best": true
+    },
+    {
+     "epoch": 2,
+     "miou": 0.6604,
+     "macc": 0.8544,
+     "allacc": 0.8543,
+     "new_best": false
+    },
+    {
+     "epoch": 3,
+     "miou": 0.6605,
+     "macc": 0.8444,
+     "allacc": 0.8527,
+     "new_best": false
+    },
+    {
+     "epoch": 4,
+     "miou": 0.6609,
+     "macc": 0.8415,
+     "allacc": 0.8561,
+     "new_best": false
+    },
+    {
+     "epoch": 5,
+     "miou": 0.6622,
+     "macc": 0.8442,
+     "allacc": 0.851,
+     "new_best": false
+    },
+    {
+     "epoch": 6,
+     "miou": 0.6592,
+     "macc": 0.8381,
+     "allacc": 0.8508,
+     "new_best": false
+    },
+    {
+     "epoch": 7,
+     "miou": 0.6556,
+     "macc": 0.841,
+     "allacc": 0.8498,
+     "new_best": false
+    },
+    {
+     "epoch": 8,
+     "miou": 0.6571,
+     "macc": 0.8416,
+     "allacc": 0.8509,
+     "new_best": false
+    },
+    {
+     "epoch": 9,
+     "miou": 0.6562,
+     "macc": 0.8408,
+     "allacc": 0.8498,
+     "new_best": false
+    },
+    {
+     "epoch": 10,
+     "miou": 0.6568,
+     "macc": 0.8411,
+     "allacc": 0.8501,
+     "new_best": false
+    }
+   ],
+   "logs": [
+    {
+     "source": "out/v06_train/armB0_s3.log",
+     "sha256": "f73d3671ad3657729552d6c471ec754197715da3499c9d53e4c0ba96ebe89afd",
+     "bytes": 21974913,
+     "val_epochs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ]
+    }
+   ]
+  },
+  "armB0_noKL_s1": {
+   "arm": "B0_noKL",
+   "training_seed": 20260924,
+   "kl_enabled": false,
+   "config": "results/v06/training/configs/armB0_noKL_s1.py",
+   "selected_epoch": 2,
+   "selected_val_miou": 0.5326,
+   "epochs": [
+    {
+     "epoch": 1,
+     "miou": 0.5055,
+     "macc": 0.7153,
+     "allacc": 0.6623,
+     "new_best": true
+    },
+    {
+     "epoch": 2,
+     "miou": 0.5326,
+     "macc": 0.7158,
+     "allacc": 0.6653,
+     "new_best": true
+    },
+    {
+     "epoch": 3,
+     "miou": 0.4932,
+     "macc": 0.7162,
+     "allacc": 0.6621,
+     "new_best": false
+    },
+    {
+     "epoch": 4,
+     "miou": 0.5284,
+     "macc": 0.7194,
+     "allacc": 0.6615,
+     "new_best": false
+    },
+    {
+     "epoch": 5,
+     "miou": 0.5311,
+     "macc": 0.7179,
+     "allacc": 0.6639,
+     "new_best": false
+    },
+    {
+     "epoch": 6,
+     "miou": 0.492,
+     "macc": 0.7202,
+     "allacc": 0.6602,
+     "new_best": false
+    },
+    {
+     "epoch": 7,
+     "miou": 0.5103,
+     "macc": 0.7187,
+     "allacc": 0.663,
+     "new_best": false
+    },
+    {
+     "epoch": 8,
+     "miou": 0.5138,
+     "macc": 0.7171,
+     "allacc": 0.6618,
+     "new_best": false
+    },
+    {
+     "epoch": 9,
+     "miou": 0.5115,
+     "macc": 0.7167,
+     "allacc": 0.6611,
+     "new_best": false
+    },
+    {
+     "epoch": 10,
+     "miou": 0.5135,
+     "macc": 0.717,
+     "allacc": 0.661,
+     "new_best": false
+    }
+   ],
+   "logs": [
+    {
+     "source": "out/v06_train/armB0_noKL_s1.log",
+     "sha256": "83b280e56e0b597986027edbe30dfdc5867209cbdaa333f1a5a15230dc083d58",
+     "bytes": 21661920,
+     "val_epochs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ]
+    }
+   ]
+  },
+  "armB0_noKL_s2": {
+   "arm": "B0_noKL",
+   "training_seed": 20260925,
+   "kl_enabled": false,
+   "config": "results/v06/training/configs/armB0_noKL_s2.py",
+   "selected_epoch": 10,
+   "selected_val_miou": 0.618,
+   "epochs": [
+    {
+     "epoch": 1,
+     "miou": 0.4772,
+     "macc": 0.7154,
+     "allacc": 0.6654,
+     "new_best": true,
+     "log": "original"
+    },
+    {
+     "epoch": 2,
+     "miou": 0.5076,
+     "macc": 0.713,
+     "allacc": 0.6628,
+     "new_best": true,
+     "log": "original"
+    },
+    {
+     "epoch": 3,
+     "miou": 0.4669,
+     "macc": 0.7185,
+     "allacc": 0.6585,
+     "new_best": false,
+     "log": "original"
+    },
+    {
+     "epoch": 4,
+     "miou": 0.5032,
+     "macc": 0.7179,
+     "allacc": 0.6662,
+     "new_best": false,
+     "log": "original"
+    },
+    {
+     "epoch": 5,
+     "miou": 0.5204,
+     "macc": 0.7144,
+     "allacc": 0.6624,
+     "new_best": true,
+     "log": "original"
+    },
+    {
+     "epoch": 6,
+     "miou": 0.5008,
+     "macc": 0.7183,
+     "allacc": 0.6591,
+     "new_best": false,
+     "log": "original"
+    },
+    {
+     "epoch": 7,
+     "miou": 0.4986,
+     "macc": 0.7127,
+     "allacc": 0.66,
+     "new_best": false,
+     "log": "original"
+    },
+    {
+     "epoch": 8,
+     "miou": 0.5036,
+     "macc": 0.7137,
+     "allacc": 0.6592,
+     "new_best": false,
+     "log": "original"
+    },
+    {
+     "epoch": 9,
+     "miou": 0.509,
+     "macc": 0.7135,
+     "allacc": 0.6605,
+     "new_best": false,
+     "log": "original"
+    },
+    {
+     "epoch": 10,
+     "miou": 0.618,
+     "macc": 0.8005,
+     "allacc": 0.8114,
+     "new_best": true,
+     "log": "resumed"
+    }
+   ],
+   "logs": [
+    {
+     "source": "out/v06_train/armB0_noKL_s2.log",
+     "sha256": "4aad67e938522577da5bc73748ca3f2e5ddf27b213e1c6b1a0937c56d8e6cde7",
+     "bytes": 19650887,
+     "val_epochs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+     ],
+     "ends_at": "epoch 10, step 687 of 7818: the process was killed; no epoch-10 validation"
+    },
+    {
+     "source": "out/v06_train/armB0_noKL_s2.resume_ep9.log",
+     "sha256": "6564864b626a1b48d529aa533690e66d7e2e265ecef1963966f7effdab6509d9",
+     "bytes": 2230519,
+     "val_epochs": [
+      10
+     ],
+     "resumed_after_epoch": 9
+    }
+   ],
+   "resume_audit": {
+    "summary": "The host's out-of-memory killer ended the job at epoch 10, step 687 of 7818. opt/train_queue_v06_resume.sh restarted it with resume=True and weight=exp/sk2/armB0_noKL_s2/model/model_last.pth, the epoch-9 checkpoint. The checkpoint loader put the frozen KL anchor's weights (the released model, stored in fp16) into the student backbone and did not restore the student head, which kept the released head it was built with; the optimizer, scheduler, AMP scaler, epoch counter and best value were restored. The resumed epoch 10 therefore trained the released model for one epoch without KL at the schedule's final learning rate, and its checkpoint is the one selected and scored.",
+    "checkpoint_loader": {
+     "file": "src/Pointcept_v151/pointcept/engines/hooks/misc.py",
+     "sha256": "dc12a69d734ecdaba8fb1e323020b5b7cd4b9ce3764bd1d249fa0f36dd3da41f",
+     "identical_to": "Pointcept tag v1.5.1, pointcept/engines/hooks/misc.py (same SHA-256)",
+     "behaviour": "with one GPU no 'module.' prefix is added, yet every key still loses its first seven characters (key[7:]); load_state_dict(strict=False) drops the unmatched keys silently and only the missing ones are logged"
+    },
+    "checkpoint_state_dict_keys": {
+     "by_prefix": {
+      "backbone": 486,
+      "seg_head": 2,
+      "frozen_backbone": 486,
+      "frozen_head": 2
+     },
+     "read_from": "the pickle index of exp/sk2/armB0_noKL_s2/model/model_best.pth (tensor data not loaded); the epoch-9 file that was resumed has since been overwritten by the epoch-10 save, and the model class, hence the key set, is the same",
+     "checkpoint_sha256": "98ef5676ddc9af006fc75f098de8f74674bc57c29c39d66e9a95aa49bac04f25"
+    },
+    "key_mapping": {
+     "frozen_backbone.* -> backbone.*": "486 keys, loaded into the student backbone",
+     "backbone.* -> e.*": "no such model key, dropped",
+     "seg_head.* -> d.*": "no such model key, dropped",
+     "frozen_head.* -> head.*": "no such model key, dropped"
+    },
+    "missing_keys_logged": {
+     "total": 477,
+     "seg_head": 2,
+     "frozen_backbone": 473,
+     "frozen_head": 2
+    },
+    "missing_keys_check": "simulating key[7:] on the checkpoint's key set leaves 490 model keys unfilled; minus the anchor backbone's 13 BatchNorm num_batches_tracked counters, which PyTorch fills itself, this equals the logged list of 477 exactly",
+    "loss_from_logs": {
+     "epoch_1_step_1": 0.8018,
+     "interrupted_epoch_10_step_1": 0.0208,
+     "resumed_epoch_10_step_1": 0.8021,
+     "mean_logged_loss_epoch_9": 0.101,
+     "mean_logged_loss_interrupted_epoch_10_steps_1_687": 0.1004,
+     "mean_logged_loss_resumed_epoch_10": 0.3868
+    },
+    "learning_rate_printed": {
+     "epoch_1_step_1": "0.00002",
+     "epoch_1_step_1000": "0.00006",
+     "epoch_1_step_7818": "0.00020",
+     "interrupted_epoch_10_step_1": "0.00001",
+     "resumed_epoch_10_step_1": "0.00001",
+     "resumed_epoch_10_step_1000": "0.00000",
+     "resumed_epoch_10_step_7818": "0.00000"
+    },
+    "val_miou": {
+     "best_before_interruption": 0.5204,
+     "best_before_interruption_epoch": 5,
+     "epoch_9": 0.509,
+     "resumed_epoch_10": 0.618
+    }
+   }
+  },
+  "armB0_noKL_s3": {
+   "arm": "B0_noKL",
+   "training_seed": 20260926,
+   "kl_enabled": false,
+   "config": "results/v06/training/configs/armB0_noKL_s3.py",
+   "selected_epoch": 7,
+   "selected_val_miou": 0.5268,
+   "epochs": [
+    {
+     "epoch": 1,
+     "miou": 0.4735,
+     "macc": 0.721,
+     "allacc": 0.6647,
+     "new_best": true
+    },
+    {
+     "epoch": 2,
+     "miou": 0.5061,
+     "macc": 0.7229,
+     "allacc": 0.6648,
+     "new_best": true
+    },
+    {
+     "epoch": 3,
+     "miou": 0.5122,
+     "macc": 0.7125,
+     "allacc": 0.6645,
+     "new_best": true
+    },
+    {
+     "epoch": 4,
+     "miou": 0.5155,
+     "macc": 0.7078,
+     "allacc": 0.6568,
+     "new_best": true
+    },
+    {
+     "epoch": 5,
+     "miou": 0.4976,
+     "macc": 0.7135,
+     "allacc": 0.6606,
+     "new_best": false
+    },
+    {
+     "epoch": 6,
+     "miou": 0.509,
+     "macc": 0.711,
+     "allacc": 0.6604,
+     "new_best": false
+    },
+    {
+     "epoch": 7,
+     "miou": 0.5268,
+     "macc": 0.7181,
+     "allacc": 0.6607,
+     "new_best": true
+    },
+    {
+     "epoch": 8,
+     "miou": 0.521,
+     "macc": 0.719,
+     "allacc": 0.6605,
+     "new_best": false
+    },
+    {
+     "epoch": 9,
+     "miou": 0.517,
+     "macc": 0.7182,
+     "allacc": 0.6606,
+     "new_best": false
+    },
+    {
+     "epoch": 10,
+     "miou": 0.5148,
+     "macc": 0.7176,
+     "allacc": 0.6599,
+     "new_best": false
+    }
+   ],
+   "logs": [
+    {
+     "source": "out/v06_train/armB0_noKL_s3.log",
+     "sha256": "f4f899ae07f76b3dc6200ab57ed4f39ac9fde7ef19b2bfa3314db805ae879741",
+     "bytes": 21543119,
+     "val_epochs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ]
+    }
+   ]
+  },
+  "armRprime_noKL_s1": {
+   "arm": "Rprime_noKL",
+   "training_seed": 20260924,
+   "kl_enabled": false,
+   "config": "results/v06/training/configs/armRprime_noKL_s1.py",
+   "selected_epoch": 7,
+   "selected_val_miou": 0.8697,
+   "epochs": [
+    {
+     "epoch": 1,
+     "miou": 0.86,
+     "macc": 0.9277,
+     "allacc": 0.9465,
+     "new_best": true
+    },
+    {
+     "epoch": 2,
+     "miou": 0.8594,
+     "macc": 0.9287,
+     "allacc": 0.9433,
+     "new_best": false
+    },
+    {
+     "epoch": 3,
+     "miou": 0.8653,
+     "macc": 0.9263,
+     "allacc": 0.9478,
+     "new_best": true
+    },
+    {
+     "epoch": 4,
+     "miou": 0.8588,
+     "macc": 0.9244,
+     "allacc": 0.94,
+     "new_best": false
+    },
+    {
+     "epoch": 5,
+     "miou": 0.8642,
+     "macc": 0.9278,
+     "allacc": 0.945,
+     "new_best": false
+    },
+    {
+     "epoch": 6,
+     "miou": 0.8627,
+     "macc": 0.9247,
+     "allacc": 0.9383,
+     "new_best": false
+    },
+    {
+     "epoch": 7,
+     "miou": 0.8697,
+     "macc": 0.9291,
+     "allacc": 0.9419,
+     "new_best": true
+    },
+    {
+     "epoch": 8,
+     "miou": 0.8658,
+     "macc": 0.9244,
+     "allacc": 0.9409,
+     "new_best": false
+    },
+    {
+     "epoch": 9,
+     "miou": 0.8668,
+     "macc": 0.9245,
+     "allacc": 0.9412,
+     "new_best": false
+    },
+    {
+     "epoch": 10,
+     "miou": 0.8677,
+     "macc": 0.9238,
+     "allacc": 0.9415,
+     "new_best": false
+    }
+   ],
+   "logs": [
+    {
+     "source": "out/v06_train/armRprime_noKL_s1.log",
+     "sha256": "e0aaba529b7fa4d9d8344498ce19ec906a25fb07b5213b2b6948a6efec8590a0",
+     "bytes": 21662470,
+     "val_epochs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ]
+    }
+   ]
+  }
+ }
+}

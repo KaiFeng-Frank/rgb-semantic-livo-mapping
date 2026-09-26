@@ -1,0 +1,76 @@
+loaded 16 (arm, seq) groups, 32 runs
+
+================================================================================
+MAIN TABLE -- out-of-frustum mIoU-9, mean±sd over seeds and passes
+              | seq 07 (design-seen) | seq 09 (clean)  
+arm           | offline map      | offline map     
+ZS            |  64.96±0.11  71.07±0.16 |  60.99±0.11  67.25±0.07
+B0            |  71.50±0.92  77.51±1.87 |  68.31±0.82  74.12±0.89
+B0_noKL       |  50.64±6.90  55.53±7.96 |  54.15±3.04  60.96±3.74
+Rprime_noKL   |  85.37±0.13  86.12±0.07 |  83.57±0.12  83.86±0.08
+
+================================================================================
+1. DECISION CONTAMINATION (difference-in-differences vs the zero-shot arm)
+  scene difficulty (ZS, untuned):      seq07  64.96  seq09  60.99   gap +3.97
+  B0           raw gap  +3.19   minus scene difficulty  ->  contamination  -0.78
+  B0_noKL      raw gap  -3.51   minus scene difficulty  ->  contamination  -7.48
+  Rprime_noKL  raw gap  +1.80   minus scene difficulty  ->  contamination  -2.17
+
+  ASSUMPTION, stated not hidden: that the two scenes are equally hard for a
+  tuned arm as for an untuned one.  If a tuned arm is differentially better at
+  seq 07's particular scene content, some of that lands here as contamination.
+
+================================================================================
+2. WHAT THE ANTI-FORGETTING KL ANCHOR COST (B0 vs B0_noKL, one factor apart)
+  seq07 per-point  with KL  71.50   without  50.64   cost of the anchor +20.86
+  seq07 map        with KL  77.51   without  55.53   cost of the anchor +21.98
+  seq09 per-point  with KL  68.31   without  54.15   cost of the anchor +14.15
+  seq09 map        with KL  74.12   without  60.96   cost of the anchor +13.16
+
+================================================================================
+3. SEED SPREAD vs FORWARD-PASS NOISE (does running 3 seeds buy anything?)
+  B0           seq07  between-seed 0.913   within-seed(pass) 0.064   -> seed spread is real
+  B0           seq09  between-seed 0.820   within-seed(pass) 0.037   -> seed spread is real
+  B0_noKL      seq07  between-seed 6.900   within-seed(pass) 0.131   -> seed spread is real
+  B0_noKL      seq09  between-seed 3.037   within-seed(pass) 0.113   -> seed spread is real
+
+================================================================================
+4. DO v0.5's STRUCTURAL FINDINGS SURVIVE ON seq 09?
+  -- seq 07 --
+     (a) ZS           offline  64.96 -> map  71.07   map WINS
+     (a) B0           offline  71.50 -> map  77.51   map WINS
+     (a) B0_noKL      offline  50.64 -> map  55.53   map WINS
+     (a) Rprime_noKL  offline  85.37 -> map  86.12   map WINS
+     (b) gain SHRINKS as the classifier strengthens (weakest B0_noKL: +4.89  ->  strongest Rprime_noKL: +0.75)
+     (c) Rprime road      offline  97.29 -> map  96.03   LOSES (v0.5 reproduces)
+     (c) Rprime sidewalk  offline  93.97 -> map  91.23   LOSES (v0.5 reproduces)
+  -- seq 09 --
+     (a) ZS           offline  60.99 -> map  67.25   map WINS
+     (a) B0           offline  68.31 -> map  74.12   map WINS
+     (a) B0_noKL      offline  54.15 -> map  60.96   map WINS
+     (a) Rprime_noKL  offline  83.57 -> map  83.86   map WINS
+     (b) gain SHRINKS as the classifier strengthens (weakest B0_noKL: +6.81  ->  strongest Rprime_noKL: +0.29)
+     (c) Rprime road      offline  92.80 -> map  93.00   does not lose
+     (c) Rprime sidewalk  offline  85.79 -> map  85.59   LOSES (v0.5 reproduces)
+
+  (c) is the finding this baseline was built to produce.  If it does not reproduce
+  on seq 09, it was a seq-07 artefact and must not be claimed.
+
+================================================================================
+5. VOXEL-WEIGHTED MAP READINGS, out-of-frustum (each map cell counts once)
+              | seq 07                     | seq 09                    
+arm           | vox-mIoU sp-oracle wrong%  | vox-mIoU sp-oracle wrong% 
+ZS            |    64.47     79.02   12.74 |    55.26     71.60   16.91
+B0            |    70.29     83.00   11.43 |    61.94     78.34   15.28
+B0_noKL       |    52.44     70.48   34.14 |    49.27     70.80   28.17
+Rprime_noKL   |    79.58     89.63    6.63 |    78.76     89.22    8.29
+
+  map vs per-scan with each cell weight 1 spread over its points (same points, same GT):
+     seq07 ZS           per-scan 61.49 -> map 63.84   map WINS
+     seq07 B0           per-scan 67.02 -> map 69.47   map WINS
+     seq07 B0_noKL      per-scan 50.16 -> map 51.73   map WINS
+     seq07 Rprime_noKL  per-scan 78.59 -> map 78.34   map LOSES
+     seq09 ZS           per-scan 52.51 -> map 54.90   map WINS
+     seq09 B0           per-scan 58.49 -> map 61.44   map WINS
+     seq09 B0_noKL      per-scan 45.81 -> map 48.90   map WINS
+     seq09 Rprime_noKL  per-scan 77.09 -> map 77.98   map WINS

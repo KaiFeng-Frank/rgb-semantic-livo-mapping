@@ -1,8 +1,8 @@
 # v0.6 training protocol: a held-out sequence, three seeds, the cost of the KL anchor
 
-Updated 2026-09-26. **Training is running; results are pending.** This page records the
-protocol and the code as they were fixed before any v0.6 number existed. Code:
-[`experiments/v06/`](../experiments/v06/README.md).
+Updated 2026-09-26. **Training and scoring are complete: [v0.6 results](v06_results.md).**
+This page records the protocol and the code as they were fixed before any v0.6 number
+existed. Code: [`experiments/v06/`](../experiments/v06/README.md).
 
 ## Why seq 09 is held out
 
@@ -87,9 +87,23 @@ therefore ran from the epoch-9 checkpoint; Pointcept re-seeds at start, so that 
 data order and augmentation differ from an uninterrupted run. This is the same class of
 perturbation as the measured run-to-run non-determinism and touches one epoch of one seed.
 
+**Correction, after scoring.** The paragraph above is kept as it was written before
+scoring. It was not the same class of perturbation as run-to-run non-determinism: the
+resume changed the weights, not only the data order. On one GPU, Pointcept v1.5.1's
+`CheckpointLoader` loaded the frozen KL anchor, which holds the released weights, into the
+student, and did not restore the student head. Epoch 10 therefore restarted from the
+released model, with epoch 9's optimizer state and final learning rate. The scored
+armB0_noKL_s2 checkpoint is that one epoch, not a ten-epoch no-KL run. See
+[deviation 1 of the results](v06_results.md#protocol-deviations-and-disclosures).
+
 ## Results
 
-Pending: training queue, then scoring.
+Complete: [v0.6 results](v06_results.md). The files are:
+
+- [`REPORT.txt`](../results/v06/scoring/REPORT.txt), the report;
+- [`runs_summary.json`](../results/v06/scoring/runs_summary.json), the per-run readouts;
+- [`val_curves.json`](../results/v06/training/val_curves.json), the validation curves, the
+  selected epochs and the resume audit.
 
 ## Note on the propagation premise check and seq 09
 

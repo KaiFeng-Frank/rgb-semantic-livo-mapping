@@ -1,0 +1,581 @@
+{
+  "tag": "armB0_noKL_s2",
+  "ckpt": "exp/sk2/armB0_noKL_s2/model/model_best.pth",
+  "out": "weights/v06/armB0_noKL_s2_student.pth",
+  "frames": [
+    0,
+    11,
+    22,
+    33,
+    44,
+    55,
+    66,
+    77,
+    88,
+    99,
+    110,
+    121,
+    132,
+    143,
+    154,
+    165,
+    176,
+    187,
+    198,
+    209,
+    220,
+    231,
+    242,
+    253,
+    264,
+    275,
+    286,
+    297,
+    308,
+    319,
+    330,
+    341,
+    352,
+    363,
+    374,
+    385,
+    396,
+    407,
+    418,
+    429,
+    440,
+    451,
+    462,
+    473,
+    484,
+    495,
+    506,
+    517,
+    528,
+    539,
+    550,
+    561,
+    572,
+    583,
+    594,
+    605,
+    616,
+    627,
+    638,
+    649,
+    660,
+    671,
+    682,
+    693,
+    704,
+    715,
+    726,
+    737,
+    748,
+    759,
+    770,
+    781,
+    792,
+    803,
+    814,
+    825,
+    836,
+    847,
+    858,
+    869,
+    880,
+    891,
+    902,
+    913,
+    924,
+    935,
+    946,
+    957,
+    968,
+    979,
+    990,
+    1001,
+    1012,
+    1023,
+    1034,
+    1045,
+    1056,
+    1067,
+    1078,
+    1089,
+    1100
+  ],
+  "time": "2026-09-26 13:36:23",
+  "source": {
+    "sha256": "98ef5676ddc9af006fc75f098de8f74674bc57c29c39d66e9a95aa49bac04f25",
+    "bytes": 647048472,
+    "top_level_keys": [
+      "best_metric_value",
+      "epoch",
+      "optimizer",
+      "scaler",
+      "scheduler",
+      "state_dict"
+    ],
+    "epoch": 10,
+    "best_metric_value": 0.6179504518350944,
+    "n_tensors": 976,
+    "n_student": 488,
+    "n_anchor": 488,
+    "n_other": 0,
+    "other_keys": [],
+    "student_dtypes": {
+      "torch.int64": 13,
+      "torch.float32": 475
+    },
+    "anchor_dtypes": {
+      "torch.float16": 475,
+      "torch.int64": 13
+    },
+    "student_bytes": 184653480,
+    "anchor_bytes": 92326792
+  },
+  "S1": {
+    "n_student": 488,
+    "n_released": 488,
+    "same_key_set": true,
+    "same_shapes": true,
+    "same_dtypes": true,
+    "missing_vs_released": [],
+    "extra_vs_released": [],
+    "strict_load_ok": true,
+    "missing": [],
+    "unexpected": [],
+    "model_tensors": 488,
+    "ckpt_tensors": 488
+  },
+  "reused_existing_file": false,
+  "out_sha256": "4a260db097303e8914c8e07834534c9a21432d0acf739f89c907ae2237e2f459",
+  "out_bytes": 184813706,
+  "plain_loaded_from": "weights/v06/armB0_noKL_s2_student.pth",
+  "plain_n_params": 46159312,
+  "distil_load": {
+    "loaded": 488,
+    "frozen_left_at_init": 475
+  },
+  "S2": {
+    "n": 488,
+    "n_equal_fp32": 488,
+    "n_equal_fp16": 488,
+    "differ_fp32": [],
+    "differ_fp16": []
+  },
+  "S3": {
+    "backbone_repr_equal": true,
+    "head_repr_equal": true,
+    "backbone_named_tensors_equal": true,
+    "head_named_tensors_equal": true,
+    "plain_type": "DefaultSegmentorV2",
+    "distil_type": "DistilSegmentorMiB",
+    "backbone_type": "PointTransformerV3",
+    "backbone_module_file": "/data/livo_sem/src/Pointcept_v151/pointcept/models/point_transformer_v3/point_transformer_v3m1_base.py"
+  },
+  "neg": "weights/v06/armB0_s1_student.pth",
+  "worker": {
+    "ckpt": "weights/v06/armB0_noKL_s2_student.pth",
+    "sha256": "4a260db097303e8914c8e07834534c9a21432d0acf739f89c907ae2237e2f459",
+    "tensors": 488,
+    "half": true,
+    "shuffle": false,
+    "gpu_voxel": true,
+    "fast_hilbert": true
+  },
+  "S4": {
+    "agreement": {
+      "distil_vs_plain": {
+        "all": {
+          "n": 8342050,
+          "agree": 0.9506005118645896
+        },
+        "margin>1": {
+          "n": 7334160,
+          "agree": 0.9839425373866946
+        },
+        "margin>2": {
+          "n": 6433514,
+          "agree": 0.993868047850677
+        },
+        "margin>4": {
+          "n": 4933016,
+          "agree": 0.9985653806920554
+        }
+      },
+      "distil_vs_plain_2": {
+        "all": {
+          "n": 8342050,
+          "agree": 0.9508437374506267
+        },
+        "margin>1": {
+          "n": 7326084,
+          "agree": 0.9857518696209325
+        },
+        "margin>2": {
+          "n": 6442816,
+          "agree": 0.9954834966573622
+        },
+        "margin>4": {
+          "n": 4936228,
+          "agree": 0.9992309917613206
+        }
+      },
+      "distil_vs_distil": {
+        "all": {
+          "n": 8342050,
+          "agree": 0.9510516000263725
+        },
+        "margin>1": {
+          "n": 7334160,
+          "agree": 0.9855161327268562
+        },
+        "margin>2": {
+          "n": 6433514,
+          "agree": 0.9954143256702325
+        },
+        "margin>4": {
+          "n": 4933016,
+          "agree": 0.9991323766231449
+        }
+      },
+      "plain_vs_plain": {
+        "all": {
+          "n": 8342050,
+          "agree": 0.9482551650973082
+        },
+        "margin>1": {
+          "n": 7326640,
+          "agree": 0.9830023039210334
+        },
+        "margin>2": {
+          "n": 6415129,
+          "agree": 0.9934136944089511
+        },
+        "margin>4": {
+          "n": 4938661,
+          "agree": 0.9987304251091541
+        }
+      },
+      "plain_vs_worker": {
+        "all": {
+          "n": 12250569,
+          "agree": 0.9456897879600531
+        },
+        "margin>1": {
+          "n": 0,
+          "agree": null
+        },
+        "margin>2": {
+          "n": 0,
+          "agree": null
+        },
+        "margin>4": {
+          "n": 0,
+          "agree": null
+        }
+      },
+      "plain_vs_NEG": {
+        "all": {
+          "n": 8342050,
+          "agree": 0.7287735029159499
+        },
+        "margin>1": {
+          "n": 7326640,
+          "agree": 0.7671214908880469
+        },
+        "margin>2": {
+          "n": 6415129,
+          "agree": 0.8079605258132767
+        },
+        "margin>4": {
+          "n": 4938661,
+          "agree": 0.8789311515813699
+        }
+      }
+    },
+    "abs_dlogit_max_per_voxel": {
+      "distil_vs_plain": {
+        "mean": 1.0846885442733765,
+        "p50": 0.912109375,
+        "p99": 3.78515625,
+        "max": 12.603515625
+      },
+      "distil_vs_plain_2": {
+        "mean": 1.0990195274353027,
+        "p50": 0.922119140625,
+        "p99": 3.9404296875,
+        "max": 10.84765625
+      },
+      "distil_vs_distil": {
+        "mean": 1.096200704574585,
+        "p50": 0.9205322265625,
+        "p99": 3.8828125,
+        "max": 12.7265625
+      },
+      "plain_vs_plain": {
+        "mean": 1.1106594800949097,
+        "p50": 0.931640625,
+        "p99": 3.9609375,
+        "max": 11.4921875
+      },
+      "plain_vs_NEG": {
+        "mean": 5.259443283081055,
+        "p50": 4.625,
+        "p99": 14.74951171875,
+        "max": 21.712890625
+      }
+    },
+    "gt_score": {
+      "distil": {
+        "point_acc": 76.98508586802178,
+        "miou9": 59.871136248300836,
+        "per_class_iou": {
+          "car": 91.307,
+          "large_vehicle": 44.336,
+          "two_wheeler": 20.412,
+          "person": 47.164,
+          "road": 92.749,
+          "sidewalk": 83.913,
+          "terrain": 71.627,
+          "vegetation": 46.254,
+          "manmade": 41.078
+        },
+        "n_eval": 11522159
+      },
+      "distil_2": {
+        "point_acc": 77.23116822116411,
+        "miou9": 60.16216518038627,
+        "per_class_iou": {
+          "car": 91.063,
+          "large_vehicle": 42.52,
+          "two_wheeler": 21.429,
+          "person": 48.45,
+          "road": 93.134,
+          "sidewalk": 84.372,
+          "terrain": 72.434,
+          "vegetation": 46.482,
+          "manmade": 41.576
+        },
+        "n_eval": 11522159
+      },
+      "plain": {
+        "point_acc": 76.93460053797209,
+        "miou9": 59.729877049634034,
+        "per_class_iou": {
+          "car": 91.297,
+          "large_vehicle": 45.187,
+          "two_wheeler": 19.703,
+          "person": 47.282,
+          "road": 92.842,
+          "sidewalk": 83.841,
+          "terrain": 70.1,
+          "vegetation": 46.112,
+          "manmade": 41.206
+        },
+        "n_eval": 11522159
+      },
+      "plain_2": {
+        "point_acc": 76.95276553638949,
+        "miou9": 59.71789220684028,
+        "per_class_iou": {
+          "car": 91.212,
+          "large_vehicle": 42.528,
+          "two_wheeler": 19.488,
+          "person": 47.413,
+          "road": 92.994,
+          "sidewalk": 83.979,
+          "terrain": 72.866,
+          "vegetation": 46.193,
+          "manmade": 40.789
+        },
+        "n_eval": 11522159
+      },
+      "worker": {
+        "point_acc": 77.13662864746095,
+        "miou9": 59.98257468711381,
+        "per_class_iou": {
+          "car": 91.318,
+          "large_vehicle": 43.72,
+          "two_wheeler": 20.612,
+          "person": 47.904,
+          "road": 93.091,
+          "sidewalk": 84.199,
+          "terrain": 71.18,
+          "vegetation": 46.33,
+          "manmade": 41.49
+        },
+        "n_eval": 11522159
+      },
+      "NEG": {
+        "point_acc": 89.49106673497562,
+        "miou9": 70.38794074784575,
+        "per_class_iou": {
+          "car": 90.369,
+          "large_vehicle": 53.337,
+          "two_wheeler": 41.815,
+          "person": 49.05,
+          "road": 89.884,
+          "sidewalk": 81.329,
+          "terrain": 78.034,
+          "vegetation": 68.525,
+          "manmade": 81.148
+        },
+        "n_eval": 11522159
+      }
+    },
+    "class_hist16": {
+      "distil": {
+        "barrier": 15265,
+        "bicycle": 1324,
+        "bus": 29986,
+        "car": 1214760,
+        "construction_vehicle": 663,
+        "motorcycle": 7313,
+        "pedestrian": 20823,
+        "traffic_cone": 176,
+        "trailer": 11146,
+        "truck": 119570,
+        "driveable_surface": 2477099,
+        "other_flat": 1423,
+        "sidewalk": 1849071,
+        "terrain": 465446,
+        "manmade": 1713332,
+        "vegetation": 4323172
+      },
+      "distil_2": {
+        "barrier": 23512,
+        "bicycle": 1299,
+        "bus": 25746,
+        "car": 1216046,
+        "construction_vehicle": 743,
+        "motorcycle": 8023,
+        "pedestrian": 20928,
+        "traffic_cone": 176,
+        "trailer": 12067,
+        "truck": 127575,
+        "driveable_surface": 2485775,
+        "other_flat": 738,
+        "sidewalk": 1838960,
+        "terrain": 467004,
+        "manmade": 1699424,
+        "vegetation": 4322553
+      },
+      "plain": {
+        "barrier": 19607,
+        "bicycle": 1149,
+        "bus": 16864,
+        "car": 1209908,
+        "construction_vehicle": 486,
+        "motorcycle": 8829,
+        "pedestrian": 20804,
+        "traffic_cone": 249,
+        "trailer": 13147,
+        "truck": 120009,
+        "driveable_surface": 2487320,
+        "other_flat": 1598,
+        "sidewalk": 1846780,
+        "terrain": 452006,
+        "manmade": 1715289,
+        "vegetation": 4336524
+      },
+      "plain_2": {
+        "barrier": 15566,
+        "bicycle": 1115,
+        "bus": 28256,
+        "car": 1213060,
+        "construction_vehicle": 915,
+        "motorcycle": 8909,
+        "pedestrian": 21576,
+        "traffic_cone": 197,
+        "trailer": 15863,
+        "truck": 119447,
+        "driveable_surface": 2475509,
+        "other_flat": 1030,
+        "sidewalk": 1847685,
+        "terrain": 472905,
+        "manmade": 1695088,
+        "vegetation": 4333448
+      },
+      "worker": {
+        "barrier": 23108,
+        "bicycle": 1158,
+        "bus": 27387,
+        "car": 1218915,
+        "construction_vehicle": 526,
+        "motorcycle": 8969,
+        "pedestrian": 20650,
+        "traffic_cone": 224,
+        "trailer": 11070,
+        "truck": 120266,
+        "driveable_surface": 2476682,
+        "other_flat": 783,
+        "sidewalk": 1849804,
+        "terrain": 462058,
+        "manmade": 1682662,
+        "vegetation": 4346307
+      },
+      "NEG": {
+        "barrier": 4740,
+        "bicycle": 3293,
+        "bus": 7550,
+        "car": 1290069,
+        "construction_vehicle": 5197,
+        "motorcycle": 10944,
+        "pedestrian": 13306,
+        "traffic_cone": 0,
+        "trailer": 4639,
+        "truck": 168746,
+        "driveable_surface": 2675136,
+        "other_flat": 1874,
+        "sidewalk": 1526020,
+        "terrain": 600089,
+        "manmade": 3958082,
+        "vegetation": 1980884
+      }
+    },
+    "seconds": 38.00384020805359,
+    "verdict_inputs": {
+      "all": {
+        "cross": 0.9506005118645896,
+        "within": 0.9482551650973082,
+        "ok": true
+      },
+      "margin>1": {
+        "cross": 0.9839425373866946,
+        "within": 0.9830023039210334,
+        "ok": true
+      },
+      "margin>2": {
+        "cross": 0.993868047850677,
+        "within": 0.9934136944089511,
+        "ok": true
+      },
+      "margin>4": {
+        "cross": 0.9985653806920554,
+        "within": 0.9987304251091541,
+        "ok": true
+      },
+      "worker": {
+        "plain_vs_worker": 0.9456897879600531,
+        "within_all": 0.9482551650973082,
+        "ok": true
+      },
+      "neg": {
+        "neg_all": 0.7287735029159499,
+        "cross_all": 0.9506005118645896,
+        "separated": true
+      },
+      "gt": {
+        "distil_mean_acc": 77.10812704459295,
+        "within_model_acc_spread": 0.2460823531423273,
+        "within_model_miou_spread": 0.2910289320854318,
+        "cross_model_miou_spread": 0.44427297354598494
+      }
+    }
+  },
+  "fails": [],
+  "PASS": true
+}

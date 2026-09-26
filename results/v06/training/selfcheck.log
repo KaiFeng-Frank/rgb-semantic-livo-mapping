@@ -1,0 +1,12 @@
+/data/miniconda3/envs/ptv3/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+[2026-09-24 11:10:10,201 INFO defaults.py line 58 528869] Totally 15637 x 1 samples in train set.
+[2026-09-24 11:10:10,239 INFO defaults.py line 58 528869] Totally 4071 x 1 samples in val set.
+[2026-09-24 11:10:10,254 INFO defaults.py line 58 528869] Totally 2692 x 1 samples in test set.
+SPLIT2SEQ_V2 = {'train': [0, 1, 2, 4, 5, 6, 10], 'val': [8], 'test': [7, 9]}
+train   15637 frames  {'00': 4541, '01': 1101, '02': 4661, '04': 271, '05': 2761, '06': 1101, '10': 1201}
+val      4071 frames  {'08': 4071}
+test     2692 frames  {'07': 1101, '09': 1591}
+guard fires as intended: held-out sequence(s) ['09'] leaked into split 'train' -- 1 frames load
+v0.4 split untouched: {'train': [0, 1, 2, 4, 5, 6, 9, 10], 'val': [8], 'test': [7]}
+SELF-CHECK PASS

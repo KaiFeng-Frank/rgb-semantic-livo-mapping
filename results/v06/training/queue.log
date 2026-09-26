@@ -1,0 +1,23 @@
+[2026-09-24 11:09:58] self-check: v0.6 split
+[2026-09-24 11:10:11] self-check PASS
+train   15637 frames  {'00': 4541, '01': 1101, '02': 4661, '04': 271, '05': 2761, '06': 1101, '10': 1201}
+val      4071 frames  {'08': 4071}
+test     2692 frames  {'07': 1101, '09': 1591}
+[2026-09-24 11:10:11] queue start -- 7 jobs, ~6.8 h each, expect ~48 h
+[2026-09-24 11:10:11] job 1/7  armB0_s1  <- arm_B0_v2_s1.py
+[2026-09-24 18:24:47] job 1  armB0_s1  OK   434 min  Best mIoU: 0.6703
+[2026-09-24 18:24:47] job 2/7  armB0_s2  <- arm_B0_v2_s2.py
+[2026-09-25 01:41:07] job 2  armB0_s2  OK   436 min  Best mIoU: 0.6731
+[2026-09-25 01:41:07] job 3/7  armB0_s3  <- arm_B0_v2_s3.py
+[2026-09-25 09:08:31] job 3  armB0_s3  OK   447 min  Best mIoU: 0.6707
+[2026-09-25 09:08:31] job 4/7  armB0_noKL_s1  <- arm_B0_noKL_v2_s1.py
+[2026-09-25 15:03:01] job 4  armB0_noKL_s1  OK   354 min  Best mIoU: 0.5326
+[2026-09-25 15:03:01] job 5/7  armB0_noKL_s2  <- arm_B0_noKL_v2_s2.py
+[2026-09-25 23:35:02] resume queue: oom_score_adj=-900 (inherited by all children)
+[2026-09-25 23:35:05] job 5/7  armB0_noKL_s2  RESUME from epoch 9  <- arm_B0_noKL_v2_s2.py
+[2026-09-26 00:15:07] job 5  armB0_noKL_s2  OK   40 min  Best mIoU: 0.6180
+[2026-09-26 00:15:07] job 6/7  armB0_noKL_s3  <- arm_B0_noKL_v2_s3.py
+[2026-09-26 06:40:56] job 6  armB0_noKL_s3  OK   385 min  Best mIoU: 0.5268
+[2026-09-26 06:40:56] job 7/7  armRprime_noKL_s1  <- arm_Rprime_noKL_v2_s1.py
+[2026-09-26 13:28:57] job 7  armRprime_noKL_s1  OK   408 min  Best mIoU: 0.8697
+[2026-09-26 13:28:57] queue done

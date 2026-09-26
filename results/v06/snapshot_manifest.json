@@ -1,6 +1,6 @@
 {
  "captured_utc": "2026-09-25T22:04:27.734797+00:00",
- "description": "Copies from the experiment host.  Text files are byte-identical except where `changes` says otherwise: the host-specific data root is rewritten to /data/, and marked redactions remove references to work outside this repository.  `sha256`/`bytes` describe the published file; `source_sha256`/`source_bytes` the original, where they differ.  No checkpoints, caches, datasets, logs, credentials or host addresses.",
+ "description": "Copies from the experiment host.  Text files are byte-identical except where `changes` says otherwise: the host-specific data root is rewritten to /data/, and marked redactions remove references to work outside this repository.  `sha256`/`bytes` describe the published file; `source_sha256`/`source_bytes` the original, where they differ.  No checkpoints, caches, datasets, training logs, credentials or host addresses.",
  "hosts": {
   "A": "original experiment host; Intel Xeon Gold 6248R / RTX 4090"
  },
@@ -644,6 +644,409 @@
    "changes": [
     "derived: unified diff against rpg_vikit as vendored by the port, apply with patch -p1 in its checkout"
    ]
+  },
+  {
+   "host": "A",
+   "source": "out/v06_score/REPORT.txt",
+   "published": "results/v06/scoring/REPORT.txt",
+   "sha256": "a8e79c6011d3aa99c93029ed2da6ca947c2ab154667fec6341efebbf4519cc33",
+   "bytes": 4814
+  },
+  {
+   "host": "A",
+   "source": "out/v06_score/score.log",
+   "published": "results/v06/scoring/score.log",
+   "sha256": "cc0424d7aba34660b81536c5f3f96745f1b6e4e39176092db93cfb9530ce8d4e",
+   "bytes": 6912
+  },
+  {
+   "host": "A",
+   "source": "out/v06_score/extract_armB0_s1.json",
+   "published": "results/v06/scoring/extract_armB0_s1.json",
+   "sha256": "67eff213f01c247af9e042d399f59ee77744f944c26aef7488539a7fbcd78b26",
+   "bytes": 11385,
+   "source_sha256": "cf86e156c73058332a7ab8ec94e0e03c67bd6243cb0f682034c0f69c88f60cfb",
+   "source_bytes": 11391,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (1 occurrence)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "out/v06_score/extract_armB0_s2.json",
+   "published": "results/v06/scoring/extract_armB0_s2.json",
+   "sha256": "b8dd109c9b139a55fbc60f0739093937ada5637e664df2cb370b5743a9fc2518",
+   "bytes": 13014,
+   "source_sha256": "cba72948f5306a84df66cfd6fbe2bc6edda58e070d8e374d00654c16e90b3cdc",
+   "source_bytes": 13020,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (1 occurrence)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "out/v06_score/extract_armB0_s3.json",
+   "published": "results/v06/scoring/extract_armB0_s3.json",
+   "sha256": "f41e4659ea397795c2755669c0352c1665930b64fe02668e8cdf44f63fdfd237",
+   "bytes": 13025,
+   "source_sha256": "c18040db7316a1236ae52ddeda9604bc63afd7b1b61fbc19d8254671286cbb1a",
+   "source_bytes": 13031,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (1 occurrence)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "out/v06_score/extract_armB0_noKL_s1.json",
+   "published": "results/v06/scoring/extract_armB0_noKL_s1.json",
+   "sha256": "15dcb7be29658a39a70149e2a655402162b6de3c8b123f08bb3a8f3eaa02d20c",
+   "bytes": 12937,
+   "source_sha256": "09670dc58866410036b4923dfdfaba6462aa15a4031c0978e6ad2a3b6755be91",
+   "source_bytes": 12943,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (1 occurrence)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "out/v06_score/extract_armB0_noKL_s2.json",
+   "published": "results/v06/scoring/extract_armB0_noKL_s2.json",
+   "sha256": "1b598c7b51e5104945553d17a8ebf2fdf8cff3e683ac02e9d8c15ff2fe3592c3",
+   "bytes": 13069,
+   "source_sha256": "ba16deeacec2b9188456ea65946970469f20ede95beef2eae084d4cfcd5dbbfc",
+   "source_bytes": 13075,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (1 occurrence)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "out/v06_score/extract_armB0_noKL_s3.json",
+   "published": "results/v06/scoring/extract_armB0_noKL_s3.json",
+   "sha256": "35e93a0423f8552ec2d595365f4c0c07a9a33e7e8278c50119e68a986337765f",
+   "bytes": 12893,
+   "source_sha256": "7f8e09145ee7ddbe3c4d3e71eebd96429d14581dfeb63590f3ed966eed8230b4",
+   "source_bytes": 12899,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (1 occurrence)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "out/v06_score/extract_armRprime_noKL_s1.json",
+   "published": "results/v06/scoring/extract_armRprime_noKL_s1.json",
+   "sha256": "27f2700efb06601ef45a14575982ccbf4c9c6155dd5dd3bbddcb3d3b7e168407",
+   "bytes": 12984,
+   "source_sha256": "62d9b5206b6560d001ce8de709a5cdd148343b6f7eceefbc865f3abe7c9124aa",
+   "source_bytes": 12990,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (1 occurrence)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "out/v06_train/queue.log",
+   "published": "results/v06/training/queue.log",
+   "sha256": "1e87bf0da4e8783054a45716a42008a40935976bc406d492c4e5a84aa53ad7bf",
+   "bytes": 1537
+  },
+  {
+   "host": "A",
+   "source": "out/v06_train/selfcheck.log",
+   "published": "results/v06/training/selfcheck.log",
+   "sha256": "9835cc04a203b1eb1fd657c2304f7a8c7cc53fb0cee85562ec8e6e7b841e0916",
+   "bytes": 1041,
+   "source_sha256": "a471efd574dbf1bf2f762fe2af7503e7e7ee3f3702ee7404486db63e7eda9358",
+   "source_bytes": 1047,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (1 occurrence)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "exp/sk2/armB0_s1/config.py",
+   "published": "results/v06/training/configs/armB0_s1.py",
+   "sha256": "6a72dc9c68f1be50149596ee9d10a87168a9f73f1c0c71ac6c4c771f4234e5ac",
+   "bytes": 5773,
+   "source_sha256": "b0f10d43a066c10d6c12fd0c7a5dda397baa9b2be101d18dd23eb27cdec56bc2",
+   "source_bytes": 5827,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (9 occurrences)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "exp/sk2/armB0_s2/config.py",
+   "published": "results/v06/training/configs/armB0_s2.py",
+   "sha256": "7c210d82d7d26571e82a45dfa3663c01743bca7341d92048c3713e9a768af94a",
+   "bytes": 5773,
+   "source_sha256": "677c48ac6506d7a299cb7e649bf24baaedd681c5cbe819bb5875f5b1aab63a51",
+   "source_bytes": 5827,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (9 occurrences)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "exp/sk2/armB0_s3/config.py",
+   "published": "results/v06/training/configs/armB0_s3.py",
+   "sha256": "f2ee3a949541cf2f2ad3a19ef00fe5d213271efe3182ad717664067201efbd68",
+   "bytes": 5773,
+   "source_sha256": "29b56a7db7411e07816d685b3c0d0ffbc5d3091c80a121700e901edd8004d082",
+   "source_bytes": 5827,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (9 occurrences)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "exp/sk2/armB0_noKL_s1/config.py",
+   "published": "results/v06/training/configs/armB0_noKL_s1.py",
+   "sha256": "44ccf169db7b1d95fa7757b42d02b005b7f4d8b39cbc337fd5efdeb7699a77f0",
+   "bytes": 5779,
+   "source_sha256": "01a16b30b86861fa5115e4a68ccc19ddca55e09e253aa762d6c75c37255afdec",
+   "source_bytes": 5833,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (9 occurrences)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "exp/sk2/armB0_noKL_s2/config.py",
+   "published": "results/v06/training/configs/armB0_noKL_s2.py",
+   "sha256": "24842e8d84bf7b4394927affd1181b44a096a2249f6e1f3e87c1faf3f281bdf3",
+   "bytes": 5779,
+   "source_sha256": "bee473ab68c7346ce793ead69fef7622348dfe7691acfdf5750a81697f10df70",
+   "source_bytes": 5833,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (9 occurrences)"
+   ],
+   "note": "configuration as realised at the job's first start; Pointcept writes config.py only when resume is false, so the resumed epoch's command-line options (resume=True, weight=<model_last.pth>) are not in this file"
+  },
+  {
+   "host": "A",
+   "source": "exp/sk2/armB0_noKL_s3/config.py",
+   "published": "results/v06/training/configs/armB0_noKL_s3.py",
+   "sha256": "c694bfb87c418246d251b8f1ca47046e12bcf820f035ae1d1b6c162cd932e201",
+   "bytes": 5779,
+   "source_sha256": "6191e916e0ec8cd51cc29ee6fb7373b57b88449793ce5af072148e400694ec3e",
+   "source_bytes": 5833,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (9 occurrences)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": "exp/sk2/armRprime_noKL_s1/config.py",
+   "published": "results/v06/training/configs/armRprime_noKL_s1.py",
+   "sha256": "874f4d9b6c4a9a3e1cc5555e92b8aef93920c80aae49256c93cef7786573f03e",
+   "bytes": 6000,
+   "source_sha256": "5189a4237b35f2ff7e1aa9ac6234aa69b105fedaf83f64a38c51614523d9387b",
+   "source_bytes": 6060,
+   "changes": [
+    "path: host-specific data root rewritten to /data/ (10 occurrences)"
+   ]
+  },
+  {
+   "host": "A",
+   "source": null,
+   "published": "results/v06/scoring/runs_summary.json",
+   "sha256": "f0cc1438f1ade2b721abc9f83eb5c8d7c286d9a63b8689e1ff9403c21248108c",
+   "bytes": 81518,
+   "derived_from": [
+    {
+     "source": "out/v06_score/map_ZS_07_r1.json",
+     "source_sha256": "88dc2043831dac7eb6746063ea8604c6f31505ae7f1c0e58fafa2345a424bfe3"
+    },
+    {
+     "source": "out/v06_score/map_ZS_07_r2.json",
+     "source_sha256": "3cb3b033a74a4dcd1f9ff6a0e1777b9464c1c5975ae347ecc97ae5d998c383ad"
+    },
+    {
+     "source": "out/v06_score/map_ZS_09_r1.json",
+     "source_sha256": "6a91db1234c45558ac6ec3e8b1f19ca04d0eafcef39feb59fb60c98a38b6b35d"
+    },
+    {
+     "source": "out/v06_score/map_ZS_09_r2.json",
+     "source_sha256": "76f8919365617eea315e76a300b292d45e00d51e843b8753e34c835d3e50e744"
+    },
+    {
+     "source": "out/v06_score/map_armB0_noKL_s1_07_r1.json",
+     "source_sha256": "03a8f70870b90a66ea554407216707dbf76c8f28cade9698ab8c412b43100b21"
+    },
+    {
+     "source": "out/v06_score/map_armB0_noKL_s1_07_r2.json",
+     "source_sha256": "3d2ac49ea73324550e014e1300b8641b498bafc752353f56c98bab2754f0849d"
+    },
+    {
+     "source": "out/v06_score/map_armB0_noKL_s1_09_r1.json",
+     "source_sha256": "5b57d29152b9755dad3b45e6d996b346a3f75a1cb92465a8e894e74a4b18ddf4"
+    },
+    {
+     "source": "out/v06_score/map_armB0_noKL_s1_09_r2.json",
+     "source_sha256": "5ffee8c0e94019b0503c6bed322749ea5f2a29a4958209cc3a7f7737198a22eb"
+    },
+    {
+     "source": "out/v06_score/map_armB0_noKL_s2_07_r1.json",
+     "source_sha256": "24a40f654dfe80fe490f0d1163868ad128e2994859cd891d600ebc94262e18be"
+    },
+    {
+     "source": "out/v06_score/map_armB0_noKL_s2_07_r2.json",
+     "source_sha256": "3313cf52a60434ecbce7e2ba6149a2a8b57490b4fe30f5abc08e105e2229a7d5"
+    },
+    {
+     "source": "out/v06_score/map_armB0_noKL_s2_09_r1.json",
+     "source_sha256": "72885c5da5e72c990c83978f327c3dc7f33df6d9a0d5dcb98e33b9b823915e03"
+    },
+    {
+     "source": "out/v06_score/map_armB0_noKL_s2_09_r2.json",
+     "source_sha256": "40a981a51e0f195209e1dc93559211c726fb266974af1b2eecbc7ca5e3601f2a"
+    },
+    {
+     "source": "out/v06_score/map_armB0_noKL_s3_07_r1.json",
+     "source_sha256": "45f262257ad674a24806887e34c138810f01d545e8f85956bb9b0214eda2148c"
+    },
+    {
+     "source": "out/v06_score/map_armB0_noKL_s3_07_r2.json",
+     "source_sha256": "8d19ab5fb3fc39b6310e76836fe7ef2a9fe216086c1c29cfc3d9963707a75b68"
+    },
+    {
+     "source": "out/v06_score/map_armB0_noKL_s3_09_r1.json",
+     "source_sha256": "b5cd5033d1e476fbc55f4f1d7350339509c511c7a427899ff945a4bbe6de3a60"
+    },
+    {
+     "source": "out/v06_score/map_armB0_noKL_s3_09_r2.json",
+     "source_sha256": "dbbde48c2c660b29ee71a9bbe3bec6dd5161f413557bd18909821f009f663d52"
+    },
+    {
+     "source": "out/v06_score/map_armB0_s1_07_r1.json",
+     "source_sha256": "89e0002df3397eadb55a1c45e525d52dc691716f2767221f025f8cfcd97e5916"
+    },
+    {
+     "source": "out/v06_score/map_armB0_s1_07_r2.json",
+     "source_sha256": "e2429da527941ba4d2dc56e9556623927ee285f9a2658b68f44cb20449675e35"
+    },
+    {
+     "source": "out/v06_score/map_armB0_s1_09_r1.json",
+     "source_sha256": "cb91bb93f025c090498c3337ee74ee1f8ec19dc6764e8a0cf7f612169f07c8f4"
+    },
+    {
+     "source": "out/v06_score/map_armB0_s1_09_r2.json",
+     "source_sha256": "028f81ae40897f3489183b2d1795d4553a71c12cb0c53ef863c629ef49780102"
+    },
+    {
+     "source": "out/v06_score/map_armB0_s2_07_r1.json",
+     "source_sha256": "80c82cf3496f404fb99699933048eab2600d559b797f1dddd6d9a555ab8e0af3"
+    },
+    {
+     "source": "out/v06_score/map_armB0_s2_07_r2.json",
+     "source_sha256": "fdc59be7fcb757188582f30b2445fc8640eb418cd72281de60c9a319c67a0bca"
+    },
+    {
+     "source": "out/v06_score/map_armB0_s2_09_r1.json",
+     "source_sha256": "b73392c1e5d091bffa2f862a3c63293799de3e51d515ede4594c34b65e1f9f9a"
+    },
+    {
+     "source": "out/v06_score/map_armB0_s2_09_r2.json",
+     "source_sha256": "db5755e253ec71d17cffd1c0473c0c701e76020d0c7fd61f9a8fac8cdbbd9746"
+    },
+    {
+     "source": "out/v06_score/map_armB0_s3_07_r1.json",
+     "source_sha256": "f5e8c67e36c6636d4c4dadebad55f966af7882e95acc808258e830c91219f677"
+    },
+    {
+     "source": "out/v06_score/map_armB0_s3_07_r2.json",
+     "source_sha256": "d7332caa700044cd1d98eed657bea3cae6c2e6f697b8d1ee89a0a15a6c4abdd8"
+    },
+    {
+     "source": "out/v06_score/map_armB0_s3_09_r1.json",
+     "source_sha256": "6ce78c4928ba030705756e5a2b147be4001209e7f80a185cdbeb1e3cee1ebe93"
+    },
+    {
+     "source": "out/v06_score/map_armB0_s3_09_r2.json",
+     "source_sha256": "55d239136b8d2c79f9bfd55c4315a43461b7f2e8615aa54ccde808f260787ee4"
+    },
+    {
+     "source": "out/v06_score/map_armRprime_noKL_s1_07_r1.json",
+     "source_sha256": "ee9838aac59d5de0e06fd27134c644dfbd6237bd77462bd3cf62e76b0a1b26a4"
+    },
+    {
+     "source": "out/v06_score/map_armRprime_noKL_s1_07_r2.json",
+     "source_sha256": "6220526bf615b92a308fb18f6d3668dada01e69bd7b14dc72fdb54bbe55acf0e"
+    },
+    {
+     "source": "out/v06_score/map_armRprime_noKL_s1_09_r1.json",
+     "source_sha256": "7d9e2ffc034fec822af042daad2ca026558b7560a191846622e2da31a951248d"
+    },
+    {
+     "source": "out/v06_score/map_armRprime_noKL_s1_09_r2.json",
+     "source_sha256": "e479dee1feb8c6901c9d89cc53665f08319ab477fe7bfb0ce73e69188f9fe0b7"
+    }
+   ],
+   "changes": [
+    "derived: per-run out-of-frustum readouts of the 32 map_eval outputs, which are not published; values copied unrounded"
+   ]
+  },
+  {
+   "host": "A",
+   "source": null,
+   "published": "results/v06/training/val_curves.json",
+   "sha256": "a3afc2b08d4626b489e573cc150856ac253ffc28c41cabcb27fc10a159c83ae5",
+   "bytes": 16884,
+   "derived_from": [
+    {
+     "source": "out/v06_train/armB0_s1.log",
+     "source_sha256": "7510f40a5b8da6a3fcc135bf09882c7350f72af34194b624db7af2e8b68e7c0e"
+    },
+    {
+     "source": "out/v06_train/armB0_s2.log",
+     "source_sha256": "4ef88767cc8a0b3b8503a8ce97d7b64e57b6fb9192a737ce8d335f012b603980"
+    },
+    {
+     "source": "out/v06_train/armB0_s3.log",
+     "source_sha256": "f73d3671ad3657729552d6c471ec754197715da3499c9d53e4c0ba96ebe89afd"
+    },
+    {
+     "source": "out/v06_train/armB0_noKL_s1.log",
+     "source_sha256": "83b280e56e0b597986027edbe30dfdc5867209cbdaa333f1a5a15230dc083d58"
+    },
+    {
+     "source": "out/v06_train/armB0_noKL_s2.log",
+     "source_sha256": "4aad67e938522577da5bc73748ca3f2e5ddf27b213e1c6b1a0937c56d8e6cde7"
+    },
+    {
+     "source": "out/v06_train/armB0_noKL_s2.resume_ep9.log",
+     "source_sha256": "6564864b626a1b48d529aa533690e66d7e2e265ecef1963966f7effdab6509d9"
+    },
+    {
+     "source": "out/v06_train/armB0_noKL_s3.log",
+     "source_sha256": "f4f899ae07f76b3dc6200ab57ed4f39ac9fde7ef19b2bfa3314db805ae879741"
+    },
+    {
+     "source": "out/v06_train/armRprime_noKL_s1.log",
+     "source_sha256": "e0aaba529b7fa4d9d8344498ce19ec906a25fb07b5213b2b6948a6efec8590a0"
+    },
+    {
+     "source": "out/v06_train/queue.log",
+     "source_sha256": "1e87bf0da4e8783054a45716a42008a40935976bc406d492c4e5a84aa53ad7bf"
+    },
+    {
+     "source": "out/v06_train/selfcheck.log",
+     "source_sha256": "a471efd574dbf1bf2f762fe2af7503e7e7ee3f3702ee7404486db63e7eda9358"
+    },
+    {
+     "source": "exp/sk2/armB0_noKL_s2/model/model_best.pth",
+     "source_sha256": "98ef5676ddc9af006fc75f098de8f74674bc57c29c39d66e9a95aa49bac04f25",
+     "used_for": "state_dict key names, read from the pickle index only"
+    },
+    {
+     "source": "src/Pointcept_v151/pointcept/engines/hooks/misc.py",
+     "source_sha256": "dc12a69d734ecdaba8fb1e323020b5b7cd4b9ce3764bd1d249fa0f36dd3da41f"
+    }
+   ],
+   "changes": [
+    "derived: per-epoch 'Val result' lines, split sizes, selected epochs and the armB0_noKL_s2 resume audit, extracted from the training logs, which are not published"
+   ]
   }
  ],
  "unchanged_by_v06": [
@@ -666,6 +1069,63 @@
    "source": "src/ptv3_worker.py",
    "source_sha256": "f8f39fd25643702eac9ec5b98057dc13f5fbe801d018fd8468073b653b9cd47a",
    "published_as": "experiments/v05/source/src/ptv3_worker.py"
+  }
+ ],
+ "updates": [
+  {
+   "captured_utc": "2026-09-26T08:33:37.168107+00:00",
+   "scope": "v0.6 training queue and scoring: the report, the per-run summary of the 32 map-level replays, the seven student extractions, the queue, self-check and scoring logs, the seven realised training configurations and the per-epoch validation curves",
+   "entries": {
+    "first_index": 60,
+    "count": 20
+   },
+   "description_edit": "'logs' in the description now reads 'training logs': the short queue, self-check and scoring logs are published; the per-epoch training logs are not",
+   "code_as_run": [
+    {
+     "source": "tools/v06_report.py",
+     "source_sha256": "782d0d6b9a4ed3097f5d1d8dd900d75950e147e662c458a29563ce66773ca561",
+     "published_as": "experiments/v06/source/tools/v06_report.py",
+     "published_source_sha256": "782d0d6b9a4ed3097f5d1d8dd900d75950e147e662c458a29563ce66773ca561"
+    },
+    {
+     "source": "tools/map_eval.py",
+     "source_sha256": "0896156c9606a62d45d90bdcc83c072797619415633b7c5f5ce22fd16c6d0c6b",
+     "published_as": "experiments/v06/source/tools/map_eval.py",
+     "published_source_sha256": "88443e507557e9a48eb49f0037fc1fcaf405da33cce69091ed3d18c9979c6528",
+     "differs_by": "voxel-map capacity doubled after the snapshot, before the scoring ran: cap0 and CAP 1<<22 -> 1<<23, hash_cap 1<<24 -> 1<<25 (seq 09's maps hold 6.40-6.48 M voxels); nothing else"
+    },
+    {
+     "source": "opt/score_v06.sh",
+     "source_sha256": "30ee633dd8f3914d1d57dc55368f7b86869b6c00e0ca244fa8582ba32f688293",
+     "published_as": "experiments/v06/source/opt/score_v06.sh",
+     "published_source_sha256": "96faad514c06537715477e362e9e77c0672ca347f770eaa51725d22781433ae9",
+     "differs_by": "map-level replay parallelism 4 -> 2 (xargs -P) and the matching comment and log line; nothing else"
+    },
+    {
+     "source": "opt/train_queue_v06.sh",
+     "source_sha256": "f1ff640c8ddbe4cca4e2402ba226cbe66374e05d3100f117b8535952e865238e",
+     "published_as": "experiments/v06/source/opt/train_queue_v06.sh",
+     "published_source_sha256": "f1ff640c8ddbe4cca4e2402ba226cbe66374e05d3100f117b8535952e865238e"
+    },
+    {
+     "source": "opt/train_queue_v06_resume.sh",
+     "source_sha256": "52e4e4d3302a7d51999d95017ef8aeace58d0d773c2c9c37eebcf3b988939d53",
+     "published_as": "experiments/v06/source/opt/train_queue_v06_resume.sh",
+     "published_source_sha256": "52e4e4d3302a7d51999d95017ef8aeace58d0d773c2c9c37eebcf3b988939d53"
+    },
+    {
+     "source": "tools/train_distil_v2.py",
+     "source_sha256": "b09725d61d722652425bae6840165abaedabb6e2ec3ae1f4e2c115db57e5a88b",
+     "published_as": "experiments/v06/source/tools/train_distil_v2.py",
+     "published_source_sha256": "b09725d61d722652425bae6840165abaedabb6e2ec3ae1f4e2c115db57e5a88b"
+    },
+    {
+     "source": "src/split_v2.py",
+     "source_sha256": "3af80857a6e8b1c58c616f07df9de3daaf462a9b95c7f10ca4c4a5389c560981",
+     "published_as": "experiments/v06/source/src/split_v2.py",
+     "published_source_sha256": "3af80857a6e8b1c58c616f07df9de3daaf462a9b95c7f10ca4c4a5389c560981"
+    }
+   ]
   }
  ]
 }

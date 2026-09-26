@@ -52,7 +52,7 @@ is new, built on `map_eval`'s trajectory, de-skew and voxel code. Each run scrip
 preregistration's SHA-256 before the first replay. The `map_eval` control and its checks
 are in [`results/v06/mapeval/`](../../results/v06/mapeval/).
 
-## Training with seq 09 held out (results pending)
+## Training with seq 09 held out
 
 | source path | role |
 |---|---|
@@ -66,6 +66,15 @@ are in [`results/v06/mapeval/`](../../results/v06/mapeval/).
 
 The v2 configurations inherit the v0.4 arm configurations archived in
 [`experiments/v04/source/`](../v04/source/src/Pointcept_v151/configs/semantic_kitti/).
+
+Results: [v0.6 results](../../docs/v06_results.md). Two notes on running these files:
+
+- The scoring ran `tools/map_eval.py` and `opt/score_v06.sh` with two edits made after this
+  snapshot: the voxel-map capacity constants doubled, and replay parallelism went from 4 to
+  2. The as-run hashes are in the manifest's `updates` record.
+- `opt/train_queue_v06_resume.sh` resumes through Pointcept v1.5.1's `CheckpointLoader`. On
+  one GPU that loader loaded the frozen anchor into the student instead of restoring it
+  ([deviation 1](../../docs/v06_results.md#protocol-deviations-and-disclosures)).
 
 ## Environment and replay
 

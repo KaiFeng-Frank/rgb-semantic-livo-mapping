@@ -1,0 +1,3218 @@
+{
+ "description": "Per-run readout of the 32 v0.6 map-level replays: 8 checkpoints x 2 test sequences x 2 forward passes, each an out/v06_score/map_<tag>.json written by tools/map_eval.py. Out-of-frustum subset only; the source files are not published, each run carries its source's SHA-256. tools/v06_report.py reads exactly these fields to write REPORT.txt.",
+ "conventions": {
+  "units": "IoU and mIoU in percent; common-9 label space",
+  "outside": "out-of-frustum points by the score_2d_vs_3d.Projector P3 rule on the raw sensor-frame point; for the per-cell readings, cells whose scored points are majority out-of-frustum",
+  "offline_all": "per-scan predictions on every evaluated point (no abstention exists)",
+  "map_all_lookup": "the fused 0.20 m map (confidence gate 0.5, FAST-LIVO2 trajectory of the sequence) looked up at every evaluated point. `miou9` and `per_class_iou` exclude points that land in no voxel, the convention of REPORT.txt and of the evaluation-unit tables; `miou9_abstain_wrong` counts them wrong, the convention of v0.5's headline map number",
+  "anatomy_voxel": "every map cell once: cell GT = majority GT of its scored points, cell prediction = the fused class; `sparse_oracle_miou` relabels the cells with n_obs <= 4 to their GT majority; `wrong` counts cells whose fused class differs from their GT majority",
+  "reweighted_map_vs_scan": "each cell weight 1 spread evenly over its scored points; the map prediction and the per-scan prediction are scored on the same points against the same GT",
+  "map_voxels": "all voxels of the run's map, every subset",
+  "points_evaluated": "every evaluated point of the sequence, every subset; the out-of-frustum count is outside.offline_all.n_eval"
+ },
+ "aggregation_in_report": "An arm is every run of its checkpoints: B0 and B0_noKL 3 seeds x 2 passes = 6 runs, ZS and Rprime_noKL 1 checkpoint x 2 passes. Main table: mean and population SD (statistics.pstdev, divisor n) over the arm's runs. Section 1 and 2: arm means. Section 3, per-scan offline_all: between-seed = pstdev of the three per-seed means, within-seed = mean over seeds of the pstdev of the two passes; 'seed spread is real' when between > 2 x within. Section 5: plain means.",
+ "caveat": "armB0_noKL_s2's checkpoint comes from a resume that restarted epoch 10 from the released weights (see training/val_curves.json, resume_audit); it is not a ten-epoch no-KL run, and every B0_noKL aggregate includes it.",
+ "reproduces": "tools/v06_report.py re-run over the 32 source files reproduces results/v06/scoring/REPORT.txt byte for byte (checked on 2026-09-26).",
+ "runs": [
+  {
+   "tag": "ZS_07_r1",
+   "arm": "ZS",
+   "checkpoint": "released nuScenes weights",
+   "training_seed": null,
+   "seq": "07",
+   "pass": 1,
+   "frames": 1101,
+   "frames_no_pose": 5,
+   "map_voxels": 2701097,
+   "points_evaluated": 125886114,
+   "outside": {
+    "offline_all": {
+     "miou9": 64.84067870594967,
+     "acc": 87.41814941505315,
+     "n_eval": 105671053,
+     "per_class_iou": {
+      "car": 94.335,
+      "large_vehicle": 37.905,
+      "two_wheeler": 37.304,
+      "person": 38.321,
+      "road": 81.29,
+      "sidewalk": 69.44,
+      "terrain": 74.283,
+      "vegetation": 67.904,
+      "manmade": 82.784
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 71.22920135003568,
+     "miou9_abstain_wrong": 70.79368355882632,
+     "acc": 89.89097414851935,
+     "coverage": 0.9950279908109039,
+     "n_eval": 105576434,
+     "n_labelled": 105051507,
+     "per_class_iou": {
+      "car": 96.015,
+      "large_vehicle": 62.692,
+      "two_wheeler": 43.292,
+      "person": 43.234,
+      "road": 83.634,
+      "sidewalk": 74.003,
+      "terrain": 79.719,
+      "vegetation": 72.519,
+      "manmade": 85.954
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 64.54570285284197,
+     "sparse_oracle_miou": 79.09706135539005,
+     "voxels": 1909877,
+     "wrong": 243645,
+     "sparse_voxels": 757895,
+     "per_class_iou": {
+      "car": 91.164,
+      "large_vehicle": 46.061,
+      "two_wheeler": 45.213,
+      "person": 42.995,
+      "road": 75.947,
+      "sidewalk": 52.497,
+      "terrain": 62.911,
+      "vegetation": 82.485,
+      "manmade": 81.639
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 63.92412837063624,
+     "per_scan_miou9": 61.512670765205,
+     "points": 115771905,
+     "voxels": 1909877,
+     "map_per_class_iou": {
+      "car": 90.2,
+      "large_vehicle": 44.963,
+      "two_wheeler": 44.71,
+      "person": 42.57,
+      "road": 75.242,
+      "sidewalk": 51.493,
+      "terrain": 62.665,
+      "vegetation": 82.305,
+      "manmade": 81.169
+     },
+     "per_scan_per_class_iou": {
+      "car": 89.722,
+      "large_vehicle": 37.091,
+      "two_wheeler": 41.027,
+      "person": 41.138,
+      "road": 74.679,
+      "sidewalk": 49.611,
+      "terrain": 61.07,
+      "vegetation": 80.6,
+      "manmade": 78.675
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_ZS_07_r1.json",
+    "sha256": "88dc2043831dac7eb6746063ea8604c6f31505ae7f1c0e58fafa2345a424bfe3",
+    "bytes": 51253
+   }
+  },
+  {
+   "tag": "ZS_07_r2",
+   "arm": "ZS",
+   "checkpoint": "released nuScenes weights",
+   "training_seed": null,
+   "seq": "07",
+   "pass": 2,
+   "frames": 1101,
+   "frames_no_pose": 5,
+   "map_voxels": 2701861,
+   "points_evaluated": 125886114,
+   "outside": {
+    "offline_all": {
+     "miou9": 65.0705120335905,
+     "acc": 87.44919765302235,
+     "n_eval": 105671053,
+     "per_class_iou": {
+      "car": 94.184,
+      "large_vehicle": 38.578,
+      "two_wheeler": 38.104,
+      "person": 38.901,
+      "road": 81.299,
+      "sidewalk": 69.399,
+      "terrain": 74.279,
+      "vegetation": 68.028,
+      "manmade": 82.862
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 70.91891345813333,
+     "miou9_abstain_wrong": 70.48647901533714,
+     "acc": 89.92514649758603,
+     "coverage": 0.9950301124965065,
+     "n_eval": 105576434,
+     "n_labelled": 105051731,
+     "per_class_iou": {
+      "car": 95.883,
+      "large_vehicle": 61.939,
+      "two_wheeler": 41.128,
+      "person": 42.988,
+      "road": 83.729,
+      "sidewalk": 74.075,
+      "terrain": 79.843,
+      "vegetation": 72.678,
+      "manmade": 86.008
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 64.38567417869992,
+     "sparse_oracle_miou": 78.94621773245615,
+     "voxels": 1910125,
+     "wrong": 243163,
+     "sparse_voxels": 757888,
+     "per_class_iou": {
+      "car": 91.168,
+      "large_vehicle": 45.998,
+      "two_wheeler": 44.572,
+      "person": 41.795,
+      "road": 75.998,
+      "sidewalk": 52.627,
+      "terrain": 63.111,
+      "vegetation": 82.546,
+      "manmade": 81.656
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 63.754739505489994,
+     "per_scan_miou9": 61.46541701515692,
+     "points": 115772127,
+     "voxels": 1910125,
+     "map_per_class_iou": {
+      "car": 90.199,
+      "large_vehicle": 44.892,
+      "two_wheeler": 44.018,
+      "person": 41.366,
+      "road": 75.289,
+      "sidewalk": 51.613,
+      "terrain": 62.87,
+      "vegetation": 82.366,
+      "manmade": 81.182
+     },
+     "per_scan_per_class_iou": {
+      "car": 89.723,
+      "large_vehicle": 37.449,
+      "two_wheeler": 40.644,
+      "person": 40.544,
+      "road": 74.667,
+      "sidewalk": 49.641,
+      "terrain": 61.171,
+      "vegetation": 80.654,
+      "manmade": 78.695
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_ZS_07_r2.json",
+    "sha256": "3cb3b033a74a4dcd1f9ff6a0e1777b9464c1c5975ae347ecc97ae5d998c383ad",
+    "bytes": 51258
+   }
+  },
+  {
+   "tag": "ZS_09_r1",
+   "arm": "ZS",
+   "checkpoint": "released nuScenes weights",
+   "training_seed": null,
+   "seq": "09",
+   "pass": 1,
+   "frames": 1591,
+   "frames_no_pose": 5,
+   "map_voxels": 6436353,
+   "points_evaluated": 188141271,
+   "outside": {
+    "offline_all": {
+     "miou9": 61.09243908746729,
+     "acc": 79.64480629133476,
+     "n_eval": 158407085,
+     "per_class_iou": {
+      "car": 87.079,
+      "large_vehicle": 24.664,
+      "two_wheeler": 67.793,
+      "person": 59.096,
+      "road": 74.185,
+      "sidewalk": 48.431,
+      "terrain": 38.037,
+      "vegetation": 76.384,
+      "manmade": 74.163
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 67.18141411710741,
+     "miou9_abstain_wrong": 67.05447600878948,
+     "acc": 82.86522762715687,
+     "coverage": 0.9965229866213754,
+     "n_eval": 158304539,
+     "n_labelled": 157754112,
+     "per_class_iou": {
+      "car": 88.981,
+      "large_vehicle": 42.666,
+      "two_wheeler": 75.315,
+      "person": 64.364,
+      "road": 78.335,
+      "sidewalk": 54.137,
+      "terrain": 43.465,
+      "vegetation": 79.589,
+      "manmade": 77.781
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 55.297596003103024,
+     "sparse_oracle_miou": 71.56877011684466,
+     "voxels": 4770575,
+     "wrong": 806546,
+     "sparse_voxels": 1812449,
+     "per_class_iou": {
+      "car": 79.931,
+      "large_vehicle": 13.473,
+      "two_wheeler": 43.169,
+      "person": 48.648,
+      "road": 72.832,
+      "sidewalk": 36.667,
+      "terrain": 44.212,
+      "vegetation": 83.893,
+      "manmade": 74.855
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 54.93814938418709,
+     "per_scan_miou9": 52.54952620644773,
+     "points": 178470694,
+     "voxels": 4770575,
+     "map_per_class_iou": {
+      "car": 79.468,
+      "large_vehicle": 13.415,
+      "two_wheeler": 42.646,
+      "person": 48.027,
+      "road": 72.468,
+      "sidewalk": 36.233,
+      "terrain": 43.991,
+      "vegetation": 83.757,
+      "manmade": 74.438
+     },
+     "per_scan_per_class_iou": {
+      "car": 78.127,
+      "large_vehicle": 10.365,
+      "two_wheeler": 39.113,
+      "person": 44.833,
+      "road": 70.621,
+      "sidewalk": 34.167,
+      "terrain": 41.353,
+      "vegetation": 82.289,
+      "manmade": 72.077
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_ZS_09_r1.json",
+    "sha256": "6a91db1234c45558ac6ec3e8b1f19ca04d0eafcef39feb59fb60c98a38b6b35d",
+    "bytes": 51360
+   }
+  },
+  {
+   "tag": "ZS_09_r2",
+   "arm": "ZS",
+   "checkpoint": "released nuScenes weights",
+   "training_seed": null,
+   "seq": "09",
+   "pass": 2,
+   "frames": 1591,
+   "frames_no_pose": 5,
+   "map_voxels": 6436212,
+   "points_evaluated": 188141271,
+   "outside": {
+    "offline_all": {
+     "miou9": 60.87890327252218,
+     "acc": 79.7130494510394,
+     "n_eval": 158407085,
+     "per_class_iou": {
+      "car": 87.152,
+      "large_vehicle": 25.724,
+      "two_wheeler": 64.331,
+      "person": 59.194,
+      "road": 74.273,
+      "sidewalk": 48.525,
+      "terrain": 38.007,
+      "vegetation": 76.46,
+      "manmade": 74.245
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 67.32359998894678,
+     "miou9_abstain_wrong": 67.19695910854159,
+     "acc": 82.87427537014605,
+     "coverage": 0.9965287476690735,
+     "n_eval": 158304539,
+     "n_labelled": 157755024,
+     "per_class_iou": {
+      "car": 89.142,
+      "large_vehicle": 43.881,
+      "two_wheeler": 75.945,
+      "person": 63.66,
+      "road": 78.267,
+      "sidewalk": 53.994,
+      "terrain": 43.662,
+      "vegetation": 79.602,
+      "manmade": 77.758
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 55.21938520568185,
+     "sparse_oracle_miou": 71.63047444233234,
+     "voxels": 4771108,
+     "wrong": 807046,
+     "sparse_voxels": 1812730,
+     "per_class_iou": {
+      "car": 79.975,
+      "large_vehicle": 13.7,
+      "two_wheeler": 42.751,
+      "person": 48.181,
+      "road": 72.854,
+      "sidewalk": 36.549,
+      "terrain": 44.354,
+      "vegetation": 83.855,
+      "manmade": 74.755
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 54.85299770928769,
+     "per_scan_miou9": 52.470011881791834,
+     "points": 178471561,
+     "voxels": 4771108,
+     "map_per_class_iou": {
+      "car": 79.517,
+      "large_vehicle": 13.645,
+      "two_wheeler": 42.198,
+      "person": 47.527,
+      "road": 72.488,
+      "sidewalk": 36.11,
+      "terrain": 44.134,
+      "vegetation": 83.718,
+      "manmade": 74.341
+     },
+     "per_scan_per_class_iou": {
+      "car": 78.207,
+      "large_vehicle": 10.634,
+      "two_wheeler": 37.977,
+      "person": 45.0,
+      "road": 70.658,
+      "sidewalk": 34.136,
+      "terrain": 41.401,
+      "vegetation": 82.246,
+      "manmade": 71.972
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_ZS_09_r2.json",
+    "sha256": "76f8919365617eea315e76a300b292d45e00d51e843b8753e34c835d3e50e744",
+    "bytes": 51378
+   }
+  },
+  {
+   "tag": "armB0_s1_07_r1",
+   "arm": "B0",
+   "checkpoint": "armB0_s1",
+   "training_seed": 20260924,
+   "seq": "07",
+   "pass": 1,
+   "frames": 1101,
+   "frames_no_pose": 5,
+   "map_voxels": 2694274,
+   "points_evaluated": 125886114,
+   "outside": {
+    "offline_all": {
+     "miou9": 71.91236929258088,
+     "acc": 90.00309763166645,
+     "n_eval": 105671053,
+     "per_class_iou": {
+      "car": 95.26,
+      "large_vehicle": 53.66,
+      "two_wheeler": 46.837,
+      "person": 53.406,
+      "road": 86.73,
+      "sidewalk": 78.637,
+      "terrain": 78.154,
+      "vegetation": 69.686,
+      "manmade": 84.842
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 77.3174763961208,
+     "miou9_abstain_wrong": 76.77052966497925,
+     "acc": 91.61503081204737,
+     "coverage": 0.9948828921423886,
+     "n_eval": 105576434,
+     "n_labelled": 105036188,
+     "per_class_iou": {
+      "car": 96.891,
+      "large_vehicle": 66.43,
+      "two_wheeler": 52.351,
+      "person": 67.63,
+      "road": 89.336,
+      "sidewalk": 82.064,
+      "terrain": 81.118,
+      "vegetation": 73.431,
+      "manmade": 86.606
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 70.92777731676391,
+     "sparse_oracle_miou": 83.34890300492299,
+     "voxels": 1904801,
+     "wrong": 212447,
+     "sparse_voxels": 755616,
+     "per_class_iou": {
+      "car": 91.145,
+      "large_vehicle": 68.145,
+      "two_wheeler": 50.449,
+      "person": 55.093,
+      "road": 81.906,
+      "sidewalk": 62.996,
+      "terrain": 62.603,
+      "vegetation": 82.926,
+      "manmade": 83.087
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 70.11470941624778,
+     "per_scan_miou9": 67.78443508763772,
+     "points": 115756529,
+     "voxels": 1904801,
+     "map_per_class_iou": {
+      "car": 90.126,
+      "large_vehicle": 66.349,
+      "two_wheeler": 49.846,
+      "person": 54.188,
+      "road": 81.046,
+      "sidewalk": 61.725,
+      "terrain": 62.389,
+      "vegetation": 82.747,
+      "manmade": 82.616
+     },
+     "per_scan_per_class_iou": {
+      "car": 87.961,
+      "large_vehicle": 61.374,
+      "two_wheeler": 47.287,
+      "person": 51.328,
+      "road": 80.429,
+      "sidewalk": 59.929,
+      "terrain": 60.547,
+      "vegetation": 81.07,
+      "manmade": 80.136
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_s1_07_r1.json",
+    "sha256": "89e0002df3397eadb55a1c45e525d52dc691716f2767221f025f8cfcd97e5916",
+    "bytes": 51240
+   }
+  },
+  {
+   "tag": "armB0_s1_07_r2",
+   "arm": "B0",
+   "checkpoint": "armB0_s1",
+   "training_seed": 20260924,
+   "seq": "07",
+   "pass": 2,
+   "frames": 1101,
+   "frames_no_pose": 5,
+   "map_voxels": 2694517,
+   "points_evaluated": 125886114,
+   "outside": {
+    "offline_all": {
+     "miou9": 71.55209015734061,
+     "acc": 89.93609441934869,
+     "n_eval": 105671053,
+     "per_class_iou": {
+      "car": 95.057,
+      "large_vehicle": 51.796,
+      "two_wheeler": 45.002,
+      "person": 54.375,
+      "road": 86.729,
+      "sidewalk": 78.707,
+      "terrain": 78.044,
+      "vegetation": 69.507,
+      "manmade": 84.752
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 77.30546075834472,
+     "miou9_abstain_wrong": 76.75788074882254,
+     "acc": 91.60976429916988,
+     "coverage": 0.994880211619953,
+     "n_eval": 105576434,
+     "n_labelled": 105035905,
+     "per_class_iou": {
+      "car": 96.825,
+      "large_vehicle": 65.877,
+      "two_wheeler": 52.613,
+      "person": 67.888,
+      "road": 89.313,
+      "sidewalk": 82.073,
+      "terrain": 81.12,
+      "vegetation": 73.417,
+      "manmade": 86.623
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 70.61721305654562,
+     "sparse_oracle_miou": 83.23309982126369,
+     "voxels": 1904745,
+     "wrong": 212742,
+     "sparse_voxels": 755791,
+     "per_class_iou": {
+      "car": 91.001,
+      "large_vehicle": 65.817,
+      "two_wheeler": 49.318,
+      "person": 55.781,
+      "road": 81.868,
+      "sidewalk": 63.019,
+      "terrain": 62.776,
+      "vegetation": 82.942,
+      "manmade": 83.032
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 69.79610541211198,
+     "per_scan_miou9": 67.42194095186568,
+     "points": 115756327,
+     "voxels": 1904745,
+     "map_per_class_iou": {
+      "car": 89.983,
+      "large_vehicle": 64.074,
+      "two_wheeler": 48.742,
+      "person": 54.752,
+      "road": 81.008,
+      "sidewalk": 61.745,
+      "terrain": 62.549,
+      "vegetation": 82.757,
+      "manmade": 82.555
+     },
+     "per_scan_per_class_iou": {
+      "car": 87.787,
+      "large_vehicle": 58.837,
+      "two_wheeler": 46.032,
+      "person": 52.079,
+      "road": 80.432,
+      "sidewalk": 59.961,
+      "terrain": 60.585,
+      "vegetation": 81.05,
+      "manmade": 80.035
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_s1_07_r2.json",
+    "sha256": "e2429da527941ba4d2dc56e9556623927ee285f9a2658b68f44cb20449675e35",
+    "bytes": 51226
+   }
+  },
+  {
+   "tag": "armB0_s1_09_r1",
+   "arm": "B0",
+   "checkpoint": "armB0_s1",
+   "training_seed": 20260924,
+   "seq": "09",
+   "pass": 1,
+   "frames": 1591,
+   "frames_no_pose": 5,
+   "map_voxels": 6416485,
+   "points_evaluated": 188141271,
+   "outside": {
+    "offline_all": {
+     "miou9": 69.37625129847584,
+     "acc": 82.49111774261864,
+     "n_eval": 158407085,
+     "per_class_iou": {
+      "car": 92.066,
+      "large_vehicle": 57.869,
+      "two_wheeler": 75.855,
+      "person": 68.789,
+      "road": 77.333,
+      "sidewalk": 54.586,
+      "terrain": 41.138,
+      "vegetation": 78.649,
+      "manmade": 78.1
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 75.25008513195449,
+     "miou9_abstain_wrong": 75.07781279132476,
+     "acc": 85.20598466823073,
+     "coverage": 0.9963080591138325,
+     "n_eval": 158304539,
+     "n_labelled": 157720088,
+     "per_class_iou": {
+      "car": 94.621,
+      "large_vehicle": 79.045,
+      "two_wheeler": 81.401,
+      "person": 72.088,
+      "road": 82.101,
+      "sidewalk": 62.659,
+      "terrain": 45.114,
+      "vegetation": 80.459,
+      "manmade": 79.763
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 62.99962149717399,
+     "sparse_oracle_miou": 78.71919619014399,
+     "voxels": 4755444,
+     "wrong": 714661,
+     "sparse_voxels": 1807436,
+     "per_class_iou": {
+      "car": 89.018,
+      "large_vehicle": 36.333,
+      "two_wheeler": 55.684,
+      "person": 57.649,
+      "road": 76.547,
+      "sidewalk": 45.389,
+      "terrain": 44.979,
+      "vegetation": 84.475,
+      "manmade": 76.923
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 62.490591585837265,
+     "per_scan_miou9": 59.540811967489894,
+     "points": 178436690,
+     "voxels": 4755444,
+     "map_per_class_iou": {
+      "car": 88.482,
+      "large_vehicle": 36.157,
+      "two_wheeler": 54.814,
+      "person": 56.567,
+      "road": 76.087,
+      "sidewalk": 44.735,
+      "terrain": 44.759,
+      "vegetation": 84.337,
+      "manmade": 76.476
+     },
+     "per_scan_per_class_iou": {
+      "car": 86.363,
+      "large_vehicle": 28.989,
+      "two_wheeler": 51.992,
+      "person": 53.115,
+      "road": 74.291,
+      "sidewalk": 41.929,
+      "terrain": 41.891,
+      "vegetation": 83.053,
+      "manmade": 74.245
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_s1_09_r1.json",
+    "sha256": "cb91bb93f025c090498c3337ee74ee1f8ec19dc6764e8a0cf7f612169f07c8f4",
+    "bytes": 51347
+   }
+  },
+  {
+   "tag": "armB0_s1_09_r2",
+   "arm": "B0",
+   "checkpoint": "armB0_s1",
+   "training_seed": 20260924,
+   "seq": "09",
+   "pass": 2,
+   "frames": 1591,
+   "frames_no_pose": 5,
+   "map_voxels": 6415359,
+   "points_evaluated": 188141271,
+   "outside": {
+    "offline_all": {
+     "miou9": 69.45601867677526,
+     "acc": 82.50612780356384,
+     "n_eval": 158407085,
+     "per_class_iou": {
+      "car": 92.516,
+      "large_vehicle": 58.35,
+      "two_wheeler": 75.76,
+      "person": 68.623,
+      "road": 77.425,
+      "sidewalk": 54.605,
+      "terrain": 41.102,
+      "vegetation": 78.623,
+      "manmade": 78.099
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 75.44571954967066,
+     "miou9_abstain_wrong": 75.28082439635125,
+     "acc": 85.21582417523334,
+     "coverage": 0.9963013884270242,
+     "n_eval": 158304539,
+     "n_labelled": 157719032,
+     "per_class_iou": {
+      "car": 94.794,
+      "large_vehicle": 80.672,
+      "two_wheeler": 81.69,
+      "person": 71.757,
+      "road": 82.106,
+      "sidewalk": 62.581,
+      "terrain": 45.07,
+      "vegetation": 80.509,
+      "manmade": 79.831
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 63.28132519482286,
+     "sparse_oracle_miou": 78.80127484659877,
+     "voxels": 4754793,
+     "wrong": 714500,
+     "sparse_voxels": 1807157,
+     "per_class_iou": {
+      "car": 89.099,
+      "large_vehicle": 37.262,
+      "two_wheeler": 56.188,
+      "person": 58.701,
+      "road": 76.618,
+      "sidewalk": 45.334,
+      "terrain": 44.903,
+      "vegetation": 84.465,
+      "manmade": 76.962
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 62.78375065691642,
+     "per_scan_miou9": 59.7916239763559,
+     "points": 178435624,
+     "voxels": 4754793,
+     "map_per_class_iou": {
+      "car": 88.564,
+      "large_vehicle": 37.092,
+      "two_wheeler": 55.411,
+      "person": 57.615,
+      "road": 76.163,
+      "sidewalk": 44.685,
+      "terrain": 44.681,
+      "vegetation": 84.328,
+      "manmade": 76.516
+     },
+     "per_scan_per_class_iou": {
+      "car": 86.527,
+      "large_vehicle": 29.982,
+      "two_wheeler": 52.068,
+      "person": 54.085,
+      "road": 74.387,
+      "sidewalk": 41.915,
+      "terrain": 41.857,
+      "vegetation": 83.036,
+      "manmade": 74.268
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_s1_09_r2.json",
+    "sha256": "028f81ae40897f3489183b2d1795d4553a71c12cb0c53ef863c629ef49780102",
+    "bytes": 51368
+   }
+  },
+  {
+   "tag": "armB0_s2_07_r1",
+   "arm": "B0",
+   "checkpoint": "armB0_s2",
+   "training_seed": 20260925,
+   "seq": "07",
+   "pass": 1,
+   "frames": 1101,
+   "frames_no_pose": 5,
+   "map_voxels": 2691353,
+   "points_evaluated": 125886114,
+   "outside": {
+    "offline_all": {
+     "miou9": 70.28988065041013,
+     "acc": 89.84368027448349,
+     "n_eval": 105671053,
+     "per_class_iou": {
+      "car": 95.311,
+      "large_vehicle": 50.49,
+      "two_wheeler": 39.939,
+      "person": 50.762,
+      "road": 86.274,
+      "sidewalk": 77.521,
+      "terrain": 76.645,
+      "vegetation": 70.64,
+      "manmade": 85.027
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 75.74990934557104,
+     "miou9_abstain_wrong": 75.20008338394507,
+     "acc": 91.52752986708026,
+     "coverage": 0.9948506216832442,
+     "n_eval": 105576434,
+     "n_labelled": 105032781,
+     "per_class_iou": {
+      "car": 96.866,
+      "large_vehicle": 65.917,
+      "two_wheeler": 45.114,
+      "person": 62.14,
+      "road": 88.679,
+      "sidewalk": 81.033,
+      "terrain": 80.733,
+      "vegetation": 74.591,
+      "manmade": 86.677
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 70.12494054457528,
+     "sparse_oracle_miou": 82.71757387405498,
+     "voxels": 1903105,
+     "wrong": 209954,
+     "sparse_voxels": 754884,
+     "per_class_iou": {
+      "car": 91.502,
+      "large_vehicle": 63.197,
+      "two_wheeler": 50.036,
+      "person": 50.76,
+      "road": 81.31,
+      "sidewalk": 61.812,
+      "terrain": 66.042,
+      "vegetation": 83.586,
+      "manmade": 82.88
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 69.30135203426174,
+     "per_scan_miou9": 67.0728308193649,
+     "points": 115753161,
+     "voxels": 1903105,
+     "map_per_class_iou": {
+      "car": 90.461,
+      "large_vehicle": 61.508,
+      "two_wheeler": 49.3,
+      "person": 49.807,
+      "road": 80.439,
+      "sidewalk": 60.603,
+      "terrain": 65.776,
+      "vegetation": 83.4,
+      "manmade": 82.418
+     },
+     "per_scan_per_class_iou": {
+      "car": 88.513,
+      "large_vehicle": 56.092,
+      "two_wheeler": 46.917,
+      "person": 47.819,
+      "road": 80.03,
+      "sidewalk": 58.858,
+      "terrain": 63.846,
+      "vegetation": 81.674,
+      "manmade": 79.906
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_s2_07_r1.json",
+    "sha256": "80c82cf3496f404fb99699933048eab2600d559b797f1dddd6d9a555ab8e0af3",
+    "bytes": 51225
+   }
+  },
+  {
+   "tag": "armB0_s2_07_r2",
+   "arm": "B0",
+   "checkpoint": "armB0_s2",
+   "training_seed": 20260925,
+   "seq": "07",
+   "pass": 2,
+   "frames": 1101,
+   "frames_no_pose": 5,
+   "map_voxels": 2691839,
+   "points_evaluated": 125886114,
+   "outside": {
+    "offline_all": {
+     "miou9": 70.27799082595683,
+     "acc": 89.85460095680129,
+     "n_eval": 105671053,
+     "per_class_iou": {
+      "car": 95.477,
+      "large_vehicle": 51.678,
+      "two_wheeler": 38.649,
+      "person": 50.779,
+      "road": 86.082,
+      "sidewalk": 77.294,
+      "terrain": 76.617,
+      "vegetation": 70.788,
+      "manmade": 85.138
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 74.94674444991057,
+     "miou9_abstain_wrong": 74.4014446497614,
+     "acc": 91.47423561659528,
+     "coverage": 0.9948501291490864,
+     "n_eval": 105576434,
+     "n_labelled": 105032729,
+     "per_class_iou": {
+      "car": 96.919,
+      "large_vehicle": 65.404,
+      "two_wheeler": 38.845,
+      "person": 62.031,
+      "road": 88.478,
+      "sidewalk": 80.776,
+      "terrain": 80.813,
+      "vegetation": 74.624,
+      "manmade": 86.631
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 70.17461163415547,
+     "sparse_oracle_miou": 82.67017294041986,
+     "voxels": 1902964,
+     "wrong": 210701,
+     "sparse_voxels": 754880,
+     "per_class_iou": {
+      "car": 91.564,
+      "large_vehicle": 64.135,
+      "two_wheeler": 49.231,
+      "person": 51.447,
+      "road": 81.251,
+      "sidewalk": 61.747,
+      "terrain": 65.92,
+      "vegetation": 83.483,
+      "manmade": 82.792
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 69.36100789376623,
+     "per_scan_miou9": 67.18928729507176,
+     "points": 115753108,
+     "voxels": 1902964,
+     "map_per_class_iou": {
+      "car": 90.533,
+      "large_vehicle": 62.452,
+      "two_wheeler": 48.544,
+      "person": 50.522,
+      "road": 80.386,
+      "sidewalk": 60.538,
+      "terrain": 65.649,
+      "vegetation": 83.297,
+      "manmade": 82.328
+     },
+     "per_scan_per_class_iou": {
+      "car": 88.553,
+      "large_vehicle": 56.698,
+      "two_wheeler": 47.386,
+      "person": 48.193,
+      "road": 79.92,
+      "sidewalk": 58.781,
+      "terrain": 63.748,
+      "vegetation": 81.595,
+      "manmade": 79.83
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_s2_07_r2.json",
+    "sha256": "fdc59be7fcb757188582f30b2445fc8640eb418cd72281de60c9a319c67a0bca",
+    "bytes": 51235
+   }
+  },
+  {
+   "tag": "armB0_s2_09_r1",
+   "arm": "B0",
+   "checkpoint": "armB0_s2",
+   "training_seed": 20260925,
+   "seq": "09",
+   "pass": 1,
+   "frames": 1591,
+   "frames_no_pose": 5,
+   "map_voxels": 6414501,
+   "points_evaluated": 188141271,
+   "outside": {
+    "offline_all": {
+     "miou9": 67.44081304020757,
+     "acc": 81.73891717027682,
+     "n_eval": 158407085,
+     "per_class_iou": {
+      "car": 92.09,
+      "large_vehicle": 44.769,
+      "two_wheeler": 73.079,
+      "person": 70.521,
+      "road": 76.989,
+      "sidewalk": 53.132,
+      "terrain": 40.891,
+      "vegetation": 77.632,
+      "manmade": 77.866
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 73.33637958790723,
+     "miou9_abstain_wrong": 73.16789295704518,
+     "acc": 84.29463844307926,
+     "coverage": 0.9962967138927078,
+     "n_eval": 158304539,
+     "n_labelled": 157718292,
+     "per_class_iou": {
+      "car": 94.093,
+      "large_vehicle": 69.117,
+      "two_wheeler": 80.754,
+      "person": 71.462,
+      "road": 81.287,
+      "sidewalk": 60.29,
+      "terrain": 44.202,
+      "vegetation": 79.444,
+      "manmade": 79.378
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 62.542482575263534,
+     "sparse_oracle_miou": 77.07066400227298,
+     "voxels": 4753899,
+     "wrong": 735681,
+     "sparse_voxels": 1806096,
+     "per_class_iou": {
+      "car": 89.382,
+      "large_vehicle": 32.398,
+      "two_wheeler": 57.502,
+      "person": 57.351,
+      "road": 76.276,
+      "sidewalk": 43.461,
+      "terrain": 45.972,
+      "vegetation": 84.137,
+      "manmade": 76.403
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 62.04529439270315,
+     "per_scan_miou9": 59.28861280249449,
+     "points": 178434888,
+     "voxels": 4753899,
+     "map_per_class_iou": {
+      "car": 88.855,
+      "large_vehicle": 32.255,
+      "two_wheeler": 56.671,
+      "person": 56.22,
+      "road": 75.828,
+      "sidewalk": 42.858,
+      "terrain": 45.753,
+      "vegetation": 83.999,
+      "manmade": 75.968
+     },
+     "per_scan_per_class_iou": {
+      "car": 87.042,
+      "large_vehicle": 25.174,
+      "two_wheeler": 51.881,
+      "person": 53.739,
+      "road": 74.317,
+      "sidewalk": 40.878,
+      "terrain": 43.902,
+      "vegetation": 82.893,
+      "manmade": 73.771
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_s2_09_r1.json",
+    "sha256": "b73392c1e5d091bffa2f862a3c63293799de3e51d515ede4594c34b65e1f9f9a",
+    "bytes": 51355
+   }
+  },
+  {
+   "tag": "armB0_s2_09_r2",
+   "arm": "B0",
+   "checkpoint": "armB0_s2",
+   "training_seed": 20260925,
+   "seq": "09",
+   "pass": 2,
+   "frames": 1591,
+   "frames_no_pose": 5,
+   "map_voxels": 6414151,
+   "points_evaluated": 188141271,
+   "outside": {
+    "offline_all": {
+     "miou9": 67.48508700380397,
+     "acc": 81.68935941217528,
+     "n_eval": 158407085,
+     "per_class_iou": {
+      "car": 91.708,
+      "large_vehicle": 43.41,
+      "two_wheeler": 75.329,
+      "person": 70.651,
+      "road": 76.988,
+      "sidewalk": 53.099,
+      "terrain": 40.742,
+      "vegetation": 77.591,
+      "manmade": 77.848
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 73.31005611795575,
+     "miou9_abstain_wrong": 73.13803866913524,
+     "acc": 84.3435992019383,
+     "coverage": 0.9962893736104433,
+     "n_eval": 158304539,
+     "n_labelled": 157717130,
+     "per_class_iou": {
+      "car": 94.127,
+      "large_vehicle": 67.923,
+      "two_wheeler": 81.218,
+      "person": 71.47,
+      "road": 81.4,
+      "sidewalk": 60.495,
+      "terrain": 44.222,
+      "vegetation": 79.433,
+      "manmade": 79.502
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 62.73909514753305,
+     "sparse_oracle_miou": 77.14705225849201,
+     "voxels": 4753445,
+     "wrong": 734868,
+     "sparse_voxels": 1805837,
+     "per_class_iou": {
+      "car": 89.806,
+      "large_vehicle": 33.742,
+      "two_wheeler": 57.143,
+      "person": 57.517,
+      "road": 76.467,
+      "sidewalk": 43.569,
+      "terrain": 45.843,
+      "vegetation": 84.115,
+      "manmade": 76.451
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 62.23413213919194,
+     "per_scan_miou9": 59.40006302315097,
+     "points": 178433845,
+     "voxels": 4753445,
+     "map_per_class_iou": {
+      "car": 89.272,
+      "large_vehicle": 33.595,
+      "two_wheeler": 56.247,
+      "person": 56.409,
+      "road": 76.004,
+      "sidewalk": 42.962,
+      "terrain": 45.624,
+      "vegetation": 83.977,
+      "manmade": 76.016
+     },
+     "per_scan_per_class_iou": {
+      "car": 87.363,
+      "large_vehicle": 25.586,
+      "two_wheeler": 52.185,
+      "person": 53.783,
+      "road": 74.437,
+      "sidewalk": 40.876,
+      "terrain": 43.721,
+      "vegetation": 82.858,
+      "manmade": 73.792
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_s2_09_r2.json",
+    "sha256": "db5755e253ec71d17cffd1c0473c0c701e76020d0c7fd61f9a8fac8cdbbd9746",
+    "bytes": 51346
+   }
+  },
+  {
+   "tag": "armB0_s3_07_r1",
+   "arm": "B0",
+   "checkpoint": "armB0_s3",
+   "training_seed": 20260926,
+   "seq": "07",
+   "pass": 1,
+   "frames": 1101,
+   "frames_no_pose": 5,
+   "map_voxels": 2685642,
+   "points_evaluated": 125886114,
+   "outside": {
+    "offline_all": {
+     "miou9": 72.47547032187298,
+     "acc": 89.57465106361721,
+     "n_eval": 105671053,
+     "per_class_iou": {
+      "car": 92.469,
+      "large_vehicle": 47.15,
+      "two_wheeler": 62.121,
+      "person": 53.09,
+      "road": 84.459,
+      "sidewalk": 75.216,
+      "terrain": 79.492,
+      "vegetation": 73.634,
+      "manmade": 84.648
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 79.83480473893847,
+     "miou9_abstain_wrong": 79.29290581237632,
+     "acc": 91.49318060291955,
+     "coverage": 0.9947683400634653,
+     "n_eval": 105576434,
+     "n_labelled": 105024094,
+     "per_class_iou": {
+      "car": 96.059,
+      "large_vehicle": 70.561,
+      "two_wheeler": 75.179,
+      "person": 64.716,
+      "road": 86.964,
+      "sidewalk": 78.822,
+      "terrain": 82.434,
+      "vegetation": 76.649,
+      "manmade": 87.129
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 69.8905530301711,
+     "sparse_oracle_miou": 82.93674170543164,
+     "voxels": 1898642,
+     "wrong": 229746,
+     "sparse_voxels": 753619,
+     "per_class_iou": {
+      "car": 86.836,
+      "large_vehicle": 66.069,
+      "two_wheeler": 57.164,
+      "person": 53.217,
+      "road": 79.668,
+      "sidewalk": 59.761,
+      "terrain": 62.885,
+      "vegetation": 82.523,
+      "manmade": 80.893
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 69.0778974056793,
+     "per_scan_miou9": 66.27266608831725,
+     "points": 115744448,
+     "voxels": 1898642,
+     "map_per_class_iou": {
+      "car": 85.867,
+      "large_vehicle": 64.215,
+      "two_wheeler": 56.2,
+      "person": 52.367,
+      "road": 78.885,
+      "sidewalk": 58.686,
+      "terrain": 62.707,
+      "vegetation": 82.354,
+      "manmade": 80.422
+     },
+     "per_scan_per_class_iou": {
+      "car": 83.463,
+      "large_vehicle": 57.041,
+      "two_wheeler": 51.095,
+      "person": 50.074,
+      "road": 78.741,
+      "sidewalk": 56.995,
+      "terrain": 60.449,
+      "vegetation": 80.824,
+      "manmade": 77.773
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_s3_07_r1.json",
+    "sha256": "f5e8c67e36c6636d4c4dadebad55f966af7882e95acc808258e830c91219f677",
+    "bytes": 51254
+   }
+  },
+  {
+   "tag": "armB0_s3_07_r2",
+   "arm": "B0",
+   "checkpoint": "armB0_s3",
+   "training_seed": 20260926,
+   "seq": "07",
+   "pass": 2,
+   "frames": 1101,
+   "frames_no_pose": 5,
+   "map_voxels": 2685610,
+   "points_evaluated": 125886114,
+   "outside": {
+    "offline_all": {
+     "miou9": 72.49011570800798,
+     "acc": 89.48204197416297,
+     "n_eval": 105671053,
+     "per_class_iou": {
+      "car": 92.281,
+      "large_vehicle": 46.174,
+      "two_wheeler": 63.357,
+      "person": 53.938,
+      "road": 84.352,
+      "sidewalk": 75.018,
+      "terrain": 79.16,
+      "vegetation": 73.573,
+      "manmade": 84.559
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 79.93157765487786,
+     "miou9_abstain_wrong": 79.38415180999583,
+     "acc": 91.4870489331083,
+     "coverage": 0.9947653659148973,
+     "n_eval": 105576434,
+     "n_labelled": 105023780,
+     "per_class_iou": {
+      "car": 96.084,
+      "large_vehicle": 71.018,
+      "two_wheeler": 75.537,
+      "person": 64.828,
+      "road": 86.914,
+      "sidewalk": 78.785,
+      "terrain": 82.471,
+      "vegetation": 76.623,
+      "manmade": 87.124
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 70.01146632712599,
+     "sparse_oracle_miou": 83.10366367201226,
+     "voxels": 1899021,
+     "wrong": 229027,
+     "sparse_voxels": 753871,
+     "per_class_iou": {
+      "car": 86.771,
+      "large_vehicle": 66.72,
+      "two_wheeler": 58.007,
+      "person": 52.709,
+      "road": 79.668,
+      "sidewalk": 59.799,
+      "terrain": 62.768,
+      "vegetation": 82.59,
+      "manmade": 81.072
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 69.18968600134066,
+     "per_scan_miou9": 66.38014586154668,
+     "points": 115744483,
+     "voxels": 1899021,
+     "map_per_class_iou": {
+      "car": 85.807,
+      "large_vehicle": 64.878,
+      "two_wheeler": 56.945,
+      "person": 51.863,
+      "road": 78.889,
+      "sidewalk": 58.725,
+      "terrain": 62.588,
+      "vegetation": 82.415,
+      "manmade": 80.596
+     },
+     "per_scan_per_class_iou": {
+      "car": 83.408,
+      "large_vehicle": 57.463,
+      "two_wheeler": 51.43,
+      "person": 50.101,
+      "road": 78.73,
+      "sidewalk": 57.093,
+      "terrain": 60.37,
+      "vegetation": 80.894,
+      "manmade": 77.932
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_s3_07_r2.json",
+    "sha256": "d7332caa700044cd1d98eed657bea3cae6c2e6f697b8d1ee89a0a15a6c4abdd8",
+    "bytes": 51229
+   }
+  },
+  {
+   "tag": "armB0_s3_09_r1",
+   "arm": "B0",
+   "checkpoint": "armB0_s3",
+   "training_seed": 20260926,
+   "seq": "09",
+   "pass": 1,
+   "frames": 1591,
+   "frames_no_pose": 5,
+   "map_voxels": 6402041,
+   "points_evaluated": 188141271,
+   "outside": {
+    "offline_all": {
+     "miou9": 67.98645534789854,
+     "acc": 82.82022297171872,
+     "n_eval": 158407085,
+     "per_class_iou": {
+      "car": 91.898,
+      "large_vehicle": 46.628,
+      "two_wheeler": 74.012,
+      "person": 69.289,
+      "road": 76.586,
+      "sidewalk": 54.766,
+      "terrain": 42.619,
+      "vegetation": 79.55,
+      "manmade": 76.529
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 73.78856481380144,
+     "miou9_abstain_wrong": 73.60988463978939,
+     "acc": 85.18507825318112,
+     "coverage": 0.9961685179475492,
+     "n_eval": 158304539,
+     "n_labelled": 157697998,
+     "per_class_iou": {
+      "car": 94.187,
+      "large_vehicle": 67.355,
+      "two_wheeler": 81.696,
+      "person": 72.643,
+      "road": 80.005,
+      "sidewalk": 61.838,
+      "terrain": 46.853,
+      "vegetation": 81.035,
+      "manmade": 78.484
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 60.10493581451927,
+     "sparse_oracle_miou": 79.06512971844377,
+     "voxels": 4745585,
+     "wrong": 726704,
+     "sparse_voxels": 1805775,
+     "per_class_iou": {
+      "car": 76.797,
+      "large_vehicle": 13.4,
+      "two_wheeler": 65.241,
+      "person": 58.157,
+      "road": 74.373,
+      "sidewalk": 46.098,
+      "terrain": 46.494,
+      "vegetation": 84.643,
+      "manmade": 75.741
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 59.58411873942998,
+     "per_scan_miou9": 56.53793959239928,
+     "points": 178414717,
+     "voxels": 4745585,
+     "map_per_class_iou": {
+      "car": 76.291,
+      "large_vehicle": 13.348,
+      "two_wheeler": 64.032,
+      "person": 57.136,
+      "road": 73.946,
+      "sidewalk": 45.433,
+      "terrain": 46.255,
+      "vegetation": 84.504,
+      "manmade": 75.311
+     },
+     "per_scan_per_class_iou": {
+      "car": 74.665,
+      "large_vehicle": 11.827,
+      "two_wheeler": 52.912,
+      "person": 53.311,
+      "road": 72.919,
+      "sidewalk": 43.096,
+      "terrain": 43.378,
+      "vegetation": 83.428,
+      "manmade": 73.306
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_s3_09_r1.json",
+    "sha256": "6ce78c4928ba030705756e5a2b147be4001209e7f80a185cdbeb1e3cee1ebe93",
+    "bytes": 51355
+   }
+  },
+  {
+   "tag": "armB0_s3_09_r2",
+   "arm": "B0",
+   "checkpoint": "armB0_s3",
+   "training_seed": 20260926,
+   "seq": "09",
+   "pass": 2,
+   "frames": 1591,
+   "frames_no_pose": 5,
+   "map_voxels": 6402982,
+   "points_evaluated": 188141271,
+   "outside": {
+    "offline_all": {
+     "miou9": 68.08662050179612,
+     "acc": 82.85787343413332,
+     "n_eval": 158407085,
+     "per_class_iou": {
+      "car": 92.124,
+      "large_vehicle": 46.735,
+      "two_wheeler": 74.193,
+      "person": 69.362,
+      "road": 76.585,
+      "sidewalk": 54.839,
+      "terrain": 42.705,
+      "vegetation": 79.594,
+      "manmade": 76.642
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 73.56310628260901,
+     "miou9_abstain_wrong": 73.38724543249911,
+     "acc": 85.16045052315349,
+     "coverage": 0.9961696486794986,
+     "n_eval": 158304539,
+     "n_labelled": 157698177,
+     "per_class_iou": {
+      "car": 93.918,
+      "large_vehicle": 65.433,
+      "two_wheeler": 81.655,
+      "person": 72.942,
+      "road": 79.992,
+      "sidewalk": 61.871,
+      "terrain": 46.81,
+      "vegetation": 81.003,
+      "manmade": 78.444
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 59.99625575054673,
+     "sparse_oracle_miou": 79.24829771044166,
+     "voxels": 4745773,
+     "wrong": 729859,
+     "sparse_voxels": 1805739,
+     "per_class_iou": {
+      "car": 76.75,
+      "large_vehicle": 13.258,
+      "two_wheeler": 65.063,
+      "person": 58.071,
+      "road": 74.262,
+      "sidewalk": 46.043,
+      "terrain": 46.314,
+      "vegetation": 84.56,
+      "manmade": 75.643
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 59.49265718895112,
+     "per_scan_miou9": 56.40350114214123,
+     "points": 178414975,
+     "voxels": 4745773,
+     "map_per_class_iou": {
+      "car": 76.247,
+      "large_vehicle": 13.209,
+      "two_wheeler": 64.046,
+      "person": 57.014,
+      "road": 73.834,
+      "sidewalk": 45.378,
+      "terrain": 46.072,
+      "vegetation": 84.422,
+      "manmade": 75.213
+     },
+     "per_scan_per_class_iou": {
+      "car": 74.648,
+      "large_vehicle": 11.659,
+      "two_wheeler": 52.774,
+      "person": 52.902,
+      "road": 72.814,
+      "sidewalk": 43.017,
+      "terrain": 43.234,
+      "vegetation": 83.365,
+      "manmade": 73.218
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_s3_09_r2.json",
+    "sha256": "55d239136b8d2c79f9bfd55c4315a43461b7f2e8615aa54ccde808f260787ee4",
+    "bytes": 51352
+   }
+  },
+  {
+   "tag": "armB0_noKL_s1_07_r1",
+   "arm": "B0_noKL",
+   "checkpoint": "armB0_noKL_s1",
+   "training_seed": 20260924,
+   "seq": "07",
+   "pass": 1,
+   "frames": 1101,
+   "frames_no_pose": 5,
+   "map_voxels": 2728169,
+   "points_evaluated": 125886114,
+   "outside": {
+    "offline_all": {
+     "miou9": 45.81558228475396,
+     "acc": 58.33527465653248,
+     "n_eval": 105671053,
+     "per_class_iou": {
+      "car": 64.833,
+      "large_vehicle": 52.815,
+      "two_wheeler": 40.379,
+      "person": 51.227,
+      "road": 89.054,
+      "sidewalk": 80.78,
+      "terrain": 0.0,
+      "vegetation": 33.251,
+      "manmade": 0.0
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 50.15437551502137,
+     "miou9_abstain_wrong": 49.77957408687863,
+     "acc": 58.83401607733837,
+     "coverage": 0.9952043653984373,
+     "n_eval": 105576434,
+     "n_labelled": 105070128,
+     "per_class_iou": {
+      "car": 72.875,
+      "large_vehicle": 61.659,
+      "two_wheeler": 48.14,
+      "person": 61.958,
+      "road": 91.362,
+      "sidewalk": 82.706,
+      "terrain": 0.0,
+      "vegetation": 32.689,
+      "manmade": 0.0
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 47.524397759081566,
+     "sparse_oracle_miou": 67.04823383392664,
+     "voxels": 1920348,
+     "wrong": 752472,
+     "sparse_voxels": 761589,
+     "per_class_iou": {
+      "car": 61.87,
+      "large_vehicle": 70.061,
+      "two_wheeler": 39.176,
+      "person": 48.614,
+      "road": 88.967,
+      "sidewalk": 67.277,
+      "terrain": 0.0,
+      "vegetation": 51.755,
+      "manmade": 0.0
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 46.82666249011337,
+     "per_scan_miou9": 45.44595881503637,
+     "points": 115790496,
+     "voxels": 1920348,
+     "map_per_class_iou": {
+      "car": 61.283,
+      "large_vehicle": 67.917,
+      "two_wheeler": 38.656,
+      "person": 47.54,
+      "road": 87.998,
+      "sidewalk": 66.319,
+      "terrain": 0.0,
+      "vegetation": 51.728,
+      "manmade": 0.0
+     },
+     "per_scan_per_class_iou": {
+      "car": 58.281,
+      "large_vehicle": 66.721,
+      "two_wheeler": 34.356,
+      "person": 45.705,
+      "road": 87.386,
+      "sidewalk": 64.655,
+      "terrain": 0.0,
+      "vegetation": 51.911,
+      "manmade": 0.0
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_noKL_s1_07_r1.json",
+    "sha256": "03a8f70870b90a66ea554407216707dbf76c8f28cade9698ab8c412b43100b21",
+    "bytes": 51011
+   }
+  },
+  {
+   "tag": "armB0_noKL_s1_07_r2",
+   "arm": "B0_noKL",
+   "checkpoint": "armB0_noKL_s1",
+   "training_seed": 20260924,
+   "seq": "07",
+   "pass": 2,
+   "frames": 1101,
+   "frames_no_pose": 5,
+   "map_voxels": 2727995,
+   "points_evaluated": 125886114,
+   "outside": {
+    "offline_all": {
+     "miou9": 45.987204756684676,
+     "acc": 58.33793290580723,
+     "n_eval": 105671053,
+     "per_class_iou": {
+      "car": 64.74,
+      "large_vehicle": 54.052,
+      "two_wheeler": 41.044,
+      "person": 50.95,
+      "road": 89.052,
+      "sidewalk": 80.79,
+      "terrain": 0.0,
+      "vegetation": 33.255,
+      "manmade": 0.0
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 50.17774484971866,
+     "miou9_abstain_wrong": 49.80412333426271,
+     "acc": 58.83298878296955,
+     "coverage": 0.9952011355109797,
+     "n_eval": 105576434,
+     "n_labelled": 105069787,
+     "per_class_iou": {
+      "car": 72.88,
+      "large_vehicle": 61.417,
+      "two_wheeler": 48.656,
+      "person": 61.809,
+      "road": 91.39,
+      "sidewalk": 82.772,
+      "terrain": 0.0,
+      "vegetation": 32.675,
+      "manmade": 0.0
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 47.46797226043956,
+     "sparse_oracle_miou": 67.05572393163652,
+     "voxels": 1920196,
+     "wrong": 752523,
+     "sparse_voxels": 761449,
+     "per_class_iou": {
+      "car": 61.93,
+      "large_vehicle": 70.014,
+      "two_wheeler": 38.908,
+      "person": 48.521,
+      "road": 88.867,
+      "sidewalk": 67.211,
+      "terrain": 0.0,
+      "vegetation": 51.76,
+      "manmade": 0.0
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 46.77027338888269,
+     "per_scan_miou9": 45.38868838719768,
+     "points": 115790152,
+     "voxels": 1920196,
+     "map_per_class_iou": {
+      "car": 61.342,
+      "large_vehicle": 67.865,
+      "two_wheeler": 38.306,
+      "person": 47.531,
+      "road": 87.9,
+      "sidewalk": 66.256,
+      "terrain": 0.0,
+      "vegetation": 51.733,
+      "manmade": 0.0
+     },
+     "per_scan_per_class_iou": {
+      "car": 58.232,
+      "large_vehicle": 66.835,
+      "two_wheeler": 34.385,
+      "person": 45.314,
+      "road": 87.258,
+      "sidewalk": 64.545,
+      "terrain": 0.0,
+      "vegetation": 51.93,
+      "manmade": 0.0
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_noKL_s1_07_r2.json",
+    "sha256": "3d2ac49ea73324550e014e1300b8641b498bafc752353f56c98bab2754f0849d",
+    "bytes": 50987
+   }
+  },
+  {
+   "tag": "armB0_noKL_s1_09_r1",
+   "arm": "B0_noKL",
+   "checkpoint": "armB0_noKL_s1",
+   "training_seed": 20260924,
+   "seq": "09",
+   "pass": 1,
+   "frames": 1591,
+   "frames_no_pose": 5,
+   "map_voxels": 6465497,
+   "points_evaluated": 188141271,
+   "outside": {
+    "offline_all": {
+     "miou9": 53.68962523158264,
+     "acc": 69.42063923466554,
+     "n_eval": 158407085,
+     "per_class_iou": {
+      "car": 76.384,
+      "large_vehicle": 79.319,
+      "two_wheeler": 54.849,
+      "person": 62.571,
+      "road": 82.331,
+      "sidewalk": 69.052,
+      "terrain": 0.0,
+      "vegetation": 58.7,
+      "manmade": 0.0
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 59.82303969305613,
+     "miou9_abstain_wrong": 59.74949754013567,
+     "acc": 70.06422762542168,
+     "coverage": 0.9966899875182985,
+     "n_eval": 158304539,
+     "n_labelled": 157780549,
+     "per_class_iou": {
+      "car": 88.066,
+      "large_vehicle": 88.481,
+      "two_wheeler": 77.735,
+      "person": 69.051,
+      "road": 85.516,
+      "sidewalk": 71.57,
+      "terrain": 0.0,
+      "vegetation": 57.988,
+      "manmade": 0.0
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 49.08039972506476,
+     "sparse_oracle_miou": 70.69696850738181,
+     "voxels": 4785443,
+     "wrong": 1492811,
+     "sparse_voxels": 1815387,
+     "per_class_iou": {
+      "car": 73.517,
+      "large_vehicle": 57.662,
+      "two_wheeler": 49.964,
+      "person": 53.843,
+      "road": 80.75,
+      "sidewalk": 60.794,
+      "terrain": 0.0,
+      "vegetation": 65.193,
+      "manmade": 0.0
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 48.68229795994345,
+     "per_scan_miou9": 45.4629963513682,
+     "points": 178497075,
+     "voxels": 4785443,
+     "map_per_class_iou": {
+      "car": 73.099,
+      "large_vehicle": 57.372,
+      "two_wheeler": 49.442,
+      "person": 52.845,
+      "road": 80.204,
+      "sidewalk": 60.026,
+      "terrain": 0.0,
+      "vegetation": 65.152,
+      "manmade": 0.0
+     },
+     "per_scan_per_class_iou": {
+      "car": 67.458,
+      "large_vehicle": 52.281,
+      "two_wheeler": 37.852,
+      "person": 49.532,
+      "road": 78.255,
+      "sidewalk": 58.421,
+      "terrain": 0.0,
+      "vegetation": 65.367,
+      "manmade": 0.0
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_noKL_s1_09_r1.json",
+    "sha256": "5b57d29152b9755dad3b45e6d996b346a3f75a1cb92465a8e894e74a4b18ddf4",
+    "bytes": 51046
+   }
+  },
+  {
+   "tag": "armB0_noKL_s1_09_r2",
+   "arm": "B0_noKL",
+   "checkpoint": "armB0_noKL_s1",
+   "training_seed": 20260924,
+   "seq": "09",
+   "pass": 2,
+   "frames": 1591,
+   "frames_no_pose": 5,
+   "map_voxels": 6465296,
+   "points_evaluated": 188141271,
+   "outside": {
+    "offline_all": {
+     "miou9": 53.941148830585504,
+     "acc": 69.41328413435548,
+     "n_eval": 158407085,
+     "per_class_iou": {
+      "car": 76.263,
+      "large_vehicle": 80.493,
+      "two_wheeler": 55.102,
+      "person": 63.591,
+      "road": 82.348,
+      "sidewalk": 68.968,
+      "terrain": 0.0,
+      "vegetation": 58.705,
+      "manmade": 0.0
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 59.90760537415198,
+     "miou9_abstain_wrong": 59.83319575130546,
+     "acc": 70.07986281290894,
+     "coverage": 0.9966893179228423,
+     "n_eval": 158304539,
+     "n_labelled": 157780443,
+     "per_class_iou": {
+      "car": 88.097,
+      "large_vehicle": 88.121,
+      "two_wheeler": 78.153,
+      "person": 69.625,
+      "road": 85.586,
+      "sidewalk": 71.584,
+      "terrain": 0.0,
+      "vegetation": 58.003,
+      "manmade": 0.0
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 49.418566696221504,
+     "sparse_oracle_miou": 70.77492328972988,
+     "voxels": 4785389,
+     "wrong": 1492743,
+     "sparse_voxels": 1815300,
+     "per_class_iou": {
+      "car": 73.756,
+      "large_vehicle": 60.691,
+      "two_wheeler": 49.638,
+      "person": 54.011,
+      "road": 80.73,
+      "sidewalk": 60.757,
+      "terrain": 0.0,
+      "vegetation": 65.185,
+      "manmade": 0.0
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 49.01907428428404,
+     "per_scan_miou9": 45.65782218703717,
+     "points": 178496956,
+     "voxels": 4785389,
+     "map_per_class_iou": {
+      "car": 73.337,
+      "large_vehicle": 60.39,
+      "two_wheeler": 49.186,
+      "person": 52.952,
+      "road": 80.181,
+      "sidewalk": 59.982,
+      "terrain": 0.0,
+      "vegetation": 65.143,
+      "manmade": 0.0
+     },
+     "per_scan_per_class_iou": {
+      "car": 67.713,
+      "large_vehicle": 54.329,
+      "two_wheeler": 37.585,
+      "person": 49.483,
+      "road": 78.169,
+      "sidewalk": 58.285,
+      "terrain": 0.0,
+      "vegetation": 65.356,
+      "manmade": 0.0
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_noKL_s1_09_r2.json",
+    "sha256": "5ffee8c0e94019b0503c6bed322749ea5f2a29a4958209cc3a7f7737198a22eb",
+    "bytes": 51079
+   }
+  },
+  {
+   "tag": "armB0_noKL_s2_07_r1",
+   "arm": "B0_noKL",
+   "checkpoint": "armB0_noKL_s2",
+   "training_seed": 20260925,
+   "seq": "07",
+   "pass": 1,
+   "frames": 1101,
+   "frames_no_pose": 5,
+   "map_voxels": 2701491,
+   "points_evaluated": 125886114,
+   "outside": {
+    "offline_all": {
+     "miou9": 60.54251460675708,
+     "acc": 76.40650746614591,
+     "n_eval": 105671053,
+     "per_class_iou": {
+      "car": 91.503,
+      "large_vehicle": 42.445,
+      "two_wheeler": 30.509,
+      "person": 45.593,
+      "road": 91.564,
+      "sidewalk": 83.169,
+      "terrain": 71.566,
+      "vegetation": 45.811,
+      "manmade": 42.723
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 67.03472480318558,
+     "miou9_abstain_wrong": 66.57180770045093,
+     "acc": 77.52818479282031,
+     "coverage": 0.9950011192838735,
+     "n_eval": 105576434,
+     "n_labelled": 105048670,
+     "per_class_iou": {
+      "car": 95.637,
+      "large_vehicle": 67.05,
+      "two_wheeler": 34.37,
+      "person": 57.713,
+      "road": 93.62,
+      "sidewalk": 85.187,
+      "terrain": 81.315,
+      "vegetation": 45.869,
+      "manmade": 42.552
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 62.92563353100997,
+     "sparse_oracle_miou": 78.0216162159156,
+     "voxels": 1908575,
+     "wrong": 453028,
+     "sparse_voxels": 756594,
+     "per_class_iou": {
+      "car": 89.192,
+      "large_vehicle": 60.97,
+      "two_wheeler": 45.51,
+      "person": 51.531,
+      "road": 87.568,
+      "sidewalk": 74.593,
+      "terrain": 56.986,
+      "vegetation": 62.758,
+      "manmade": 37.224
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 62.17010322198606,
+     "per_scan_miou9": 60.13843672866403,
+     "points": 115769071,
+     "voxels": 1908575,
+     "map_per_class_iou": {
+      "car": 88.173,
+      "large_vehicle": 59.329,
+      "two_wheeler": 44.878,
+      "person": 50.614,
+      "road": 86.531,
+      "sidewalk": 73.304,
+      "terrain": 56.954,
+      "vegetation": 62.687,
+      "manmade": 37.061
+     },
+     "per_scan_per_class_iou": {
+      "car": 87.193,
+      "large_vehicle": 52.389,
+      "two_wheeler": 42.905,
+      "person": 48.667,
+      "road": 85.374,
+      "sidewalk": 71.353,
+      "terrain": 53.178,
+      "vegetation": 62.659,
+      "manmade": 37.527
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_noKL_s2_07_r1.json",
+    "sha256": "24a40f654dfe80fe490f0d1163868ad128e2994859cd891d600ebc94262e18be",
+    "bytes": 51297
+   }
+  },
+  {
+   "tag": "armB0_noKL_s2_07_r2",
+   "arm": "B0_noKL",
+   "checkpoint": "armB0_noKL_s2",
+   "training_seed": 20260925,
+   "seq": "07",
+   "pass": 2,
+   "frames": 1101,
+   "frames_no_pose": 5,
+   "map_voxels": 2701893,
+   "points_evaluated": 125886114,
+   "outside": {
+    "offline_all": {
+     "miou9": 60.246946183696195,
+     "acc": 76.53979751673337,
+     "n_eval": 105671053,
+     "per_class_iou": {
+      "car": 91.696,
+      "large_vehicle": 41.448,
+      "two_wheeler": 28.945,
+      "person": 44.903,
+      "road": 91.622,
+      "sidewalk": 83.167,
+      "terrain": 71.34,
+      "vegetation": 46.012,
+      "manmade": 43.089
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 66.52423733282127,
+     "miou9_abstain_wrong": 66.06766898858412,
+     "acc": 77.69588713231587,
+     "coverage": 0.9950071528273061,
+     "n_eval": 105576434,
+     "n_labelled": 105049307,
+     "per_class_iou": {
+      "car": 95.624,
+      "large_vehicle": 64.703,
+      "two_wheeler": 31.188,
+      "person": 58.02,
+      "road": 93.601,
+      "sidewalk": 85.169,
+      "terrain": 81.169,
+      "vegetation": 46.13,
+      "manmade": 43.115
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 62.740513619093576,
+     "sparse_oracle_miou": 77.73900750496921,
+     "voxels": 1908761,
+     "wrong": 453173,
+     "sparse_voxels": 756751,
+     "per_class_iou": {
+      "car": 89.152,
+      "large_vehicle": 60.402,
+      "two_wheeler": 44.521,
+      "person": 51.559,
+      "road": 87.676,
+      "sidewalk": 74.58,
+      "terrain": 56.764,
+      "vegetation": 62.765,
+      "manmade": 37.246
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 61.99746398779395,
+     "per_scan_miou9": 59.999678043216946,
+     "points": 115769697,
+     "voxels": 1908761,
+     "map_per_class_iou": {
+      "car": 88.142,
+      "large_vehicle": 58.843,
+      "two_wheeler": 43.864,
+      "person": 50.658,
+      "road": 86.644,
+      "sidewalk": 73.312,
+      "terrain": 56.738,
+      "vegetation": 62.693,
+      "manmade": 37.083
+     },
+     "per_scan_per_class_iou": {
+      "car": 87.183,
+      "large_vehicle": 51.688,
+      "two_wheeler": 42.413,
+      "person": 48.737,
+      "road": 85.487,
+      "sidewalk": 71.325,
+      "terrain": 52.943,
+      "vegetation": 62.681,
+      "manmade": 37.542
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_noKL_s2_07_r2.json",
+    "sha256": "3313cf52a60434ecbce7e2ba6149a2a8b57490b4fe30f5abc08e105e2229a7d5",
+    "bytes": 51303
+   }
+  },
+  {
+   "tag": "armB0_noKL_s2_09_r1",
+   "arm": "B0_noKL",
+   "checkpoint": "armB0_noKL_s2",
+   "training_seed": 20260925,
+   "seq": "09",
+   "pass": 1,
+   "frames": 1591,
+   "frames_no_pose": 5,
+   "map_voxels": 6422917,
+   "points_evaluated": 188141271,
+   "outside": {
+    "offline_all": {
+     "miou9": 57.97952704676364,
+     "acc": 79.85535242946993,
+     "n_eval": 158407085,
+     "per_class_iou": {
+      "car": 87.08,
+      "large_vehicle": 35.151,
+      "two_wheeler": 53.905,
+      "person": 44.585,
+      "road": 82.459,
+      "sidewalk": 67.774,
+      "terrain": 27.971,
+      "vegetation": 71.329,
+      "manmade": 51.561
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 65.66114638156452,
+     "miou9_abstain_wrong": 65.53870033866593,
+     "acc": 81.64111719592904,
+     "coverage": 0.9963897055409131,
+     "n_eval": 158304539,
+     "n_labelled": 157733013,
+     "per_class_iou": {
+      "car": 94.002,
+      "large_vehicle": 57.239,
+      "two_wheeler": 69.844,
+      "person": 56.722,
+      "road": 86.946,
+      "sidewalk": 72.377,
+      "terrain": 28.855,
+      "vegetation": 71.867,
+      "manmade": 53.099
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 51.61600870611177,
+     "sparse_oracle_miou": 72.8899963117671,
+     "voxels": 4759415,
+     "wrong": 1037157,
+     "sparse_voxels": 1814152,
+     "per_class_iou": {
+      "car": 72.588,
+      "large_vehicle": 11.729,
+      "two_wheeler": 44.315,
+      "person": 51.765,
+      "road": 78.385,
+      "sidewalk": 62.078,
+      "terrain": 27.425,
+      "vegetation": 74.67,
+      "manmade": 41.588
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 51.238869299152036,
+     "per_scan_miou9": 48.732447925850046,
+     "points": 178449811,
+     "voxels": 4759415,
+     "map_per_class_iou": {
+      "car": 72.109,
+      "large_vehicle": 11.686,
+      "two_wheeler": 43.922,
+      "person": 50.971,
+      "road": 77.865,
+      "sidewalk": 61.229,
+      "terrain": 27.36,
+      "vegetation": 74.596,
+      "manmade": 41.412
+     },
+     "per_scan_per_class_iou": {
+      "car": 69.856,
+      "large_vehicle": 10.305,
+      "two_wheeler": 37.471,
+      "person": 44.589,
+      "road": 75.695,
+      "sidewalk": 58.65,
+      "terrain": 26.068,
+      "vegetation": 74.448,
+      "manmade": 41.51
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_noKL_s2_09_r1.json",
+    "sha256": "72885c5da5e72c990c83978f327c3dc7f33df6d9a0d5dcb98e33b9b823915e03",
+    "bytes": 51381
+   }
+  },
+  {
+   "tag": "armB0_noKL_s2_09_r2",
+   "arm": "B0_noKL",
+   "checkpoint": "armB0_noKL_s2",
+   "training_seed": 20260925,
+   "seq": "09",
+   "pass": 2,
+   "frames": 1591,
+   "frames_no_pose": 5,
+   "map_voxels": 6421816,
+   "points_evaluated": 188141271,
+   "outside": {
+    "offline_all": {
+     "miou9": 58.07276886110222,
+     "acc": 79.90355986918135,
+     "n_eval": 158407085,
+     "per_class_iou": {
+      "car": 87.525,
+      "large_vehicle": 37.569,
+      "two_wheeler": 51.63,
+      "person": 44.654,
+      "road": 82.636,
+      "sidewalk": 67.929,
+      "terrain": 27.861,
+      "vegetation": 71.293,
+      "manmade": 51.558
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 66.3030103175236,
+     "miou9_abstain_wrong": 66.17926555345167,
+     "acc": 81.67645059520783,
+     "coverage": 0.996379895335787,
+     "n_eval": 158304539,
+     "n_labelled": 157731460,
+     "per_class_iou": {
+      "car": 93.989,
+      "large_vehicle": 63.23,
+      "two_wheeler": 67.198,
+      "person": 59.014,
+      "road": 87.071,
+      "sidewalk": 72.481,
+      "terrain": 28.712,
+      "vegetation": 71.815,
+      "manmade": 53.217
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 51.829210515370534,
+     "sparse_oracle_miou": 73.13203292993343,
+     "voxels": 4759000,
+     "wrong": 1033264,
+     "sparse_voxels": 1814364,
+     "per_class_iou": {
+      "car": 73.31,
+      "large_vehicle": 12.314,
+      "two_wheeler": 43.27,
+      "person": 52.89,
+      "road": 78.522,
+      "sidewalk": 62.283,
+      "terrain": 27.431,
+      "vegetation": 74.7,
+      "manmade": 41.744
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 51.44544971764963,
+     "per_scan_miou9": 48.939524807295896,
+     "points": 178448339,
+     "voxels": 4759000,
+     "map_per_class_iou": {
+      "car": 72.821,
+      "large_vehicle": 12.264,
+      "two_wheeler": 42.869,
+      "person": 52.064,
+      "road": 78.001,
+      "sidewalk": 61.436,
+      "terrain": 27.364,
+      "vegetation": 74.626,
+      "manmade": 41.564
+     },
+     "per_scan_per_class_iou": {
+      "car": 70.767,
+      "large_vehicle": 10.808,
+      "two_wheeler": 37.048,
+      "person": 45.051,
+      "road": 75.844,
+      "sidewalk": 58.805,
+      "terrain": 26.072,
+      "vegetation": 74.477,
+      "manmade": 41.583
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_noKL_s2_09_r2.json",
+    "sha256": "40a981a51e0f195209e1dc93559211c726fb266974af1b2eecbc7ca5e3601f2a",
+    "bytes": 51343
+   }
+  },
+  {
+   "tag": "armB0_noKL_s3_07_r1",
+   "arm": "B0_noKL",
+   "checkpoint": "armB0_noKL_s3",
+   "training_seed": 20260926,
+   "seq": "07",
+   "pass": 1,
+   "frames": 1101,
+   "frames_no_pose": 5,
+   "map_voxels": 2731120,
+   "points_evaluated": 125886114,
+   "outside": {
+    "offline_all": {
+     "miou9": 45.780090885990916,
+     "acc": 58.13963545910723,
+     "n_eval": 105671053,
+     "per_class_iou": {
+      "car": 60.235,
+      "large_vehicle": 55.498,
+      "two_wheeler": 41.43,
+      "person": 55.62,
+      "road": 90.641,
+      "sidewalk": 74.325,
+      "terrain": 0.0,
+      "vegetation": 34.272,
+      "manmade": 0.0
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 49.713564060059326,
+     "miou9_abstain_wrong": 49.344772748217025,
+     "acc": 58.76649073535159,
+     "coverage": 0.9952245119398521,
+     "n_eval": 105576434,
+     "n_labelled": 105072255,
+     "per_class_iou": {
+      "car": 68.163,
+      "large_vehicle": 61.52,
+      "two_wheeler": 53.206,
+      "person": 61.795,
+      "road": 93.52,
+      "sidewalk": 75.32,
+      "terrain": 0.0,
+      "vegetation": 33.899,
+      "manmade": 0.0
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 46.98689079743773,
+     "sparse_oracle_miou": 66.5807632737978,
+     "voxels": 1921735,
+     "wrong": 759507,
+     "sparse_voxels": 762092,
+     "per_class_iou": {
+      "car": 55.248,
+      "large_vehicle": 70.85,
+      "two_wheeler": 41.375,
+      "person": 50.364,
+      "road": 89.689,
+      "sidewalk": 62.718,
+      "terrain": 0.0,
+      "vegetation": 52.638,
+      "manmade": 0.0
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 46.317867938803204,
+     "per_scan_miou9": 45.033622291018816,
+     "points": 115792623,
+     "voxels": 1921735,
+     "map_per_class_iou": {
+      "car": 54.75,
+      "large_vehicle": 68.699,
+      "two_wheeler": 40.804,
+      "person": 49.374,
+      "road": 88.736,
+      "sidewalk": 61.896,
+      "terrain": 0.0,
+      "vegetation": 52.602,
+      "manmade": 0.0
+     },
+     "per_scan_per_class_iou": {
+      "car": 52.068,
+      "large_vehicle": 67.362,
+      "two_wheeler": 35.851,
+      "person": 48.713,
+      "road": 88.025,
+      "sidewalk": 60.654,
+      "terrain": 0.0,
+      "vegetation": 52.63,
+      "manmade": 0.0
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_noKL_s3_07_r1.json",
+    "sha256": "45f262257ad674a24806887e34c138810f01d545e8f85956bb9b0214eda2148c",
+    "bytes": 51003
+   }
+  },
+  {
+   "tag": "armB0_noKL_s3_07_r2",
+   "arm": "B0_noKL",
+   "checkpoint": "armB0_noKL_s3",
+   "training_seed": 20260926,
+   "seq": "07",
+   "pass": 2,
+   "frames": 1101,
+   "frames_no_pose": 5,
+   "map_voxels": 2731111,
+   "points_evaluated": 125886114,
+   "outside": {
+    "offline_all": {
+     "miou9": 45.45921968647045,
+     "acc": 58.135114826574124,
+     "n_eval": 105671053,
+     "per_class_iou": {
+      "car": 60.194,
+      "large_vehicle": 55.415,
+      "two_wheeler": 39.577,
+      "person": 54.712,
+      "road": 90.736,
+      "sidewalk": 74.204,
+      "terrain": 0.0,
+      "vegetation": 34.295,
+      "manmade": 0.0
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 49.58842008276149,
+     "miou9_abstain_wrong": 49.22040425638855,
+     "acc": 58.76673295954689,
+     "coverage": 0.9952232143017825,
+     "n_eval": 105576434,
+     "n_labelled": 105072118,
+     "per_class_iou": {
+      "car": 67.949,
+      "large_vehicle": 61.337,
+      "two_wheeler": 52.666,
+      "person": 61.604,
+      "road": 93.481,
+      "sidewalk": 75.325,
+      "terrain": 0.0,
+      "vegetation": 33.935,
+      "manmade": 0.0
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 46.9758270011807,
+     "sparse_oracle_miou": 66.43884300827408,
+     "voxels": 1921706,
+     "wrong": 758886,
+     "sparse_voxels": 762052,
+     "per_class_iou": {
+      "car": 55.338,
+      "large_vehicle": 70.817,
+      "two_wheeler": 40.634,
+      "person": 50.576,
+      "road": 89.783,
+      "sidewalk": 62.99,
+      "terrain": 0.0,
+      "vegetation": 52.643,
+      "manmade": 0.0
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 46.320614079669426,
+     "per_scan_miou9": 44.965961399799916,
+     "points": 115792485,
+     "voxels": 1921706,
+     "map_per_class_iou": {
+      "car": 54.837,
+      "large_vehicle": 68.715,
+      "two_wheeler": 40.084,
+      "person": 49.652,
+      "road": 88.826,
+      "sidewalk": 62.165,
+      "terrain": 0.0,
+      "vegetation": 52.607,
+      "manmade": 0.0
+     },
+     "per_scan_per_class_iou": {
+      "car": 52.182,
+      "large_vehicle": 67.281,
+      "two_wheeler": 34.787,
+      "person": 48.758,
+      "road": 88.181,
+      "sidewalk": 60.865,
+      "terrain": 0.0,
+      "vegetation": 52.64,
+      "manmade": 0.0
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_noKL_s3_07_r2.json",
+    "sha256": "8d19ab5fb3fc39b6310e76836fe7ef2a9fe216086c1c29cfc3d9963707a75b68",
+    "bytes": 51002
+   }
+  },
+  {
+   "tag": "armB0_noKL_s3_09_r1",
+   "arm": "B0_noKL",
+   "checkpoint": "armB0_noKL_s3",
+   "training_seed": 20260926,
+   "seq": "09",
+   "pass": 1,
+   "frames": 1591,
+   "frames_no_pose": 5,
+   "map_voxels": 6484040,
+   "points_evaluated": 188141271,
+   "outside": {
+    "offline_all": {
+     "miou9": 50.77575444019256,
+     "acc": 68.70756633139231,
+     "n_eval": 158407085,
+     "per_class_iou": {
+      "car": 67.725,
+      "large_vehicle": 69.714,
+      "two_wheeler": 54.07,
+      "person": 60.844,
+      "road": 80.794,
+      "sidewalk": 64.386,
+      "terrain": 0.0,
+      "vegetation": 59.449,
+      "manmade": 0.0
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 56.97154221929605,
+     "miou9_abstain_wrong": 56.89947896624968,
+     "acc": 69.79620223363001,
+     "coverage": 0.99675342221236,
+     "n_eval": 158304539,
+     "n_labelled": 157790591,
+     "per_class_iou": {
+      "car": 82.613,
+      "large_vehicle": 75.575,
+      "two_wheeler": 78.713,
+      "person": 64.592,
+      "road": 84.243,
+      "sidewalk": 67.923,
+      "terrain": 0.0,
+      "vegetation": 59.085,
+      "manmade": 0.0
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 46.92798135834092,
+     "sparse_oracle_miou": 68.67191428584731,
+     "voxels": 4792740,
+     "wrong": 1512191,
+     "sparse_voxels": 1818288,
+     "per_class_iou": {
+      "car": 66.547,
+      "large_vehicle": 45.156,
+      "two_wheeler": 55.251,
+      "person": 52.862,
+      "road": 79.616,
+      "sidewalk": 57.333,
+      "terrain": 0.0,
+      "vegetation": 65.587,
+      "manmade": 0.0
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 46.58386085651276,
+     "per_scan_miou9": 43.17161543238896,
+     "points": 178507097,
+     "voxels": 4792740,
+     "map_per_class_iou": {
+      "car": 66.201,
+      "large_vehicle": 45.025,
+      "two_wheeler": 54.809,
+      "person": 51.912,
+      "road": 79.114,
+      "sidewalk": 56.65,
+      "terrain": 0.0,
+      "vegetation": 65.544,
+      "manmade": 0.0
+     },
+     "per_scan_per_class_iou": {
+      "car": 59.466,
+      "large_vehicle": 42.401,
+      "two_wheeler": 40.809,
+      "person": 48.135,
+      "road": 77.505,
+      "sidewalk": 54.651,
+      "terrain": 0.0,
+      "vegetation": 65.576,
+      "manmade": 0.0
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_noKL_s3_09_r1.json",
+    "sha256": "b5cd5033d1e476fbc55f4f1d7350339509c511c7a427899ff945a4bbe6de3a60",
+    "bytes": 51083
+   }
+  },
+  {
+   "tag": "armB0_noKL_s3_09_r2",
+   "arm": "B0_noKL",
+   "checkpoint": "armB0_noKL_s3",
+   "training_seed": 20260926,
+   "seq": "09",
+   "pass": 2,
+   "frames": 1591,
+   "frames_no_pose": 5,
+   "map_voxels": 6484141,
+   "points_evaluated": 188141271,
+   "outside": {
+    "offline_all": {
+     "miou9": 50.44449047331559,
+     "acc": 68.66481382445741,
+     "n_eval": 158407085,
+     "per_class_iou": {
+      "car": 67.78,
+      "large_vehicle": 68.705,
+      "two_wheeler": 52.912,
+      "person": 60.257,
+      "road": 80.719,
+      "sidewalk": 64.199,
+      "terrain": 0.0,
+      "vegetation": 59.428,
+      "manmade": 0.0
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 57.07036968441801,
+     "miou9_abstain_wrong": 57.000546030264054,
+     "acc": 69.76198977654855,
+     "coverage": 0.9967543823869763,
+     "n_eval": 158304539,
+     "n_labelled": 157790743,
+     "per_class_iou": {
+      "car": 82.61,
+      "large_vehicle": 74.623,
+      "two_wheeler": 80.183,
+      "person": 65.224,
+      "road": 84.18,
+      "sidewalk": 67.726,
+      "terrain": 0.0,
+      "vegetation": 59.087,
+      "manmade": 0.0
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 46.76224091073184,
+     "sparse_oracle_miou": 68.64580829742924,
+     "voxels": 4792694,
+     "wrong": 1512104,
+     "sparse_voxels": 1818106,
+     "per_class_iou": {
+      "car": 66.575,
+      "large_vehicle": 44.683,
+      "two_wheeler": 53.822,
+      "person": 53.222,
+      "road": 79.634,
+      "sidewalk": 57.334,
+      "terrain": 0.0,
+      "vegetation": 65.59,
+      "manmade": 0.0
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 46.42932530416213,
+     "per_scan_miou9": 42.91174165937208,
+     "points": 178507248,
+     "voxels": 4792694,
+     "map_per_class_iou": {
+      "car": 66.22,
+      "large_vehicle": 44.583,
+      "two_wheeler": 53.445,
+      "person": 52.276,
+      "road": 79.135,
+      "sidewalk": 56.657,
+      "terrain": 0.0,
+      "vegetation": 65.548,
+      "manmade": 0.0
+     },
+     "per_scan_per_class_iou": {
+      "car": 59.454,
+      "large_vehicle": 41.439,
+      "two_wheeler": 39.467,
+      "person": 48.009,
+      "road": 77.57,
+      "sidewalk": 54.682,
+      "terrain": 0.0,
+      "vegetation": 65.585,
+      "manmade": 0.0
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armB0_noKL_s3_09_r2.json",
+    "sha256": "dbbde48c2c660b29ee71a9bbe3bec6dd5161f413557bd18909821f009f663d52",
+    "bytes": 51045
+   }
+  },
+  {
+   "tag": "armRprime_noKL_s1_07_r1",
+   "arm": "Rprime_noKL",
+   "checkpoint": "armRprime_noKL_s1",
+   "training_seed": 20260924,
+   "seq": "07",
+   "pass": 1,
+   "frames": 1101,
+   "frames_no_pose": 5,
+   "map_voxels": 2723663,
+   "points_evaluated": 125886114,
+   "outside": {
+    "offline_all": {
+     "miou9": 85.49986269383918,
+     "acc": 96.00763985951762,
+     "n_eval": 105671053,
+     "per_class_iou": {
+      "car": 98.635,
+      "large_vehicle": 57.108,
+      "two_wheeler": 83.377,
+      "person": 75.932,
+      "road": 97.286,
+      "sidewalk": 93.959,
+      "terrain": 84.555,
+      "vegetation": 85.545,
+      "manmade": 93.102
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 86.1924405603744,
+     "miou9_abstain_wrong": 85.65935763340882,
+     "acc": 95.70052224777183,
+     "coverage": 0.9952000083655033,
+     "n_eval": 105576434,
+     "n_labelled": 105069668,
+     "per_class_iou": {
+      "car": 97.732,
+      "large_vehicle": 60.96,
+      "two_wheeler": 84.815,
+      "person": 81.235,
+      "road": 96.037,
+      "sidewalk": 91.22,
+      "terrain": 84.261,
+      "vegetation": 86.558,
+      "manmade": 92.915
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 79.64553994430588,
+     "sparse_oracle_miou": 89.64414077813171,
+     "voxels": 1920012,
+     "wrong": 127021,
+     "sparse_voxels": 759786,
+     "per_class_iou": {
+      "car": 95.276,
+      "large_vehicle": 64.022,
+      "two_wheeler": 64.556,
+      "person": 65.507,
+      "road": 95.904,
+      "sidewalk": 85.331,
+      "terrain": 69.192,
+      "vegetation": 87.718,
+      "manmade": 89.303
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 78.40449097373107,
+     "per_scan_miou9": 78.6837739497343,
+     "points": 115790046,
+     "voxels": 1920012,
+     "map_per_class_iou": {
+      "car": 94.152,
+      "large_vehicle": 61.82,
+      "two_wheeler": 63.013,
+      "person": 64.049,
+      "road": 94.556,
+      "sidewalk": 83.094,
+      "terrain": 68.916,
+      "vegetation": 87.443,
+      "manmade": 88.599
+     },
+     "per_scan_per_class_iou": {
+      "car": 95.177,
+      "large_vehicle": 62.182,
+      "two_wheeler": 62.543,
+      "person": 63.816,
+      "road": 95.373,
+      "sidewalk": 84.791,
+      "terrain": 68.946,
+      "vegetation": 86.972,
+      "manmade": 88.354
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armRprime_noKL_s1_07_r1.json",
+    "sha256": "ee9838aac59d5de0e06fd27134c644dfbd6237bd77462bd3cf62e76b0a1b26a4",
+    "bytes": 51153
+   }
+  },
+  {
+   "tag": "armRprime_noKL_s1_07_r2",
+   "arm": "Rprime_noKL",
+   "checkpoint": "armRprime_noKL_s1",
+   "training_seed": 20260924,
+   "seq": "07",
+   "pass": 2,
+   "frames": 1101,
+   "frames_no_pose": 5,
+   "map_voxels": 2723517,
+   "points_evaluated": 125886114,
+   "outside": {
+    "offline_all": {
+     "miou9": 85.2309645030788,
+     "acc": 95.99484638427896,
+     "n_eval": 105671053,
+     "per_class_iou": {
+      "car": 98.597,
+      "large_vehicle": 56.327,
+      "two_wheeler": 81.95,
+      "person": 75.792,
+      "road": 97.303,
+      "sidewalk": 93.988,
+      "terrain": 84.566,
+      "vegetation": 85.48,
+      "manmade": 93.077
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 86.04504678895445,
+     "miou9_abstain_wrong": 85.51943396465259,
+     "acc": 95.70007971266513,
+     "coverage": 0.9952019974457558,
+     "n_eval": 105576434,
+     "n_labelled": 105069878,
+     "per_class_iou": {
+      "car": 97.761,
+      "large_vehicle": 60.584,
+      "two_wheeler": 84.037,
+      "person": 81.022,
+      "road": 96.029,
+      "sidewalk": 91.236,
+      "terrain": 84.272,
+      "vegetation": 86.544,
+      "manmade": 92.921
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 79.50666425346556,
+     "sparse_oracle_miou": 89.61384539423977,
+     "voxels": 1920140,
+     "wrong": 127446,
+     "sparse_voxels": 759856,
+     "per_class_iou": {
+      "car": 95.269,
+      "large_vehicle": 63.421,
+      "two_wheeler": 63.897,
+      "person": 65.708,
+      "road": 95.887,
+      "sidewalk": 85.321,
+      "terrain": 69.087,
+      "vegetation": 87.675,
+      "manmade": 89.296
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 78.2739829898872,
+     "per_scan_miou9": 78.4904870175182,
+     "points": 115790254,
+     "voxels": 1920140,
+     "map_per_class_iou": {
+      "car": 94.145,
+      "large_vehicle": 61.327,
+      "two_wheeler": 62.313,
+      "person": 64.25,
+      "road": 94.541,
+      "sidewalk": 83.086,
+      "terrain": 68.807,
+      "vegetation": 87.401,
+      "manmade": 88.598
+     },
+     "per_scan_per_class_iou": {
+      "car": 95.156,
+      "large_vehicle": 61.47,
+      "two_wheeler": 61.549,
+      "person": 63.905,
+      "road": 95.372,
+      "sidewalk": 84.806,
+      "terrain": 68.857,
+      "vegetation": 86.93,
+      "manmade": 88.369
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armRprime_noKL_s1_07_r2.json",
+    "sha256": "6220526bf615b92a308fb18f6d3668dada01e69bd7b14dc72fdb54bbe55acf0e",
+    "bytes": 51142
+   }
+  },
+  {
+   "tag": "armRprime_noKL_s1_09_r1",
+   "arm": "Rprime_noKL",
+   "checkpoint": "armRprime_noKL_s1",
+   "training_seed": 20260924,
+   "seq": "09",
+   "pass": 1,
+   "frames": 1591,
+   "frames_no_pose": 5,
+   "map_voxels": 6463519,
+   "points_evaluated": 188141271,
+   "outside": {
+    "offline_all": {
+     "miou9": 83.45136380903166,
+     "acc": 91.87311476629975,
+     "n_eval": 158407085,
+     "per_class_iou": {
+      "car": 97.682,
+      "large_vehicle": 87.419,
+      "two_wheeler": 78.413,
+      "person": 76.141,
+      "road": 92.781,
+      "sidewalk": 85.765,
+      "terrain": 58.383,
+      "vegetation": 85.298,
+      "manmade": 89.182
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 83.78263115860801,
+     "miou9_abstain_wrong": 83.6302107499287,
+     "acc": 92.10432783583934,
+     "coverage": 0.9966946367848619,
+     "n_eval": 158304539,
+     "n_labelled": 157781285,
+     "per_class_iou": {
+      "car": 97.126,
+      "large_vehicle": 88.254,
+      "two_wheeler": 80.263,
+      "person": 75.131,
+      "road": 93.009,
+      "sidewalk": 85.564,
+      "terrain": 59.319,
+      "vegetation": 85.895,
+      "manmade": 89.483
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 78.59614539079485,
+     "sparse_oracle_miou": 89.1894882401092,
+     "voxels": 4786459,
+     "wrong": 397357,
+     "sparse_voxels": 1813943,
+     "per_class_iou": {
+      "car": 94.864,
+      "large_vehicle": 70.086,
+      "two_wheeler": 69.753,
+      "person": 63.834,
+      "road": 90.753,
+      "sidewalk": 79.37,
+      "terrain": 64.471,
+      "vegetation": 88.846,
+      "manmade": 85.389
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 77.81151417552339,
+     "per_scan_miou9": 76.90043700449468,
+     "points": 178497836,
+     "voxels": 4786459,
+     "map_per_class_iou": {
+      "car": 94.2,
+      "large_vehicle": 69.575,
+      "two_wheeler": 68.76,
+      "person": 62.684,
+      "road": 90.017,
+      "sidewalk": 77.712,
+      "terrain": 64.004,
+      "vegetation": 88.633,
+      "manmade": 84.72
+     },
+     "per_scan_per_class_iou": {
+      "car": 94.504,
+      "large_vehicle": 69.073,
+      "two_wheeler": 64.896,
+      "person": 60.753,
+      "road": 89.85,
+      "sidewalk": 77.789,
+      "terrain": 63.003,
+      "vegetation": 88.106,
+      "manmade": 84.132
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armRprime_noKL_s1_09_r1.json",
+    "sha256": "7d9e2ffc034fec822af042daad2ca026558b7560a191846622e2da31a951248d",
+    "bytes": 51245
+   }
+  },
+  {
+   "tag": "armRprime_noKL_s1_09_r2",
+   "arm": "Rprime_noKL",
+   "checkpoint": "armRprime_noKL_s1",
+   "training_seed": 20260924,
+   "seq": "09",
+   "pass": 2,
+   "frames": 1591,
+   "frames_no_pose": 5,
+   "map_voxels": 6464086,
+   "points_evaluated": 188141271,
+   "outside": {
+    "offline_all": {
+     "miou9": 83.68268968362469,
+     "acc": 91.91361169230531,
+     "n_eval": 158407085,
+     "per_class_iou": {
+      "car": 97.681,
+      "large_vehicle": 87.557,
+      "two_wheeler": 79.308,
+      "person": 76.872,
+      "road": 92.814,
+      "sidewalk": 85.823,
+      "terrain": 58.504,
+      "vegetation": 85.377,
+      "manmade": 89.208
+     }
+    },
+    "map_all_lookup": {
+     "miou9": 83.94107072853578,
+     "miou9_abstain_wrong": 83.7889803779509,
+     "acc": 92.14086257376053,
+     "coverage": 0.9967015475153242,
+     "n_eval": 158304539,
+     "n_labelled": 157782379,
+     "per_class_iou": {
+      "car": 97.12,
+      "large_vehicle": 88.622,
+      "two_wheeler": 81.226,
+      "person": 74.897,
+      "road": 92.997,
+      "sidewalk": 85.619,
+      "terrain": 59.51,
+      "vegetation": 85.962,
+      "manmade": 89.516
+     }
+    },
+    "anatomy_voxel": {
+     "miou9": 78.92538546810775,
+     "sparse_oracle_miou": 89.24393876845834,
+     "voxels": 4786976,
+     "wrong": 396030,
+     "sparse_voxels": 1814302,
+     "per_class_iou": {
+      "car": 94.883,
+      "large_vehicle": 71.251,
+      "two_wheeler": 70.553,
+      "person": 64.619,
+      "road": 90.696,
+      "sidewalk": 79.425,
+      "terrain": 64.603,
+      "vegetation": 88.891,
+      "manmade": 85.407
+     }
+    },
+    "reweighted_map_vs_scan": {
+     "map_miou9": 78.14466756439418,
+     "per_scan_miou9": 77.27882636570675,
+     "points": 178498930,
+     "voxels": 4786976,
+     "map_per_class_iou": {
+      "car": 94.217,
+      "large_vehicle": 70.725,
+      "two_wheeler": 69.592,
+      "person": 63.499,
+      "road": 89.966,
+      "sidewalk": 77.766,
+      "terrain": 64.13,
+      "vegetation": 88.674,
+      "manmade": 84.734
+     },
+     "per_scan_per_class_iou": {
+      "car": 94.541,
+      "large_vehicle": 70.11,
+      "two_wheeler": 66.393,
+      "person": 61.378,
+      "road": 89.812,
+      "sidewalk": 77.847,
+      "terrain": 63.123,
+      "vegetation": 88.152,
+      "manmade": 84.153
+     }
+    }
+   },
+   "source": {
+    "path": "out/v06_score/map_armRprime_noKL_s1_09_r2.json",
+    "sha256": "e479dee1feb8c6901c9d89cc53665f08319ab477fe7bfb0ce73e69188f9fe0b7",
+    "bytes": 51234
+   }
+  }
+ ]
+}
