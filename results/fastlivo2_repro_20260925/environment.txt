@@ -1,0 +1,31 @@
+# FAST-LIVO2 reproduction environment, 2026-09-25
+host: Intel(R) Xeon(R) Processor @ 2.10GHz, 4 vCPU, 15 GiB RAM, SIMD: avx2 fma avx512f avx512vl
+os: Ubuntu 24.04.4 LTS
+sources:
+  hku-mars/FAST-LIVO2 (upstream reference)          0d2c0346107b75b59934975adec9a6eeeb913c64
+  Robotic-Developer-Road/FAST-LIVO2 branch humble    837b7bbc1431cb04cf936528e52c83c835efba8e
+  Robotic-Developer-Road/rpg_vikit                   4b7abc838f5d2ca9137f70f122eaaeff9eaf0f50
+  ros2-gbp/sophus-release release/jazzy/sophus/1.22.9102-2  39c729040cd2c3720879b0df85f162c4ac789877
+conda (RoboStack robostack-jazzy + conda-forge), key packages:
+  ceres-solver                       2.2.0 cpugplhc142d66_210
+  cmake                              3.28.4 hcfe8598_0
+  eigen                              3.4.0 h54a6638_2
+  fmt                                12.1.0 h76c4fd7_1
+  glog                               0.7.1 hb7133d2_1
+  gxx_linux-64                       13.4.0 hb11295d_28
+  libboost-devel                     1.88.0 hfcd1e18_7
+  libopencv                          4.12.0 qt6_py312h52d6ec5_612
+  numpy                              2.5.3 py312he827f4e_0
+  pcl                                1.15.1 h717c489_7
+  python                             3.12.14 h5f976f7_3_cpython
+  ros-jazzy-cv-bridge                4.1.0 np2py312hedab9cf_16
+  ros-jazzy-fastrtps                 2.14.5 np2py312h2ed9cc7_16
+  ros-jazzy-pcl-ros                  2.6.2 np2py312h2ed9cc7_16
+  ros-jazzy-rclcpp                   28.1.16 np2py312h2ed9cc7_16
+  ros-jazzy-rmw-fastrtps-cpp         8.4.3 np2py312h2ed9cc7_16
+  ros-jazzy-rosbag2                  0.26.9 np2py312h2ed9cc7_16
+  ros-jazzy-rosbag2-storage-mcap     0.26.9 np2py312h2ed9cc7_16
+data (s3.eu-central-1.amazonaws.com/avg-kitti):
+  raw_data 2011_09_30_drive_{0027,0016}_sync (velodyne_points, image_02, oxts), _extract oxts (100 Hz), 2011_09_30_calib
+  data_odometry_calib.zip (calib.txt, times.txt), data_odometry_poses.zip (KITTI odometry GT)
+bags: kitti_seq07_us 1101 clouds / 1101 images / 11482 imu; kitti_seq04_us 271 / 271 / 2861

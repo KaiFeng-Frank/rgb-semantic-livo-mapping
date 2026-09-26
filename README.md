@@ -48,6 +48,12 @@ the interesting problems can be discovered instead of assumed.
 | 5 | Dynamic objects do not smear from sync error | **PASS** — controlled experiment, see below |
 | 6 | Full mapping replay, no crash / VRAM growth / sustained drops | **PASS** — **1092 / 1092 scans, 0 dropped**, VRAM flat |
 
+Criterion 1 was rebuilt and re-run from raw KITTI on a second host (2026-09-25). Against KITTI
+odometry GT, three re-runs score seq 07 ATE **0.858 ± 0.030 m**, and the committed trajectory scores
+0.837 m. The published 0.880 m was scored against SemanticKITTI's `poses.txt`, which that host could
+not download. seq 04's cold start does not reproduce. See
+[the reproduction](docs/fastlivo2_reproduction.md).
+
 **Semantic quality**, all 1101 frames of seq 07 against SemanticKITTI ground truth, zero-shot
 (nuScenes-trained weights, never fine-tuned on KITTI):
 

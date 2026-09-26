@@ -1,0 +1,194 @@
+{
+  "07": {
+    "committed": {
+      "seq": "07",
+      "n_pairs": 1096,
+      "ate_rmse": 0.8365924140331249,
+      "ate_mean": 0.7516073062554178,
+      "ate_median": 0.6899625720697216,
+      "ate_max": 1.7042007554965022,
+      "ate_min": 0.0172967855178915,
+      "traj_len_gt": 693.888275276165,
+      "traj_len_est": 694.3528050748712,
+      "gt_duration": 113.81008005142212,
+      "mean_speed_gt": 6.096896469650576,
+      "mean_speed_est": 6.100978092284497,
+      "drift_pct": 0.12056586684652716
+    },
+    "runs": {
+      "kitti_seq07_run1": {
+        "ate": {
+          "seq": "07",
+          "n_pairs": 1096,
+          "ate_rmse": 0.8377231637212903,
+          "ate_mean": 0.7579609622946242,
+          "ate_median": 0.7219161680325434,
+          "ate_max": 1.7262398631431408,
+          "ate_min": 0.16501224119306357,
+          "traj_len_gt": 693.888275276165,
+          "traj_len_est": 693.9669043311774,
+          "gt_duration": 113.81008005142212,
+          "mean_speed_gt": 6.096896469650576,
+          "mean_speed_est": 6.097587349184066,
+          "drift_pct": 0.12072882531238613
+        },
+        "vs_committed": {
+          "n_ref": 1096,
+          "n_run": 1096,
+          "same_stamps": true,
+          "first_diverging_pose_1mm": 1,
+          "pos_diff_max": 0.5078320005474252,
+          "pos_diff_final": 0.2977914442189361
+        }
+      },
+      "kitti_seq07_run2": {
+        "ate": {
+          "seq": "07",
+          "n_pairs": 1096,
+          "ate_rmse": 0.842794475982982,
+          "ate_mean": 0.7627287801491961,
+          "ate_median": 0.695065360139457,
+          "ate_max": 1.9661245625397634,
+          "ate_min": 0.22618184141693115,
+          "traj_len_gt": 693.888275276165,
+          "traj_len_est": 694.0158654516133,
+          "gt_duration": 113.81008005142212,
+          "mean_speed_gt": 6.096896469650576,
+          "mean_speed_est": 6.098017549394925,
+          "drift_pct": 0.1214596796072902
+        },
+        "vs_committed": {
+          "n_ref": 1096,
+          "n_run": 1096,
+          "same_stamps": true,
+          "first_diverging_pose_1mm": 1,
+          "pos_diff_max": 0.9874518952931342,
+          "pos_diff_final": 0.6394656889419478
+        }
+      },
+      "kitti_seq07_run3": {
+        "ate": {
+          "seq": "07",
+          "n_pairs": 1096,
+          "ate_rmse": 0.8926632752174704,
+          "ate_mean": 0.7656908473505326,
+          "ate_median": 0.6406936905477929,
+          "ate_max": 2.5808099787509184,
+          "ate_min": 0.18371363521771278,
+          "traj_len_gt": 693.888275276165,
+          "traj_len_est": 694.0673980709116,
+          "gt_duration": 113.81008005142212,
+          "mean_speed_gt": 6.096896469650576,
+          "mean_speed_est": 6.09847034425523,
+          "drift_pct": 0.12864654253772967
+        },
+        "vs_committed": {
+          "n_ref": 1096,
+          "n_run": 1096,
+          "same_stamps": true,
+          "first_diverging_pose_1mm": 1,
+          "pos_diff_max": 2.344851843662196,
+          "pos_diff_final": 1.981095819327778
+        }
+      }
+    },
+    "run_ate_rmse_mean": 0.8577269716405809,
+    "run_ate_rmse_sd": 0.030361793964229646
+  },
+  "04": {
+    "committed": {
+      "seq": "04",
+      "n_pairs": 266,
+      "ate_rmse": 2.5445498048304467,
+      "ate_mean": 1.3059342793856474,
+      "ate_median": 0.8951120314231213,
+      "ate_max": 16.671024935076222,
+      "ate_min": 0.15127027591143818,
+      "traj_len_gt": 387.0626959547785,
+      "traj_len_est": 371.5216507760397,
+      "gt_duration": 27.58815908432007,
+      "mean_speed_gt": 14.030029867950429,
+      "mean_speed_est": 13.466706844792581,
+      "drift_pct": 0.6573999074113132
+    },
+    "runs": {
+      "kitti_seq04_run1": {
+        "ate": {
+          "seq": "04",
+          "n_pairs": 266,
+          "ate_rmse": 35.378507734707334,
+          "ate_mean": 29.83897098929979,
+          "ate_median": 27.887018530103482,
+          "ate_max": 89.65025143037352,
+          "ate_min": 0.31023858924463876,
+          "traj_len_gt": 387.0626959547785,
+          "traj_len_est": 403.035704651718,
+          "gt_duration": 27.58815908432007,
+          "mean_speed_gt": 14.030029867950429,
+          "mean_speed_est": 14.609010460606857,
+          "drift_pct": 9.140252497709232
+        },
+        "vs_committed": {
+          "n_ref": 266,
+          "n_run": 266,
+          "same_stamps": true,
+          "first_diverging_pose_1mm": 5,
+          "pos_diff_max": 747.5461119975315,
+          "pos_diff_final": 747.5461119975315
+        }
+      },
+      "kitti_seq04_run2": {
+        "ate": {
+          "seq": "04",
+          "n_pairs": 266,
+          "ate_rmse": 41.11787337329098,
+          "ate_mean": 35.38011637843103,
+          "ate_median": 36.20639053922497,
+          "ate_max": 98.76275774795478,
+          "ate_min": 0.5671189986961338,
+          "traj_len_gt": 387.0626959547785,
+          "traj_len_est": 441.6018866621239,
+          "gt_duration": 27.58815908432007,
+          "mean_speed_gt": 14.030029867950429,
+          "mean_speed_est": 16.00693563178384,
+          "drift_pct": 10.623052493308446
+        },
+        "vs_committed": {
+          "n_ref": 266,
+          "n_run": 266,
+          "same_stamps": true,
+          "first_diverging_pose_1mm": 5,
+          "pos_diff_max": 786.1532239121037,
+          "pos_diff_final": 786.1532239121037
+        }
+      },
+      "kitti_seq04_run3": {
+        "ate": {
+          "seq": "04",
+          "n_pairs": 266,
+          "ate_rmse": 35.68456036244004,
+          "ate_mean": 29.986895445426622,
+          "ate_median": 28.63148332432715,
+          "ate_max": 93.7350737310522,
+          "ate_min": 0.39257019948996463,
+          "traj_len_gt": 387.0626959547785,
+          "traj_len_est": 394.2681508458935,
+          "gt_duration": 27.58815908432007,
+          "mean_speed_gt": 14.030029867950429,
+          "mean_speed_est": 14.29120912493138,
+          "drift_pct": 9.219323054218883
+        },
+        "vs_committed": {
+          "n_ref": 266,
+          "n_run": 266,
+          "same_stamps": true,
+          "first_diverging_pose_1mm": 5,
+          "pos_diff_max": 738.8290809637338,
+          "pos_diff_final": 738.8290809637338
+        }
+      }
+    },
+    "run_ate_rmse_mean": 37.39364715681278,
+    "run_ate_rmse_sd": 3.2289027139824387
+  }
+}
