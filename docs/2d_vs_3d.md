@@ -101,7 +101,7 @@ arm globally.** It labels 15.2 %. The 3D arm answers for **6.56×** as many poin
 The natural rebuttal — *but the camera sweeps the scene as the vehicle drives* — is answered with a
 measurement rather than an opinion: over the whole 1101-frame trajectory, **only 35.77 % of the
 2,584,582 occupied 0.2 m map voxels are ever seen by the camera at all**, and a voxel is in frustum
-on just 18.49 % of the sweeps that observe it. (Computed with KITTI GT poses, so it is an upper
+on just 18.49 % of the sweeps that observe it. (Computed with SemanticKITTI's `poses.txt`, not KITTI's odometry GT, so it is an upper
 bound; a drifting trajectory can only make it worse.)
 
 ### 2. The structural weakness is geometric, and sits exactly where predicted
@@ -175,7 +175,7 @@ the headline in-frustum gap would have been quietly inflated in our favour.
 - One sequence, one rig, daytime, dry, no night. The *coverage* results are geometric and transfer to
   any forward-camera + 360° LiDAR rig; the *accuracy* results are one drive.
 - Both networks are zero-shot. This is the deployment question, not the ceiling question.
-- Map coverage (35.77 %) uses GT poses and is therefore an upper bound.
+- Map coverage (35.77 %) uses SemanticKITTI's `poses.txt` and is therefore an upper bound.
 
 ---
 

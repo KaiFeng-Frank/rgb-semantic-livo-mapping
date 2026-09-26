@@ -257,7 +257,7 @@ the pose source, identical config and frames:
 | pose source | static false-kill | vehicle-parked FK | recall |
 |---|---|---|---|
 | FAST-LIVO2 (ATE 0.879 m) | 0.260 % | 2.454 % | 63.49 % |
-| SemanticKITTI GT poses | **0.052 %** | **0.468 %** | 63.99 % |
+| SemanticKITTI `poses.txt` (not KITTI's odometry GT; [see](docs/fastlivo2_reproduction.md)) | **0.052 %** | **0.468 %** | 63.99 % |
 
 **5.0×**, at unchanged recall. ATE 0.879 m is 4–9 voxels at 0.2 m — a map-vs-sweep visibility test
 cannot beat the relative pose error between the sweep that wrote a voxel and the sweep that tests it.
@@ -673,7 +673,7 @@ three biggest wins turned out to be a wrong comment and a pure-Python loop.
 **v0.3 — make the map honest about time. ✅ done.** Dynamic-object handling scored against
 SemanticKITTI's moving-class ids. Ribbon −91.1 %, static false-kill 0.161 % against the naive
 control arm's 9.83 % — 61× — and 62× against that arm's *perfect-classifier* bound. The finding that
-matters is the precise negative: the false-kill floor is the trajectory (5.0× better on GT poses),
+matters is the precise negative: the false-kill floor is the trajectory (5.0× better on SemanticKITTI's `poses.txt`),
 not the removal mechanism.
 
 **v0.4 — camera-supervised transfer. ✅ diagnostic stage complete.** Camera pseudo-labels
