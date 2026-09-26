@@ -146,3 +146,22 @@ python3 tools/score_fastlivo2_repro.py <dir with kitti_seq0?_run*.txt> summary.j
 * Locate FAST-LIVO2's run-to-run nondeterminism. Two candidates remain: thread scheduling (the
   OpenMP reduction in `vio.cpp`) and message-arrival timing in `sync_packages`. Comparing a
   single-threaded build (`MP_PROC_NUM=1`) with a rate-independent replay would separate them.
+
+## Addendum (2026-09-26): the two pose files, measured on the project host
+
+KITTI's `data_odometry_poses.zip` (1.3 MB) was fetched and unpacked beside the SemanticKITTI
+archive (`data/odometry_gt/dataset/poses/`). Per-frame position difference between
+SemanticKITTI's `sequences/<seq>/poses.txt` and KITTI's odometry ground truth, same frames:
+
+| seq | frames | mean | max | path length (SemanticKITTI / KITTI) |
+|---|---:|---:|---:|---|
+| 04 | 271 | 0.68 m | 2.30 m | — |
+| 07 | 1101 | 0.48 m | 1.08 m | 693.48 m / 694.70 m |
+| 08 | 4071 | 13.82 m | 17.48 m | — |
+| 09 | 1591 | 2.08 m | 4.31 m | — |
+
+Every number in this repository that was scored "against GT poses" before this date used the
+SemanticKITTI file: the v0.1 ATE, the v0.3 pose-source ablation, the 2D-vs-3D map-coverage
+bound and the v0.6 seq-09 rig check. Per-point semantic scoring never reads either file, so the
+segmentation and map-quality tables are unaffected. Trajectory numbers against KITTI's ground
+truth are the ones in this document.

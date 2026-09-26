@@ -397,3 +397,12 @@ The ten *_sync.zip archives (~92 GiB) were removed after verifying each was alre
 extracted under data/raw/<day>/<drive>_sync/ (frame counts checked) and that
 data/pointcept_sk symlinks into data/raw, not into the archives.  Re-downloadable from the
 KITTI S3 bucket.  Kept: the calib zips, data_odometry_labels.zip, data/raw itself.
+
+## P1 (2026-09-26) sequences/<seq>/poses.txt is SemanticKITTI's, not KITTI's odometry ground truth
+fetch_kitti.sh never fetched data_odometry_poses.zip; the poses.txt under data/odometry/dataset/
+sequences/ comes from SemanticKITTI's labels archive. Against KITTI's own poses (now in
+data/odometry_gt/dataset/poses/) the per-frame position differs by 0.48 m mean on seq 07, 0.68 m on
+seq 04, 2.08 m on seq 09 and 13.8 m (max 17.5 m) on seq 08. Trajectory metrics scored against
+poses.txt (v0.1 ATE 0.880 m, the v0.3 pose-source ablation, the 2D-vs-3D coverage bound) are
+therefore against a SLAM-quality reference; the same seq-07 trajectory scores 0.837 m against
+KITTI's ground truth (docs/fastlivo2_reproduction.md).
