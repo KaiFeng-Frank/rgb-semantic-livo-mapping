@@ -19,6 +19,44 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def commit_receipts(api, headers, directory):
+    """Record completion on main without depending on the initiating laptop."""
+    files = ['publication.json', 'upload-receipt.json']
+
+    def call(method, path, **kw):
+        response = requests.request(method, api + path, headers=headers, timeout=60, **kw)
+        response.raise_for_status()
+        return response.json()
+
+    for attempt in range(6):
+        try:
+            head = call('GET', '/git/ref/heads/main')['object']['sha']
+            parent = call('GET', '/git/commits/' + head)
+            tree = []
+            for name in files:
+                blob = call('POST', '/git/blobs', json={
+                    'content': (directory / name).read_text(), 'encoding': 'utf-8'})
+                tree.append(dict(path='results/v06/artifacts_20260928/' + name,
+                                 mode='100644', type='blob', sha=blob['sha']))
+            new_tree = call('POST', '/git/trees', json={
+                'base_tree': parent['tree']['sha'], 'tree': tree})
+            if new_tree['sha'] == parent['tree']['sha']:
+                return head  # Already recorded; safe to resume this step.
+            commit = call('POST', '/git/commits', json={
+                'message': 'Record verified semantic artifact release publication',
+                'tree': new_tree['sha'], 'parents': [head]})
+            updated = call('PATCH', '/git/refs/heads/main', json={
+                'sha': commit['sha'], 'force': False})
+            assert updated['object']['sha'] == commit['sha']
+            return commit['sha']
+        except requests.RequestException as error:
+            code = error.response.status_code if error.response is not None else None
+            if attempt == 5 or (code is not None and code not in (409, 422, 429) and code < 500):
+                raise
+            # Re-read main on retry; never overwrite somebody else's newer work.
+            time.sleep(5 * (attempt + 1))
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--directory', type=Path, required=True)
@@ -92,6 +130,9 @@ def main():
                   public_access_verified=True)
     (d / 'publication.json').write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps(result), flush=True)
+    commit = commit_receipts(api, headers, d)
+    (d / 'receipt-commit.json').write_text(json.dumps(dict(commit=commit)) + '\n')
+    print('RECEIPTS_COMMITTED', commit, flush=True)
 
 
 if __name__ == '__main__':

@@ -16,6 +16,9 @@ Trained models and recovery evidence are archived separately from Git source:
 [artefact recovery instructions](docs/artifact_recovery.md) and
 [the exact asset manifest](results/v06/artifacts_20260928/artifact-manifest.json).
 
+A [14-second driving replay](docs/driving_demo.md) shows the camera view and the
+latest completed semantic sweep on a freshly measured inference timeline.
+
 ![semantic map](docs/img/rviz_class_final.png)
 
 *The full 693 m loop of KITTI seq 07, coloured by predicted class. Cyan is `driveable_surface`,
