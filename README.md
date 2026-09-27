@@ -12,6 +12,10 @@ v0.6 also runs both concurrently on bag replay, the mapper fed by live FAST-LIVO
 ([below](#v06--online-integration-live-fast-livo2-poses)); that online mode is archived in
 `experiments/v06/`, and `src/` still carries the two-pass node.
 
+Trained models and recovery evidence are archived separately from Git source:
+[artefact recovery instructions](docs/artifact_recovery.md) and
+[the exact asset manifest](results/v06/artifacts_20260928/artifact-manifest.json).
+
 ![semantic map](docs/img/rviz_class_final.png)
 
 *The full 693 m loop of KITTI seq 07, coloured by predicted class. Cyan is `driveable_surface`,
