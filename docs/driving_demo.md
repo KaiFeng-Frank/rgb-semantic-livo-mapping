@@ -44,10 +44,13 @@ RTX 4090，131 帧，先暖机，输入预加载到内存，按扫描结束时�
 以及 `demo-manifest.json` 和 `SHA256SUMS`。恢复这些预测后，可仅运行渲染命令重建相同视频；
 压缩包中的 133 个文件均已逐一校验。
 
-在具备原始 KITTI 数据和已验证 PTv3 环境的实验服务器上执行：
+在具备原始 KITTI 数据和已验证 PTv3 环境的实验服务器上执行。
+先将模型 Release 的 `semantic-runtime-and-metadata.tar` 恢复到实验目录；
+下例保留归档运行时使用的原路径 `/data/wuyou/livo_sem`。换目录时还需同步修改
+已验证加载器里的路径常量，保持 Pointcept 版本和模型结构不变。
 
 ```bash
-TASK_ROOT=/data/livo_sem
+TASK_ROOT=/data/wuyou/livo_sem
 TASK_OUT="$TASK_ROOT/out/driving_demo"
 python tools/record_driving_semantics.py measure --root "$TASK_ROOT" --out "$TASK_OUT"
 /usr/bin/python3 tools/record_driving_semantics.py render --root "$TASK_ROOT" --out "$TASK_OUT"

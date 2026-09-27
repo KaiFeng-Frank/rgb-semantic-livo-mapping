@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 import sys
 import time
+from urllib.parse import quote
 
 import requests
 
@@ -57,16 +58,16 @@ def commit_receipts(api, headers, directory):
             time.sleep(5 * (attempt + 1))
 
 
-def main():
+def main(token):
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--directory', type=Path, required=True)
     p.add_argument('--release-id', type=int, required=True)
     a = p.parse_args()
-    token = sys.stdin.readline().strip()
     assert token
     headers = {'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json',
                'X-GitHub-Api-Version': '2022-11-28'}
     repo = 'KaiFeng-Frank/rgb-semantic-livo-mapping'
+    tag = 'v0.6-artifacts-20260928'
     api = 'https://api.github.com/repos/' + repo
     release = api + '/releases/' + str(a.release_id)
     d = a.directory
@@ -81,6 +82,14 @@ def main():
             if not cmd.exists() or not cmd.read_bytes():
                 raise RuntimeError('Uploader stopped before completion; draft is preserved.')
         time.sleep(10)
+    # Draft asset responses contain temporary untagged-* URLs. Pin the final tag
+    # before preserving the receipt; these links must survive publication.
+    for asset in receipt['assets']:
+        asset['browser_download_url'] = ('https://github.com/' + repo + '/releases/download/' +
+                                         quote(tag, safe='') + '/' + quote(asset['name'], safe=''))
+    temporary = d / 'upload-receipt.finalizing.json'
+    temporary.write_text(json.dumps(receipt, indent=2) + '\n')
+    temporary.replace(d / 'upload-receipt.json')
     manifest = json.loads((d / 'artifact-manifest.json').read_text())
     expected = {x['name']: x for x in manifest['assets']}
     for name in ['artifact-manifest.json', 'SHA256SUMS', 'RESTORE.md']:
@@ -104,8 +113,15 @@ def main():
     for name in ['upload-receipt.json', 'archive-check.json']:
         path = d / name
         if name in actual:
-            assert actual[name].get('digest') == 'sha256:' + sha(path)
-            continue
+            existing = actual[name]
+            if existing['state'] == 'uploaded':
+                assert existing['size'] == path.stat().st_size
+                assert existing.get('digest') == 'sha256:' + sha(path)
+                continue
+            assert existing['state'] == 'starter'
+            response = requests.delete(api + '/releases/assets/' + str(existing['id']),
+                                       headers=headers, timeout=60)
+            response.raise_for_status()
         response = requests.post('https://uploads.github.com/repos/' + repo + '/releases/' + str(a.release_id) + '/assets',
                                  params={'name': name}, headers={**headers, 'Content-Type': 'application/json'},
                                  data=path.read_bytes(), timeout=60)
@@ -114,18 +130,29 @@ def main():
     response = requests.patch(release, headers=headers, json={'draft': False, 'make_latest': 'false'}, timeout=60)
     response.raise_for_status()
     published = response.json()
-    assert published['draft'] is False and published['tag_name'] == 'v0.6-artifacts-20260928'
+    assert published['draft'] is False and published['tag_name'] == tag
     # The final check is unauthenticated: the user-facing release must be public.
-    public = requests.get(api + '/releases/tags/v0.6-artifacts-20260928', timeout=60)
+    public = requests.get(api + '/releases/tags/' + tag, timeout=60)
     public.raise_for_status()
     public = public.json()
     assert public['id'] == a.release_id and public['draft'] is False
     assert len(public['assets']) == len(expected) + 2
     assert all(x['state'] == 'uploaded' for x in public['assets'])
+    public_assets = {x['name']: x for x in public['assets']}
+    for asset in receipt['assets']:
+        assert asset['browser_download_url'] == public_assets[asset['name']]['browser_download_url']
+    for attempt in range(3):
+        download = requests.get(public_assets['artifact-manifest.json']['browser_download_url'], timeout=60)
+        if download.status_code != 404 or attempt == 2:
+            download.raise_for_status()
+            break
+        time.sleep(5)
+    assert hashlib.sha256(download.content).hexdigest() == sha(d / 'artifact-manifest.json')
     result = dict(verified_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
                   url=public['html_url'], tag=public['tag_name'], assets=len(public['assets']),
                   total_bytes=sum(x['size'] for x in public['assets']),
                   all_server_digests_verified=True, manifest_download_verified=True,
+                  public_download_verified=True,
                   archive_members_verified=sum(x['verified_members'] for x in archive_check['archives']),
                   public_access_verified=True)
     (d / 'publication.json').write_text(json.dumps(result, indent=2) + '\n')
@@ -136,4 +163,14 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    credential = sys.stdin.readline().strip()
+    for attempt in range(5):
+        try:
+            main(credential)
+            break
+        except requests.RequestException as error:
+            code = error.response.status_code if error.response is not None else None
+            if attempt == 4 or (code is not None and code != 429 and code < 500):
+                raise
+            print('NETWORK_RETRY', attempt + 1, type(error).__name__, code, flush=True)
+            time.sleep(10 * (attempt + 1))

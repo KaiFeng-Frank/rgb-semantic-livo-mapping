@@ -20,6 +20,7 @@ import sys
 import tarfile
 import threading
 import time
+from urllib.parse import quote
 
 REPO = 'KaiFeng-Frank/rgb-semantic-livo-mapping'
 SOURCE_COMMIT = 'fb36c69337dce37cb1195defafcbf0723d3d7693'
@@ -172,6 +173,10 @@ def upload(root, dest, release_id, workers):
                    **{'X-GitHub-Api-Version': '2022-11-28'})
     api = 'https://api.github.com/repos/' + REPO
     url = 'https://uploads.github.com/repos/' + REPO + '/releases/' + str(release_id) + '/assets'
+    release = requests.get(api + '/releases/' + str(release_id), headers=headers, timeout=30)
+    release.raise_for_status()
+    download_base = ('https://github.com/' + REPO + '/releases/download/' +
+                     quote(release.json()['tag_name'], safe='') + '/')
     manifest = json.loads((dest / 'artifact-manifest.json').read_text())
     entries = list(manifest['assets'])
     for name in ['artifact-manifest.json', 'SHA256SUMS', 'RESTORE.md']:
@@ -194,7 +199,8 @@ def upload(root, dest, release_id, workers):
         assert a['state'] == 'uploaded' and a['size'] == entry['bytes'], entry['name']
         assert a.get('digest') == 'sha256:' + entry['sha256'], ('GitHub digest mismatch', entry['name'], a.get('digest'))
         return dict(name=entry['name'], id=a['id'], bytes=a['size'], sha256=entry['sha256'],
-                    github_digest=a['digest'], browser_download_url=a['browser_download_url'])
+                    github_digest=a['digest'],
+                    browser_download_url=download_base + quote(entry['name'], safe=''))
 
     def one(entry):
         started = time.monotonic()
