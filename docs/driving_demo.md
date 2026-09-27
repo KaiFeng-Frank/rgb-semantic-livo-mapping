@@ -3,6 +3,10 @@
 [下载 14 秒视频（MP4，约 12 MB）](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/releases/download/driving-demo-20260928/driving_semantics_seq07_measured.mp4)
 · [视频与测量附件](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/releases/tag/driving-demo-20260928)
 
+README 顶部使用 [循环 GIF 预览](img/driving_semantics_v06.gif)：560 × 462、7.5 fps、
+106 帧、14.03 秒，保留原速和语义类别配色。查看延迟变化请使用 30 fps 的完整 MP4。
+[GIF 导出校验](../results/v06/driving_demo_20260928/gif-check.json)记录了来源与文件校验值。
+
 ![驾驶画面及延迟显示的语义点云](../results/v06/driving_demo_20260928/preview.jpg)
 
 KITTI 序列 07 的连续帧 970–1100，按原始传感器时间以 1 倍速回放。

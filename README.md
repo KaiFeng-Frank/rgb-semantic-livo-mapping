@@ -1,9 +1,11 @@
 # rgb-semantic-livo-mapping
 
-[**▶ Watch the driving semantic video — 14 seconds, original speed**](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/releases/download/driving-demo-20260928/driving_semantics_seq07_measured.mp4)
+[**▶ Full driving semantic video — 14 seconds, original speed**](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/releases/download/driving-demo-20260928/driving_semantics_seq07_measured.mp4)
 · [模型与测量说明 / model and timing details](docs/driving_demo.md)
 
-[![Driving video: camera view above, semantic point cloud below](results/v06/driving_demo_20260928/preview.jpg)](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/releases/download/driving-demo-20260928/driving_semantics_seq07_measured.mp4)
+[![Animated driving demo: camera view above, semantic point cloud below](docs/img/driving_semantics_v06.gif)](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/releases/download/driving-demo-20260928/driving_semantics_seq07_measured.mp4)
+
+*Looping GIF preview at 7.5 fps. Open the linked MP4 at 30 fps to inspect timing.*
 
 *v0.6 B0, seed 1: PTv3 trained with camera pseudo-label distillation and KL regularization
 to retain knowledge outside the camera field of view. This clip segments one LiDAR
