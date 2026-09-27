@@ -1,5 +1,15 @@
 # rgb-semantic-livo-mapping
 
+[**▶ Watch the driving semantic video — 14 seconds, original speed**](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/releases/download/driving-demo-20260928/driving_semantics_seq07_measured.mp4)
+· [模型与测量说明 / model and timing details](docs/driving_demo.md)
+
+[![Driving video: camera view above, semantic point cloud below](results/v06/driving_demo_20260928/preview.jpg)](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/releases/download/driving-demo-20260928/driving_semantics_seq07_measured.mp4)
+
+*v0.6 B0, seed 1: PTv3 trained with camera pseudo-label distillation and KL regularization
+to retain knowledge outside the camera field of view. This clip segments one LiDAR
+sweep at a time; RGB is used for the projection display. Playback follows measured
+inference completion times; full SLAM and map fusion are outside this clip.*
+
 **A reproducible RGB-semantic mapper that sustains 10 Hz rosbag replay using a precomputed
 FAST-LIVO2 trajectory, producing a world-frame point cloud with class, confidence and RGB coverage.**
 
@@ -15,9 +25,6 @@ v0.6 also runs both concurrently on bag replay, the mapper fed by live FAST-LIVO
 Trained models and recovery evidence are archived separately from Git source:
 [artefact recovery instructions](docs/artifact_recovery.md) and
 [the exact asset manifest](results/v06/artifacts_20260928/artifact-manifest.json).
-
-A [14-second driving replay](docs/driving_demo.md) shows the camera view and the
-latest completed semantic sweep on a freshly measured inference timeline.
 
 ![semantic map](docs/img/rviz_class_final.png)
 

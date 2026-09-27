@@ -12,6 +12,15 @@ KITTI 序列 07 的连续帧 970–1100，按原始传感器时间以 1 倍速�
 
 模型使用 v0.6 `armB0_s1_student.pth`，SHA-256 为
 `35f5d3aec63ae1c383f4a4146e157aa054860cb12b178d899571287e6f97e5f1`。
+这是研究方法训练后的 **B0 主实验组**：以 PTv3 为底座，使用经过 filter E 筛选的
+相机伪标签蒸馏、全网络微调，以及相机视野外的 KL 防遗忘约束。原始预训练模型的
+零样本基线在实验中记为 **ZS**。实际训练配置的 `label_source='pseudo'`、
+`freeze_backbone=False`、`kl_enabled=True` 可见
+[B0 seed-1 配置](../results/v06/training/configs/armB0_s1.py)。
+
+本次推理输入只有单帧 LiDAR 点云；RGB 图像用于展示预测点的投影。相机伪标签和
+KL 约束在训练阶段发挥作用。视频未接入多帧地图融合、动态点过滤或 FAST-LIVO2 在线联动。
+
 加载冻结的 Pointcept v1.5.1，严格匹配 488 个张量；强度乘 0.2，体素 0.05 m，
 FP16，关闭 shuffle 和 TTA。片段依据场景里的人车选择，没有依据模型效果筛帧。
 
