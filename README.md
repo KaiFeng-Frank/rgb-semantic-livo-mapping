@@ -1,16 +1,19 @@
 # rgb-semantic-livo-mapping
 
-[**▶ Full driving semantic video — 14 seconds, original speed**](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/releases/download/driving-demo-20260928/driving_semantics_seq07_measured.mp4)
+[**▶ 原始 ZS / 训练后 B0：同帧驾驶语义对比 · 14 秒原速**](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/releases/download/driving-comparison-20260928/driving_zs_vs_b0_seq07.mp4)
+· [对比说明 / comparison details](docs/driving_comparison.md)
+
+[![Same-frame semantic comparison: original pretrained ZS on the left, trained B0 on the right](docs/img/driving_zs_vs_b0.gif)](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/releases/download/driving-comparison-20260928/driving_zs_vs_b0_seq07.mp4)
+
+*左：原始预训练 PTv3（ZS）；右：相机伪标签蒸馏 + KL 训练后的 v0.6 B0，seed 1。
+同一段 KITTI 07、同一帧点云与相机、同一配色和 0.5 置信度阈值。点击 GIF 查看高清 MP4。*
+
+*Original ZS (left) vs trained B0 (right), using the first archived scoring pass for both.
+Same frames 970–1100, original-speed playback; GIF at 7.5 fps, MP4 at 30 fps.
+An aligned offline visual comparison of single-sweep LiDAR predictions projected onto RGB.*
+
+[**▶ B0 推理延迟演示 / measured-latency driving video**](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/releases/download/driving-demo-20260928/driving_semantics_seq07_measured.mp4)
 · [模型与测量说明 / model and timing details](docs/driving_demo.md)
-
-[![Animated driving demo: camera view above, semantic point cloud below](docs/img/driving_semantics_v06.gif)](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/releases/download/driving-demo-20260928/driving_semantics_seq07_measured.mp4)
-
-*Looping GIF preview at 7.5 fps. Open the linked MP4 at 30 fps to inspect timing.*
-
-*v0.6 B0, seed 1: PTv3 trained with camera pseudo-label distillation and KL regularization
-to retain knowledge outside the camera field of view. This clip segments one LiDAR
-sweep at a time; RGB is used for the projection display. Playback follows measured
-inference completion times; full SLAM and map fusion are outside this clip.*
 
 **A reproducible RGB-semantic mapper that sustains 10 Hz rosbag replay using a precomputed
 FAST-LIVO2 trajectory, producing a world-frame point cloud with class, confidence and RGB coverage.**

@@ -1,0 +1,2357 @@
+{
+  "schema": 1,
+  "created_utc": "2026-09-28T02:16:26.818116+00:00",
+  "sequence": "07",
+  "first": 970,
+  "last": 1100,
+  "frames": 131,
+  "conf_gate": 0.5,
+  "rate": 1,
+  "source": "Archived v0.6 scoring pass r1 for BOTH arms; no new inference or training.",
+  "timing": "Same image/scan index in both panels, held to the next original camera timestamp. Same 421 video frames as the original demo; final frame held to its end.",
+  "scope": "Single-sweep LiDAR predictions projected onto RGB. Offline visual comparison; no latency measurement, map fusion, SLAM, or ground-truth accuracy claim.",
+  "selection": "Exactly the previously published contiguous driving segment; first archived scoring pass for both arms, without frame or repeat selection by model quality.",
+  "preprocessing": {
+    "pointcept": "v1.5.1",
+    "tensors": 488,
+    "intensity_scale": 0.2,
+    "grid_m": 0.05,
+    "fp16": true,
+    "shuffle_orders": false,
+    "tta": false,
+    "voxelization": "CPU numpy unique, first point per voxel, raw point order"
+  },
+  "original_demo_note": "B0 uses the same trained weights as the timing demo, but its archived scoring pass rather than that fresh inference draw. PTv3 has run-to-run variation.",
+  "models": {
+    "ZS": {
+      "checkpoint": "v05-ZS-student.pth",
+      "sha256": "4c1d540a2b0dac5f3dff41c24e76d7f531a9dd3a3c48aac55ee243be7d7df287",
+      "url": "https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/releases/download/v0.6-artifacts-20260928/v05-ZS-student.pth",
+      "prediction_archive": "https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/releases/download/v0.6-artifacts-20260928/v06-pred-ZS-seq07-r1.tar",
+      "prediction_index_sha256": "30b1eac606ba71efac95bb353db87eb816579323b3572e190019aef751d59ef6"
+    },
+    "armB0_s1": {
+      "checkpoint": "v06-armB0_s1-student.pth",
+      "sha256": "35f5d3aec63ae1c383f4a4146e157aa054860cb12b178d899571287e6f97e5f1",
+      "url": "https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/releases/download/v0.6-artifacts-20260928/v06-armB0_s1-student.pth",
+      "prediction_archive": "https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/releases/download/v0.6-artifacts-20260928/v06-pred-armB0_s1-seq07-r1.tar",
+      "prediction_index_sha256": "da55759ab52236bdf67a378c308961b43acb2cff24c8caa9b7b2fb0dd1a9141a"
+    }
+  },
+  "calibration": {
+    "calib_cam_to_cam.txt": "7b795cefb1d2535dbc6a8faeaf0bd033c71163f57476758bf82d63cb4901b2a2",
+    "calib_imu_to_velo.txt": "07ca9ed33a2d968fc6358617d2c70e048b6f8e0f6ee5b73ae963afc1b19456ce",
+    "calib_velo_to_cam.txt": "a544a0c00536e6aba5f832cf4c6e1bf9cdd944b91ac0a6ef3725f77972ef6f4d"
+  },
+  "palette_bgr": [
+    [
+      180,
+      160,
+      120
+    ],
+    [
+      20,
+      170,
+      255
+    ],
+    [
+      245,
+      200,
+      0
+    ],
+    [
+      255,
+      190,
+      20
+    ],
+    [
+      180,
+      180,
+      40
+    ],
+    [
+      25,
+      160,
+      245
+    ],
+    [
+      35,
+      85,
+      255
+    ],
+    [
+      40,
+      150,
+      240
+    ],
+    [
+      200,
+      180,
+      40
+    ],
+    [
+      235,
+      170,
+      10
+    ],
+    [
+      190,
+      110,
+      155
+    ],
+    [
+      145,
+      120,
+      150
+    ],
+    [
+      155,
+      130,
+      220
+    ],
+    [
+      80,
+      150,
+      150
+    ],
+    [
+      170,
+      175,
+      180
+    ],
+    [
+      80,
+      170,
+      80
+    ]
+  ],
+  "timeline": [
+    {
+      "frame": 970,
+      "image_s": 0.0,
+      "points": 114217,
+      "points_sha256": "32b82fc6ee6d94a5363eb0c5ddfdd77878dfb2f0f57474a0929c660098af120b",
+      "image_sha256": "4b932aa2b28dc49d7256bfcbeef2478af749e2b2835a85a5ec2e60cba0de0277",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000970.npz",
+          "sha256": "905de71476a288e4687d2efe0b74a74f2f755d33344c2f68cc28ca80ecac7742"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000970.npz",
+          "sha256": "2091f30e9686ca0921551d656035a1597d2a0b26bfd756d8d648382f577e3b63"
+        }
+      }
+    },
+    {
+      "frame": 971,
+      "image_s": 0.103998208,
+      "points": 114006,
+      "points_sha256": "84f9918743b84243e1e75bb9a425ec32e7623cb23293383bff2532ae403f09db",
+      "image_sha256": "831f01cbbcecd815b59d6f2db1f1a60ee8c7e8ff6630fa716fa97a2428129c3f",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000971.npz",
+          "sha256": "307e73e05dce8082b08687a2447e6e2d51b1fc900ed6f7f4901353ce93c3febd"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000971.npz",
+          "sha256": "537d9d420f17b1ed45cd8006683400e041742572c95e2cb30ed7c22f0e3d0b21"
+        }
+      }
+    },
+    {
+      "frame": 972,
+      "image_s": 0.207999744,
+      "points": 114038,
+      "points_sha256": "f302a1ae7be6e8d0cb2abeb102b6c882339932e0bcc0cd0ffa203cd96d08e78e",
+      "image_sha256": "a2dcb4b520e9e55b473ad8e71066852a34b81a3dce90857142b592e71b5350e5",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000972.npz",
+          "sha256": "c19ffa08a3ccf6e0a517005162c99647762dd68d2c92b8b1bc3682757d8d8efd"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000972.npz",
+          "sha256": "93c335f3e112e99b063170f50c35fc1892a6b31b43887ec4991316ff1667afad"
+        }
+      }
+    },
+    {
+      "frame": 973,
+      "image_s": 0.311872768,
+      "points": 114551,
+      "points_sha256": "b60619e4e7092f3b63d42668c296c3ef4329ef5fe4ef2c0817d9713b7eeebb9d",
+      "image_sha256": "23372e1b57ee600efdef156214303c193d3837df638137f24c363746fc2bf390",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000973.npz",
+          "sha256": "680ab108186cdf8a8374702b8bbb3e8b0f5a50e99edc27569b16863c55041ba3"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000973.npz",
+          "sha256": "4cd90cb84b42d88d8febda8970839a169a0a96afbba990efc5b46162b09ee4fe"
+        }
+      }
+    },
+    {
+      "frame": 974,
+      "image_s": 0.415873536,
+      "points": 113612,
+      "points_sha256": "775320e50d8486202ca68285c06160cf3688c4a76abf73c2e84d19f716ed4703",
+      "image_sha256": "40062a9ad024571153adbf688a69a8d01045a24eba5b52db15ad6d23c091edfe",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000974.npz",
+          "sha256": "a18cf8dba1694a3cd09b25c0e1e27c960447fe681b5c6e777e6f0bc57932197d"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000974.npz",
+          "sha256": "363f8a30c3bcc420b3c00b56f75daf0aa43190541c3989e0cd4f34da05a01911"
+        }
+      }
+    },
+    {
+      "frame": 975,
+      "image_s": 0.519883264,
+      "points": 112927,
+      "points_sha256": "748cdb59eaf1db4c1184e7fe847791d6973c855811fd5d99bc33c67df931f11b",
+      "image_sha256": "993157380b0be78e02ac978d16ddf52573966082e8433256a596494c9e04c7ff",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000975.npz",
+          "sha256": "62f14a873fcac63a1b15adb9c2a0e5bc38b84f581e2b4c182d6a995c5351a54c"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000975.npz",
+          "sha256": "3eb95ac1862fb4a93159d40564f18d26089d74b3271c7fdb491ccf842f59c4b0"
+        }
+      }
+    },
+    {
+      "frame": 976,
+      "image_s": 0.623749376,
+      "points": 113339,
+      "points_sha256": "ea80c25ffd2ac5055428894b1a8092c6f6b75ece982f4f2543da8849b25d3058",
+      "image_sha256": "d2f782b45216de617d643fe213411ff4b26976d18ebc27122c4d0b848fe1d9f4",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000976.npz",
+          "sha256": "410b537db985d82f6a1f3e219aeaaddcc1557f22d1df5027f64ca2bfe71acb34"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000976.npz",
+          "sha256": "906c9c2843351843ec8dde35b41ccd34afa9dc9e3ec3e331cc5d1bf0fdb02be7"
+        }
+      }
+    },
+    {
+      "frame": 977,
+      "image_s": 0.727749376,
+      "points": 114017,
+      "points_sha256": "14a09799e6de9d80ea64c0bc288e3318dbd6bb41e49b7576058be14b74880a68",
+      "image_sha256": "a6ca238e3cc28cf7f0998ebb8131529254adf4ce5ef9c13dff962fc7692d4a5e",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000977.npz",
+          "sha256": "91f7751f658086305cf2c0af68bc14c7784d11eb5502423ed89db89c4618324b"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000977.npz",
+          "sha256": "9eea7b158e1c0e64d416f215e4b2975ef3bd33012600cdc3647dda4252fe739e"
+        }
+      }
+    },
+    {
+      "frame": 978,
+      "image_s": 0.831624448,
+      "points": 114744,
+      "points_sha256": "4fc3e56e97729508376b3bd8461d911196041125e09fa2e5d2f93dff7efab91c",
+      "image_sha256": "0ad3504b4cc44859e183e18d868a7fae85e3d91c23a7d0d46b929ff2b8f18757",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000978.npz",
+          "sha256": "4a981d82a06074598894454d8dbe522578aed82704c4302200b42a0149bd7836"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000978.npz",
+          "sha256": "e5e9209d7b836262cec1d6f99e6c9b83e962953eb2d78204b1163f3eedd32668"
+        }
+      }
+    },
+    {
+      "frame": 979,
+      "image_s": 0.935622656,
+      "points": 116344,
+      "points_sha256": "5c38e394de00825f800ccf92793dc196b6862912863662fa10fbcaba2c564b34",
+      "image_sha256": "7908d53195e0450abe7abd01712577382e73e079d9cf321723973ac033e58199",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000979.npz",
+          "sha256": "ca5f54c3c7944883906a712907a50b614f078df9c5fe3a540d96585d74e1ed3f"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000979.npz",
+          "sha256": "f8449575f5105ea4bb076602a27f5e40128df010f3294d2f710a53347de5ed82"
+        }
+      }
+    },
+    {
+      "frame": 980,
+      "image_s": 1.039499264,
+      "points": 117036,
+      "points_sha256": "bd0100baffcbdf381b41b0f89589827f25f82f71f4b0b83f12567f2fd96ff6fb",
+      "image_sha256": "fd34eedc6ad9cc2a7c421f2160c19a3c45bcad06688cb54abc7e61dea6034a26",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000980.npz",
+          "sha256": "c7b9752ff0afa3449f2376cefb476903f3af9913f06a895caf9a7d481846562d"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000980.npz",
+          "sha256": "a888b7382f37d44d69f1209c7a5fc08c11e8e9fad0d7e5d16ecf65ff95fd5b5b"
+        }
+      }
+    },
+    {
+      "frame": 981,
+      "image_s": 1.14349824,
+      "points": 117435,
+      "points_sha256": "d8c92d4bfb16aaa609e6fc0f7684cd48862f9140a5f5ab7ae5cf2ae17373200a",
+      "image_sha256": "66043891b6d94b0f3f8a1b94c375d3eb0be6665f22aa2d679a821c31a8ba7d5b",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000981.npz",
+          "sha256": "996027a341b1bcfe3ad04db37979c25272e099e413624cc04ec88c1bd8ef07bc"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000981.npz",
+          "sha256": "1ec4c0eab68f9a72aec1898669eb3126413de3eaa202e95018cce0b7cd9513a9"
+        }
+      }
+    },
+    {
+      "frame": 982,
+      "image_s": 1.24737408,
+      "points": 117813,
+      "points_sha256": "3e421fb1d5e55739360a7057428c6549f57cb9828c6adf25713bc7e2b0194c7f",
+      "image_sha256": "cc744ad9a328f279d8f1f724b5b772d040d5520edb99521f3f2d6c328b30e289",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000982.npz",
+          "sha256": "27ffd5db543ca63593af977b26c867c96bf6949561dd5d2efce29b600c7728ff"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000982.npz",
+          "sha256": "52ca949384ce411a2a4ba2fcac870c32d54ee6ffd6379cb304a7e59ec96d2dd1"
+        }
+      }
+    },
+    {
+      "frame": 983,
+      "image_s": 1.3513728,
+      "points": 118344,
+      "points_sha256": "baca0669e176fc91779c471307b254d75a8ba756a47c5e0c97e8c023aa55d93a",
+      "image_sha256": "936f80d699e62f01d4860e07aad4189bcbc90680cf5e4f8fc3149f5244680773",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000983.npz",
+          "sha256": "331d5d98ab72019317b15203e244c1292fde4d8a94eb13ea29705c00dc28a937"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000983.npz",
+          "sha256": "e371268fa9054fa7e6d1cb950ebdc9e02716bc85efea6deb8f1271369dea64b2"
+        }
+      }
+    },
+    {
+      "frame": 984,
+      "image_s": 1.455373568,
+      "points": 119143,
+      "points_sha256": "a3dec1a44828e575ad73877ee7bd3f1327baca2dce2538031cbd218ef70845c7",
+      "image_sha256": "73a307acc91ce4b2ed507af987035cb4c0e93d4be062c2615e38f5731c2311dc",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000984.npz",
+          "sha256": "ea10c0521fa40478da0063add1e7713e46ebb46cabb16811dc166d1895a9aea7"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000984.npz",
+          "sha256": "68344b1895c92a7290ebaa4d22216246a98b25c96975ee644a853a31034ecdb1"
+        }
+      }
+    },
+    {
+      "frame": 985,
+      "image_s": 1.55925504,
+      "points": 119571,
+      "points_sha256": "420303df700373816304c686fcbd7842c04db3aec3e961897147c570238803e4",
+      "image_sha256": "6eb92bc4beb89db9e03f71bc38873d2f19b526510f0c6bf3b203a87df1abed4a",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000985.npz",
+          "sha256": "92dddce65a16225ffc99242d49e1124ccc4719539771b62310efc912742f34b8"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000985.npz",
+          "sha256": "31d38d4f18824f624ebfb6fda64c4c1e4d6634022c700f587319eeab8231a619"
+        }
+      }
+    },
+    {
+      "frame": 986,
+      "image_s": 1.663127296,
+      "points": 119671,
+      "points_sha256": "cdaca9fff25bcd5a5b3c34e35e68f156ddd65df37966099300e930bd87004929",
+      "image_sha256": "00535d74d391e27c760bab887ac748a11fc0e1418ae75a76ce0fe6a0111ffb50",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000986.npz",
+          "sha256": "e7d1b7e1e2c3be5ae62b673393a499b4f3473ecc8a47a5c1587fed377b46687d"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000986.npz",
+          "sha256": "2bf0adc0d53598e16d55c86b528ab09c5fdee3e7320356a9e2f0b2f967fd504c"
+        }
+      }
+    },
+    {
+      "frame": 987,
+      "image_s": 1.7671232,
+      "points": 119388,
+      "points_sha256": "74bd16f1f2b2e5ec03f4ceef7b4257d127570853dd93f116a7c6a25ee9cb2b6f",
+      "image_sha256": "b9910b8df809ccf34b2b5ad485e2f92d10c6a84c8ceb368ca3befdf9b676a874",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000987.npz",
+          "sha256": "b1025e93804b0805ad45dc30e3e0dea576c889657cfcbadb5fa909e380da4641"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000987.npz",
+          "sha256": "690e02fbac85c737435e9a7fa353e9d684063c0fb5aaf7a9252311d5564eaa92"
+        }
+      }
+    },
+    {
+      "frame": 988,
+      "image_s": 1.870999808,
+      "points": 119169,
+      "points_sha256": "26a6c6130c377667bf7322a195e6026439f0785a52fe04490771d3d4eac2bde5",
+      "image_sha256": "94c27c819ac8dfe19e41e2e82f8df53319d3b03825e3c93be983d1ac26a90325",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000988.npz",
+          "sha256": "892566c69dd4ec7c9f91365fa8639d68511475d27f7e69d229e203bbb3dbd208"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000988.npz",
+          "sha256": "556836ba90d41585f672bd78237e0212f1f4ccfe9e2c0fdd9cef3235117dddd8"
+        }
+      }
+    },
+    {
+      "frame": 989,
+      "image_s": 1.97499776,
+      "points": 118925,
+      "points_sha256": "5100fcd2728578e900875dd2ad7d82f502d6c064ada4cf60c15f586c299114d7",
+      "image_sha256": "c63b25fbcfbad3f76807f28ec0d83e2d20e37f0d96433f263e861e549dcd7414",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000989.npz",
+          "sha256": "7ba1f7bedc38f8a698919518dfc944f98a6e5e6b398c777527541eca4347cf50"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000989.npz",
+          "sha256": "99f4dc96d328f336cf8f2f70ca38b8611e5333b20033e27408e462e889243a4d"
+        }
+      }
+    },
+    {
+      "frame": 990,
+      "image_s": 2.078872832,
+      "points": 118546,
+      "points_sha256": "325eccce4b3e6e18ad7f2b8e2d4e103d65af4d2c15c9c5e6d444dda4407ce405",
+      "image_sha256": "fc9b3066fe135c88e3e6ac5ef100aa596ad621c912d3d7805a807b1c8eed4621",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000990.npz",
+          "sha256": "2cba4941c1455cf0eb88de8b0b5e6c6b697762b36773695b18e56319196c2f6c"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000990.npz",
+          "sha256": "6f4c1fc524ed89c4fb0090fd342c3dfa5a0d8fa7144366e4c4614a5e0c4aee11"
+        }
+      }
+    },
+    {
+      "frame": 991,
+      "image_s": 2.182876416,
+      "points": 118674,
+      "points_sha256": "9d28b893dc64d588353b472bba3b46035f5a98f36b78606f0d065a7c9958d28a",
+      "image_sha256": "f6b40f83dcbcf3b8034bdea201c260cf537e3fa329473c6706abf263f4068810",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000991.npz",
+          "sha256": "54c04ae221919b08031d4b9ef0832bbb8f9c4232f539d018f96407e060c3d37a"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000991.npz",
+          "sha256": "e61035fc2f5f78605d50f140a25c4eedbf2f5ff91d2c4c5fe8d3dedab20ae3e9"
+        }
+      }
+    },
+    {
+      "frame": 992,
+      "image_s": 2.286875392,
+      "points": 118596,
+      "points_sha256": "a464ea4edc0a0db1476d84e31a28181082c44030f9fd6b15098c022f34fc7f9c",
+      "image_sha256": "4e07ec1d27eb41cbddfcfa08dec10fa4d3a2b2dc86661faf992550332ec0e831",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000992.npz",
+          "sha256": "229ae6c47ba59770af2a3e3f4571461744af5d050fd568afca7ca59c4025b740"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000992.npz",
+          "sha256": "0e3a4db8d15bfc47be579d09ef564dbf6fb9a11c1a5f132dfcaa91d2e9d8b948"
+        }
+      }
+    },
+    {
+      "frame": 993,
+      "image_s": 2.390874112,
+      "points": 117431,
+      "points_sha256": "c644ed5470555a48789339658ca43d366c14312af8b5ab81b921e878df1e3218",
+      "image_sha256": "fd3a4b5bc5ef695917379fc7f0a6b86ae304d6ac89c2b6973683b7becd4c7bc4",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000993.npz",
+          "sha256": "c1cabe6779ba482410da64d93ffcde7bc2f8e2b97ebd4205b4b7442e5a9e1700"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000993.npz",
+          "sha256": "bf46f78cc7aa135342f7df6ad2f0c7917c547c0b751e9868a2b08ad5f3716d0d"
+        }
+      }
+    },
+    {
+      "frame": 994,
+      "image_s": 2.494874368,
+      "points": 116655,
+      "points_sha256": "91f0686ffd2eac975d0d17e30200a4097a4be5be89e514b424fa689afd9a3b84",
+      "image_sha256": "5398d643e442b94407856ff042c5df9384d356ba50a17948dd63faec3ee9859d",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000994.npz",
+          "sha256": "50e89aa495797284ad2782a3b0b2bb4f9e5190a14e32a5fd6a5620dfffcb2741"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000994.npz",
+          "sha256": "1fd2bf20b4bb81b4eb7afb465c3e0a80ee47ba5242cba960aaae56255eb89361"
+        }
+      }
+    },
+    {
+      "frame": 995,
+      "image_s": 2.598750464,
+      "points": 116540,
+      "points_sha256": "292fec253553cd2b92b5ece30474e697e262ef6f90b6f245fe86569f0feb1510",
+      "image_sha256": "835899318592d9e380171196f7e0f19ecf8bfd4528e39b86ad8673e1d47b44e3",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000995.npz",
+          "sha256": "19d72dc2969d8f061b338e524947a70387964b0e6e374b328ffa87728b1895a6"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000995.npz",
+          "sha256": "8cbe99b6552187efc5d922a420f1a9cf3cc050c2fcdd7778311158bec4f7c1ac"
+        }
+      }
+    },
+    {
+      "frame": 996,
+      "image_s": 2.702750464,
+      "points": 115687,
+      "points_sha256": "762afe2d9e54fe13b9e04f7fa8a49f55f33bf77b4fedf995c1df0f41883e1854",
+      "image_sha256": "334de167cb708f67776f1d159fe626c3a2fbe5638fd069b872af59970593eea3",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000996.npz",
+          "sha256": "14440894d18663b18c95fbf42577fbf5901acaeaa782ad832a10a6767f3623e1"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000996.npz",
+          "sha256": "0a75d49fb5e0f5aa1ee301e0f6fc25630087a220149b99eba5e025b081225b49"
+        }
+      }
+    },
+    {
+      "frame": 997,
+      "image_s": 2.806749184,
+      "points": 115638,
+      "points_sha256": "c2ef96b6c34d671cdce704055ca79dba4ae5c502c7cd393da4cc8ab0ba77554b",
+      "image_sha256": "8acb6f19b23c694919c4d25008732ef3dc54bd3c2398010fb5937c66289ec9a2",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000997.npz",
+          "sha256": "b1b628ee3876dd1b8cc7ec6f278acece7cd0e4862d46688289c3e5ece12da97b"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000997.npz",
+          "sha256": "dd329eb6d942d176ecffdc76bab2266df5f723374eab9e1fc50edebf25163626"
+        }
+      }
+    },
+    {
+      "frame": 998,
+      "image_s": 2.91074944,
+      "points": 115910,
+      "points_sha256": "2428e1e89cc39f99f5bd71da369c7a14180d7dfa7577d63ccbc36e72923cec4a",
+      "image_sha256": "16534d4adf854d0c6cf65b4a77fb68ab4e140cf9638460e93565c3731da9ed60",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000998.npz",
+          "sha256": "b419e1c52f984eff83d58404341158915c0bfb0c2d690af967a4472c2444bd33"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000998.npz",
+          "sha256": "c105c6c6d9868f5782469b7b6b1bb5f65c9493d4312815f92bf17d9ca4fd3746"
+        }
+      }
+    },
+    {
+      "frame": 999,
+      "image_s": 3.014748672,
+      "points": 115307,
+      "points_sha256": "c2bb1b23d0035a8ed5dc461c78eb098a9983f69778ffe51ee63c69f7fbb074d6",
+      "image_sha256": "ef8021fa3bf2cc84fa14433ee8c6585e692b1ada7505d67fea5a51b96d629e8a",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f000999.npz",
+          "sha256": "6c54c25c183537ddd649b4d92b38c4250e5beb14452e6174fb5a51b46131106e"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f000999.npz",
+          "sha256": "2675ff3e21a5acb9cf2cf82628f57ed62511a4176fe972be7fe14f8e9e74e076"
+        }
+      }
+    },
+    {
+      "frame": 1000,
+      "image_s": 3.11876352,
+      "points": 114852,
+      "points_sha256": "4203d47ab666d272ada51d6d4245e8e96c7797137872e8c0e8487a8602289b63",
+      "image_sha256": "689ebd1722e7400dd63949d7508d77cc746f58a94c1f760a2d8d83fb04f0edf5",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001000.npz",
+          "sha256": "17ff15e10a5d14e8f7ff8b4b9fa312f277cc3e79377d2169c4ee0100fe92d02a"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001000.npz",
+          "sha256": "a3418e2adf1822da8945f09d7f97bddc7ba76a1d6e011b734ad777d2b496ade2"
+        }
+      }
+    },
+    {
+      "frame": 1001,
+      "image_s": 3.222754304,
+      "points": 114148,
+      "points_sha256": "3960771b22f9fe20453d7ff8d57ccdf17db90fe363edf37d3b621ff9abd19f99",
+      "image_sha256": "41a1ea230c8d35a239f903170e9d7301528e2f6c962dda8fcb5536b722721b97",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001001.npz",
+          "sha256": "997f53ce2e21b8ca52ff810c5b7468b7ca93c2a9a035a28349dcf98aedd90bfc"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001001.npz",
+          "sha256": "862a5737a40e9e696e44942220ef6cf2122cb42797f234a8ef23f95a94425873"
+        }
+      }
+    },
+    {
+      "frame": 1002,
+      "image_s": 3.326629376,
+      "points": 113116,
+      "points_sha256": "feacdbfeeb79af0040eb1b3c79ba80daa446a5ff21da9e8a469adb86f0d17a8a",
+      "image_sha256": "c84d019d92299a674a857277bb3c7218f5f0f23a1d4cae7f86d72d5131efc58a",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001002.npz",
+          "sha256": "0cbcc47fecba852d42fe299331ac8cfb27d9ed8716d63736275d8c20127106b6"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001002.npz",
+          "sha256": "2966fc01e0fe88a5b7d7ce8394bbe2e73086091d0db31a02b2ac5174014c413b"
+        }
+      }
+    },
+    {
+      "frame": 1003,
+      "image_s": 3.430639616,
+      "points": 112153,
+      "points_sha256": "f402940ab9b51b8d1e50fe0e0eec3a3b0797fd619da0a5626c52442ed0a6e5a5",
+      "image_sha256": "b9cafe8581e220a3988f84273821d614e7fb2b04a8ae03ade55ff43cf6bd1c48",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001003.npz",
+          "sha256": "4152818a8b43b608b75ce4503cc157d3cfeac8d7dec71f39134b6958893d8fd0"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001003.npz",
+          "sha256": "e055f6971c08cc7c63f00437a78eb6fcb8febe01a6705e70cb29845a866f0532"
+        }
+      }
+    },
+    {
+      "frame": 1004,
+      "image_s": 3.534646272,
+      "points": 111403,
+      "points_sha256": "d4af704183112051a3c95a7e9ce8def7f6583c391825b8d66426c13eb9af3d1d",
+      "image_sha256": "583c7b7bfba816d76fd2284a88816ea91849b851d47c350d076997723d5948e6",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001004.npz",
+          "sha256": "eca0c3eee7c3e8a4e0632b604b4083decae7fb5017c0ff0f30c11bf0de9ffe96"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001004.npz",
+          "sha256": "05f7be30aa3fdbe5bd771f79930b0548b8fcf2018629c6476e8df2c51bb64792"
+        }
+      }
+    },
+    {
+      "frame": 1005,
+      "image_s": 3.638625536,
+      "points": 110912,
+      "points_sha256": "5066300851bef889043498db49dfc79ef7af021af71d7e0cd1ef2b6f8a5e355a",
+      "image_sha256": "52291a016e115b622815f6f0f5e8ff9b53c236e6964a7df07ea04ee4fab317fa",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001005.npz",
+          "sha256": "d31184290b9f5f9c70ab81ed4501ffbe95ea13392ffc98cedcc0391c52c138a9"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001005.npz",
+          "sha256": "e153c5b1a2438cf9da19dfbe63dddc795ee63c0e57fcc5efa14439ae5a727729"
+        }
+      }
+    },
+    {
+      "frame": 1006,
+      "image_s": 3.742633984,
+      "points": 111026,
+      "points_sha256": "3951856214489e408f9a7437e6fa09d6bdc196ddccc457777602da9e49c578c9",
+      "image_sha256": "27ca5fdf5e89741ae959d663393453951d0dca09cbec58db14b87de140ad91f1",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001006.npz",
+          "sha256": "fa18e81b1c9d21a998b5d91abd4d5e319e2f21f0091bf6196387476aced459fd"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001006.npz",
+          "sha256": "1e893fc5f3a39ff01e8f432ce88c352ba59d2484c7eda5fa15675a04267b650e"
+        }
+      }
+    },
+    {
+      "frame": 1007,
+      "image_s": 3.846619392,
+      "points": 111145,
+      "points_sha256": "b0fe24f87184bcb1bd217c5289c765aed0ecdcdb91a7023be0d7dc6be2e99d22",
+      "image_sha256": "a746a846f3a2abe038b45cf8f6d105e3dd3ea9d37b4d640dbefe0e6798e5b9c5",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001007.npz",
+          "sha256": "7defe085034be86bb70fdad06f0ba66579cb500ad2af9129b00bdcebad8b0cb5"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001007.npz",
+          "sha256": "e2651c36ac733913e6017ff6b307c9c0301267cde222a5229e47434b9a3b54d5"
+        }
+      }
+    },
+    {
+      "frame": 1008,
+      "image_s": 3.950619648,
+      "points": 110991,
+      "points_sha256": "67cf50962a161b4803adf16d56459643a8c2083a711b86551244b9b1cf52c4e4",
+      "image_sha256": "6ec3b55364f68b8958772713a844ad1bd9db473103a834dc2c2559e041c31561",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001008.npz",
+          "sha256": "4e6c0dce2382378c59efaf06acec32f979a5105a24ed618544f54c7dfb5d2fa9"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001008.npz",
+          "sha256": "eb54695137be136cf6ac43b1550bfe98e0b448f45ed98f0f4634c94de8cdfc8d"
+        }
+      }
+    },
+    {
+      "frame": 1009,
+      "image_s": 4.054632192,
+      "points": 110819,
+      "points_sha256": "71fe2d5ad47ad325efd1e04ee450e8f6b0977ac9826f375a658bcdb6621fc7b9",
+      "image_sha256": "a48c96dac8aaadc9de2be06556a17fd7cd0857cd967a3ae3e5194d3c0cd596ec",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001009.npz",
+          "sha256": "3c4c2c18be60f763466f5848a4b38c4c7f1779c7b755ab4eede0a861c73fc6e8"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001009.npz",
+          "sha256": "2c1fe8edcf2734cae0094dc7bbb0cf116b984b1df3607c5e167e5d4b30fe062f"
+        }
+      }
+    },
+    {
+      "frame": 1010,
+      "image_s": 4.158518784,
+      "points": 110834,
+      "points_sha256": "8c3c6273b7c8357417529be4280b9e5095eb0a8ba7da0288b88599cc6050e894",
+      "image_sha256": "bd984f5fd651b232818437f538a7b2a6328919ab1288d169a92dd37d57566e60",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001010.npz",
+          "sha256": "85fc1e4fd358b6720569b5cd59d9b11818989a64d5b1bb047583a0abd56bd8b2"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001010.npz",
+          "sha256": "7a9357e10d5334d0813db4fc7f68392d18df185eedd0e46f1e07bc0e94d51c99"
+        }
+      }
+    },
+    {
+      "frame": 1011,
+      "image_s": 4.262511616,
+      "points": 110752,
+      "points_sha256": "8ae2c060e1ca38b783d049c840f76938d83905a729c737e43421effa2e7f203f",
+      "image_sha256": "8f1a464d71798aed898812126a016d9b20d549cc39665780b030ddcef8e4ee45",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001011.npz",
+          "sha256": "c2afe189c88b7d10f74ff49d9224d958a6a0e0d9615e70e64a7e4672e5be02db"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001011.npz",
+          "sha256": "7d7f3a30cb85f51c5ec1c6a59507ea6dd261523d285660c6d1de53e5481cc388"
+        }
+      }
+    },
+    {
+      "frame": 1012,
+      "image_s": 4.366386432,
+      "points": 110710,
+      "points_sha256": "db2613c320aea0da342a8258a3314b6a342ee0bb85fd8b06c43bcbc3b321e1d5",
+      "image_sha256": "068395e8cec8915e150697553433023a80f8ea8a068bc8d653400f547736beca",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001012.npz",
+          "sha256": "17f7e28f3d8df88694cbc6b000f1d7e116db6688f033bf20fddad06b3cc0cbf4"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001012.npz",
+          "sha256": "9ba973903b211ed7116fd11ca2cb286489e040966229ad83158a47710c12d33c"
+        }
+      }
+    },
+    {
+      "frame": 1013,
+      "image_s": 4.470381312,
+      "points": 110160,
+      "points_sha256": "35eb823829ddd5d560225eef53a5155a1ab99932fbf70ba7ebd2116686b55140",
+      "image_sha256": "f9abfd474b966210148228749010a1ab4c982e5114c2c9cc5f421762dc3af175",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001013.npz",
+          "sha256": "9f5d87e9943fe70586ea29b5575653298ee99c1430a64d60f7f30381c77e78aa"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001013.npz",
+          "sha256": "2e16ffa495d6cebdb61a8e68f29633666c01ca90e0d7c50e16b33b17d3ab9b90"
+        }
+      }
+    },
+    {
+      "frame": 1014,
+      "image_s": 4.5743808,
+      "points": 109760,
+      "points_sha256": "da41dfae417d2ec7e78de3a8ca7903b582a49c204225f89f2511348976270067",
+      "image_sha256": "5f06e9826f6f3230b486db3a1ac62561108bde48f18403f28b11adee345f210e",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001014.npz",
+          "sha256": "672d7e729556d39c48dcaf187d878d0510b9a807ee8d6ed30ea4b934e1b34374"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001014.npz",
+          "sha256": "9a39dd9e91018e851efa3293730d3bc7143b0e7e7b7132ff6712eb7f3384e8fd"
+        }
+      }
+    },
+    {
+      "frame": 1015,
+      "image_s": 4.67837056,
+      "points": 109588,
+      "points_sha256": "5b6ef8790bbb6b1b4a8f84f57cd6b407ff6306300d7ba6e4b46a09e9fed5ba4f",
+      "image_sha256": "a87bc0d1ac0c5c1b0a6b38826a75fd1da5ad2ee58a42a298f255415ae4684c9f",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001015.npz",
+          "sha256": "557f23b4bc6f217b03c316ad0d03cfeca0e58db1a39c4775baf7373fa4971796"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001015.npz",
+          "sha256": "02902b804b37e68372b85d0fd112fd419ead716b96d81df2576ee577cc4723cc"
+        }
+      }
+    },
+    {
+      "frame": 1016,
+      "image_s": 4.782258688,
+      "points": 109417,
+      "points_sha256": "f004f868e1b792278d370ee2061e902f548fec9eeedb826f9a0287e0b00896c0",
+      "image_sha256": "7a8a434102ee5e1f4c36c55990e541a3d9ebb8529b3bf788241fce71a99170d8",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001016.npz",
+          "sha256": "df8854e02720d4ea8fa629a3013edcbacf27792a0d9aabf80c8b69823b8aee63"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001016.npz",
+          "sha256": "0c33493b4b3caa24fb140d7aeaa39f8fdbe8645f1782f90d682ff7e7ba72ed96"
+        }
+      }
+    },
+    {
+      "frame": 1017,
+      "image_s": 4.886252544,
+      "points": 109548,
+      "points_sha256": "0629a2a705a45cb6b4ee5529ce7004f4cde062bebd36ff8fbfe4f730166f1215",
+      "image_sha256": "1f4f460a08ea4c664bcdffc31438e7ca8f0346ab3cbcca538ab994a4422ba207",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001017.npz",
+          "sha256": "a51a47f820761c6812de2b0fa1cc7ae5c99521c8e3f6cf731b93aab48e889043"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001017.npz",
+          "sha256": "fe8849e89a2ab094929725d0437aac14a7066fe5215d0eb0dabb8e1e6ddffcfa"
+        }
+      }
+    },
+    {
+      "frame": 1018,
+      "image_s": 4.99014144,
+      "points": 109675,
+      "points_sha256": "1be2876dfd77b556e2c767c1de8dcec342f0ace5c42c6db1aa23380133c54af6",
+      "image_sha256": "3c46e1eaadf726c6e7b08b9ea2d327e61c6154f0dbdf1c0d5bf6e86f40340a5c",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001018.npz",
+          "sha256": "798b83914a41381c65a5dc677d7644e163db2cffc46781474f7ab37d8c0c263e"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001018.npz",
+          "sha256": "d894ca523a8eafec1d20ed79330db60b5edca073579b6de426f4d831c994917a"
+        }
+      }
+    },
+    {
+      "frame": 1019,
+      "image_s": 5.094156544,
+      "points": 110170,
+      "points_sha256": "e8e8450362ed66aa3a186dbc513cfc28839bfb4ee62073d12c8ee5d05fddf542",
+      "image_sha256": "3ba1cf2244234b583a789b33ce8b20f339c51a901c71d568c6145d159e3fa25f",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001019.npz",
+          "sha256": "cd24a6d13f9c5e5dba05fb10887e0b0de040816bce588fb3b551acece9faf1c6"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001019.npz",
+          "sha256": "e6c453b3f542bfeb7153a7eb8d5782c668b3e11ebbc6a111abb900f5ba046ebf"
+        }
+      }
+    },
+    {
+      "frame": 1020,
+      "image_s": 5.198120704,
+      "points": 110228,
+      "points_sha256": "910f52de6385ddff3302f9095f1f738fb9fa9e8de7e39eea9a00bab0011a9c92",
+      "image_sha256": "44451daefcd0afc7c8f02b6de2ad2dd8f07e14cb6d089d16673bf111afcb2727",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001020.npz",
+          "sha256": "b79ca666fc05ebbdf78b39d176a540907fd093009584d5b05f0230875ae039bc"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001020.npz",
+          "sha256": "52f53a807fc53e9bff94d7fde91c454d4fd71ab7c26f31493a8a62cb2a204f85"
+        }
+      }
+    },
+    {
+      "frame": 1021,
+      "image_s": 5.302007296,
+      "points": 110163,
+      "points_sha256": "2e8a27f9e289b5b9b515fe86c8f600c05b60a919816fca7ad9806a535228cac1",
+      "image_sha256": "704a16b69fbf22c5c0b4e8ec6416fa3a04272a83153a6dfc83d9ae62f73c3be9",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001021.npz",
+          "sha256": "bb3f8531e09015e4fc09a5a342960c5a30be285974ebcb62d9408ed47e8be1c6"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001021.npz",
+          "sha256": "6d3da584171487538c605ca4188041299f5029b15adc4ef7acb1620a9d911d0d"
+        }
+      }
+    },
+    {
+      "frame": 1022,
+      "image_s": 5.405882624,
+      "points": 110337,
+      "points_sha256": "678e8a1548a51086dacbe20afd02b1d5f6234258af86965fc8b0d6e4e4658773",
+      "image_sha256": "a3fb3fb2bd41c50380542e138759f9a673888cb7f7977bdd03d18641dc5aa4e2",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001022.npz",
+          "sha256": "0ae4140a8ca987f418437079bef5725592357e154ccfbb4afdbaa1ccae0f151f"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001022.npz",
+          "sha256": "22c8a09160d25b7f77e313ea0b60861be7dc1c8332cd0ac2350f33a3d3ee28a8"
+        }
+      }
+    },
+    {
+      "frame": 1023,
+      "image_s": 5.50987648,
+      "points": 110699,
+      "points_sha256": "2d61957429fc5d7e66e6db3d7b7c6a67a0320ca3ca86230139a4eb0972c44796",
+      "image_sha256": "6b0b506855541c1b01a948b79eaf4a410681018a804dbfcb589345b4086eb59f",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001023.npz",
+          "sha256": "53bcc443e3d9b618e05d4f370218f4751c1012c2585af9183ccb3629fa21137a"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001023.npz",
+          "sha256": "b3754ce6b11e295691b8bb033fbd144e0c66a88273dd4d2183cd29848ce2000e"
+        }
+      }
+    },
+    {
+      "frame": 1024,
+      "image_s": 5.613753344,
+      "points": 110858,
+      "points_sha256": "f21ae30fb3ed54755f411be18543ebb57ad089cc4c458530a93eafa59c63796c",
+      "image_sha256": "76005be28b4acfbaceeb5a4da63bc9060133692ed6d17fc6867aa87f6b2e3515",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001024.npz",
+          "sha256": "e47843f539c1ac8bb9144ea9bc0a3216cb7c7707b045883e17deb4d1e5383544"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001024.npz",
+          "sha256": "eecea969d76be686e1503e21abf580ef4b24bc9892002b79241cc177722dc043"
+        }
+      }
+    },
+    {
+      "frame": 1025,
+      "image_s": 5.717632768,
+      "points": 110827,
+      "points_sha256": "5842f824bb1b34411aa8170816429020027a6a82da297ad2933ab21f702b13b6",
+      "image_sha256": "2daf64a55b575a910e0eda6e0b0b6972480834e6e01db2a939f5b7e35d2a9835",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001025.npz",
+          "sha256": "3e6a937a63e776b1659a566cc3fb6f95e572c81b13ce4384fc3b1492dfc87b2c"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001025.npz",
+          "sha256": "e66fd3b1ed19a9c1e9f49d9f4d0d7d83016c5f1eec178540a15bd1dbd205990e"
+        }
+      }
+    },
+    {
+      "frame": 1026,
+      "image_s": 5.821515776,
+      "points": 110832,
+      "points_sha256": "8a029b480d032de25a0e3c4262fd088a1fcdc280c036e717db53b56531b73c5d",
+      "image_sha256": "86950066bb8e34f50d3b088a4e145e4727185bf27775fb5324867087389e7d7a",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001026.npz",
+          "sha256": "910df681ca0afaf6aa174f16d1d2e3d83668150a8d39863f2a1f0d7e75109c6e"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001026.npz",
+          "sha256": "58f11312ab639d1d71e4fd149d398493ff2d8d2da509771e2550f66d3fe375bb"
+        }
+      }
+    },
+    {
+      "frame": 1027,
+      "image_s": 5.925378304,
+      "points": 111105,
+      "points_sha256": "218f0a1ec60fe6846974473cbe1ab060f6cfd9a03b9a650f93f60795668d7af0",
+      "image_sha256": "f953a36dd7c22a55fabbada4fafff4dea441a833f5551e081beeb294b74b2acd",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001027.npz",
+          "sha256": "75c86f363278819bbb4d3d6890b5170766444356a2e4babecb84e362f13c091f"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001027.npz",
+          "sha256": "221140d1e53f42c2bc167cab79dbf8c2b8ed671e87314986d03a817477bae022"
+        }
+      }
+    },
+    {
+      "frame": 1028,
+      "image_s": 6.029385984,
+      "points": 111047,
+      "points_sha256": "fc7ab86338b81e3862c8162f664bcf366d9a9bc777a1cee8e03901fa8aea9508",
+      "image_sha256": "f7c135c8c43d1a9c0dfba51735f9a82c22f7fe381727db30a50f4b96dcb95efc",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001028.npz",
+          "sha256": "6e5f56c55c872bc1b621bae2557e81d056da3a98dd71f6561a48e05c21ee0065"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001028.npz",
+          "sha256": "b73201d697f4c82d2e3f3b5484ec5390219c242e53af32c5c08049ce0e906a20"
+        }
+      }
+    },
+    {
+      "frame": 1029,
+      "image_s": 6.133258496,
+      "points": 111298,
+      "points_sha256": "f67b9ce6277185ad19c96c3df32a5dca27377894d4a2425c0980e1fc88489675",
+      "image_sha256": "8574f6c8afb38b9164ffcbca6e04f14ee2719fc27fd393c636faa8b6bda5786f",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001029.npz",
+          "sha256": "f2f09dfe92467260152f59c1043bb42bcc5297ee4c2da206253de5c4a339390b"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001029.npz",
+          "sha256": "4b07e6324bb922454b4ca5f00e2ee5a590d4951f0d3b1d25d12c2ae6dcf9c6c0"
+        }
+      }
+    },
+    {
+      "frame": 1030,
+      "image_s": 6.237256704,
+      "points": 111383,
+      "points_sha256": "0da3e3fcd2e435c0ee7a41c2bafe1602ff84661a0b9db41628aed11d84998779",
+      "image_sha256": "73a623b50610791dc9c909ead909938ca1ad342868d58f3bcca19174a1044dfe",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001030.npz",
+          "sha256": "a64668471268623acb81d64e740919390322a4a560f2bd014b1f0f41def8e55d"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001030.npz",
+          "sha256": "472d1c22f68caee2a89a793f769c86744d1264be0ca6b0c0a4018511212326b4"
+        }
+      }
+    },
+    {
+      "frame": 1031,
+      "image_s": 6.341296384,
+      "points": 111665,
+      "points_sha256": "4bba60a76f08821137859ff32cb1ff491ec1671ddd91bdd45f90798b893b9c39",
+      "image_sha256": "0259660de3a9a2d951f725c79540ea1a55b4eb9504d3c5665e81913c20f963a0",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001031.npz",
+          "sha256": "3f95e455e66772d420cbb7dcf5506663b7a3bf54cc4e17e6776c0f65a7f58103"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001031.npz",
+          "sha256": "7b0d51dd376bdaf22bfeec373cb76dac53b5567bd786ffa02533447fe56d4ff5"
+        }
+      }
+    },
+    {
+      "frame": 1032,
+      "image_s": 6.445138176,
+      "points": 111895,
+      "points_sha256": "a0bb7bd80dd69c9bc478f77aefdf7170759d8a664458c499d208de81b353649e",
+      "image_sha256": "82a1906d14ab79fb14da7ac1ee70131f6c827c4c85b1d1c92cd2ad26689fd609",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001032.npz",
+          "sha256": "fb15727ebe656dc703c0c3bf9b34da52b8111f2acc9f918b6cd8d4566fdc60c4"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001032.npz",
+          "sha256": "5a88ac50004765b511c027434b289f72c06fcdcc629015869dda97aab73f1837"
+        }
+      }
+    },
+    {
+      "frame": 1033,
+      "image_s": 6.549131264,
+      "points": 112323,
+      "points_sha256": "305cf11cb64b3d2b4f4668b877b8531498d68f4a5847fff29a7a3ef992146702",
+      "image_sha256": "a85f3d48535e67788d97c349382286604645c8987d76cfee5a4555d613d642a5",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001033.npz",
+          "sha256": "75fef045f864826ac390920dc60f6ae32d3aea5fc2ea7c94f7dbb54451f1d87a"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001033.npz",
+          "sha256": "c968356e726bf0a358cdd5c9249fb3d67b92d9b8199a9297bb4900eed89aed6b"
+        }
+      }
+    },
+    {
+      "frame": 1034,
+      "image_s": 6.653302272,
+      "points": 112633,
+      "points_sha256": "1f93a3d755bd9ac51c3c7e7df2aaec5cf426056b4c873db7b4cf2bb0636951d7",
+      "image_sha256": "3fe3fa345d67bdb4c68e503edc7c32c0729831f8330eeab54aee0be872ca5103",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001034.npz",
+          "sha256": "6c2fdba17534b88195e07e3a29c6b0b4ed150526ea0c50c6c5e2c9d7e2324d61"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001034.npz",
+          "sha256": "5d075e7f3d409362e1a75484424f8777025191e49ccf2c15bfe718ba81aef168"
+        }
+      }
+    },
+    {
+      "frame": 1035,
+      "image_s": 6.7572544,
+      "points": 112684,
+      "points_sha256": "ed4a1a45dc8428a79d32027d303142fa52610c643f2af8fe042e5cbb83ed96a0",
+      "image_sha256": "f401ace14043fad71e916fee6addf1ea8beb35202109c6a7f41c6280e97f2b33",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001035.npz",
+          "sha256": "7863e86937ec5c2677f0e372e79e6bc02424863dc897b31cbc4c27f7053e3399"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001035.npz",
+          "sha256": "7753d10fb0c79f50adc6b0264121c874d2bf8777951f563115fa97f79d42e820"
+        }
+      }
+    },
+    {
+      "frame": 1036,
+      "image_s": 6.861254144,
+      "points": 112578,
+      "points_sha256": "4988575b480e914e1c6b8883996425865a1f8d7f3a19ea0ce8c568b5bd660d72",
+      "image_sha256": "46e38a8f0f4dc97fb419382632cb5ba973af8babcdcde9173815ab413b9a64f9",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001036.npz",
+          "sha256": "6cabae39a4ccaa040135fa7a7e4fbe18f8bd697b4504fc0759722642f70e11bf"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001036.npz",
+          "sha256": "88f5362046ca3d6b36757d8cae8ee3e510648c27cad90558e5e256d33a5869ac"
+        }
+      }
+    },
+    {
+      "frame": 1037,
+      "image_s": 6.965379072,
+      "points": 112937,
+      "points_sha256": "f386f3934116e80c83a018ec6f1776db769f8d5a2aba344b3880b1cd9f065635",
+      "image_sha256": "917fad06b66bf4db7c2daa9acf3f1acfe93c7b8b2386ba6412617ccc6184907b",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001037.npz",
+          "sha256": "8a94bd4bb6757396ab0d21e4b559f17ce3b885a70c002e69d381ba92afe64abb"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001037.npz",
+          "sha256": "5db1453c42cc411f57c20cb8f1ed1c0524d1aa4186386aad54a41f52682c95d4"
+        }
+      }
+    },
+    {
+      "frame": 1038,
+      "image_s": 7.069376,
+      "points": 113655,
+      "points_sha256": "5cbbd488f42fd6251240489e07ae8689253ec1f922e91796f368eb0e0ef4d2fd",
+      "image_sha256": "781972d8652433a4ee261c11ee2ac68c675606608567beae4be2422e01a26463",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001038.npz",
+          "sha256": "ce0de335ce071b0741f08f9b7985f7e125a64a7db92b63bea1c29bc77b142e5b"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001038.npz",
+          "sha256": "bb1124e7a08f994ac7dc2592bb64897b4659f872bb70a1a2c286470a5e84045a"
+        }
+      }
+    },
+    {
+      "frame": 1039,
+      "image_s": 7.173379072,
+      "points": 114110,
+      "points_sha256": "0a983e938c7ad968bff7f2e2c7dbf9fd551faf2754926ad887e96de619f183c4",
+      "image_sha256": "5a08b2696ec73739cefff6da191b50a79266712025b87eb2ec0ffe500d4b0d6f",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001039.npz",
+          "sha256": "da5494fd918460bdb20724918c96fefe7897176cbfe9a2b48cab2980f41ad687"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001039.npz",
+          "sha256": "ef677855c06b2d7a397e1d9a32c7da8d67c845075f3ce478be333bd5ea69b7cc"
+        }
+      }
+    },
+    {
+      "frame": 1040,
+      "image_s": 7.277502976,
+      "points": 114431,
+      "points_sha256": "51364d8017b2e38057837336003fc33a26fd383fe3237cf2b85d17d4bcb5df8f",
+      "image_sha256": "11f975b5374546d88a4fbb86f3b093695b40c946a1462def961a574ee4e82654",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001040.npz",
+          "sha256": "2ed0a9bc74fd8afa1cb032832cbff1ce656c148fc2587e3fcd84d21908e6990e"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001040.npz",
+          "sha256": "cb131b6e3696e44cc0fd3ad974ab062403f70547893f0093750ae2558cbf2c6e"
+        }
+      }
+    },
+    {
+      "frame": 1041,
+      "image_s": 7.381501952,
+      "points": 114727,
+      "points_sha256": "91df9fb2765af5dd3483f52e5a7725df9e12ea25a5b4f39b96cabfe998696eda",
+      "image_sha256": "336bfbb7da9beae54dfcbac714f8741c28ab65aba1289d02a222d4aec49bb940",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001041.npz",
+          "sha256": "0f2731aba97eaa53e89cb16666d9765611d61f50e041864c342cb350336ac60a"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001041.npz",
+          "sha256": "c355474791f83825e39121f3c436819a4e12247c7145392856df4e7a86da6c22"
+        }
+      }
+    },
+    {
+      "frame": 1042,
+      "image_s": 7.485503488,
+      "points": 114929,
+      "points_sha256": "23dce754e101d7e21ac66b5619598b190e3ada58400c807cb8caf2db6dc37479",
+      "image_sha256": "95a23c2a0f66cf2ae1e4ca52c3801613ab2c228542f41aa9adf85b679c4b1e4c",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001042.npz",
+          "sha256": "bd87194319136b88203ab83be9f11d59eb7f4dcb08a27b641295f25e92bef5f3"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001042.npz",
+          "sha256": "3f804d33c05c0ba057234f42ad209dd6ee68184b6b9f01150898ff41da6a1615"
+        }
+      }
+    },
+    {
+      "frame": 1043,
+      "image_s": 7.58950144,
+      "points": 115218,
+      "points_sha256": "bd4ea1690813983a6b55da0664ba84e5ea81d5c6e09f8c0eea94241dbc1f1537",
+      "image_sha256": "252679ec228129ca736dfdb30cd7978af1a9160d09c1623bd7f3bc4710e37184",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001043.npz",
+          "sha256": "8e5adc3000769d4d48bd1c5e55211787ed33b1699cb65ee5dedb4b24c0e27304"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001043.npz",
+          "sha256": "f385f24cfacf620fc6d07e39d8e024f3650c53bc66d35f65afdf34d5dfc334b2"
+        }
+      }
+    },
+    {
+      "frame": 1044,
+      "image_s": 7.693502976,
+      "points": 115354,
+      "points_sha256": "e069a29fcae9a0fc113b4b98e56af7ce40f48ca38829f0da49bbcd1c70739bf4",
+      "image_sha256": "0b3a668f8bc0011a7d9b7c713750148d8c572f880822cfd6e7e7975549a1932a",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001044.npz",
+          "sha256": "413d5623a5b43c36cbfab3af9168dfe1bd493bd0464be6e2c4445a190e806e34"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001044.npz",
+          "sha256": "993e4783b401e4afa244424dc7f47f1489cc850ba2e71528ce6cc72522f845fb"
+        }
+      }
+    },
+    {
+      "frame": 1045,
+      "image_s": 7.797377792,
+      "points": 115279,
+      "points_sha256": "6c14fe77e416fea304d625acede0b7881ea9c78051924e997077af265aa81ab4",
+      "image_sha256": "6ff39229e8edc9d5c296c2148f5fe44f99d7ca08b4920d8eba65544cb727653b",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001045.npz",
+          "sha256": "2603534c849cdb8287dafade9939bf2d0d1442a46f8273137fc6a5dfe00297a6"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001045.npz",
+          "sha256": "f42a8efdc73e8d32358212b1373d70324a8ff0fe6fd2a337428f60c39770c476"
+        }
+      }
+    },
+    {
+      "frame": 1046,
+      "image_s": 7.901379328,
+      "points": 115186,
+      "points_sha256": "173aef3bcede683fc6943c67f8ec2382fbb117487676eef08fa49481a4efb50b",
+      "image_sha256": "7d4c8e6fae54c5914942fde680b56632c267f037b5ac5ebdad54f0e09f0fe963",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001046.npz",
+          "sha256": "d79dd33a421fe0aa461f876058114db736fc38d9a9b5925c10a698e3bb2769f4"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001046.npz",
+          "sha256": "85c2d28515d3f977288c3f3096917b4256902dc710b8177124e44a59638c0c38"
+        }
+      }
+    },
+    {
+      "frame": 1047,
+      "image_s": 8.005380352,
+      "points": 115433,
+      "points_sha256": "4724e1ad862f26215878b1a526a458a16796cb6d4ee3085ada754ee7a4b8d1e1",
+      "image_sha256": "615365d2c6910fbe3299ba576efcbba7705a9ccef336bc9016f880bdc844db27",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001047.npz",
+          "sha256": "17603f53f2d101c4302e699493165459fc41138e3b1ce871a0cf5da48534a6e6"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001047.npz",
+          "sha256": "b0633fc6328c4dde834ec65ad6b5df353ce7a7b8ba4f5f00e4ced0d1caf6fed0"
+        }
+      }
+    },
+    {
+      "frame": 1048,
+      "image_s": 8.109378048,
+      "points": 115960,
+      "points_sha256": "c88964e3648b3b2f9ef08b62cbe39ed3fec00798aec12d643ec6cac945930254",
+      "image_sha256": "99e797b7e896400aa28f8ed7a3e013a8846f004f2e645e9a4e0fcc5c7b926084",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001048.npz",
+          "sha256": "113a3816cf96bacee3f3608b38ddeb3fd590e9d5e3dd537ce69e9bd58ed6d66b"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001048.npz",
+          "sha256": "71b15f0b302ac3d3c7600f6529a51a7b4bbdfc87a2285deab0d329f5acd31c10"
+        }
+      }
+    },
+    {
+      "frame": 1049,
+      "image_s": 8.213379072,
+      "points": 116021,
+      "points_sha256": "8c556ad2e87b41cf70fe4664ceffe3ca35e0c55fa3ce2b8264d83a1a4395e1f7",
+      "image_sha256": "09e1f7dd414554a24548c83c164c6a4f7a9d396a45b72ff1c2532bceec2d635c",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001049.npz",
+          "sha256": "c1de1a190e1bda7f6782317d919071a590ae7dc3c68e7d81a3f99604944d26f5"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001049.npz",
+          "sha256": "146a2d336ce06ce89f8d12ca7ec9dab8e6e1e626a80ba5dd67605b67d6b5380b"
+        }
+      }
+    },
+    {
+      "frame": 1050,
+      "image_s": 8.317254912,
+      "points": 116471,
+      "points_sha256": "0b46d749a67974a086d8f7b47ea68fe58b1d31722ae613f48e03569fe4be09e0",
+      "image_sha256": "6890209d6becaf6f72d15b80e5a5222b2a52208f7bc8255bd97f859c4fc22d1c",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001050.npz",
+          "sha256": "346bc9c986bd3ab0676bbfb921f4a8b2f49d4b228577cf051d22ec0b917e5094"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001050.npz",
+          "sha256": "ae7d76d78602b83d58a250b5dbf95e090f08c23f5405a1e9d1e205c7daff6d94"
+        }
+      }
+    },
+    {
+      "frame": 1051,
+      "image_s": 8.421253888,
+      "points": 116891,
+      "points_sha256": "8d42eee9d60fdb0732bc90356d6fb9063e6690d79eea3394364c515d594f25c3",
+      "image_sha256": "a8c21c4f6124a9f1af5c749b3ed3e3d7b5f43b40d0fe6923d2c8a35f57238fed",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001051.npz",
+          "sha256": "c2b60ce1377c2665596e960d8aabdd5a37b6ff8578442d2f6f44f53a492a3a65"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001051.npz",
+          "sha256": "6573c28f2718de9c998b02699477afed5bf1656fb671848094dcec6981134136"
+        }
+      }
+    },
+    {
+      "frame": 1052,
+      "image_s": 8.525129728,
+      "points": 117316,
+      "points_sha256": "78c2c8db933dd09d78ba509d543388876daf52a78dce95d4689fbde03bd10019",
+      "image_sha256": "11745a98af77a5fbb4f797d2d150228ce608af4109224fa3c31129c6743d0fed",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001052.npz",
+          "sha256": "a2ab496db1a372831ff43c580f1ca8c61f30ccd900344f867ac2403f2d652858"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001052.npz",
+          "sha256": "c236ac40870c02c334a750c27b31c5f1e4e99e373177b513b2e94c9043ae003f"
+        }
+      }
+    },
+    {
+      "frame": 1053,
+      "image_s": 8.629127936,
+      "points": 117751,
+      "points_sha256": "89e0d17bbb95fa7a23cd13161d839265a7bd1307a1e6d6dab872309be279a737",
+      "image_sha256": "a9888136445fd50ba7c8186dcc4d8399711adbe2598bd07d399f22aa4693a03d",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001053.npz",
+          "sha256": "9849f807d93b8ff5a9fef1be7777b5d85c8a5ec5caa15f6ec5f6cd1c8f711196"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001053.npz",
+          "sha256": "8df682f611583e2143c5f623ad907b631c564b6574f9be8837036ff134f89cff"
+        }
+      }
+    },
+    {
+      "frame": 1054,
+      "image_s": 8.733127936,
+      "points": 118040,
+      "points_sha256": "951c2d74d074e4ebf51a6f445f00dc6a95b0ab1f730236b7a05c4bd65117d061",
+      "image_sha256": "c2639688ae7ae3bb3265f127d67c1973774146b0c98ae2d00dcebcdd13a62a64",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001054.npz",
+          "sha256": "0ea69d59bbb9133469818463da5ef726fb0b4e92cc76e4796116ece0f6b1ce75"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001054.npz",
+          "sha256": "59488913c77c7a5f429a9728cd3f36f6846c6686d0e137f9962fce5e4014b35a"
+        }
+      }
+    },
+    {
+      "frame": 1055,
+      "image_s": 8.837017344,
+      "points": 118152,
+      "points_sha256": "ec27827177c4cfe9ab0c9369cfe656553850b70c7d25afd6d0fa832298070b3e",
+      "image_sha256": "40fe64f7d7a2c32ba6ad26cec90bf6aae4f89c9e9a197954630661f0fe348ea8",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001055.npz",
+          "sha256": "90bf540e3e0a1aed458468a3847be9e4afab528db1ffd5838ec9646932b80f36"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001055.npz",
+          "sha256": "e358e4efdd69a72d7d97e7c708d830b0f2c8e803ea7338dbf53a46371587aa84"
+        }
+      }
+    },
+    {
+      "frame": 1056,
+      "image_s": 8.940881152,
+      "points": 118581,
+      "points_sha256": "31b3a26c00a16e9a65926cbddd5b378d648ffc267b77ddf6d58f666f5769d56d",
+      "image_sha256": "b4c407c805afbd820b5d8acb619f3948ab46e71fabae4e009a27e75e9458f2b8",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001056.npz",
+          "sha256": "d5c8fa52c31e3cf354a9b7dd3cf980b59d3031263987c78ff5f61bad50d9d7fb"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001056.npz",
+          "sha256": "cf37162c0f2f637c4af0b909f318d7ce55af8511dc1a60910b2a100594f625e6"
+        }
+      }
+    },
+    {
+      "frame": 1057,
+      "image_s": 9.04487808,
+      "points": 118641,
+      "points_sha256": "6bb531c8e761559ca6b2180432c08e73a0e66dde7f77f02aacfd0f8b69fdf5a8",
+      "image_sha256": "173c9efd64fa8525fbb6aeace809958aa50fcf80d16c46ed6a74cadd53d27e96",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001057.npz",
+          "sha256": "775bc1621c666694deb6ae90b88ac8841f3ac406d8c74563161a52857a71370f"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001057.npz",
+          "sha256": "cd0080a925fbd726ae418a1be574297722f0fcdb5fe80011bd0af6cb0830ad9e"
+        }
+      }
+    },
+    {
+      "frame": 1058,
+      "image_s": 9.1487552,
+      "points": 118653,
+      "points_sha256": "a040ce4823cf826af0e8fbc105cfd6668a3b49c33f5ca6897b956603f33d2af0",
+      "image_sha256": "511376e087418c59707e5fba8d9c2a6da22719c8dc33c9477a87054def707473",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001058.npz",
+          "sha256": "fba71272c5dbdb4329a6839d58d85cfec2d118793b8e12512cbc1ffe8050fb90"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001058.npz",
+          "sha256": "5fab08e6ae55b31463c8eebbc3333c5e2aad84ba815a9a4264851f676db8dddc"
+        }
+      }
+    },
+    {
+      "frame": 1059,
+      "image_s": 9.252628224,
+      "points": 118645,
+      "points_sha256": "e4d2ede9336b3c1689f26e7ba0aace72b0f989c74b69f785b3cfd0963a91e41d",
+      "image_sha256": "0e0726ecc5fff97217284ca1746b1f3dd8972f72f085af667eb1bc2042e4a86c",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001059.npz",
+          "sha256": "e65b84086d4225657b7363b23c25afa5f267a694e84001235bff48d2a4412741"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001059.npz",
+          "sha256": "a47d9a19879cfaa594a1087e5b594a6498c970438f48e07105ac900feb94fca9"
+        }
+      }
+    },
+    {
+      "frame": 1060,
+      "image_s": 9.35650304,
+      "points": 118728,
+      "points_sha256": "9fcd414e85ad7a02180bf700af583161641e4ae514bbbf01b3329a123675d984",
+      "image_sha256": "dd7bd4b04b36f28161199681f077ef68c270cfe96cf2f9995efd4f5a35d6133e",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001060.npz",
+          "sha256": "030fe7bb48c8465d40b285409157ce67f91e441cf7e9ff74d5589494e03ddecb"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001060.npz",
+          "sha256": "1b99a028d94d092d2af45649018bc4f4711b3ebb26e94b4d6f2d5dab59e45a27"
+        }
+      }
+    },
+    {
+      "frame": 1061,
+      "image_s": 9.46038144,
+      "points": 118863,
+      "points_sha256": "d8fc4982656dc076ae79eedcf1cc957d47f5b58f0dbee5958314e0a14050a780",
+      "image_sha256": "3f4be6de4939c2a053c80e6f13a7ed9e7d889ead60e8044f7a1d98b0a1a46512",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001061.npz",
+          "sha256": "cba1633b9b92f2c0fb18ca5b8aa3423717811b75737e8114afbfda8133ae2410"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001061.npz",
+          "sha256": "1e0a16deaa799a23f5c3d00540e7e1842847053bfde9f29ade3bf3b4a8fb947d"
+        }
+      }
+    },
+    {
+      "frame": 1062,
+      "image_s": 9.564395264,
+      "points": 118886,
+      "points_sha256": "4f4d3e5d88fbb26922b1badcde3e11d9de57c9de6497691a20f9be4fa36ed77f",
+      "image_sha256": "7d6228a7a751f1b260650411e47cfef2b612d9a6f04287f7bddb9ea622c44a67",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001062.npz",
+          "sha256": "32207e34c84f64f94bfb638d6832df6e8a6d52ff04f56502099af83f47b202ad"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001062.npz",
+          "sha256": "ee8cbfde78619a8728436dbfedc824f0648bbe4c5b10e98ad1e8110a9152d577"
+        }
+      }
+    },
+    {
+      "frame": 1063,
+      "image_s": 9.668379904,
+      "points": 119179,
+      "points_sha256": "2f5ad667e2c8f97076416d206b5a4ff4b1c8b2084894a395f8ed8284ab0e8eb1",
+      "image_sha256": "f89a8a09d6b4d24f9e1703df7ea64b33903d692c1c39fa3be4930167ff57c4e1",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001063.npz",
+          "sha256": "f36f4f2e2e903c82edf2853dfbfa85dc03898c7409d19e73a0e8405992c25dd7"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001063.npz",
+          "sha256": "173a7d5e7b7c16aba4e93bc4db31ba16a3df1afe726b6725bd68c76f665bd438"
+        }
+      }
+    },
+    {
+      "frame": 1064,
+      "image_s": 9.772256512,
+      "points": 119465,
+      "points_sha256": "020b899880832cf94f6e3ebeb56a7f7e19022c8b836aaab38c5d58816c5bd84d",
+      "image_sha256": "68d0c70aa65b89d147220a49195c3af98b4971af831063e4d72873156b48292b",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001064.npz",
+          "sha256": "fd436eb5904f45b17318e4ef3eaebc79bb5c358b2e3ff7c404e1ec895e22b818"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001064.npz",
+          "sha256": "60ef6aca9745e3634cd65708354c5df0dc57583deacec0b98d078aeb150755f6"
+        }
+      }
+    },
+    {
+      "frame": 1065,
+      "image_s": 9.876252928,
+      "points": 119621,
+      "points_sha256": "e6397ce6b28ef54bc8434ed04a93582c6d309cb53dab767a751c8b333413b608",
+      "image_sha256": "922253c561a3acb6ed8588b2894e73d4bbdc47b9e13ba5fb0bb234530271e5a3",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001065.npz",
+          "sha256": "547991c18376c5afcf4313942aa772b4a52132f9e8ce7c15f3f349c91d1f0552"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001065.npz",
+          "sha256": "c60093f1d6c754e1aa06c66c46248fd6f36ee1833b6cf18ac4af9a742d7d015b"
+        }
+      }
+    },
+    {
+      "frame": 1066,
+      "image_s": 9.980006144,
+      "points": 119795,
+      "points_sha256": "21044819f687466f0195cf319b26aec0ab0137f7291886635d51401c7eaccc90",
+      "image_sha256": "8efd0a6bfa2eb9f39c0aac53091ac8716cf78e2ec0a31ff36beef00cc7fa3ca6",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001066.npz",
+          "sha256": "ef8800e5cd3376a317cf44ce9edca0ce2e5063568157f9b37a001f77d1db6079"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001066.npz",
+          "sha256": "88f95625c6f21ae29f85d769a0728afad70360e4ae287c23bbc627c7fc8503c3"
+        }
+      }
+    },
+    {
+      "frame": 1067,
+      "image_s": 10.083629824,
+      "points": 120070,
+      "points_sha256": "f9801ba0ed8689f34d7a8d141dddc64ae336e103649d43defc7cf95fa92a2dea",
+      "image_sha256": "67034d62bb7492d38cc3ba1ffea73552c8e1375a86481fda2ae4f69bae528c60",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001067.npz",
+          "sha256": "c96bd24570f1e5650db604880ce4227d19c84e9e0d51bc25ae6e26ff04db2f90"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001067.npz",
+          "sha256": "1a4e420b6bcd6e182ec9135cb17c3e222d93aaaddeb43b40a11cd003217f9dd6"
+        }
+      }
+    },
+    {
+      "frame": 1068,
+      "image_s": 10.187255552,
+      "points": 119974,
+      "points_sha256": "a59dd21d21b99f3bc29975e3f851f398651ef03693ff579fb3ec6d85e41df9d1",
+      "image_sha256": "80517c537a8cd3ac3c1a6385d25c220b87b8efcda6bf73a593165cd773e12918",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001068.npz",
+          "sha256": "a690b2775cb813040b0628db9994c9686d6cee327ddb0546d44d88e10cd2a0a1"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001068.npz",
+          "sha256": "c32330ffe9b9d47b0daed210eb3d3a7f8caef56632668be053206ce95af05ef0"
+        }
+      }
+    },
+    {
+      "frame": 1069,
+      "image_s": 10.291005696,
+      "points": 119858,
+      "points_sha256": "4b1b9fc51ae2c8cfa6787fd4dbdf1bda531117dfbc57a2bf137fd81d8085fe7d",
+      "image_sha256": "af93dc2c985d7022ac324ef1efd3a875e62531e710420926b6c36e697ac805ef",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001069.npz",
+          "sha256": "26f1bf5080ae14788b4520815f7356e2f7e773a15b891d1bd5033e56583e7fb5"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001069.npz",
+          "sha256": "cdda0e38defd8f6c10c97df52b209a5a5d824667a2a95dbc5468c08579a2104d"
+        }
+      }
+    },
+    {
+      "frame": 1070,
+      "image_s": 10.394754304,
+      "points": 120014,
+      "points_sha256": "4316c2ffffbf42ace44e176891b054e3e131d721d9530c9af39cc1a4a4c15788",
+      "image_sha256": "80147ddcad3d61f93fbb977c873d6cc9b56458f03d7059c5a72cd3fb48c202fe",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001070.npz",
+          "sha256": "b47710dc34cf6dfb8f0d57165786b7c8c922ec6b1927701ba8cc5d39dcb307a8"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001070.npz",
+          "sha256": "a655b920aec497458489879db6380b4244bc0c72e730d190bca11c9e5be200ae"
+        }
+      }
+    },
+    {
+      "frame": 1071,
+      "image_s": 10.49838848,
+      "points": 120264,
+      "points_sha256": "9ae24923aadc2071143a515c39f2dcc67fdbf8bf1f0e6e169d81fef7d13a2455",
+      "image_sha256": "649df5329e0fb8a0dd1c016f4317277b022f7e89e8f180ed13544032c39029a4",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001071.npz",
+          "sha256": "4330b2309c0b0cd38f6c947e7ade67b68ff9b962eda148c942a6e8c205e3099c"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001071.npz",
+          "sha256": "9f1262d241b3d0c5709c28f893b65ee37d0d907c79c9dd65d23562bfb975d3ef"
+        }
+      }
+    },
+    {
+      "frame": 1072,
+      "image_s": 10.602130176,
+      "points": 120271,
+      "points_sha256": "89d19e49bfd906d468756f64fc1645ee7ecb022de15d767f1bb1bcf5a3d6507c",
+      "image_sha256": "a68964f876ccc616da08d22af5fbb16370c24ac39fc1782c10b0d986c78c2885",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001072.npz",
+          "sha256": "2374477a2ed83a004c733c32dfd178ed57eaedb0622f99d39211400a0b20e9ed"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001072.npz",
+          "sha256": "1bdb81438b7f80d3572972cb15f96224fda92d429526b9883468bed67816e8cf"
+        }
+      }
+    },
+    {
+      "frame": 1073,
+      "image_s": 10.705755648,
+      "points": 120364,
+      "points_sha256": "67148f4aa314f604d34f4e6ee2b2a91a6894e1795ff505599165ab02a5acef5b",
+      "image_sha256": "43b9c7f0f538220dd9a1cf848da219817687b363853e25f795d7304f64e6254e",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001073.npz",
+          "sha256": "edb5c0efce3630cd09f11b1bcef617ade1fe13dde77637e2502bdb91b63e5345"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001073.npz",
+          "sha256": "df99eaba953ac0068f0060c05c6007d1120c11bb78c4d1c90f8baa3267249830"
+        }
+      }
+    },
+    {
+      "frame": 1074,
+      "image_s": 10.80950528,
+      "points": 120272,
+      "points_sha256": "a0c04b13e1d5152a968a07651ceee1ebe144559bbab7c70ce44b87ec88d20c2f",
+      "image_sha256": "5ca7a3c9704882c2e9e8dc4d1d00146e18680c09588ebaa304f64a9ac87adab5",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001074.npz",
+          "sha256": "d69713bc23172bf9430eda3050a3de338c41de71023f9cb9c50fb0642dd06cab"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001074.npz",
+          "sha256": "3e8fa8ebfcd8913013d5b90c2e22e4b17f2f51a320f5ee4533cbeb437050d1ac"
+        }
+      }
+    },
+    {
+      "frame": 1075,
+      "image_s": 10.913132288,
+      "points": 120190,
+      "points_sha256": "2440ca70bb3b0b2d6c296a5a6d6171155251503f77d60327ceb1952f229ceec2",
+      "image_sha256": "1a2723f129c12ab0b1c76eb240ebd752a353570c593dafb11754ad934765edf0",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001075.npz",
+          "sha256": "5d84f06d3ef5121c310dea2a8e7ecb6578f528afcc2f6ae078408d921403bc0f"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001075.npz",
+          "sha256": "1620696919fa3a1e6d738362124e62126ec8f82f0265a47dd5399f961af48fe8"
+        }
+      }
+    },
+    {
+      "frame": 1076,
+      "image_s": 11.01688064,
+      "points": 120082,
+      "points_sha256": "57a7db0465df893e10c274961f7b6e11ce98ece6694379919f7b3128eb31a731",
+      "image_sha256": "8c52e8427404e91cea86ccefcd050d64292ade908c6d3034e63f0b697e83aac8",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001076.npz",
+          "sha256": "7025e0fa450e04b9e5403b42601ffe1f03816c38ed5babc14c4d4d3ab18eb282"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001076.npz",
+          "sha256": "cadbe3a7467e32d9141e2232c5b09a580af84655534a1c00482d16bd91d9f84e"
+        }
+      }
+    },
+    {
+      "frame": 1077,
+      "image_s": 11.120754176,
+      "points": 120070,
+      "points_sha256": "60762dcfd3cfb481de0d0a158244f96172bd8b7213a1feaf878e3ebe93bc4529",
+      "image_sha256": "68a31caa821c2edb815c3fe80f7e12e85f3cf0003153e4571f0c4666f4bba1bf",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001077.npz",
+          "sha256": "ef9c5c0f025ad77fa0bde6a72b863e55d0d8b134265b8f133a58593d58e994f2"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001077.npz",
+          "sha256": "ed28841b889f80362edd56f89d39fd3d612b0618a46837f37c6431d41d7f42e9"
+        }
+      }
+    },
+    {
+      "frame": 1078,
+      "image_s": 11.224628736,
+      "points": 119969,
+      "points_sha256": "95216e482749c0aac5e9f472abee5b023414e06c333629e187247dd7e7c8f1e1",
+      "image_sha256": "1c2e9f1c8758f7f2f1928590dea36e02fe539d0d95b018956c87176a13a81042",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001078.npz",
+          "sha256": "98a1e5f0a510f14ddb3b00c5b6168111ea33eeae74f659ceaa8693f5d35ab3ec"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001078.npz",
+          "sha256": "13570f7000b5895c64ca8da3e68dc83f509efe5fd51b8177f219aa30534d8a0a"
+        }
+      }
+    },
+    {
+      "frame": 1079,
+      "image_s": 11.328630272,
+      "points": 119761,
+      "points_sha256": "26beff34487b4f7a793d27b37ed05f797d057fdb6c33280b9a7cc65eeb90b339",
+      "image_sha256": "832d7c0d3aae509351561d919ba671a47feb97618b837f313d87d0b147ec50a6",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001079.npz",
+          "sha256": "73ea339edf133bccf8179cbf8599050a2c2580942d5029fa61d9315565a45cd8"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001079.npz",
+          "sha256": "bc61065b98b34b75b2b263b49a6dffa78f7af02a9a174f59b76fde58d28682dd"
+        }
+      }
+    },
+    {
+      "frame": 1080,
+      "image_s": 11.43275648,
+      "points": 119380,
+      "points_sha256": "b2daae5056d119567c6f68163a57784b252e0b06566c009be20a12c193c21490",
+      "image_sha256": "be5e36418d8fe2d54ae60b63443ff4add131775368050424e2892801325c5b9c",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001080.npz",
+          "sha256": "1917de594f093f4d65b8a7bb29356f766866ad4cc5cea5a57308456fa14f1eca"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001080.npz",
+          "sha256": "5e74a5a76fedcaa038af45abfc1fb602dcbff88913582bf626214d2bf95d6f00"
+        }
+      }
+    },
+    {
+      "frame": 1081,
+      "image_s": 11.536880128,
+      "points": 118822,
+      "points_sha256": "52d1fecca62ed98c7745b43a7607e936b1a2462b57220d6797d424b11eb0923d",
+      "image_sha256": "e9410992409dde89543722f3868241740a2effb8d7a3cfc0618f3fdbd97dc126",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001081.npz",
+          "sha256": "19918e5bc4ac9516ff9de0c6e20e2300129bd7c3a94da19a9dac9b97163d2c2b"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001081.npz",
+          "sha256": "eba19147db8a290d2f3086c662d3f616fcdd117aef4b62329141dfc25229739a"
+        }
+      }
+    },
+    {
+      "frame": 1082,
+      "image_s": 11.641134336,
+      "points": 118471,
+      "points_sha256": "636d8c874dc7d6fee98c8bd40533dfd8fd48a062b2adcc52cd185fa64e4c0c9c",
+      "image_sha256": "8ed8b695e10141f4f6c7ecc845247022846c14f3104362c35622696a405e46a5",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001082.npz",
+          "sha256": "011f459e36cee706a1125a3e5e5ede59bef334b3b11d4c82694df0d5104f866a"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001082.npz",
+          "sha256": "98ed049e259b3e360bd8a58aecfb170ef06df43f27d4a404ea528938028d6287"
+        }
+      }
+    },
+    {
+      "frame": 1083,
+      "image_s": 11.745380608,
+      "points": 117943,
+      "points_sha256": "371e49d3cbd6b54c221bc2ce413067502898f8b244fe1cc4f31728e7419c4aea",
+      "image_sha256": "d56daa665e72d634aa7db3eb9fda0f3a17da34f973e0d659940e88ce23469948",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001083.npz",
+          "sha256": "8655b2233842ecfaf0863052b9e04577eb086dd908ce6dd0f20c31524b73c13d"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001083.npz",
+          "sha256": "da09d395822783baa03b9c98ea53dda76b4b6733a84bb60bd27190c26a33eb05"
+        }
+      }
+    },
+    {
+      "frame": 1084,
+      "image_s": 11.849507584,
+      "points": 117408,
+      "points_sha256": "1e58ab9bd2a9db391d2c2fd9813dba424eb75b18b34969ef1f73282c95be3d4e",
+      "image_sha256": "577d67687446e44ff60f7a51cd62ca0bd53e7e5a1b2b3aeb933ac16dc8887642",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001084.npz",
+          "sha256": "c9b78cd21cb84f2cc59b9c2f7cbeda78bba0f4c4208a259e70a01b26f1bfba5d"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001084.npz",
+          "sha256": "9c1083ecde57b888a536bd0d90145bda2fa7eb8e56047169573ad369b8cb5f00"
+        }
+      }
+    },
+    {
+      "frame": 1085,
+      "image_s": 11.953756672,
+      "points": 116866,
+      "points_sha256": "359f8a9ac1fe521b2b53704f944988d49a83c620c21a44ac41202e8987749dee",
+      "image_sha256": "060641f545e11078b87664d056e3c667ac6148b8ba35d4b9a626ffe6aae672d3",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001085.npz",
+          "sha256": "860f02fca3fe238a08daccc707e7154e00046ce7037a126a8dc5c222e72857dd"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001085.npz",
+          "sha256": "9ec9ff8a752d9a2f8dab519b6d15ec6b293af857b6a24f60c27bd9efda15b5ca"
+        }
+      }
+    },
+    {
+      "frame": 1086,
+      "image_s": 12.057886464,
+      "points": 116541,
+      "points_sha256": "339b750bd91b95d74f1704dcee3ce6f97729bfda94724570f9bffbc84f3ab29e",
+      "image_sha256": "8210e24d4a97a61f26589ddbbc481e4e5bf9bc17819a885d570953363346e9a4",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001086.npz",
+          "sha256": "1d49867e4ed105255ce837e49714a92647d50ec2060ec8375f248fa0bb308aae"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001086.npz",
+          "sha256": "9f98569aab76690a0e85a9b9961a532b60c6db5a36525ca316fc365d0837a383"
+        }
+      }
+    },
+    {
+      "frame": 1087,
+      "image_s": 12.16188288,
+      "points": 116353,
+      "points_sha256": "7d9cc92d36fe5d878218d2dc62e22d2b1474627f44f56678d638784591b9f84b",
+      "image_sha256": "9d45ec4f6ca5877fe8cba3e8d4a65ada4afd6a8b8177751c8e6d614fc92f9f9f",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001087.npz",
+          "sha256": "6fa7dc7fcb23609acf10594bb478c578e96687cf196847d49b282d0f294b15c1"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001087.npz",
+          "sha256": "541afe6c60d01f0c1132a73fcb1b06c71b3311e32db9fb00f64ffa55c756c22f"
+        }
+      }
+    },
+    {
+      "frame": 1088,
+      "image_s": 12.266009088,
+      "points": 116198,
+      "points_sha256": "2a2f134141911c9f883751bced478739b5307d41747a48ba05846c7bab714d90",
+      "image_sha256": "380dea32e24a21bdbd2e7d0b283affbf69aafba614183dfd311ca7d35dfc9343",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001088.npz",
+          "sha256": "92004c63cdb1c1477521a10f5b244256c8ee216845cd772ecbd6c539802042c5"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001088.npz",
+          "sha256": "74c45ba1c83400065f7e13d3bebbc67535003632fb8130ef0143775c19066eec"
+        }
+      }
+    },
+    {
+      "frame": 1089,
+      "image_s": 12.370130176,
+      "points": 116017,
+      "points_sha256": "a90d93eebf062905a6427d4816ff5a1b1a7f0744fb363b61268be4b059104fda",
+      "image_sha256": "dd04d11a88ab4f4b900b534acaf717fdbda4b14145a8d0c24ff248004682e26b",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001089.npz",
+          "sha256": "09003848abe76f254d1aae1afe5680ddda3a479a0381292a9d631b55d6d02e3c"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001089.npz",
+          "sha256": "57e930e9ca9c233646d646b8438fc1548260fdd0c624e75269769cdf68d860d4"
+        }
+      }
+    },
+    {
+      "frame": 1090,
+      "image_s": 12.474133504,
+      "points": 115986,
+      "points_sha256": "280041ed6cd6ae6fd051c952e5b6fc3166410d96c1b2a198c1f49b25b40845f6",
+      "image_sha256": "795e25572cb8bdad3c520d225983f5a76c5586ec158f81e35a5ec286f99b8e7e",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001090.npz",
+          "sha256": "f92f27ae4c9417d02c7123f2555e10a6652e5261f052eed5c23bc268d6de87e2"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001090.npz",
+          "sha256": "f8d377d2539a77c1d857d159029986570fc24f13c90b557ae5faf3b87f93df38"
+        }
+      }
+    },
+    {
+      "frame": 1091,
+      "image_s": 12.578130688,
+      "points": 115931,
+      "points_sha256": "1937804ac00581ae7cccb1b2cdefd8ae053b4f2b28bac344e74224d2feab02c3",
+      "image_sha256": "f5e141584e7ebc08f98156d46db3696126486cd8afe5fddfa3a4d5898464827f",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001091.npz",
+          "sha256": "22bc4bf2e2e384bcb51e106b54bf898dc0cfdd40608a6ed3c2e6847e1a50c85b"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001091.npz",
+          "sha256": "c2e70a1302f4f441b5b2e1b42f4a2b1085a954370d5b9fb27405d7f3cd2f7623"
+        }
+      }
+    },
+    {
+      "frame": 1092,
+      "image_s": 12.6821312,
+      "points": 115882,
+      "points_sha256": "02d977e23ff37b716823873267998cf8cdee6b9684734e69ecc77a1e18903501",
+      "image_sha256": "cf4904838377cbd9f1a2e17ba0ca6229fecd930fd60c2c66b0bac54aa9696c02",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001092.npz",
+          "sha256": "e962c3021c1bdb1ea62fb7ce41a8db56711f379886aa084b75b87c47e5e61fd9"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001092.npz",
+          "sha256": "21a77250372897821979aaa6013a619479cf36c00368d6a9f98259f7f100f7e5"
+        }
+      }
+    },
+    {
+      "frame": 1093,
+      "image_s": 12.786130432,
+      "points": 115857,
+      "points_sha256": "6fac21f68df26c416fe7dd2f2aa6311e98684e4f68d2d43a930f948cc63f0015",
+      "image_sha256": "bdc2a3ec32fe49c08d7be2337627a4ee8a0894a6d1cc843c319219cfc04679c0",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001093.npz",
+          "sha256": "27f14d629b3cce6e3623b2109a66970bd00187cb274212a069d149d2d049c877"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001093.npz",
+          "sha256": "2664d7fd404e6558c303516b8f3a2bb416e494e3ff84dd18a70c5a6f4a7eb290"
+        }
+      }
+    },
+    {
+      "frame": 1094,
+      "image_s": 12.890132224,
+      "points": 115903,
+      "points_sha256": "258751925e308b54a7d4185bf030d87a35ea6d25b9428c66acb9eb7486181cd2",
+      "image_sha256": "061d6ee3ed04b879f1360d1a44c0687de1393272884bb3af7115b2c53b4fc992",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001094.npz",
+          "sha256": "33626de59f4dac51cfa3ff1eae38b26683c7896c67c0f206671cca4da2393316"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001094.npz",
+          "sha256": "c9a73340f9cbe82041e9b7031c6bcbb419ad91bf3e6d1d5c917d90b53dcc5cd1"
+        }
+      }
+    },
+    {
+      "frame": 1095,
+      "image_s": 12.994130944,
+      "points": 116056,
+      "points_sha256": "399792fd831c95fd1858a289db2a878a4982119463e4a76f9a1a8546aa360590",
+      "image_sha256": "5225560fde41cffacab59082fee267a0157b82767a71ad40b1d847996b2d4e03",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001095.npz",
+          "sha256": "bb03cc0d039afc1c35b526895ebb5754eceb79199d9a0d255293ae442add2fb0"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001095.npz",
+          "sha256": "e9b88467a0f39f12f3b362b7ce47e28c847bf99af21973cb519ca9d55ca380d2"
+        }
+      }
+    },
+    {
+      "frame": 1096,
+      "image_s": 13.098006528,
+      "points": 116081,
+      "points_sha256": "3aec6ce03ee1f34289b56cf4355d8cdae8bf0322247159fdc174be265b099c1e",
+      "image_sha256": "ca8acc4c39e0cc7d34a7c4593aa9f28ce18fe3842fb1f6ea764f77f828cc571d",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001096.npz",
+          "sha256": "38d88a7024caeb5e6e1c3f6724979d56ed3ee66eda33be32a0b9a42e11acee30"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001096.npz",
+          "sha256": "7186e9bd685f0469f561b2b7615e82eb96b534902fa332c8f5c1b03f7f6e8038"
+        }
+      }
+    },
+    {
+      "frame": 1097,
+      "image_s": 13.202009088,
+      "points": 116097,
+      "points_sha256": "41ccbbc00c842e75586bcc395c8c974dbe4da3cb7c684e34eb4884790aca8185",
+      "image_sha256": "0778380d3ae7118b837d97a7f3c9fb81a1d46394574e5450fa9be43362690f61",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001097.npz",
+          "sha256": "1aaadd7b1185a54717036548284ac0214c1589cf8b710735afef65860b1eb8f6"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001097.npz",
+          "sha256": "e98ace8a5c67502b2abf93a470406ff61481fec8ef73bf9e9761bc0091fadd3e"
+        }
+      }
+    },
+    {
+      "frame": 1098,
+      "image_s": 13.306008064,
+      "points": 116094,
+      "points_sha256": "f825495e5a7f242cd44ca23b93fce010feb9ed79367d3cc51b227ff9db39e7de",
+      "image_sha256": "fc9052314bac98022084fd1cb262c3c38445c377848b8ed5cba5e0958d8c6076",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001098.npz",
+          "sha256": "3ea5d22635dfafc168326b9e7199387920001f5f0b94235953ebbc108035f409"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001098.npz",
+          "sha256": "4d8a5470489ba13907ac9149664ccd6c0b9acd4154d63ff3c746791461348e5f"
+        }
+      }
+    },
+    {
+      "frame": 1099,
+      "image_s": 13.41000704,
+      "points": 116080,
+      "points_sha256": "9961ca91427ffc6e5736cb17ff1caa4a0f7968bfaba6cabb1037910a06fa9b05",
+      "image_sha256": "58761b4a7ce59b95160427e223d575580202a5ebf7766d5ebcf4d3cd65d3b103",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001099.npz",
+          "sha256": "bbe8e7a622db1e6dac6525c747489516e96f86b6cfa25c013f329b2fe01496af"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001099.npz",
+          "sha256": "4c51991b09f3908b7c7193f158f98c279f1242598f2884e6b1447419de194ff7"
+        }
+      }
+    },
+    {
+      "frame": 1100,
+      "image_s": 13.514006016,
+      "points": 115982,
+      "points_sha256": "5f9011629bc1af7feb1f112e24ee5a45ad6064bc59c959bcb92b5c34cfd3ff44",
+      "image_sha256": "ce9c3f9550d3fcacb1e1b52987a19417956fb499d295d9fd352a5df9d8f3f9e8",
+      "predictions": {
+        "ZS": {
+          "path": "out/v06_score/pred/ZS_07_r1/f001100.npz",
+          "sha256": "fb03f5a6dcb091d6e6f3133f3668027fa76f7efeefff5b7fd93099877ac348a0"
+        },
+        "armB0_s1": {
+          "path": "out/v06_score/pred/armB0_s1_07_r1/f001100.npz",
+          "sha256": "6d3aa6b981c6b8b6fd1ef4739379035f068657828494588dd850f6afd6498350"
+        }
+      }
+    }
+  ]
+}
