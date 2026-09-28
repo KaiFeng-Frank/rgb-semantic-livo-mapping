@@ -1,0 +1,70 @@
+name: Restore and render the synchronized driving comparison
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: driving-comparison-20260928
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      COMPARISON_TAG: driving-comparison-20260928
+      GH_TOKEN: ${{ github.token }}
+      OMP_NUM_THREADS: '2'
+      OPENBLAS_NUM_THREADS: '2'
+    steps:
+      - name: Check out the dispatched commit
+        run: |
+          git init .
+          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
+          git fetch --depth 1 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+      - name: Install CPU rendering dependencies
+        run: |
+          python3 -m venv /tmp/comparison-env
+          /tmp/comparison-env/bin/pip install numpy==1.26.4 Pillow==10.4.0 opencv-python-headless==4.10.0.84 requests==2.32.3
+          command -v ffmpeg
+      - name: Restore the paired predictions and only the selected raw frames
+        run: |
+          /tmp/comparison-env/bin/python tools/restore_driving_comparison.py --root /tmp/comparison-inputs --out out/comparison
+      - name: Render and verify the MP4, GIF and prediction archive
+        run: |
+          /tmp/comparison-env/bin/python tools/compare_driving_semantics.py --root /tmp/comparison-inputs --out out/comparison
+      - name: Save verified outputs to a draft release for visual review
+        run: |
+          /tmp/comparison-env/bin/python - <<'PY'
+          from pathlib import Path
+          import hashlib, json
+          folder = Path('out/comparison')
+          names = ['driving_zs_vs_b0_seq07.mp4', 'driving_zs_vs_b0.gif', 'preview.jpg',
+                   'comparison.json', 'video-check.json', 'gif-check.json', 'input-recovery.json',
+                   'comparison-predictions.tar', 'archive-check.json', 'scoring-sources.json']
+          assets = []
+          for name in names:
+              p = folder / name
+              assets.append(dict(name=name, bytes=p.stat().st_size,
+                            sha256=hashlib.sha256(p.read_bytes()).hexdigest()))
+          (folder / 'comparison-manifest.json').write_text(json.dumps(dict(assets=assets), indent=2)+'\n')
+          (folder / 'SHA256SUMS').write_text(''.join(a['sha256']+'  '+a['name']+'\n' for a in assets))
+          (folder / 'release-notes.md').write_text('''Same-time, same-frame ZS versus v0.6 B0 (seed 1), KITTI sequence 07, frames 970–1100.
+
+          Left: original nuScenes-pretrained PTv3 (ZS). Right: camera pseudo-label distillation with out-of-frustum KL (B0).
+          Both use the first archived scoring pass, identical preprocessing, calibration, view, class colours and confidence threshold 0.5. This is an aligned offline visual comparison, not a latency or accuracy measurement.
+
+          Recovered from the verified artifact release. Every scan matches the original driving demo's input SHA-256. All 131 scans are shown at original speed; 421 MP4 frames at 30 fps. The GIF is a lighter looping preview. Includes the exact 262 prediction files and full provenance. Raw KITTI inputs remain outside the release.
+          ''')
+          PY
+          gh release create "$COMPARISON_TAG" --repo "$GITHUB_REPOSITORY" --draft --target "$GITHUB_SHA" \
+            --title "Driving semantics: synchronized ZS vs B0" --notes-file out/comparison/release-notes.md \
+            out/comparison/driving_zs_vs_b0_seq07.mp4 out/comparison/driving_zs_vs_b0.gif \
+            out/comparison/preview.jpg out/comparison/comparison.json out/comparison/video-check.json \
+            out/comparison/gif-check.json out/comparison/input-recovery.json \
+            out/comparison/comparison-predictions.tar out/comparison/archive-check.json out/comparison/scoring-sources.json \
+            out/comparison/comparison-manifest.json out/comparison/SHA256SUMS
