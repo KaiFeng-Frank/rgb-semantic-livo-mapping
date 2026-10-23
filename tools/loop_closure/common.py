@@ -51,6 +51,17 @@ def transform(points, pose):
     return np.asarray(points) @ pose[:3, :3].T + pose[:3, 3]
 
 
+def rigid_pose(pose):
+    """Project rounded calibration rotations onto SO(3) for rigid graph math.
+
+    Keep sem_core's frozen decimal extrinsic untouched for historical replay.
+    GTSAM's Rot3 inverse assumes orthonormality, unlike numpy.linalg.inv.
+    """
+    result = np.array(pose, dtype=np.float64, copy=True)
+    result[:3, :3] = Rotation.from_matrix(result[:3, :3]).as_matrix()
+    return result
+
+
 def matrices(tum):
     out = np.tile(np.eye(4), (len(tum), 1, 1))
     out[:, :3, :3] = Rotation.from_quat(tum[:, 4:8]).as_matrix()
@@ -125,5 +136,5 @@ class Scans:
         if not ok or valid.sum() < 100:
             raise ValueError(f'No trajectory support for keyframe {frame}')
         world, _ = self.world(pts[order, :3], times, valid)
-        lidar = pose @ S.T_I_L
+        lidar = rigid_pose(pose @ S.T_I_L)
         return transform(world, np.linalg.inv(lidar)), lidar

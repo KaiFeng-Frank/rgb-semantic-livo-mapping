@@ -25,6 +25,8 @@ The graph operates on LiDAR poses. Its world-frame corrections are interpolated
 onto the original IMU TUM samples and applied on the **left**. The output keeps
 the input timestamps; `T_W_L = T_W_I @ T_I_L` remains valid. Maps are rebuilt from
 scratch because changing the published poses cannot move already fused voxels.
+The graph adapter projects the rounded calibration rotation onto SO(3), which
+GTSAM requires. The frozen decimal extrinsic stays unchanged in semantic replay.
 
 ## Frozen protocol and checks
 
@@ -34,7 +36,8 @@ Official KITTI poses and SemanticKITTI labels are confined to the evaluators.
 No threshold or loop is selected using ground-truth scores.
 
 1. Synthetic tests check a nonzero extrinsic under a rotated world correction,
-   ICP measurement direction, yaw retrieval and an odometry-only graph.
+   ICP measurement direction, yaw retrieval, an odometry-only graph, and the
+   real calibration's rounded rotation on a long synthetic trajectory.
 2. A second odometry-only graph on the actual sequence must return the input
    poses within 1e-6 matrix-entry error.
 3. Baseline replay must reproduce the archived B0 run's voxel count,

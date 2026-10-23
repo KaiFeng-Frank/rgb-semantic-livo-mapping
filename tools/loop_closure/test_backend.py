@@ -3,11 +3,24 @@ import unittest
 import numpy as np
 from scipy.spatial.transform import Rotation
 
-from .common import S, corrected_tum, matrices, protocol, transform
+from .common import S, corrected_tum, matrices, protocol, transform, rigid_pose
 from .backend import descriptor, descriptor_distance, optimize, cloud, register
 
 
 class Contracts(unittest.TestCase):
+    def test_rounded_extrinsic_is_rigid_before_graph_optimization(self):
+        # The frozen decimal KITTI extrinsic is only approximately orthogonal.
+        # A synthetic identity rotation does not exercise this real-data issue.
+        poses = []
+        for k in range(100):
+            imu = np.eye(4)
+            imu[:3, :3] = Rotation.from_euler('xyz', [.01, .02, k*.04]).as_matrix()
+            imu[:3, 3] = [100*np.sin(k*.04), 100*np.cos(k*.04), .01*k]
+            poses.append(rigid_pose(imu@S.T_I_L))
+        poses = np.asarray(poses)
+        result, _ = optimize(poses, [], protocol())
+        np.testing.assert_allclose(result, poses, atol=1e-8)
+
     def test_world_correction_preserves_imu_lidar_extrinsic(self):
         tum = np.array([[1, 1, 2, 3, 0, 0, 0, 1], [2, 4, 5, 6, 0, 0, 0, 1]], float)
         original = matrices(tum) @ S.T_I_L
