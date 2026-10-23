@@ -21,6 +21,13 @@ def configuration():
     return json.loads((HERE / 'protocol.json').read_text())
 
 
+def verify_configuration(path):
+    # JSON re-serialization can change 0.20 to 0.2 without changing a parameter.
+    # Compare parsed values, not formatting; the source hash is recorded too.
+    if json.loads(Path(path).read_text()) != configuration():
+        raise ValueError('Parameters changed after map construction')
+
+
 def heldout(frame, cfg):
     return frame % cfg['heldout_stride'] == cfg['heldout_remainder']
 
@@ -117,6 +124,7 @@ def build_maps(root, out):
         if frame % 100 == 0:
             print('FUSE', frame, {k: v.n for k, v in maps.items()}, round(time.monotonic()-t0), flush=True)
     result = dict(trajectory_sha256=cfg['corrected_trajectory_sha256'], loop_windows=windows,
+                  source_protocol_sha256=digest(HERE / 'protocol.json'),
                   roi_center=center.tolist(), roi_radius_m=cfg['roi_radius_m'], ground_truth_read=False,
                   fixed_prediction_arm=cfg['prediction_arm'], new_inference=False, training=False,
                   primary_endpoint=cfg['primary_endpoint'], modes={})
@@ -169,8 +177,7 @@ def strict_report(counts):
 def score(root, out):
     cfg = configuration()
     build = json.loads((out / 'build.json').read_text())
-    if digest(out / 'protocol.json') != digest(HERE / 'protocol.json'):
-        raise ValueError('Parameters changed after map construction')
+    verify_configuration(out / 'protocol.json')
     scans, center, windows = setup(root, cfg)
     cal = KittiCalib(Path(root) / 'data/raw/2011_09_30')
     maps = {}

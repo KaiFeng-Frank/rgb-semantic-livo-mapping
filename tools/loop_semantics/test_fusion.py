@@ -8,7 +8,7 @@ from unittest.mock import patch
 import numpy as np
 
 from .fusion import Visit, propose, apply_proposal
-from .run import build_maps, configuration, S
+from .run import build_maps, configuration, verify_configuration, S
 
 
 def evidence(label, confidence, distance, groups, xyz=(0., 0., 0.)):
@@ -20,6 +20,16 @@ def evidence(label, confidence, distance, groups, xyz=(0., 0., 0.)):
 class Contracts(unittest.TestCase):
     def setUp(self):
         self.cfg = configuration()
+
+    def test_protocol_round_trip_accepts_formatting_but_rejects_changed_values(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / 'protocol.json'
+            path.write_text(json.dumps(self.cfg, sort_keys=True))
+            verify_configuration(path)
+            changed = dict(self.cfg, roi_radius_m=self.cfg['roi_radius_m'] + 1)
+            path.write_text(json.dumps(changed))
+            with self.assertRaisesRegex(ValueError, 'Parameters changed'):
+                verify_configuration(path)
 
     def test_point_density_does_not_multiply_frame_evidence(self):
         def run(repeats):
