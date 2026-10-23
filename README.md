@@ -31,6 +31,9 @@ Trained models and recovery evidence are archived separately from Git source:
 [artefact recovery instructions](docs/artifact_recovery.md) and
 [the exact asset manifest](results/v06/artifacts_20260928/artifact-manifest.json).
 
+**SemanticKITTI 19-class preparation:** [official-metric diagnostics, local GPU checks and native-19 tooling](docs/semantickitti19.md).
+The archived 07/09 bridge scores are diagnostics; complete native-19 sequence-08 validation and a leaderboard submission are still pending.
+
 ![semantic map](docs/img/rviz_class_final.png)
 
 *The full 693 m loop of KITTI seq 07, coloured by predicted class. Cyan is `driveable_surface`,

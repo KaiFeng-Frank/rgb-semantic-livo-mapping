@@ -37,10 +37,12 @@ jobs:
       - name: Check official evaluator parity and submission integrity
         run: /tmp/sk19-env/bin/python -m unittest tools.semantic_kitti.test_contract -v
       - name: Score immutable archived predictions on complete public sequences
+        if: github.event_name == 'workflow_dispatch'
         run: |
           /tmp/sk19-env/bin/python -m tools.semantic_kitti.audit_archives \
             --root /tmp/sk19-inputs --out out/sk19-readiness
       - name: Archive small results and provenance, without datasets or predictions
+        if: github.event_name == 'workflow_dispatch'
         run: |
           /tmp/sk19-env/bin/python - <<'PY'
           import hashlib, json, os

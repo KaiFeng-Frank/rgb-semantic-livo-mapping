@@ -86,6 +86,7 @@ class Contracts(unittest.TestCase):
         meta = dict(task='single_scan_semantic_segmentation', num_classes=19,
                     label_space='SemanticKITTI19', uses_future_scans=False,
                     map_fusion=False, frozen_bridge=False, sequences=list(TEST_SEQUENCES),
+                    partial_diagnostic=False, training_mode='full', complete=True,
                     checkpoint_sha256='fixture', training_data_disclosure='synthetic test fixture',
                     predictions=records)
         manifest = root / 'manifest.json'
@@ -112,8 +113,12 @@ class Contracts(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp, patch.dict(FRAME_COUNTS, {s: 1 for s in TEST_SEQUENCES}):
             root = Path(tmp)
             data, pred, manifest, meta = self.fixture(root)
-            for key in ['frozen_bridge', 'uses_future_scans', 'map_fusion']:
+            for key in ['frozen_bridge', 'uses_future_scans', 'map_fusion', 'partial_diagnostic']:
                 bad = dict(meta); bad[key] = True; save(manifest, bad)
+                with self.assertRaisesRegex(ValueError, 'contract'):
+                    build_submission(data, pred, manifest, root / 'bad.zip')
+            for key, value in [('training_mode', 'pilot'), ('complete', False)]:
+                bad = dict(meta); bad[key] = value; save(manifest, bad)
                 with self.assertRaisesRegex(ValueError, 'contract'):
                     build_submission(data, pred, manifest, root / 'bad.zip')
             save(manifest, meta)

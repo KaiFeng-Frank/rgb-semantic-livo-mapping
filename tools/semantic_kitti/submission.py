@@ -16,7 +16,8 @@ def build_submission(dataset, predictions, provenance, destination):
     meta = json.loads(Path(provenance).read_text())
     required = dict(task='single_scan_semantic_segmentation', num_classes=19,
                     label_space='SemanticKITTI19', uses_future_scans=False,
-                    map_fusion=False, frozen_bridge=False)
+                    map_fusion=False, frozen_bridge=False, partial_diagnostic=False,
+                    training_mode='full', complete=True)
     for key, value in required.items():
         if type(meta.get(key)) is not type(value) or meta[key] != value:
             raise ValueError(f'Invalid/missing inference contract: {key} must be {value!r}')

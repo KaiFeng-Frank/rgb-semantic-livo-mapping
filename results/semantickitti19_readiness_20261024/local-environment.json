@@ -1,0 +1,21 @@
+{
+  "python": "3.11.14",
+  "packages": {
+    "torch": "2.11.0.dev20260201+cu128",
+    "numpy": "1.26.4",
+    "PyYAML": "6.0.2",
+    "spconv-cu126": "2.3.8",
+    "cumm-cu126": "0.7.11",
+    "timm": "1.0.25",
+    "pccm": "0.4.16",
+    "ccimport": "0.4.4",
+    "huggingface-hub": "0.36.0"
+  },
+  "pointcept_commit": "72a799353c568c29a3365c02a15129ebe7fe637a",
+  "parent_environment": "/home/frank/miniconda3/envs/activesplat-5070ti",
+  "isolated_environment": "/home/frank/.local/share/semantic-kitti/venv",
+  "upstream_pointcept_modified": false,
+  "attention_backend": "torch SDPA",
+  "pooling_backend": "torch.segment_reduce",
+  "bitwise_original_runtime": false
+}
