@@ -103,7 +103,7 @@ def render_attribution(out):
     for i, value in enumerate(values):
         ax.annotate(f'{value:.4f}%', (value, i), xytext=(7, 7), textcoords='offset points')
     ax.set_yticks(range(len(arms)), names)
-    ax.invert_yaxis()
+    ax.set_ylim(len(arms)-.45, -.55)
     spread = max(max(values)-min(values), .2)
     ax.set_xlim(min(values)-.15*spread, max(values)+.45*spread)
     ax.set_xlabel('Held-out revisit ROI: common-9 mIoU (%), abstentions wrong')

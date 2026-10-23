@@ -35,18 +35,21 @@ jobs:
           /tmp/revisit-env/bin/pip install -r tools/loop_semantics/requirements.txt
           /tmp/revisit-env/bin/python -m unittest tools.loop_semantics.test_fusion -v
       - name: Restore verified primary maps and evidence
+        if: github.event_name == 'workflow_dispatch'
         run: |
           gh release download loop-semantics-40036755735-1 --repo "$GITHUB_REPOSITORY" \
             --pattern manifest.json --pattern build.json --pattern comparison.json --pattern protocol.json \
             --pattern '*maps.npz' --pattern '*evidence.npz' --dir /tmp/primary-revisit
       - name: Restore identical evaluation inputs
+        if: github.event_name == 'workflow_dispatch'
         run: /tmp/revisit-env/bin/python -u -m tools.loop_closure.restore --root /tmp/revisit-inputs --out out/attribution
       - name: Remove each visits semantic votes and verify original scores unchanged
+        if: github.event_name == 'workflow_dispatch'
         run: |
           /tmp/revisit-env/bin/python -u -m tools.loop_semantics.attribution \
             --source /tmp/primary-revisit --root /tmp/revisit-inputs --out out/attribution
       - name: Preserve all attribution outcomes
-        if: always()
+        if: always() && github.event_name == 'workflow_dispatch'
         run: |
           /tmp/revisit-env/bin/python -m tools.loop_semantics.package out/attribution
           gh release create "loop-attribution-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
