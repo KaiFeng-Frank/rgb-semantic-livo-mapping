@@ -1,0 +1,56 @@
+name: Offline seq07 loop closure and semantic replay
+
+on:
+  push:
+    branches: [codex/seq07-loop-closure]
+    paths: ['tools/loop_closure/**', '.github/workflows/seq07-loop-closure.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: offline-seq07-loop
+  cancel-in-progress: false
+
+jobs:
+  compare:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 100
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OMP_NUM_THREADS: '2'
+      OPENBLAS_NUM_THREADS: '2'
+      MPLBACKEND: Agg
+    steps:
+      - name: Check out exact experiment commit
+        run: |
+          git init .
+          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
+          git fetch --depth 1 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+      - name: Install pinned CPU dependencies
+        run: |
+          python3 -m venv /tmp/loop-env
+          /tmp/loop-env/bin/pip install -r tools/loop_closure/requirements.txt
+      - name: Check coordinate and optimizer contracts
+        run: /tmp/loop-env/bin/python -m unittest tools.loop_closure.test_backend -v
+      - name: Recover verified predictions and official seq07 inputs
+        run: /tmp/loop-env/bin/python -u -m tools.loop_closure.restore --root /tmp/loop-inputs --out out/loop
+      - name: Detect, verify and optimize loops without ground truth
+        run: /tmp/loop-env/bin/python -u -m tools.loop_closure.backend --root /tmp/loop-inputs --out out/loop
+      - name: Evaluate official trajectory and held-out revisits
+        run: /tmp/loop-env/bin/python -u -m tools.loop_closure.evaluate --root /tmp/loop-inputs --out out/loop
+      - name: Rebuild baseline and verify historical metric parity
+        run: /tmp/loop-env/bin/python -u -m tools.loop_closure.replay --root /tmp/loop-inputs --out out/loop --arm baseline
+      - name: Rebuild corrected semantic map from the same predictions
+        run: /tmp/loop-env/bin/python -u -m tools.loop_closure.replay --root /tmp/loop-inputs --out out/loop --arm corrected
+      - name: Compare the complete paired result
+        run: /tmp/loop-env/bin/python -u -m tools.loop_closure.evaluate --root /tmp/loop-inputs --out out/loop
+      - name: Preserve outputs and checksums for review
+        if: always()
+        run: |
+          /tmp/loop-env/bin/python -m tools.loop_closure.package out/loop
+          gh release create "seq07-loop-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" --repo "$GITHUB_REPOSITORY" \
+            --draft --target "$GITHUB_SHA" --title "Seq07 offline loop closure: run ${GITHUB_RUN_ID}" \
+            --notes-file out/loop/release-notes.md out/loop/*
