@@ -3,11 +3,21 @@ import unittest
 import numpy as np
 from scipy.spatial.transform import Rotation
 
-from .common import S, corrected_tum, matrices, protocol, transform, rigid_pose
+from .common import S, corrected_tum, matrices, protocol, transform, rigid_pose, check_time_tables
 from .backend import descriptor, descriptor_distance, optimize, cloud, register
 
 
 class Contracts(unittest.TestCase):
+    def test_clock_audit_allows_subframe_jitter_but_rejects_a_frame_offset(self):
+        times = np.arange(20)*.104
+        relative = times.copy()
+        relative[8] += .0048
+        audit = check_time_tables(relative, times)
+        self.assertAlmostEqual(audit['max_difference_s'], .0048)
+        relative[8:] += .104
+        with self.assertRaises(AssertionError):
+            check_time_tables(relative, times)
+
     def test_rounded_extrinsic_is_rigid_before_graph_optimization(self):
         # The frozen decimal KITTI extrinsic is only approximately orthogonal.
         # A synthetic identity rotation does not exercise this real-data issue.

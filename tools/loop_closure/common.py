@@ -69,6 +69,23 @@ def matrices(tum):
     return out
 
 
+def check_time_tables(relative, image_times):
+    """Audit the auxiliary odometry clock without replacing the raw camera clock.
+
+    KITTI seq07 has a real 4.788 ms discrepancy in times.txt. The frozen ATE
+    evaluator logs it and uses raw image timestamps. Reject an ambiguity of
+    half a frame, not a sub-frame clock fluctuation.
+    """
+    assert len(relative) == len(image_times)
+    assert np.all(np.diff(relative)>0) and np.all(np.diff(image_times)>0)
+    difference = (relative-relative[0])-(image_times-image_times[0])
+    limit = .5*min(float(np.min(np.diff(relative))), float(np.min(np.diff(image_times))))
+    maximum = float(np.max(np.abs(difference)))
+    assert maximum < limit, (maximum, limit)
+    return dict(max_difference_s=maximum, half_frame_bound_s=limit,
+                association_clock='raw image_02 timestamps', samples=len(relative))
+
+
 def interpolate(times, poses, query):
     # Offset absolute UNIX times to avoid losing precision in Slerp internals.
     query = np.clip(query, times[0], times[-1])

@@ -48,6 +48,10 @@ ATE uses the **official KITTI odometry ground truth**, interpolated to the TUM
 timestamps, with one global rigid alignment and no scale. The historical
 `results/seq07_ate.json` instead uses SemanticKITTI reference poses; those two
 numbers must not be compared as if they used the same reference.
+The odometry `times.txt` differs from the raw image clock by up to 4.788 ms on
+seq07. As in the original evaluator, association uses the raw image clock.
+The auxiliary time-table check records that difference and rejects a deviation
+of half a frame; a regression test covers both sub-frame jitter and a frame slip.
 
 Held-out frames ending in 5 supply early/late static building/fence/pole/sign
 surfaces for a revisit diagnostic. None enters the backend's keyframes, which

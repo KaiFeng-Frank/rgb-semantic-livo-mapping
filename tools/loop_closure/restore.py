@@ -54,15 +54,20 @@ def restore(root, out):
                 p.parent.mkdir(parents=True, exist_ok=True)
                 p.write_bytes(z.read(member))
     url = 'https://www.semantic-kitti.org/assets/data_odometry_labels.zip'
-    remote = RemoteZip(url)
-    with zipfile.ZipFile(remote) as z:
-        for f in range(1101):
-            p = root/f'evaluation/labels/{f:06d}.label'
-            p.parent.mkdir(parents=True, exist_ok=True)
-            p.write_bytes(z.read(f'dataset/sequences/07/labels/{f:06d}.label'))
-            if f % 200 == 0:
-                print('LABELS', f, flush=True)
-    evidence['sources'].append(dict(url=url, archive_bytes=remote.size, range_bytes=remote.fetched))
+    def label_shard(worker):
+        remote = RemoteZip(url)
+        with zipfile.ZipFile(remote) as z:
+            for count, f in enumerate(range(worker, 1101, 6)):
+                p = root/f'evaluation/labels/{f:06d}.label'
+                p.parent.mkdir(parents=True, exist_ok=True)
+                p.write_bytes(z.read(f'dataset/sequences/07/labels/{f:06d}.label'))
+                if count % 50 == 0:
+                    print('LABELS', worker, count, flush=True)
+        return remote.size, remote.fetched
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        label_parts = list(pool.map(label_shard, range(6)))
+    evidence['sources'].append(dict(url=url, archive_bytes=label_parts[0][0],
+                                   range_bytes=sum(n for _,n in label_parts)))
     url = KITTI+'raw_data/2011_09_30_drive_0027/'+DRIVE+'.zip'
     prefix = '2011_09_30/'+DRIVE+'/'
     base = root/'data/raw/2011_09_30'/DRIVE

@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.spatial import cKDTree
 
-from .common import REPO, S, Scans, interpolate, matrices, protocol, save, transform
+from .common import REPO, S, Scans, interpolate, matrices, protocol, save, transform, check_time_tables
 
 
 def align(source, target):
@@ -71,8 +71,9 @@ def run(root, out):
     gt = np.linalg.inv(tr)@gt@tr
     ts = scans['baseline'].images[:len(gt)]
     rel = np.loadtxt(root/'evaluation/times.txt')
-    assert np.max(np.abs((rel-rel[0])-(ts-ts[0]))) < .001
-    result = dict(reference=cfg['evaluation_reference'], trajectory={}, revisit_geometry={}, semantics={})
+    clock_check = check_time_tables(rel, ts)
+    result = dict(reference=cfg['evaluation_reference'], time_association=clock_check,
+                  trajectory={}, revisit_geometry={}, semantics={})
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))
     center_pose, _ = scans['baseline'].traj.query_one(ts[10])
     center = (center_pose@S.T_I_L)[:3, 3]
