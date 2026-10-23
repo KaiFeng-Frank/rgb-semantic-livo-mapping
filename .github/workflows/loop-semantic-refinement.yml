@@ -1,0 +1,51 @@
+name: Fixed-geometry revisit semantic refinement
+
+on:
+  push:
+    branches: [codex/loop-semantic-refinement]
+    paths: ['tools/loop_semantics/**', '.github/workflows/loop-semantic-refinement.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: loop-semantic-refinement
+  cancel-in-progress: false
+
+jobs:
+  compare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OMP_NUM_THREADS: '2'
+      OPENBLAS_NUM_THREADS: '2'
+      MPLBACKEND: Agg
+    steps:
+      - name: Check out exact experiment commit
+        run: |
+          git init .
+          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
+          git fetch --depth 1 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+      - name: Install pinned CPU dependencies
+        run: |
+          python3 -m venv /tmp/revisit-env
+          /tmp/revisit-env/bin/pip install -r tools/loop_semantics/requirements.txt
+      - name: Verify semantic evidence and exclusion contracts
+        run: /tmp/revisit-env/bin/python -m unittest tools.loop_semantics.test_fusion -v
+      - name: Restore immutable B0 predictions and seq07 data
+        run: /tmp/revisit-env/bin/python -u -m tools.loop_closure.restore --root /tmp/revisit-inputs --out out/revisit
+      - name: Build all arms before reading ground truth
+        run: /tmp/revisit-env/bin/python -u -m tools.loop_semantics.run --root /tmp/revisit-inputs --out out/revisit --stage build
+      - name: Evaluate identical query points and verify baseline parity
+        run: /tmp/revisit-env/bin/python -u -m tools.loop_semantics.run --root /tmp/revisit-inputs --out out/revisit --stage score
+      - name: Render comparison and preserve reproducibility evidence
+        if: always()
+        run: |
+          /tmp/revisit-env/bin/python -m tools.loop_semantics.package out/revisit
+          gh release create "loop-semantics-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            --repo "$GITHUB_REPOSITORY" --draft --target "$GITHUB_SHA" \
+            --title "Revisit semantic refinement at fixed geometry: ${GITHUB_RUN_ID}" \
+            --notes-file out/revisit/README.md out/revisit/*
