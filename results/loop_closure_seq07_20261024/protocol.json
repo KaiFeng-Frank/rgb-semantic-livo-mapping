@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "sequence": "07",
+  "prediction_arm": "armB0_s1_07_r1",
+  "baseline_trajectory": "results/kitti_seq07_fastlivo2_tum.txt",
+  "frames": 1101,
+  "keyframe_stride": 10,
+  "minimum_loop_seconds": 30.0,
+  "maximum_candidate_distance_m": 20.0,
+  "ring_candidates": 10,
+  "scan_context_rings": 20,
+  "scan_context_sectors": 60,
+  "scan_context_radius_m": 80.0,
+  "scan_context_height_offset_m": 2.0,
+  "scan_context_threshold": 0.18,
+  "submap_half_window": 2,
+  "loop_cooldown_keyframes": 3,
+  "icp_voxel_m": 0.4,
+  "icp_correspondence_m": [
+    2.0,
+    1.0,
+    0.75
+  ],
+  "icp_iterations": [
+    60,
+    40,
+    30
+  ],
+  "icp_huber_m": 0.15,
+  "minimum_icp_fitness": 0.55,
+  "maximum_icp_rmse_m": 0.3,
+  "minimum_correspondences": 1000,
+  "maximum_correction_translation_m": 5.0,
+  "maximum_correction_rotation_deg": 10.0,
+  "odometry_rotation_sigma_deg": 0.15,
+  "odometry_translation_sigma_m": 0.1,
+  "loop_rotation_sigma_deg": 0.5,
+  "loop_translation_sigma_m": 0.15,
+  "loop_huber_sigma": 1.345,
+  "map_voxel_m": 0.2,
+  "map_confidence_gate": 0.5,
+  "deskew_bins": 128,
+  "geometry_evaluation": {
+    "early_frames": [
+      15,
+      25,
+      35,
+      45,
+      55,
+      65,
+      75,
+      85,
+      95
+    ],
+    "late_frames": [
+      1005,
+      1015,
+      1025,
+      1035,
+      1045,
+      1055,
+      1065,
+      1075,
+      1085,
+      1095
+    ],
+    "static_raw_labels": [
+      50,
+      51,
+      80,
+      81
+    ],
+    "range_m": 35.0,
+    "voxel_m": 0.2,
+    "distance_thresholds_m": [
+      0.2,
+      0.5,
+      1.0
+    ],
+    "description": "Held-out frames, static manmade surfaces, symmetric nearest-neighbour distances without fitting a transform; diagnostic, not an independent dataset. No geometry or labels from these frames enter the loop detector."
+  },
+  "evaluation_reference": "Official KITTI odometry poses (not SemanticKITTI poses), interpolated at original TUM timestamps; one SE(3) alignment, no scale.",
+  "selection": "Parameters frozen before execution. No GT, labels or predictions are read by backend.py. One paired feasibility experiment, not a cross-sequence benchmark."
+}

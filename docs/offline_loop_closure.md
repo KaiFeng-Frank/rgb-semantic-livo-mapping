@@ -89,5 +89,11 @@ python -m tools.loop_closure.replay --root /tmp/loop-inputs --out out/loop --arm
 python -m tools.loop_closure.evaluate --root /tmp/loop-inputs --out out/loop
 ```
 
-Results are pending the first completed run. Online ROS integration and broader
-sequence validation are outside this first feasibility experiment.
+The completed [paired seq07 result](../results/loop_closure_seq07_20261024/README.md)
+reduces official KITTI ATE from 0.836592 to 0.557214 m and raises out-of-frustum
+map mIoU-9 from 77.3175% to 78.5259%. Baseline parity, six contract tests and the
+fixed-prediction check all passed. One geometric loop was accepted. Full maps,
+trajectories and checksums are in the
+[result release](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/releases/tag/seq07-loop-40028387196-1).
+Online ROS integration and broader sequence validation are outside this first
+feasibility experiment.

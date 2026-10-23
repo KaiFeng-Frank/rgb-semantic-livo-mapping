@@ -31,6 +31,13 @@ Trained models and recovery evidence are archived separately from Git source:
 [artefact recovery instructions](docs/artifact_recovery.md) and
 [the exact asset manifest](results/v06/artifacts_20260928/artifact-manifest.json).
 
+**Offline loop closure, seq07:** with the same frozen frontend and B0 predictions,
+official KITTI ATE falls **0.837 → 0.557 m** and out-of-frustum map mIoU-9 rises
+**77.32 → 78.53%**. Historical baseline replay is reproduced exactly.
+[Paired results and revisit figures](results/loop_closure_seq07_20261024/README.md)
+· [backend and protocol](docs/offline_loop_closure.md).
+This is one offline sequence comparison; the single-scan predictions are unchanged.
+
 ![semantic map](docs/img/rviz_class_final.png)
 
 *The full 693 m loop of KITTI seq 07, coloured by predicted class. Cyan is `driveable_surface`,
