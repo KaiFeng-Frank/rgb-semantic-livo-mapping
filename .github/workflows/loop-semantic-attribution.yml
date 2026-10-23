@@ -1,0 +1,55 @@
+name: Revisit semantic contribution attribution
+
+on:
+  push:
+    branches: [codex/loop-semantic-refinement]
+    paths: ['tools/loop_semantics/attribution.py', '.github/workflows/loop-semantic-attribution.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: loop-semantic-attribution
+  cancel-in-progress: false
+
+jobs:
+  attribute:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OMP_NUM_THREADS: '2'
+      OPENBLAS_NUM_THREADS: '2'
+      MPLBACKEND: Agg
+    steps:
+      - name: Check out exact source
+        run: |
+          git init .
+          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
+          git fetch --depth 1 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+      - name: Install and test
+        run: |
+          python3 -m venv /tmp/revisit-env
+          /tmp/revisit-env/bin/pip install -r tools/loop_semantics/requirements.txt
+          /tmp/revisit-env/bin/python -m unittest tools.loop_semantics.test_fusion -v
+      - name: Restore verified primary maps and evidence
+        run: |
+          gh release download loop-semantics-40036755735-1 --repo "$GITHUB_REPOSITORY" \
+            --pattern manifest.json --pattern build.json --pattern comparison.json --pattern protocol.json \
+            --pattern '*maps.npz' --pattern '*evidence.npz' --dir /tmp/primary-revisit
+      - name: Restore identical evaluation inputs
+        run: /tmp/revisit-env/bin/python -u -m tools.loop_closure.restore --root /tmp/revisit-inputs --out out/attribution
+      - name: Remove each visits semantic votes and verify original scores unchanged
+        run: |
+          /tmp/revisit-env/bin/python -u -m tools.loop_semantics.attribution \
+            --source /tmp/primary-revisit --root /tmp/revisit-inputs --out out/attribution
+      - name: Preserve all attribution outcomes
+        if: always()
+        run: |
+          /tmp/revisit-env/bin/python -m tools.loop_semantics.package out/attribution
+          gh release create "loop-attribution-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            --repo "$GITHUB_REPOSITORY" --draft --target "$GITHUB_SHA" \
+            --title "Revisit semantic attribution (all controls): ${GITHUB_RUN_ID}" \
+            --notes-file out/attribution/README.md out/attribution/*

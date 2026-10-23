@@ -9,6 +9,7 @@ import numpy as np
 
 from .fusion import Visit, propose, apply_proposal
 from .run import build_maps, configuration, verify_configuration, S
+from .attribution import one_visit_proposal
 
 
 def evidence(label, confidence, distance, groups, xyz=(0., 0., 0.)):
@@ -80,6 +81,16 @@ class Contracts(unittest.TestCase):
         b['keys'][:] = 456
         p = propose(a, b, self.cfg)
         self.assertEqual(len(p['keys']), 0)
+
+    def test_attribution_removes_only_the_other_visits_class_votes(self):
+        proposal = propose(evidence(14, .8, 40, 4), evidence(15, .9, 5, 2), self.cfg)
+        first = one_visit_proposal(proposal, 'first', self.cfg)['first_visit_only']
+        second = one_visit_proposal(proposal, 'second', self.cfg)['second_visit_only']
+        self.assertEqual(first['label'].item(), 14)
+        self.assertEqual(second['label'].item(), 15)
+        self.assertTrue(first['accept'].item() and second['accept'].item())
+        proposal['eligible'][:] = False
+        self.assertFalse(one_visit_proposal(proposal, 'first', self.cfg)['first_visit_only']['accept'].item())
 
     def test_actual_build_excludes_heldout_predictions(self):
         cfg = dict(self.cfg, frames=6)

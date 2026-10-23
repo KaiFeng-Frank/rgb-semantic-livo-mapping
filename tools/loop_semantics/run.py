@@ -174,8 +174,9 @@ def strict_report(counts):
     return r
 
 
-def score(root, out):
+def score(root, out, additional_arms=()):
     cfg = configuration()
+    cfg['arms'] = cfg['arms'] + list(additional_arms)
     build = json.loads((out / 'build.json').read_text())
     verify_configuration(out / 'protocol.json')
     scans, center, windows = setup(root, cfg)
