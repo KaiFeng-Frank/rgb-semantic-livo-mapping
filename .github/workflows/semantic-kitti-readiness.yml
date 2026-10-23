@@ -1,0 +1,63 @@
+name: SemanticKITTI full-taxonomy readiness diagnostic
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/semantickitti-19]
+    paths:
+      - tools/semantic_kitti/**
+      - .github/workflows/semantic-kitti-readiness.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: semantic-kitti-readiness
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OPENBLAS_NUM_THREADS: '2'
+      OMP_NUM_THREADS: '2'
+    steps:
+      - name: Check out exact source
+        run: |
+          git init .
+          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
+          git fetch --depth 1 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+      - name: Install CPU evaluation dependencies
+        run: |
+          python3 -m venv /tmp/sk19-env
+          /tmp/sk19-env/bin/pip install numpy==1.26.4 PyYAML==6.0.2 requests==2.32.3
+      - name: Check official evaluator parity and submission integrity
+        run: /tmp/sk19-env/bin/python -m unittest tools.semantic_kitti.test_contract -v
+      - name: Score immutable archived predictions on complete public sequences
+        run: |
+          /tmp/sk19-env/bin/python -m tools.semantic_kitti.audit_archives \
+            --root /tmp/sk19-inputs --out out/sk19-readiness
+      - name: Archive small results and provenance, without datasets or predictions
+        run: |
+          /tmp/sk19-env/bin/python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          out = Path('out/sk19-readiness')
+          (out / 'execution.json').write_text(json.dumps({
+              'commit': os.environ['GITHUB_SHA'], 'run_id': os.environ['GITHUB_RUN_ID'],
+              'native19_training': False, 'seq08_validation': False, 'test_submission': False,
+              'cpu_only': True, 'raw_data_uploaded': False}, indent=2) + '\n')
+          assets = []
+          for p in sorted(out.iterdir()):
+              assets.append(dict(name=p.name, bytes=p.stat().st_size,
+                  sha256=hashlib.sha256(p.read_bytes()).hexdigest()))
+          (out / 'manifest.json').write_text(json.dumps(dict(assets=assets), indent=2) + '\n')
+          (out / 'SHA256SUMS').write_text(''.join(x['sha256']+'  '+x['name']+'\n' for x in assets))
+          PY
+          gh release create "sk19-readiness-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            --repo "$GITHUB_REPOSITORY" --draft --target "$GITHUB_SHA" \
+            --title "SemanticKITTI 19-class bridge diagnostic (not a leaderboard result)" \
+            --notes-file out/sk19-readiness/README.md out/sk19-readiness/*

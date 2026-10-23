@@ -1,0 +1,20 @@
+{
+  "purpose": "Readiness diagnostic before native 19-class adaptation",
+  "sequences": ["07", "09"],
+  "arms": ["ZS", "armB0_s1"],
+  "pass": 1,
+  "prediction_source": "v0.6-artifacts-20260928",
+  "label_source": "Official SemanticKITTI labels",
+  "metric": "Full-scan mIoU over all 19 official classes",
+  "fov_filter": false,
+  "confidence_filter": false,
+  "range_filter": false,
+  "unpredicted_classes_excluded": false,
+  "abstentions_excluded": false,
+  "mapping_tuned_on_gt": false,
+  "native_19_class_model": false,
+  "new_inference": false,
+  "leaderboard_submission": false,
+  "seq08_validation": false,
+  "raw_data_published": false
+}
