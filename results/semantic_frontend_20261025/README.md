@@ -26,7 +26,13 @@ historical-only evidence, information caps, bounded history, and six input-field
 and timing tests. Geometry and semantic ROS startup both load the expected KITTI
 camera calibration successfully.
 
+The subsequent [isolated build check](clean-build-verification.json) disables the
+CMake package registry and forces all three packages to use the pinned Sophus.
+It passes the actual estimator test and both ROS startup modes. A live ROS bridge
+test also verifies five received scans, preserved point bytes and timestamps, and
+one geometry fallback emission per scan after the configured deadline.
+
 The frozen [120-frame protocol](../../frontend/protocol.json) is being executed
-in [GitHub Actions](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/actions/runs/40123646351).
+in [GitHub Actions](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/actions/runs/40124283919).
 Its raw inputs stay on the ephemeral runner. Final trajectories must be frozen
 before reading pose GT. Cached predictions cannot establish live inference latency.
