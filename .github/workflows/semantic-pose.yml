@@ -15,7 +15,8 @@ concurrency:
 
 jobs:
   compare:
-    runs-on: ubuntu-24.04
+    # Match the original geometry experiment's Python 3.10 / GTSAM 4.2 wheels.
+    runs-on: ubuntu-22.04
     timeout-minutes: 30
     env:
       GH_TOKEN: ${{ github.token }}
