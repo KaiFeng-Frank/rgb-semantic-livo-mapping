@@ -15,7 +15,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: semantic-frontend
+  group: semantic-frontend-${{ github.event_name }}
   cancel-in-progress: false
 
 jobs:
@@ -55,7 +55,9 @@ jobs:
       - name: Install ROS build and validation dependencies
         run: |
           apt-get update -qq
-          apt-get install -y -qq git gh build-essential cmake libeigen3-dev libgoogle-glog-dev libfmt-dev libopencv-dev libpcl-dev libboost-thread-dev python3-colcon-common-extensions python3-numpy python3-scipy python3-yaml python3-pil python3-requests python3-matplotlib ros-jazzy-pcl-ros ros-jazzy-cv-bridge ros-jazzy-image-transport ros-jazzy-tf2-geometry-msgs ros-jazzy-demo-nodes-cpp ros-jazzy-rosbag2-storage-mcap
+          apt-get install -y -qq git gh build-essential cmake libeigen3-dev libgoogle-glog-dev libfmt-dev libopencv-dev libpcl-dev libboost-thread-dev python3-colcon-common-extensions python3-numpy python3-scipy python3-yaml python3-pil python3-requests python3-matplotlib ros-jazzy-pcl-ros ros-jazzy-cv-bridge ros-jazzy-image-transport ros-jazzy-tf2-geometry-msgs ros-jazzy-sensor-msgs-py ros-jazzy-rosbag2-storage-mcap
+          source /opt/ros/jazzy/setup.bash
+          python3 -c 'import rclpy, rosbag2_py, sensor_msgs_py.point_cloud2, cv2, scipy, PIL, requests, yaml'
       - name: Check out exact commit
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
