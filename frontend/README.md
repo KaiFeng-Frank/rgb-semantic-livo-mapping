@@ -41,7 +41,7 @@ not a full joint covariance over robot pose and every semantic map variable.
 
 ## Build and contracts
 
-Use Ubuntu 24.04 / ROS 2 Jazzy, Eigen, PCL, OpenCV, glog, fmt, and colcon. The source
+Use Ubuntu 24.04 / ROS 2 Jazzy, Eigen, PCL, OpenCV, glog, Ceres, fmt, and colcon. The source
 and dependency revisions are locked in `upstream-files.json`, `vikit-files.json`,
 and `dependencies.json`. Bootstrap retrieves only the source files needed to build,
 with Git blob hash verification; it does not download upstream videos or datasets.
