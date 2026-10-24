@@ -76,7 +76,8 @@ python3 -m frontend.input_bridge --mode online --wait-ms 80 \
   --log /tmp/semantic-input.jsonl
 ```
 
-Run the original camera-parameter service and FAST-LIVO2 with the original KITTI
+Run `python3 frontend/parameter_blackboard.py --ros-args --params-file
+config/camera_kitti_cam2.yaml` and FAST-LIVO2 with the original KITTI
 calibration, overriding `common.lid_topic:=/semantic_frontend/points` and
 `semantic.enabled:=true`. `semantic.association` and `semantic.boundaries` provide
 separate ablations; `semantic.enabled:=false` is the unchanged observation path.

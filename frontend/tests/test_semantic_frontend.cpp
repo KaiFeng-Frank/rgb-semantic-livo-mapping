@@ -12,6 +12,7 @@ std::vector<Boundary> straight() {
 }
 int main() {
   Config cfg; cfg.enabled=true;
+  check(group(8)==group(3) && group(7)!=group(3),"native trailer/cone class order changed");
   Evidence e;
   for(int i=0;i<100;++i) e.add({10,.95},0);
   check(!e.dominant().valid(),"pending evidence leaked into current estimate");

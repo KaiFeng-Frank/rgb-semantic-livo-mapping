@@ -53,6 +53,12 @@ reliability gives 0.557178 m and trades loop translation against rotation accura
 These sub-millimetre RMSE differences do **not** establish a useful localization gain.
 All controls and trajectories are preserved; this experiment does not change the live frontend.
 
+The separate [semantic frontend implementation](frontend/README.md) now adds historical
+class-conditioned surface association and metric boundary observations directly to
+FAST-LIVO2's error-state update. Synthetic tests exercise pose, velocity cross covariance,
+and uncertainty updates in the actual estimator. A frozen 120-frame paired validation
+is defined separately; no real-driving accuracy gain is claimed from those tests.
+
 ![semantic map](docs/img/rviz_class_final.png)
 
 *The full 693 m loop of KITTI seq 07, coloured by predicted class. Cyan is `driveable_surface`,

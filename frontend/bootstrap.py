@@ -82,6 +82,11 @@ def prepare(workspace):
             else:
                 replace(p,'  ${cpp_typesupport_target}\n)','  ${cpp_typesupport_target}\n  Sophus::Sophus\n)')
         vikit_marker.write_text('4b7abc838f5d2ca9137f70f122eaaeff9eaf0f50\n')
+    # The original 100 ms discovery race can silently substitute zero intrinsics.
+    # Match the existing reproduction's service-readiness fix; no estimator math.
+    replace(vikit/'vikit_ros/include/vikit/params_helper.h',
+            'wait_for_service(std::chrono::milliseconds(100))',
+            'wait_for_service(std::chrono::milliseconds(10000))')
     sophus=workspace/'src/sophus'
     if not sophus.exists():
         lock=json.loads((HERE/'dependencies.json').read_text())['sophus']

@@ -90,12 +90,12 @@ def run(args):
             path=out/f'{name}.yaml';path.write_text(yaml.safe_dump(config))
             bag='geometry' if arm=='geometry' else 'ZS' if arm.endswith('_ZS') else 'armB0_s1'
             with (out/f'{name}.camera.log').open('w') as camera_log, (out/f'{name}.log').open('w') as log:
-                camera=subprocess.Popen(['ros2','run','demo_nodes_cpp','parameter_blackboard','--ros-args','--params-file',str(REPO/'config/camera_kitti_cam2.yaml')],env=env,stdout=camera_log,stderr=subprocess.STDOUT,start_new_session=True)
+                camera=subprocess.Popen([sys.executable,str(REPO/'frontend/parameter_blackboard.py'),'--ros-args','--params-file',str(REPO/'config/camera_kitti_cam2.yaml')],env=env,stdout=camera_log,stderr=subprocess.STDOUT,start_new_session=True)
                 node=None
                 try:
                     time.sleep(1)
                     node=subprocess.Popen([str(executable),'--ros-args','--params-file',str(path)],env=env,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
-                    for _ in range(100):
+                    for _ in range(150):
                         if node.poll() is not None:raise RuntimeError('frontend startup failed: '+name)
                         if 'intrinsic: 707.091200, 707.091200, 601.887300, 183.110400' in (out/f'{name}.log').read_text():break
                         time.sleep(.1)

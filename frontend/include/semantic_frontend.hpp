@@ -36,7 +36,7 @@ inline double reliability(Tag t) {
 }
 inline int group(int c) {
   if (c == 1 || c == 5) return 1;
-  if (c == 2 || c == 3 || c == 4 || c == 7 || c == 9) return 2;
+  if (c == 2 || c == 3 || c == 4 || c == 8 || c == 9) return 2;
   if (c == 6) return 3;
   if (ground(c)) return 4;
   if (c == 15) return 5;
