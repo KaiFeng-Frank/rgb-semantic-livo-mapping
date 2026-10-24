@@ -45,7 +45,7 @@ jobs:
     container: ros:jazzy-ros-base
     timeout-minutes: 50
     env:
-      CMAKE_BUILD_PARALLEL_LEVEL: '2'
+      CMAKE_BUILD_PARALLEL_LEVEL: '1'
       OPENBLAS_NUM_THREADS: '1'
       OMP_NUM_THREADS: '2'
     defaults:
@@ -97,6 +97,7 @@ jobs:
           mkdir -p out/frontend
           if [ -f /tmp/frontend-inputs/input-recovery.json ]; then cp /tmp/frontend-inputs/input-recovery.json out/frontend/; fi
           if [ -f /tmp/semantic-ws/build/fast_livo/Testing/Temporary/LastTest.log ]; then cp /tmp/semantic-ws/build/fast_livo/Testing/Temporary/LastTest.log out/frontend/; fi
+          if [ -d /tmp/semantic-ws/src/fast_livo/Log/result ]; then cp -a /tmp/semantic-ws/src/fast_livo/Log/result out/frontend/raw-trajectories; fi
           tar -czf /tmp/frontend-evidence.tar.gz -C out frontend
           sha256sum /tmp/frontend-evidence.tar.gz > /tmp/frontend-evidence.sha256
       - name: Upload evidence independently of release permissions
