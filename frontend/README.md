@@ -53,6 +53,7 @@ source /opt/ros/jazzy/setup.bash
 source "$HOME/semantic_livo_ws_clean/install/setup.bash"
 ctest --test-dir "$HOME/semantic_livo_ws_clean/build/fast_livo" --output-on-failure
 python3 -m unittest frontend.tests.test_input_bridge -v
+python3 -m unittest frontend.tests.test_ros_bridge -v
 cmake -S frontend -B /tmp/semantic-contracts -DCMAKE_BUILD_TYPE=Release
 cmake --build /tmp/semantic-contracts -j2
 ctest --test-dir /tmp/semantic-contracts --output-on-failure
@@ -88,6 +89,12 @@ been transformed/deskewed and lacks the original scan timing contract.
 history size. Bridge logs record sensor stamp, arrival, completion, emission and
 timeout outcome. Cached-label replay is only a mechanism control; it cannot stand
 in for measured inference latency or an online result.
+
+The exactly-once rule applies to scans received by the bridge. Its input uses ROS
+sensor-data best-effort QoS; network loss before receipt is outside that buffer.
+Allow DDS discovery to settle before replay (the validation uses `ros2 bag play
+--delay 3`) and compare received timestamps, rather than assuming delivery from
+the publisher's count.
 
 ## Remaining validation and scope
 

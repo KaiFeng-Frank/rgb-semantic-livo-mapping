@@ -76,6 +76,7 @@ jobs:
           ctest --test-dir /tmp/semantic-ws/build/fast_livo --output-on-failure | tee out/frontend/integration.log
           /tmp/semantic-ws/build/fast_livo/semantic_lio_integration_test > out/frontend/state-update.log
           python3 -m unittest frontend.tests.test_input_bridge -v 2>&1 | tee out/frontend/input-tests.log
+          python3 -m unittest frontend.tests.test_ros_bridge -v 2>&1 | tee out/frontend/ros-bridge-tests.log
           python3 -m frontend.tests.startup --workspace /tmp/semantic-ws --out out/frontend/startup
       - name: Recover only the admitted short sequence
         if: inputs.dataset_smoke
