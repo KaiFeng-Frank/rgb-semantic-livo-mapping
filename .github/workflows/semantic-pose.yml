@@ -1,0 +1,55 @@
+name: Controlled semantic contribution to pose
+
+on:
+  push:
+    branches: [codex/semantic-pose]
+    paths: ['tools/semantic_pose/**', '.github/workflows/semantic-pose.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: semantic-pose
+  cancel-in-progress: false
+
+jobs:
+  compare:
+    # Match the original geometry experiment's Python 3.10 / GTSAM 4.2 wheels.
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OMP_NUM_THREADS: '2'
+      OPENBLAS_NUM_THREADS: '2'
+      MPLBACKEND: Agg
+    steps:
+      - name: Check out exact experiment commit
+        run: |
+          git init .
+          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
+          git fetch --depth 1 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+      - name: Install pinned CPU environment
+        run: |
+          python3 -m venv /tmp/pose-env
+          /tmp/pose-env/bin/pip install -r tools/loop_closure/requirements.txt
+      - name: Verify correspondence, weights, geometry and fallback contracts
+        run: /tmp/pose-env/bin/python -m unittest tools.semantic_pose.test_core tools.semantic_pose.test_inputs tools.loop_closure.test_backend -v
+      - name: Recover only fixed registration and held-out diagnostic frames
+        if: github.event_name == 'workflow_dispatch'
+        run: /tmp/pose-env/bin/python -u -m tools.semantic_pose.restore --root /tmp/pose-inputs --out out/semantic-pose
+      - name: Freeze all candidate measurements and trajectories before GT scoring
+        if: github.event_name == 'workflow_dispatch'
+        run: /tmp/pose-env/bin/python -u -m tools.semantic_pose.run --root /tmp/pose-inputs --out out/semantic-pose
+      - name: Score all arms and verify historical trajectory results
+        if: github.event_name == 'workflow_dispatch'
+        run: /tmp/pose-env/bin/python -u -m tools.semantic_pose.score --root /tmp/pose-inputs --out out/semantic-pose
+      - name: Preserve all results and failure evidence
+        if: always() && github.event_name == 'workflow_dispatch'
+        run: |
+          /tmp/pose-env/bin/python -m tools.semantic_pose.package out/semantic-pose
+          gh release create "semantic-pose-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            --repo "$GITHUB_REPOSITORY" --draft --target "$GITHUB_SHA" \
+            --title "Semantic contribution to pose: ${GITHUB_RUN_ID}" \
+            --notes-file out/semantic-pose/README.md out/semantic-pose/*

@@ -1,0 +1,405 @@
+{
+  "historical_open3d_max_matrix_error": 4.119447838402124e-14,
+  "G_vs_open3d_translation_m": 1.0807032433430509e-12,
+  "G_vs_open3d_rotation_deg": 6.15670611154485e-12,
+  "G_measurement": [
+    [
+      0.9954213645588833,
+      0.09555821670718835,
+      0.002221305803185039,
+      -1.3235565626573182
+    ],
+    [
+      -0.09557086251717462,
+      0.9954011744444627,
+      0.006535453489057185,
+      0.24642113567474253
+    ],
+    [
+      -0.0015865741245036143,
+      -0.00671782214161323,
+      0.9999761765403314,
+      -0.00808756642734023
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "G_registration": {
+    "fitness": 0.9552175749894382,
+    "rmse_m": 0.2591441184301837,
+    "correspondences": 9044,
+    "correction_translation_m": 2.6408444175740406,
+    "correction_rotation_deg": 2.950575382740878,
+    "iterations": 45,
+    "failure": null,
+    "history": [
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.8914237431347698,
+        "rmse_m": 0.9049647161532981,
+        "effective_correspondences": 5428.218112522921,
+        "condition": 2.1359663923913117,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9233206590621039,
+        "rmse_m": 0.8866572847779682,
+        "effective_correspondences": 5739.8833606183425,
+        "condition": 1.957476969019612,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9695817490494296,
+        "rmse_m": 0.8899570093716315,
+        "effective_correspondences": 6034.82040518174,
+        "condition": 1.9195679198345137,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9877482044782425,
+        "rmse_m": 0.8225651006873812,
+        "effective_correspondences": 6362.9973967064,
+        "condition": 1.940257820193634,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9923954372623575,
+        "rmse_m": 0.7305637705995737,
+        "effective_correspondences": 6651.781257468158,
+        "condition": 2.005573759416368,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9944021968736798,
+        "rmse_m": 0.6344645355566401,
+        "effective_correspondences": 6894.422174274863,
+        "condition": 1.9338872262021178,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9955640050697085,
+        "rmse_m": 0.5397528495055424,
+        "effective_correspondences": 7174.512394447868,
+        "condition": 1.832062474029016,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9963033375580904,
+        "rmse_m": 0.4547658042542548,
+        "effective_correspondences": 7578.972515462875,
+        "condition": 1.7631433293666467,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9968314321926489,
+        "rmse_m": 0.4023907828950196,
+        "effective_correspondences": 8058.817273167939,
+        "condition": 1.6651481618029138,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9967258132657372,
+        "rmse_m": 0.3757477000487606,
+        "effective_correspondences": 8482.791366121119,
+        "condition": 1.6458839838625867,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9966201943388255,
+        "rmse_m": 0.3626775040141812,
+        "effective_correspondences": 8707.380962011415,
+        "condition": 1.6632623320037527,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9968314321926489,
+        "rmse_m": 0.3571478561060766,
+        "effective_correspondences": 8805.97918885059,
+        "condition": 1.6764188404803932,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9965145754119138,
+        "rmse_m": 0.35170649743543303,
+        "effective_correspondences": 8855.728595755276,
+        "condition": 1.7046954526317144,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9965145754119138,
+        "rmse_m": 0.35042912821317684,
+        "effective_correspondences": 8869.105231782709,
+        "condition": 1.7519693360261979,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9965145754119138,
+        "rmse_m": 0.350075839072283,
+        "effective_correspondences": 8876.17253569755,
+        "condition": 1.7757496727707713,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9964089564850022,
+        "rmse_m": 0.3493988378561609,
+        "effective_correspondences": 8880.164940415545,
+        "condition": 1.7817390177480912,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9964089564850022,
+        "rmse_m": 0.34936783757526163,
+        "effective_correspondences": 8880.552467408577,
+        "condition": 1.7875100732897573,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9964089564850022,
+        "rmse_m": 0.3493540762810945,
+        "effective_correspondences": 8880.059093988682,
+        "condition": 1.791641241382784,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9964089564850022,
+        "rmse_m": 0.3493430107448713,
+        "effective_correspondences": 8880.189419730525,
+        "condition": 1.7901930850356216,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9964089564850022,
+        "rmse_m": 0.34933546740135446,
+        "effective_correspondences": 8880.294388786968,
+        "condition": 1.7910315903334153,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9964089564850022,
+        "rmse_m": 0.3493322967320757,
+        "effective_correspondences": 8880.778138914222,
+        "condition": 1.7917824695745665,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9964089564850022,
+        "rmse_m": 0.3493320522661005,
+        "effective_correspondences": 8880.948221440562,
+        "condition": 1.7918921249724025,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9964089564850022,
+        "rmse_m": 0.34933174887444707,
+        "effective_correspondences": 8880.949327581073,
+        "condition": 1.7919323561546714,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 2.0,
+        "fitness": 0.9964089564850022,
+        "rmse_m": 0.3493317256163332,
+        "effective_correspondences": 8880.950680630667,
+        "condition": 1.7919594321222116,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 1.0,
+        "fitness": 0.9706379383185467,
+        "rmse_m": 0.27987262238760746,
+        "effective_correspondences": 8773.858975288198,
+        "condition": 1.8103629775772476,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 1.0,
+        "fitness": 0.970532319391635,
+        "rmse_m": 0.27964455376919867,
+        "effective_correspondences": 8771.789069670682,
+        "condition": 1.807209212630317,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 1.0,
+        "fitness": 0.970532319391635,
+        "rmse_m": 0.2796303637960996,
+        "effective_correspondences": 8772.94751369759,
+        "condition": 1.8065596940139477,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 1.0,
+        "fitness": 0.970532319391635,
+        "rmse_m": 0.27962438470979045,
+        "effective_correspondences": 8772.67926781957,
+        "condition": 1.8066874774576147,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 1.0,
+        "fitness": 0.970532319391635,
+        "rmse_m": 0.27962127414582494,
+        "effective_correspondences": 8772.668183570695,
+        "condition": 1.8064644739180364,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 1.0,
+        "fitness": 0.970532319391635,
+        "rmse_m": 0.27962040690958806,
+        "effective_correspondences": 8772.592927857,
+        "condition": 1.8065070107169705,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 1.0,
+        "fitness": 0.970532319391635,
+        "rmse_m": 0.2796197675780452,
+        "effective_correspondences": 8772.583470891464,
+        "condition": 1.8065606933828224,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 1.0,
+        "fitness": 0.970532319391635,
+        "rmse_m": 0.2796196008051446,
+        "effective_correspondences": 8772.573784117303,
+        "condition": 1.8065601980574542,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 1.0,
+        "fitness": 0.970532319391635,
+        "rmse_m": 0.2796190966794572,
+        "effective_correspondences": 8772.495739795439,
+        "condition": 1.8069614757745076,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 1.0,
+        "fitness": 0.970532319391635,
+        "rmse_m": 0.2796195831839149,
+        "effective_correspondences": 8772.550503030667,
+        "condition": 1.806524713928845,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 1.0,
+        "fitness": 0.970532319391635,
+        "rmse_m": 0.2796197222214166,
+        "effective_correspondences": 8772.551764976728,
+        "condition": 1.8065154482391061,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 1.0,
+        "fitness": 0.970532319391635,
+        "rmse_m": 0.27961975598458694,
+        "effective_correspondences": 8772.55274592271,
+        "condition": 1.8065133576491192,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 0.75,
+        "fitness": 0.9552175749894382,
+        "rmse_m": 0.25913451838998836,
+        "effective_correspondences": 8690.988324069805,
+        "condition": 1.8165177459611228,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 0.75,
+        "fitness": 0.9552175749894382,
+        "rmse_m": 0.25913693943286287,
+        "effective_correspondences": 8689.69707974822,
+        "condition": 1.8169171007810354,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 0.75,
+        "fitness": 0.9552175749894382,
+        "rmse_m": 0.2591384862513883,
+        "effective_correspondences": 8689.68498403759,
+        "condition": 1.8168950151844492,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 0.75,
+        "fitness": 0.9552175749894382,
+        "rmse_m": 0.25914146273458843,
+        "effective_correspondences": 8689.605630334014,
+        "condition": 1.8176229226415828,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 0.75,
+        "fitness": 0.9552175749894382,
+        "rmse_m": 0.2591421447116163,
+        "effective_correspondences": 8689.402400172388,
+        "condition": 1.8172318990902883,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 0.75,
+        "fitness": 0.9552175749894382,
+        "rmse_m": 0.25914291587516314,
+        "effective_correspondences": 8689.389110609327,
+        "condition": 1.817202146332995,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 0.75,
+        "fitness": 0.9552175749894382,
+        "rmse_m": 0.2591438184318443,
+        "effective_correspondences": 8689.370424211244,
+        "condition": 1.8173975339175616,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 0.75,
+        "fitness": 0.9552175749894382,
+        "rmse_m": 0.25914405104732036,
+        "effective_correspondences": 8689.362649615936,
+        "condition": 1.817381951425356,
+        "downweighted_fraction": 0.0
+      },
+      {
+        "threshold_m": 0.75,
+        "fitness": 0.9552175749894382,
+        "rmse_m": 0.2591441184301837,
+        "effective_correspondences": 8689.360140621653,
+        "condition": 1.8173709144206553,
+        "downweighted_fraction": 0.0
+      }
+    ],
+    "downweighted_fraction": 0.0,
+    "mean_semantic_weight": 1.0,
+    "accepted": true
+  }
+}
