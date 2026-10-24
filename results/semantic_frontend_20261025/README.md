@@ -41,7 +41,38 @@ trajectory replay or scoring. The complete small evidence archive and
 Cached replay now carries original point IDs from bag conversion and checks
 exact xyz/intensity correspondence before attaching predictions. Three added
 tests cover MCAP transport, unchanged sensor bytes and invalid/duplicate IDs.
-The frozen [120-frame protocol](../../frontend/protocol.json) is being rerun in
+The frozen [120-frame protocol](../../frontend/protocol.json) completed in
 [run 40125959560](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/actions/runs/40125959560).
-Raw points and images stay on the ephemeral runner. All trajectories must be
-frozen before reading pose GT; cached predictions cannot establish live inference latency.
+Raw points and images stayed on the ephemeral runner. All 15 trajectories have the
+same 115 timestamps and were hash-frozen before reading pose GT. All source point
+IDs passed exact xyz/intensity checks; the diagnostic recomputed orders also agreed
+in this run. The prior preparation failure's exact cause remains unestablished.
+
+## Real-data admission: failed boundary activation
+
+**Every run accepted zero historical semantic boundary constraints.** The build and
+execution succeeded, but the mechanism gate failed. Changes in error therefore
+cannot be attributed to the boundary residual. No longer experiment is admitted.
+
+| Arm | Mean ATE, m (min–max over 3 runs) | Mean 1 s translation RPE, m | Boundary constraints |
+|---|---:|---:|---:|
+| geometry | 0.074106 (0.073545–0.074490) | 0.094358 | 0 |
+| association_B0 | 0.073180 (0.072615–0.073656) | 0.093129 | 0 |
+| boundary_B0 | 0.074496 (0.073440–0.076388) | 0.094350 | 0 |
+| full_B0 | 0.074326 (0.073403–0.076050) | 0.092839 | 0 |
+| full_ZS | 0.071848 (0.071550–0.072177) | 0.093204 | 0 |
+
+Boundary-only's ATE range is 2.947 mm even though its boundary rows were all zero.
+Full ZS has 2.258 mm lower mean ATE than geometry on this window, but this cannot
+support a boundary-tight-coupling claim. See every repetition in [scores.json](scores.json)
+and the explicit decision in [admission.json](admission.json). The complete compressed
+evidence is `remote-smoke-40125959560.tar.gz` (815 kB, SHA-256 in `admission.json`).
+It contains trajectories, configurations, logs and input hashes, not raw scans,
+images or model archives.
+
+The first implementation extracted semantic edges after the geometry's 0.5 m voxel
+filter. Only 0–8 candidates survived per frame. The next diagnostic will inspect
+boundary extraction from the deskewed cloud before that filter, preserving the
+geometry input and existing acceptance gates. This window is now development data;
+any revised accuracy claim needs a separately frozen, unseen window. Cached labels
+do not establish live inference latency.

@@ -47,8 +47,13 @@
     {
       "run": 40125959560,
       "stage": "validation with carried raw point IDs",
-      "outcome": "running",
-      "commit": "0971a5f0abae160ff3dcd97a3009cf3af10e9c38"
+      "outcome": "workflow success; boundary admission failed",
+      "commit": "0971a5f0abae160ff3dcd97a3009cf3af10e9c38",
+      "reason": "all 15 trajectories complete, but zero accepted boundary constraints",
+      "evidence": {
+        "file": "remote-smoke-40125959560.tar.gz",
+        "sha256": "3bf5108b225b8c082f17f3776f359fe20631b741102268d1669619b2d813e311"
+      }
     }
   ]
 }
