@@ -32,7 +32,16 @@ It passes the actual estimator test and both ROS startup modes. A live ROS bridg
 test also verifies five received scans, preserved point bytes and timestamps, and
 one geometry fallback emission per scan after the configured deadline.
 
-The frozen [120-frame protocol](../../frontend/protocol.json) is being executed
-in [GitHub Actions](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/actions/runs/40124283919).
-Its raw inputs stay on the ephemeral runner. Final trajectories must be frozen
-before reading pose GT. Cached predictions cannot establish live inference latency.
+The remote build, actual estimator test, input tests and both startup modes passed
+in [run 40124920386](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/actions/runs/40124920386).
+Its first data preparation was stopped by a point-order mismatch before any
+trajectory replay or scoring. The complete small evidence archive and
+[`ci-attempts.json`](ci-attempts.json) preserve that result.
+
+Cached replay now carries original point IDs from bag conversion and checks
+exact xyz/intensity correspondence before attaching predictions. Three added
+tests cover MCAP transport, unchanged sensor bytes and invalid/duplicate IDs.
+The frozen [120-frame protocol](../../frontend/protocol.json) is being rerun in
+[run 40125959560](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/actions/runs/40125959560).
+Raw points and images stay on the ephemeral runner. All trajectories must be
+frozen before reading pose GT; cached predictions cannot establish live inference latency.
