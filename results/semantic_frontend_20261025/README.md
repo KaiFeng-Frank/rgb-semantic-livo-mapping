@@ -1,9 +1,10 @@
 # Semantic frontend verification
 
-These are local **synthetic integration and startup** results for the first
-semantic frontend increment. They are not driving accuracy or online throughput
-results. The implementation commit and source hashes are in
-[`local-verification.json`](local-verification.json).
+The first frontend increment now passes actual-estimator tests and a real-data
+**boundary activation** diagnostic. This does not establish driving accuracy or
+online model throughput. The initial synthetic evidence and source hashes are in
+[`local-verification.json`](local-verification.json); revised runtime evidence is
+in [pre-voxel-diagnostic.json](pre-voxel-diagnostic.json).
 
 The fixture calls the actual pinned FAST-LIVO2 `StateEstimation` method. Its flat
 ground cannot geometrically observe lateral translation. Adding historical
@@ -71,8 +72,44 @@ It contains trajectories, configurations, logs and input hashes, not raw scans,
 images or model archives.
 
 The first implementation extracted semantic edges after the geometry's 0.5 m voxel
-filter. Only 0–8 candidates survived per frame. The next diagnostic will inspect
+filter. Only 0–8 candidates survived per frame. The follow-up uses
 boundary extraction from the deskewed cloud before that filter, preserving the
 geometry input and existing acceptance gates. This window is now development data;
 any revised accuracy claim needs a separately frozen, unseen window. Cached labels
 do not establish live inference latency.
+
+## Revised source: boundary activation confirmed
+
+[Run 40127490465](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/actions/runs/40127490465)
+uses commit `8ffa14f62d9258ceb21a341404709557f6c7e150`. All build, integration,
+ROS transport and startup tests pass, including a new fixture retaining dense
+semantic input alongside 0.5 m geometric voxelization. The three development
+replays each retain the same 115 timestamps. Pose GT was not fetched or scored.
+
+| Arm | Updates accepting boundary rows | Rows summed over updates | Maximum history points | Median LIO time, ms | LIO p95, ms |
+|---|---:|---:|---:|---:|---:|
+| geometry | 0/115 | 0 | 0 | 21.71 | 29.87 |
+| full_B0 | 112/115 | 2554 | 568 | 50.07 | 67.24 |
+| full_ZS | 106/115 | 1611 | 393 | 50.54 | 70.97 |
+
+B0 accepts boundary rows on 97.4% of updates and ZS on 92.2%. Those rows enter the
+same state/covariance solve; the synthetic integration test separately verifies
+pose and cross-correlated velocity response. Row counts refer to the final IEKF
+iteration and are not counts of statistically independent measurements.
+
+Boundary extraction alone has median cost 19.44 ms (B0) and 19.98 ms (ZS). These
+are instrumented CPU-stage times on the GitHub runner, with cached predictions,
+not sensor-to-output latency or an online model benchmark. LIO time excludes
+segmentation inference and does not establish realtime operation.
+
+The full 249 kB evidence archive is `remote-diagnostic-40127490465.tar.gz`; its
+SHA-256 is in [pre-voxel-diagnostic.json](pre-voxel-diagnostic.json). The executed
+[diagnostic protocol](executed-diagnostic-protocol.json), all three trajectories,
+input identity audits, configurations and logs are preserved. Raw scans, images
+and model archives remain outside Git source.
+
+This completes the first frontend implementation and activation check. An unseen,
+separately frozen paired evaluation is still needed to measure accuracy benefit;
+the live GPU runtime also needs latency/admission validation. Dynamic-object
+tracking, visual semantic masking and non-rigid loop-map rebuilding remain outside
+this increment. No larger experiment is launched by this diagnostic.

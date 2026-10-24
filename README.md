@@ -56,8 +56,12 @@ All controls and trajectories are preserved; this experiment does not change the
 The separate [semantic frontend implementation](frontend/README.md) now adds historical
 class-conditioned surface association and metric boundary observations directly to
 FAST-LIVO2's error-state update. Synthetic tests exercise pose, velocity cross covariance,
-and uncertainty updates in the actual estimator. A frozen 120-frame paired validation
-is defined separately; no real-driving accuracy gain is claimed from those tests.
+and uncertainty updates in the actual estimator. The first short replay exposed
+zero active boundary rows; moving extraction before geometry voxelization restored
+activation on 112/115 B0 and 106/115 ZS updates, with paired timestamps.
+[Complete verification and the preserved failed admission](results/semantic_frontend_20261025/README.md).
+The revised diagnostic is not scored for accuracy; online model latency and unseen
+trajectory benefit remain unverified.
 
 ![semantic map](docs/img/rviz_class_final.png)
 

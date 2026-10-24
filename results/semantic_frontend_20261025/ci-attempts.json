@@ -1,6 +1,4 @@
 {
-  "protocol_unchanged": true,
-  "algorithm_unchanged_since": "b06090e2a1f4810a3272394e76714e12cc97be16",
   "attempts": [
     {
       "run": 40123646351,
@@ -54,6 +52,19 @@
         "file": "remote-smoke-40125959560.tar.gz",
         "sha256": "3bf5108b225b8c082f17f3776f359fe20631b741102268d1669619b2d813e311"
       }
+    },
+    {
+      "run": 40127490465,
+      "commit": "8ffa14f62d9258ceb21a341404709557f6c7e150",
+      "stage": "pre-voxel boundary source diagnostic",
+      "outcome": "success; real-data boundary activation confirmed",
+      "reason": "B0 112/115 updates, ZS 106/115 updates; paired timestamps; no GT scoring",
+      "evidence": {
+        "file": "remote-diagnostic-40127490465.tar.gz",
+        "sha256": "32ef2893ffb6eacd7eced82f21e4862ddfbf6abddd9ccfffff51346b6f0849c3"
+      }
     }
-  ]
+  ],
+  "original_protocol_unchanged_through_run": 40125959560,
+  "original_core_unchanged_through_run": 40125959560
 }
