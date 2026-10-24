@@ -31,7 +31,9 @@ def score(root,out):
         if line.startswith('Tr:'):tr[:3]=np.array(list(map(float,line.split()[1:]))).reshape(3,4)
     poses=np.loadtxt(io.BytesIO(gt_files['07.txt'])).reshape(-1,3,4)
     gt=np.tile(np.eye(4),(len(poses),1,1));gt[:,:3]=poses;gt=np.linalg.inv(tr)@gt@tr
-    ts=timestamps(root/'raw/2011_09_30/2011_09_30_drive_0027_sync/image_02/timestamps.txt')/1e9
+    # The raw drive has 1106 images; official odometry seq07 covers the first 1101.
+    # Keep the same coverage convention as the existing full-sequence evaluator.
+    ts=timestamps(root/'raw/2011_09_30/2011_09_30_drive_0027_sync/image_02/timestamps.txt')[:len(gt)]/1e9
     clock=check_time_tables(np.loadtxt(io.BytesIO(gt_files['times.txt'])),ts)
     scores=[]
     for run in runs:

@@ -54,6 +54,7 @@ source "$HOME/semantic_livo_ws_clean/install/setup.bash"
 ctest --test-dir "$HOME/semantic_livo_ws_clean/build/fast_livo" --output-on-failure
 python3 -m unittest frontend.tests.test_input_bridge -v
 python3 -m unittest frontend.tests.test_ros_bridge -v
+python3 -m unittest frontend.tests.test_replay_identity -v
 cmake -S frontend -B /tmp/semantic-contracts -DCMAKE_BUILD_TYPE=Release
 cmake --build /tmp/semantic-contracts -j2
 ctest --test-dir /tmp/semantic-contracts --output-on-failure
@@ -101,6 +102,13 @@ the publisher's count.
 The protocol is frozen in `protocol.json`. No accuracy claim follows from the
 synthetic fixture. It must be followed by a short paired real-data check, and a
 measured online run before calling the pipeline validated in driving scenes.
+
+Cached replay carries `raw_point_index` from the original KITTI bag conversion in
+every arm, including geometry. Annotation verifies a complete index permutation
+and exact xyz/intensity equality before applying archived labels. Existing sensor
+fields and timestamps stay byte-identical; the converter's default output is
+unchanged unless `--point-index-field` is requested. Recomputing a permutation is
+kept only as a diagnostic, never as the point identity used to attach semantics.
 
 Actual object-motion tracking, transient object maps, semantic masking of visual
 patches, and rebuilding maps after non-rigid loop correction are not implemented

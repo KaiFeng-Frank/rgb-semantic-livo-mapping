@@ -21,6 +21,24 @@ from kitti_scan import synth
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def raw_point_order(msg, points):
+    fields=[f for f in msg.fields if f.name=='raw_point_index']
+    if len(fields)!=1 or fields[0].datatype!=6 or fields[0].count!=1:
+        raise ValueError('replay requires the original raw_point_index uint32 field')
+    if msg.height!=1 or msg.width!=len(points) or msg.is_bigendian:
+        raise ValueError('raw scan shape/endianness mismatch')
+    field=fields[0]
+    if field.offset+4>msg.point_step:raise ValueError('truncated point index field')
+    order=np.ndarray((len(points),),dtype='<u4',buffer=msg.data,
+                     offset=field.offset,strides=(msg.point_step,)).copy()
+    if not np.array_equal(np.sort(order),np.arange(len(points),dtype=np.uint32)):
+        raise ValueError('point IDs are not a complete raw-scan permutation')
+    xyzi=np.ndarray((len(points),4),dtype='<f4',buffer=msg.data,strides=(msg.point_step,4))
+    if not np.array_equal(xyzi,points[order]):
+        raise ValueError('carried point IDs do not match original xyz/intensity')
+    return order
+
+
 def annotate(root, source, dest, arm):
     import rosbag2_py
     from rclpy.serialization import serialize_message,deserialize_message
@@ -34,7 +52,7 @@ def annotate(root, source, dest, arm):
     starts=np.asarray((raw/'velodyne_points/timestamps_start.txt').read_text().splitlines(),dtype='datetime64[ns]').astype(np.int64)
     ends=np.asarray((raw/'velodyne_points/timestamps_end.txt').read_text().splitlines(),dtype='datetime64[ns]').astype(np.int64)
     lookup={int(t):i for i,t in enumerate(starts)}
-    seen=[]
+    seen=[];audit=[]
     while reader.has_next():
         topic,data,when=reader.read_next()
         if topic=='/velodyne_points':
@@ -42,18 +60,22 @@ def annotate(root, source, dest, arm):
             stamp=msg.header.stamp.sec*10**9+msg.header.stamp.nanosec
             f=lookup[stamp]
             points=np.fromfile(raw/f'velodyne_points/data/{f:010d}.bin',np.float32).reshape(-1,4)
-            _,_,order=synth(points[:,:3],sweep_duration=(ends[f]-starts[f])/1e9)
+            order=raw_point_order(msg,points)
+            _,_,recomputed=synth(points[:,:3],sweep_duration=(ends[f]-starts[f])/1e9)
+            audit.append(dict(frame=f,points=len(points),
+                              order_sha256=hashlib.sha256(order.tobytes()).hexdigest(),
+                              recomputed_disagreements=int(np.count_nonzero(order!=recomputed))))
             with np.load(root/f'pred/{arm}/f{f:06d}.npz') as z:
                 labels,conf=z['lab'],z['conf']
                 if len(labels)!=len(points):raise ValueError('raw prediction index mismatch')
-                # Verify geometry in the actual bag before transporting reordered labels.
-                bag_xyz=np.ndarray((len(points),3),dtype='<f4',buffer=msg.data,strides=(msg.point_step,4))
-                if not np.array_equal(bag_xyz,points[order,:3]):raise ValueError('bag/raw ordering mismatch')
                 msg=add_fields(msg,labels[order],conf[order])
             data=serialize_message(msg);seen.append(f)
         writer.write(topic,data,when)
     del writer
     if seen!=list(range(120)):raise ValueError('smoke frame coverage changed')
+    (root/f'annotation-{arm}.json').write_text(json.dumps(audit,indent=2)+'\n')
+    print('POINT_IDENTITY_VERIFIED',arm,len(seen),'frames; recomputed disagreements',
+          sum(r['recomputed_disagreements'] for r in audit),flush=True)
 
 
 def terminate(process):
@@ -73,8 +95,9 @@ def run(args):
     raw=root/'raw/2011_09_30/2011_09_30_drive_0027_sync'
     subprocess.run([sys.executable,str(REPO/'src/kitti_to_ros2bag.py'),'--drive',str(raw),
                     '--oxts100',str(root/'oxts100'),'--out',str(root/'bag_geometry'),
-                    '--end','120','--time-unit','us'],check=True)
+                    '--end','120','--time-unit','us','--point-index-field'],check=True)
     for arm in ['armB0_s1','ZS']:annotate(root,root/'bag_geometry',root/f'bag_{arm}',arm)
+    for path in root.glob('annotation-*.json'):(out/path.name).write_bytes(path.read_bytes())
     env=dict(os.environ,ROS_DOMAIN_ID='173',RCUTILS_LOGGING_BUFFERED_STREAM='0',OMP_NUM_THREADS='2')
     executable=ws/'install/fast_livo/lib/fast_livo/fastlivo_mapping'
     records=[]

@@ -1,0 +1,48 @@
+{
+  "protocol_unchanged": true,
+  "algorithm_unchanged_since": "b06090e2a1f4810a3272394e76714e12cc97be16",
+  "attempts": [
+    {
+      "run": 40123646351,
+      "stage": "checkout",
+      "outcome": "failed",
+      "reason": "container workspace ownership; no dataset replay"
+    },
+    {
+      "run": 40123913180,
+      "stage": "build",
+      "outcome": "failed",
+      "reason": "build log unavailable from failed release upload; fixed independent artifact preservation"
+    },
+    {
+      "run": 40124198935,
+      "stage": "setup",
+      "outcome": "cancelled",
+      "reason": "declare missing sensor_msgs_py before starting expensive build"
+    },
+    {
+      "run": 40124283919,
+      "stage": "Sophus configuration",
+      "outcome": "failed",
+      "reason": "missing libceres-dev; error and build log archived as Actions artifact"
+    },
+    {
+      "run": 40124555107,
+      "stage": "Vikit ROS configuration",
+      "outcome": "failed",
+      "commit": "b1a1b6b8f1bd7126890b7d6eae0d4bd6c1454848",
+      "reason": "upstream exports Vikit config only in build tree; explicit path added"
+    },
+    {
+      "run": 40124920386,
+      "stage": "point identity audit before any trajectory replay",
+      "outcome": "failed",
+      "commit": "5dd02ab8d346007b5a41eafd36bbfbf66ab7c6c2",
+      "reason": "reconstructed permutation disagreed with actual bag xyz; now carry and validate source point IDs",
+      "evidence": {
+        "file": "remote-preflight-40124920386.tar.gz",
+        "sha256": "0d4e5a088660b93a7d394ef6c7af47f68de701af11f1f2d853a6604b6650e39f"
+      }
+    }
+  ]
+}
