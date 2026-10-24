@@ -14,6 +14,8 @@ colcon build --packages-select sophus livox_ros_driver2 vikit_common vikit_ros f
   --executor sequential --cmake-args -DCMAKE_BUILD_TYPE=Release \
   -DPython3_EXECUTABLE=/usr/bin/python3 -DPYTHON_EXECUTABLE=/usr/bin/python3 \
   -DBUILD_SOPHUS_TESTS=OFF -DBUILD_SOPHUS_EXAMPLES=OFF -DBUILD_TESTING=OFF \
+  -DCMAKE_FIND_USE_PACKAGE_REGISTRY=OFF -DCMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY=OFF \
+  -DSophus_DIR="$WS/install/sophus/share/sophus/cmake" \
   -DSEMANTIC_FRONTEND_SOURCE_DIR="$FRONTEND" \
   '-DCMAKE_CXX_FLAGS=-DEIGEN_MAX_ALIGN_BYTES=16 -DEIGEN_MAX_STATIC_ALIGN_BYTES=16' \
   -Dfmt_DIR=/usr/lib/x86_64-linux-gnu/cmake/fmt

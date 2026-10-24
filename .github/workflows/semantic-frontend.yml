@@ -12,7 +12,7 @@ on:
         default: false
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: semantic-frontend
@@ -45,7 +45,6 @@ jobs:
     container: ros:jazzy-ros-base
     timeout-minutes: 50
     env:
-      GH_TOKEN: ${{ github.token }}
       CMAKE_BUILD_PARALLEL_LEVEL: '2'
       OPENBLAS_NUM_THREADS: '1'
       OMP_NUM_THREADS: '2'
@@ -68,7 +67,7 @@ jobs:
         run: |
           mkdir -p out/frontend
           python3 frontend/bootstrap.py --workspace /tmp/semantic-ws | tee out/frontend/bootstrap.json
-          bash frontend/build.sh /tmp/semantic-ws > out/frontend/build.log 2>&1
+          bash frontend/build.sh /tmp/semantic-ws 2>&1 | tee out/frontend/build.log
       - name: Exercise the actual state estimator and original point transport
         run: |
           source /opt/ros/jazzy/setup.bash
@@ -80,7 +79,7 @@ jobs:
           python3 -m frontend.tests.startup --workspace /tmp/semantic-ws --out out/frontend/startup
       - name: Recover only the admitted short sequence
         if: inputs.dataset_smoke
-        run: python3 -u -m frontend.restore_smoke --root /tmp/frontend-inputs > out/frontend/restore.log 2>&1
+        run: python3 -u -m frontend.restore_smoke --root /tmp/frontend-inputs 2>&1 | tee out/frontend/restore.log
       - name: Freeze paired frontend trajectories before reading GT
         if: inputs.dataset_smoke
         run: |
@@ -98,7 +97,10 @@ jobs:
           if [ -f /tmp/semantic-ws/build/fast_livo/Testing/Temporary/LastTest.log ]; then cp /tmp/semantic-ws/build/fast_livo/Testing/Temporary/LastTest.log out/frontend/; fi
           tar -czf /tmp/frontend-evidence.tar.gz -C out frontend
           sha256sum /tmp/frontend-evidence.tar.gz > /tmp/frontend-evidence.sha256
-          gh release create "semantic-frontend-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" --repo "$GITHUB_REPOSITORY" \
-            --draft --target "$GITHUB_SHA" --title "Semantic frontend integration ${GITHUB_RUN_ID}" \
-            --notes 'Frontend build, state-update, timing, and optional short cached-label evidence. Not a full-sequence or online accuracy claim.' \
-            /tmp/frontend-evidence.tar.gz /tmp/frontend-evidence.sha256
+      - name: Upload evidence independently of release permissions
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: semantic-frontend-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/frontend-evidence.*
+          retention-days: 30

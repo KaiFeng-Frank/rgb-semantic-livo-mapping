@@ -82,6 +82,11 @@ def prepare(workspace):
             else:
                 replace(p,'  ${cpp_typesupport_target}\n)','  ${cpp_typesupport_target}\n  Sophus::Sophus\n)')
         vikit_marker.write_text('4b7abc838f5d2ca9137f70f122eaaeff9eaf0f50\n')
+    # Upstream omits this build dependency; a clean runner must build/export
+    # the pinned Sophus before either vikit package is configured.
+    for name in ('vikit_common','vikit_ros'):
+        replace(vikit/name/'package.xml', '<name>'+name+'</name>',
+                '<name>'+name+'</name>\n  <depend>sophus</depend>')
     # The original 100 ms discovery race can silently substitute zero intrinsics.
     # Match the existing reproduction's service-readiness fix; no estimator math.
     replace(vikit/'vikit_ros/include/vikit/params_helper.h',
