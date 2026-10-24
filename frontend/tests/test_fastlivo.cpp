@@ -49,7 +49,7 @@ void checkPreprocessing() {
     require(tagOf((*b)[i]).label==(i%2?12:10),"raw semantic point identity lost");
   }
 }
-Result estimate(bool enabled,bool boundaries) {
+Result estimate(bool enabled,bool boundaries,bool coarse_geometry=false) {
   VoxelMapConfig cfg{};
   cfg.max_voxel_size_=20.;cfg.max_layer_=0;cfg.max_iterations_=6;
   cfg.layer_init_num_={10};cfg.max_points_num_=5000;cfg.planner_threshold_=.01;
@@ -68,6 +68,13 @@ Result estimate(bool enabled,bool boundaries) {
     vm.feats_down_world_->push_back(p);points.push_back({Vec3(p.x,p.y,p.z),tagOf(p)});
   }
   vm.feats_undistort_=vm.feats_down_body_;
+  if (coarse_geometry) {
+    PointCloudXYZI::Ptr geometry(new PointCloudXYZI);
+    pcl::VoxelGrid<PointType> filter;filter.setLeafSize(.5,.5,.5);
+    filter.setInputCloud(vm.feats_undistort_);filter.filter(*geometry);
+    aggregateTags(*vm.feats_undistort_,*geometry,filter);
+    vm.feats_down_body_=geometry;*vm.feats_down_world_=*geometry;
+  }
   vm.feats_down_size_=int(vm.feats_down_body_->size());
   vm.BuildVoxelMap();
   vm.semantic_map_.config.enabled=enabled;vm.semantic_map_.config.boundaries=boundaries;
@@ -92,6 +99,10 @@ int main(int argc,char **argv) {
   require(on.rows>5 && std::abs(on.state.pos_end.y())<.10,"actual FAST-LIVO2 did not consume semantic residuals");
   require(on.state.cov(4,4)<off.state.cov(4,4),"semantic rows omitted from covariance update");
   require(std::abs(on.state.vel_end.y())>.001,"semantic innovation did not reach coupled velocity state");
+  const auto coarse_off=estimate(false,false,true),coarse_on=estimate(true,true,true);
+  require(std::abs(coarse_off.state.pos_end.y()-.2)<1e-6,"coarse geometry fixture has lateral information");
+  require(coarse_on.rows>5 && std::abs(coarse_on.state.pos_end.y())<.10,
+          "geometry voxelization erased the separate dense semantic boundary input");
   // PCL averages normals; the adapter must restore discrete tags without changing xyz.
   PointCloudXYZI::Ptr cloud(new PointCloudXYZI);
   for(int i=0;i<5;++i) {PointType p;p.x=.1+.01*i;p.y=.1;p.z=.1;p.intensity=i;p.curvature=i;setTag(p,{i<4?10:12,.95});cloud->push_back(p);}

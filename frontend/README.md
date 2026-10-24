@@ -22,7 +22,9 @@ the estimator. Dataset improvement and online throughput require separate eviden
   measurement information. A confident conflict triggers a bounded neighbouring
   surface search. One update contributes at most one normalized semantic vote per
   octree node. Unknown semantics are neutral. Evidence is committed after estimation.
-* Locally planar boundaries between native ground classes supply an additional
+* Boundary extraction uses the deskewed cloud before geometry voxelization;
+  geometric association retains its original downsampled input. Locally planar
+  boundaries between native ground classes supply an additional
   **tangential metric residual**, using a line fitted to matching historical class-pair
   boundaries. The residual and right-SO(3) Jacobian enter `H^T R^-1 H` and `H^T R^-1 r`
   in `VoxelMapManager::StateEstimation`, before the original state/covariance update.
@@ -100,8 +102,12 @@ the publisher's count.
 ## Remaining validation and scope
 
 The protocol is frozen in `protocol.json`. No accuracy claim follows from the
-synthetic fixture. It must be followed by a short paired real-data check, and a
-measured online run before calling the pipeline validated in driving scenes.
+synthetic fixture. The first short real-data replay completed, but accepted zero
+boundary rows: see [the failed admission](../results/semantic_frontend_20261025/README.md).
+The revised pre-voxel source is checked with `--diagnostic`: geometry, full B0 and
+full ZS once each, with no GT fetch or scoring. The old window is now development
+data. A new frozen unseen window and measured online run are required before
+claiming driving accuracy or online performance.
 
 Cached replay carries `raw_point_index` from the original KITTI bag conversion in
 every arm, including geometry. Annotation verifies a complete index permutation

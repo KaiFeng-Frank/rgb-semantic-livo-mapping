@@ -10,6 +10,10 @@ on:
         description: Run the frozen 120-frame cached-label admission on this ephemeral runner
         type: boolean
         default: false
+      mechanism_diagnostic:
+        description: Check pre-voxel boundary activation on development frames without fetching or scoring GT
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -81,16 +85,20 @@ jobs:
           python3 -m unittest frontend.tests.test_replay_identity -v 2>&1 | tee out/frontend/replay-identity-tests.log
           python3 -m frontend.tests.startup --workspace /tmp/semantic-ws --out out/frontend/startup
       - name: Recover only the admitted short sequence
-        if: inputs.dataset_smoke
+        if: inputs.dataset_smoke || inputs.mechanism_diagnostic
         run: python3 -u -m frontend.restore_smoke --root /tmp/frontend-inputs 2>&1 | tee out/frontend/restore.log
       - name: Freeze paired frontend trajectories before reading GT
-        if: inputs.dataset_smoke
+        if: inputs.dataset_smoke || inputs.mechanism_diagnostic
+        env:
+          MECHANISM_DIAGNOSTIC: ${{ inputs.mechanism_diagnostic }}
         run: |
           source /opt/ros/jazzy/setup.bash
           source /tmp/semantic-ws/install/setup.bash
-          python3 -u -m frontend.replay_smoke --root /tmp/frontend-inputs --workspace /tmp/semantic-ws --out out/frontend/smoke
+          diagnostic_args=()
+          if [ "$MECHANISM_DIAGNOSTIC" = true ]; then diagnostic_args+=(--diagnostic); fi
+          python3 -u -m frontend.replay_smoke --root /tmp/frontend-inputs --workspace /tmp/semantic-ws --out out/frontend/smoke "${diagnostic_args[@]}"
       - name: Score frozen trajectories
-        if: inputs.dataset_smoke
+        if: inputs.dataset_smoke && !inputs.mechanism_diagnostic
         run: python3 -m frontend.score_smoke --root /tmp/frontend-inputs --out out/frontend/smoke > out/frontend/scoring.log
       - name: Preserve evidence without raw data or model archives
         if: always()

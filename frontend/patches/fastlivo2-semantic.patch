@@ -231,7 +231,7 @@ index bf0d497..41f9941 100644
        added_pt.y = pl_orig.points[i].y;
        added_pt.z = pl_orig.points[i].z;
 diff --git a/src/voxel_map.cpp b/src/voxel_map.cpp
-index 731222c..7d65dcd 100644
+index 731222c..4f83595 100644
 --- a/src/voxel_map.cpp
 +++ b/src/voxel_map.cpp
 @@ -11,6 +11,7 @@ which is included as part of this source code package.
@@ -250,22 +250,36 @@ index 731222c..7d65dcd 100644
    if (!init_octo_)
    {
      new_points_++;
-@@ -353,6 +355,14 @@ VoxelOctoTree *VoxelOctoTree::Insert(const pointWithVar &pv)
+@@ -353,6 +355,28 @@ VoxelOctoTree *VoxelOctoTree::Insert(const pointWithVar &pv)
  
  void VoxelMapManager::StateEstimation(StatesGroup &state_propagat)
  {
 +  semantic_boundaries_.clear();
 +  semantic_constraint_count_ = 0;
 +  if (semantic_map_.config.enabled) {
++    // Boundary transitions must be observed BEFORE the 0.5 m geometry voxel
++    // filter mixes labels and removes their local support. Both clouds have the
++    // same deskew/time endpoint; geometry continues to use feats_down_body_.
 +    std::vector<semantic_frontend::Sample> samples;
-+    for (const auto &p : *feats_down_body_)
++    samples.reserve(feats_undistort_->size());
++    for (const auto &p : *feats_undistort_)
 +      samples.push_back({extR_ * V3D(p.x,p.y,p.z) + extT_, semantic_frontend::tagOf(p)});
-+    semantic_boundaries_ = semantic_frontend::extractBoundaries(samples, semantic_map_.config);
++    semantic_frontend::ExtractionStats extraction;
++    const double semantic_start = omp_get_wtime();
++    semantic_boundaries_ = semantic_frontend::extractBoundaries(samples, semantic_map_.config, &extraction);
++    std::cout << "[ Semantic input ] frame=" << semantic_frame_
++              << " dense=" << samples.size() << " geometric=" << feats_down_body_->size()
++              << " eligible=" << extraction.eligible
++              << " no_other=" << extraction.no_other_class
++              << " sparse_or_nonadjacent=" << extraction.sparse_or_nonadjacent
++              << " sparse_other=" << extraction.sparse_other
++              << " nonplanar=" << extraction.nonplanar
++              << " extraction_ms=" << 1000. * (omp_get_wtime() - semantic_start) << std::endl;
 +  }
    cross_mat_list_.clear();
    cross_mat_list_.reserve(feats_down_size_);
    body_cov_list_.clear();
-@@ -403,6 +413,10 @@ void VoxelMapManager::StateEstimation(StatesGroup &state_propagat)
+@@ -403,6 +427,10 @@ void VoxelMapManager::StateEstimation(StatesGroup &state_propagat)
        cov = state_.rot_end * cov * state_.rot_end.transpose() + (-point_crossmat) * rot_var * (-point_crossmat.transpose()) + t_var;
        pv.var = cov;
        pv.body_var = body_cov_list_[i];
@@ -276,7 +290,7 @@ index 731222c..7d65dcd 100644
      }
      ptpl_list_.clear();
  
-@@ -465,6 +479,8 @@ void VoxelMapManager::StateEstimation(StatesGroup &state_propagat)
+@@ -465,6 +493,8 @@ void VoxelMapManager::StateEstimation(StatesGroup &state_propagat)
        R_inv(i) = 1.0 / (0.001 + sigma_l + ptpl_list_[i].normal_.transpose() * var * ptpl_list_[i].normal_);
        // R_inv(i) = 1.0 / (sigma_l + ptpl_list_[i].normal_.transpose() * var * ptpl_list_[i].normal_);
  
@@ -285,7 +299,7 @@ index 731222c..7d65dcd 100644
        /*** calculate the Measuremnt Jacobian matrix H ***/
        V3D A(point_crossmat * state_.rot_end.transpose() * ptpl_list_[i].normal_);
        Hsub.row(i) << VEC_FROM_ARRAY(A), ptpl_list_[i].normal_[0], ptpl_list_[i].normal_[1], ptpl_list_[i].normal_[2];
-@@ -477,9 +493,17 @@ void VoxelMapManager::StateEstimation(StatesGroup &state_propagat)
+@@ -477,9 +507,17 @@ void VoxelMapManager::StateEstimation(StatesGroup &state_propagat)
      /*** Iterative Kalman Filter Update ***/
      MatrixXd K(DIM_STATE, effct_feat_num_);
      // auto &&Hsub_T = Hsub.transpose();
@@ -304,7 +318,7 @@ index 731222c..7d65dcd 100644
      // EigenSolver<Matrix<double, 6, 6>> es(H_T_H.block<6,6>(0,0));
      MD(DIM_STATE, DIM_STATE) &&K_1 = (H_T_H.block<DIM_STATE, DIM_STATE>(0, 0) + state_.cov.block<DIM_STATE, DIM_STATE>(0, 0).inverse()).inverse();
      G.block<DIM_STATE, 6>(0, 0) = K_1.block<DIM_STATE, 6>(0, 0) * H_T_H.block<6, 6>(0, 0);
-@@ -705,6 +729,19 @@ void VoxelMapManager::BuildResidualListOMP(std::vector<pointWithVar> &pv_list, s
+@@ -705,6 +743,19 @@ void VoxelMapManager::BuildResidualListOMP(std::vector<pointWithVar> &pv_list, s
          auto iter_near = voxel_map_.find(near_position);
          if (iter_near != voxel_map_.end()) { build_single_residual(pv, iter_near->second, 0, is_sucess, prob, single_ptpl); }
        }
@@ -324,7 +338,7 @@ index 731222c..7d65dcd 100644
        if (is_sucess)
        {
          mylock.lock();
-@@ -754,10 +791,14 @@ void VoxelMapManager::build_single_residual(pointWithVar &pv, const VoxelOctoTre
+@@ -754,10 +805,14 @@ void VoxelMapManager::build_single_residual(pointWithVar &pv, const VoxelOctoTre
        {
          is_sucess = true;
          double this_prob = 1.0 / (sqrt(sigma_l)) * exp(-0.5 * dis_to_plane * dis_to_plane / sigma_l);

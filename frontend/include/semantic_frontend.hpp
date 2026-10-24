@@ -110,6 +110,10 @@ struct Config {
 };
 
 struct Sample { Vec3 point; Tag tag; };
+struct ExtractionStats {
+  std::size_t eligible=0, no_other_class=0, sparse_or_nonadjacent=0,
+              sparse_other=0, nonplanar=0;
+};
 struct Boundary {
   Vec3 point = Vec3::Zero();
   Vec3 surface_normal = Vec3::UnitZ();
@@ -125,12 +129,16 @@ inline Cell cell(const Vec3 &p, double size) {
 // Initial scope: boundaries between observed ground categories. A locally planar
 // neighbourhood rejects range silhouettes and height discontinuities. It does NOT
 // create a pole/lane class that is absent from the native 16-class model.
-inline std::vector<Boundary> extractBoundaries(const std::vector<Sample> &points, const Config &cfg) {
+inline std::vector<Boundary> extractBoundaries(const std::vector<Sample> &points, const Config &cfg,
+                                               ExtractionStats *stats=nullptr) {
+  ExtractionStats counts;
   std::map<Cell, std::vector<int>> grid;
   for (std::size_t i = 0; i < points.size(); ++i)
     if (points[i].point.allFinite() && ground(points[i].tag.label) &&
-        points[i].tag.valid() && points[i].tag.confidence >= cfg.confidence_min)
+        points[i].tag.valid() && points[i].tag.confidence >= cfg.confidence_min) {
       grid[cell(points[i].point, cfg.extraction_radius)].push_back(int(i));
+      ++counts.eligible;
+    }
   std::vector<Boundary> result;
   std::map<std::tuple<int,int,int,int,int>, bool> emitted;
   for (const auto &[key, ids] : grid) for (int i : ids) {
@@ -157,21 +165,22 @@ inline std::vector<Boundary> extractBoundaries(const std::vector<Sample> &points
     }
     // Only an adjacent class transition is an edge. Interior points within the
     // search radius would otherwise smear the boundary across a wide strip.
-    if (other < 0 || same_count < cfg.min_support || best>2.25*spacing) continue;
+    if (other < 0) { ++counts.no_other_class; continue; }
+    if (same_count < cfg.min_support || best>2.25*spacing) { ++counts.sparse_or_nonadjacent; continue; }
     int other_count=0;
     Vec3 mean=Vec3::Zero();
     for (int j : near) {
       mean += points[j].point;
       other_count += points[j].tag.label == points[other].tag.label;
     }
-    if (other_count < cfg.min_support) continue;
+    if (other_count < cfg.min_support) { ++counts.sparse_other; continue; }
     mean /= double(near.size());
     Mat3 cov=Mat3::Zero();
     for (int j : near) { Vec3 d=points[j].point-mean; cov.noalias() += d*d.transpose(); }
     cov /= double(near.size());
     Eigen::SelfAdjointEigenSolver<Mat3> es(cov);
     if (es.info()!=Eigen::Success || es.eigenvalues()[1] < 1e-4 ||
-        es.eigenvalues()[0] > .04*es.eigenvalues()[1]) continue;
+        es.eigenvalues()[0] > .04*es.eigenvalues()[1]) { ++counts.nonplanar; continue; }
     Boundary b;
     b.point=.5*(p.point+points[other].point);
     b.surface_normal=es.eigenvectors().col(0);
@@ -181,8 +190,9 @@ inline std::vector<Boundary> extractBoundaries(const std::vector<Sample> &points
     auto [bx,by,bz]=cell(b.point,.25);
     if (!emitted.emplace(std::make_tuple(bx,by,bz,b.first,b.second),true).second) continue;
     result.push_back(b);
-    if (result.size() >= cfg.max_boundaries) return result;
+    if (result.size() >= cfg.max_boundaries) { if(stats) *stats=counts; return result; }
   }
+  if(stats) *stats=counts;
   return result;
 }
 

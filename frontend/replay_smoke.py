@@ -91,6 +91,13 @@ def run(args):
     if out.exists():raise ValueError('refusing to overwrite an experiment directory')
     out.mkdir(parents=True)
     cfg=json.loads((REPO/'frontend/protocol.json').read_text())
+    if args.diagnostic:
+        # The first scored window is now development data. This rerun checks
+        # activation only; score_smoke explicitly rejects this protocol.
+        cfg.update(purpose='Boundary source diagnostic only; no accuracy scoring',
+                   arms=['geometry','full_B0','full_ZS'],repetitions=1,
+                   diagnostic=True,reference_run=40125959560,
+                   change='extract from deskewed pre-voxel cloud; same gates and information caps')
     (out/'protocol.json').write_text(json.dumps(cfg,indent=2)+'\n')
     raw=root/'raw/2011_09_30/2011_09_30_drive_0027_sync'
     subprocess.run([sys.executable,str(REPO/'src/kitti_to_ros2bag.py'),'--drive',str(raw),
@@ -150,4 +157,5 @@ def run(args):
 if __name__=='__main__':
     ap=argparse.ArgumentParser(description=__doc__)
     for name in ['root','workspace','out']:ap.add_argument('--'+name,type=Path,required=True)
+    ap.add_argument('--diagnostic',action='store_true')
     run(ap.parse_args())

@@ -16,6 +16,8 @@ from tools.loop_closure.common import timestamps,matrices,interpolate,check_time
 
 
 def score(root,out):
+    if json.loads((out/'protocol.json').read_text()).get('diagnostic'):
+        raise ValueError('diagnostic development replay cannot be used for accuracy scoring')
     frozen=json.loads((out/'frozen.json').read_text())
     runs=json.loads((out/'runs.json').read_text())
     for name,digest in frozen.items():
