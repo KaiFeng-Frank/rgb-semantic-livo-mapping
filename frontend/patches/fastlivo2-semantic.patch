@@ -1,0 +1,896 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index af27e8a..3f4a59d 100755
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -21,18 +21,18 @@ message(STATUS "Current CPU architecture: ${CMAKE_SYSTEM_PROCESSOR}")
+ if(CMAKE_SYSTEM_PROCESSOR MATCHES "^(arm|aarch64|ARM|AARCH64)")
+   if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
+     # 64-bit ARM optimizations (e.g., RK3588 and Jetson Orin NX)
+-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -mcpu=native -mtune=native -ffast-math")
+-    message(STATUS "Using 64-bit ARM optimizations: -O3 -mcpu=native -mtune=native -ffast-math")
++    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -mcpu=native -mtune=generic -ffast-math")
++    message(STATUS "Using 64-bit ARM optimizations: -O3 -mcpu=native -mtune=generic -ffast-math")
+   else()
+     # 32-bit ARM optimizations with NEON support
+-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -mcpu=native -mtune=native -mfpu=neon -ffast-math")
+-    message(STATUS "Using 32-bit ARM optimizations: -O3 -mcpu=native -mtune=native -mfpu=neon -ffast-math")
++    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -mcpu=native -mtune=generic -mfpu=neon -ffast-math")
++    message(STATUS "Using 32-bit ARM optimizations: -O3 -mcpu=native -mtune=generic -mfpu=neon -ffast-math")
+   endif()
+   add_definitions(-DARM_ARCH)
+ else()
+   # x86-64 (Intel/AMD) optimizations
+-  set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native -mtune=native -funroll-loops") #-flto
+-  message(STATUS "Using general x86 optimizations: -O3 -march=native -mtune=native -funroll-loops") 
++  set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=x86-64 -mtune=generic -funroll-loops") #-flto
++  message(STATUS "Using general x86 optimizations: -O3 -march=x86-64 -mtune=generic -funroll-loops") 
+   add_definitions(-DX86_ARCH)
+ endif()
+ 
+@@ -95,6 +95,9 @@ find_package(Eigen3 REQUIRED)
+ find_package(PCL REQUIRED)
+ find_package(OpenCV REQUIRED)
+ find_package(Sophus REQUIRED)
++if(NOT Sophus_INCLUDE_DIRS AND TARGET Sophus::Sophus)
++  get_target_property(Sophus_INCLUDE_DIRS Sophus::Sophus INTERFACE_INCLUDE_DIRECTORIES)
++endif()
+ find_package(Boost REQUIRED COMPONENTS thread)
+ find_package(fmt REQUIRED)
+ 
+@@ -126,7 +129,7 @@ set(dependencies
+   livox_ros_driver2
+ )
+ 
+-set(COMMON_DEPENDENCIES OpenMP::OpenMP_CXX fmt::fmt)
++set(COMMON_DEPENDENCIES OpenMP::OpenMP_CXX fmt::fmt Sophus::Sophus)
+ 
+ # link_directories(${COMMON_DEPENDENCIES}
+ #   ${vikit_common_LIBRARIES}/libvikit_common.so
+@@ -153,7 +156,7 @@ target_link_libraries(laser_mapping
+     ${CMAKE_SOURCE_DIR}/../../install/vikit_ros/lib/libvikit_ros.so
+     ${COMMON_DEPENDENCIES}
+ )
+-target_link_libraries(vio ${COMMON_DEPENDENCIES})
++target_link_libraries(vio ${CMAKE_SOURCE_DIR}/../../install/vikit_common/lib/libvikit_common.so ${COMMON_DEPENDENCIES})
+ target_link_libraries(lio utils ${COMMON_DEPENDENCIES})
+ target_link_libraries(pre ${COMMON_DEPENDENCIES})
+ target_link_libraries(imu_proc ${COMMON_DEPENDENCIES})
+@@ -209,4 +212,12 @@ ament_export_dependencies(
+   Sophus
+ )
+ 
+-ament_package()
+\ No newline at end of file
++ament_package()
++set(SEMANTIC_FRONTEND_SOURCE_DIR "" CACHE PATH "Semantic frontend repository's frontend directory")
++if(SEMANTIC_FRONTEND_SOURCE_DIR)
++  enable_testing()
++  add_executable(semantic_lio_integration_test ${SEMANTIC_FRONTEND_SOURCE_DIR}/tests/test_fastlivo.cpp)
++  ament_target_dependencies(semantic_lio_integration_test ${dependencies})
++  target_link_libraries(semantic_lio_integration_test lio vio pre ${PCL_LIBRARIES} ${OpenCV_LIBRARIES} ${COMMON_DEPENDENCIES})
++  add_test(NAME semantic_lio_integration COMMAND semantic_lio_integration_test)
++endif()
+diff --git a/include/common_lib.h b/include/common_lib.h
+index 6202918..2118198 100644
+--- a/include/common_lib.h
++++ b/include/common_lib.h
+@@ -13,6 +13,8 @@ which is included as part of this source code package.
+ #ifndef COMMON_LIB_H
+ #define COMMON_LIB_H
+ 
++#include "semantic_frontend.hpp"
++#include "semantic_motion.hpp"
+ #include <utils/so3_math.h>
+ #include <utils/types.h>
+ #include <utils/color.h>
+@@ -105,13 +107,16 @@ struct LidarMeasureGroup
+ typedef struct pointWithVar
+ {
+   Eigen::Vector3d point_b;     // point in the lidar body frame
++  semantic_frontend::Tag semantic_tag;
++  semantic_frontend::MotionDecision semantic_motion;
++  std::int64_t semantic_frame = -1;
+   Eigen::Vector3d point_i;     // point in the imu body frame
+   Eigen::Vector3d point_w;     // point in the world frame
+   Eigen::Matrix3d var_nostate; // the var removed the state covarience
+   Eigen::Matrix3d body_var;
+   Eigen::Matrix3d var;
+   Eigen::Matrix3d point_crossmat;
+-  Eigen::Vector3d normal;
++  Eigen::Vector3d normal = Eigen::Vector3d::Zero();
+   pointWithVar()
+   {
+     var_nostate = Eigen::Matrix3d::Zero();
+diff --git a/include/preprocess.h b/include/preprocess.h
+index bb550cf..7661006 100644
+--- a/include/preprocess.h
++++ b/include/preprocess.h
+@@ -167,6 +167,7 @@ public:
+   
+   double blind, blind_sqr;
+   bool feature_enabled, given_offset_time;
++  bool semantic_enabled = false;
+   std::shared_ptr<rclcpp::Publisher<sensor_msgs::msg::PointCloud2>> pub_full;
+   std::shared_ptr<rclcpp::Publisher<sensor_msgs::msg::PointCloud2>> pub_surf;
+   std::shared_ptr<rclcpp::Publisher<sensor_msgs::msg::PointCloud2>> pub_corn;
+diff --git a/include/vio.h b/include/vio.h
+index 21f2d9d..1e5b281 100644
+--- a/include/vio.h
++++ b/include/vio.h
+@@ -15,6 +15,7 @@ which is included as part of this source code package.
+ 
+ #include "voxel_map.h"
+ #include "feature.h"
++#include "semantic_visual.hpp"
+ #include <opencv2/imgproc/imgproc_c.h>
+ #include <pcl/filters/voxel_grid.h>
+ #include <set>
+@@ -99,6 +100,15 @@ public:
+   vector<float> patch_buffer;
+   bool normal_en, inverse_composition_en, exposure_estimate_en, raycast_en, has_ref_patch_cache;
+   bool ncc_en = false, colmap_output_en = false;
++  bool semantic_visual_enabled_=false;
++  double semantic_stamp_=-1.;
++  semantic_frontend::VisualSemanticGate semantic_gate_;
++  std::vector<semantic_frontend::Sample> semantic_world_;
++  std::vector<semantic_frontend::ObjectRegion> semantic_regions_,semantic_invalidated_;
++  std::size_t semantic_visual_rows_=0;
++  double semanticPatchWeight(const V2D &pc,int scale=1) const {
++    return semantic_visual_enabled_?semantic_gate_.patchWeight(pc,patch_size_half,scale):1.;
++  }
+ 
+   int width, height, grid_n_width, grid_n_height, length;
+   double image_resize_factor;
+diff --git a/include/visual_point.h b/include/visual_point.h
+index 494cc72..c2ea306 100644
+--- a/include/visual_point.h
++++ b/include/visual_point.h
+@@ -25,6 +25,8 @@ class VisualPoint : boost::noncopyable
+ public:
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+ 
++  semantic_frontend::Tag semantic_tag_;
++  bool semantic_invalid_=false;
+   Vector3d pos_;                //!< 3d pos of the point in the world coordinate frame.
+   Vector3d normal_;             //!< Surface normal at point.
+   Matrix3d normal_information_; //!< Inverse covariance matrix of normal estimation.
+diff --git a/include/voxel_map.h b/include/voxel_map.h
+index 2f28d80..d2571e0 100644
+--- a/include/voxel_map.h
++++ b/include/voxel_map.h
+@@ -14,6 +14,7 @@ which is included as part of this source code package.
+ #define VOXEL_MAP_H_
+ 
+ #include "common_lib.h"
++#include "semantic_likelihood.hpp"
+ #include <Eigen/Dense>
+ #include <fstream>
+ #include <math.h>
+@@ -64,6 +65,8 @@ typedef struct PointToPlane
+   double eigen_value_;
+   bool is_valid_;
+   float dis_to_plane_;
++  double semantic_weight_ = 1.;
++  double motion_weight_ = 1.;
+ } PointToPlane;
+ 
+ typedef struct VoxelPlane
+@@ -132,6 +135,8 @@ class VoxelOctoTree
+ public:
+   VoxelOctoTree() = default;
+   std::vector<pointWithVar> temp_points_;
++  semantic_frontend::Evidence semantic_evidence_;
++  bool semantic_invalid_ = false;
+   VoxelPlane *plane_ptr_;
+   int layer_;
+   int octo_state_; // 0 is end of tree, 1 is not
+@@ -226,6 +231,33 @@ public:
+     feats_down_world_.reset(new PointCloudXYZI());
+   };
+ 
++  semantic_frontend::BoundaryMap semantic_map_;
++  semantic_frontend::MotionTracker semantic_motion_;
++  semantic_frontend::SemanticLikelihood semantic_likelihood_;
++  std::vector<semantic_frontend::Sample> semantic_samples_;
++  std::vector<semantic_frontend::MotionDecision> semantic_decisions_;
++  M3D semantic_prior_R_ = M3D::Identity();
++  V3D semantic_prior_t_ = V3D::Zero();
++  double semantic_stamp_ = -1.;
++  std::size_t semantic_likelihood_count_ = 0, semantic_dynamic_count_ = 0;
++  std::size_t semantic_pending_count_ = 0, semantic_invalidated_count_ = 0;
++  void PrepareSemanticFrame(double stamp);
++  void InvalidateSemanticMap();
++  std::vector<semantic_frontend::Boundary> semantic_boundaries_;
++  std::int64_t semantic_frame_ = 0;
++  std::size_t semantic_constraint_count_ = 0;
++  void CommitSemanticFrame() {
++    if (semantic_map_.config.enabled) {
++      semantic_map_.commit(semantic_frame_, semantic_boundaries_, state_.rot_end, state_.pos_end);
++      if (semantic_map_.config.likelihood)
++        semantic_likelihood_.commit(semantic_frame_, semantic_samples_, state_.rot_end, state_.pos_end);
++      if ((semantic_map_.config.dynamics || semantic_map_.config.visual_mask) && semantic_stamp_>=0.) {
++        const M3D correction=state_.rot_end*semantic_prior_R_.transpose();
++        semantic_motion_.commit(correction,state_.pos_end-correction*semantic_prior_t_);
++      }
++    }
++    ++semantic_frame_;
++  }
+   void StateEstimation(StatesGroup &state_propagat);
+   void TransformLidar(const Eigen::Matrix3d rot, const Eigen::Vector3d t, const PointCloudXYZI::Ptr &input_cloud,
+                       pcl::PointCloud<pcl::PointXYZI>::Ptr &trans_cloud);
+diff --git a/src/LIVMapper.cpp b/src/LIVMapper.cpp
+index d67d140..374de9d 100644
+--- a/src/LIVMapper.cpp
++++ b/src/LIVMapper.cpp
+@@ -11,6 +11,7 @@ which is included as part of this source code package.
+ */
+ 
+ #include "LIVMapper.h"
++#include "semantic_pcl.hpp"
+ #include <vikit/camera_loader.h>
+ 
+ using namespace Sophus;
+@@ -40,6 +41,13 @@ LIVMapper::LIVMapper(rclcpp::Node::SharedPtr &node, std::string node_name)
+   pcl_wait_save.reset(new PointCloudXYZRGB());
+   pcl_wait_save_intensity.reset(new PointCloudXYZI());
+   voxelmap_manager.reset(new VoxelMapManager(voxel_config, voxel_map));
++  voxelmap_manager->semantic_map_.config.enabled = p_pre->semantic_enabled;
++  voxelmap_manager->semantic_map_.config.association = this->node->get_parameter("semantic.association").as_bool();
++  voxelmap_manager->semantic_map_.config.boundaries = this->node->get_parameter("semantic.boundaries").as_bool();
++  voxelmap_manager->semantic_map_.config.dynamics = this->node->get_parameter("semantic.dynamics").as_bool();
++  voxelmap_manager->semantic_map_.config.visual_mask = this->node->get_parameter("semantic.visual_mask").as_bool();
++  voxelmap_manager->semantic_map_.config.likelihood = this->node->get_parameter("semantic.likelihood").as_bool();
++  voxelmap_manager->semantic_map_.config.adaptive_boundary_noise = this->node->get_parameter("semantic.adaptive_boundary_noise").as_bool();
+   vio_manager.reset(new VIOManager());
+   root_dir = ROOT_DIR;
+   initializeFiles();
+@@ -52,6 +60,14 @@ LIVMapper::~LIVMapper() {}
+ 
+ void LIVMapper::readParameters(rclcpp::Node::SharedPtr &node)
+ {
++  node->declare_parameter<bool>("semantic.enabled", false);
++  node->declare_parameter<bool>("semantic.association", true);
++  node->declare_parameter<bool>("semantic.boundaries", true);
++  node->declare_parameter<bool>("semantic.dynamics", false);
++  node->declare_parameter<bool>("semantic.visual_mask", false);
++  node->declare_parameter<bool>("semantic.likelihood", false);
++  node->declare_parameter<bool>("semantic.adaptive_boundary_noise", false);
++  p_pre->semantic_enabled = node->get_parameter("semantic.enabled").as_bool();
+   // declare parameters
+   this->node->declare_parameter<std::string>("common.lid_topic", "/livox/lidar");
+   this->node->declare_parameter<std::string>("common.imu_topic", "/livox/imu");
+@@ -257,6 +273,8 @@ void LIVMapper::initializeFiles()
+ 
+ void LIVMapper::initializeSubscribersAndPublishers(rclcpp::Node::SharedPtr &node, image_transport::ImageTransport &it_)
+ {
++  if (p_pre->semantic_enabled && (p_pre->lidar_type != VELO16 || p_pre->feature_enabled))
++    throw std::invalid_argument("semantic frontend currently requires Velodyne with feature_extract_en=false");
+   image_transport::ImageTransport it(this->node);
+   if (p_pre->lidar_type == AVIA) {
+     sub_pcl = this->node->create_subscription<livox_ros_driver2::msg::CustomMsg>(lid_topic, 200000, std::bind(&LIVMapper::livox_pcl_cbk, this, std::placeholders::_1));
+@@ -419,6 +437,8 @@ void LIVMapper::handleLIO()
+ 
+   downSizeFilterSurf.setInputCloud(feats_undistort);
+   downSizeFilterSurf.filter(*feats_down_body);
++  if (voxelmap_manager->semantic_map_.config.enabled)
++    semantic_frontend::aggregateTags(*feats_undistort, *feats_down_body, downSizeFilterSurf);
+   
+   double t_down = omp_get_wtime();
+ 
+@@ -427,6 +447,7 @@ void LIVMapper::handleLIO()
+   transformLidar(_state.rot_end, _state.pos_end, feats_down_body, feats_down_world);
+   voxelmap_manager->feats_down_world_ = feats_down_world;
+   voxelmap_manager->feats_down_size_ = feats_down_size;
++  voxelmap_manager->PrepareSemanticFrame(LidarMeasures.last_lio_update_time);
+   
+   if (!lidar_map_inited) 
+   {
+@@ -491,6 +512,25 @@ void LIVMapper::handleLIO()
+     voxelmap_manager->pv_list_[i].var = var;
+   }
+   voxelmap_manager->UpdateVoxelMap(voxelmap_manager->pv_list_);
++  voxelmap_manager->CommitSemanticFrame();
++  vio_manager->semantic_visual_enabled_=voxelmap_manager->semantic_map_.config.enabled && voxelmap_manager->semantic_map_.config.visual_mask;
++  if(vio_manager->semantic_visual_enabled_) {
++    vio_manager->semantic_world_.clear();
++    for(const auto &s:voxelmap_manager->semantic_samples_)
++      vio_manager->semantic_world_.push_back({_state.rot_end*s.point+_state.pos_end,s.tag});
++    vio_manager->semantic_regions_=voxelmap_manager->semantic_motion_.regions();
++    vio_manager->semantic_invalidated_=voxelmap_manager->semantic_motion_.invalidated;
++    vio_manager->semantic_stamp_=LidarMeasures.last_lio_update_time-_first_lidar_time;
++  }
++  if (voxelmap_manager->semantic_map_.config.enabled)
++    std::cout << "[ Semantic ] frame=" << voxelmap_manager->semantic_frame_
++              << " boundaries=" << voxelmap_manager->semantic_boundaries_.size()
++              << " constraints=" << voxelmap_manager->semantic_constraint_count_
++              << " historical_points=" << voxelmap_manager->semantic_map_.size()
++              << " likelihood_rows=" << voxelmap_manager->semantic_likelihood_count_
++              << " moving=" << voxelmap_manager->semantic_dynamic_count_
++              << " pending=" << voxelmap_manager->semantic_pending_count_
++              << " invalidated=" << voxelmap_manager->semantic_invalidated_count_ << std::endl;
+   std::cout << "[ LIO ] Update Voxel Map" << std::endl;
+   _pv_list = voxelmap_manager->pv_list_;
+   
+diff --git a/src/preprocess.cpp b/src/preprocess.cpp
+index bf0d497..2e21bb8 100644
+--- a/src/preprocess.cpp
++++ b/src/preprocess.cpp
+@@ -11,12 +11,14 @@ which is included as part of this source code package.
+ */
+ 
+ #include "preprocess.h"
++#include "semantic_pcl.hpp"
+ 
+ #define RETURN0 0x00
+ #define RETURN0AND1 0x10
+ 
+ Preprocess::Preprocess() : feature_enabled(0), lidar_type(AVIA), blind(0.01), point_filter_num(1)
+ {
++  blind_sqr = blind * blind;
+   inf_bound = 10;
+   N_SCANS = 6;
+   group_size = 8;
+@@ -48,17 +50,20 @@ void Preprocess::set(bool feat_en, int lid_type, double bld, int pfilt_num)
+   feature_enabled = feat_en;
+   lidar_type = lid_type;
+   blind = bld;
++  blind_sqr = blind * blind;
+   point_filter_num = pfilt_num;
+ }
+ 
+ void Preprocess::process(const livox_ros_driver2::msg::CustomMsg::SharedPtr &msg, PointCloudXYZI::Ptr &pcl_out)
+ {
++  blind_sqr = blind * blind;
+   avia_handler(msg);
+   *pcl_out = pl_surf;
+ }
+ 
+ void Preprocess::process(const sensor_msgs::msg::PointCloud2::ConstSharedPtr &msg, PointCloudXYZI::Ptr &pcl_out)
+ {
++  blind_sqr = blind * blind; // ROS parameters can set blind directly after construction.
+   switch (lidar_type)
+   {
+   case OUST64:
+@@ -345,6 +350,7 @@ void Preprocess::oust64_handler(const sensor_msgs::msg::PointCloud2::ConstShared
+ 
+ void Preprocess::velodyne_handler(const sensor_msgs::msg::PointCloud2::ConstSharedPtr &msg)
+ {
++  semantic_frontend::CloudTags semantic_tags(*msg, semantic_enabled);
+   pl_surf.clear();
+   pl_corn.clear();
+   pl_full.clear();
+@@ -393,6 +399,7 @@ void Preprocess::velodyne_handler(const sensor_msgs::msg::PointCloud2::ConstShar
+       added_pt.normal_x = 0;
+       added_pt.normal_y = 0;
+       added_pt.normal_z = 0;
++      if (semantic_enabled) semantic_frontend::setTag(added_pt, semantic_tags.at(i));
+       int layer = pl_orig.points[i].ring;
+       if (layer >= N_SCANS) continue;
+       added_pt.x = pl_orig.points[i].x;
+@@ -458,6 +465,7 @@ void Preprocess::velodyne_handler(const sensor_msgs::msg::PointCloud2::ConstShar
+       added_pt.normal_x = 0;
+       added_pt.normal_y = 0;
+       added_pt.normal_z = 0;
++      if (semantic_enabled) semantic_frontend::setTag(added_pt, semantic_tags.at(i));
+       added_pt.x = pl_orig.points[i].x;
+       added_pt.y = pl_orig.points[i].y;
+       added_pt.z = pl_orig.points[i].z;
+diff --git a/src/vio.cpp b/src/vio.cpp
+index 6e14fcf..5705dff 100644
+--- a/src/vio.cpp
++++ b/src/vio.cpp
+@@ -455,7 +455,7 @@ void VIOManager::retrieveFromVisualSparseMap(cv::Mat img, vector<pointWithVar> &
+       for (int i = 0; i < voxel_num; i++)
+       {
+         VisualPoint *pt = voxel_points[i];
+-        if (pt == nullptr) continue;
++        if (pt == nullptr || (semantic_visual_enabled_ && pt->semantic_invalid_)) continue;
+         if (pt->obs_.size() == 0) continue;
+ 
+         V3D norm_vec(new_frame_->T_f_w_.rotationMatrix() * pt->normal_);
+@@ -530,7 +530,7 @@ void VIOManager::retrieveFromVisualSparseMap(cv::Mat img, vector<pointWithVar> &
+           {
+             VisualPoint *pt = voxel_points[j];
+ 
+-            if (pt == nullptr) continue;
++            if (pt == nullptr || (semantic_visual_enabled_ && pt->semantic_invalid_)) continue;
+             if (pt->obs_.size() == 0) continue;
+ 
+             // sub_map_ray.push_back(pt); // cloud_visual_sub_map
+@@ -581,6 +581,8 @@ void VIOManager::retrieveFromVisualSparseMap(cv::Mat img, vector<pointWithVar> &
+               VoxelPlane &plane = *current_octo->plane_ptr_;
+               plane_center.point_w = plane.center_;
+               plane_center.normal = plane.normal_;
++              plane_center.semantic_tag=current_octo->semantic_evidence_.dominant();
++              if(semantic_visual_enabled_ && semantic_frontend::motionCandidate(plane_center.semantic_tag))continue;
+               visual_submap->add_from_voxel_map.push_back(plane_center);
+               break;
+             }
+@@ -616,6 +618,7 @@ void VIOManager::retrieveFromVisualSparseMap(cv::Mat img, vector<pointWithVar> &
+ 
+       // cv::circle(img_cp, cv::Point2f(pc[0], pc[1]), 3, cv::Scalar(0, 0, 255), -1, 8); // Green Sparse Align tracked
+ 
++      if(semanticPatchWeight(pc)<=0.)continue;
+       V3D pt_cam(new_frame_->w2f(pt->pos_));
+       bool depth_continous = false;
+       for (int u = -patch_size_half; u <= patch_size_half; u++)
+@@ -787,6 +790,7 @@ void VIOManager::computeJacobianAndUpdateEKF(cv::Mat img)
+   if (total_points == 0) return;
+   
+   compute_jacobian_time = update_ekf_time = 0.0;
++  G.setZero();H_T_H.setZero();
+ 
+   for (int level = patch_pyrimid_level - 1; level >= 0; level--)
+   {
+@@ -809,10 +813,12 @@ void VIOManager::generateVisualMapPoints(cv::Mat img, vector<pointWithVar> &pg)
+   // double t0 = omp_get_wtime();
+   for (int i = 0; i < pg.size(); i++)
+   {
++    if(semantic_visual_enabled_ && !pg[i].semantic_motion.map_allowed)continue;
+     if (pg[i].normal == V3D(0, 0, 0)) continue;
+ 
+     V3D pt = pg[i].point_w;
+     V2D pc(new_frame_->w2c(pt));
++    if(semanticPatchWeight(pc)<1.)continue;
+ 
+     if (new_frame_->cam_->isInFrame(pc.cast<int>(), border)) // 20px is the patch size in the matcher
+     {
+@@ -836,6 +842,7 @@ void VIOManager::generateVisualMapPoints(cv::Mat img, vector<pointWithVar> &pg)
+   {
+     V3D pt = visual_submap->add_from_voxel_map[j].point_w;
+     V2D pc(new_frame_->w2c(pt));
++    if(semanticPatchWeight(pc)<1.)continue;
+ 
+     if (new_frame_->cam_->isInFrame(pc.cast<int>(), border)) // 20px is the patch size in the matcher
+     {
+@@ -863,6 +870,7 @@ void VIOManager::generateVisualMapPoints(cv::Mat img, vector<pointWithVar> &pg)
+     if (grid_num[i] == TYPE_POINTCLOUD) // && (scan_value[i]>=50))
+     {
+       pointWithVar pt_var = append_voxel_points[i];
++      if(semantic_visual_enabled_ && !pt_var.semantic_motion.map_allowed)continue;
+       V3D pt = pt_var.point_w;
+ 
+       V3D norm_vec(new_frame_->T_f_w_.rotationMatrix() * pt_var.normal);
+@@ -871,11 +879,12 @@ void VIOManager::generateVisualMapPoints(cv::Mat img, vector<pointWithVar> &pg)
+       double cos_theta = dir.dot(norm_vec);
+       // if(std::fabs(cos_theta)<0.34) continue; // 70 degree
+       V2D pc(new_frame_->w2c(pt));
+-
++      if(semanticPatchWeight(pc)<1.)continue;
+       float *patch = new float[patch_size_total];
+       getImagePatch(img, pc, patch, 0);
+ 
+       VisualPoint *pt_new = new VisualPoint(pt);
++      pt_new->semantic_tag_=pt_var.semantic_tag;
+ 
+       Vector3d f = cam->cam2world(pc);
+       Feature *ftr_new = new Feature(pt_new, patch, pc, f, new_frame_->T_f_w_, 0);
+@@ -915,7 +924,7 @@ void VIOManager::updateVisualMapPoints(cv::Mat img)
+   for (int i = 0; i < total_points; i++)
+   {
+     VisualPoint *pt = visual_submap->voxel_points[i];
+-    if (pt == nullptr) continue;
++    if (pt == nullptr || (semantic_visual_enabled_ && pt->semantic_invalid_)) continue;
+     if (pt->is_converged_)
+     { 
+       pt->deleteNonRefPatchFeatures();
+@@ -923,6 +932,7 @@ void VIOManager::updateVisualMapPoints(cv::Mat img)
+     }
+ 
+     V2D pc(new_frame_->w2c(pt->pos_));
++    if(semanticPatchWeight(pc)<1.)continue;
+     bool add_flag = false;
+     
+     float *patch_temp = new float[patch_size_total];
+@@ -1344,10 +1354,9 @@ void VIOManager::precomputeReferencePatches(int level)
+     const int scale = (1 << level);
+ 
+     VisualPoint *pt = visual_submap->voxel_points[i];
++    if (pt == nullptr || (semantic_visual_enabled_ && pt->semantic_invalid_)) continue;
+     cv::Mat img = pt->ref_patch->img_;
+ 
+-    if (pt == nullptr) continue;
+-
+     double depth((pt->pos_ - pt->ref_patch->pos()).norm());
+     V3D pf = pt->ref_patch->f_ * depth;
+     V2D pc = pt->ref_patch->px_;
+@@ -1400,6 +1409,7 @@ void VIOManager::updateStateInverse(cv::Mat img, int level)
+ {
+   if (total_points == 0) return;
+   StatesGroup old_state = (*state);
++  const StatesGroup semantic_entry_state=(*state);
+   V2D pc;
+   MD(1, 2) Jimg;
+   MD(2, 3) Jdpi;
+@@ -1422,6 +1432,7 @@ void VIOManager::updateStateInverse(cv::Mat img, int level)
+   for (int iteration = 0; iteration < max_iterations; iteration++)
+   {
+     double t1 = omp_get_wtime();
++    z.setZero();H_sub.setZero();
+     double count_outlier = 0;
+     if (has_ref_patch_cache == false) precomputeReferencePatches(level);
+     int n_meas = 0;
+@@ -1442,10 +1453,12 @@ void VIOManager::updateStateInverse(cv::Mat img, int level)
+ 
+       VisualPoint *pt = visual_submap->voxel_points[i];
+ 
+-      if (pt == nullptr) continue;
++      if (pt == nullptr || (semantic_visual_enabled_ && pt->semantic_invalid_)) continue;
+ 
+       V3D pf = Rcw * pt->pos_ + Pcw;
+       pc = cam->world2cam(pf);
++      const double semantic_scale=std::sqrt(semanticPatchWeight(pc,scale));
++      if(pf.z()<=0. || semantic_scale<=0.)continue;
+ 
+       const float u_ref = pc[0];
+       const float v_ref = pc[1];
+@@ -1466,13 +1479,14 @@ void VIOManager::updateStateInverse(cv::Mat img, int level)
+         {
+           double res = w_ref_tl * img_ptr[0] + w_ref_tr * img_ptr[scale] + w_ref_bl * img_ptr[scale * width] +
+                        w_ref_br * img_ptr[scale * width + scale] - P[patch_size_total * level + x * patch_size + y];
+-          z(i * patch_size_total + x * patch_size + y) = res;
+-          patch_error += res * res;
++          z(i * patch_size_total + x * patch_size + y) = semantic_scale*res;
++          patch_error += semantic_scale*semantic_scale*res*res;
+           MD(1, 3) J_dR = H_sub_inv.block<1, 3>(i * patch_size_total + x * patch_size + y, 0);
+           MD(1, 3) J_dt = H_sub_inv.block<1, 3>(i * patch_size_total + x * patch_size + y, 3);
+           JdR = J_dR * Rwi + J_dt * P_wi_hat * Rwi;
+           Jdt = J_dt * Rwi;
+           H_sub.block<1, 6>(i * patch_size_total + x * patch_size + y, 0) << JdR, Jdt;
++          H_sub.row(i*patch_size_total+x*patch_size+y) *= semantic_scale;
+           n_meas++;
+         }
+       }
+@@ -1480,6 +1494,8 @@ void VIOManager::updateStateInverse(cv::Mat img, int level)
+       error += patch_error;
+     }
+ 
++    semantic_visual_rows_+=n_meas;
++    if(n_meas==0){(*state)=semantic_entry_state;G.setZero();H_T_H.setZero();break;}
+     error = error / n_meas;
+ 
+     compute_jacobian_time += omp_get_wtime() - t1;
+@@ -1522,6 +1538,7 @@ void VIOManager::updateState(cv::Mat img, int level)
+ {
+   if (total_points == 0) return;
+   StatesGroup old_state = (*state);
++  const StatesGroup semantic_entry_state=(*state);
+ 
+   VectorXd z;
+   MatrixXd H_sub;
+@@ -1537,6 +1554,7 @@ void VIOManager::updateState(cv::Mat img, int level)
+   for (int iteration = 0; iteration < max_iterations; iteration++)
+   {
+     double t1 = omp_get_wtime();
++    z.setZero();H_sub.setZero();
+ 
+     M3D Rwi(state->rot_end);
+     V3D Pwi(state->pos_end);
+@@ -1569,10 +1587,12 @@ void VIOManager::updateState(cv::Mat img, int level)
+ 
+       VisualPoint *pt = visual_submap->voxel_points[i];
+ 
+-      if (pt == nullptr) continue;
++      if (pt == nullptr || (semantic_visual_enabled_ && pt->semantic_invalid_)) continue;
+ 
+       V3D pf = Rcw * pt->pos_ + Pcw;
+       V2D pc = cam->world2cam(pf);
++      const double semantic_scale=std::sqrt(semanticPatchWeight(pc,scale));
++      if(pf.z()<=0. || semantic_scale<=0.)continue;
+ 
+       computeProjectionJacobian(pf, Jdpi);
+       M3D p_hat;
+@@ -1621,19 +1641,22 @@ void VIOManager::updateState(cv::Mat img, int level)
+               w_ref_tl * img_ptr[0] + w_ref_tr * img_ptr[scale] + w_ref_bl * img_ptr[scale * width] + w_ref_br * img_ptr[scale * width + scale];
+           double res = state->inv_expo_time * cur_value - inv_ref_expo * P[patch_size_total * level + x * patch_size + y];
+ 
+-          z(i * patch_size_total + x * patch_size + y) = res;
++          z(i * patch_size_total + x * patch_size + y) = semantic_scale*res;
+ 
+-          patch_error += res * res;
++          patch_error += semantic_scale*semantic_scale*res*res;
+           n_meas += 1;
+           
+           if (exposure_estimate_en) { H_sub.block<1, 7>(i * patch_size_total + x * patch_size + y, 0) << JdR, Jdt, cur_value; }
+           else { H_sub.block<1, 6>(i * patch_size_total + x * patch_size + y, 0) << JdR, Jdt; }
++          H_sub.row(i*patch_size_total+x*patch_size+y) *= semantic_scale;
+         }
+       }
+       visual_submap->errors[i] = patch_error;
+       error += patch_error;
+     }
+ 
++    semantic_visual_rows_+=n_meas;
++    if(n_meas==0){(*state)=semantic_entry_state;G.setZero();H_T_H.setZero();break;}
+     error = error / n_meas;
+     
+     compute_jacobian_time += omp_get_wtime() - t1;
+@@ -1801,6 +1824,16 @@ void VIOManager::processFrame(cv::Mat &img, vector<pointWithVar> &pg, const unor
+   updateFrameState(*state);
+   
+   resetGrid();
++  semantic_gate_.clear();semantic_visual_rows_=0;
++  if(semantic_visual_enabled_ && img_time>=semantic_stamp_ && img_time-semantic_stamp_<=.2) {
++    semantic_gate_.build(width,height,semantic_world_,semantic_regions_,
++      new_frame_->T_f_w_.rotationMatrix(),new_frame_->T_f_w_.translation(),
++      [&](const V3D &p){return cam->world2cam(p);});
++    for(auto &[key,voxel]:this->feat_map)for(auto *pt:voxel->voxel_points)
++      if(pt && semantic_frontend::motionCandidate(pt->semantic_tag_))
++        for(const auto &r:semantic_invalidated_)
++          if(r.label==pt->semantic_tag_.label && r.contains(pt->pos_))pt->semantic_invalid_=true;
++  }
+ 
+   double t1 = omp_get_wtime();
+ 
+@@ -1832,6 +1865,10 @@ void VIOManager::processFrame(cv::Mat &img, vector<pointWithVar> &pg, const unor
+   
+   if(colmap_output_en)  dumpDataForColmap();
+ 
++  if(semantic_visual_enabled_)
++    std::cout<<"[ Semantic visual ] moving_pixels="<<semantic_gate_.moving_pixels
++             <<" uncertain_pixels="<<semantic_gate_.uncertain_pixels
++             <<" accepted_rows="<<semantic_visual_rows_<<std::endl;
+   frame_count++;
+   ave_total = ave_total * (frame_count - 1) / frame_count + (t7 - t1 - (t5 - t4)) / frame_count;
+ 
+diff --git a/src/voxel_map.cpp b/src/voxel_map.cpp
+index 731222c..eca387d 100644
+--- a/src/voxel_map.cpp
++++ b/src/voxel_map.cpp
+@@ -11,6 +11,8 @@ which is included as part of this source code package.
+ */
+ 
+ #include "voxel_map.h"
++#include "semantic_pcl.hpp"
++#include <functional>
+ using namespace Eigen;
+ void calcBodyCov(Eigen::Vector3d &pb, const float range_inc, const float degree_inc, Eigen::Matrix3d &cov)
+ {
+@@ -199,6 +201,7 @@ void VoxelOctoTree::cut_octo_tree()
+       leaves_[leafnum]->voxel_center_[2] = voxel_center_[2] + (2 * xyz[2] - 1) * quater_length_;
+       leaves_[leafnum]->quater_length_ = quater_length_ / 2;
+     }
++    leaves_[leafnum]->semantic_evidence_.add(temp_points_[i].semantic_tag,temp_points_[i].semantic_frame);
+     leaves_[leafnum]->temp_points_.push_back(temp_points_[i]);
+     leaves_[leafnum]->new_points_++;
+   }
+@@ -234,6 +237,12 @@ void VoxelOctoTree::cut_octo_tree()
+ 
+ void VoxelOctoTree::UpdateOctoTree(const pointWithVar &pv)
+ {
++  if(semantic_invalid_) {
++    for(auto &child:leaves_){delete child;child=nullptr;}
++    *plane_ptr_=VoxelPlane();temp_points_.clear();semantic_evidence_={};
++    init_octo_=false;update_enable_=true;octo_state_=0;new_points_=0;semantic_invalid_=false;
++  }
++  semantic_evidence_.add(pv.semantic_tag, pv.semantic_frame);
+   if (!init_octo_)
+   {
+     new_points_++;
+@@ -351,8 +360,77 @@ VoxelOctoTree *VoxelOctoTree::Insert(const pointWithVar &pv)
+   return nullptr;
+ }
+ 
++void VoxelMapManager::PrepareSemanticFrame(double stamp)
++{
++  semantic_stamp_=stamp;semantic_samples_.clear();semantic_decisions_.clear();
++  semantic_dynamic_count_=semantic_pending_count_=semantic_invalidated_count_=0;
++  if(!semantic_map_.config.enabled)return;
++  semantic_prior_R_=state_.rot_end;semantic_prior_t_=state_.pos_end;
++  std::vector<semantic_frontend::Sample> world;
++  for(const auto &p:*feats_down_body_) {
++    const V3D body=extR_*V3D(p.x,p.y,p.z)+extT_;
++    const auto tag=semantic_frontend::tagOf(p);
++    semantic_samples_.push_back({body,tag});
++    world.push_back({state_.rot_end*body+state_.pos_end,tag});
++  }
++  if(semantic_map_.config.dynamics || semantic_map_.config.visual_mask) {
++    double variance=std::max(0.,state_.cov.block<3,3>(3,3).trace()/3.);
++    // Rotation uncertainty increases world-point uncertainty with range.
++    double radius2=0.;for(const auto &s:semantic_samples_)radius2+=s.point.squaredNorm();
++    radius2/=std::max<std::size_t>(1,semantic_samples_.size());
++    variance+=std::max(0.,state_.cov.block<3,3>(0,0).trace()/3.)*radius2;
++    semantic_motion_.prepare(stamp,world,variance);
++    for(const auto &s:world) {
++      auto d=semantic_motion_.decision(s);semantic_decisions_.push_back(d);
++      semantic_dynamic_count_+=d.state==semantic_frontend::Motion::Moving;
++      semantic_pending_count_+=d.state==semantic_frontend::Motion::Unknown;
++    }
++    if(semantic_map_.config.dynamics)InvalidateSemanticMap();
++  }
++}
++
++void VoxelMapManager::InvalidateSemanticMap()
++{
++  std::function<void(VoxelOctoTree*)> visit=[&](VoxelOctoTree *node) {
++    if(!node)return;
++    auto tag=node->semantic_evidence_.dominant();
++    if(semantic_frontend::motionCandidate(tag)) {
++      for(const auto &r:semantic_motion_.invalidated)
++        if(r.label==tag.label && r.contains(node->plane_ptr_->center_)) {
++          node->semantic_invalid_=true;node->plane_ptr_->is_plane_=false;
++          ++semantic_invalidated_count_;break;
++        }
++    }
++    for(auto *child:node->leaves_)visit(child);
++  };
++  for(auto &[key,node]:voxel_map_)visit(node);
++}
++
+ void VoxelMapManager::StateEstimation(StatesGroup &state_propagat)
+ {
++  semantic_boundaries_.clear();
++  semantic_constraint_count_ = 0;
++  semantic_likelihood_count_ = 0;
++  if (semantic_map_.config.enabled) {
++    // Boundary transitions must be observed BEFORE the 0.5 m geometry voxel
++    // filter mixes labels and removes their local support. Both clouds have the
++    // same deskew/time endpoint; geometry continues to use feats_down_body_.
++    std::vector<semantic_frontend::Sample> samples;
++    samples.reserve(feats_undistort_->size());
++    for (const auto &p : *feats_undistort_)
++      samples.push_back({extR_ * V3D(p.x,p.y,p.z) + extT_, semantic_frontend::tagOf(p)});
++    semantic_frontend::ExtractionStats extraction;
++    const double semantic_start = omp_get_wtime();
++    semantic_boundaries_ = semantic_frontend::extractBoundaries(samples, semantic_map_.config, &extraction);
++    std::cout << "[ Semantic input ] frame=" << semantic_frame_
++              << " dense=" << samples.size() << " geometric=" << feats_down_body_->size()
++              << " eligible=" << extraction.eligible
++              << " no_other=" << extraction.no_other_class
++              << " sparse_or_nonadjacent=" << extraction.sparse_or_nonadjacent
++              << " sparse_other=" << extraction.sparse_other
++              << " nonplanar=" << extraction.nonplanar
++              << " extraction_ms=" << 1000. * (omp_get_wtime() - semantic_start) << std::endl;
++  }
+   cross_mat_list_.clear();
+   cross_mat_list_.reserve(feats_down_size_);
+   body_cov_list_.clear();
+@@ -403,6 +481,11 @@ void VoxelMapManager::StateEstimation(StatesGroup &state_propagat)
+       cov = state_.rot_end * cov * state_.rot_end.transpose() + (-point_crossmat) * rot_var * (-point_crossmat.transpose()) + t_var;
+       pv.var = cov;
+       pv.body_var = body_cov_list_[i];
++      if (semantic_map_.config.enabled) {
++        pv.semantic_tag = semantic_frontend::tagOf(feats_down_body_->points[i]);
++        pv.semantic_frame = semantic_frame_;
++        if(i<semantic_decisions_.size())pv.semantic_motion=semantic_decisions_[i];
++      }
+     }
+     ptpl_list_.clear();
+ 
+@@ -418,7 +501,7 @@ void VoxelMapManager::StateEstimation(StatesGroup &state_propagat)
+     }
+     effct_feat_num_ = ptpl_list_.size();
+     cout << "[ LIO ] Raw feature num: " << feats_undistort_->size() << ", downsampled feature num:" << feats_down_size_ 
+-         << " effective feature num: " << effct_feat_num_ << " average residual: " << total_residual / effct_feat_num_ << endl;
++         << " effective feature num: " << effct_feat_num_ << " average residual: " << total_residual / std::max(1,effct_feat_num_) << endl;
+ 
+     /*** Computation of Measuremnt Jacobian matrix H and measurents covarience
+      * ***/
+@@ -465,6 +548,10 @@ void VoxelMapManager::StateEstimation(StatesGroup &state_propagat)
+       R_inv(i) = 1.0 / (0.001 + sigma_l + ptpl_list_[i].normal_.transpose() * var * ptpl_list_[i].normal_);
+       // R_inv(i) = 1.0 / (sigma_l + ptpl_list_[i].normal_.transpose() * var * ptpl_list_[i].normal_);
+ 
++      if (semantic_map_.config.enabled && semantic_map_.config.association)
++        R_inv(i) *= ptpl.semantic_weight_;
++      if (semantic_map_.config.enabled && semantic_map_.config.dynamics)
++        R_inv(i) *= ptpl.motion_weight_;
+       /*** calculate the Measuremnt Jacobian matrix H ***/
+       V3D A(point_crossmat * state_.rot_end.transpose() * ptpl_list_[i].normal_);
+       Hsub.row(i) << VEC_FROM_ARRAY(A), ptpl_list_[i].normal_[0], ptpl_list_[i].normal_[1], ptpl_list_[i].normal_[2];
+@@ -477,10 +564,26 @@ void VoxelMapManager::StateEstimation(StatesGroup &state_propagat)
+     /*** Iterative Kalman Filter Update ***/
+     MatrixXd K(DIM_STATE, effct_feat_num_);
+     // auto &&Hsub_T = Hsub.transpose();
+-    auto &&HTz = Hsub_T_R_inv * meas_vec;
++    Eigen::Matrix<double,6,1> HTz = Hsub_T_R_inv * meas_vec;
+     // fout_dbg<<"HTz: "<<HTz<<endl;
+     H_T_H.block<6, 6>(0, 0) = Hsub_T_R_inv * Hsub;
++    // Raw semantic boundary observations update the SAME 19-state prior/covariance.
++    // There is no separate ICP pose fed back as a pseudo measurement.
++    const auto semantic_rows = semantic_map_.linearize(semantic_frame_, semantic_boundaries_, state_.rot_end, state_.pos_end);
++    semantic_constraint_count_ = semantic_rows.size();
++    for (const auto &row : semantic_rows) {
++      H_T_H.block<6,6>(0,0).noalias() += row.information * row.jacobian.transpose() * row.jacobian;
++      HTz.noalias() -= row.information * row.jacobian.transpose() * row.residual;
++    }
+     // EigenSolver<Matrix<double, 6, 6>> es(H_T_H.block<6,6>(0,0));
++    if(semantic_map_.config.enabled && semantic_map_.config.likelihood) {
++      const auto rows=semantic_likelihood_.linearize(semantic_frame_,semantic_samples_,state_.rot_end,state_.pos_end);
++      semantic_likelihood_count_=rows.size();
++      for(const auto &row:rows) {
++        H_T_H.block<6,6>(0,0).noalias() += row.information*row.jacobian.transpose()*row.jacobian;
++        HTz.noalias() -= row.information*row.jacobian.transpose()*row.residual;
++      }
++    }
+     MD(DIM_STATE, DIM_STATE) &&K_1 = (H_T_H.block<DIM_STATE, DIM_STATE>(0, 0) + state_.cov.block<DIM_STATE, DIM_STATE>(0, 0).inverse()).inverse();
+     G.block<DIM_STATE, 6>(0, 0) = K_1.block<DIM_STATE, 6>(0, 0) * H_T_H.block<6, 6>(0, 0);
+     auto vec = state_propagat - state_;
+@@ -558,6 +661,12 @@ void VoxelMapManager::BuildVoxelMap()
+   for (size_t i = 0; i < feats_down_world_->size(); i++)
+   {
+     pointWithVar pv;
++    if(semantic_map_.config.enabled) {
++      pv.semantic_tag=semantic_frontend::tagOf(feats_down_body_->points[i]);
++      pv.semantic_frame=semantic_frame_;
++      if(i<semantic_decisions_.size())pv.semantic_motion=semantic_decisions_[i];
++      if(semantic_map_.config.dynamics && !pv.semantic_motion.map_allowed)continue;
++    }
+     pv.point_w << feats_down_world_->points[i].x, feats_down_world_->points[i].y, feats_down_world_->points[i].z;
+     V3D point_this(feats_down_body_->points[i].x, feats_down_body_->points[i].y, feats_down_body_->points[i].z);
+     M3D var;
+@@ -584,6 +693,7 @@ void VoxelMapManager::BuildVoxelMap()
+     auto iter = voxel_map_.find(position);
+     if (iter != voxel_map_.end())
+     {
++      voxel_map_[position]->semantic_evidence_.add(p_v.semantic_tag,p_v.semantic_frame);
+       voxel_map_[position]->temp_points_.push_back(p_v);
+       voxel_map_[position]->new_points_++;
+     }
+@@ -595,6 +705,7 @@ void VoxelMapManager::BuildVoxelMap()
+       voxel_map_[position]->voxel_center_[0] = (0.5 + position.x) * voxel_size;
+       voxel_map_[position]->voxel_center_[1] = (0.5 + position.y) * voxel_size;
+       voxel_map_[position]->voxel_center_[2] = (0.5 + position.z) * voxel_size;
++      voxel_map_[position]->semantic_evidence_.add(p_v.semantic_tag,p_v.semantic_frame);
+       voxel_map_[position]->temp_points_.push_back(p_v);
+       voxel_map_[position]->new_points_++;
+       voxel_map_[position]->layer_init_num_ = layer_init_num;
+@@ -633,6 +744,7 @@ void VoxelMapManager::UpdateVoxelMap(const std::vector<pointWithVar> &input_poin
+   for (uint i = 0; i < plsize; i++)
+   {
+     const pointWithVar p_v = input_points[i];
++    if(semantic_map_.config.enabled && semantic_map_.config.dynamics && !p_v.semantic_motion.map_allowed)continue;
+     float loc_xyz[3];
+     for (int j = 0; j < 3; j++)
+     {
+@@ -678,6 +790,7 @@ void VoxelMapManager::BuildResidualListOMP(std::vector<pointWithVar> &pv_list, s
+   for (int i = 0; i < index.size(); i++)
+   {
+     pointWithVar &pv = pv_list[i];
++    if(semantic_map_.config.enabled && semantic_map_.config.dynamics && pv.semantic_motion.weight<=0.)continue;
+     float loc_xyz[3];
+     for (int j = 0; j < 3; j++)
+     {
+@@ -705,6 +818,19 @@ void VoxelMapManager::BuildResidualListOMP(std::vector<pointWithVar> &pv_list, s
+         auto iter_near = voxel_map_.find(near_position);
+         if (iter_near != voxel_map_.end()) { build_single_residual(pv, iter_near->second, 0, is_sucess, prob, single_ptpl); }
+       }
++      // Search alternative surfaces only when a confident semantic conflict
++      // exists. Geometry-only retains the original correspondence search exactly.
++      if (is_sucess && semantic_map_.config.enabled && semantic_map_.config.association &&
++          single_ptpl.semantic_weight_ < .8)
++      {
++        for (int dx=-1; dx<=1; ++dx) for (int dy=-1; dy<=1; ++dy) for (int dz=-1; dz<=1; ++dz)
++        {
++          if (!dx && !dy && !dz) continue;
++          auto alternative = voxel_map_.find(VOXEL_LOCATION(position.x+dx,position.y+dy,position.z+dz));
++          if (alternative != voxel_map_.end())
++            build_single_residual(pv, alternative->second, 0, is_sucess, prob, single_ptpl);
++        }
++      }
+       if (is_sucess)
+       {
+         mylock.lock();
+@@ -732,6 +858,7 @@ void VoxelMapManager::build_single_residual(pointWithVar &pv, const VoxelOctoTre
+   int max_layer = config_setting_.max_layer_;
+   double sigma_num = config_setting_.sigma_num_;
+ 
++  if(current_octo->semantic_invalid_)return;
+   double radius_k = 3;
+   Eigen::Vector3d p_w = pv.point_w;
+   if (current_octo->plane_ptr_->is_plane_)
+@@ -754,10 +881,15 @@ void VoxelMapManager::build_single_residual(pointWithVar &pv, const VoxelOctoTre
+       {
+         is_sucess = true;
+         double this_prob = 1.0 / (sqrt(sigma_l)) * exp(-0.5 * dis_to_plane * dis_to_plane / sigma_l);
++        const double semantic_weight = semantic_map_.config.enabled && semantic_map_.config.association
++            ? current_octo->semantic_evidence_.compatibility(pv.semantic_tag) : 1.;
++        this_prob *= semantic_weight;
+         if (this_prob > prob)
+         {
+           prob = this_prob;
+           pv.normal = plane.normal_;
++          single_ptpl.semantic_weight_ = semantic_weight;
++          single_ptpl.motion_weight_ = pv.semantic_motion.weight;
+           single_ptpl.body_cov_ = pv.body_var;
+           single_ptpl.point_b_ = pv.point_b;
+           single_ptpl.point_w_ = pv.point_w;

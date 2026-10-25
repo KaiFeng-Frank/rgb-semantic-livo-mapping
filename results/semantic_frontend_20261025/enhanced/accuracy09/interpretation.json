@@ -1,0 +1,26 @@
+{
+  "status": "not_passed",
+  "workflow_execution": "success; not a scientific admission pass",
+  "baseline_caveat": "All arms cold-start at frame 240 with no estimator pre-roll; geometry itself has mean ATE 16.204397 m. The log initializes gravity to (-1.1721, 2.1191, -9.5064) with initial mean acceleration norm 10.3437. Startup/initialization is a hypothesis for investigation, not an established cause or reason to discard this failure.",
+  "result": "Combined ATE, translation RPE and rotation RPE regress against geometry in all repeats. Categorical-only reduces mean ATE/translation RPE but regresses rotation RPE, so no semantic arm passes every declared comparison gate.",
+  "online": "Independent local 1x live-inference replay failed; CPU cached-label timing below is not interchangeable with laptop latency.",
+  "performance": "Categorical-only and motion-only both add substantial LIO time. The combined high-frequency layout violates the measured realtime budget. Repeated field searches and full map invalidation traversal are code-level candidates; stage totals are not isolated function profiles.",
+  "annotation": {
+    "armB0_s1": {
+      "scans": 240,
+      "first_frame": 240,
+      "last_frame": 479,
+      "recomputed_order_disagreements": 86,
+      "identity": "original carried raw_point_index checked exactly against raw xyz/intensity; diagnostic recomputed order not used"
+    },
+    "ZS": {
+      "scans": 240,
+      "first_frame": 240,
+      "last_frame": 479,
+      "recomputed_order_disagreements": 12,
+      "identity": "original carried raw_point_index checked exactly against raw xyz/intensity; diagnostic recomputed order not used"
+    }
+  },
+  "automatic_expansion": false,
+  "estimator_changed_after_scoring": false
+}

@@ -1,0 +1,39 @@
+{
+  "scope": "Synthetic geometry-only ROS transport diagnostic; no GPU, raw dataset, or LIO replay",
+  "source_commit": "55814feecd626ce3d13f44f850bda955c842fa40",
+  "input_bridge_sha256": "d89b6314023fcd1a29307d8075430dc793efaa5773ffbff735c5e44bc5b86c13",
+  "probe": "10 synthetic scans, 120000 points x 26 bytes = 3.12 MB each, 0.1 s publish interval, 80 ms geometry fallback wait",
+  "sequence": [
+    [
+      "rmw_fastrtps_cpp",
+      41,
+      2
+    ],
+    [
+      "rmw_fastrtps_cpp",
+      42,
+      120000
+    ],
+    [
+      "rmw_cyclonedds_cpp",
+      43,
+      120000
+    ],
+    [
+      "rmw_cyclonedds_cpp",
+      42,
+      120000
+    ],
+    [
+      "rmw_fastrtps_cpp",
+      42,
+      120000
+    ]
+  ],
+  "script_versions": "probe.py is the final two-run version. Initial three runs used the same send/receive path, checked only the first point bytes, and omitted timestamp suffix and explicit coverage field.",
+  "initial_byte_check_warning": "Initial files without a timestamp suffix have original_bytes_preserved limited to the first point; true with zero received is vacuous. Only the final two runs validate every original point byte and report null when no frames arrive.",
+  "finding": "Fast DDS: 10/10 small, 0/10 large in both probes. Cyclone DDS: 10/10 large on domains 43 and 42. Same-domain repeat supports a middleware-dependent large-message transport failure.",
+  "limits": "Exact Fast DDS fault is not established. Synthetic all-zero point payload, not actual scans. No semantic inference, no deadline/online LIO admission, no localization improvement claim.",
+  "online_validated": false,
+  "large_experiment_admitted": false
+}

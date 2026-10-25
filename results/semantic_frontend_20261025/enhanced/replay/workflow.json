@@ -1,0 +1,145 @@
+{
+  "conclusion": "success",
+  "createdAt": "2026-10-25T04:43:07Z",
+  "databaseId": 40162901816,
+  "event": "workflow_dispatch",
+  "headBranch": "codex/semantic-frontend",
+  "headSha": "0d279c7dd338a079e5a0887327f3684331c50f72",
+  "jobs": [
+    {
+      "completedAt": "2026-10-25T04:44:18Z",
+      "conclusion": "success",
+      "databaseId": 121077999706,
+      "name": "contracts",
+      "startedAt": "2026-10-25T04:43:11Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Check out exact commit",
+          "number": 2,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Build geometry and causal-input contracts",
+          "number": 3,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 4,
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/actions/runs/40162901816/job/121077999706"
+    },
+    {
+      "completedAt": "2026-10-25T04:58:34Z",
+      "conclusion": "success",
+      "databaseId": 121078000016,
+      "name": "integration",
+      "startedAt": "2026-10-25T04:43:11Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Initialize containers",
+          "number": 2,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Install ROS build and validation dependencies",
+          "number": 3,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Check out exact commit",
+          "number": 4,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Restore pinned frontend and build all sensor paths",
+          "number": 5,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Validate frozen experiment sources",
+          "number": 6,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Exercise the actual state estimator and original point transport",
+          "number": 7,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Recover only the admitted short sequence",
+          "number": 8,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Freeze paired frontend trajectories before reading GT",
+          "number": 9,
+          "status": "completed"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Score frozen trajectories",
+          "number": 10,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Preserve evidence without raw data or model archives",
+          "number": 11,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Upload evidence independently of release permissions",
+          "number": 12,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Stop containers",
+          "number": 24,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 25,
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/actions/runs/40162901816/job/121078000016"
+    }
+  ],
+  "startedAt": "2026-10-25T04:43:07Z",
+  "status": "completed",
+  "updatedAt": "2026-10-25T04:58:35Z",
+  "url": "https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/actions/runs/40162901816",
+  "workflowName": "Semantic frontend integration"
+}

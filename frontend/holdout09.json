@@ -1,0 +1,66 @@
+{
+  "purpose": "Frozen cross-sequence frontend accuracy validation; not leaderboard or online claim",
+  "upstream_commit": "837b7bbc1431cb04cf936528e52c83c835efba8e",
+  "taxonomy": "native nuScenes 16, archived top1 label and confidence",
+  "loop_closure": false,
+  "training": false,
+  "parameter_search": false,
+  "short_sequence": {
+    "sequence": "09",
+    "first_frame": 0,
+    "end_exclusive": 240
+  },
+  "arms": [
+    "geometry",
+    "association_B0",
+    "boundary_B0",
+    "full_B0",
+    "full_ZS"
+  ],
+  "repetitions": 3,
+  "cache_interpretation": "zero-inference-latency mechanism control only; not online performance",
+  "online_wait_ms": 80,
+  "input_queue_capacity": 4,
+  "boundary_classes": [
+    10,
+    11,
+    12,
+    13
+  ],
+  "boundary_max_information_per_class_pair": 25,
+  "boundary_max_information_per_frame": 100,
+  "boundary_sigma_m": 0.2,
+  "boundary_min_history_updates": 2,
+  "history_updates": 12,
+  "gate": {
+    "off_path": "same inputs must preserve geometry/covariance in controlled integration tests",
+    "state_coupling": "semantic rows must update pose and cross-correlated velocity, and be included in covariance",
+    "causality": "old map frozen during all current-state iterations; no current/future observations",
+    "data": "raw point index carried through exact scan timing/sorting; identical IMU/images/geometry in all arms",
+    "dataset": "all arms retain all supported pose timestamps; report short-sequence errors without selecting a winner",
+    "expansion": "require stable boundary support, reduced local error beyond repeat spread, and no failures before longer runs"
+  },
+  "baseline_commit": "4518e4ba8e814492b07bf57fdde0a2079535a78f",
+  "minimum_poses": 220,
+  "selection": "first 240 frames of the other archived sequence, fixed without viewing revised frontend errors",
+  "independence": "unseen by frontend implementation/diagnostics; archived segmentation evaluations have used seq09 previously",
+  "playback_rate": 0.5,
+  "primary_comparison": [
+    "full_B0",
+    "geometry"
+  ],
+  "decision": {
+    "benefit": "all three paired full_B0 minus geometry ATE differences negative, nonoverlapping ATE ranges, and mean translation/rotation RPE no worse than geometry",
+    "mechanism": "boundary rows accepted on at least 80% of semantic updates",
+    "failure": "any missing/nonfinite trajectory, unequal timestamps, unchanged-zero constraints, or metric regression is reported; no parameter search",
+    "scope": "pass applies only to this short held-out frontend window; no large experiment auto-launched",
+    "boundary_increment": "report full_B0 against association_B0 separately; activation alone cannot prove useful boundary information"
+  },
+  "frozen_sources": {
+    "frontend/include/semantic_frontend.hpp": "b0d712e853613f3c14f9518f66f27d997ea3e281d63ed7e58c2d64c21e75bac0",
+    "frontend/include/semantic_pcl.hpp": "ab5fd64cc5cd7fd0dfd6fc92e26bf27a97ac6e5da958593d4f317b890e6749db",
+    "frontend/patches/fastlivo2-semantic.patch": "998a8b8d0606ed249d5da66dab13c9ad3426df4508f3bbcc1a47a32b9c6d9e8b",
+    "config/kitti_velodyne64.yaml": "b868c5a7a0986e8448800d3ef6b9238e1bcde0ccac9dccfa5b0b32c1bc8ddebb",
+    "config/camera_kitti_cam2.yaml": "5748d60a5a867998c55b1cef1e1279199b3ec70945016ac3dc9f2ad7ee97e90f"
+  }
+}

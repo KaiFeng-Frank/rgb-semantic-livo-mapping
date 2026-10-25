@@ -1,0 +1,148 @@
+name: Semantic frontend integration
+
+on:
+  push:
+    branches: [codex/semantic-frontend]
+    paths: ['frontend/**', '.github/workflows/semantic-frontend.yml', 'src/ptv3_loader_verified.py']
+  workflow_dispatch:
+    inputs:
+      dataset_smoke:
+        description: Run the frozen 120-frame cached-label admission on this ephemeral runner
+        type: boolean
+        default: false
+      mechanism_diagnostic:
+        description: Check pre-voxel boundary activation on development frames without fetching or scoring GT
+        type: boolean
+        default: false
+      enhanced_diagnostic:
+        description: Check motion, pixel masking and categorical coupling on frozen 96-frame development window
+        type: boolean
+        default: false
+      enhanced_validation:
+        description: Frozen enhanced seq09 frames 240-479 accuracy validation, six arms and three repeats
+        type: boolean
+        default: false
+      holdout09:
+        description: Frozen 240-frame seq09 accuracy validation, five arms and three repeats
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: semantic-frontend-${{ github.event_name }}
+  cancel-in-progress: false
+
+jobs:
+  contracts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out exact commit
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git init .
+          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
+          git fetch --depth 1 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+      - name: Build geometry and causal-input contracts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libeigen3-dev libopencv-dev
+          cmake -S frontend -B /tmp/contracts -DCMAKE_BUILD_TYPE=Release
+          cmake --build /tmp/contracts -j2
+          ctest --test-dir /tmp/contracts --output-on-failure
+          python3 -m unittest frontend.tests.test_input_bridge.Timing -v
+          python3 -m compileall -q frontend
+  integration:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    container: ros:jazzy-ros-base
+    timeout-minutes: 65
+    env:
+      CMAKE_BUILD_PARALLEL_LEVEL: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '2'
+      RMW_IMPLEMENTATION: rmw_cyclonedds_cpp
+      REPLAY_PROTOCOL: ${{ inputs.enhanced_validation && 'frontend/enhanced-validation09-reliable.json' || inputs.enhanced_diagnostic && 'frontend/enhanced-diagnostic.json' || inputs.holdout09 && 'frontend/holdout09.json' || 'frontend/protocol.json' }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Install ROS build and validation dependencies
+        run: |
+          apt-get update -qq
+          apt-get install -y -qq git gh build-essential cmake libeigen3-dev libgoogle-glog-dev libceres-dev libfmt-dev libopencv-dev libpcl-dev libboost-thread-dev python3-colcon-common-extensions python3-numpy python3-scipy python3-yaml python3-pil python3-requests python3-matplotlib ros-jazzy-pcl-ros ros-jazzy-cv-bridge ros-jazzy-image-transport ros-jazzy-tf2-geometry-msgs ros-jazzy-sensor-msgs-py ros-jazzy-rosbag2-storage-mcap ros-jazzy-rmw-cyclonedds-cpp
+          source /opt/ros/jazzy/setup.bash
+          python3 -c 'import rclpy, rosbag2_py, sensor_msgs_py.point_cloud2, cv2, scipy, PIL, requests, yaml'
+      - name: Check out exact commit
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git init .
+          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
+          git fetch --depth 1 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+      - name: Restore pinned frontend and build all sensor paths
+        run: |
+          mkdir -p out/frontend
+          python3 frontend/bootstrap.py --workspace /tmp/semantic-ws | tee out/frontend/bootstrap.json
+          bash frontend/build.sh /tmp/semantic-ws 2>&1 | tee out/frontend/build.log
+      - name: Validate frozen experiment sources
+        env:
+          DIAGNOSTIC: ${{ inputs.mechanism_diagnostic }}
+          HOLDOUT: ${{ inputs.holdout09 }}
+          ENHANCED: ${{ inputs.enhanced_diagnostic }}
+          VALIDATION: ${{ inputs.enhanced_validation }}
+        run: |
+          if [ "$DIAGNOSTIC" = true ] && [ "$HOLDOUT" = true ]; then exit 2; fi
+          if [ "$ENHANCED" = true ] && { [ "$DIAGNOSTIC" = true ] || [ "$HOLDOUT" = true ]; }; then exit 2; fi
+          if [ "$VALIDATION" = true ] && { [ "$DIAGNOSTIC" = true ] || [ "$HOLDOUT" = true ] || [ "$ENHANCED" = true ]; }; then exit 2; fi
+          python3 -c 'import os; from frontend.protocol import load; print(load(os.environ["REPLAY_PROTOCOL"]))'
+          python3 -m unittest frontend.tests.test_protocol -v
+          python3 -m unittest frontend.tests.test_assess_validation -v
+      - name: Exercise the actual state estimator and original point transport
+        run: |
+          source /opt/ros/jazzy/setup.bash
+          source /tmp/semantic-ws/install/setup.bash
+          ctest --test-dir /tmp/semantic-ws/build/fast_livo --output-on-failure | tee out/frontend/integration.log
+          /tmp/semantic-ws/build/fast_livo/semantic_lio_integration_test > out/frontend/state-update.log
+          python3 -m unittest frontend.tests.test_input_bridge -v 2>&1 | tee out/frontend/input-tests.log
+          python3 -m unittest frontend.tests.test_ros_bridge -v 2>&1 | tee out/frontend/ros-bridge-tests.log
+          python3 -m unittest frontend.tests.test_replay_identity -v 2>&1 | tee out/frontend/replay-identity-tests.log
+          python3 -m frontend.tests.startup --workspace /tmp/semantic-ws --out out/frontend/startup
+      - name: Recover only the admitted short sequence
+        if: inputs.dataset_smoke || inputs.mechanism_diagnostic || inputs.holdout09 || inputs.enhanced_diagnostic || inputs.enhanced_validation
+        run: python3 -u -m frontend.restore_smoke --root /tmp/frontend-inputs --protocol "$REPLAY_PROTOCOL" 2>&1 | tee out/frontend/restore.log
+      - name: Freeze paired frontend trajectories before reading GT
+        if: inputs.dataset_smoke || inputs.mechanism_diagnostic || inputs.holdout09 || inputs.enhanced_diagnostic || inputs.enhanced_validation
+        env:
+          MECHANISM_DIAGNOSTIC: ${{ inputs.mechanism_diagnostic }}
+        run: |
+          source /opt/ros/jazzy/setup.bash
+          source /tmp/semantic-ws/install/setup.bash
+          diagnostic_args=()
+          if [ "$MECHANISM_DIAGNOSTIC" = true ]; then diagnostic_args+=(--diagnostic); fi
+          python3 -u -m frontend.replay_smoke --root /tmp/frontend-inputs --workspace /tmp/semantic-ws --out out/frontend/smoke --protocol "$REPLAY_PROTOCOL" "${diagnostic_args[@]}"
+      - name: Score frozen trajectories
+        if: (inputs.dataset_smoke || inputs.holdout09 || inputs.enhanced_validation) && !inputs.mechanism_diagnostic && !inputs.enhanced_diagnostic
+        run: python3 -m frontend.score_smoke --root /tmp/frontend-inputs --out out/frontend/smoke > out/frontend/scoring.log
+      - name: Assess enhanced accuracy against frozen decision rules
+        if: inputs.enhanced_validation
+        run: python3 -m frontend.assess_validation --out out/frontend/smoke
+      - name: Preserve evidence without raw data or model archives
+        if: always()
+        run: |
+          mkdir -p out/frontend
+          if [ -f /tmp/frontend-inputs/input-recovery.json ]; then cp /tmp/frontend-inputs/input-recovery.json out/frontend/; fi
+          if [ -f /tmp/semantic-ws/build/fast_livo/Testing/Temporary/LastTest.log ]; then cp /tmp/semantic-ws/build/fast_livo/Testing/Temporary/LastTest.log out/frontend/; fi
+          if [ -d /tmp/semantic-ws/src/fast_livo/Log/result ]; then cp -a /tmp/semantic-ws/src/fast_livo/Log/result out/frontend/raw-trajectories; fi
+          tar -czf /tmp/frontend-evidence.tar.gz -C out frontend
+          sha256sum /tmp/frontend-evidence.tar.gz > /tmp/frontend-evidence.sha256
+      - name: Upload evidence independently of release permissions
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: semantic-frontend-${{ github.run_id }}-${{ github.run_attempt }}
+          path: /tmp/frontend-evidence.*
+          retention-days: 30

@@ -76,7 +76,7 @@ import sys
 import struct
 import time
 
-sys.path.insert(0, "/data/livo_sem/src")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np
 
 INTENSITY_SCALE = float(os.environ.get("PTV3_INTENSITY_SCALE", "0.2"))

@@ -1,0 +1,109 @@
+{
+  "run": 40125959560,
+  "workflow": "success",
+  "admission": "failed: no historical boundary constraints in any replay",
+  "scope": "120-frame cached-label mechanism check, 3 repeats per arm",
+  "summary": {
+    "geometry": {
+      "ate_rmse_m": {
+        "mean": 0.0741060003369125,
+        "min": 0.07354476399881817,
+        "max": 0.07449006951240289
+      },
+      "rpe_1s_translation_rmse_m": {
+        "mean": 0.09435769394077632,
+        "min": 0.09396368614719723,
+        "max": 0.09481844739303566
+      },
+      "rpe_1s_rotation_rmse_deg": {
+        "mean": 0.31539577730667756,
+        "min": 0.3112930112843269,
+        "max": 0.3204842719901207
+      },
+      "boundary_constraints_total": 0
+    },
+    "association_B0": {
+      "ate_rmse_m": {
+        "mean": 0.07317977726616111,
+        "min": 0.07261462933632858,
+        "max": 0.07365579538143625
+      },
+      "rpe_1s_translation_rmse_m": {
+        "mean": 0.09312880922069429,
+        "min": 0.09237364036714144,
+        "max": 0.0936588423440519
+      },
+      "rpe_1s_rotation_rmse_deg": {
+        "mean": 0.2984651479290304,
+        "min": 0.2946551969281604,
+        "max": 0.301570524026073
+      },
+      "boundary_constraints_total": 0
+    },
+    "boundary_B0": {
+      "ate_rmse_m": {
+        "mean": 0.0744964947753016,
+        "min": 0.07344015269612038,
+        "max": 0.07638754781878823
+      },
+      "rpe_1s_translation_rmse_m": {
+        "mean": 0.09434972169674317,
+        "min": 0.09419417940418416,
+        "max": 0.0945442811406221
+      },
+      "rpe_1s_rotation_rmse_deg": {
+        "mean": 0.3116588375423873,
+        "min": 0.3094202261371646,
+        "max": 0.3150419916946578
+      },
+      "boundary_constraints_total": 0
+    },
+    "full_B0": {
+      "ate_rmse_m": {
+        "mean": 0.07432581240722055,
+        "min": 0.07340254783783906,
+        "max": 0.07605018419969213
+      },
+      "rpe_1s_translation_rmse_m": {
+        "mean": 0.09283922625833507,
+        "min": 0.0909885206357825,
+        "max": 0.09383533448604792
+      },
+      "rpe_1s_rotation_rmse_deg": {
+        "mean": 0.3061311443886624,
+        "min": 0.30075523843311136,
+        "max": 0.3133247037034885
+      },
+      "boundary_constraints_total": 0
+    },
+    "full_ZS": {
+      "ate_rmse_m": {
+        "mean": 0.07184815398700227,
+        "min": 0.0715501364049879,
+        "max": 0.07217739280212293
+      },
+      "rpe_1s_translation_rmse_m": {
+        "mean": 0.09320351869459854,
+        "min": 0.09271981704534737,
+        "max": 0.09360491035095564
+      },
+      "rpe_1s_rotation_rmse_deg": {
+        "mean": 0.31609832027934204,
+        "min": 0.3135344275200612,
+        "max": 0.3191945682335657
+      },
+      "boundary_constraints_total": 0
+    }
+  },
+  "archive": {
+    "file": "remote-smoke-40125959560.tar.gz",
+    "sha256": "3bf5108b225b8c082f17f3776f359fe20631b741102268d1669619b2d813e311"
+  },
+  "interpretation": [
+    "All 15 trajectories contain the same 115 timestamps; hashes verified before GT scoring.",
+    "All boundary rows are zero. No measured error change can be attributed to the boundary residual.",
+    "Boundary-only has up to 2.947 mm ATE range despite no active boundary rows, exposing execution variation.",
+    "Full ZS mean ATE is 2.258 mm below geometry, but this does not establish boundary coupling or full-sequence benefit.",
+    "No expansion is admitted. Further diagnostics must use support/transport evidence without selecting parameters by these errors."
+  ]
+}

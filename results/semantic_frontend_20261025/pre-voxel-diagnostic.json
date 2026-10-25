@@ -1,0 +1,115 @@
+{
+  "run": 40127490465,
+  "archive_sha256": "32ef2893ffb6eacd7eced82f21e4862ddfbf6abddd9ccfffff51346b6f0849c3",
+  "archive_bytes": 249239,
+  "paired_timestamps": 115,
+  "scored": false,
+  "runs": [
+    {
+      "arm": "geometry",
+      "repetition": 1,
+      "poses": 115,
+      "trajectory_sha256": "098dd0911a7a4aece957660d94930f7191872928adc3f64bc216a2842326fac8",
+      "semantic_updates": 0,
+      "updates_with_constraints": 0,
+      "total_constraints": 0,
+      "max_history_points": 0,
+      "lio_total_ms": {
+        "n": 115,
+        "min": 16.473000000000003,
+        "median": 21.714000000000002,
+        "p95": 29.8721,
+        "max": 30.889
+      },
+      "extraction_ms": null
+    },
+    {
+      "arm": "full_B0",
+      "repetition": 1,
+      "poses": 115,
+      "trajectory_sha256": "21dab9436d4c3c5acb1f0219d258dfadde8890b4fd187ac44c67e02cc37165f8",
+      "semantic_updates": 115,
+      "updates_with_constraints": 112,
+      "total_constraints": 2554,
+      "max_history_points": 568,
+      "lio_total_ms": {
+        "n": 115,
+        "min": 32.266999999999996,
+        "median": 50.067,
+        "p95": 67.2447,
+        "max": 72.456
+      },
+      "extraction_ms": {
+        "n": 115,
+        "min": 9.25873,
+        "median": 19.4359,
+        "p95": 31.200929999999996,
+        "max": 32.6573
+      },
+      "extracted_total": 3447,
+      "boundary_count_per_update": {
+        "n": 115,
+        "min": 8.0,
+        "median": 30.0,
+        "p95": 51.3,
+        "max": 61.0
+      },
+      "accepted_fraction": 0.9739130434782609,
+      "active_rows_per_update": {
+        "n": 115,
+        "min": 0.0,
+        "median": 20.0,
+        "p95": 43.0,
+        "max": 49.0
+      }
+    },
+    {
+      "arm": "full_ZS",
+      "repetition": 1,
+      "poses": 115,
+      "trajectory_sha256": "0c998bd848c1bb61940d6f7dee2a3de8821653d976b3462c091331fa6eb8df23",
+      "semantic_updates": 115,
+      "updates_with_constraints": 106,
+      "total_constraints": 1611,
+      "max_history_points": 393,
+      "lio_total_ms": {
+        "n": 115,
+        "min": 34.435,
+        "median": 50.537,
+        "p95": 70.96730000000001,
+        "max": 83.328
+      },
+      "extraction_ms": {
+        "n": 115,
+        "min": 10.0521,
+        "median": 19.9791,
+        "p95": 32.736039999999996,
+        "max": 36.8866
+      },
+      "extracted_total": 2534,
+      "boundary_count_per_update": {
+        "n": 115,
+        "min": 0.0,
+        "median": 21.0,
+        "p95": 38.0,
+        "max": 46.0
+      },
+      "accepted_fraction": 0.9217391304347826,
+      "active_rows_per_update": {
+        "n": 115,
+        "min": 0.0,
+        "median": 15.0,
+        "p95": 27.0,
+        "max": 32.0
+      }
+    }
+  ],
+  "activation_pass": true,
+  "commit": "8ffa14f62d9258ceb21a341404709557f6c7e150",
+  "archive": "remote-diagnostic-40127490465.tar.gz",
+  "interpretation": "Boundary activation only, with archived labels on the development window. No GT fetched or accuracy scored. Counts are final-iteration constraint rows per update, not independent samples.",
+  "remaining_validation": [
+    "Unseen paired trajectory evaluation after freezing the revised method",
+    "Online PTv3 latency and deadline admission on restored GPU runtime"
+  ]
+}

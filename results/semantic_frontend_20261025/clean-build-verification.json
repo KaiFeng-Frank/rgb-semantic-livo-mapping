@@ -1,0 +1,17 @@
+{
+  "commit": "e8728d3b7abdf24704b989ba7bb89d202ff263cc",
+  "source_restored_from_pinned_manifests": true,
+  "cmake_package_registry_disabled": true,
+  "tests": {
+    "actual_estimator_ctest": "pass",
+    "geometry_startup": "pass",
+    "semantic_startup": "pass",
+    "live_ROS_geometry_fallback": "pass"
+  },
+  "scope": "engineering verification only; no local raw driving data or model archives",
+  "sophus_resolution": {
+    "vikit_common": "/home/frank/semantic_livo_clean_verify/install/sophus/share/sophus/cmake",
+    "vikit_ros": "/home/frank/semantic_livo_clean_verify/install/sophus/share/sophus/cmake",
+    "fast_livo": "/home/frank/semantic_livo_clean_verify/install/sophus/share/sophus/cmake"
+  }
+}

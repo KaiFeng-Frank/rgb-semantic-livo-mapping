@@ -1,0 +1,42 @@
+[ptv3_worker] Pointcept v1.5.1 loader, strict=True, intensity_scale=0.20 grid=0.050 classes=16 | shuffle_orders=False weight_dtype=fp16 tf32=False fast_voxel=True shm=True
+[ptv3_worker] gpu_voxel=True fast_hilbert=True
+[ptv3_worker] shm attached psm_18169417 (4 slots x 200000 pts)
+W1025 13:15:32.110000 3255376 site-packages/torch/fx/_symbolic_trace.py:53] is_fx_tracing will return true for both fx.symbolic_trace and torch.export. Please use is_fx_tracing_symbolic_tracing() for specifically fx.symbolic_trace or torch.compiler.is_compiling() for specifically torch.export/compile.
+[ptv3_worker] warm
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_online_verify/src/ptv3_worker.py", line 381, in <module>
+    main()
+  File "/home/frank/semantic_livo_online_verify/src/ptv3_worker.py", line 345, in main
+    tag = _readn(inp, 1)
+          ^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_online_verify/src/ptv3_worker.py", line 282, in _readn
+    c = f.read(n - len(buf))
+        ^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+Exception ignored in: <function SharedMemory.__del__ at 0x7056fbc8b240>
+Traceback (most recent call last):
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/multiprocessing/shared_memory.py", line 187, in __del__
+    self.close()
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/multiprocessing/shared_memory.py", line 230, in close
+    self._mmap.close()
+BufferError: cannot close exported pointers exist
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/frank/semantic_livo_online_verify/frontend/input_bridge.py", line 209, in <module>
+    main()
+  File "/home/frank/semantic_livo_online_verify/frontend/input_bridge.py", line 198, in main
+    rclpy.spin(node)
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 247, in spin
+    executor.spin_once()
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 923, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 904, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 874, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 778, in _wait_for_ready_callbacks
+    wait_set.wait(timeout_nsec)
+KeyboardInterrupt

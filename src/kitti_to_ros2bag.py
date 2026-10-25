@@ -49,6 +49,7 @@ OX = dict(lat=0, lon=1, alt=2, roll=3, pitch=4, yaw=5,
 PC_DTYPE = np.dtype([("x", "<f4"), ("y", "<f4"), ("z", "<f4"),
                      ("intensity", "<f4"), ("time", "<f4"), ("ring", "<u2")])
 assert PC_DTYPE.itemsize == 22, PC_DTYPE.itemsize
+INDEXED_PC_DTYPE = np.dtype(PC_DTYPE.descr + [("raw_point_index", "<u4")])
 
 TIME_SCALE = {"s": 1.0, "ms": 1.0e3, "us": 1.0e6}
 
@@ -110,7 +111,10 @@ def make_pointcloud2(stamp_ns, arr, frame_id):
         PointField(name="ring",      offset=20, datatype=PointField.UINT16,  count=1),
     ]
     m.is_bigendian = False
-    m.point_step = PC_DTYPE.itemsize
+    if "raw_point_index" in arr.dtype.names:
+        m.fields.append(PointField(name="raw_point_index", offset=22,
+                                   datatype=PointField.UINT32, count=1))
+    m.point_step = arr.dtype.itemsize
     m.row_step = m.point_step * m.width
     m.data = arr.tobytes()
     m.is_dense = True
@@ -210,6 +214,8 @@ def main():
                          "ALWAYS the sweep start")
     ap.add_argument("--storage", default="mcap", choices=["mcap", "sqlite3"])
     ap.add_argument("--tf-static", action="store_true")
+    ap.add_argument("--point-index-field", action="store_true",
+                    help="carry original .bin point IDs through scan sorting for paired semantic replay")
     ap.add_argument("--no-imu-dedup", action="store_true",
                     help="keep oxts samples exactly as the files order them, "
                          "including KITTI's own non-monotonic entries")
@@ -306,11 +312,13 @@ def main():
                           dtype=np.float32).reshape(-1, 4)
         ring, tt, order = synth(pts[:, :3], sweep_duration=sweep)
         q = pts[order]
-        arr = np.empty(q.shape[0], dtype=PC_DTYPE)
+        arr = np.empty(q.shape[0], dtype=INDEXED_PC_DTYPE if args.point_index_field else PC_DTYPE)
         arr["x"], arr["y"], arr["z"] = q[:, 0], q[:, 1], q[:, 2]
         arr["intensity"] = q[:, 3]
         arr["time"] = (tt * tscale).astype(np.float32)
         arr["ring"] = ring
+        if args.point_index_field:
+            arr["raw_point_index"] = order
         if arr["time"][-1] <= 0:
             raise RuntimeError("frame %d: last point time <= 0, FAST-LIVO2 would "
                                "fall back to yaw estimation" % i)

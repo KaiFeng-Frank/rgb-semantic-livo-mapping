@@ -1,0 +1,47 @@
+{
+  "runtime_kernel_checks_passed": true,
+  "strict_checkpoint_loaded": true,
+  "direct_inference_rounds": [
+    {
+      "attempt": "admission-20261025-retry2",
+      "frames": 20,
+      "median_ms": 70.20135602215305,
+      "p95_ms": 80.97489701467566,
+      "max_ms": 82.17993297148496,
+      "over_80ms": 2
+    },
+    {
+      "attempt": "admission-20261025-complete",
+      "frames": 20,
+      "median_ms": 69.4896025233902,
+      "p95_ms": 75.95467317732982,
+      "max_ms": 77.48343399725854,
+      "over_80ms": 0
+    },
+    {
+      "attempt": "admission-20261025-ready",
+      "frames": 20,
+      "median_ms": 63.21950553683564,
+      "p95_ms": 66.72159789013676,
+      "max_ms": 68.46307893283665,
+      "over_80ms": 0
+    }
+  ],
+  "geometry_received": 0,
+  "online_received": 0,
+  "published_per_mode": 26,
+  "online_deadline_evaluable": false,
+  "online_admitted": false,
+  "full_lio_online_validated": false,
+  "raw_data_persisted": false,
+  "interpretation": "Both final geometry and semantic bridge paths failed scan coverage. Zero-receipt timing/byte-preservation flags are vacuous, not evidence; this result does not measure an inference deadline success rate. Runtime startup and direct GPU inference pass, but large-cloud transport must be repaired before effective deadline/full-LIO evaluation.",
+  "preserved_attempts": {
+    "admission-20261025": "network read interrupted before testing",
+    "admission-20261025-retry1": "geometry coverage 9/26 while compilation ran",
+    "admission-20261025-retry2": "direct inference passed; geometry coverage 17/26 after compilation",
+    "admission-20261025-complete": "direct inference passed; geometry 5/26 and online 0/26; startup readiness guard missing",
+    "admission-20261025-ready": "explicit initialized-worker wait and separate domains; direct inference passed, both paths 0/26"
+  },
+  "runtime_path": "/home/frank/semantic_livo_runtime",
+  "next_required": "Diagnose and fix large PointCloud2 delivery, then rerun the same deadline protocol. No larger accuracy experiment is admitted by the failed seq09 holdout."
+}

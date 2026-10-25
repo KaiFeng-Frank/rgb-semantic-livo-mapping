@@ -1,0 +1,12 @@
+test_preserves_raw_bytes_and_organized_padding (frontend.tests.test_input_bridge.ROSFields.test_preserves_raw_bytes_and_organized_padding) ... ok
+test_arrival_order_and_once_only (frontend.tests.test_input_bridge.Timing.test_arrival_order_and_once_only) ... ok
+test_bounded_backpressure_and_duplicate (frontend.tests.test_input_bridge.Timing.test_bounded_backpressure_and_duplicate) ... ok
+test_completion_timestamp_not_timer_timestamp (frontend.tests.test_input_bridge.Timing.test_completion_timestamp_not_timer_timestamp) ... ok
+test_fixed_delay_control (frontend.tests.test_input_bridge.Timing.test_fixed_delay_control) ... ok
+test_late_inference_does_not_refuse_geometry (frontend.tests.test_input_bridge.Timing.test_late_inference_does_not_refuse_geometry) ... ok
+test_indexed_scan_reliable_delivery (frontend.tests.test_ros_bridge.LiveBridge.test_indexed_scan_reliable_delivery) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 2.238s
+
+OK

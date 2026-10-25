@@ -1,0 +1,18 @@
+test_cross_sequence_source_is_frozen (frontend.tests.test_protocol.Protocol.test_cross_sequence_source_is_frozen) ... ok
+test_enhanced_accuracy_freeze_is_separate (frontend.tests.test_protocol.Protocol.test_enhanced_accuracy_freeze_is_separate) ... ok
+test_enhanced_window_is_bounded_and_cannot_be_scored (frontend.tests.test_protocol.Protocol.test_enhanced_window_is_bounded_and_cannot_be_scored) ... ok
+test_old_protocol_still_selects_development_sequence (frontend.tests.test_protocol.Protocol.test_old_protocol_still_selects_development_sequence) ... ok
+test_reject_mismatched_estimator (frontend.tests.test_protocol.Protocol.test_reject_mismatched_estimator) ... ok
+test_reject_unapproved_large_window (frontend.tests.test_protocol.Protocol.test_reject_unapproved_large_window) ... ok
+test_consistent_improvement_and_frozen_mechanism_pass (frontend.tests.test_assess_validation.Assessment.test_consistent_improvement_and_frozen_mechanism_pass) ... ok
+test_duplicate_or_missing_run_is_not_a_valid_comparison (frontend.tests.test_assess_validation.Assessment.test_duplicate_or_missing_run_is_not_a_valid_comparison) ... ok
+test_mean_improvement_cannot_hide_one_paired_regression (frontend.tests.test_assess_validation.Assessment.test_mean_improvement_cannot_hide_one_paired_regression) ... ok
+test_rotation_regression_or_missing_mechanism_fails (frontend.tests.test_assess_validation.Assessment.test_rotation_regression_or_missing_mechanism_fails) ... ok
+test_full_size_cloud_delivery (frontend.tests.test_ros_bridge.LiveBridge.test_full_size_cloud_delivery) ... ok
+test_indexed_scan_reliable_delivery (frontend.tests.test_ros_bridge.LiveBridge.test_indexed_scan_reliable_delivery) ... ok
+test_once_only_fallback_preserves_sensor_points (frontend.tests.test_ros_bridge.LiveBridge.test_once_only_fallback_preserves_sensor_points) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 6.312s
+
+OK
