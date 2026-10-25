@@ -19,12 +19,32 @@ WARM=[0,20,40,60,80,100]
 MEASURE=list(range(120,140))
 
 
+class MemoryRangeReader(RemoteZip):
+    """Retry interrupted response bodies without retaining raw files on disk."""
+    def read(self,n=-1):
+        remaining=self.size-self.pos if n<0 else min(n,self.size-self.pos)
+        if remaining>32*1024**2:raise ValueError('unexpected large archive read')
+        parts=[]
+        while remaining:
+            size=min(1024**2,remaining)
+            for attempt in range(5):
+                try:
+                    part=super().read(size)
+                    break
+                except Exception:
+                    if attempt==4:raise
+                    time.sleep(.5)
+            if len(part)!=size:raise ValueError('incomplete archive range')
+            parts.append(part);remaining-=len(part)
+        return b''.join(parts)
+
+
 def recover():
     url='https://s3.eu-central-1.amazonaws.com/avg-kitti/raw_data/2011_09_30_drive_0027/2011_09_30_drive_0027_sync.zip'
     prefix='2011_09_30/2011_09_30_drive_0027_sync/velodyne_points/'
     frames=WARM+MEASURE
     def shard(i):
-        reader=RemoteZip(url);reader.session.headers['Connection']='close'
+        reader=MemoryRangeReader(url);reader.session.headers['Connection']='close'
         rows={};meta={}
         with zipfile.ZipFile(reader) as z:
             if i==0:
