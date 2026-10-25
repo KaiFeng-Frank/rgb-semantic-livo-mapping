@@ -64,7 +64,8 @@ def prepare(workspace):
         subprocess.run(['git','apply','--check',str(patch)], cwd=source, check=True)
         subprocess.run(['git','apply',str(patch)], cwd=source, check=True)
         marker.write_text(json.dumps(wanted, indent=2)+'\n')
-    for header in ('semantic_frontend.hpp','semantic_pcl.hpp'):
+    for header in ('semantic_frontend.hpp','semantic_pcl.hpp','semantic_motion.hpp',
+                   'semantic_likelihood.hpp','semantic_visual.hpp'):
         shutil.copyfile(HERE/'include'/header, source/'include'/header)
     (source/'Log/result').mkdir(parents=True, exist_ok=True)
     vikit = workspace/'src/rpg_vikit'

@@ -196,7 +196,7 @@ def main():
         node.thread.join(timeout=2.)
         if worker is not None: worker.close()
         node.destroy_node()
-        rclpy.shutdown()
+        if rclpy.ok(): rclpy.shutdown()
         log.close()
 
 

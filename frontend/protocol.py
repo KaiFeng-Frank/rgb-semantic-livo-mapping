@@ -10,7 +10,10 @@ def load(path=None):
     cfg = json.loads(Path(path or REPO/'frontend/protocol.json').read_text())
     part = cfg['short_sequence']
     seq, first, end = part['sequence'], part['first_frame'], part['end_exclusive']
-    if seq not in DRIVES or first != 0 or not 0 < end <= (120 if seq == '07' else 240):
+    legacy = seq in DRIVES and first == 0 and 0 < end <= (120 if seq == '07' else 240)
+    enhanced = (cfg.get('version') == 2 and seq == '07' and first == 730 and end == 826
+                and cfg.get('diagnostic') is True and cfg.get('repetitions') == 1)
+    if not (legacy or enhanced):
         raise ValueError('outside the admitted bounded replay windows')
     for relative, expected in cfg.get('frozen_sources', {}).items():
         if hashlib.sha256((REPO/relative).read_bytes()).hexdigest() != expected:

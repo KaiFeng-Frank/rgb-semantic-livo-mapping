@@ -111,7 +111,8 @@ def run(args):
                     '--time-unit','us','--point-index-field'],check=True)
     for arm in ['armB0_s1','ZS']:annotate(root,root/'bag_geometry',root/f'bag_{arm}',arm,cfg)
     for path in root.glob('annotation-*.json'):(out/path.name).write_bytes(path.read_bytes())
-    env=dict(os.environ,ROS_DOMAIN_ID='173',RCUTILS_LOGGING_BUFFERED_STREAM='0',OMP_NUM_THREADS='2')
+    env=dict(os.environ,ROS_DOMAIN_ID='43',RCUTILS_LOGGING_BUFFERED_STREAM='0',OMP_NUM_THREADS='2',
+             RMW_IMPLEMENTATION=cfg.get('middleware',os.environ.get('RMW_IMPLEMENTATION','rmw_fastrtps_cpp')))
     executable=ws/'install/fast_livo/lib/fast_livo/fastlivo_mapping'
     records=[]
     reference_times=None
@@ -123,6 +124,8 @@ def run(args):
             config=yaml.safe_load((REPO/'config/kitti_velodyne64.yaml').read_text())
             p=config['/**']['ros__parameters'];p['evo']['seq_name']=name
             p['semantic']=dict(enabled=arm!='geometry',association=arm in ['association_B0','full_B0','full_ZS'],boundaries=arm in ['boundary_B0','full_B0','full_ZS'])
+            if 'arm_settings' in cfg:
+                p['semantic']=cfg['arm_settings'][arm]
             path=out/f'{name}.yaml';path.write_text(yaml.safe_dump(config))
             bag='geometry' if arm=='geometry' else 'ZS' if arm.endswith('_ZS') else 'armB0_s1'
             with (out/f'{name}.camera.log').open('w') as camera_log, (out/f'{name}.log').open('w') as log:
@@ -154,6 +157,16 @@ def run(args):
             record=dict(arm=arm,repetition=rep+1,poses=len(e),trajectory_sha256=sha(saved),
                         semantic_updates=len(rows),updates_with_constraints=sum(r[2]>0 for r in rows),
                         total_constraints=sum(r[2] for r in rows),max_history_points=max([r[3] for r in rows] or [0]))
+            enhanced=[tuple(map(int,m)) for m in re.findall(r'likelihood_rows=(\d+) moving=(\d+) pending=(\d+) invalidated=(\d+)',logtext)]
+            visual=[tuple(map(int,m)) for m in re.findall(r'\[ Semantic visual \] moving_pixels=(\d+) uncertain_pixels=(\d+) accepted_rows=(\d+)',logtext)]
+            record.update(likelihood_updates=sum(r[0]>0 for r in enhanced),
+                          moving_updates=sum(r[1]>0 for r in enhanced),
+                          moving_points=sum(r[1] for r in enhanced),
+                          uncertain_points=sum(r[2] for r in enhanced),
+                          invalidated_nodes=sum(r[3] for r in enhanced),
+                          visual_mask_updates=sum(r[0]>0 for r in visual),
+                          visual_uncertain_updates=sum(r[1]>0 for r in visual),
+                          visual_accepted_rows=sum(r[2] for r in visual))
             records.append(record)
             (out/'runs.json').write_text(json.dumps(records,indent=2)+'\n')
             print('FRONTEND_RUN',json.dumps(record),flush=True)

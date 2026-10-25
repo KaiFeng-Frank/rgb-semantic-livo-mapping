@@ -98,7 +98,9 @@ struct Config {
   double confidence_min = .8;
   double extraction_radius = .65;
   double correspondence_radius = .8;
-  double boundary_sigma = .20; // metres; includes segmentation/sampling uncertainty
+  double boundary_sigma = .20; // minimum noise floor, not calibrated uncertainty
+  bool dynamics = false, visual_mask = false, likelihood = false;
+  bool adaptive_boundary_noise = false;
   double huber = .30;
   double max_frame_information = 100.; // cap correlated boundary observations
   double max_group_information = 25.;
@@ -197,7 +199,7 @@ inline std::vector<Boundary> extractBoundaries(const std::vector<Sample> &points
 }
 
 struct Constraint {
-  Vec3 point_body, normal_world, center_world;
+  Vec3 point_body=Vec3::Zero(), normal_world=Vec3::Zero(), center_world=Vec3::Zero();
   double residual=0., information=0.;
   Row6 jacobian=Row6::Zero();
   int first=0, second=0;
@@ -266,7 +268,11 @@ class BoundaryMap {
       c.residual=residual; c.first=b.first; c.second=b.second;
       c.jacobian.head<3>()=-normal.transpose()*R*skew(b.point);
       c.jacobian.tail<3>()=normal.transpose();
-      c.information=reliability({b.first,b.confidence})/(config.boundary_sigma*config.boundary_sigma);
+      double variance=config.boundary_sigma*config.boundary_sigma;
+      if(config.adaptive_boundary_noise)
+        variance+=std::max(0.,normal.dot(cov*normal)) +
+                  (1.-b.confidence)*config.correspondence_radius*config.correspondence_radius;
+      c.information=reliability({b.first,b.confidence})/variance;
       c.information*=std::min(1.,config.huber/std::max(std::abs(residual),1e-9));
       out.push_back(c);
     }

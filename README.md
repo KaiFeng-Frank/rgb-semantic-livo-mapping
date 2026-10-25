@@ -64,6 +64,11 @@ full B0 mean ATE is 0.463 m versus geometry's 0.430 m across three repeats,
 despite active boundary rows on 233/235 updates. All five arms and failures are
 preserved in the [holdout results](results/semantic_frontend_20261025/holdout09/README.md).
 [Complete verification and the preserved failed admission](results/semantic_frontend_20261025/README.md).
+The enhanced implementation now adds motion-aware geometric/map admission,
+projected dynamic-pixel gating in both visual update paths, and direct categorical
+likelihood observations with boundary rows disabled. Actual-estimator integration
+tests pass; real-data mechanism validation is pending. The earlier failed result
+does not evaluate this enhanced profile. See [implementation and limits](frontend/README.md).
 The local 5070 Ti now runs the strict B0 model: direct inference medians are
 63–70 ms over three fixed 20-frame timing rounds. The ROS bridge fails complete
 scan delivery, so online deadline and full-LIO throughput remain unvalidated.

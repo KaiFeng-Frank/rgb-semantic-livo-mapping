@@ -10,14 +10,20 @@ import unittest
 
 class LiveBridge(unittest.TestCase):
     def test_once_only_fallback_preserves_sensor_points(self):
+        self.exercise(1,46)
+
+    def test_full_size_cloud_delivery(self):
+        self.exercise(60000,47)
+
+    def exercise(self,repeats,domain):
         import numpy as np
         import rclpy
         from rclpy.node import Node
         from sensor_msgs.msg import PointCloud2, PointField
         from frontend.replay_smoke import terminate
         root = Path(__file__).resolve().parents[2]
-        env = dict(os.environ, ROS_DOMAIN_ID='176')
-        rclpy.init(domain_id=176)
+        env = dict(os.environ, ROS_DOMAIN_ID=str(domain))
+        rclpy.init(domain_id=domain)
         node = Node('semantic_bridge_contract')
         received = []
         pub = node.create_publisher(PointCloud2, '/contract/raw', 10)
@@ -39,11 +45,11 @@ class LiveBridge(unittest.TestCase):
                 # As with rosbag --delay, measure only after transport startup.
                 ready=time.monotonic()+.5
                 while time.monotonic()<ready: rclpy.spin_once(node,timeout_sec=.01)
-                points = np.array([[3., 1., -1., .5], [4., 2., -.5, .7]], dtype='<f4')
+                points = np.tile(np.array([[3., 1., -1., .5], [4., 2., -.5, .7]], dtype='<f4'),(repeats,1))
                 fields = [PointField(name=k, offset=4*i, datatype=7, count=1)
                           for i,k in enumerate(('x','y','z','intensity'))]
                 for i in range(5):
-                    msg = PointCloud2(height=1, width=2, point_step=16, row_step=32,
+                    msg = PointCloud2(height=1, width=len(points), point_step=16, row_step=16*len(points),
                                      is_dense=True, fields=fields, data=points.tobytes())
                     msg.header.frame_id='lidar'; msg.header.stamp.sec=100; msg.header.stamp.nanosec=i*100_000_000
                     pub.publish(msg)
@@ -55,9 +61,9 @@ class LiveBridge(unittest.TestCase):
                 self.assertEqual([m.header.stamp.nanosec for m in received],[i*100_000_000 for i in range(5)])
                 for m in received:
                     self.assertEqual(m.header.frame_id,'lidar')
-                    data=np.frombuffer(m.data,np.uint8).reshape(2,m.point_step)
-                    np.testing.assert_array_equal(data[:,:16],points.view(np.uint8).reshape(2,16))
-                    np.testing.assert_array_equal(data[:,16:18].copy().view('<u2').ravel(),[65535,65535])
+                    data=np.frombuffer(m.data,np.uint8).reshape(len(points),m.point_step)
+                    np.testing.assert_array_equal(data[:,:16],points.view(np.uint8).reshape(len(points),16))
+                    np.testing.assert_array_equal(data[:,16:18].copy().view('<u2').ravel(),np.full(len(points),65535))
                     self.assertEqual(m.point_step,24)
                 import json
                 rows=[json.loads(line) for line in Path(temp+'/input.jsonl').read_text().splitlines()]

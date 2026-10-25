@@ -5,6 +5,24 @@ filter. It does not estimate another ICP pose and feed it into a pose graph. The
 original 19-state prior, cross covariance, and LiDAR/visual sequential update remain
 the estimator. Dataset improvement and online throughput require separate evidence.
 
+The enhanced profile is `frontend/enhanced.yaml`. It adds three independently
+switchable paths: ego-compensated motion decisions in geometric residuals and map
+admission, image-space motion masks in the actual photometric update, and a
+pose-dependent categorical likelihood in the same 19-state estimator. The old
+failed sequence09 result evaluates only the earlier association/boundary variant;
+it does not evaluate these additions or establish that semantic coupling is
+ineffective.
+
+All arms also initialize/recompute the upstream `blind_sqr` from `blind`; an
+uninitialized shared preprocessing threshold was found by the integration fixture.
+This is a new common baseline. The old failed experiment is preserved unchanged.
+
+The enhanced profile disables the old boundary residual to avoid counting the
+same class transitions twice. Every new switch defaults to false when omitted,
+preserving the earlier controls. New real-data admission is separately frozen in
+`enhanced-diagnostic.json`: 96 development frames, five arms, one repeat, no GT
+scoring, no training, no parameter search and no automatic large experiment.
+
 ## Implementation
 
 * A scan-preserving input bridge adds native nuScenes `semantic_label` (uint16) and
@@ -84,7 +102,8 @@ Run `python3 frontend/parameter_blackboard.py --ros-args --params-file
 config/camera_kitti_cam2.yaml` and FAST-LIVO2 with the original KITTI
 calibration, overriding `common.lid_topic:=/semantic_frontend/points` and
 `semantic.enabled:=true`. `semantic.association` and `semantic.boundaries` provide
-separate ablations; `semantic.enabled:=false` is the unchanged observation path.
+separate ablations; `semantic.enabled:=false` is the unchanged observation path. For the enhanced profile,
+append `--params-file frontend/enhanced.yaml` after the KITTI parameter file.
 Do not feed `/semantic_scan` from the existing mapping node: that topic has already
 been transformed/deskewed and lacks the original scan timing contract.
 
@@ -128,6 +147,7 @@ Set the four `PTV3_*` paths above, then run:
 ```bash
 "$PTV3_PYTHON" -m frontend.check_gpu_runtime --out /tmp/semantic-runtime-ready.json
 source /opt/ros/jazzy/setup.bash
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 /usr/bin/python3 -m frontend.online_admission --out /tmp/semantic-online-admission
 ```
 
@@ -143,11 +163,40 @@ fields and timestamps stay byte-identical; the converter's default output is
 unchanged unless `--point-index-field` is requested. Recomputing a permutation is
 kept only as a diagnostic, never as the point identity used to attach semantics.
 
-Actual object-motion tracking, transient object maps, semantic masking of visual
-patches, and rebuilding maps after non-rigid loop correction are not implemented
-in this first frontend increment. Movable categories are not treated as permanent
-semantic boundary landmarks. A rigid map-frame rebase is supported; a non-rigid
-correction requires clearing/rebuilding the boundary history. None of those pending
-capabilities is inferred from the presence of semantic labels or a changed ATE.
+The enhanced implementation distinguishes class candidates from measured motion.
+Class-conditioned clusters are compared in the world frame, with one-to-one
+association, shape/ambiguity gates, pose uncertainty, repeated movement evidence
+and a stationary confirmation period. Unknown candidates retain 0.25 geometric
+weight and are withheld from map insertion; confirmed motion has zero weight;
+confirmed stationary candidates retain full weight. Old associated map surfaces
+and visual landmarks are invalidated when an object starts moving. These are
+bounded centroid tracks, not a validated general multi-object tracker. Confidence
+thresholds and motion uncertainty floors are engineering choices, not calibrated
+probabilities.
+
+Image masks are projections of the current 3-D motion regions, with a freshness
+limit and nearer observed static-depth protection. They are **not dense 2-D
+semantic segmentation** and may miss unobserved regions. Full patch footprints,
+including pyramid/gradient support, gate both photometric update implementations,
+new visual landmarks and reference-patch updates. Unknown regions are downweighted;
+confirmed moving regions contribute no photometric rows. An all-masked update
+preserves the entry state and does not shrink covariance. Expired masks are cleared.
+
+The categorical field uses smoothed historical class-vote frequencies, not
+reconstructed full network posteriors. Its negative-log class likelihood changes
+with pose, so its spatial derivative contributes directly to the IEKF Jacobian.
+A uniform class field contributes no pose information. History remains frozen
+throughout an update, requires two older observations, and has point/history and
+information caps. Tests cover finite-difference Jacobians, input-order invariance,
+and actual state/covariance/velocity response with boundary constraints disabled.
+The optional `adaptive_boundary_noise` switch adds measured line scatter and a
+confidence penalty to the old boundary noise floor; it is not used in the enhanced
+profile and is not claimed as calibrated uncertainty.
+
+Non-rigid loop corrections still require clearing/rebuilding all geometry,
+semantic histories and motion tracks. The older boundary map's rigid rebase helper
+alone does not rebase the new motion/likelihood state; live loop integration is not
+enabled by this profile. Passing synthetic integration tests is not evidence of
+real-data accuracy benefit or online throughput.
 
 The FAST-LIVO2 patch remains subject to its upstream GPL-2.0 license and notices.

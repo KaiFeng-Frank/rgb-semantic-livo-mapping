@@ -85,13 +85,16 @@ def direct(scans,out):
 
 
 def bridge(scans,meta,out,mode):
+    # The local controlled large-cloud probe failed on Fast DDS and passed on
+    # Cyclone DDS. Record the selected implementation with every admission.
+    os.environ.setdefault('RMW_IMPLEMENTATION','rmw_cyclonedds_cpp')
     import rclpy
     from rclpy.node import Node
     from sensor_msgs.msg import PointCloud2
     from kitti_to_ros2bag import INDEXED_PC_DTYPE,make_pointcloud2
     from kitti_scan import synth
     from frontend.replay_smoke import terminate
-    domain=180+2*(os.getpid()%20)+int(mode=='online')
+    domain=20+2*(os.getpid()%20)+int(mode=='online')
     rclpy.init(domain_id=domain);node=Node('semantic_online_admission')
     received=[]
     pub=node.create_publisher(PointCloud2,'/admission/raw',10)
@@ -136,7 +139,7 @@ def bridge(scans,meta,out,mode):
     selected={int(meta['timestamps_start.txt'][f]) for f in MEASURE}
     measured=[r for r in rows if r['stamp_ns'] in selected]
     semantic=sum(r['semantic'] for r in measured)
-    return dict(mode=mode,ros_domain=domain,scans=len(MEASURE),received_measurement_scans=len(measured),
+    return dict(mode=mode,ros_domain=domain,middleware=os.environ['RMW_IMPLEMENTATION'],scans=len(MEASURE),received_measurement_scans=len(measured),
                 published_total=count,received_total=len(stamps),complete_ordered_coverage=coverage,
                 expected_stamp_ns=list(expected),received_stamp_ns=stamps,
                 semantic_scans=semantic,semantic_fraction=semantic/len(MEASURE),

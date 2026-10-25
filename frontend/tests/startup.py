@@ -15,8 +15,12 @@ def check(workspace, out):
     out.mkdir(parents=True, exist_ok=True)
     env = dict(os.environ, ROS_DOMAIN_ID='174', RCUTILS_LOGGING_BUFFERED_STREAM='0')
     exe = workspace/'install/fast_livo/lib/fast_livo/fastlivo_mapping'
-    for enabled in (False, True):
-        name = 'semantic' if enabled else 'geometry'
+    for name in ('geometry','semantic','enhanced'):
+        enabled=name!='geometry'
+        extra=[]
+        if name=='enhanced':
+            for key in ('dynamics','visual_mask','likelihood','adaptive_boundary_noise'):
+                extra+=['-p','semantic.'+key+':=true']
         with (out/(name+'.camera.log')).open('w') as camera_log, (out/(name+'.log')).open('w') as log:
             camera = subprocess.Popen([sys.executable, str(REPO/'frontend/parameter_blackboard.py'),
                 '--ros-args', '--params-file', str(REPO/'config/camera_kitti_cam2.yaml')],
@@ -25,7 +29,7 @@ def check(workspace, out):
             try:
                 time.sleep(1)
                 node = subprocess.Popen([str(exe), '--ros-args', '--params-file',
-                    str(REPO/'config/kitti_velodyne64.yaml'), '-p', 'semantic.enabled:='+str(enabled).lower()],
+                    str(REPO/'config/kitti_velodyne64.yaml'), '-p', 'semantic.enabled:='+str(enabled).lower(),*extra],
                     env=env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
                 for _ in range(150):
                     if camera.poll() is not None or node.poll() is not None:
