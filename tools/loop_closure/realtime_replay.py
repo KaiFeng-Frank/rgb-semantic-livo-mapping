@@ -123,8 +123,13 @@ def run(args):
                 PTV3_CONFIG=str(runtime/'weights/nuscenes-semseg-pt-v3m1-0-base/config.py'),
                 PTV3_CHECKPOINT=str(runtime/'v06-armB0_s1-student.pth'),
                 OMP_NUM_THREADS='1', OPENBLAS_NUM_THREADS='1', MKL_NUM_THREADS='1')
+            # Optional ROS-interpreter dependencies must not leak into the
+            # geometric worker, which can use a different Python ABI.
+            if os.environ.get('SEMANTIC_ROS_PYTHONPATH'):
+                env['PYTHONPATH'] = os.environ['SEMANTIC_ROS_PYTHONPATH']+os.pathsep+env.get('PYTHONPATH', '')
             semantic_process = start([sys.executable, '-m', 'tools.loop_closure.semantic_node', '--frontend', str(args.frontend),
-                   '--out', str(args.out/'semantics'), '--reflectance-divisor', '255', '--verify-final'], 'semantics.log', env)
+                   '--out', str(args.out/'semantics'), '--reflectance-divisor', '255', '--verify-final',
+                   '--consistency', getattr(args, 'consistency', 'off')], 'semantics.log', env)
         front = start([str(args.workspace/'install/fast_livo/lib/fast_livo/fastlivo_mapping'),
                        '--ros-args', '--params-file', str(args.frontend)], 'frontend.log')
         until = time.monotonic()+(150 if args.semantics else 45)
@@ -233,6 +238,7 @@ def run(args):
                        warmup_prefix_images=sum(s < min(raw) for s in arrivals) if raw else len(arrivals),
                        missing_images_after_initialization=sum(s >= min(raw) and s not in raw for s in arrivals) if raw else None,
                        semantic_input_keyframes=len(semantic_inputs), semantic_scan_outputs=len(semantic_scans),
+                       consistency=getattr(args, 'consistency', 'off'),
                        semantic_map_outputs=len(semantic_maps),
                        semantic_map_clouds_received=len(semantic_clouds),
                        last_semantic_status=semantic_statuses[-1] if semantic_statuses else None,
@@ -286,4 +292,5 @@ if __name__ == '__main__':
     parser.add_argument('--semantics', action='store_true')
     parser.add_argument('--semantic-export', action='store_true', help='Match dense frontend export load in the control arm')
     parser.add_argument('--semantic-runtime', type=Path)
+    parser.add_argument('--consistency', choices=('off', 'shadow', 'active'), default='off')
     run(parser.parse_args())

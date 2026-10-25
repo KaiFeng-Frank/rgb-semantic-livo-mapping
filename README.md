@@ -55,6 +55,16 @@ bounded-session runtime/consistency results; online semantic accuracy is not eva
 [Run and boundaries](docs/online_semantic_refusion.md)
 · [live validation](results/online_semantic_refusion_20261026/README.md).
 
+**Optional cross-frame scan consistency:** raw previous-frame posteriors now support
+current predictions through reciprocal geometric matching and confidence gates.
+History follows received pose revisions; enhanced outputs are never recycled as
+independent map evidence. A six-log / 242-frame nuScenes diagnostic improves
+native16 mIoU by **0.10 pp**, but ordinary averaging scores higher and deliberately
+wrong history still causes harm. This is an opt-in inference baseline, not a new
+training objective or a demonstrated moving-object improvement.
+[Implementation and limits](docs/semantic_consistency.md)
+· [paired accuracy, failure cases and online validation](results/semantic_consistency_20261026/README.md).
+
 **Offline loop closure, seq07:** with the same frozen frontend and B0 predictions,
 official KITTI ATE falls **0.837 → 0.557 m** and out-of-frustum map mIoU-9 rises
 **77.32 → 78.53%**. Historical baseline replay is reproduced exactly.

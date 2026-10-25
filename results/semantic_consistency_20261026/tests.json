@@ -1,0 +1,18 @@
+{
+  "semantic_pytest": {
+    "passed": 199,
+    "skipped": 1,
+    "subtests_passed": 128
+  },
+  "geometry_unittest": {
+    "run": 79,
+    "skipped": 2,
+    "passed": true
+  },
+  "native19_unittest": {
+    "run": 11,
+    "passed": true
+  },
+  "real_ros_fixture": "ros-contract/assessment.json",
+  "scope": "Local suite execution; full GPU semantic effect and live timings are separate artifacts"
+}

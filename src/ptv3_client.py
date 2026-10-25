@@ -49,7 +49,8 @@ class PTv3Client(object):
                  use_shm=True, nslot=4, max_pts=200000, grid_size=None,
                  half=None, shuffle=None, fast_voxel=None, tf32=None,
                  memory_checkpoint=None, memory_shadow=False,
-                 startup_timeout_s=120., response_timeout_s=10., cancel_event=None):
+                 startup_timeout_s=120., response_timeout_s=10., cancel_event=None,
+                 probability_classes=0):
         if any(not math.isfinite(v) or v <= 0 for v in (startup_timeout_s, response_timeout_s)):
             raise ValueError('Worker timeouts must be finite and positive')
         self._cancel_event = cancel_event
@@ -60,6 +61,15 @@ class PTv3Client(object):
         # Memory is opt-in at the client, never inherited accidentally by legacy callers.
         env.pop('PTV3_MEMORY_CHECKPOINT', None)
         env.pop('PTV3_MEMORY_SHADOW', None)
+        env.pop('PTV3_PROBABILITY_CLASSES', None)
+        if type(probability_classes) is not int or probability_classes < 0 or probability_classes > 256:
+            raise ValueError('Invalid probability class count')
+        if probability_classes and (not use_shm or memory_checkpoint or memory_shadow):
+            raise ValueError('Raw probability export requires SHM and an unfused worker')
+        self.probability_classes = probability_classes
+        self.prob_np = None
+        if probability_classes:
+            env['PTV3_PROBABILITY_CLASSES'] = str(probability_classes)
         self.memory_enabled = bool(memory_checkpoint or memory_shadow)
         if self.memory_enabled and not use_shm:
             raise ValueError('Temporal memory requires shared-memory transport')
@@ -86,8 +96,9 @@ class PTv3Client(object):
             in_bytes = self.nslot * self.max_pts * 16
             lab_bytes = self.nslot * self.max_pts * 2
             conf_bytes = self.nslot * self.max_pts * 4
+            prob_bytes = self.nslot * self.max_pts * self.probability_classes * 4
             self.shm = shared_memory.SharedMemory(
-                create=True, size=in_bytes + lab_bytes + conf_bytes)
+                create=True, size=in_bytes + lab_bytes + conf_bytes + prob_bytes)
             b = self.shm.buf
             self.in_np = np.frombuffer(b, dtype=np.float32,
                                        count=self.nslot * self.max_pts * 4,
@@ -99,6 +110,11 @@ class PTv3Client(object):
                                          count=self.nslot * self.max_pts,
                                          offset=in_bytes + lab_bytes
                                          ).reshape(self.nslot, self.max_pts)
+            if self.probability_classes:
+                self.prob_np = np.frombuffer(b, dtype=np.float32,
+                    count=self.nslot*self.max_pts*self.probability_classes,
+                    offset=in_bytes+lab_bytes+conf_bytes
+                    ).reshape(self.nslot, self.max_pts, self.probability_classes)
             env["PTV3_SHM"] = "1"
             env["PTV3_SHM_NAME"] = self.shm.name
             env["PTV3_SHM_NSLOT"] = str(self.nslot)
@@ -119,6 +135,8 @@ class PTv3Client(object):
                 raise RuntimeError("ptv3 worker failed to start (got %r); see %s"
                                    % (hdr, stderr_path))
             self.num_classes = struct.unpack("<I", self._readn(4))[0]
+            if self.probability_classes and self.num_classes != self.probability_classes:
+                raise ValueError('Probability export vocabulary does not match worker')
         except Exception:
             if hasattr(self, 'p'):
                 self.p.kill()
@@ -218,6 +236,16 @@ class PTv3Client(object):
         return self.lab_np[slot, :n].view(np.uint16), self.conf_np[slot, :n]
 
     # ----------------------------------------------------------------- sync
+    def segment_probabilities(self, pts_n4):
+        """One forward, owned full posteriors; legacy segment() stays a 2-tuple."""
+        if not self.probability_classes:
+            raise RuntimeError('Enable probability_classes explicitly')
+        if self.pending:
+            raise RuntimeError('Collect pending asynchronous requests first')
+        _, slot, n = self.submit(np.ascontiguousarray(pts_n4[:, :4], dtype=np.float32))
+        lab, conf = self.collect()
+        return lab.copy(), conf.copy(), self.prob_np[slot, :n].copy()
+
     def segment(self, pts_n4, *, memory_context=None):
         """Synchronous convenience wrapper (the legacy contract)."""
         if self.pending:
@@ -243,7 +271,7 @@ class PTv3Client(object):
     def _unlink_shm(self):
         if self.shm is not None:
             shared = self.shm
-            self.in_np = self.lab_np = self.conf_np = None
+            self.in_np = self.lab_np = self.conf_np = self.prob_np = None
             try:
                 shared.close()
             except BufferError:

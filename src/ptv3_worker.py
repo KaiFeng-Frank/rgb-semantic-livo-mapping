@@ -261,7 +261,8 @@ class Segmenter(object):
             self.memory.fusion.load_state_dict(saved['fusion'], strict=True)
         self.memory_shadow = bool(shadow)
 
-    def segment(self, pts_n4, out_lab=None, out_conf=None, *, memory_context=None, return_features=False):
+    def segment(self, pts_n4, out_lab=None, out_conf=None, *, memory_context=None, return_features=False,
+                out_prob=None, return_probabilities=False):
         """pts_n4 (N,4) float32.  Returns (label uint16 [N], conf float32 [N]).
 
         out_lab / out_conf, when given, are pre-allocated CPU uint16/float32 views
@@ -269,6 +270,10 @@ class Segmenter(object):
         which deletes the `.to(int32).cpu().numpy().astype(uint16)` cast chain.
         """
         torch = self.torch
+        if (out_prob is not None or return_probabilities) and (memory_context is not None or return_features):
+            raise ValueError('Raw posterior export cannot be combined with feature/memory export')
+        if out_prob is not None and out_lab is None:
+            raise ValueError('SHM probabilities require label/confidence output buffers')
         if memory_context is not None and self.memory is None:
             raise ValueError('Memory context supplied without enable_memory()')
         if self.memory is not None and memory_context is None and not getattr(self, '_warming', False):
@@ -328,9 +333,13 @@ class Segmenter(object):
             if out_lab is not None:
                 out_lab.copy_(lab_g)
                 out_conf.copy_(conf_g)
+                if out_prob is not None:
+                    out_prob.copy_(prob[iv])
                 return None, None
             lab = lab_g.cpu().numpy().view(np.uint16)
             conf = conf_g.cpu().numpy()
+            if return_probabilities:
+                return lab, conf, prob[iv].cpu().numpy()
         return lab, conf
 
     def warmup(self, iters=2):
@@ -399,7 +408,10 @@ def main():
     sys.stderr.flush()
 
     shm = None
-    in_np = out_lab_t = out_conf_t = None
+    in_np = out_lab_t = out_conf_t = prob_np = out_prob_t = None
+    probability_classes = int(os.environ.get('PTV3_PROBABILITY_CLASSES', '0'))
+    if probability_classes and (probability_classes != seg.num_classes or not USE_SHM):
+        raise ValueError('Invalid full-posterior transport contract')
     if USE_SHM and SHM_NAME:
         import torch
         from multiprocessing import shared_memory
@@ -422,6 +434,12 @@ def main():
                                 ).reshape(SHM_NSLOT, SHM_MAXPTS)
         out_lab_t = torch.from_numpy(lab_np)
         out_conf_t = torch.from_numpy(conf_np)
+        if probability_classes:
+            prob_np = np.frombuffer(buf, dtype=np.float32,
+                count=SHM_NSLOT*SHM_MAXPTS*probability_classes,
+                offset=in_bytes+SHM_NSLOT*SHM_MAXPTS*6
+                ).reshape(SHM_NSLOT, SHM_MAXPTS, probability_classes)
+            out_prob_t = torch.from_numpy(prob_np)
         sys.stderr.write("[ptv3_worker] shm attached %s (%d slots x %d pts)\n"
                          % (SHM_NAME, SHM_NSLOT, SHM_MAXPTS))
         sys.stderr.flush()
@@ -453,7 +471,8 @@ def main():
                                transform=np.array(meta[3:]).reshape(4, 4))
             pts = in_np[slot, :n]
             t0 = time.perf_counter()
-            seg.segment(pts, out_lab=out_lab_t[slot, :n], out_conf=out_conf_t[slot, :n], memory_context=context)
+            seg.segment(pts, out_lab=out_lab_t[slot, :n], out_conf=out_conf_t[slot, :n], memory_context=context,
+                        out_prob=out_prob_t[slot, :n] if out_prob_t is not None else None)
             if context is not None:
                 import json
                 sys.stderr.write('[semantic_memory] ' + json.dumps(seg.last_memory_status) + '\n')
@@ -479,7 +498,7 @@ def main():
 
     if shm is not None:
         # Release every numpy/torch exported view before closing the mmap.
-        pts = in_np = lab_np = conf_np = out_lab_t = out_conf_t = None
+        pts = in_np = lab_np = conf_np = out_lab_t = out_conf_t = prob_np = out_prob_t = None
         buf.release()
         import gc
         gc.collect()
