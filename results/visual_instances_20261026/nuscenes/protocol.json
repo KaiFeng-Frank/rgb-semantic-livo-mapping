@@ -1,0 +1,28 @@
+{
+  "index_sha256": "83a6a5d26d11b85c24966364457623223cab4e21156f5c98c9007f5a1c2bc18f",
+  "scenes": [
+    "scene-0035",
+    "scene-0519",
+    "scene-0003",
+    "scene-0092",
+    "scene-0012",
+    "scene-0962"
+  ],
+  "supervision": "No new training. COCO-pretrained YOLO11n-seg + BoT-SORT without ReID.",
+  "association": "Camera masks eroded 2 pixels; overlap abstention; all-point 3-pixel z-buffer, 0.4m tolerance, >=3 points.",
+  "input": "raw nuScenes scans, provided ego poses at camera/LiDAR time, front camera only, 2Hz keyframes",
+  "task": "Association only; PTv3 semantics and persistent map unchanged.",
+  "limits": [
+    "Development scenes previously used for consistency; not new held-out evidence.",
+    "Boxes + lidarseg provide an instance proxy; not official panoptic masks or LSTQ.",
+    "Camera/LiDAR object motion between acquisition times is not compensated.",
+    "Depth gates cannot reject all unmeasured occlusions; tracker IDs may switch."
+  ],
+  "evaluation_only": "GT labels/boxes never enter Detector or associate.",
+  "source": {
+    "/home/frank/semantic_livo_realtime_main/tools/visual_instances/evaluate.py": "cff291cad1638678402f405a658a91016f89b7929e2b45c6b514238190f93e38",
+    "/home/frank/semantic_livo_realtime_main/tools/visual_instances/geometry.py": "db6d348d2d6f8f207abddd21e2f6f9b2e062b2a0da286e91c0b67017805634a8",
+    "/home/frank/semantic_livo_realtime_main/tools/visual_instances/detector.py": "d32bb6aab963d5c8fe79b3f4a331bf6baaa6fe80eb21b1388b4be526d68002b4",
+    "/home/frank/semantic_livo_realtime_main/tools/visual_instances/botsort.yaml": "55d4224828acd42d5d097c9e214d2621f8ac5d6c44ec786c919e1572c90c717a"
+  }
+}

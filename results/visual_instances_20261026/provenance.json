@@ -1,0 +1,19 @@
+{
+  "implementation_commit": "52412cb5d27c7d0ba7182f8db3202bafe70fb10f",
+  "base_commit": "212c0edb89edde2b05ec5548a06043fe8d4f577a",
+  "visual_weight_sha256": "55ed65c56c91713d23e8402371c6c49a6fd84f257f7dce452e8d70e41dcbe152",
+  "gpu": "NVIDIA GeForce RTX 5070 Ti Laptop GPU, 12227 MiB, 595.99.02",
+  "cpu": [
+    "CPU(s):                                  32",
+    "Model name:                              AMD Ryzen 9 9955HX 16-Core Processor",
+    "Thread(s) per core:                      2",
+    "Core(s) per socket:                      16",
+    "NUMA node0 CPU(s):                       0-31"
+  ],
+  "ros": "Jazzy / CycloneDDS; ROS Python 3.12, visual/PTv3 Python 3.11",
+  "final_ros_fixture": "synthetic-ros-report.json was revalidated on 52412cb before docs/evidence commit",
+  "ci": "ci.json records passing 52412cb checks; PR carries final-head checks",
+  "source_scope": "Detector/evaluator/geometry match 2aa2c25; later changes only worker cancellation and its test. Early development runs lack exact per-run source hashes.",
+  "active_timing_scope": "HKU: 10Hz camera and pose, about 1Hz semantic scans, no associated dynamic points.",
+  "real_ros_scope": "nuScenes: supplied ego poses, 2Hz raw scans/images, nonzero instance associations; no semantic-accuracy claim."
+}

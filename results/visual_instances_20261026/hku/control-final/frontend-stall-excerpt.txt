@@ -1,0 +1,462 @@
+Source: /home/frank/semantic_backend_runtime/visual-instance-20261026-control-final-full/frontend.log
+Formatting: trailing whitespace removed; original line numbers retained.
+48694: [INFO] [1792966009.237956174] [laserMapping]: get imu at time: 1577837034.470747
+48695: got imu: 1.57784e+09 imu size 15
+48696: [INFO] [1792966009.243160775] [laserMapping]: get imu at time: 1577837034.475783
+48697: got imu: 1.57784e+09 imu size 16
+48698: [INFO] [1792966009.247957083] [laserMapping]: get imu at time: 1577837034.480749
+48699: got imu: 1.57784e+09 imu size 17
+48700: [INFO] [1792966009.253001761] [laserMapping]: get imu at time: 1577837034.485839
+48701: got imu: 1.57784e+09 imu size 18
+48702: [INFO] [1792966009.257970376] [laserMapping]: get imu at time: 1577837034.490747
+48703: got imu: 1.57784e+09 imu size 19
+48704: [INFO] [1792966010.230403660] [laserMapping]: [ Camera delivery ] transport_ms=762.406 dispatch_ms=0.003
+48705: [INFO] [1792966010.233786162] [laserMapping]: Get image, its header time: 1577837034.699769
+48706: [INFO] [1792966010.234005738] [laserMapping]: get imu at time: 1577837034.495786
+48707: got imu: 1.57784e+09 imu size 20
+48708: [INFO] [1792966010.234362012] [laserMapping]: Get LiDAR, its header time: 1577837034.499288
+48709: [INFO] [1792966010.234369657] [laserMapping]: get point cloud at time: 1577837034.499288
+48710: [INFO] [1792966010.234608058] [laserMapping]: [ Camera delivery ] transport_ms=667.354 dispatch_ms=0.001
+48711: [INFO] [1792966010.237895210] [laserMapping]: Get image, its header time: 1577837034.799615
+48712: [INFO] [1792966010.238487631] [laserMapping]: get imu at time: 1577837034.499785
+48713: [ Preprocess ] Input point number: 24000
+48714: [ Preprocess ] Output point number: 24000
+48715: got imu: 1.57784e+09 imu size 21
+48716: [INFO] [1792966010.238831582] [laserMapping]: Get LiDAR, its header time: 1577837034.599926
+48717: [INFO] [1792966010.238836992] [laserMapping]: get point cloud at time: 1577837034.599926
+48718: [INFO] [1792966010.239007265] [laserMapping]: [ Camera delivery ] transport_ms=571.080 dispatch_ms=0.001
+48719: [INFO] [1792966010.242191481] [laserMapping]: Get image, its header time: 1577837034.899440
+48720: [INFO] [1792966010.242828177] [laserMapping]: get imu at time: 1577837034.504748
+48721: [ Preprocess ] Input point number: 24000
+48722: [ Preprocess ] Output point number: 24000
+48723: got imu: 1.57784e+09 imu size 22
+48724: [INFO] [1792966010.243188609] [laserMapping]: Get LiDAR, its header time: 1577837034.699769
+48725: [INFO] [1792966010.243194380] [laserMapping]: get point cloud at time: 1577837034.699769
+48726: [INFO] [1792966010.243392685] [laserMapping]: [ Camera delivery ] transport_ms=476.818 dispatch_ms=0.001
+48727: [INFO] [1792966010.246281994] [laserMapping]: Get image, its header time: 1577837034.999289
+48728: [INFO] [1792966010.246860639] [laserMapping]: get imu at time: 1577837034.505792
+48729: [ Preprocess ] Input point number: 24000
+48730: [ Preprocess ] Output point number: 24000
+48731: got imu: 1.57784e+09 imu size 23
+48732: [INFO] [1792966010.247198829] [laserMapping]: Get LiDAR, its header time: 1577837034.799615
+48733: [INFO] [1792966010.247204229] [laserMapping]: get point cloud at time: 1577837034.799615
+48734: [INFO] [1792966010.247397365] [laserMapping]: [ Camera delivery ] transport_ms=379.476 dispatch_ms=0.001
+48735: [INFO] [1792966010.250671742] [laserMapping]: Get image, its header time: 1577837035.099929
+48736: [INFO] [1792966010.251339546] [laserMapping]: get imu at time: 1577837034.509785
+48737: [ Preprocess ] Input point number: 24000
+48738: [ Preprocess ] Output point number: 24000
+48739: got imu: 1.57784e+09 imu size 24
+48740: [INFO] [1792966010.251690631] [laserMapping]: Get LiDAR, its header time: 1577837034.899440
+48741: [INFO] [1792966010.251697343] [laserMapping]: get point cloud at time: 1577837034.899440
+48742: [INFO] [1792966010.251865752] [laserMapping]: [ Camera delivery ] transport_ms=284.954 dispatch_ms=0.000
+48743: [INFO] [1792966010.255104673] [laserMapping]: Get image, its header time: 1577837035.199763
+48744: [INFO] [1792966010.255691533] [laserMapping]: get imu at time: 1577837034.514747
+48745: [ Preprocess ] Input point number: 24000
+48746: [ Preprocess ] Output point number: 24000
+48747: got imu: 1.57784e+09 imu size 25
+48748: [INFO] [1792966010.256029724] [laserMapping]: Get LiDAR, its header time: 1577837034.999289
+48749: [INFO] [1792966010.256034322] [laserMapping]: get point cloud at time: 1577837034.999289
+48750: [INFO] [1792966010.256196680] [laserMapping]: [ Camera delivery ] transport_ms=188.995 dispatch_ms=0.000
+48751: [INFO] [1792966010.259249087] [laserMapping]: Get image, its header time: 1577837035.299611
+48752: [INFO] [1792966010.259778008] [laserMapping]: get imu at time: 1577837034.515792
+48753: [ Preprocess ] Input point number: 24000
+48754: [ Preprocess ] Output point number: 24000
+48755: got imu: 1.57784e+09 imu size 26
+48756: [INFO] [1792966010.260114505] [laserMapping]: Get LiDAR, its header time: 1577837035.099929
+48757: [INFO] [1792966010.260132379] [laserMapping]: get point cloud at time: 1577837035.099929
+48758: [INFO] [1792966010.260325214] [laserMapping]: [ Camera delivery ] transport_ms=93.251 dispatch_ms=0.001
+48759: [INFO] [1792966010.263436903] [laserMapping]: Get image, its header time: 1577837035.399454
+48760: [INFO] [1792966010.264101521] [laserMapping]: get imu at time: 1577837034.519782
+48761: [WARN] [1792966010.264108244] [laserMapping]: IMU and LiDAR not synced! delta time: 0.580147 .
+48762:
+48763: [ Preprocess ] Input point number: 24000
+48764: [ Preprocess ] Output point number: 24000
+48765: got imu: 1.57784e+09 imu size 27
+48766: [INFO] [1792966010.264460010] [laserMapping]: Get LiDAR, its header time: 1577837035.199763
+48767: [INFO] [1792966010.264465550] [laserMapping]: get point cloud at time: 1577837035.199763
+48768: [INFO] [1792966010.264630813] [laserMapping]: get imu at time: 1577837034.524745
+48769: [WARN] [1792966010.264636053] [laserMapping]: IMU and LiDAR not synced! delta time: 0.675018 .
+48770:
+48771: [ Preprocess ] Input point number: 24000
+48772: [ Preprocess ] Output point number: 24000
+48773: got imu: 1.57784e+09 imu size 28
+48774: [INFO] [1792966010.264980645] [laserMapping]: Get LiDAR, its header time: 1577837035.299611
+48775: [INFO] [1792966010.264999130] [laserMapping]: get point cloud at time: 1577837035.299611
+48776: [INFO] [1792966010.265146760] [laserMapping]: get imu at time: 1577837034.529782
+48777: [WARN] [1792966010.265151038] [laserMapping]: IMU and LiDAR not synced! delta time: 0.769829 .
+48778:
+48779: [ Preprocess ] Input point number: 24000
+48780: [ Preprocess ] Output point number: 24000
+48781: got imu: 1.57784e+09 imu size 29
+48782: [INFO] [1792966010.265494097] [laserMapping]: Get LiDAR, its header time: 1577837035.399454
+48783: [INFO] [1792966010.265499066] [laserMapping]: get point cloud at time: 1577837035.399454
+48784: [INFO] [1792966010.265636807] [laserMapping]: get imu at time: 1577837034.534746
+48785: [WARN] [1792966010.265641686] [laserMapping]: IMU and LiDAR not synced! delta time: 0.864708 .
+48786:
+48787: [ Preprocess ] Input point number: 24000
+48788: [ Preprocess ] Output point number: 24000
+48789: got imu: 1.57784e+09 imu size 30
+48790: [INFO] [1792966010.265927217] [laserMapping]: get imu at time: 1577837034.539785
+48791: [WARN] [1792966010.265948597] [laserMapping]: IMU and LiDAR not synced! delta time: 0.859669 .
+48792:
+48793: got imu: 1.57784e+09 imu size 31
+48794: [INFO] [1792966010.266218939] [laserMapping]: get imu at time: 1577837034.544744
+48795: [WARN] [1792966010.266224019] [laserMapping]: IMU and LiDAR not synced! delta time: 0.854710 .
+48796:
+48797: got imu: 1.57784e+09 imu size 32
+48798: [INFO] [1792966010.266487628] [laserMapping]: get imu at time: 1577837034.549783
+48799: [WARN] [1792966010.266491244] [laserMapping]: IMU and LiDAR not synced! delta time: 0.849671 .
+48800:
+48801: got imu: 1.57784e+09 imu size 33
+48802: [INFO] [1792966010.266687135] [laserMapping]: get imu at time: 1577837034.554747
+48803: [WARN] [1792966010.266693818] [laserMapping]: IMU and LiDAR not synced! delta time: 0.844707 .
+48804:
+48805: got imu: 1.57784e+09 imu size 34
+48806: [INFO] [1792966010.266887625] [laserMapping]: get imu at time: 1577837034.559789
+48807: [WARN] [1792966010.266891973] [laserMapping]: IMU and LiDAR not synced! delta time: 0.839665 .
+48808:
+48809: got imu: 1.57784e+09 imu size 35
+48810: [INFO] [1792966010.267227949] [laserMapping]: Get LiDAR, its header time: 1577837035.499297
+48811: [INFO] [1792966010.267232407] [laserMapping]: get point cloud at time: 1577837035.499297
+48812: [INFO] [1792966010.267398421] [laserMapping]: [ Camera delivery ] transport_ms=0.331 dispatch_ms=0.000
+48813: [INFO] [1792966010.271271141] [laserMapping]: Get image, its header time: 1577837035.499297
+48814: [INFO] [1792966010.271886717] [laserMapping]: get imu at time: 1577837034.564745
+48815: [WARN] [1792966010.271893890] [laserMapping]: IMU and LiDAR not synced! delta time: 0.934552 .
+48816:
+48817: [ Preprocess ] Input point number: 24000
+48818: [ Preprocess ] Output point number: 24000
+48819: got imu: 1.57784e+09 imu size 36
+48820: [INFO] [1792966010.271919028] [laserMapping]: get imu at time: 1577837034.569785
+48821: [WARN] [1792966010.271922514] [laserMapping]: IMU and LiDAR not synced! delta time: 0.929512 .
+48822:
+48823: got imu: 1.57784e+09 imu size 37
+48824: [INFO] [1792966010.272188107] [laserMapping]: get imu at time: 1577837034.574746
+48825: [WARN] [1792966010.272191704] [laserMapping]: IMU and LiDAR not synced! delta time: 0.924551 .
+48826:
+48827: got imu: 1.57784e+09 imu size 38
+48828: [INFO] [1792966010.272454551] [laserMapping]: get imu at time: 1577837034.579782
+48829: [WARN] [1792966010.272457998] [laserMapping]: IMU and LiDAR not synced! delta time: 0.919515 .
+48830:
+48831: got imu: 1.57784e+09 imu size 39
+48832: [INFO] [1792966010.272719182] [laserMapping]: get imu at time: 1577837034.584745
+48833: [WARN] [1792966010.272722368] [laserMapping]: IMU and LiDAR not synced! delta time: 0.914552 .
+48834:
+48835: got imu: 1.57784e+09 imu size 40
+48836: [INFO] [1792966010.272962062] [laserMapping]: get imu at time: 1577837034.589786
+48837: [WARN] [1792966010.272965148] [laserMapping]: IMU and LiDAR not synced! delta time: 0.909511 .
+48838:
+48839: got imu: 1.57784e+09 imu size 41
+48840: [INFO] [1792966010.273161700] [laserMapping]: get imu at time: 1577837034.594762
+48841: [WARN] [1792966010.273164786] [laserMapping]: IMU and LiDAR not synced! delta time: 0.904535 .
+48842:
+48843: got imu: 1.57784e+09 imu size 42
+48844: [INFO] [1792966010.273361388] [laserMapping]: get imu at time: 1577837034.599758
+48845: [WARN] [1792966010.273377458] [laserMapping]: IMU and LiDAR not synced! delta time: 0.899539 .
+48846:
+48847: got imu: 1.57784e+09 imu size 43
+48848: [INFO] [1792966010.273516942] [laserMapping]: get imu at time: 1577837034.604772
+48849: [WARN] [1792966010.273520449] [laserMapping]: IMU and LiDAR not synced! delta time: 0.894525 .
+48850:
+48851: got imu: 1.57784e+09 imu size 44
+48852: [INFO] [1792966010.273761866] [laserMapping]: get imu at time: 1577837034.609755
+48853: [WARN] [1792966010.273765653] [laserMapping]: IMU and LiDAR not synced! delta time: 0.889542 .
+48854:
+48855: got imu: 1.57784e+09 imu size 45
+48856: [INFO] [1792966010.273960892] [laserMapping]: get imu at time: 1577837034.614772
+48857: [WARN] [1792966010.273964058] [laserMapping]: IMU and LiDAR not synced! delta time: 0.884525 .
+48858:
+48859: got imu: 1.57784e+09 imu size 46
+48860: [INFO] [1792966010.274163245] [laserMapping]: get imu at time: 1577837034.619757
+48861: [WARN] [1792966010.274167784] [laserMapping]: IMU and LiDAR not synced! delta time: 0.879540 .
+48862:
+48863: got imu: 1.57784e+09 imu size 47
+48864: [INFO] [1792966010.274367622] [laserMapping]: get imu at time: 1577837034.624773
+48865: [WARN] [1792966010.274373784] [laserMapping]: IMU and LiDAR not synced! delta time: 0.874524 .
+48866:
+48867: got imu: 1.57784e+09 imu size 48
+48868: [INFO] [1792966010.274522315] [laserMapping]: get imu at time: 1577837034.629758
+48869: [WARN] [1792966010.274528467] [laserMapping]: IMU and LiDAR not synced! delta time: 0.869539 .
+48870:
+48871: got imu: 1.57784e+09 imu size 49
+48872: [INFO] [1792966010.274774071] [laserMapping]: get imu at time: 1577837034.634777
+48873: [WARN] [1792966010.274787637] [laserMapping]: IMU and LiDAR not synced! delta time: 0.864520 .
+48874:
+48875: got imu: 1.57784e+09 imu size 50
+48876: [INFO] [1792966010.274963099] [laserMapping]: get imu at time: 1577837034.639762
+48877: [WARN] [1792966010.274966576] [laserMapping]: IMU and LiDAR not synced! delta time: 0.859535 .
+48878:
+48879: got imu: 1.57784e+09 imu size 51
+48880: [INFO] [1792966010.275162657] [laserMapping]: get imu at time: 1577837034.644776
+48881: [WARN] [1792966010.275165833] [laserMapping]: IMU and LiDAR not synced! delta time: 0.854521 .
+48882:
+48883: got imu: 1.57784e+09 imu size 52
+48884: [INFO] [1792966010.275370941] [laserMapping]: get imu at time: 1577837034.649753
+48885: [WARN] [1792966010.275384407] [laserMapping]: IMU and LiDAR not synced! delta time: 0.849544 .
+48886:
+48887: got imu: 1.57784e+09 imu size 53
+48888: [INFO] [1792966010.275518060] [laserMapping]: get imu at time: 1577837034.654773
+48889: [WARN] [1792966010.275522428] [laserMapping]: IMU and LiDAR not synced! delta time: 0.844524 .
+48890:
+48891: got imu: 1.57784e+09 imu size 54
+48892: [INFO] [1792966010.275761901] [laserMapping]: get imu at time: 1577837034.659754
+48893: [WARN] [1792966010.275765107] [laserMapping]: IMU and LiDAR not synced! delta time: 0.839543 .
+48894:
+48895: got imu: 1.57784e+09 imu size 55
+48896: [INFO] [1792966010.275961840] [laserMapping]: get imu at time: 1577837034.664776
+48897: [WARN] [1792966010.275965136] [laserMapping]: IMU and LiDAR not synced! delta time: 0.834521 .
+48898:
+48899: got imu: 1.57784e+09 imu size 56
+48900: [INFO] [1792966010.276160586] [laserMapping]: get imu at time: 1577837034.669755
+48901: [WARN] [1792966010.276163491] [laserMapping]: IMU and LiDAR not synced! delta time: 0.829542 .
+48902:
+48903: got imu: 1.57784e+09 imu size 57
+48904: [INFO] [1792966010.276361155] [laserMapping]: get imu at time: 1577837034.674772
+48905: [WARN] [1792966010.276364081] [laserMapping]: IMU and LiDAR not synced! delta time: 0.824525 .
+48906:
+48907: got imu: 1.57784e+09 imu size 58
+48908: [INFO] [1792966010.276518313] [laserMapping]: get imu at time: 1577837034.679763
+48909: [WARN] [1792966010.276521469] [laserMapping]: IMU and LiDAR not synced! delta time: 0.819534 .
+48910:
+48911: got imu: 1.57784e+09 imu size 59
+48912: [INFO] [1792966010.276761203] [laserMapping]: get imu at time: 1577837034.684779
+48913: [WARN] [1792966010.276764329] [laserMapping]: IMU and LiDAR not synced! delta time: 0.814518 .
+48914:
+48915: got imu: 1.57784e+09 imu size 60
+48916: [INFO] [1792966010.276968415] [laserMapping]: get imu at time: 1577837034.689752
+48917: [WARN] [1792966010.276976731] [laserMapping]: IMU and LiDAR not synced! delta time: 0.809545 .
+48918:
+48919: got imu: 1.57784e+09 imu size 61
+48920: [INFO] [1792966010.277162312] [laserMapping]: get imu at time: 1577837034.694776
+48921: [WARN] [1792966010.277165568] [laserMapping]: IMU and LiDAR not synced! delta time: 0.804521 .
+48922:
+48923: got imu: 1.57784e+09 imu size 62
+48924: [INFO] [1792966010.277361028] [laserMapping]: get imu at time: 1577837034.699757
+48925: [WARN] [1792966010.277363863] [laserMapping]: IMU and LiDAR not synced! delta time: 0.799540 .
+48926:
+48927: got imu: 1.57784e+09 imu size 63
+48928: [INFO] [1792966010.277521341] [laserMapping]: get imu at time: 1577837034.704769
+48929: [WARN] [1792966010.277528605] [laserMapping]: IMU and LiDAR not synced! delta time: 0.794528 .
+48930:
+48931: got imu: 1.57784e+09 imu size 64
+48932: [ LIO ] Raw feature num: 72000, downsampled feature num:25257 effective feature num: 24508 average residual: 0.0451601
+48933: [ LIO ] Raw feature num: 72000, downsampled feature num:25257 effective feature num: 24694 average residual: 0.0369715
+48934: [ LIO ] Raw feature num: 72000, downsampled feature num:25257 effective feature num: 24696 average residual: 0.0364956
+48935: [ LIO ] Raw feature num: 72000, downsampled feature num:25257 effective feature num: 24688 average residual: 0.0365018
+48936: [ LIO ] Raw feature num: 72000, downsampled feature num:25257 effective feature num: 24683 average residual: 0.0365562
+48937: [ LIO ] Update Voxel Map
+48938: [INFO] [1792966010.334804343] [laserMapping]: get imu at time: 1577837034.709757
+48939: [WARN] [1792966010.334836714] [laserMapping]: IMU and LiDAR not synced! delta time: 0.789540 .
+48940:
+48941: [31m[DEBUG]: Last sliding length 0.760679[0m
+48942: [1;34m+-------------------------------------------------------------+[0m
+48943: [1;34m|                         LIO Mapping Time                    |[0m
+48944: [1;34m+-------------------------------------------------------------+[0m
+48945: [1;34m| Algorithm Stage               | Time (secs)                 |[0m
+48946: [1;34m+-------------------------------------------------------------+[0m
+48947: [1;36m| DownSample                    | 0.002470                    |[0m
+48948: [1;36m| ICP                           | 0.044544                    |[0m
+48949: [1;36m| updateVoxelMap                | 0.004160                    |[0m
+48950: [1;34m+-------------------------------------------------------------+[0m
+48951: [1;36m| Current Total Time            | 0.051770                    |[0m
+48952: [1;36m| Average Total Time            | 0.021918                    |[0m
+48953: [1;34m+-------------------------------------------------------------+[0m
+48954: got imu: 1.57784e+09 imu size 2
+48955: [ VIO ] Raw feature num: 72000
+48956: [INFO] [1792966010.346399700] [laserMapping]: get imu at time: 1577837034.714744
+48957: [WARN] [1792966010.346434826] [laserMapping]: IMU and LiDAR not synced! delta time: 0.784553 .
+48958:
+48959: [ VIO ] Retrieve 135 points from visual sparse map
+48960: [ VIO ] Append 21 new visual map points
+48961: [ VIO ] Update 29 points in visual submap
+48962: [1;34m+-------------------------------------------------------------+[0m
+48963: [1;34m|                         VIO Time                            |[0m
+48964: [1;34m+-------------------------------------------------------------+[0m
+48965: [1;34m| Sparse Map Size               | 30223                       |[0m
+48966: [1;34m+-------------------------------------------------------------+[0m
+48967: [1;34m| Algorithm Stage               | Time (secs)                 |[0m
+48968: [1;34m+-------------------------------------------------------------+[0m
+48969: [1;32m| retrieveFromVisualSparseMap   | 0.002643                    |[0m
+48970: [1;32m| computeJacobianAndUpdateEKF   | 0.002143                    |[0m
+48971: [1;32m| -> computeJacobian            | 0.001119                    |[0m
+48972: [1;32m| -> updateEKF                  | 0.000975                    |[0m
+48973: [1;32m| generateVisualMapPoints       | 0.000561                    |[0m
+48974: [1;32m| updateVisualMapPoints         | 0.000055                    |[0m
+48975: [1;32m| updateReferencePatch          | 0.000284                    |[0m
+48976: [1;34m+-------------------------------------------------------------+[0m
+48977: [1;32m| Current Total Time            | 0.005687                    |[0m
+48978: [1;32m| Average Total Time            | 0.004136                    |[0m
+48979: [1;34m+-------------------------------------------------------------+[0m
+48980: got imu: 1.57784e+09 imu size 3
+48981: [INFO] [1792966010.346449664] [laserMapping]: get imu at time: 1577837034.719784
+48982: [WARN] [1792966010.346452820] [laserMapping]: IMU and LiDAR not synced! delta time: 0.779513 .
+48983:
+48984: got imu: 1.57784e+09 imu size 4
+48985: [INFO] [1792966010.346766624] [laserMapping]: get imu at time: 1577837034.724741
+48986: [WARN] [1792966010.346814064] [laserMapping]: IMU and LiDAR not synced! delta time: 0.774556 .
+48987:
+48988: got imu: 1.57784e+09 imu size 5
+48989: [INFO] [1792966010.347117037] [laserMapping]: get imu at time: 1577837034.729787
+48990: [WARN] [1792966010.347126295] [laserMapping]: IMU and LiDAR not synced! delta time: 0.769510 .
+48991:
+48992: got imu: 1.57784e+09 imu size 6
+48993: [INFO] [1792966010.347300074] [laserMapping]: get imu at time: 1577837034.734744
+48994: [WARN] [1792966010.347303470] [laserMapping]: IMU and LiDAR not synced! delta time: 0.764553 .
+48995:
+48996: got imu: 1.57784e+09 imu size 7
+48997: [INFO] [1792966010.347500202] [laserMapping]: get imu at time: 1577837034.739788
+48998: [WARN] [1792966010.347503318] [laserMapping]: IMU and LiDAR not synced! delta time: 0.759509 .
+48999:
+49000: got imu: 1.57784e+09 imu size 8
+49001: [INFO] [1792966010.347699369] [laserMapping]: get imu at time: 1577837034.744747
+49002: [WARN] [1792966010.347702836] [laserMapping]: IMU and LiDAR not synced! delta time: 0.754550 .
+49003:
+49004: got imu: 1.57784e+09 imu size 9
+49005: [INFO] [1792966010.347899208] [laserMapping]: get imu at time: 1577837034.749786
+49006: [WARN] [1792966010.347902684] [laserMapping]: IMU and LiDAR not synced! delta time: 0.749511 .
+49007:
+49008: got imu: 1.57784e+09 imu size 10
+49009: [INFO] [1792966010.348099607] [laserMapping]: get imu at time: 1577837034.754749
+49010: [WARN] [1792966010.348102422] [laserMapping]: IMU and LiDAR not synced! delta time: 0.744548 .
+49011:
+49012: got imu: 1.57784e+09 imu size 11
+49013: [INFO] [1792966010.348299816] [laserMapping]: get imu at time: 1577837034.759782
+49014: [WARN] [1792966010.348302912] [laserMapping]: IMU and LiDAR not synced! delta time: 0.739515 .
+49015:
+49016: got imu: 1.57784e+09 imu size 12
+49017: [INFO] [1792966010.348499764] [laserMapping]: get imu at time: 1577837034.764746
+49018: [WARN] [1792966010.348502660] [laserMapping]: IMU and LiDAR not synced! delta time: 0.734551 .
+49019:
+49020: got imu: 1.57784e+09 imu size 13
+49021: [INFO] [1792966010.348699843] [laserMapping]: get imu at time: 1577837034.769784
+49022: [WARN] [1792966010.348703420] [laserMapping]: IMU and LiDAR not synced! delta time: 0.729513 .
+49023:
+49024: got imu: 1.57784e+09 imu size 14
+49025: [INFO] [1792966010.348899431] [laserMapping]: get imu at time: 1577837034.774749
+49026: [WARN] [1792966010.348902647] [laserMapping]: IMU and LiDAR not synced! delta time: 0.724548 .
+49027:
+49028: got imu: 1.57784e+09 imu size 15
+49029: [INFO] [1792966010.349099259] [laserMapping]: get imu at time: 1577837034.779786
+49030: [WARN] [1792966010.349102165] [laserMapping]: IMU and LiDAR not synced! delta time: 0.719511 .
+49031:
+49032: got imu: 1.57784e+09 imu size 16
+49033: [INFO] [1792966010.349299678] [laserMapping]: get imu at time: 1577837034.784746
+49034: [WARN] [1792966010.349302704] [laserMapping]: IMU and LiDAR not synced! delta time: 0.714551 .
+49035:
+49036: got imu: 1.57784e+09 imu size 17
+49037: [INFO] [1792966010.349499467] [laserMapping]: get imu at time: 1577837034.789788
+49038: [WARN] [1792966010.349503244] [laserMapping]: IMU and LiDAR not synced! delta time: 0.709509 .
+49039:
+49040: got imu: 1.57784e+09 imu size 18
+49041: [INFO] [1792966010.349700347] [laserMapping]: get imu at time: 1577837034.794747
+49042: [WARN] [1792966010.349703443] [laserMapping]: IMU and LiDAR not synced! delta time: 0.704550 .
+49043:
+49044: got imu: 1.57784e+09 imu size 19
+49045: [INFO] [1792966010.349899504] [laserMapping]: get imu at time: 1577837034.799787
+49046: [WARN] [1792966010.349902249] [laserMapping]: IMU and LiDAR not synced! delta time: 0.699510 .
+49047:
+49048: got imu: 1.57784e+09 imu size 20
+49049: [ LIO ] Raw feature num: 24000, downsampled feature num:12847 effective feature num: 12555 average residual: 0.0318446
+49050: [ LIO ] Raw feature num: 24000, downsampled feature num:12847 effective feature num: 12565 average residual: 0.0274683
+49051: [ LIO ] Raw feature num: 24000, downsampled feature num:12847 effective feature num: 12564 average residual: 0.0271614
+49052: [ LIO ] Raw feature num: 24000, downsampled feature num:12847 effective feature num: 12572 average residual: 0.0271866
+49053: [ LIO ] Raw feature num: 24000, downsampled feature num:12847 effective feature num: 12574 average residual: 0.0271919
+49054: [ LIO ] Update Voxel Map
+49055: [INFO] [1792966010.375389059] [laserMapping]: [ Camera delivery ] transport_ms=7.584 dispatch_ms=0.002
+49056: [INFO] [1792966010.379368040] [laserMapping]: Get image, its header time: 1577837035.599938
+49057: [INFO] [1792966010.379734463] [laserMapping]: get imu at time: 1577837034.804745
+49058: [WARN] [1792966010.379753850] [laserMapping]: IMU and LiDAR not synced! delta time: 0.694552 .
+49059:
+49060: [31m[DEBUG]: Last sliding length 0.826697[0m
+49061: [1;34m+-------------------------------------------------------------+[0m
+49062: [1;34m|                         LIO Mapping Time                    |[0m
+49063: [1;34m+-------------------------------------------------------------+[0m
+49064: [1;34m| Algorithm Stage               | Time (secs)                 |[0m
+49065: [1;34m+-------------------------------------------------------------+[0m
+49066: [1;36m| DownSample                    | 0.000777                    |[0m
+49067: [1;36m| ICP                           | 0.020663                    |[0m
+49068: [1;36m| updateVoxelMap                | 0.001873                    |[0m
+49069: [1;34m+-------------------------------------------------------------+[0m
+49070: [1;36m| Current Total Time            | 0.023775                    |[0m
+49071: [1;36m| Average Total Time            | 0.021921                    |[0m
+49072: [1;34m+-------------------------------------------------------------+[0m
+49073: got imu: 1.57784e+09 imu size 2
+49074: [INFO] [1792966010.380135532] [laserMapping]: Get LiDAR, its header time: 1577837035.599938
+49075: [INFO] [1792966010.380141985] [laserMapping]: get point cloud at time: 1577837035.599938
+49076: [ Preprocess ] Input point number: 24000
+49077: [ Preprocess ] Output point number: 24000
+49078: [ VIO ] Raw feature num: 24000
+49079: [INFO] [1792966010.389676311] [laserMapping]: get imu at time: 1577837034.809785
+49080: [WARN] [1792966010.389690598] [laserMapping]: IMU and LiDAR not synced! delta time: 0.790153 .
+49081:
+49082: [ VIO ] Retrieve 155 points from visual sparse map
+49083: [ VIO ] Append 23 new visual map points
+49084: [ VIO ] Update 37 points in visual submap
+49085: [1;34m+-------------------------------------------------------------+[0m
+49086: [1;34m|                         VIO Time                            |[0m
+49087: [1;34m+-------------------------------------------------------------+[0m
+49088: [1;34m| Sparse Map Size               | 30234                       |[0m
+49089: [1;34m+-------------------------------------------------------------+[0m
+49090: [1;34m| Algorithm Stage               | Time (secs)                 |[0m
+49091: [1;34m+-------------------------------------------------------------+[0m
+49092: [1;32m| retrieveFromVisualSparseMap   | 0.003233                    |[0m
+49093: [1;32m| computeJacobianAndUpdateEKF   | 0.002688                    |[0m
+49094: [1;32m| -> computeJacobian            | 0.001103                    |[0m
+49095: [1;32m| -> updateEKF                  | 0.001549                    |[0m
+49096: [1;32m| generateVisualMapPoints       | 0.000351                    |[0m
+49097: [1;32m| updateVisualMapPoints         | 0.000075                    |[0m
+49098: [1;32m| updateReferencePatch          | 0.000438                    |[0m
+49099: [1;34m+-------------------------------------------------------------+[0m
+49100: [1;32m| Current Total Time            | 0.006786                    |[0m
+49101: [1;32m| Average Total Time            | 0.004141                    |[0m
+49102: [1;34m+-------------------------------------------------------------+[0m
+49103: got imu: 1.57784e+09 imu size 3
+49104: [INFO] [1792966010.389724592] [laserMapping]: get imu at time: 1577837034.814749
+49105: [WARN] [1792966010.389729351] [laserMapping]: IMU and LiDAR not synced! delta time: 0.785189 .
+49106:
+49107: got imu: 1.57784e+09 imu size 4
+49108: [INFO] [1792966010.389994353] [laserMapping]: get imu at time: 1577837034.819786
+49109: [WARN] [1792966010.390006265] [laserMapping]: IMU and LiDAR not synced! delta time: 0.780152 .
+49110:
+49111: got imu: 1.57784e+09 imu size 5
+49112: [INFO] [1792966010.390267690] [laserMapping]: get imu at time: 1577837034.824747
+49113: [WARN] [1792966010.390270645] [laserMapping]: IMU and LiDAR not synced! delta time: 0.775191 .
+49114:
+49115: got imu: 1.57784e+09 imu size 6
+49116: [INFO] [1792966010.390520649] [laserMapping]: get imu at time: 1577837034.829788
+49117: [WARN] [1792966010.390524235] [laserMapping]: IMU and LiDAR not synced! delta time: 0.770150 .
+49118:
+49119: got imu: 1.57784e+09 imu size 7
+49120: [INFO] [1792966010.390771834] [laserMapping]: get imu at time: 1577837034.834745
+49121: [WARN] [1792966010.390774940] [laserMapping]: IMU and LiDAR not synced! delta time: 0.765193 .
+49122:
+49123: got imu: 1.57784e+09 imu size 8
+49124: [INFO] [1792966010.390971131] [laserMapping]: get imu at time: 1577837034.839781
+49125: [WARN] [1792966010.390974538] [laserMapping]: IMU and LiDAR not synced! delta time: 0.760157 .
+49126:
+49127: got imu: 1.57784e+09 imu size 9
+49128: [INFO] [1792966010.391171741] [laserMapping]: get imu at time: 1577837034.844763
+49129: [WARN] [1792966010.391174817] [laserMapping]: IMU and LiDAR not synced! delta time: 0.755175 .
+49130:
+49131: got imu: 1.57784e+09 imu size 10
+49132: [INFO] [1792966010.391371539] [laserMapping]: get imu at time: 1577837034.849757
+49133: [WARN] [1792966010.391374244] [laserMapping]: IMU and LiDAR not synced! delta time: 0.750181 .
+49134:
+49135: got imu: 1.57784e+09 imu size 11
+49136: [INFO] [1792966010.391571027] [laserMapping]: get imu at time: 1577837034.854775
+49137: [WARN] [1792966010.391574313] [laserMapping]: IMU and LiDAR not synced! delta time: 0.745163 .
+49138:
+49139: got imu: 1.57784e+09 imu size 12
+49140: [INFO] [1792966010.391771897] [laserMapping]: get imu at time: 1577837034.859757
+49141: [WARN] [1792966010.391774762] [laserMapping]: IMU and LiDAR not synced! delta time: 0.740181 .
+49142:
+49143: got imu: 1.57784e+09 imu size 13
+49144: [INFO] [1792966010.391971875] [laserMapping]: get imu at time: 1577837034.864773
+49145: [WARN] [1792966010.391974681] [laserMapping]: IMU and LiDAR not synced! delta time: 0.735165 .
+49146:
+49147: got imu: 1.57784e+09 imu size 14
+49148: [INFO] [1792966010.392171583] [laserMapping]: get imu at time: 1577837034.869755
+49149: [WARN] [1792966010.392174429] [laserMapping]: IMU and LiDAR not synced! delta time: 0.730183 .
+49150:
+49151: got imu: 1.57784e+09 imu size 15
+49152: [INFO] [1792966010.392371552] [laserMapping]: get imu at time: 1577837034.874774
+49153: [WARN] [1792966010.392374257] [laserMapping]: IMU and LiDAR not synced! delta time: 0.725164 .

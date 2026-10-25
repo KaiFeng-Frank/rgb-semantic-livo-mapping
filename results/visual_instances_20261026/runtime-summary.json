@@ -1,0 +1,166 @@
+{
+  "active": {
+    "input_images": 1277,
+    "initialized_pose_outputs": 1274,
+    "missing_images_after_initialization": 0,
+    "missing_image_offsets_s": [
+      0.0,
+      0.099826098,
+      0.199653149
+    ],
+    "corrected_pose_latency": {
+      "n": 1274,
+      "median_ms": 52.24792502122,
+      "p95_ms": 85.53636490250936,
+      "p99_ms": 109.66712186695075,
+      "max_ms": 165.6559370458126
+    },
+    "semantic_scan_outputs": 122,
+    "visual_processed": 1277,
+    "visual_frames_with_instances": 1,
+    "visual_receipt_to_publish": {
+      "n": 1277,
+      "median_ms": 41.142542962916195,
+      "p95_ms": 53.818056592717774,
+      "p99_ms": 61.63339638151229,
+      "max_ms": 97.41353499703109
+    },
+    "instance_cloud_outputs": 122,
+    "associated_points": 0,
+    "source_payload_sha256": "042c59558c43c364b44b70382c1ac40ed80720f86c88f28d8141605a9ff9ab01"
+  },
+  "active-final": {
+    "input_images": 1277,
+    "initialized_pose_outputs": 1274,
+    "missing_images_after_initialization": 0,
+    "missing_image_offsets_s": [
+      0.0,
+      0.099826098,
+      0.199653149
+    ],
+    "corrected_pose_latency": {
+      "n": 1274,
+      "median_ms": 37.86489897174761,
+      "p95_ms": 51.644897769438096,
+      "p99_ms": 57.60101176216265,
+      "max_ms": 70.3516899375245
+    },
+    "semantic_scan_outputs": 122,
+    "visual_processed": 1277,
+    "visual_frames_with_instances": 1,
+    "visual_receipt_to_publish": {
+      "n": 1277,
+      "median_ms": 25.953390053473413,
+      "p95_ms": 28.84063213132322,
+      "p99_ms": 30.747238136827946,
+      "max_ms": 42.37257700879127
+    },
+    "instance_cloud_outputs": 122,
+    "associated_points": 0,
+    "source_payload_sha256": "042c59558c43c364b44b70382c1ac40ed80720f86c88f28d8141605a9ff9ab01"
+  },
+  "active-isolated": {
+    "input_images": 1277,
+    "initialized_pose_outputs": 1274,
+    "missing_images_after_initialization": 0,
+    "missing_image_offsets_s": [
+      0.0,
+      0.099826098,
+      0.199653149
+    ],
+    "corrected_pose_latency": {
+      "n": 1274,
+      "median_ms": 37.85984846763313,
+      "p95_ms": 51.638532005017616,
+      "p99_ms": 60.50434990203938,
+      "max_ms": 93.77274999860674
+    },
+    "semantic_scan_outputs": 122,
+    "visual_processed": 1277,
+    "visual_frames_with_instances": 1,
+    "visual_receipt_to_publish": {
+      "n": 1277,
+      "median_ms": 27.8214419959113,
+      "p95_ms": 31.261825561523438,
+      "p99_ms": 33.29056015703828,
+      "max_ms": 146.7399860266596
+    },
+    "instance_cloud_outputs": 122,
+    "associated_points": 0,
+    "source_payload_sha256": "042c59558c43c364b44b70382c1ac40ed80720f86c88f28d8141605a9ff9ab01"
+  },
+  "control": {
+    "input_images": 1277,
+    "initialized_pose_outputs": 1274,
+    "missing_images_after_initialization": 0,
+    "missing_image_offsets_s": [
+      0.0,
+      0.099826098,
+      0.199653149
+    ],
+    "corrected_pose_latency": {
+      "n": 1274,
+      "median_ms": 37.068849545903504,
+      "p95_ms": 50.29681583400815,
+      "p99_ms": 57.13409709976986,
+      "max_ms": 71.58968597650528
+    },
+    "semantic_scan_outputs": 122,
+    "visual_processed": 0,
+    "visual_frames_with_instances": 0,
+    "visual_receipt_to_publish": null,
+    "instance_cloud_outputs": 0,
+    "associated_points": 0,
+    "source_payload_sha256": "042c59558c43c364b44b70382c1ac40ed80720f86c88f28d8141605a9ff9ab01"
+  },
+  "control-final": {
+    "input_images": 1277,
+    "initialized_pose_outputs": 1272,
+    "missing_images_after_initialization": 2,
+    "missing_image_offsets_s": [
+      0.0,
+      0.099826098,
+      0.199653149,
+      55.799461127,
+      55.900099039
+    ],
+    "corrected_pose_latency": {
+      "n": 1272,
+      "median_ms": 37.498743971809745,
+      "p95_ms": 51.57258044928313,
+      "p99_ms": 109.0573529736122,
+      "max_ms": 879.2229919927195
+    },
+    "semantic_scan_outputs": 122,
+    "visual_processed": 0,
+    "visual_frames_with_instances": 0,
+    "visual_receipt_to_publish": null,
+    "instance_cloud_outputs": 0,
+    "associated_points": 0,
+    "source_payload_sha256": "042c59558c43c364b44b70382c1ac40ed80720f86c88f28d8141605a9ff9ab01"
+  },
+  "control-repeat": {
+    "input_images": 1277,
+    "initialized_pose_outputs": 1274,
+    "missing_images_after_initialization": 0,
+    "missing_image_offsets_s": [
+      0.0,
+      0.099826098,
+      0.199653149
+    ],
+    "corrected_pose_latency": {
+      "n": 1274,
+      "median_ms": 37.903100019320846,
+      "p95_ms": 51.911920431302846,
+      "p99_ms": 62.724577658809714,
+      "max_ms": 78.98012292571366
+    },
+    "semantic_scan_outputs": 122,
+    "visual_processed": 0,
+    "visual_frames_with_instances": 0,
+    "visual_receipt_to_publish": null,
+    "instance_cloud_outputs": 0,
+    "associated_points": 0,
+    "source_payload_sha256": "042c59558c43c364b44b70382c1ac40ed80720f86c88f28d8141605a9ff9ab01"
+  }
+}

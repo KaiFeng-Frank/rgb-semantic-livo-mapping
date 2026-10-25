@@ -64,7 +64,8 @@ The validated environment adds `ultralytics==8.3.228`, `lap==0.5.12`, and
 `ultralytics-thop==2.0.18` in a separate dependency directory. It reuses the existing
 PyTorch, torchvision, NumPy, OpenCV, SciPy and YAML installations. Do not replace
 the PTv3 environment's CUDA/PyTorch stack just to install the optional detector.
-The ROS interpreter also needs OpenCV, NumPy and YAML, but does not import torch.
+The ROS interpreter also needs OpenCV, NumPy, SciPy and YAML, but does not import
+torch. SciPy supplies pose interpolation for nonzero camera/scan timestamp gaps.
 
 Set the existing `SEMANTIC_RUNTIME` and, when needed, `SEMANTIC_ROS_PYTHONPATH`.
 Add these environment settings before `tools/loop_closure/run_online.sh`:
@@ -95,6 +96,8 @@ For the existing paced real-sensor replay, add:
 ```
 
 ## Validation and limits
+
+[Recorded results, including failed associations and runtime outliers](../../results/visual_instances_20261026/README.md).
 
 `test_association.py` checks nearby people, measured foreground occlusion, mask
 overlap, rejected foreground, boundary rejection, camera axes, malformed transport,

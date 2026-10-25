@@ -65,6 +65,18 @@ training objective or a demonstrated moving-object improvement.
 [Implementation and limits](docs/semantic_consistency.md)
 · [paired accuracy, failure cases and online validation](results/semantic_consistency_20261026/README.md).
 
+**Optional visual instance association:** a separate YOLO11n-seg / BoT-SORT worker
+now projects observed person/vehicle masks and session-scoped track IDs onto live
+PTv3 scans. A real 41-frame nuScenes ROS replay delivered 4,826 associated points
+in 40 frames with the original semantic labels preserved. Six development scenes
+expose **22 wrong identities in 180 checkable adjacent-track pairs**; this path
+therefore supplies association hypotheses, without temporal semantic overwrites.
+The full HKU runtime test processes 1,277 images at 10 Hz with CPU isolation;
+semantic keyframes remain about 1 Hz. Timing comparisons retain a control stall
+and the slower run without isolation, and do not establish hard real-time bounds.
+[Run and interface](tools/visual_instances/README.md)
+· [association failures, actual ROS delivery and timing](results/visual_instances_20261026/README.md).
+
 **Offline loop closure, seq07:** with the same frozen frontend and B0 predictions,
 official KITTI ATE falls **0.837 → 0.557 m** and out-of-frustum map mIoU-9 rises
 **77.32 → 78.53%**. Historical baseline replay is reproduced exactly.
