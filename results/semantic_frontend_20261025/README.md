@@ -15,6 +15,15 @@ in the geometry control; therefore its online deadline cannot be effectively
 evaluated and full online LIO remains unvalidated. See
 [the runtime checks and every failed input probe](local_gpu/README.md).
 
+A subsequent [synthetic transport diagnostic](local_gpu/transport_probe/context.json)
+localizes a middleware-dependent large-message failure: Fast DDS receives 10/10
+small scans but 0/10 scans with 120,000 points (3.12 MB). Cyclone DDS receives
+10/10 large scans. Repeating both on ROS domain 42 gives the same difference;
+the successful repeat preserves every original point byte and timestamp order.
+No GPU, dataset download or LIO replay is involved. The exact Fast DDS fault is
+not yet established; this does not validate real-scan online operation or change
+the failed accuracy admission. All five diagnostic results are preserved.
+
 The initial synthetic evidence and source hashes are in
 [`local-verification.json`](local-verification.json); revised runtime evidence is
 in [pre-voxel-diagnostic.json](pre-voxel-diagnostic.json).
