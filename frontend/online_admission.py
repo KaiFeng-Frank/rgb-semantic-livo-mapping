@@ -130,15 +130,17 @@ def bridge(scans,meta,out,mode):
         a=np.frombuffer(msg.data,np.uint8).reshape(msg.width,msg.point_step)[:,:src.point_step]
         b=np.frombuffer(src.data,np.uint8).reshape(src.width,src.point_step)
         if not np.array_equal(a,b):raise ValueError('original point bytes changed')
-    if stamps!=list(expected):raise ValueError(f'output timestamp coverage {len(stamps)}/{count}: {mode}')
+    coverage=stamps==list(expected)
     rows=[json.loads(line) for line in (out/f'{mode}.jsonl').read_text().splitlines()]
     selected={int(meta['timestamps_start.txt'][f]) for f in MEASURE}
     measured=[r for r in rows if r['stamp_ns'] in selected]
-    if len(measured)!=len(MEASURE):raise ValueError('missing bridge log coverage')
     semantic=sum(r['semantic'] for r in measured)
-    return dict(mode=mode,scans=len(measured),semantic_scans=semantic,semantic_fraction=semantic/len(measured),
+    return dict(mode=mode,scans=len(MEASURE),received_measurement_scans=len(measured),
+                published_total=count,received_total=len(stamps),complete_ordered_coverage=coverage,
+                expected_stamp_ns=list(expected),received_stamp_ns=stamps,
+                semantic_scans=semantic,semantic_fraction=semantic/len(MEASURE),
                 emission=statistics([(r['emitted']-r['arrival'])*1000 for r in measured]),
-                late_discarded=max(r['late_discarded'] for r in rows),point_bytes_unchanged=True,
+                late_discarded=max((r['late_discarded'] for r in rows),default=0),point_bytes_unchanged=True,
                 all_timely_semantics=all(r['inference_complete'] is None or r['inference_complete']<=r['deadline'] for r in rows))
 
 
@@ -167,7 +169,8 @@ def main():
         (out/'geometry-result.json').write_text(json.dumps(baseline,indent=2)+'\n')
         online=bridge(scans,meta,out,'online')
         result=dict(geometry=baseline,inference=inference,online=online,
-                    admitted=online['semantic_fraction']>=.95 and online['all_timely_semantics'],
+                    admitted=baseline['complete_ordered_coverage'] and online['complete_ordered_coverage']
+                             and online['semantic_fraction']>=.95 and online['all_timely_semantics'],
                     full_lio_online_validated=False)
         (out/'result.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))
     except Exception as exc:
