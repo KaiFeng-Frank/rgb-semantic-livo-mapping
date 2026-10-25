@@ -1,0 +1,38 @@
+[ptv3_worker] Pointcept v1.5.1 loader, strict=True, intensity_scale=1.00 grid=0.050 classes=16 | shuffle_orders=False weight_dtype=fp16 tf32=False fast_voxel=True shm=True
+[ptv3_worker] gpu_voxel=True fast_hilbert=True
+[ptv3_worker] shm attached psm_f643bd9b (4 slots x 200000 pts)
+W1025 19:56:26.909000 3346134 site-packages/torch/fx/_symbolic_trace.py:53] is_fx_tracing will return true for both fx.symbolic_trace and torch.export. Please use is_fx_tracing_symbolic_tracing() for specifically fx.symbolic_trace or torch.compiler.is_compiling() for specifically torch.export/compile.
+[semantic_memory] enabled shadow=True
+[ptv3_worker] warm
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 0, "records": 6168, "epoch": 0, "epoch_reset": false, "frame": 0, "stamp": 0.0, "shadow": true, "history_points": 0}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 8, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 1, "stamp": 0.1, "shadow": true, "history_points": 21882}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 2, "stamp": 0.2, "shadow": true, "history_points": 21882}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 3, "stamp": 0.30000000000000004, "shadow": true, "history_points": 21882}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 4, "stamp": 0.4, "shadow": true, "history_points": 21886}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 5, "stamp": 0.5, "shadow": true, "history_points": 21882}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 6, "stamp": 0.6000000000000001, "shadow": true, "history_points": 21882}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 7, "stamp": 0.7000000000000001, "shadow": true, "history_points": 21882}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 8, "stamp": 0.8, "shadow": true, "history_points": 21882}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 9, "stamp": 0.9, "shadow": true, "history_points": 21882}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 10, "stamp": 1.0, "shadow": true, "history_points": 21882}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 11, "stamp": 1.1, "shadow": true, "history_points": 21882}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 12, "stamp": 1.2000000000000002, "shadow": true, "history_points": 21892}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 13, "stamp": 1.3, "shadow": true, "history_points": 21883}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 14, "stamp": 1.4000000000000001, "shadow": true, "history_points": 21883}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 15, "stamp": 1.5, "shadow": true, "history_points": 21882}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 16, "stamp": 1.6, "shadow": true, "history_points": 21882}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 17, "stamp": 1.7000000000000002, "shadow": true, "history_points": 21883}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 18, "stamp": 1.8, "shadow": true, "history_points": 21883}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 19, "stamp": 1.9000000000000001, "shadow": true, "history_points": 21884}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 20, "stamp": 2.0, "shadow": true, "history_points": 21886}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 21, "stamp": 2.1, "shadow": true, "history_points": 21882}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 22, "stamp": 2.2, "shadow": true, "history_points": 21882}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 23, "stamp": 2.3000000000000003, "shadow": true, "history_points": 21882}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 16, "records": 12336, "epoch": 0, "epoch_reset": false, "frame": 24, "stamp": 2.4000000000000004, "shadow": true, "history_points": 21886}
+Exception ignored in: <function SharedMemory.__del__ at 0x78b538d8f740>
+Traceback (most recent call last):
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/multiprocessing/shared_memory.py", line 187, in __del__
+    self.close()
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/multiprocessing/shared_memory.py", line 230, in close
+    self._mmap.close()
+BufferError: cannot close exported pointers exist

@@ -1,0 +1,44 @@
+{
+  "base_main": "d7c00bb",
+  "history_sources": [
+    "969dbc1",
+    "ee0a8ba"
+  ],
+  "selective_source": "dd8be892b69209d27750ebd6679a1a98c5125490",
+  "tests": {
+    "memory_passed": 178,
+    "memory_skipped_in_ptv3": 1,
+    "parameter_subtests_passed": 128,
+    "loop_passed": 14,
+    "native19_passed": 11,
+    "ros_geometry_passed": 2
+  },
+  "runtime": {
+    "scope": "fixed real scan integration, not accuracy or realtime admission",
+    "same_forward_features": true,
+    "same_forward_shadow_identity": true,
+    "ordinary_and_shadow_ipc": true,
+    "shared_segments_removed": [
+      "psm_b01a3b22",
+      "psm_af22fdf0"
+    ]
+  },
+  "unchanged_entrypoints": {
+    "src/semantic_map_node.py": "03226d9c8f0e61c8e70714eb0c3db272574c63868f13e09692ff2e29a423f24d",
+    "src/kitti_to_ros2bag.py": "9f749922e7b95a0168c7290f33f241969bc4fb4caab7cffbfca4455522a2d01f",
+    "src/ptv3_fast.py": "496d2774bfb5010eef711d881f2260cd3d8eb164463f54ccc6f504a7cb222c00"
+  },
+  "research_frontend_imported": false,
+  "online_backend_imported": false,
+  "active_temporal_fusion_enabled_by_default": false,
+  "source_sha256": {
+    "src/ptv3_loader_verified.py": "f00fec63ef983fe7d033910f82360d95fbe10b2853f3ef9bb61417fee33845b3",
+    "src/ptv3_worker.py": "f305676325ac044d481d99326fd5232c4d40b04521a139f311e070dbdaa5cca3",
+    "src/ptv3_client.py": "aa547f101a45bf3a8598ea173cbed66d976a940dec930af47b380dfeca556a71",
+    "src/semantic_memory.py": "1750963a421c263e3b3bb37a95e6bf32b140cfa143babde90f2681f5d79a025b",
+    "src/semantic_repair.py": "349bfb920933b63a4d61b96faffb58a2e5e8452c001a244c39d8eab063a09a90",
+    "tools/semantic_memory/test_chain.py": "3d0fb81419b2e7b398285a19ec4331bb2d89cf5652ded4c533144176962e0903",
+    "tools/semantic_memory/test_opportunities.py": "6ac2bbaa21ea6626527801f7f78edb0a581c46e4dfd0493f9c6c32fd9f582365",
+    ".github/workflows/main-contracts.yml": "76618a3ed9568cf4d0e0323e086bdd0074a424e7bf25dc134ae876ad34880fdc"
+  }
+}

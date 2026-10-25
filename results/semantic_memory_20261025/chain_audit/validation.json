@@ -1,0 +1,28 @@
+{
+  "audits": [
+    {
+      "policy": "legacy",
+      "partitions": 12,
+      "frames": 2400,
+      "source_checks": true,
+      "hash_checks": true,
+      "aggregate_recomputed": true,
+      "point_metrics_recomputed": true
+    },
+    {
+      "policy": "all_off",
+      "partitions": 12,
+      "frames": 2400,
+      "source_checks": true,
+      "hash_checks": true,
+      "aggregate_recomputed": true,
+      "point_metrics_recomputed": true
+    }
+  ],
+  "total_parity_frames": 4800,
+  "unit_tests_run": 71,
+  "unit_tests_passed": 70,
+  "unit_tests_ros_skip": 1,
+  "cross_process_repeatability_passed": false,
+  "active_fusion_admitted": false
+}

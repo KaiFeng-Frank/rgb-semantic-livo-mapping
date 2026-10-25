@@ -1,0 +1,15 @@
+numpy==1.26.4
+scipy==1.13.1
+gtsam==4.2
+open3d-cpu==0.19.0
+matplotlib==3.9.2
+requests==2.32.3
+Pillow==10.4.0
+opencv-python-headless==4.10.0.84
+# Bound Open3D's optional notebook/ML dependencies to avoid resolver backtracking
+# against future releases on Python 3.10/3.11. They are not used by the experiment.
+dash==2.18.2
+pandas==2.2.3
+scikit-learn==1.5.2
+ipython==8.29.0
+jedi==0.19.2

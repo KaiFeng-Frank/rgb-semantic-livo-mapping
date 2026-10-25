@@ -1,0 +1,71 @@
+{
+  "scope": "engineering_fixed_real_scan_repeated_not_driving_not_accuracy",
+  "source_sha256": "02696cc8ddd89cb3cb3197321d9caa4f0a17d8d105077ba801e6f76ca2afeb09",
+  "intensity": "nuScenes remission /255; PTv3 intensity_scale=1.0",
+  "gpu": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+  "torch": "2.11.0.dev20260201+cu128",
+  "capture": {
+    "raw_points": 34688,
+    "voxels": 23258,
+    "feature_dim": 64,
+    "inverse_min": 0,
+    "inverse_max": 23257,
+    "same_forward_head_exact": true,
+    "state_tensors": 488
+  },
+  "memory_only": {
+    "n": 1,
+    "median_ms": 64.85240603797138,
+    "p95_ms": 64.85240603797138,
+    "max_ms": 64.85240603797138
+  },
+  "memory_extra_peak_bytes": 123056128,
+  "supported_points": [
+    23222
+  ],
+  "ipc": {
+    "baseline": {
+      "client": {
+        "n": 1,
+        "median_ms": 163.56218105647713,
+        "p95_ms": 163.56218105647713,
+        "max_ms": 163.56218105647713
+      },
+      "worker": {
+        "n": 1,
+        "median_ms": 163.21429004892707,
+        "p95_ms": 163.21429004892707,
+        "max_ms": 163.21429004892707
+      },
+      "records": [
+        {
+          "client_ms": 163.56218105647713,
+          "worker_ms": 163.21429004892707
+        }
+      ]
+    },
+    "shadow": {
+      "client": {
+        "n": 1,
+        "median_ms": 138.5509279789403,
+        "p95_ms": 138.5509279789403,
+        "max_ms": 138.5509279789403
+      },
+      "worker": {
+        "n": 1,
+        "median_ms": 138.25203198939562,
+        "p95_ms": 138.25203198939562,
+        "max_ms": 138.25203198939562
+      },
+      "records": [
+        {
+          "client_ms": 138.5509279789403,
+          "worker_ms": 138.25203198939562
+        }
+      ]
+    }
+  },
+  "trained": false,
+  "same_forward_shadow_identity": true,
+  "raw_data_written": false
+}

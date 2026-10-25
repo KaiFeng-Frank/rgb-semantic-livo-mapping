@@ -1,0 +1,27 @@
+
+==================================== ERRORS ====================================
+_____________ ERROR collecting tools/semantic_memory/test_chain.py _____________
+ImportError while importing test module '/home/frank/semantic_livo_main_integration/tools/semantic_memory/test_chain.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../miniconda3/envs/ctvggt/lib/python3.11/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/semantic_memory/test_chain.py:8: in <module>
+    from .chain_trace import TracedEvidence, FusionCapture, exact_source_indices, voxel_instances, candidate_tags
+E   ImportError: attempted relative import with no known parent package
+_________ ERROR collecting tools/semantic_memory/test_opportunities.py _________
+ImportError while importing test module '/home/frank/semantic_livo_main_integration/tools/semantic_memory/test_opportunities.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../miniconda3/envs/ctvggt/lib/python3.11/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/semantic_memory/test_opportunities.py:4: in <module>
+    from .audit_opportunities import audit
+E   ImportError: attempted relative import with no known parent package
+=========================== short test summary info ============================
+ERROR tools/semantic_memory/test_chain.py
+ERROR tools/semantic_memory/test_opportunities.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!!
+2 errors in 0.98s

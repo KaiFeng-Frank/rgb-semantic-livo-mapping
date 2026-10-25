@@ -1,0 +1,12 @@
+[ptv3_worker] Pointcept v1.5.1 loader, strict=True, intensity_scale=1.00 grid=0.050 classes=16 | shuffle_orders=False weight_dtype=fp16 tf32=False fast_voxel=True shm=True
+[ptv3_worker] gpu_voxel=True fast_hilbert=True
+[ptv3_worker] shm attached psm_af22fdf0 (4 slots x 200000 pts)
+W1026 01:22:05.272000 3410638 site-packages/torch/fx/_symbolic_trace.py:53] is_fx_tracing will return true for both fx.symbolic_trace and torch.export. Please use is_fx_tracing_symbolic_tracing() for specifically fx.symbolic_trace or torch.compiler.is_compiling() for specifically torch.export/compile.
+[semantic_memory] enabled shadow=True
+[ptv3_worker] warm
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 0, "records": 4486, "epoch": 0, "epoch_reset": false, "frame": 0, "stamp": 0.0, "shadow": true, "history_points": 0}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 14, "records": 8972, "epoch": 0, "epoch_reset": false, "frame": 1, "stamp": 0.1, "shadow": true, "history_points": 23222}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 28, "records": 8972, "epoch": 0, "epoch_reset": false, "frame": 2, "stamp": 0.2, "shadow": true, "history_points": 23222}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 28, "records": 8972, "epoch": 0, "epoch_reset": false, "frame": 3, "stamp": 0.30000000000000004, "shadow": true, "history_points": 23222}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 28, "records": 8972, "epoch": 0, "epoch_reset": false, "frame": 4, "stamp": 0.4, "shadow": true, "history_points": 23222}
+[semantic_memory] {"expired": 0, "revoked_free_space": 0, "occluded": 28, "records": 8972, "epoch": 0, "epoch_reset": false, "frame": 5, "stamp": 0.5, "shadow": true, "history_points": 23222}

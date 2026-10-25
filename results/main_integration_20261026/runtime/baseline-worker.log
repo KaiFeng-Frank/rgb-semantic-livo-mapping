@@ -1,0 +1,5 @@
+[ptv3_worker] Pointcept v1.5.1 loader, strict=True, intensity_scale=1.00 grid=0.050 classes=16 | shuffle_orders=False weight_dtype=fp16 tf32=False fast_voxel=True shm=True
+[ptv3_worker] gpu_voxel=True fast_hilbert=True
+[ptv3_worker] shm attached psm_b01a3b22 (4 slots x 200000 pts)
+W1026 01:21:41.871000 3410471 site-packages/torch/fx/_symbolic_trace.py:53] is_fx_tracing will return true for both fx.symbolic_trace and torch.export. Please use is_fx_tracing_symbolic_tracing() for specifically fx.symbolic_trace or torch.compiler.is_compiling() for specifically torch.export/compile.
+[ptv3_worker] warm

@@ -1,0 +1,21 @@
+test_clock_audit_allows_subframe_jitter_but_rejects_a_frame_offset (tools.loop_closure.test_backend.Contracts) ... ok
+test_icp_transform_direction_on_three_planes (tools.loop_closure.test_backend.Contracts) ... ok
+test_odometry_only_graph_and_loop_direction (tools.loop_closure.test_backend.Contracts) ... ok
+test_rounded_extrinsic_is_rigid_before_graph_optimization (tools.loop_closure.test_backend.Contracts) ... ok
+test_scan_context_rotation (tools.loop_closure.test_backend.Contracts) ... ok
+test_world_correction_preserves_imu_lidar_extrinsic (tools.loop_closure.test_backend.Contracts) ... ok
+test_actual_build_excludes_heldout_predictions (tools.loop_semantics.test_fusion.Contracts) ... FUSE 0 {'all': 1, 'heldout': 1} 0
+BUILD_COMPLETE 0.13806089095305651
+ok
+test_attribution_removes_only_the_other_visits_class_votes (tools.loop_semantics.test_fusion.Contracts) ... ok
+test_geometry_and_weak_support_reject_revision (tools.loop_semantics.test_fusion.Contracts) ... ok
+test_moving_class_evidence_and_protected_voxels_never_relabelled (tools.loop_semantics.test_fusion.Contracts) ... ok
+test_point_density_does_not_multiply_frame_evidence (tools.loop_semantics.test_fusion.Contracts) ... ok
+test_protocol_round_trip_accepts_formatting_but_rejects_changed_values (tools.loop_semantics.test_fusion.Contracts) ... ok
+test_repeated_visit_does_not_overwhelm_clearer_revisit (tools.loop_semantics.test_fusion.Contracts) ... ok
+test_unknown_keys_and_unmatched_visits_cannot_create_voxels (tools.loop_semantics.test_fusion.Contracts) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.235s
+
+OK

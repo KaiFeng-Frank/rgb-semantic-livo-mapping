@@ -1,0 +1,40 @@
+{
+  "scope": "Local GPU feasibility evidence, separate from immutable CPU release manifest.json",
+  "files": [
+    {
+      "path": "local-environment.json",
+      "sha256": "e88fb2e1f67b6a9c26e706a589c42abe3e7e9da5cf982cfd5bdbc1ab08520de2",
+      "bytes": 665
+    },
+    {
+      "path": "local-gpu-smoke-000000.json",
+      "sha256": "15eec1aaca9f22904f250ad93b94b4a88e3f36dc7775f44da70eb81385a8cbae",
+      "bytes": 1500
+    },
+    {
+      "path": "local-pilot-config.json",
+      "sha256": "03db200e0b0efd97ca17ee98397db667f89ffb5b7a284bd1e878814b0fdd21c7",
+      "bytes": 597
+    },
+    {
+      "path": "local-pilot-inference.json",
+      "sha256": "931b996f598f413815fd81e687fa4e3b10285d27d04071db8d286e6d0cc1444f",
+      "bytes": 1692
+    },
+    {
+      "path": "local-pilot-metrics.jsonl",
+      "sha256": "4fb5ff7dbd10c1598f8c53f5c1042c1f779c8fa5a8f781c1963ec2e6d75e0085",
+      "bytes": 17303
+    },
+    {
+      "path": "local-pilot-summary.json",
+      "sha256": "598e9de7493ca59565049f904894d270835e1aed59b4b2154ba94463521436d6",
+      "bytes": 9419
+    },
+    {
+      "path": "local-pilot-training-inventory.json",
+      "sha256": "24cbc988d0c678a3da9ac78c0ae863471e08df0584cb8bdd229a657640ea0f2d",
+      "bytes": 3139
+    }
+  ]
+}

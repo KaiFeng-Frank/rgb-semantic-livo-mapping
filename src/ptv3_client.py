@@ -22,9 +22,12 @@ already taken seq+2, which means the worker finished seq and the fuse stage fini
 processing seq's output slot.
 """
 import os
+import math
+import select
 import struct
 import subprocess
 import sys
+import time
 import numpy as np
 
 PTV3_PY = os.environ.get("PTV3_PYTHON", "/opt/miniconda3/envs/ptv3/bin/python")
@@ -32,6 +35,7 @@ WORKER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ptv3_worker.p
 
 REQ = struct.Struct("<IBI")        # seq, slot, n            -> 9 bytes after the tag
 RESP = struct.Struct("<IBIdI")     # seq, slot, n, ms, nvox  -> 21 bytes after the tag
+MEMORY_CONTEXT = struct.Struct('<QdI16d')  # frame, sensor time, coordinate epoch, T_memory_sensor
 
 
 class Backpressure(Exception):
@@ -41,8 +45,23 @@ class Backpressure(Exception):
 class PTv3Client(object):
     def __init__(self, log=None, intensity_scale=0.2, stderr_path=None,
                  use_shm=True, nslot=4, max_pts=200000, grid_size=None,
-                 half=None, shuffle=None, fast_voxel=None, tf32=None):
+                 half=None, shuffle=None, fast_voxel=None, tf32=None,
+                 memory_checkpoint=None, memory_shadow=False,
+                 startup_timeout_s=120., response_timeout_s=10.):
+        if any(not math.isfinite(v) or v <= 0 for v in (startup_timeout_s, response_timeout_s)):
+            raise ValueError('Worker timeouts must be finite and positive')
+        self._read_timeout_s = startup_timeout_s
         env = dict(os.environ)
+        # Memory is opt-in at the client, never inherited accidentally by legacy callers.
+        env.pop('PTV3_MEMORY_CHECKPOINT', None)
+        env.pop('PTV3_MEMORY_SHADOW', None)
+        self.memory_enabled = bool(memory_checkpoint or memory_shadow)
+        if self.memory_enabled and not use_shm:
+            raise ValueError('Temporal memory requires shared-memory transport')
+        if memory_checkpoint:
+            env['PTV3_MEMORY_CHECKPOINT'] = os.path.abspath(memory_checkpoint)
+        if memory_shadow:
+            env['PTV3_MEMORY_SHADOW'] = '1'
         env["PTV3_INTENSITY_SCALE"] = "%.4f" % intensity_scale
         if grid_size is not None:
             env["PTV3_GRID_SIZE"] = "%.6f" % grid_size
@@ -93,10 +112,16 @@ class PTv3Client(object):
             if hdr != b"RDY0":
                 raise RuntimeError("ptv3 worker failed to start (got %r); see %s"
                                    % (hdr, stderr_path))
+            self.num_classes = struct.unpack("<I", self._readn(4))[0]
         except Exception:
+            if hasattr(self, 'p'):
+                self.p.kill()
+                self.p.wait(timeout=5)
             self._unlink_shm()
+            if errf:
+                errf.close()
             raise
-        self.num_classes = struct.unpack("<I", self._readn(4))[0]
+        self._read_timeout_s = response_timeout_s
         self.last_infer_ms = 0.0
         self.last_voxels = 0
         self.seq = 0
@@ -106,8 +131,13 @@ class PTv3Client(object):
     # ----------------------------------------------------------------- io
     def _readn(self, n):
         buf = bytearray()
+        deadline = time.monotonic() + self._read_timeout_s
         while len(buf) < n:
-            c = self.p.stdout.read(n - len(buf))
+            remaining = deadline - time.monotonic()
+            if remaining <= 0 or not select.select([self.p.stdout], [], [], max(0., remaining))[0]:
+                self.p.kill()
+                raise TimeoutError('PTv3 worker response exceeded %.3f s' % self._read_timeout_s)
+            c = os.read(self.p.stdout.fileno(), n - len(buf))
             if not c:
                 raise RuntimeError("ptv3 worker died")
             buf += c
@@ -117,18 +147,29 @@ class PTv3Client(object):
     def can_submit(self):
         return len(self.pending) < self.max_inflight
 
-    def submit(self, pts_n4):
+    def submit(self, pts_n4, *, memory_context=None):
         """Non-blocking.  Copies the scan into a shm slot and writes 10 bytes."""
         if not self.use_shm:
             raise RuntimeError("submit() requires the shm transport")
         if len(self.pending) >= self.max_inflight:
             raise Backpressure()
+        if self.memory_enabled != (memory_context is not None):
+            raise ValueError('Temporal client requests require an explicit memory context')
+        meta = b''
+        if memory_context is not None:
+            transform = np.asarray(memory_context['transform'], dtype=np.float64)
+            stamp, frame, epoch = memory_context['stamp'], memory_context['frame'], memory_context.get('epoch', 0)
+            if transform.shape != (4, 4) or not np.isfinite(transform).all() or not np.isfinite(stamp):
+                raise ValueError('Invalid temporal context')
+            if type(frame) is not int or frame < 0 or type(epoch) is not int or epoch < 0:
+                raise ValueError('Invalid frame/epoch')
+            meta = MEMORY_CONTEXT.pack(frame, stamp, epoch, *transform.ravel())
         n = len(pts_n4)
         if n > self.max_pts:
             raise RuntimeError("scan of %d points exceeds shm slot of %d" % (n, self.max_pts))
         slot = self.seq % self.nslot
         self.in_np[slot, :n] = pts_n4[:, :4]
-        self.p.stdin.write(b"H" + REQ.pack(self.seq, slot, n))
+        self.p.stdin.write((b'T' if self.memory_enabled else b'H') + REQ.pack(self.seq, slot, n) + meta)
         self.p.stdin.flush()
         h = (self.seq, slot, n)
         self.pending.append(h)
@@ -153,10 +194,12 @@ class PTv3Client(object):
         return self.lab_np[slot, :n].view(np.uint16), self.conf_np[slot, :n]
 
     # ----------------------------------------------------------------- sync
-    def segment(self, pts_n4):
+    def segment(self, pts_n4, *, memory_context=None):
         """Synchronous convenience wrapper (the legacy contract)."""
+        if self.pending:
+            raise RuntimeError('Collect pending asynchronous requests before segment()')
         if self.use_shm:
-            self.submit(np.ascontiguousarray(pts_n4[:, :4], dtype=np.float32))
+            self.submit(np.ascontiguousarray(pts_n4[:, :4], dtype=np.float32), memory_context=memory_context)
             lab, conf = self.collect()
             return lab.copy(), conf.copy()
         pts = np.ascontiguousarray(pts_n4[:, :4], dtype=np.float32)
@@ -175,13 +218,20 @@ class PTv3Client(object):
     # ----------------------------------------------------------------- teardown
     def _unlink_shm(self):
         if self.shm is not None:
+            shared = self.shm
+            self.in_np = self.lab_np = self.conf_np = None
             try:
-                self.in_np = self.lab_np = self.conf_np = None
-                self.shm.close()
-                self.shm.unlink()
-            except Exception:
+                shared.close()
+            except BufferError:
+                # A caller may still own a collect() view. Unlink regardless;
+                # the mapping lives until its last exported view is released.
                 pass
-            self.shm = None
+            finally:
+                try:
+                    shared.unlink()
+                except FileNotFoundError:
+                    pass
+                self.shm = None
 
     def close(self):
         try:
@@ -191,6 +241,7 @@ class PTv3Client(object):
         except Exception:
             try:
                 self.p.kill()
+                self.p.wait(timeout=5)
             except Exception:
                 pass
         self._unlink_shm()

@@ -1,0 +1,5617 @@
+{
+  "index_sha256": "ea049e7a2bccd9c7dc42c63fc6a824dbb981cdc19593ef774533e189078a0a13",
+  "backbone_sha256": "35f5d3aec63ae1c383f4a4146e157aa054860cb12b178d899571287e6f97e5f1",
+  "model_config_sha256": "ade404654307e7d71c646620cb1389114b439ac76c73bdb26494645fc4008552",
+  "synthetic": false,
+  "geometry": "raw_keyframe_sensor_with_rigid_ego_alignment_not_deskewed",
+  "intensity": "raw remission divided by 255; extractor intensity_scale=1.0",
+  "files": [
+    {
+      "scene": "scene-0062",
+      "frame": 0,
+      "path": "scene-0062/000.npz",
+      "sha256": "b5561109d3383d57aadcbd2a62a9959991e91e1fd34350bd3f39bf3cb48c173e",
+      "bytes": 4339620,
+      "voxels": 23258,
+      "points": 34688,
+      "objects": 6
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 1,
+      "path": "scene-0062/001.npz",
+      "sha256": "15c9fa798b4cca18f55ffac9fa094a232b6ba7a9371dfa3f471e128c35583ca7",
+      "bytes": 4337428,
+      "voxels": 23242,
+      "points": 34752,
+      "objects": 6
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 2,
+      "path": "scene-0062/002.npz",
+      "sha256": "454c07636ea0540510b6b7d208dc91106c02e1be927e181dd431825191bad2ff",
+      "bytes": 4357289,
+      "voxels": 23363,
+      "points": 34688,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 3,
+      "path": "scene-0062/003.npz",
+      "sha256": "6e93976e27145efbcdb6be997dac9bdbc698bb3692266ec8194edf578145f016",
+      "bytes": 4417804,
+      "voxels": 23714,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 4,
+      "path": "scene-0062/004.npz",
+      "sha256": "6268dce028008a0ec4597c4b0e27b9a631a5e3b4f1cb2c6e51c51cf3fb151300",
+      "bytes": 4468683,
+      "voxels": 24005,
+      "points": 34752,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 5,
+      "path": "scene-0062/005.npz",
+      "sha256": "d6f711aa42d28fcd1f0ff2072a4a9683edb01f988e90d0ab2975d8998b037371",
+      "bytes": 4447462,
+      "voxels": 23884,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 6,
+      "path": "scene-0062/006.npz",
+      "sha256": "f8814f59ae62be8d8ea624bc42a4977277589871383062632eb0e9eae1489fd2",
+      "bytes": 4464762,
+      "voxels": 23984,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 7,
+      "path": "scene-0062/007.npz",
+      "sha256": "2f31bbf3356e4071c98927bac65005af433b2e088a2ec2714103fd1af80de206",
+      "bytes": 4492632,
+      "voxels": 24142,
+      "points": 34752,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 8,
+      "path": "scene-0062/008.npz",
+      "sha256": "bfc4d34f3d56ac9b2468b00839d1ae99e2470ef199cd51a1b994b95f16d08926",
+      "bytes": 4512602,
+      "voxels": 24256,
+      "points": 34752,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 9,
+      "path": "scene-0062/009.npz",
+      "sha256": "e0bd69444492c03f9fe07444c5c28fa4809c10f4c370f86e61e59ab0870ee8d8",
+      "bytes": 4487517,
+      "voxels": 24111,
+      "points": 34752,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 10,
+      "path": "scene-0062/010.npz",
+      "sha256": "ca9c2daa8d7e32d00e96b9ef70375b55afbf9d720e8205e5f5b4c97e4fe7cafb",
+      "bytes": 4510446,
+      "voxels": 24244,
+      "points": 34688,
+      "objects": 7
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 11,
+      "path": "scene-0062/011.npz",
+      "sha256": "f4ca95b1387396ae65920581ad1964fc34316566a358b08c7759cf5044df3e42",
+      "bytes": 4504754,
+      "voxels": 24208,
+      "points": 34720,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 12,
+      "path": "scene-0062/012.npz",
+      "sha256": "cb524ad48ab33eabb240af0d2f1192e4dea575577620c3d6d40f9012e42edc3e",
+      "bytes": 4464290,
+      "voxels": 23976,
+      "points": 34656,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 13,
+      "path": "scene-0062/013.npz",
+      "sha256": "e38bb3e7594f7f271fd73ea366a1b79330a99d07b2d0adf7a973f0eb050468ff",
+      "bytes": 4463274,
+      "voxels": 23968,
+      "points": 34752,
+      "objects": 7
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 14,
+      "path": "scene-0062/014.npz",
+      "sha256": "acd220c8ab393cdfb833b05d997e7ff2891016ccc197e665cc9a9b4a2098e9cd",
+      "bytes": 4500371,
+      "voxels": 24181,
+      "points": 34752,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 15,
+      "path": "scene-0062/015.npz",
+      "sha256": "1dc7ee77689cbed4126dd1089a0e1c73e5a28b8385dbcac2962a6311c5ef120c",
+      "bytes": 4447376,
+      "voxels": 23878,
+      "points": 34688,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 16,
+      "path": "scene-0062/016.npz",
+      "sha256": "e40cbd77aedfda051eef936bfa44c660a0593d2cd2b8e59f3c543e0e7b723d1d",
+      "bytes": 4412450,
+      "voxels": 23688,
+      "points": 34432,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 17,
+      "path": "scene-0062/017.npz",
+      "sha256": "c2b0fa7b4254eaf06f2407a495e448204e6026a81809fd7b836e2e93068c1f13",
+      "bytes": 4215631,
+      "voxels": 22537,
+      "points": 34688,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 18,
+      "path": "scene-0062/018.npz",
+      "sha256": "df44cade9e7a30d328415da1b2b613518ef51f14b5cb908711f2ad2cbdcefc49",
+      "bytes": 4353742,
+      "voxels": 23332,
+      "points": 34752,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 19,
+      "path": "scene-0062/019.npz",
+      "sha256": "a3f107a9610a04682f01ac348540e7194c542041873c0426732c1d17fe70b853",
+      "bytes": 4421673,
+      "voxels": 23723,
+      "points": 34784,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 20,
+      "path": "scene-0062/020.npz",
+      "sha256": "2bacbe563b7d59628887678b26c68138e88383624eef48e0a54fbde7d507cc15",
+      "bytes": 4500175,
+      "voxels": 24177,
+      "points": 34752,
+      "objects": 10
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 21,
+      "path": "scene-0062/021.npz",
+      "sha256": "1069b5253bb240c2ef1d8f59f60f7dcd2087b982df6dc708c81cdddfd51a81db",
+      "bytes": 4574260,
+      "voxels": 24610,
+      "points": 34688,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 22,
+      "path": "scene-0062/022.npz",
+      "sha256": "85c6db32b052fa0b4a89619331349fdd6cba2b798f6dfede0be8c0d128878adf",
+      "bytes": 4612533,
+      "voxels": 24831,
+      "points": 34720,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 23,
+      "path": "scene-0062/023.npz",
+      "sha256": "6f8c3edd2ef79cc96430ebea4adf62a7dab208e60a14354443873d8ed56f764a",
+      "bytes": 4570863,
+      "voxels": 24593,
+      "points": 34720,
+      "objects": 6
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 24,
+      "path": "scene-0062/024.npz",
+      "sha256": "79863a368fb30a228aa84426c05a8775a77c04ba29a3dbbbc9aca41880effc57",
+      "bytes": 4587857,
+      "voxels": 24691,
+      "points": 34752,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 25,
+      "path": "scene-0062/025.npz",
+      "sha256": "8158d62b472e524a2ee27f75dd6d1b6ed6c0ea92458f565a123b98ff2001f116",
+      "bytes": 4534343,
+      "voxels": 24385,
+      "points": 34688,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 26,
+      "path": "scene-0062/026.npz",
+      "sha256": "369da1f52fffc5480036c42ca3eec13ea64fb721a56e60400838c29abcb95a60",
+      "bytes": 4557104,
+      "voxels": 24518,
+      "points": 34688,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 27,
+      "path": "scene-0062/027.npz",
+      "sha256": "b77d8fe7bf6b2f7ae80cfa6bdfa2cfdc96a39e8920fdad005aa7e7873421da0c",
+      "bytes": 4567789,
+      "voxels": 24575,
+      "points": 34752,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 28,
+      "path": "scene-0062/028.npz",
+      "sha256": "94eb44a170936f004c10e93e63e654579a707c168f16876c58d1f56b30b2803d",
+      "bytes": 4570961,
+      "voxels": 24595,
+      "points": 34720,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 29,
+      "path": "scene-0062/029.npz",
+      "sha256": "d4a24921785c221e50fbd43d80113327ec6f5f6b52f99ae114b2e80459fd2958",
+      "bytes": 4556660,
+      "voxels": 24514,
+      "points": 34688,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 30,
+      "path": "scene-0062/030.npz",
+      "sha256": "4f5f6233c0aa181b0ef63f34e6fb74e1f4535eea5df106b116093275c631f265",
+      "bytes": 4572501,
+      "voxels": 24607,
+      "points": 34688,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 31,
+      "path": "scene-0062/031.npz",
+      "sha256": "c728910da1acc13aa5bb0b78f230f0bcae8b1094bf73e8da7fa3c40843955ff3",
+      "bytes": 4545956,
+      "voxels": 24450,
+      "points": 34784,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 32,
+      "path": "scene-0062/032.npz",
+      "sha256": "118cff098c0a03d0b2faaf8f859116a083381ab2853b3f57d3a520e06f8c6d1b",
+      "bytes": 4552681,
+      "voxels": 24491,
+      "points": 34688,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 33,
+      "path": "scene-0062/033.npz",
+      "sha256": "793e1b330ebf2a14034e70185421f82a91d6b555c789cb5fdd9f9b930287089c",
+      "bytes": 4548339,
+      "voxels": 24469,
+      "points": 34656,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 34,
+      "path": "scene-0062/034.npz",
+      "sha256": "0d8eb171f97f8e70839c6104411037cd18e0e625741cfb2a4b07eacd5b91b347",
+      "bytes": 4585129,
+      "voxels": 24675,
+      "points": 34784,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 35,
+      "path": "scene-0062/035.npz",
+      "sha256": "32a4be2bb1bfaffe4d04750b0f5a5b67a8958b91d87b4dc217c98a445fc0cffe",
+      "bytes": 4579346,
+      "voxels": 24648,
+      "points": 34688,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 36,
+      "path": "scene-0062/036.npz",
+      "sha256": "deb43afa43f41eb4721ef87832618c2f1e8d83836d793a808d9b6fd3ec94e3d9",
+      "bytes": 4592609,
+      "voxels": 24723,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 37,
+      "path": "scene-0062/037.npz",
+      "sha256": "754bab41cc8d2d7927dba6c02eccad71699f43cb46062a5a52b46571cb9a261f",
+      "bytes": 4613888,
+      "voxels": 24846,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0062",
+      "frame": 38,
+      "path": "scene-0062/038.npz",
+      "sha256": "fee7f06a3349981d8b935cfddf737a23734f2715b0ff29860c15077f28f63894",
+      "bytes": 4611927,
+      "voxels": 24833,
+      "points": 34752,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 0,
+      "path": "scene-0315/000.npz",
+      "sha256": "e87343b732c3f2b8224006ce68e0345535072d944a1678f142c4bc0631822c10",
+      "bytes": 4393492,
+      "voxels": 23562,
+      "points": 34720,
+      "objects": 10
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 1,
+      "path": "scene-0315/001.npz",
+      "sha256": "e6857f11fd33583388a6aa8b41e78df3c63f59fa161cee22f3cebd8c91b4cd3f",
+      "bytes": 4367369,
+      "voxels": 23411,
+      "points": 34720,
+      "objects": 10
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 2,
+      "path": "scene-0315/002.npz",
+      "sha256": "b3205d4df5a95896245cc1b560b4302c26d954b66c11990168905d582c9ef5dd",
+      "bytes": 4405146,
+      "voxels": 23632,
+      "points": 34752,
+      "objects": 7
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 3,
+      "path": "scene-0315/003.npz",
+      "sha256": "8539cce67203fad7c0c2348d3656aac195aab2b5107d4b0d6abd2264e536903f",
+      "bytes": 4435865,
+      "voxels": 23811,
+      "points": 34752,
+      "objects": 6
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 4,
+      "path": "scene-0315/004.npz",
+      "sha256": "316905244b6987e6691da97cbe68bbbc110ed9d1f7f60d05b51e071101921880",
+      "bytes": 4486093,
+      "voxels": 24103,
+      "points": 34720,
+      "objects": 6
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 5,
+      "path": "scene-0315/005.npz",
+      "sha256": "562e6b3731727dc0529d909c637325a423c9c1523ab1898cc72db0e66bc399e1",
+      "bytes": 4489939,
+      "voxels": 24125,
+      "points": 34752,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 6,
+      "path": "scene-0315/006.npz",
+      "sha256": "92d98dae2245c2693693c6fcfb7a90cceee6a03a4b98f0cee6140615a4480369",
+      "bytes": 4461948,
+      "voxels": 23962,
+      "points": 34720,
+      "objects": 7
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 7,
+      "path": "scene-0315/007.npz",
+      "sha256": "f1c5cdff5e7f9baf9d722dae84d40fe3ed3e8060c2c248d62497b5c02461f22f",
+      "bytes": 4380442,
+      "voxels": 23488,
+      "points": 34720,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 8,
+      "path": "scene-0315/008.npz",
+      "sha256": "0acbd41cd9d810c522fb34358a6a5d26c89a468fc5c853c4932690a874f7baf7",
+      "bytes": 4389888,
+      "voxels": 23550,
+      "points": 34688,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 9,
+      "path": "scene-0315/009.npz",
+      "sha256": "898e4b19886a49f122e2002be02ea7a14b9a29658ea7654bc784772bb6d2730a",
+      "bytes": 4321028,
+      "voxels": 23146,
+      "points": 34720,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 10,
+      "path": "scene-0315/010.npz",
+      "sha256": "60dea20ccce7fc2f16b3aafe57513e732f19c2f1a40ba66ae5d0ddf934979cd7",
+      "bytes": 4425941,
+      "voxels": 23751,
+      "points": 34720,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 11,
+      "path": "scene-0315/011.npz",
+      "sha256": "14939b45f4ab62d172c3bf87f75468897fab05afa2da0c2e6784f5aaa0928544",
+      "bytes": 4505844,
+      "voxels": 24210,
+      "points": 34720,
+      "objects": 11
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 12,
+      "path": "scene-0315/012.npz",
+      "sha256": "b04e8c6835540b73d6035e91b5bcdcc013f8da180b91734df5c3c08d1f6a80ee",
+      "bytes": 4520399,
+      "voxels": 24297,
+      "points": 34720,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 13,
+      "path": "scene-0315/013.npz",
+      "sha256": "b90923c48b18f558df78438f99f7e14d45ce838b492274b6c18d96fd405dd843",
+      "bytes": 4531875,
+      "voxels": 24365,
+      "points": 34688,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 14,
+      "path": "scene-0315/014.npz",
+      "sha256": "198817dde12d52684a2561de86759420674683b4cb8d33d31460494ce20cbdab",
+      "bytes": 4494068,
+      "voxels": 24146,
+      "points": 34752,
+      "objects": 7
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 15,
+      "path": "scene-0315/015.npz",
+      "sha256": "e269b6ee79e36b7a64b4343c10939c25f86d80aadebc3f33bfc71c2a3782fcc4",
+      "bytes": 4469635,
+      "voxels": 24005,
+      "points": 34720,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 16,
+      "path": "scene-0315/016.npz",
+      "sha256": "a264786bd8ffb30e56bb31f00ec952bcc1022534c78f7fbb3177dbf7a5fdd3f0",
+      "bytes": 4464330,
+      "voxels": 23976,
+      "points": 34688,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 17,
+      "path": "scene-0315/017.npz",
+      "sha256": "8f18c24034d7b9744411dab683c759478c28e003ec240de209c5cba603944d3c",
+      "bytes": 4448742,
+      "voxels": 23884,
+      "points": 34752,
+      "objects": 7
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 18,
+      "path": "scene-0315/018.npz",
+      "sha256": "2af68037eed94d0b03237b728d6fc4428482f7c03804ec91ef45831a60b7d428",
+      "bytes": 4448304,
+      "voxels": 23886,
+      "points": 34720,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 19,
+      "path": "scene-0315/019.npz",
+      "sha256": "1da33e31dc3b5217a677bc4da0874bfdacb2948a30262c5fef1c1dea4b3e01a0",
+      "bytes": 4371659,
+      "voxels": 23437,
+      "points": 34752,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 20,
+      "path": "scene-0315/020.npz",
+      "sha256": "9e87d1c9c4f9d6474b81f66601ab9fb0e2a90b917966e72b16efbd1c7f2f2712",
+      "bytes": 4388019,
+      "voxels": 23533,
+      "points": 34752,
+      "objects": 7
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 21,
+      "path": "scene-0315/021.npz",
+      "sha256": "9341cf254f0014e7ed4b6842eacdfc452ad08793ffc475bf967066b6305f399b",
+      "bytes": 4401646,
+      "voxels": 23612,
+      "points": 34720,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 22,
+      "path": "scene-0315/022.npz",
+      "sha256": "52307a0b457b2667ca12eaee6ea8f7f54c4d0a8d1f914b34d369a9b256024ada",
+      "bytes": 4380160,
+      "voxels": 23494,
+      "points": 34656,
+      "objects": 6
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 23,
+      "path": "scene-0315/023.npz",
+      "sha256": "716f38312c0365f512e07a292cb23c863a7eb541e9d52e16f44e9da0f6380cd0",
+      "bytes": 4394155,
+      "voxels": 23573,
+      "points": 34720,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 24,
+      "path": "scene-0315/024.npz",
+      "sha256": "addb57e16b0abf3556e86e7dcde2af0aa6eae845be9287b4fdd0da7281b5238a",
+      "bytes": 4380050,
+      "voxels": 23496,
+      "points": 34688,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 25,
+      "path": "scene-0315/025.npz",
+      "sha256": "664e68e2fbf42daf86c21e6eb6f0539d074b07fb49052ba286ad65d4320843f8",
+      "bytes": 4408462,
+      "voxels": 23660,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 26,
+      "path": "scene-0315/026.npz",
+      "sha256": "49344a8a02b0587313ab39d6d488a507152d85a59f9441a0ae3b1d2c9881f2b4",
+      "bytes": 4393065,
+      "voxels": 23571,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 27,
+      "path": "scene-0315/027.npz",
+      "sha256": "02fcf71515ae6c8f4d4d2ec2cc10bb176e1709af4f340a6a0981f0efe14a34b8",
+      "bytes": 4365114,
+      "voxels": 23408,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 28,
+      "path": "scene-0315/028.npz",
+      "sha256": "cfa4dbc63a12b0a3138f2ed9aca07154ee723176806debfd7a386f8872006d84",
+      "bytes": 4373170,
+      "voxels": 23456,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 29,
+      "path": "scene-0315/029.npz",
+      "sha256": "969b25ee46f94377a9531c397f3531474078917daf518dce945ff42b33087ac0",
+      "bytes": 4406386,
+      "voxels": 23648,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 30,
+      "path": "scene-0315/030.npz",
+      "sha256": "cc6fe32017f41ccdd35c2abab16455d4b4ecf13c92d9d18b47e9788612df3520",
+      "bytes": 4439100,
+      "voxels": 23834,
+      "points": 34752,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 31,
+      "path": "scene-0315/031.npz",
+      "sha256": "dad24aa1309406a56e11438edd743b0e44980c957787b94b9f122c5571875dbe",
+      "bytes": 4502516,
+      "voxels": 24202,
+      "points": 34752,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 32,
+      "path": "scene-0315/032.npz",
+      "sha256": "fb7d2f871ab78d04a46ccb91de9ab3340571519e2ae803f750853dbeea88e576",
+      "bytes": 4519701,
+      "voxels": 24303,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 33,
+      "path": "scene-0315/033.npz",
+      "sha256": "2b02ad7ebbb773316a89f34de5106dce289908b3b987730ef951e047d75eebc6",
+      "bytes": 4525583,
+      "voxels": 24337,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 34,
+      "path": "scene-0315/034.npz",
+      "sha256": "3d643d9a8d08a39665861d4b1b5cc06717722e681b0afdaa9e3fee29124515c2",
+      "bytes": 4467916,
+      "voxels": 24002,
+      "points": 34752,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 35,
+      "path": "scene-0315/035.npz",
+      "sha256": "11828d5859d3d740cb0a6f5b34c5fbc5fbb0fdeaf1d1b58221cc413b17f70c8d",
+      "bytes": 4467241,
+      "voxels": 23995,
+      "points": 34784,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 36,
+      "path": "scene-0315/036.npz",
+      "sha256": "59fc90ad8f29f31a263bc5f5860cee4b736211b01372ffaac4de3b70ab31937e",
+      "bytes": 4476526,
+      "voxels": 24052,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 37,
+      "path": "scene-0315/037.npz",
+      "sha256": "176826038bd83c935d6aebff514b5d22a2320b780ceffe32aeca4b49b5ec733f",
+      "bytes": 4447191,
+      "voxels": 23881,
+      "points": 34720,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0315",
+      "frame": 38,
+      "path": "scene-0315/038.npz",
+      "sha256": "6cc8d85c09762555e766b9264784d0ae91c17cf50ad9acd4860e22ebc30193fd",
+      "bytes": 4452514,
+      "voxels": 23912,
+      "points": 34688,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 0,
+      "path": "scene-0399/000.npz",
+      "sha256": "e6cca0f28a72cc85180419e25b69782d5f4c3f337d756c071b307ef6cc57b59e",
+      "bytes": 4251906,
+      "voxels": 22744,
+      "points": 34464,
+      "objects": 19
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 1,
+      "path": "scene-0399/001.npz",
+      "sha256": "4b67e92d6bfdf8f9db4040b1dcf85fed20555b556dfebce2fa618178b2a12b79",
+      "bytes": 4222897,
+      "voxels": 22563,
+      "points": 34720,
+      "objects": 19
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 2,
+      "path": "scene-0399/002.npz",
+      "sha256": "72cd90bb373247bcc211a59620891df7d98fdcbee17fa99cf87568f9f9041985",
+      "bytes": 4013146,
+      "voxels": 21352,
+      "points": 34720,
+      "objects": 18
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 3,
+      "path": "scene-0399/003.npz",
+      "sha256": "3c93ec3a18c6bec5ad0d46ed8dc7ba19544e3a9424939867a6e17323a8ab229e",
+      "bytes": 3969954,
+      "voxels": 21104,
+      "points": 34688,
+      "objects": 18
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 4,
+      "path": "scene-0399/004.npz",
+      "sha256": "cd90b4b452e2b90ce7a46ec90ad66141c06aee61b4566f97bd08f58cfab4316e",
+      "bytes": 4256055,
+      "voxels": 22753,
+      "points": 34752,
+      "objects": 19
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 5,
+      "path": "scene-0399/005.npz",
+      "sha256": "3e5d5286cf4bedfb50a5117a39dd63c2012b9a159a85d75cffa56dcb10d8515a",
+      "bytes": 4334707,
+      "voxels": 23205,
+      "points": 34720,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 6,
+      "path": "scene-0399/006.npz",
+      "sha256": "c37c4858bfb08df191c7f5269be652dc3f88c057d0b84f6f9b61b149929aafea",
+      "bytes": 4334782,
+      "voxels": 23204,
+      "points": 34720,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 7,
+      "path": "scene-0399/007.npz",
+      "sha256": "2dcc7437f5aac0a2603f8af7a0a33d7b2790ff0553fa55722782398df52acfd5",
+      "bytes": 4260836,
+      "voxels": 22778,
+      "points": 34720,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 8,
+      "path": "scene-0399/008.npz",
+      "sha256": "a5cd7a005adf588dde5aa5c83b57c8ab6c24efdffb995a22d06f66fa9e7c3c08",
+      "bytes": 4124143,
+      "voxels": 21985,
+      "points": 34720,
+      "objects": 24
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 9,
+      "path": "scene-0399/009.npz",
+      "sha256": "077a0cfa216761bcef6ecb38d11d4939e850941c9fe5aecfcebade5cfe4306f3",
+      "bytes": 4042412,
+      "voxels": 21514,
+      "points": 34720,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 10,
+      "path": "scene-0399/010.npz",
+      "sha256": "7c9bbfebecfe919de5876a8336265780123d21cf1e96095a9a76e28df9f3e0e3",
+      "bytes": 4228652,
+      "voxels": 22586,
+      "points": 34752,
+      "objects": 25
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 11,
+      "path": "scene-0399/011.npz",
+      "sha256": "a81e5cd7b3caf819dde7061e8736eba95cb8383d06d62b233bdfc4371881aed5",
+      "bytes": 4314391,
+      "voxels": 23089,
+      "points": 34720,
+      "objects": 21
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 12,
+      "path": "scene-0399/012.npz",
+      "sha256": "062b233b355acdb3ac43d2dceaeec8cba5bed50932b44a6a11b5c12c023f491b",
+      "bytes": 4249741,
+      "voxels": 22711,
+      "points": 34720,
+      "objects": 24
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 13,
+      "path": "scene-0399/013.npz",
+      "sha256": "e6de4d1eea74c97daa2333457c236bf223243710a10107d7ffbdb0391510956b",
+      "bytes": 4113371,
+      "voxels": 21917,
+      "points": 34720,
+      "objects": 28
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 14,
+      "path": "scene-0399/014.npz",
+      "sha256": "5926f7e0b69aa3116a9efb9a949c638bc99f65b8a28b5a56a58bf676a535ce01",
+      "bytes": 4201572,
+      "voxels": 22434,
+      "points": 34720,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 15,
+      "path": "scene-0399/015.npz",
+      "sha256": "f84085bb67bd0454dc942eeeb1c980387d0396dc4a39e26ba19ef172947a1b97",
+      "bytes": 4288995,
+      "voxels": 22941,
+      "points": 34688,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 16,
+      "path": "scene-0399/016.npz",
+      "sha256": "25a7808383f211d09a0f5a6155e9194c956fc6761384d5ce5f9dd04fe681199c",
+      "bytes": 4166511,
+      "voxels": 22233,
+      "points": 34688,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 17,
+      "path": "scene-0399/017.npz",
+      "sha256": "726c3d71e1e05452db3007bf82640eeb5a8ba641f41c62e7b9d394cd1bfeb2d2",
+      "bytes": 4218555,
+      "voxels": 22525,
+      "points": 34720,
+      "objects": 28
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 18,
+      "path": "scene-0399/018.npz",
+      "sha256": "c3927f4640fd06477a8730079e608a7ef53c284b8373e249268b99dcdf24bea2",
+      "bytes": 4305412,
+      "voxels": 23034,
+      "points": 34752,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 19,
+      "path": "scene-0399/019.npz",
+      "sha256": "7cf15680d1da556accb4c2355decb8d1c2ccff3b6be3b67a8828a168300f3acb",
+      "bytes": 4338392,
+      "voxels": 23222,
+      "points": 34720,
+      "objects": 25
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 20,
+      "path": "scene-0399/020.npz",
+      "sha256": "009e11379219b788c399cd1c85f1ddada5b90ee3bc79a421c0b2683bdcc8118b",
+      "bytes": 4281302,
+      "voxels": 22892,
+      "points": 34720,
+      "objects": 25
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 21,
+      "path": "scene-0399/021.npz",
+      "sha256": "a89e227fd8d4dc14aed0a9a7f2b990e9d60a6c93239c029673810274473c132e",
+      "bytes": 4256165,
+      "voxels": 22751,
+      "points": 34720,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 22,
+      "path": "scene-0399/022.npz",
+      "sha256": "f7fe38a1eae0db7f8985706ceea7d5d393079b750282dd7b748db30eab0cee39",
+      "bytes": 4315671,
+      "voxels": 23089,
+      "points": 34752,
+      "objects": 25
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 23,
+      "path": "scene-0399/023.npz",
+      "sha256": "2411c5e9a4eea09d2e93b331ca81ca5d12a945369e94f201da9b7c590858bd62",
+      "bytes": 4326593,
+      "voxels": 23155,
+      "points": 34752,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 24,
+      "path": "scene-0399/024.npz",
+      "sha256": "74073b6bdfda95e6a3bea48214cd7456344eb27e7331b97d5af7f8ead7f1fa24",
+      "bytes": 4317159,
+      "voxels": 23105,
+      "points": 34720,
+      "objects": 21
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 25,
+      "path": "scene-0399/025.npz",
+      "sha256": "97c9ef0118213d5e6e0d4c123c835b2dbeb26dd0c7211aac56d50be537379c3f",
+      "bytes": 4343455,
+      "voxels": 23257,
+      "points": 34720,
+      "objects": 21
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 26,
+      "path": "scene-0399/026.npz",
+      "sha256": "6f358c3972182ce5b44a91b2c64aaa7fac960b86d1fcb41e215395e1d1b5d063",
+      "bytes": 4328311,
+      "voxels": 23169,
+      "points": 34784,
+      "objects": 19
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 27,
+      "path": "scene-0399/027.npz",
+      "sha256": "310c995a9ca3deef004fc4684f17222fdf8767330939300ebba1c2a3c200991a",
+      "bytes": 4287893,
+      "voxels": 22943,
+      "points": 34720,
+      "objects": 16
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 28,
+      "path": "scene-0399/028.npz",
+      "sha256": "01175dfd4d0a094a455278a41ef65a10b2405d7dfb61fd0151ac7f48f6e7c453",
+      "bytes": 4333559,
+      "voxels": 23201,
+      "points": 34752,
+      "objects": 19
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 29,
+      "path": "scene-0399/029.npz",
+      "sha256": "ef1a0958ab216632dd07332217b482ac1b405235aa764e7bfa3b3c70fb634599",
+      "bytes": 4295805,
+      "voxels": 22983,
+      "points": 34720,
+      "objects": 20
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 30,
+      "path": "scene-0399/030.npz",
+      "sha256": "c5445aea0d5edf1c3a852cc16620377a41dac7a6b7f872ff8aa2582aa7b2c94e",
+      "bytes": 4167906,
+      "voxels": 22248,
+      "points": 34720,
+      "objects": 17
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 31,
+      "path": "scene-0399/031.npz",
+      "sha256": "a9bcb42e7791ec40e116b9e496b3d6cc3d3b3085795397768b44590ed5f3bc24",
+      "bytes": 4325815,
+      "voxels": 23161,
+      "points": 34688,
+      "objects": 18
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 32,
+      "path": "scene-0399/032.npz",
+      "sha256": "075ecfd92691109a294ef8bdc80394ca70846c3fcfc8fe85c33d9af14478d2ab",
+      "bytes": 4331714,
+      "voxels": 23192,
+      "points": 34720,
+      "objects": 19
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 33,
+      "path": "scene-0399/033.npz",
+      "sha256": "7032a8262c480cbcd988803cce13917052830c892a1bb904099ce82e20489307",
+      "bytes": 4301514,
+      "voxels": 23016,
+      "points": 34720,
+      "objects": 20
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 34,
+      "path": "scene-0399/034.npz",
+      "sha256": "54aa74701816c43f88fd81e2cfc4be2de1b7d3af5b7373b036aaa3917d3e1dc1",
+      "bytes": 4209195,
+      "voxels": 22485,
+      "points": 34752,
+      "objects": 17
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 35,
+      "path": "scene-0399/035.npz",
+      "sha256": "83cc1980c8329540c803649bc35e45a5239f405775224790b4aa64c43e393977",
+      "bytes": 4285275,
+      "voxels": 22925,
+      "points": 34720,
+      "objects": 18
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 36,
+      "path": "scene-0399/036.npz",
+      "sha256": "c36f36dd77365438a2ae5eb64a01a1ec2292f2360b4fdd74549544e77633316c",
+      "bytes": 4345439,
+      "voxels": 23273,
+      "points": 34688,
+      "objects": 19
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 37,
+      "path": "scene-0399/037.npz",
+      "sha256": "e54620ed2167e674acde792a31a3269006f28dbd2a35d4b84665febd2fbee04c",
+      "bytes": 4353074,
+      "voxels": 23320,
+      "points": 34688,
+      "objects": 17
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 38,
+      "path": "scene-0399/038.npz",
+      "sha256": "fab79575741839e4f361fbc53348d33e5ce7fd60c2b70c3446c546a40e99d6d2",
+      "bytes": 4348719,
+      "voxels": 23297,
+      "points": 34784,
+      "objects": 12
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 39,
+      "path": "scene-0399/039.npz",
+      "sha256": "37d62a126b4dac9fdb6367eee21202f23a836daf2f22fa5e4acf364395149396",
+      "bytes": 4311882,
+      "voxels": 23080,
+      "points": 34752,
+      "objects": 16
+    },
+    {
+      "scene": "scene-0399",
+      "frame": 40,
+      "path": "scene-0399/040.npz",
+      "sha256": "844cc85c0ecaf1d7f7c4f7d9f25748d4f0413ff5ba6a3a80e4dea2b1f2e1935c",
+      "bytes": 4338991,
+      "voxels": 23241,
+      "points": 34752,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 0,
+      "path": "scene-0242/000.npz",
+      "sha256": "1c765e8ec350e1f5e98b1a74703462a117e8351b966e70f3ac3883c0d1385e92",
+      "bytes": 3913643,
+      "voxels": 20773,
+      "points": 34656,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 1,
+      "path": "scene-0242/001.npz",
+      "sha256": "faa46aa9a4cd91ef96fc02375eedd194b03af5b8c88843126330c47347a47606",
+      "bytes": 3929962,
+      "voxels": 20864,
+      "points": 34720,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 2,
+      "path": "scene-0242/002.npz",
+      "sha256": "9bac38862d5c67ca1a1b5455cb59c2d43f8f55935944453333b9c352dfd5bfad",
+      "bytes": 3961944,
+      "voxels": 21046,
+      "points": 34720,
+      "objects": 25
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 3,
+      "path": "scene-0242/003.npz",
+      "sha256": "f3658a8e192930eddd45fbccf63274dfa99a642554e939036e5d170c592afc06",
+      "bytes": 3998279,
+      "voxels": 21257,
+      "points": 34784,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 4,
+      "path": "scene-0242/004.npz",
+      "sha256": "15ac28f3ad10c3479bd77da4e68c3434606ec34dae4fccd4265b9edadbf646c7",
+      "bytes": 4022096,
+      "voxels": 21398,
+      "points": 34720,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 5,
+      "path": "scene-0242/005.npz",
+      "sha256": "0d0f44922dca9df2bd130802ab686fab5876158e06904b1e71f3c9eb15eff777",
+      "bytes": 4025112,
+      "voxels": 21414,
+      "points": 34720,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 6,
+      "path": "scene-0242/006.npz",
+      "sha256": "42a1a22caf0590538ba9aabf876c2592427b22064bfbaf3d48c1813c53feca9d",
+      "bytes": 4012927,
+      "voxels": 21345,
+      "points": 34720,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 7,
+      "path": "scene-0242/007.npz",
+      "sha256": "a09cad5f6a8ce90526e085342327954e22a7010c5d5fcb5aeb5035e16c7794c7",
+      "bytes": 4012829,
+      "voxels": 21343,
+      "points": 34720,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 8,
+      "path": "scene-0242/008.npz",
+      "sha256": "a1af1fdbe299967c42ed7bcd33cd4c6166ee81f1389aa7e8a632af487e67a83e",
+      "bytes": 4006468,
+      "voxels": 21306,
+      "points": 34752,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 9,
+      "path": "scene-0242/009.npz",
+      "sha256": "e1f5fdf1e520e23607d5b0c71722d5b25fdb571d3f8a48c9ac15acfc3f89407a",
+      "bytes": 3973887,
+      "voxels": 21121,
+      "points": 34688,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 10,
+      "path": "scene-0242/010.npz",
+      "sha256": "9bed86771dcb5807b9353531a8018bbfdcacc6883cb2ec08be8793d7afe9bd07",
+      "bytes": 3976712,
+      "voxels": 21134,
+      "points": 34752,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 11,
+      "path": "scene-0242/011.npz",
+      "sha256": "8a089bcdd70c2d2812335517b30292af3c7ab3a26ad741c85025bb1373fcb6ab",
+      "bytes": 3949384,
+      "voxels": 20982,
+      "points": 34720,
+      "objects": 19
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 12,
+      "path": "scene-0242/012.npz",
+      "sha256": "edf4ddbffe49acaadd2a2b3e4d112c3e75c8ae5d676656c225dc452aeb3183fc",
+      "bytes": 3932119,
+      "voxels": 20881,
+      "points": 34688,
+      "objects": 21
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 13,
+      "path": "scene-0242/013.npz",
+      "sha256": "bda996cfc3d4343479b53e6e28d0927225d697ec09e3b8ef8824947b40ac2a79",
+      "bytes": 3920949,
+      "voxels": 20815,
+      "points": 34688,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 14,
+      "path": "scene-0242/014.npz",
+      "sha256": "8798d8feef0a30c25da1605386693f8507f1faaee01c07134f0ccee551c4274d",
+      "bytes": 3927563,
+      "voxels": 20853,
+      "points": 34720,
+      "objects": 21
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 15,
+      "path": "scene-0242/015.npz",
+      "sha256": "da21ccd4814c530a13a48a7989628458d79fb522588c8a42dc606a387fe0f1b5",
+      "bytes": 3912241,
+      "voxels": 20763,
+      "points": 34720,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 16,
+      "path": "scene-0242/016.npz",
+      "sha256": "5b31ad66b62b2bcc15a4fa4926382d06cd697ee301d79f57e079c8bcdfefa41f",
+      "bytes": 3909819,
+      "voxels": 20749,
+      "points": 34720,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 17,
+      "path": "scene-0242/017.npz",
+      "sha256": "944f9647ecfa723437bb47fc02344253e649d8679da3f78f2b3a7dedbd689a92",
+      "bytes": 3890899,
+      "voxels": 20637,
+      "points": 34688,
+      "objects": 25
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 18,
+      "path": "scene-0242/018.npz",
+      "sha256": "9471a9d6042037565387fcb10347d7c14a8d0af3182a9ec6b630b288a831d25d",
+      "bytes": 3898436,
+      "voxels": 20682,
+      "points": 34688,
+      "objects": 24
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 19,
+      "path": "scene-0242/019.npz",
+      "sha256": "d645f5dc56c24fd9f12fade6cb628bc0dab804ce9767e372f5f38ead87182fb0",
+      "bytes": 3891192,
+      "voxels": 20638,
+      "points": 34784,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 20,
+      "path": "scene-0242/020.npz",
+      "sha256": "9db08a623eb232f8900f486c25f998759f638e6db846a0b7ee7326806ca3a4f9",
+      "bytes": 3895477,
+      "voxels": 20663,
+      "points": 34752,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 21,
+      "path": "scene-0242/021.npz",
+      "sha256": "5c1edd922de11286cbde60259c17010d642803215818431b04b8fd75c59ae6f6",
+      "bytes": 3894595,
+      "voxels": 20661,
+      "points": 34720,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 22,
+      "path": "scene-0242/022.npz",
+      "sha256": "c4f92b5959f6f7a922470188c32d7a7b0296fbb934682d5340bef5e37993d181",
+      "bytes": 3891464,
+      "voxels": 20646,
+      "points": 34688,
+      "objects": 21
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 23,
+      "path": "scene-0242/023.npz",
+      "sha256": "9fec9e916d6bcc17c40b559229bfb7ef8726448d834cce745da7009861382f71",
+      "bytes": 3898672,
+      "voxels": 20686,
+      "points": 34720,
+      "objects": 21
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 24,
+      "path": "scene-0242/024.npz",
+      "sha256": "0a7d82d97efb743acc3dbdb2706d96e491e1be94d863a6b289ae044b3b9cbf46",
+      "bytes": 3924599,
+      "voxels": 20833,
+      "points": 34720,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 25,
+      "path": "scene-0242/025.npz",
+      "sha256": "d0f0353da38432b2c7cd830fb5c1f8b74034093a61b2ac539270569edc3c689d",
+      "bytes": 3954303,
+      "voxels": 21009,
+      "points": 34720,
+      "objects": 20
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 26,
+      "path": "scene-0242/026.npz",
+      "sha256": "3a03bd5f9e1511ebbe54d02ec53979f7fd52b30272b3e14d7cc44742c2233275",
+      "bytes": 3997899,
+      "voxels": 21261,
+      "points": 34720,
+      "objects": 20
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 27,
+      "path": "scene-0242/027.npz",
+      "sha256": "48559cebc5f8ec4c4263150be8febe1d981f2454e1f3eda8f8a49ccc1438048d",
+      "bytes": 4029552,
+      "voxels": 21438,
+      "points": 34752,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 28,
+      "path": "scene-0242/028.npz",
+      "sha256": "a6553e23d84f0f12a26fb2f042c07f95382c8a39f0985022999720ce9e1d4d19",
+      "bytes": 4011099,
+      "voxels": 21333,
+      "points": 34720,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 29,
+      "path": "scene-0242/029.npz",
+      "sha256": "c2d162a4d842f171673cdbe921c8b24b51bd3ea7a5bf658e0c6c2727fe5442ac",
+      "bytes": 3953150,
+      "voxels": 21004,
+      "points": 34688,
+      "objects": 20
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 30,
+      "path": "scene-0242/030.npz",
+      "sha256": "6d55a3474dd597d38b5360523b7d4404a365f93ea86ac91f852778646c65dace",
+      "bytes": 3920753,
+      "voxels": 20811,
+      "points": 34688,
+      "objects": 24
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 31,
+      "path": "scene-0242/031.npz",
+      "sha256": "b8eee6e5c0c8cb4ed61ee726da25d006e78ed15bb11a1a720f53fbf2b0145411",
+      "bytes": 3909508,
+      "voxels": 20746,
+      "points": 34688,
+      "objects": 24
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 32,
+      "path": "scene-0242/032.npz",
+      "sha256": "5c1644018c1bffeee9a8aaa0e0929000f26ea52dad7d85c1cec8e6fe21bd931a",
+      "bytes": 3896054,
+      "voxels": 20668,
+      "points": 34720,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 33,
+      "path": "scene-0242/033.npz",
+      "sha256": "1d6504dbd27b2b075fdf5578de1e9479871991b28bfaf75b46b17d498c8125db",
+      "bytes": 3878806,
+      "voxels": 20564,
+      "points": 34720,
+      "objects": 26
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 34,
+      "path": "scene-0242/034.npz",
+      "sha256": "3953b8ee81122f7355c504cf644dc75f7adcb2cfdc6655361abbadf7a10a916b",
+      "bytes": 3879388,
+      "voxels": 20570,
+      "points": 34752,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 35,
+      "path": "scene-0242/035.npz",
+      "sha256": "7e363acbbf9f6605e1727fb3fd0aee087b20151d8f57e6a3b65b3f3efebe3774",
+      "bytes": 3866696,
+      "voxels": 20494,
+      "points": 34720,
+      "objects": 26
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 36,
+      "path": "scene-0242/036.npz",
+      "sha256": "c1f48b35434a3f09a9102b921087c44fd276361cfe9e486e4ad88faedcd19b22",
+      "bytes": 3857988,
+      "voxels": 20442,
+      "points": 34752,
+      "objects": 26
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 37,
+      "path": "scene-0242/037.npz",
+      "sha256": "021727030e831f4d52e9949ef41f53eb2cddb17dc055bc5e70fd701733e64da2",
+      "bytes": 3860318,
+      "voxels": 20460,
+      "points": 34720,
+      "objects": 24
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 38,
+      "path": "scene-0242/038.npz",
+      "sha256": "4ff715ff3a0742c6e0bf7eea8d57bba6e6120f31bd8667672a485669f8822754",
+      "bytes": 3850070,
+      "voxels": 20396,
+      "points": 34784,
+      "objects": 25
+    },
+    {
+      "scene": "scene-0242",
+      "frame": 39,
+      "path": "scene-0242/039.npz",
+      "sha256": "32de385e6b9e90221c87afe5445cd57eaf372f1f605eceaefd8864ddd8299230",
+      "bytes": 3848646,
+      "voxels": 20388,
+      "points": 34752,
+      "objects": 26
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 0,
+      "path": "scene-0190/000.npz",
+      "sha256": "734b56ad1d78b3215213f6160864519da2ba7a6b675ae6ebc36902090e005d8d",
+      "bytes": 4220970,
+      "voxels": 22576,
+      "points": 34752,
+      "objects": 1
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 1,
+      "path": "scene-0190/001.npz",
+      "sha256": "e8c14d21f01c494255550b094c37e6eabe465b74a3375640265c13ead1214bde",
+      "bytes": 4193654,
+      "voxels": 22420,
+      "points": 34688,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 2,
+      "path": "scene-0190/002.npz",
+      "sha256": "9c379be2729d4298efc1abc30109a637e7ddc93c8f215582f3d5d8ac5a9c91ea",
+      "bytes": 4249377,
+      "voxels": 22739,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 3,
+      "path": "scene-0190/003.npz",
+      "sha256": "9171ede37b17c15b84e76ffffbffe92c2eaba9274262fb8da85ff7316fa68a6f",
+      "bytes": 4269024,
+      "voxels": 22854,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 4,
+      "path": "scene-0190/004.npz",
+      "sha256": "5432c41d79a124f93e221d4a0006a86c0f075fed56b8ee7888389b158bd977e7",
+      "bytes": 4275673,
+      "voxels": 22891,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 5,
+      "path": "scene-0190/005.npz",
+      "sha256": "88fbfe55ba765b51b9791035dd0cdc11153d57a9db30b8f4e13f894932aa4748",
+      "bytes": 4284958,
+      "voxels": 22948,
+      "points": 34656,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 6,
+      "path": "scene-0190/006.npz",
+      "sha256": "75b148f6c28f7aaa7bacfb9cad7e8e80634ea9a50015ae3890b30cc1a3cdce63",
+      "bytes": 4152768,
+      "voxels": 22182,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 7,
+      "path": "scene-0190/007.npz",
+      "sha256": "445c09dd32eb63878d8fad6adcd2c61bda7829934211804b77f84665b7a15aa4",
+      "bytes": 4171066,
+      "voxels": 22288,
+      "points": 34688,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 8,
+      "path": "scene-0190/008.npz",
+      "sha256": "d2059350cc65285824805e915f8f3ede42285d984ea6fbf0a944314b0d8d8869",
+      "bytes": 4313560,
+      "voxels": 23110,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 9,
+      "path": "scene-0190/009.npz",
+      "sha256": "a0a1b1d29f7c756dd127af036502d030acd8e055741ecd7868b2923bacec336b",
+      "bytes": 4330110,
+      "voxels": 23204,
+      "points": 34752,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 10,
+      "path": "scene-0190/010.npz",
+      "sha256": "a839442f01d4f77bf3c1e3bc277e66abfc8d6b5eb911425229cabbee81d89f50",
+      "bytes": 4356233,
+      "voxels": 23355,
+      "points": 34752,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 11,
+      "path": "scene-0190/011.npz",
+      "sha256": "de0014a22ec0b46169d0b7d73607d9ba5c5cf14803bcb58c40efe0f3a3645edf",
+      "bytes": 4342912,
+      "voxels": 23278,
+      "points": 34752,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 12,
+      "path": "scene-0190/012.npz",
+      "sha256": "d611eecbf1bb3d55adc3a1619220cd2f1b23b76a214bc6ab7ff6dd1013668302",
+      "bytes": 4341390,
+      "voxels": 23268,
+      "points": 34720,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 13,
+      "path": "scene-0190/013.npz",
+      "sha256": "f6abc4f31922fd841f85c76ba5a7521df5d285124b938de7f048e9c1f1aecfab",
+      "bytes": 4350755,
+      "voxels": 23325,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 14,
+      "path": "scene-0190/014.npz",
+      "sha256": "0eab8541073a39bcff0b7ff4f2275bb3d84e3d0436326134b3a366ac13051ea8",
+      "bytes": 4305965,
+      "voxels": 23063,
+      "points": 34752,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 15,
+      "path": "scene-0190/015.npz",
+      "sha256": "169c04781753bb781f6345846f446ac2c4b1e10615a870641d2869c7e2263654",
+      "bytes": 4288648,
+      "voxels": 22966,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 16,
+      "path": "scene-0190/016.npz",
+      "sha256": "b4057d4bd818c8606b8155b66c0548b0659003b4c7c92dcd53e8c2a6fa693c5a",
+      "bytes": 4298353,
+      "voxels": 23019,
+      "points": 34752,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 17,
+      "path": "scene-0190/017.npz",
+      "sha256": "117e3f3ac92fa776fb91b31844f4097e6367fa4a85a38c2bfc5200c0f0a233c1",
+      "bytes": 4323785,
+      "voxels": 23171,
+      "points": 34656,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 18,
+      "path": "scene-0190/018.npz",
+      "sha256": "ff7997a38e5c9ce85a388cce28a776d493af12315f967d7b466135ef9fd5c177",
+      "bytes": 4359405,
+      "voxels": 23375,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 19,
+      "path": "scene-0190/019.npz",
+      "sha256": "cb02596fe750c6e59fd06864d668dc5d75f64a14d1dd8ffa40dd17874c5b54d7",
+      "bytes": 4343777,
+      "voxels": 23283,
+      "points": 34752,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 20,
+      "path": "scene-0190/020.npz",
+      "sha256": "72965ec09e7c29fadd9001712f0528749edf379fb460b5c9c7aaf002bbb92659",
+      "bytes": 4378377,
+      "voxels": 23483,
+      "points": 34752,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 21,
+      "path": "scene-0190/021.npz",
+      "sha256": "bd22099947b7c8968923e3a10d11c47923071a3cfe07151617a9247a679657c2",
+      "bytes": 4380107,
+      "voxels": 23493,
+      "points": 34752,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 22,
+      "path": "scene-0190/022.npz",
+      "sha256": "832540e58a04fd2eec4b340614568f0393718546a7a8734a28bc5b1ecac02954",
+      "bytes": 4362347,
+      "voxels": 23397,
+      "points": 34624,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 23,
+      "path": "scene-0190/023.npz",
+      "sha256": "44f9dd03cbc2bd380f7408f213d2a98dfa25caa39d1336e9a2c289409179309f",
+      "bytes": 4358483,
+      "voxels": 23373,
+      "points": 34656,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 24,
+      "path": "scene-0190/024.npz",
+      "sha256": "3eb49e86807fc0f08c05a8f0c5a8ea29f88f58c2e1cb1c902146ad1f5d071fb6",
+      "bytes": 4353869,
+      "voxels": 23343,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 25,
+      "path": "scene-0190/025.npz",
+      "sha256": "66a70ab3b1ac8df468d6520db434cea36db9ae689ba1470bc0d9affd555e4123",
+      "bytes": 4360443,
+      "voxels": 23381,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 26,
+      "path": "scene-0190/026.npz",
+      "sha256": "7baf502fd8cd2d751072c16d141cf866c7465103044e94fedeacdadfe8c9b3e7",
+      "bytes": 4366440,
+      "voxels": 23414,
+      "points": 34752,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 27,
+      "path": "scene-0190/027.npz",
+      "sha256": "41ce58a6f545f3deb5bd7fe77c3b563aa8bb36229b8f620144483fdac4e96973",
+      "bytes": 4353696,
+      "voxels": 23342,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 28,
+      "path": "scene-0190/028.npz",
+      "sha256": "d35fd9fd73a339ba2f31490cf3d1bae4b688074d5c89163e548d3d31b9e671d8",
+      "bytes": 4367899,
+      "voxels": 23421,
+      "points": 34752,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 29,
+      "path": "scene-0190/029.npz",
+      "sha256": "2a135714bdbe2e2b20a1ca7ef0ebab641c0b4e8a0fe648d25b885c7b14c6e05f",
+      "bytes": 4355097,
+      "voxels": 23347,
+      "points": 34752,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 30,
+      "path": "scene-0190/030.npz",
+      "sha256": "b877b61d4414553ba72eb002cbf03a1656f12991b84d412749bffa359e849fb6",
+      "bytes": 4353194,
+      "voxels": 23336,
+      "points": 34752,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 31,
+      "path": "scene-0190/031.npz",
+      "sha256": "fb79aa59525d2b4715c128169e2013f52c6779ad12c1620c6d6dd8da7029b165",
+      "bytes": 4343218,
+      "voxels": 23280,
+      "points": 34720,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 32,
+      "path": "scene-0190/032.npz",
+      "sha256": "2ca2c382cc64a4de8f5dc755df13f62ec256515aa822e1921ad3760b9c66fa88",
+      "bytes": 4357923,
+      "voxels": 23365,
+      "points": 34720,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 33,
+      "path": "scene-0190/033.npz",
+      "sha256": "722ace1bce1cf60ab051e9b22b64149b0a88422e0708924df65319c8ccb0e869",
+      "bytes": 4349446,
+      "voxels": 23316,
+      "points": 34720,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 34,
+      "path": "scene-0190/034.npz",
+      "sha256": "addac158eb5309f5b837eb71bde14b50cf8d54e98876d15ff459cc46db2b0bb4",
+      "bytes": 4355847,
+      "voxels": 23353,
+      "points": 34720,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 35,
+      "path": "scene-0190/035.npz",
+      "sha256": "99084648eaadce330ec8107e4e2e95c377404409e2a7a4ea62524653b4cc44f0",
+      "bytes": 4342930,
+      "voxels": 23280,
+      "points": 34688,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 36,
+      "path": "scene-0190/036.npz",
+      "sha256": "cda2b2c6f0d1257a20cf0969d3d4cd519c5f96bbd811f2694a7283466eff3459",
+      "bytes": 4350138,
+      "voxels": 23320,
+      "points": 34720,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 37,
+      "path": "scene-0190/037.npz",
+      "sha256": "4638e184c4a96bebaa28b174abf29dbf5039e6e80dd4aa0df1e4272bcaa00b76",
+      "bytes": 4357346,
+      "voxels": 23360,
+      "points": 34752,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 38,
+      "path": "scene-0190/038.npz",
+      "sha256": "e64529fde492da2c31702dd0d182ff245b8c798639ff23fe5311861a3ba9ce62",
+      "bytes": 4346851,
+      "voxels": 23301,
+      "points": 34720,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0190",
+      "frame": 39,
+      "path": "scene-0190/039.npz",
+      "sha256": "61749e32e6d8fc0c75647d659204d34313069d10aa813b0135e940ef98e7dd5d",
+      "bytes": 4338893,
+      "voxels": 23255,
+      "points": 34720,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 0,
+      "path": "scene-0177/000.npz",
+      "sha256": "65bcd07583fe40eeadafa98b6364d47c77d313d914c8f14024f99f223051a5d4",
+      "bytes": 4486560,
+      "voxels": 24110,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 1,
+      "path": "scene-0177/001.npz",
+      "sha256": "b37d3e6018ed0d9274566a1ffd83349e7433f197f05cfd8144a7e4b6e0407de4",
+      "bytes": 4496634,
+      "voxels": 24168,
+      "points": 34752,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 2,
+      "path": "scene-0177/002.npz",
+      "sha256": "c5e66386c7f5287082bd632886b31fb229b81b2f59b90ff099af8156c8c9a7c7",
+      "bytes": 4492136,
+      "voxels": 24142,
+      "points": 34752,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 3,
+      "path": "scene-0177/003.npz",
+      "sha256": "5065917f2af600536e48d517bc0975eba64c40c89929509bb1dbc52bc39ee6c6",
+      "bytes": 4497788,
+      "voxels": 24178,
+      "points": 34688,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 4,
+      "path": "scene-0177/004.npz",
+      "sha256": "afa12616571101f05d99a2687cd52bc3606ee6eb2fd8a86b760a0ef9540830e1",
+      "bytes": 4515780,
+      "voxels": 24282,
+      "points": 34688,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 5,
+      "path": "scene-0177/005.npz",
+      "sha256": "4f4c1d06dd27d88453a0466364cf9053d99f96eaaa7f57ef43639c8f0fed22dd",
+      "bytes": 4517971,
+      "voxels": 24293,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 6,
+      "path": "scene-0177/006.npz",
+      "sha256": "a563a9340dd06d9fc4cdaf1bf18ab259fc276f94bc4acc87b9bfd30a0ad8b263",
+      "bytes": 4502960,
+      "voxels": 24206,
+      "points": 34752,
+      "objects": 1
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 7,
+      "path": "scene-0177/007.npz",
+      "sha256": "0b9330500dd872f7ff2f5fc0756ebab7096ecfdf844a1477d9a389c978c42ce3",
+      "bytes": 4565027,
+      "voxels": 24565,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 8,
+      "path": "scene-0177/008.npz",
+      "sha256": "fefbb8b7897b262767222110a5032beb19b0fbf0d57d17cebf048f6455b5eb49",
+      "bytes": 4626096,
+      "voxels": 24918,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 9,
+      "path": "scene-0177/009.npz",
+      "sha256": "dacb2d46bc8db60500a751cddd9f32c7fd2c5a4cfbbb4f26f05363a3decbb350",
+      "bytes": 4615618,
+      "voxels": 24856,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 10,
+      "path": "scene-0177/010.npz",
+      "sha256": "bcc11b97e2e1f563c93ec12a67e32fde6d424b27f1efcf3680d0a6390a9c6ed5",
+      "bytes": 4634804,
+      "voxels": 24970,
+      "points": 34688,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 11,
+      "path": "scene-0177/011.npz",
+      "sha256": "a4c8f44db84b783a4e942195d31fad4cb5c8cac007f3891381f09ade52401795",
+      "bytes": 4614678,
+      "voxels": 24852,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 12,
+      "path": "scene-0177/012.npz",
+      "sha256": "2d60bab1c4271ddc0ce42c9843183a5407f3272d560e0dcf582b8891dfc2526c",
+      "bytes": 4582056,
+      "voxels": 24662,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 13,
+      "path": "scene-0177/013.npz",
+      "sha256": "39ca17e9c57a902d5b4594f2728bfd1c09adab2eba3ef489d97919f0a22d5a34",
+      "bytes": 4571428,
+      "voxels": 24602,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 14,
+      "path": "scene-0177/014.npz",
+      "sha256": "7ea976f1f6aaa3d26cd93c6311984f3c8373868272130a14be414afc1045207c",
+      "bytes": 4558551,
+      "voxels": 24529,
+      "points": 34720,
+      "objects": 1
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 15,
+      "path": "scene-0177/015.npz",
+      "sha256": "764f2de39b3c5dc1a3cd91baa898f8e43c2ad1b2d57368a886377cc5afc2f4ec",
+      "bytes": 4566739,
+      "voxels": 24573,
+      "points": 34784,
+      "objects": 1
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 16,
+      "path": "scene-0177/016.npz",
+      "sha256": "a628b806df7c09a9f0f84c5453f13f2f8217096a1e44858c8c3069f8a0948f13",
+      "bytes": 4546631,
+      "voxels": 24457,
+      "points": 34752,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 17,
+      "path": "scene-0177/017.npz",
+      "sha256": "3018b9a6a8ffc4ba602ef60bedb936ea8f4106ff50824ff5e10c8fedc6f14c20",
+      "bytes": 4544728,
+      "voxels": 24446,
+      "points": 34752,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 18,
+      "path": "scene-0177/018.npz",
+      "sha256": "3c32202d1f8880975357a527acb00485c687a762ac24d060b646d492202b44da",
+      "bytes": 4537693,
+      "voxels": 24407,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 19,
+      "path": "scene-0177/019.npz",
+      "sha256": "58f06e3991e2d7837fb362b59e9af2d516e26a9f6197056d8fe67953eec3a2e1",
+      "bytes": 4542710,
+      "voxels": 24436,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 20,
+      "path": "scene-0177/020.npz",
+      "sha256": "a7c23adee4aae6167250ba1781dc3f454ffdafff63c43fe40dc15495a3e91360",
+      "bytes": 4544728,
+      "voxels": 24446,
+      "points": 34752,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 21,
+      "path": "scene-0177/021.npz",
+      "sha256": "1ec535eacfc50431dabf592e107ae9c26bdd13984b8abc6f52908225ecd2475b",
+      "bytes": 4547093,
+      "voxels": 24463,
+      "points": 34688,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 22,
+      "path": "scene-0177/022.npz",
+      "sha256": "9450c36897eef05e02cda1d50b237cbeaa67328aa43ee554393360f972937c1f",
+      "bytes": 4542785,
+      "voxels": 24435,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 23,
+      "path": "scene-0177/023.npz",
+      "sha256": "a5bf74fe9f6737d8a8f8837627ae010a3da652ad8f3fa5c0194ac5c866b68053",
+      "bytes": 4540709,
+      "voxels": 24423,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 24,
+      "path": "scene-0177/024.npz",
+      "sha256": "4565d43c6cc3343a701c0dd53b92defcac88d2bf723155e2d07328c4e6070d64",
+      "bytes": 4545034,
+      "voxels": 24448,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 25,
+      "path": "scene-0177/025.npz",
+      "sha256": "58c66558da588f22618d7c84873f5d15e7116d2200e37c45d3ca9c8b5d882e79",
+      "bytes": 4542439,
+      "voxels": 24433,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 26,
+      "path": "scene-0177/026.npz",
+      "sha256": "d4111eba96bbb052af2751997657d776336971b0a117a9cd11e487e26f8be2bd",
+      "bytes": 4524447,
+      "voxels": 24329,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 27,
+      "path": "scene-0177/027.npz",
+      "sha256": "c30c18b0e94c19eb2f3d26ff36982eef0ed6941dcea74f95350bdf2173d5f491",
+      "bytes": 4543938,
+      "voxels": 24440,
+      "points": 34752,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 28,
+      "path": "scene-0177/028.npz",
+      "sha256": "5162e984bdcd5ca856961bc9643f52f493a2f9ec568bc22d23aae3e3ee463dda",
+      "bytes": 4548321,
+      "voxels": 24467,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 29,
+      "path": "scene-0177/029.npz",
+      "sha256": "0b3506051de2a53a6046931b28009388379f6a32fef9dc2bd83e4046a2609009",
+      "bytes": 4543650,
+      "voxels": 24440,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 30,
+      "path": "scene-0177/030.npz",
+      "sha256": "e17bcad593d8db5bd956271e75bdfb26e2b95e104665bc6ffa344c47bb068566",
+      "bytes": 4529406,
+      "voxels": 24356,
+      "points": 34752,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 31,
+      "path": "scene-0177/031.npz",
+      "sha256": "91f5bfa8128b47a913455da19c743f468f57b1cf85ec622fda3674a9e6a6010e",
+      "bytes": 4506109,
+      "voxels": 24223,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 32,
+      "path": "scene-0177/032.npz",
+      "sha256": "93ae6010a66ad0b8c728cc0f67e5b1e15b70727896f780f5adab6be440ea8934",
+      "bytes": 4469779,
+      "voxels": 24013,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 33,
+      "path": "scene-0177/033.npz",
+      "sha256": "98da7acf4a16c0cb940d71fb1c8610fec80e126f2591a5b164de6070fe30d3bb",
+      "bytes": 4424222,
+      "voxels": 23748,
+      "points": 34752,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 34,
+      "path": "scene-0177/034.npz",
+      "sha256": "cc2b5ddabb122692946815290e876bf7d4c0330775c6bd5131a5eb309c0d3953",
+      "bytes": 4389334,
+      "voxels": 23548,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 35,
+      "path": "scene-0177/035.npz",
+      "sha256": "cf2ae849926ba1794909c1d6829d6fbd2c0ddd448a352ae30e9cd773bc90e6c2",
+      "bytes": 4369093,
+      "voxels": 23431,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 36,
+      "path": "scene-0177/036.npz",
+      "sha256": "021787de0bc0fdf1a6f72ed01ff7e17d91b5837f7ef889274e335dccec6f0c08",
+      "bytes": 4356522,
+      "voxels": 23360,
+      "points": 34688,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 37,
+      "path": "scene-0177/037.npz",
+      "sha256": "4e4aae5e8477e440746866cac791cead64810b82de298e59476cadaf4ec5a6b0",
+      "bytes": 4382241,
+      "voxels": 23507,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 38,
+      "path": "scene-0177/038.npz",
+      "sha256": "8e8d8f8766a99cbb9f4bb08ddb70a971b2341dc8785f747ec8b938766c3fd00a",
+      "bytes": 4417245,
+      "voxels": 23711,
+      "points": 34688,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0177",
+      "frame": 39,
+      "path": "scene-0177/039.npz",
+      "sha256": "7c873e49f588f0fd9ee4bdbdb2fc5d41c152341ed4efa9800a53a6c7d0df6e15",
+      "bytes": 4440600,
+      "voxels": 23846,
+      "points": 34688,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 0,
+      "path": "scene-0440/000.npz",
+      "sha256": "2caadeb88c07c185a5195deb1db12d39dd16edaa567861fe79d6ff805b3e0f1c",
+      "bytes": 4111514,
+      "voxels": 21928,
+      "points": 34688,
+      "objects": 14
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 1,
+      "path": "scene-0440/001.npz",
+      "sha256": "c9b8c7c5b20ea326729533bb66048d60f6a95365b0ffafbb62ab6bff7b7f4318",
+      "bytes": 4095984,
+      "voxels": 21838,
+      "points": 34720,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 2,
+      "path": "scene-0440/002.npz",
+      "sha256": "a7862a42ad3fe19878f63fc5601653f7e89d31011b864c04c7ef5e3b9f8a499d",
+      "bytes": 4135849,
+      "voxels": 22067,
+      "points": 34720,
+      "objects": 14
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 3,
+      "path": "scene-0440/003.npz",
+      "sha256": "b7471043a0c3722ee31b668771ab12caa63fe2e371f08e5b316b04dfebd3a37d",
+      "bytes": 4210873,
+      "voxels": 22499,
+      "points": 34752,
+      "objects": 14
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 4,
+      "path": "scene-0440/004.npz",
+      "sha256": "a8f2a63ac7a351158677e5d3f97ef5d80a4418f08f1beac38776d34f5da7fe5a",
+      "bytes": 4175656,
+      "voxels": 22294,
+      "points": 34752,
+      "objects": 15
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 5,
+      "path": "scene-0440/005.npz",
+      "sha256": "bec68ac4949af279648aec12421e97ce6d028695d533290a5e274fec3de0677d",
+      "bytes": 4147630,
+      "voxels": 22132,
+      "points": 34752,
+      "objects": 15
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 6,
+      "path": "scene-0440/006.npz",
+      "sha256": "70fc32cb3f709f428e9abdbe3a7fd2674b4a29629757a7bfa32d14b2e51a7dd5",
+      "bytes": 4155075,
+      "voxels": 22181,
+      "points": 34720,
+      "objects": 12
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 7,
+      "path": "scene-0440/007.npz",
+      "sha256": "cddad094468d8b6e94e25307cf3aa5d59c807c9e490a1f79d64d62bfe246c334",
+      "bytes": 4151344,
+      "voxels": 22158,
+      "points": 34720,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 8,
+      "path": "scene-0440/008.npz",
+      "sha256": "93c056b39199d38a4893964ea75f0ac0c8413cf818899382365b685d284cad00",
+      "bytes": 4152382,
+      "voxels": 22164,
+      "points": 34720,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 9,
+      "path": "scene-0440/009.npz",
+      "sha256": "e367b305ce9d047ef97f26e582ba6884f95f878025bffe4f521bdeba015e135d",
+      "bytes": 4150190,
+      "voxels": 22148,
+      "points": 34784,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 10,
+      "path": "scene-0440/010.npz",
+      "sha256": "a9b5577b0511d2fca8a0fb6563609d03a9972becd3766860d9e7530326ddde14",
+      "bytes": 4151828,
+      "voxels": 22162,
+      "points": 34752,
+      "objects": 11
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 11,
+      "path": "scene-0440/011.npz",
+      "sha256": "6320e85d82c01312a06ca5df493e11fc56a4a429b7bf8ad54043154bdb3a19d8",
+      "bytes": 4178908,
+      "voxels": 22314,
+      "points": 34784,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 12,
+      "path": "scene-0440/012.npz",
+      "sha256": "8973ca17ffce94575cb6e3ca6cc03c7d627e9885af67b164f5f9ef6ff8458d47",
+      "bytes": 4171567,
+      "voxels": 22273,
+      "points": 34784,
+      "objects": 12
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 13,
+      "path": "scene-0440/013.npz",
+      "sha256": "b6f4b9cedb6ce2c1f4eae4d5854da156f244195e8c5fde5e5c7aa5f3767c4c39",
+      "bytes": 4150364,
+      "voxels": 22154,
+      "points": 34688,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 14,
+      "path": "scene-0440/014.npz",
+      "sha256": "fe55c66db5387cb6e4a84df228c22c52e60a30022cfe6615b77b733fb6e7832e",
+      "bytes": 4146443,
+      "voxels": 22133,
+      "points": 34656,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 15,
+      "path": "scene-0440/015.npz",
+      "sha256": "b6f00bf8966784e5110e297dccd9cb8a254ccf72ee38ecbf726df016b2923d52",
+      "bytes": 4110113,
+      "voxels": 21923,
+      "points": 34656,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 16,
+      "path": "scene-0440/016.npz",
+      "sha256": "ebb102d44d4355288f2b78f3f69471becaaf29fc45d8d95eff23a6c83b059505",
+      "bytes": 4118434,
+      "voxels": 21968,
+      "points": 34688,
+      "objects": 14
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 17,
+      "path": "scene-0440/017.npz",
+      "sha256": "b5719843d1ea5db72cb164d61df0da932d1b68e9548e9881772419ecbe69b70e",
+      "bytes": 4069706,
+      "voxels": 21688,
+      "points": 34656,
+      "objects": 14
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 18,
+      "path": "scene-0440/018.npz",
+      "sha256": "14ea83e86b19a3d089e13631c63db3b12ac1559ed44aa08e8443a9c83215f148",
+      "bytes": 4068033,
+      "voxels": 21675,
+      "points": 34720,
+      "objects": 14
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 19,
+      "path": "scene-0440/019.npz",
+      "sha256": "4bd28159822a3623cb0801b1b65ae41f6ee371557c6732c6791842491ef567a3",
+      "bytes": 4056096,
+      "voxels": 21606,
+      "points": 34720,
+      "objects": 14
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 20,
+      "path": "scene-0440/020.npz",
+      "sha256": "53d4cc71b1e135e3086f00d0763ad93a219eb172fcd97cdd0e51b7cafba06e52",
+      "bytes": 4114876,
+      "voxels": 21946,
+      "points": 34688,
+      "objects": 15
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 21,
+      "path": "scene-0440/021.npz",
+      "sha256": "1115df6fa45fd6886491257e89bcc62d1b2ff9b8f9442f80f1bdc1e14e4ade7d",
+      "bytes": 4133040,
+      "voxels": 22046,
+      "points": 34784,
+      "objects": 15
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 22,
+      "path": "scene-0440/022.npz",
+      "sha256": "73638da26dcd3f66a79bee99dc820670c4ebbb91388540a58412cc4c1c12bf91",
+      "bytes": 4064129,
+      "voxels": 21651,
+      "points": 34720,
+      "objects": 15
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 23,
+      "path": "scene-0440/023.npz",
+      "sha256": "98f0f879d248bf1ce9273e2641d39f41ed562250487f449114af576332c8cff1",
+      "bytes": 4009905,
+      "voxels": 21339,
+      "points": 34720,
+      "objects": 14
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 24,
+      "path": "scene-0440/024.npz",
+      "sha256": "6e3008b86fd04a705ed879231a4eae78b445c73340b53e28d9a7793e99fb5715",
+      "bytes": 3929322,
+      "voxels": 20872,
+      "points": 34688,
+      "objects": 16
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 25,
+      "path": "scene-0440/025.npz",
+      "sha256": "3ee48020b1a3cb4063c423e968b052739d3bb59139d64dbcd9bed5e14a408792",
+      "bytes": 3868766,
+      "voxels": 20516,
+      "points": 34720,
+      "objects": 19
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 26,
+      "path": "scene-0440/026.npz",
+      "sha256": "34cc7a6f46c9db6113786a24c0fb590f2de0e8bb39910792fe4ffb8b97f8c802",
+      "bytes": 3873281,
+      "voxels": 20539,
+      "points": 34752,
+      "objects": 20
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 27,
+      "path": "scene-0440/027.npz",
+      "sha256": "f8b3692c107ca0460063256e7e208cf1312e9e02b65a24c4ccd7a7827b55ee1e",
+      "bytes": 3794883,
+      "voxels": 20093,
+      "points": 34752,
+      "objects": 15
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 28,
+      "path": "scene-0440/028.npz",
+      "sha256": "509d882b0b3cd728db4015c31a0642f3a69e327307196f166d759c23a9f67583",
+      "bytes": 3693384,
+      "voxels": 19502,
+      "points": 34752,
+      "objects": 18
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 29,
+      "path": "scene-0440/029.npz",
+      "sha256": "f872ed00ca92342265870e192601a9c7817d239f906b15ae0dab87975f57fbdb",
+      "bytes": 3613331,
+      "voxels": 19045,
+      "points": 34752,
+      "objects": 14
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 30,
+      "path": "scene-0440/030.npz",
+      "sha256": "03216de0b90b91d49e018d0feec1db51b41d81cebfbc70ae8a91138ddc0df785",
+      "bytes": 3598972,
+      "voxels": 18962,
+      "points": 34752,
+      "objects": 14
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 31,
+      "path": "scene-0440/031.npz",
+      "sha256": "00112bf26caf0e9c50e35ffbb19e98db386489fde2e6393050202f94275e4d91",
+      "bytes": 3566852,
+      "voxels": 18778,
+      "points": 34720,
+      "objects": 14
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 32,
+      "path": "scene-0440/032.npz",
+      "sha256": "a603df6832c07438113eca80f9a9b8bdd9148d3bad978e0e29b0396b2a1938f7",
+      "bytes": 3557066,
+      "voxels": 18720,
+      "points": 34720,
+      "objects": 15
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 33,
+      "path": "scene-0440/033.npz",
+      "sha256": "787131668a6c89d03623865f944f6a91b5a1a88f26c5c5096dc5a9e3e856bec2",
+      "bytes": 3533734,
+      "voxels": 18588,
+      "points": 34720,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 34,
+      "path": "scene-0440/034.npz",
+      "sha256": "503e141e0280f3584f839355c1cb8ae395c073dbaef8c7895a7bbc9f9bfb3fa8",
+      "bytes": 3450659,
+      "voxels": 18109,
+      "points": 34752,
+      "objects": 11
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 35,
+      "path": "scene-0440/035.npz",
+      "sha256": "3f31c3099a0a60d67aac11aaef26f616d65a273cc9b8cc3218f339e1ef665b53",
+      "bytes": 3505771,
+      "voxels": 18429,
+      "points": 34752,
+      "objects": 10
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 36,
+      "path": "scene-0440/036.npz",
+      "sha256": "3113a455336cdfd8f9681cca1c8748ed988c6ba78b6016253258c9364fa8a6ee",
+      "bytes": 3436958,
+      "voxels": 18036,
+      "points": 34688,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 37,
+      "path": "scene-0440/037.npz",
+      "sha256": "24051003f8b3ab96146233ef91a14d760fd87b6d5a767be4773060b277c5e8c0",
+      "bytes": 3418078,
+      "voxels": 17924,
+      "points": 34688,
+      "objects": 11
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 38,
+      "path": "scene-0440/038.npz",
+      "sha256": "62bd6f4f656b9fdd4e957c5b5f8a470bbc4c0b8ecf94450a96293146527407d5",
+      "bytes": 3411308,
+      "voxels": 17882,
+      "points": 34688,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 39,
+      "path": "scene-0440/039.npz",
+      "sha256": "c8bc8338cf8ff7906da66d9fef5d873f4a3244126a4e10a3e90b6b3f7344faca",
+      "bytes": 3341116,
+      "voxels": 17482,
+      "points": 34688,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0440",
+      "frame": 40,
+      "path": "scene-0440/040.npz",
+      "sha256": "fcf64887661bc9ecfd7f59ae3174ec8a2676cb0a298ff0dfd938e2cce900d5c5",
+      "bytes": 3307646,
+      "voxels": 17284,
+      "points": 34720,
+      "objects": 11
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 0,
+      "path": "scene-0514/000.npz",
+      "sha256": "0f5e49020bca2b10564f5d69f2ed13b5a7e28451408e2f035e32cf0b32bea0e9",
+      "bytes": 3580629,
+      "voxels": 18823,
+      "points": 34752,
+      "objects": 37
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 1,
+      "path": "scene-0514/001.npz",
+      "sha256": "4190980a392b24794d6d3daa652684544db166712b1d6e5e588548a77ef7c4ba",
+      "bytes": 3576091,
+      "voxels": 18797,
+      "points": 34720,
+      "objects": 38
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 2,
+      "path": "scene-0514/002.npz",
+      "sha256": "13bcc07bb921f363a7b836d0ab5c2cc35d31e4ed0f1cd3281ce520c450e5c0dd",
+      "bytes": 3576743,
+      "voxels": 18801,
+      "points": 34688,
+      "objects": 39
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 3,
+      "path": "scene-0514/003.npz",
+      "sha256": "c660e0d688282fa32530f6db06c4f405759399368b0fd90589af9571a7616cbc",
+      "bytes": 3573052,
+      "voxels": 18778,
+      "points": 34720,
+      "objects": 39
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 4,
+      "path": "scene-0514/004.npz",
+      "sha256": "fd5202351c522d6b9da548fe31057da4bdcef72df8a25430dd67dfd40c02769c",
+      "bytes": 3581021,
+      "voxels": 18831,
+      "points": 34752,
+      "objects": 33
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 5,
+      "path": "scene-0514/005.npz",
+      "sha256": "b17b88c64d4723fda89eadd7afb63e6a17c84a3e42f67654e45a8b44f08ef8fb",
+      "bytes": 3577919,
+      "voxels": 18809,
+      "points": 34720,
+      "objects": 37
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 6,
+      "path": "scene-0514/006.npz",
+      "sha256": "861a0fd91839d5646d57375067402136ff4d72d09f7af6b53d18a996178c8dd3",
+      "bytes": 3573519,
+      "voxels": 18785,
+      "points": 34720,
+      "objects": 36
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 7,
+      "path": "scene-0514/007.npz",
+      "sha256": "ac038b51bd6df7a5e044a5d15b0160fe98b45a7a94650ac18c96cde665d33ad0",
+      "bytes": 3572245,
+      "voxels": 18775,
+      "points": 34688,
+      "objects": 39
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 8,
+      "path": "scene-0514/008.npz",
+      "sha256": "8cadb877318a0304090d5a84eeba64a705154e985a2f3970f2fb80170dfb62bd",
+      "bytes": 3584014,
+      "voxels": 18844,
+      "points": 34752,
+      "objects": 36
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 9,
+      "path": "scene-0514/009.npz",
+      "sha256": "ded7028cb147da14603a254e37693f3e6f8393073877454b1398495437551737",
+      "bytes": 3579499,
+      "voxels": 18821,
+      "points": 34720,
+      "objects": 35
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 10,
+      "path": "scene-0514/010.npz",
+      "sha256": "f4fceb810e5c772d3c9b10fe1cf6b996ad1bade4642321e48037ab76961ad8ac",
+      "bytes": 3576166,
+      "voxels": 18796,
+      "points": 34720,
+      "objects": 39
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 11,
+      "path": "scene-0514/011.npz",
+      "sha256": "b038d9f62e47c3732cda1aedbb1611d2e1628a8dd79ec933f24315299a301ca0",
+      "bytes": 3577596,
+      "voxels": 18810,
+      "points": 34720,
+      "objects": 35
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 12,
+      "path": "scene-0514/012.npz",
+      "sha256": "4f48846d84659f70359b34ae77a0495f183e04b02db484890610720982c078b0",
+      "bytes": 3559572,
+      "voxels": 18722,
+      "points": 34464,
+      "objects": 33
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 13,
+      "path": "scene-0514/013.npz",
+      "sha256": "19b8e5b3726cd500bb9bb607450248b613c6312b224a83f4ddfbee4603d89504",
+      "bytes": 3580710,
+      "voxels": 18828,
+      "points": 34720,
+      "objects": 35
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 14,
+      "path": "scene-0514/014.npz",
+      "sha256": "9475bf9c96e455bf623aef376a9a8e1a6b913c588de5640e37df23a680917ce1",
+      "bytes": 3573640,
+      "voxels": 18790,
+      "points": 34720,
+      "objects": 33
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 15,
+      "path": "scene-0514/015.npz",
+      "sha256": "df0b0bef90bd720e5cd436a4586845042863580a8d286a412d2b43ee0ddaa815",
+      "bytes": 3575831,
+      "voxels": 18801,
+      "points": 34752,
+      "objects": 33
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 16,
+      "path": "scene-0514/016.npz",
+      "sha256": "b75f190362e6f7f2c0c64623564001581b147ef629908ab6bc68ccca817c6dce",
+      "bytes": 3577250,
+      "voxels": 18808,
+      "points": 34720,
+      "objects": 35
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 17,
+      "path": "scene-0514/017.npz",
+      "sha256": "a1dd711948fde86b341104308d01a3b12f42327a33f14c96bb65945ff014ab65",
+      "bytes": 3582348,
+      "voxels": 18842,
+      "points": 34688,
+      "objects": 33
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 18,
+      "path": "scene-0514/018.npz",
+      "sha256": "186d6531856a6d24f112c20366f6457335f93899178143eace9b021e9eedd60b",
+      "bytes": 3576304,
+      "voxels": 18798,
+      "points": 34752,
+      "objects": 37
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 19,
+      "path": "scene-0514/019.npz",
+      "sha256": "d809318075fc18b6e8acfbeb8158504bdb0892216688d40029e966fc393ba957",
+      "bytes": 3572135,
+      "voxels": 18777,
+      "points": 34720,
+      "objects": 36
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 20,
+      "path": "scene-0514/020.npz",
+      "sha256": "c0f23b45c6e95356aa02081994ed3051f3807e8f9ff43f98a7c36be7ad3962a5",
+      "bytes": 3597543,
+      "voxels": 18921,
+      "points": 34720,
+      "objects": 38
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 21,
+      "path": "scene-0514/021.npz",
+      "sha256": "324c7c246d86eb5d70b8b935bd973d9a2bcaa4ab3bdf5075e2375522abf932fe",
+      "bytes": 3569459,
+      "voxels": 18757,
+      "points": 34752,
+      "objects": 38
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 22,
+      "path": "scene-0514/022.npz",
+      "sha256": "9c8233a9facba9af5284ff48e516e0e8c96116082aeeb0aab66b93e2f0204ed3",
+      "bytes": 3553509,
+      "voxels": 18671,
+      "points": 34688,
+      "objects": 36
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 23,
+      "path": "scene-0514/023.npz",
+      "sha256": "35c81c342a499ecdc897c7b2aba6b9a04b35c359f4dcd4245e2d77024cbe4b1b",
+      "bytes": 3578455,
+      "voxels": 18809,
+      "points": 34752,
+      "objects": 38
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 24,
+      "path": "scene-0514/024.npz",
+      "sha256": "2fd03e9d8bd3dbced105d312c1bbd351058a193a827c3b311c92b250619a3078",
+      "bytes": 3601868,
+      "voxels": 18946,
+      "points": 34720,
+      "objects": 38
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 25,
+      "path": "scene-0514/025.npz",
+      "sha256": "a4c956c1091327784bd0b370514ee624922e42a056eb9cc632260122d5d0c32a",
+      "bytes": 3606741,
+      "voxels": 18983,
+      "points": 34688,
+      "objects": 33
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 26,
+      "path": "scene-0514/026.npz",
+      "sha256": "933b6a4848692ac921a01243e05965eaeb231d99c80766a811b6c1ba901e4c66",
+      "bytes": 3611135,
+      "voxels": 19001,
+      "points": 34720,
+      "objects": 37
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 27,
+      "path": "scene-0514/027.npz",
+      "sha256": "a66ca06821589a93226e8f4e4c0ff3c93fd9797be230be8b6d4d056a1cf5c7c6",
+      "bytes": 3603771,
+      "voxels": 18957,
+      "points": 34720,
+      "objects": 38
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 28,
+      "path": "scene-0514/028.npz",
+      "sha256": "6c9bfed5997a7337754376bdf43324f4c527970a5af8b65d023392b4f7e1154d",
+      "bytes": 3578253,
+      "voxels": 18815,
+      "points": 34752,
+      "objects": 33
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 29,
+      "path": "scene-0514/029.npz",
+      "sha256": "5d3bdb9caacacc50d06af4d1266cc6d40328341ac2f1c67c9e6bd435d6f81c72",
+      "bytes": 3640337,
+      "voxels": 19171,
+      "points": 34752,
+      "objects": 35
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 30,
+      "path": "scene-0514/030.npz",
+      "sha256": "928cedb23578cbad4447e768e6c719c6ce75b1479f988071183a30eb2d0afa0d",
+      "bytes": 3580133,
+      "voxels": 18823,
+      "points": 34752,
+      "objects": 35
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 31,
+      "path": "scene-0514/031.npz",
+      "sha256": "3c8fd7ffaaa2d3135db4bacf9fa286c17d3924531d21b2848785e0ab349f46e7",
+      "bytes": 3558358,
+      "voxels": 18700,
+      "points": 34752,
+      "objects": 33
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 32,
+      "path": "scene-0514/032.npz",
+      "sha256": "835e80dad31400bc9e18673daf1d758aee4da33dc60ef0d5f5eb6a11bbed5024",
+      "bytes": 3624358,
+      "voxels": 19076,
+      "points": 34720,
+      "objects": 38
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 33,
+      "path": "scene-0514/033.npz",
+      "sha256": "00d5b5a4c0d9849540f5e889d54500a331ae91ccd054e89942701953427ca71e",
+      "bytes": 3582452,
+      "voxels": 18834,
+      "points": 34688,
+      "objects": 39
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 34,
+      "path": "scene-0514/034.npz",
+      "sha256": "47fe17e185ce8f5e1f85424d7e9c2ef021ad5c10b167abbe87dd130c5237428a",
+      "bytes": 3527276,
+      "voxels": 18522,
+      "points": 34720,
+      "objects": 33
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 35,
+      "path": "scene-0514/035.npz",
+      "sha256": "10d33e552fda9518d6d8271a1e0141876140fdf8a46f2afe29e6232527f82f71",
+      "bytes": 3436284,
+      "voxels": 17986,
+      "points": 34720,
+      "objects": 40
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 36,
+      "path": "scene-0514/036.npz",
+      "sha256": "19eccef1cb81069e37430ef95e95e5caee6cd47b2c912e34c7894b0f1b914c5d",
+      "bytes": 3552661,
+      "voxels": 18663,
+      "points": 34720,
+      "objects": 37
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 37,
+      "path": "scene-0514/037.npz",
+      "sha256": "2663cf07b9076bcb919c650efd71178e66910b8e80ee37e64074879ecb46e51f",
+      "bytes": 3530540,
+      "voxels": 18538,
+      "points": 34720,
+      "objects": 35
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 38,
+      "path": "scene-0514/038.npz",
+      "sha256": "d5f7ace26ef15a88b1e0f076aff59a1990ced064934b07cc67a761f2f34b2862",
+      "bytes": 3550706,
+      "voxels": 18656,
+      "points": 34720,
+      "objects": 34
+    },
+    {
+      "scene": "scene-0514",
+      "frame": 39,
+      "path": "scene-0514/039.npz",
+      "sha256": "0ee412929b6eb81cde784220401f9a0017fe1afc60e402dab23352f657580da0",
+      "bytes": 3544334,
+      "voxels": 18612,
+      "points": 34720,
+      "objects": 39
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 0,
+      "path": "scene-0268/000.npz",
+      "sha256": "e7dfd4e7c9891c67d5d691244d4597ffb0b2da1b3e684f8355cd9f0753bed0cd",
+      "bytes": 4123681,
+      "voxels": 22011,
+      "points": 34720,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 1,
+      "path": "scene-0268/001.npz",
+      "sha256": "717b1ca5b91ad4a2646f51c9420038962eefd780b350e53a86a384b5357f8c0f",
+      "bytes": 4094314,
+      "voxels": 21856,
+      "points": 34464,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 2,
+      "path": "scene-0268/002.npz",
+      "sha256": "fb67b61d1fae931bb26b55b38c963d61f4eb4144adf7e747e605d54c5b725f28",
+      "bytes": 4196035,
+      "voxels": 22429,
+      "points": 34752,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 3,
+      "path": "scene-0268/003.npz",
+      "sha256": "2476a7ed5960fd3eb01247f98250c2acc878527ed426fd18c1d3ee769cc00b13",
+      "bytes": 4179485,
+      "voxels": 22335,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 4,
+      "path": "scene-0268/004.npz",
+      "sha256": "01cee6b9e54ebffde2aa489b0e1745294b1676bdb762c4fd54250119135799a6",
+      "bytes": 4175985,
+      "voxels": 22315,
+      "points": 34688,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 5,
+      "path": "scene-0268/005.npz",
+      "sha256": "dc246766b4a513f23b1690fcb38188c5d22f5ce85d3250517ce7e49cf3d05124",
+      "bytes": 4158408,
+      "voxels": 22206,
+      "points": 34720,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 6,
+      "path": "scene-0268/006.npz",
+      "sha256": "a5e5fa3cf337ad6b513a7ca27bbac45c934173a9e83229b939b286d73849ae35",
+      "bytes": 4227164,
+      "voxels": 22602,
+      "points": 34720,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 7,
+      "path": "scene-0268/007.npz",
+      "sha256": "4f5bb05e12fb933044dd24f0bfbbaf43d2ee24a91749c7744491f9fe39325877",
+      "bytes": 4229586,
+      "voxels": 22616,
+      "points": 34720,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 8,
+      "path": "scene-0268/008.npz",
+      "sha256": "d04429ff455ef0b9b60a50f51d14666f7f7304124aeb6c3c6fb90985f12a2f60",
+      "bytes": 4199790,
+      "voxels": 22444,
+      "points": 34688,
+      "objects": 10
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 9,
+      "path": "scene-0268/009.npz",
+      "sha256": "ec9be61cd3c6d2bbfd12b5ee3fe6007ac438bd556da3ffafabeb6618a4bb585e",
+      "bytes": 4146488,
+      "voxels": 22134,
+      "points": 34752,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 10,
+      "path": "scene-0268/010.npz",
+      "sha256": "21b30f72bfc011fb67328211e61c65407a7c4d5214b97e9eff82b2347dbb53ef",
+      "bytes": 4073373,
+      "voxels": 21719,
+      "points": 34688,
+      "objects": 6
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 11,
+      "path": "scene-0268/011.npz",
+      "sha256": "e82d66a7f11dca08a0485bf7160eb559c26d920c9426c181b3bc198771da40bc",
+      "bytes": 4028468,
+      "voxels": 21458,
+      "points": 34688,
+      "objects": 7
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 12,
+      "path": "scene-0268/012.npz",
+      "sha256": "a6981bb88c26f2f5702cbdee6078e3c928fabb053fed4f7866407618911db0ce",
+      "bytes": 4107546,
+      "voxels": 21912,
+      "points": 34720,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 13,
+      "path": "scene-0268/013.npz",
+      "sha256": "9b4f7046d91fad2f7fb5a8f112093447475a769de077ea8398d8a25e19439090",
+      "bytes": 4138052,
+      "voxels": 22090,
+      "points": 34688,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 14,
+      "path": "scene-0268/014.npz",
+      "sha256": "b10c485a244d39dfc8aef3dd0e0c7e13414beba9b79558416d11169daaa78daf",
+      "bytes": 4113353,
+      "voxels": 21947,
+      "points": 34720,
+      "objects": 7
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 15,
+      "path": "scene-0268/015.npz",
+      "sha256": "05fc211503d09e980740129a771605450fd4596e5f5ffaba46fc8f06812c8e2e",
+      "bytes": 4066949,
+      "voxels": 21679,
+      "points": 34688,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 16,
+      "path": "scene-0268/016.npz",
+      "sha256": "5669f55ea82c0fbc12ee04ab09f772e65060ad8a4dc06cce240c1e6d18bdc186",
+      "bytes": 4087599,
+      "voxels": 21801,
+      "points": 34720,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 17,
+      "path": "scene-0268/017.npz",
+      "sha256": "1bf1a6486858edbe022134743c88e4b5a8d37f0dcf872b4fd59b5176661e71b9",
+      "bytes": 4092904,
+      "voxels": 21830,
+      "points": 34752,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 18,
+      "path": "scene-0268/018.npz",
+      "sha256": "73aafe838c3c0b051e5a272055feb842adac0d0523d6d94fd5eea9f7368130f2",
+      "bytes": 4102892,
+      "voxels": 21882,
+      "points": 34752,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 19,
+      "path": "scene-0268/019.npz",
+      "sha256": "82188dbbe6ef8f069e14e73cc38472d7ad809c0bf0e1bf144dc16e3ed7bcd745",
+      "bytes": 4098890,
+      "voxels": 21856,
+      "points": 34752,
+      "objects": 11
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 20,
+      "path": "scene-0268/020.npz",
+      "sha256": "9c17ee4219cacb41efb1c27b965950753c586e0749cad9431b3a6c12442e8666",
+      "bytes": 4089012,
+      "voxels": 21802,
+      "points": 34720,
+      "objects": 10
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 21,
+      "path": "scene-0268/021.npz",
+      "sha256": "a344639c4a4d713b257d32a7da195470d1f772936835305cd819624d8f9df560",
+      "bytes": 4080881,
+      "voxels": 21755,
+      "points": 34720,
+      "objects": 10
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 22,
+      "path": "scene-0268/022.npz",
+      "sha256": "c98d5ac13c7122bf87a777130ffc82370c46c0e1006b02c09c6405985b1bd42c",
+      "bytes": 4054504,
+      "voxels": 21598,
+      "points": 34752,
+      "objects": 12
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 23,
+      "path": "scene-0268/023.npz",
+      "sha256": "3f3b7ff42567c8a7e533eb3dd766a1649de6cd6df2afcad9c9c202e043595ea1",
+      "bytes": 3948859,
+      "voxels": 20989,
+      "points": 34720,
+      "objects": 12
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 24,
+      "path": "scene-0268/024.npz",
+      "sha256": "540f97f44fda09aad5b06d7f9cd91909b5f07cbab170aaadaf8c2eb64ae37c2b",
+      "bytes": 3954701,
+      "voxels": 21023,
+      "points": 34688,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 25,
+      "path": "scene-0268/025.npz",
+      "sha256": "a4eaa0f4c14a19e11641e90613509d168388410ffd3e287d12c17159c1ce95e0",
+      "bytes": 4039090,
+      "voxels": 21512,
+      "points": 34720,
+      "objects": 11
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 26,
+      "path": "scene-0268/026.npz",
+      "sha256": "7e657ab5bf8edf1defa344a29a2994c8030ced97fa9022946672656e40d0619d",
+      "bytes": 4021265,
+      "voxels": 21403,
+      "points": 34752,
+      "objects": 14
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 27,
+      "path": "scene-0268/027.npz",
+      "sha256": "ee123c51aebdd6168ce6acf43de2f91d02645da5e73997a1f3c75987933181cd",
+      "bytes": 3981452,
+      "voxels": 21170,
+      "points": 34752,
+      "objects": 16
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 28,
+      "path": "scene-0268/028.npz",
+      "sha256": "5231c9e74cd2ba87bf1041a96153ac806cd8c4b555dd9e1b0cc5106e0f21b7e0",
+      "bytes": 3950739,
+      "voxels": 20997,
+      "points": 34720,
+      "objects": 14
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 29,
+      "path": "scene-0268/029.npz",
+      "sha256": "4b53a393d36d710e49b9b8480ef66a262abcc4b21e4a0f11bdd03e637f2abd8b",
+      "bytes": 3946719,
+      "voxels": 20969,
+      "points": 34784,
+      "objects": 15
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 30,
+      "path": "scene-0268/030.npz",
+      "sha256": "b0e78479bda79ccbd5516b5e0281fae7c87bb5ad5616ec88171ee06bcf9a0ba9",
+      "bytes": 3940509,
+      "voxels": 20935,
+      "points": 34720,
+      "objects": 16
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 31,
+      "path": "scene-0268/031.npz",
+      "sha256": "7dc79696691316a79f0bada069d67d30e5486d1a0b2f0c468db5645956a2da19",
+      "bytes": 3941086,
+      "voxels": 20940,
+      "points": 34688,
+      "objects": 16
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 32,
+      "path": "scene-0268/032.npz",
+      "sha256": "1f364496a6c40b9fd30e2fc15652fe38070678e8cfe44c7f8c29f9dde3a51c07",
+      "bytes": 3952025,
+      "voxels": 21003,
+      "points": 34720,
+      "objects": 15
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 33,
+      "path": "scene-0268/033.npz",
+      "sha256": "7a98b355b86c69d0fcf3ecb4c93e3e722d6a861707abc64b55772c9fc12f6ff2",
+      "bytes": 3943588,
+      "voxels": 20954,
+      "points": 34752,
+      "objects": 14
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 34,
+      "path": "scene-0268/034.npz",
+      "sha256": "43005ba2c2a7afda635f934b05d518d557b91a810d8cd6e0b2a30e35aa8f3fa3",
+      "bytes": 3947833,
+      "voxels": 20979,
+      "points": 34688,
+      "objects": 16
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 35,
+      "path": "scene-0268/035.npz",
+      "sha256": "85866fe65e55a2014dc5a94c6e8fd69857a436a4e50a97513a661db0031e1426",
+      "bytes": 3986031,
+      "voxels": 21201,
+      "points": 34720,
+      "objects": 14
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 36,
+      "path": "scene-0268/036.npz",
+      "sha256": "e2a91581fc4abdf4a2ce38ee3e2217858f0551411062e45f1b4542d79227327a",
+      "bytes": 4015366,
+      "voxels": 21372,
+      "points": 34720,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 37,
+      "path": "scene-0268/037.npz",
+      "sha256": "1d60fd67677d6f6dddad3a5114e0f444ef8fbdf069324f8c598c6f1096951460",
+      "bytes": 4068454,
+      "voxels": 21676,
+      "points": 34720,
+      "objects": 15
+    },
+    {
+      "scene": "scene-0268",
+      "frame": 38,
+      "path": "scene-0268/038.npz",
+      "sha256": "74d5c55ac124fe06b1cd51da69329e6edfcd7892be13a0b99d0256a02be9839c",
+      "bytes": 4115360,
+      "voxels": 21950,
+      "points": 34720,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 0,
+      "path": "scene-0794/000.npz",
+      "sha256": "d5d70b3ec0c18c8419ebfddd1dbf3c654a829b197246899d98cef1333c716a8a",
+      "bytes": 4048229,
+      "voxels": 21575,
+      "points": 34304,
+      "objects": 19
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 1,
+      "path": "scene-0794/001.npz",
+      "sha256": "8e3af145ca87a57aa06879e280fe8e4d120226d7275a485408112834e61983b2",
+      "bytes": 4109882,
+      "voxels": 21904,
+      "points": 34720,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 2,
+      "path": "scene-0794/002.npz",
+      "sha256": "bf5f61b7877f2f97d8824996e3e00aae66ae8624cef03ca217b0a35f37817aa5",
+      "bytes": 4111093,
+      "voxels": 21911,
+      "points": 34720,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 3,
+      "path": "scene-0794/003.npz",
+      "sha256": "a9863c13a7852afe554d0b11bf4862014c80e76ab33626681d766c7f19a14d1f",
+      "bytes": 4079146,
+      "voxels": 21728,
+      "points": 34688,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 4,
+      "path": "scene-0794/004.npz",
+      "sha256": "8c117415b847cc3df2b9d5db29dceb011e696a41bbec48ba2cb0c5a1f0a93659",
+      "bytes": 4090887,
+      "voxels": 21793,
+      "points": 34688,
+      "objects": 25
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 5,
+      "path": "scene-0794/005.npz",
+      "sha256": "e7537d970e8344e02b6af7983ea7822258d3353baa33aecc969d995ed2bffa8f",
+      "bytes": 4086123,
+      "voxels": 21765,
+      "points": 34752,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 6,
+      "path": "scene-0794/006.npz",
+      "sha256": "6e537840714d3c6d0f1e238eeb78c028e00edbff4a69820b90f00c265ef99eb3",
+      "bytes": 4080316,
+      "voxels": 21730,
+      "points": 34752,
+      "objects": 24
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 7,
+      "path": "scene-0794/007.npz",
+      "sha256": "08867cc394ab6ce04c602b8655f78150036efcad7c481547bc9cadd55bfbb6ca",
+      "bytes": 4069169,
+      "voxels": 21667,
+      "points": 34752,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 8,
+      "path": "scene-0794/008.npz",
+      "sha256": "c666596161b410463ff8be23bdad7945a9376ca9d6916a4df20149b97cd9e4c9",
+      "bytes": 4073685,
+      "voxels": 21695,
+      "points": 34688,
+      "objects": 24
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 9,
+      "path": "scene-0794/009.npz",
+      "sha256": "007bfcdf591ec5e125ea484eb3e266f18571af88194f4b5b79457424fb6ce590",
+      "bytes": 4081274,
+      "voxels": 21736,
+      "points": 34688,
+      "objects": 26
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 10,
+      "path": "scene-0794/010.npz",
+      "sha256": "1461dd9a6bade89bfd4f22431f45f13d283d01724be5dc56039d888c85cb2483",
+      "bytes": 4086066,
+      "voxels": 21768,
+      "points": 34688,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 11,
+      "path": "scene-0794/011.npz",
+      "sha256": "c72257080a849c975e8c2632dfd51f6f7a54303902ce159c095d65d9ea62528c",
+      "bytes": 4090817,
+      "voxels": 21795,
+      "points": 34752,
+      "objects": 21
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 12,
+      "path": "scene-0794/012.npz",
+      "sha256": "c2b9bbfd47735b363bb1b11865ebb9ab9bc87c02b6057790fb6ea8468ea2baf9",
+      "bytes": 4094508,
+      "voxels": 21818,
+      "points": 34720,
+      "objects": 21
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 13,
+      "path": "scene-0794/013.npz",
+      "sha256": "215ec78dcd57cf1577af49b90209080396c30971e107d07ed8bc5543ec36f23f",
+      "bytes": 4087121,
+      "voxels": 21771,
+      "points": 34720,
+      "objects": 24
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 14,
+      "path": "scene-0794/014.npz",
+      "sha256": "b1ce4b3402ef800803eba879d2809d65b6075478eccca2cc315560c1ba2d5b2e",
+      "bytes": 4105118,
+      "voxels": 21876,
+      "points": 34784,
+      "objects": 21
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 15,
+      "path": "scene-0794/015.npz",
+      "sha256": "410a027f0039d17a3ee939c26e0d309b78a170d4e072eeeb6be53add022192da",
+      "bytes": 4104813,
+      "voxels": 21879,
+      "points": 34720,
+      "objects": 20
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 16,
+      "path": "scene-0794/016.npz",
+      "sha256": "c6f6762b092af799e0eb6e48399dcbcefedbe3c91e73c0dda7b0d7bbcd43c135",
+      "bytes": 4109195,
+      "voxels": 21901,
+      "points": 34784,
+      "objects": 20
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 17,
+      "path": "scene-0794/017.npz",
+      "sha256": "a2a86fd6aa52423aa94eb27e89b5907556759a9c306dd3553b1ea7c3cbbf64a4",
+      "bytes": 4097201,
+      "voxels": 21835,
+      "points": 34720,
+      "objects": 20
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 18,
+      "path": "scene-0794/018.npz",
+      "sha256": "a689cfb9a5fb1cad17b4530beb1d41f658a5e72283f8f74db0acb97bb5a95203",
+      "bytes": 4100811,
+      "voxels": 21853,
+      "points": 34720,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 19,
+      "path": "scene-0794/019.npz",
+      "sha256": "932ce3be3bbc5c3c2997f1ce1828960a40ec94a7c93681c644f509a2d4f521a1",
+      "bytes": 4096815,
+      "voxels": 21833,
+      "points": 34688,
+      "objects": 21
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 20,
+      "path": "scene-0794/020.npz",
+      "sha256": "c170606ea07326df5c45e356270e6033c9bf69ff0d089c91dac53446871f968e",
+      "bytes": 4101699,
+      "voxels": 21861,
+      "points": 34720,
+      "objects": 20
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 21,
+      "path": "scene-0794/021.npz",
+      "sha256": "19587c3c68d3f1050b4a2e1811ef6398571442b64ca5e27a903df3a449923a92",
+      "bytes": 4103504,
+      "voxels": 21870,
+      "points": 34720,
+      "objects": 21
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 22,
+      "path": "scene-0794/022.npz",
+      "sha256": "4cfc75578e5ee4e50ac2247299b4cea1cc1415325bdb84f56cb1e3240596b3c5",
+      "bytes": 4091198,
+      "voxels": 21796,
+      "points": 34720,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 23,
+      "path": "scene-0794/023.npz",
+      "sha256": "aff9ee8bff521a2c08182e9ea8ce60b83a842c5db463037dc47e4965fdd5216c",
+      "bytes": 4090604,
+      "voxels": 21794,
+      "points": 34720,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 24,
+      "path": "scene-0794/024.npz",
+      "sha256": "599179d0cd60609d6085fdc4e50b666b63a703b09f899229ccbdd7293e004dcf",
+      "bytes": 4070594,
+      "voxels": 21680,
+      "points": 34688,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 25,
+      "path": "scene-0794/025.npz",
+      "sha256": "a3ba0b9a2f479b6c7a015e4f9b65f9bf2675b63f3fae3be6cf81b3a6d8f89ce8",
+      "bytes": 4075357,
+      "voxels": 21703,
+      "points": 34720,
+      "objects": 24
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 26,
+      "path": "scene-0794/026.npz",
+      "sha256": "ff10e9c409ef1cc8423a5cf3057b1bd9e77907bb8b2fda33127efaf4ac6fb572",
+      "bytes": 4058218,
+      "voxels": 21608,
+      "points": 34752,
+      "objects": 20
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 27,
+      "path": "scene-0794/027.npz",
+      "sha256": "983a555a5867f824d28fccfd51beedac89a4db57406605dfc804798839b15e6e",
+      "bytes": 4064123,
+      "voxels": 21645,
+      "points": 34752,
+      "objects": 18
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 28,
+      "path": "scene-0794/028.npz",
+      "sha256": "b4bfc2fc77b1c6945b0c6170d990ace63dc413f8bc8499b1a566a6a989b8dace",
+      "bytes": 4053824,
+      "voxels": 21590,
+      "points": 34720,
+      "objects": 16
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 29,
+      "path": "scene-0794/029.npz",
+      "sha256": "a2499d11f244faa1da39cc820c489740b9f44ff09830fc78781decd8fac45606",
+      "bytes": 4060185,
+      "voxels": 21627,
+      "points": 34688,
+      "objects": 17
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 30,
+      "path": "scene-0794/030.npz",
+      "sha256": "70d2f49b1ba345640b9d6a7ff3475d9419ab78ad39ed7c18f55769f59e9d8c07",
+      "bytes": 4084041,
+      "voxels": 21763,
+      "points": 34752,
+      "objects": 16
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 31,
+      "path": "scene-0794/031.npz",
+      "sha256": "95b77684996163ec96c79f39cdca71cc1692a9fdcfa5256ba11d141b5271f53d",
+      "bytes": 4082640,
+      "voxels": 21758,
+      "points": 34720,
+      "objects": 15
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 32,
+      "path": "scene-0794/032.npz",
+      "sha256": "32d3f81563ef79efe114e9e371db32b7610d4bfe78991936f62c329a6350f0c0",
+      "bytes": 4072952,
+      "voxels": 21702,
+      "points": 34720,
+      "objects": 15
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 33,
+      "path": "scene-0794/033.npz",
+      "sha256": "f5c4c456492021d9cd2aefc49f125b2d456bc403bad46037292cfa3cd3aa057d",
+      "bytes": 4080599,
+      "voxels": 21745,
+      "points": 34688,
+      "objects": 17
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 34,
+      "path": "scene-0794/034.npz",
+      "sha256": "8c1615fa560d79fb6ebf636a1191e0f5d0a16fba22fe4352828d8fb1c18445b6",
+      "bytes": 4093037,
+      "voxels": 21815,
+      "points": 34752,
+      "objects": 16
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 35,
+      "path": "scene-0794/035.npz",
+      "sha256": "1913ac953458e54e4033b7d34edc1f040d3a506a1aa5792319c4d0cc42aa8218",
+      "bytes": 4121957,
+      "voxels": 21975,
+      "points": 34752,
+      "objects": 21
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 36,
+      "path": "scene-0794/036.npz",
+      "sha256": "4edfc18be8e8986e8aabd278e40ddcf68576a7afc7d2ff57dc41f83d02512fd8",
+      "bytes": 4107714,
+      "voxels": 21896,
+      "points": 34688,
+      "objects": 21
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 37,
+      "path": "scene-0794/037.npz",
+      "sha256": "f4efc0ed2a24a800ad66fc569fe0f09710a36cf01ef08c51bda771e1211b98bd",
+      "bytes": 4080195,
+      "voxels": 21741,
+      "points": 34720,
+      "objects": 17
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 38,
+      "path": "scene-0794/038.npz",
+      "sha256": "e32afb24442f4218ab84e60d968c77681358c1a30fc6bac971836fce342da167",
+      "bytes": 4072024,
+      "voxels": 21694,
+      "points": 34688,
+      "objects": 18
+    },
+    {
+      "scene": "scene-0794",
+      "frame": 39,
+      "path": "scene-0794/039.npz",
+      "sha256": "9ac07831067566f629d682fe7be09c7929731d0f8df7b741a2076bee9918dc4d",
+      "bytes": 4073713,
+      "voxels": 21699,
+      "points": 34752,
+      "objects": 19
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 0,
+      "path": "scene-0625/000.npz",
+      "sha256": "5110a0bb8175facc16188e0b7a9097712ade264114c54f9fc3b9b4201931bc4b",
+      "bytes": 3435097,
+      "voxels": 18035,
+      "points": 34528,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 1,
+      "path": "scene-0625/001.npz",
+      "sha256": "cbd64ed9f4bc4a0e6a2d4c63beaafd6347457aae29ccba2cce83c66ff7e85960",
+      "bytes": 3442229,
+      "voxels": 18071,
+      "points": 34656,
+      "objects": 7
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 2,
+      "path": "scene-0625/002.npz",
+      "sha256": "1bbcf11c3a067cf533e77f4810f586a6f8f619e155a110b9b22badab63b6b725",
+      "bytes": 3510039,
+      "voxels": 18457,
+      "points": 34688,
+      "objects": 10
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 3,
+      "path": "scene-0625/003.npz",
+      "sha256": "989080484dae780e3efcdc2de8b39b0f3c7fb731583c5a87d43f6bd32f59224f",
+      "bytes": 3512772,
+      "voxels": 18474,
+      "points": 34720,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 4,
+      "path": "scene-0625/004.npz",
+      "sha256": "4bd67e913359bdb83e1b73eb4fe4562ae5c308e318fccf13b86303ed1f068c76",
+      "bytes": 3415275,
+      "voxels": 17909,
+      "points": 34720,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 5,
+      "path": "scene-0625/005.npz",
+      "sha256": "6f464eaf06ba6073a71b4a1d5f0e57d2a821664a040a1fe41429b2360b0036d3",
+      "bytes": 3301303,
+      "voxels": 17249,
+      "points": 34688,
+      "objects": 11
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 6,
+      "path": "scene-0625/006.npz",
+      "sha256": "5fc48e236b270927a4726c0e612bce2f530650e4ad3c3624a3a1102fb16810a8",
+      "bytes": 3308955,
+      "voxels": 17293,
+      "points": 34720,
+      "objects": 10
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 7,
+      "path": "scene-0625/007.npz",
+      "sha256": "5fd6654c125e81268f4cd409bc7ef4e15a916f7e8b45704f0b9a64a8bdf1c1c9",
+      "bytes": 3328198,
+      "voxels": 17404,
+      "points": 34752,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 8,
+      "path": "scene-0625/008.npz",
+      "sha256": "49da8ea030aac824caf8abdd0bc82f1d6dfaceaa139ed88ac457d4dae814298b",
+      "bytes": 3378207,
+      "voxels": 17689,
+      "points": 34720,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 9,
+      "path": "scene-0625/009.npz",
+      "sha256": "31dce9ab352556983c0d2ba582905e45d5ceafc75fb598fd12d57e6f932e657b",
+      "bytes": 3379533,
+      "voxels": 17695,
+      "points": 34752,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 10,
+      "path": "scene-0625/010.npz",
+      "sha256": "7b5e70aeedafec8f8f01fd444a272fa627fba8df78a3d171f4d5e09927c1c27f",
+      "bytes": 3384204,
+      "voxels": 17722,
+      "points": 34752,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 11,
+      "path": "scene-0625/011.npz",
+      "sha256": "8b040257421a5e87156d2b2d5fe305e541942d7e09b59496a8f9f1fcbb073071",
+      "bytes": 3446888,
+      "voxels": 18086,
+      "points": 34720,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 12,
+      "path": "scene-0625/012.npz",
+      "sha256": "129ac0bac39da7d551c4f6c97fe458563d722e7dee6f2c7689c3519f6d04d6f4",
+      "bytes": 3467613,
+      "voxels": 18207,
+      "points": 34752,
+      "objects": 11
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 13,
+      "path": "scene-0625/013.npz",
+      "sha256": "7196870c891da24b222db6d885965f73c488690da15846d4126893be4c6aba66",
+      "bytes": 3497652,
+      "voxels": 18378,
+      "points": 34720,
+      "objects": 14
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 14,
+      "path": "scene-0625/014.npz",
+      "sha256": "a397e90bff502c587292524394ddf25c7b5ca589db119554d7d114cfe2564540",
+      "bytes": 3564182,
+      "voxels": 18764,
+      "points": 34720,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 15,
+      "path": "scene-0625/015.npz",
+      "sha256": "e3bd1d6a49e28b19b26e25503bdff23c8102ef2d5f0d69e81418c42be51ac829",
+      "bytes": 3554782,
+      "voxels": 18708,
+      "points": 34752,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 16,
+      "path": "scene-0625/016.npz",
+      "sha256": "c66f25bb9c5e2eca96610c68977fd96e23218fa4906523b703942d5666a44c7a",
+      "bytes": 3617910,
+      "voxels": 19076,
+      "points": 34720,
+      "objects": 12
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 17,
+      "path": "scene-0625/017.npz",
+      "sha256": "c7882cbbcd11e1afc7477de5181effdb6941ac55b021f3288b6bf514384d317c",
+      "bytes": 3632136,
+      "voxels": 19158,
+      "points": 34752,
+      "objects": 11
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 18,
+      "path": "scene-0625/018.npz",
+      "sha256": "8c863c0a809e8848288e7364a4d8dd7e09131df9016439ab693f2168c71a6574",
+      "bytes": 3662567,
+      "voxels": 19337,
+      "points": 34720,
+      "objects": 10
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 19,
+      "path": "scene-0625/019.npz",
+      "sha256": "68dd455516f8d0317860fc3e088bf8a179de6bf59da7da37b0182d03e087892b",
+      "bytes": 3639783,
+      "voxels": 19201,
+      "points": 34720,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 20,
+      "path": "scene-0625/020.npz",
+      "sha256": "d91b5933ff3c45924b42cd5e776c616ed553508349b5186624a842348e72a158",
+      "bytes": 3583869,
+      "voxels": 18879,
+      "points": 34752,
+      "objects": 11
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 21,
+      "path": "scene-0625/021.npz",
+      "sha256": "88e6a01abf546cc17dd3e8d4cfef580d8db664ad30d952d89d18be03dc537fbb",
+      "bytes": 3559511,
+      "voxels": 18737,
+      "points": 34720,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 22,
+      "path": "scene-0625/022.npz",
+      "sha256": "c38eb1274b5f5a519bc722b9eed190faa8e57fcac37101f9d3b61238ef84a53b",
+      "bytes": 3579648,
+      "voxels": 18846,
+      "points": 34752,
+      "objects": 17
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 23,
+      "path": "scene-0625/023.npz",
+      "sha256": "ad8aee0c56016f6994c53ac75ae523acffe2e5603b0615ffef1104a9dc9a5517",
+      "bytes": 3541323,
+      "voxels": 18629,
+      "points": 34720,
+      "objects": 15
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 24,
+      "path": "scene-0625/024.npz",
+      "sha256": "c9516a35c3ff0497d476efb59a9b09499da57d0a5e3cc9d2fddc1add1def75c7",
+      "bytes": 3489636,
+      "voxels": 18330,
+      "points": 34752,
+      "objects": 14
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 25,
+      "path": "scene-0625/025.npz",
+      "sha256": "c974adf9eb9b2b20395255f0de93bd8011be175af900653b82b11941f64daf95",
+      "bytes": 3319520,
+      "voxels": 17350,
+      "points": 34688,
+      "objects": 14
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 26,
+      "path": "scene-0625/026.npz",
+      "sha256": "5b73768225feec54927bf65935ca4bde38dc34ad58a5c2451aa017e37ad7067a",
+      "bytes": 3318868,
+      "voxels": 17346,
+      "points": 34720,
+      "objects": 13
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 27,
+      "path": "scene-0625/027.npz",
+      "sha256": "7dca871439f2a0ae0f1688a3f13c07476f56d06e41e2047f13dbe490a4712bcc",
+      "bytes": 3355123,
+      "voxels": 17557,
+      "points": 34720,
+      "objects": 12
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 28,
+      "path": "scene-0625/028.npz",
+      "sha256": "8eb938986914e2dc108d3ffeb17699fa23d4b5eb5275330a480eba7b616c3921",
+      "bytes": 3477238,
+      "voxels": 18260,
+      "points": 34720,
+      "objects": 14
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 29,
+      "path": "scene-0625/029.npz",
+      "sha256": "8d80f6ba95b08b1312209c26cb0a00f20fb9ac66d0679a6ba753f2a2cb0c41e6",
+      "bytes": 3470860,
+      "voxels": 18226,
+      "points": 34720,
+      "objects": 12
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 30,
+      "path": "scene-0625/030.npz",
+      "sha256": "4de4e0819fea3bf602ad0a09d1a89ab68c795ad7cf356e94f76898cbf93f3def",
+      "bytes": 3457649,
+      "voxels": 18147,
+      "points": 34688,
+      "objects": 15
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 31,
+      "path": "scene-0625/031.npz",
+      "sha256": "39b90f3a51a4f1ddfc20e5ed15a438b3f3283ffef9b38f8c653efa7b1f2645cd",
+      "bytes": 3463721,
+      "voxels": 18179,
+      "points": 34720,
+      "objects": 16
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 32,
+      "path": "scene-0625/032.npz",
+      "sha256": "c67cce9c3ce8039374997a28abfdf7b5b3a1f023b8937c3222a6586589685803",
+      "bytes": 3423199,
+      "voxels": 17945,
+      "points": 34688,
+      "objects": 17
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 33,
+      "path": "scene-0625/033.npz",
+      "sha256": "5f1514b087c5b45fab7217cf5b8f9050a0a48168340648acf8b1edf253d2f9e2",
+      "bytes": 3354766,
+      "voxels": 17548,
+      "points": 34688,
+      "objects": 18
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 34,
+      "path": "scene-0625/034.npz",
+      "sha256": "29ec3f1d385df493532aa3b3de9776d0fb1338f118796da35d1579d37a395c14",
+      "bytes": 3311095,
+      "voxels": 17297,
+      "points": 34688,
+      "objects": 17
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 35,
+      "path": "scene-0625/035.npz",
+      "sha256": "1dbe47ac3a69781f0aedd3e2a9199bf277bc5d33016cc726f2df21fb5084a1aa",
+      "bytes": 3272827,
+      "voxels": 17077,
+      "points": 34720,
+      "objects": 15
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 36,
+      "path": "scene-0625/036.npz",
+      "sha256": "12f56ac488ce0b9427ad250bc4a0533e841d6dbf9ed7de432dbd3268e916c246",
+      "bytes": 3251548,
+      "voxels": 16954,
+      "points": 34720,
+      "objects": 15
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 37,
+      "path": "scene-0625/037.npz",
+      "sha256": "2cedfe087a295400ec4130ffd1e9e65140b80118825b91d6d94e49decf9d4a77",
+      "bytes": 3243169,
+      "voxels": 16907,
+      "points": 34720,
+      "objects": 14
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 38,
+      "path": "scene-0625/038.npz",
+      "sha256": "a2c4d6f19f7cce7cdec67d1ae6b66631f67443ced6fcff013fa066261df04341",
+      "bytes": 3243878,
+      "voxels": 16908,
+      "points": 34752,
+      "objects": 15
+    },
+    {
+      "scene": "scene-0625",
+      "frame": 39,
+      "path": "scene-0625/039.npz",
+      "sha256": "bf40b66cf363c4a9c5f2830d4c06de3523e730e3a4645d665705998a5e393b4c",
+      "bytes": 3272019,
+      "voxels": 17069,
+      "points": 34784,
+      "objects": 15
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 0,
+      "path": "scene-0904/000.npz",
+      "sha256": "49dfb95d853612789bd212d16f57575e2ae56658f3fb60494d7c0af8f5717ddb",
+      "bytes": 3176017,
+      "voxels": 16515,
+      "points": 34656,
+      "objects": 19
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 1,
+      "path": "scene-0904/001.npz",
+      "sha256": "71018ec0ed7509d31136a54e3d4c9568a749341303297087aaf371c35da55f2d",
+      "bytes": 3210749,
+      "voxels": 16711,
+      "points": 34720,
+      "objects": 20
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 2,
+      "path": "scene-0904/002.npz",
+      "sha256": "17ab2a7cac50b658762f0ad3611fa9628c89c8efeebd8484e19dfeb44263cca7",
+      "bytes": 3203892,
+      "voxels": 16674,
+      "points": 34752,
+      "objects": 17
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 3,
+      "path": "scene-0904/003.npz",
+      "sha256": "dfaee18c2f7fd949a260ec8dfb33e395e11d514b46d8433397e5e416d579fc34",
+      "bytes": 3216400,
+      "voxels": 16742,
+      "points": 34752,
+      "objects": 20
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 4,
+      "path": "scene-0904/004.npz",
+      "sha256": "de30f00e8e30e6ac84e7f4e724027e4bc208cf97c1b671a2ceefa1c50ac8930e",
+      "bytes": 3202733,
+      "voxels": 16663,
+      "points": 34752,
+      "objects": 20
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 5,
+      "path": "scene-0904/005.npz",
+      "sha256": "ff59f0efa13aa2cdda2199028c18249af0af8779341b6541ebc6b325ed40f5d9",
+      "bytes": 3161063,
+      "voxels": 16425,
+      "points": 34752,
+      "objects": 18
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 6,
+      "path": "scene-0904/006.npz",
+      "sha256": "b902c01ea448996cb59c99ee3d20f6044b673001b639f894fc8664c0bfd94bfe",
+      "bytes": 3147725,
+      "voxels": 16351,
+      "points": 34720,
+      "objects": 17
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 7,
+      "path": "scene-0904/007.npz",
+      "sha256": "1edeb4ea9dba125df0a7827d924b7c8365dd44b46abbe552eb7546c7e6001c5c",
+      "bytes": 3117375,
+      "voxels": 16177,
+      "points": 34720,
+      "objects": 16
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 8,
+      "path": "scene-0904/008.npz",
+      "sha256": "899519b6006a4854cfca321170209e920acd8bcca3607bcb165c1d028379693f",
+      "bytes": 3232149,
+      "voxels": 16839,
+      "points": 34720,
+      "objects": 17
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 9,
+      "path": "scene-0904/009.npz",
+      "sha256": "c2fdd65c3e1ee6bf6b6bd9af97141b5565825a576ec3b20252d3c62af64f3bd3",
+      "bytes": 3292543,
+      "voxels": 17185,
+      "points": 34752,
+      "objects": 18
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 10,
+      "path": "scene-0904/010.npz",
+      "sha256": "224f48ca64b8514b13a2bbee1b7da30dd26380b1c918f69fc86215c25bb6575d",
+      "bytes": 3344686,
+      "voxels": 17484,
+      "points": 34688,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 11,
+      "path": "scene-0904/011.npz",
+      "sha256": "883e0d691b75a33905ce2412ca8f02d0d369710d12ea7ec81384a369d222f0b0",
+      "bytes": 3346883,
+      "voxels": 17501,
+      "points": 34688,
+      "objects": 19
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 12,
+      "path": "scene-0904/012.npz",
+      "sha256": "1af58360e8b5c37a8568878138ec4df0052b15e9134433ae8a6f267ec827f9b2",
+      "bytes": 3416216,
+      "voxels": 17902,
+      "points": 34656,
+      "objects": 20
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 13,
+      "path": "scene-0904/013.npz",
+      "sha256": "02c602fbe5a02217b0bf591508cdc0c5ebff2ca86abf0121b8f8e9d7a78d1221",
+      "bytes": 3531532,
+      "voxels": 18570,
+      "points": 34656,
+      "objects": 19
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 14,
+      "path": "scene-0904/014.npz",
+      "sha256": "f6d90b059cfc6504f4e767b4c5efd9566538eaf4a3ce3cf30f443b798a8bc50f",
+      "bytes": 3535274,
+      "voxels": 18584,
+      "points": 34720,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 15,
+      "path": "scene-0904/015.npz",
+      "sha256": "068f2d4d4c38b94a3cf5dc0c57359676ac2df40a2c4a21e04c1b90990681dff7",
+      "bytes": 3611123,
+      "voxels": 19021,
+      "points": 34720,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 16,
+      "path": "scene-0904/016.npz",
+      "sha256": "a3911d19ff71e3c0af7eadf8eca473ce5635f4c7da1be835c44d154fd33b1567",
+      "bytes": 3588131,
+      "voxels": 18885,
+      "points": 34752,
+      "objects": 24
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 17,
+      "path": "scene-0904/017.npz",
+      "sha256": "932adbc973259fa8851ac738b08dc67002ae3b52cf1eeed322f17aa620e21b2a",
+      "bytes": 3575404,
+      "voxels": 18810,
+      "points": 34752,
+      "objects": 25
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 18,
+      "path": "scene-0904/018.npz",
+      "sha256": "4b2b38615b433067de30716e3b781627dbd57c56309ebcce15b6de156dfe239f",
+      "bytes": 3587024,
+      "voxels": 18886,
+      "points": 34720,
+      "objects": 20
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 19,
+      "path": "scene-0904/019.npz",
+      "sha256": "fe3f621702e6a4a791b015563bfd5a033d854f53c32d0a6db5f7cfb72e40f1c8",
+      "bytes": 3558531,
+      "voxels": 18717,
+      "points": 34720,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 20,
+      "path": "scene-0904/020.npz",
+      "sha256": "3571a53438f5294385d3ac3ef3dd8809f5067454346cf8c5e872b11bd66b6496",
+      "bytes": 3562683,
+      "voxels": 18741,
+      "points": 34720,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 21,
+      "path": "scene-0904/021.npz",
+      "sha256": "69ff0f3f723f1790cda6b6cec64a719d77b86e4d0ac15a7e878e272c612fa143",
+      "bytes": 3646219,
+      "voxels": 19221,
+      "points": 34720,
+      "objects": 25
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 22,
+      "path": "scene-0904/022.npz",
+      "sha256": "ad00d00370c7b0376b51a402d2469a1c4aa0668f911c6830c11f4945a2a3f1de",
+      "bytes": 3669522,
+      "voxels": 19360,
+      "points": 34720,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 23,
+      "path": "scene-0904/023.npz",
+      "sha256": "1ef9134d81056535908a325a7d1bc117caa0a6872004687a437b24ca8ba593f1",
+      "bytes": 3671056,
+      "voxels": 19366,
+      "points": 34720,
+      "objects": 24
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 24,
+      "path": "scene-0904/024.npz",
+      "sha256": "ab3387fb3582998729578bc78d575c91a6f49668af100bb4eed5444021c4ca00",
+      "bytes": 3637494,
+      "voxels": 19172,
+      "points": 34720,
+      "objects": 24
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 25,
+      "path": "scene-0904/025.npz",
+      "sha256": "1a42ef7218ac53914d4d859ac54dc93f11e4326bccf77ea93a7dfe0e53f9061b",
+      "bytes": 3635383,
+      "voxels": 19161,
+      "points": 34752,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 26,
+      "path": "scene-0904/026.npz",
+      "sha256": "8d80a2af446b6b8725bebd49590a653fb5dbe146961402d380685d03976446cb",
+      "bytes": 3646686,
+      "voxels": 19228,
+      "points": 34720,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 27,
+      "path": "scene-0904/027.npz",
+      "sha256": "c96308fd3186ee7d4f9828181b0e836a484e2fc3879d5f5b6cadf3b74e2a96a7",
+      "bytes": 3604278,
+      "voxels": 18980,
+      "points": 34720,
+      "objects": 24
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 28,
+      "path": "scene-0904/028.npz",
+      "sha256": "0d9d1050c147bbb770dd86b26d9d9becd5477ed828d4eee13ab916dc72430202",
+      "bytes": 3699065,
+      "voxels": 19531,
+      "points": 34688,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 29,
+      "path": "scene-0904/029.npz",
+      "sha256": "91595a70234a0bab1dc04427bf675fd0fd03d095a7edec0d388f2732e25c0cda",
+      "bytes": 3707986,
+      "voxels": 19584,
+      "points": 34688,
+      "objects": 22
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 30,
+      "path": "scene-0904/030.npz",
+      "sha256": "46f9f7d675a81da0a043973d2b18b6d69d80e5d8554866d691a24ef5086fa298",
+      "bytes": 3646317,
+      "voxels": 19223,
+      "points": 34720,
+      "objects": 24
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 31,
+      "path": "scene-0904/031.npz",
+      "sha256": "e806838ce35db4a2e5e2074c56a34c0c3784997763af5071f5bb9d589c15ed1f",
+      "bytes": 3628037,
+      "voxels": 19119,
+      "points": 34688,
+      "objects": 24
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 32,
+      "path": "scene-0904/032.npz",
+      "sha256": "db87306046b3658695aab0c565cab27f294dfcbf4c557b047fa61398caf655fc",
+      "bytes": 3595570,
+      "voxels": 18928,
+      "points": 34752,
+      "objects": 24
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 33,
+      "path": "scene-0904/033.npz",
+      "sha256": "9fb066b8eb980f99a948119649b611f53efbbbd9435054d1a7aafbae2b88b1b2",
+      "bytes": 3585865,
+      "voxels": 18875,
+      "points": 34720,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 34,
+      "path": "scene-0904/034.npz",
+      "sha256": "0fc3c74ecea40893f7a9580f1b90c6cf9cca75b57eef5166bd3c3477dffb9731",
+      "bytes": 3614641,
+      "voxels": 19043,
+      "points": 34688,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 35,
+      "path": "scene-0904/035.npz",
+      "sha256": "02110cd6750fd106f410e519edb3ed95bf8f50209d7b57e795d0b589f6ff8e51",
+      "bytes": 3627650,
+      "voxels": 19112,
+      "points": 34752,
+      "objects": 25
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 36,
+      "path": "scene-0904/036.npz",
+      "sha256": "86a1583f1284ae062ee41322cf052caaaf498d377ac62546272c4b92bd2b00e1",
+      "bytes": 3639570,
+      "voxels": 19184,
+      "points": 34720,
+      "objects": 24
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 37,
+      "path": "scene-0904/037.npz",
+      "sha256": "ac46d367dd31351c6641c52f9a46eee1c5dec10ff30a5d04f3813d1b08c24409",
+      "bytes": 3670520,
+      "voxels": 19366,
+      "points": 34688,
+      "objects": 23
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 38,
+      "path": "scene-0904/038.npz",
+      "sha256": "9602cc17a3135f27a6d44d48aef0e8610088bb2315d5d80bf9d55d3f6779207c",
+      "bytes": 3625909,
+      "voxels": 19111,
+      "points": 34688,
+      "objects": 21
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 39,
+      "path": "scene-0904/039.npz",
+      "sha256": "765d192338f24c12415d097c89438ed396a2da47e594c02f61172580778ddbec",
+      "bytes": 3621318,
+      "voxels": 19084,
+      "points": 34752,
+      "objects": 19
+    },
+    {
+      "scene": "scene-0904",
+      "frame": 40,
+      "path": "scene-0904/040.npz",
+      "sha256": "a685beb98672050c8ca26df1e5e2c2efa9ac8df8aec7aabb3a477f71c050037c",
+      "bytes": 3565687,
+      "voxels": 18761,
+      "points": 34752,
+      "objects": 20
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 0,
+      "path": "scene-1059/000.npz",
+      "sha256": "045f4ea159800d8a03bdb0b1ff7b2f990bd95a7c2657b48530c823c17b69da76",
+      "bytes": 4318981,
+      "voxels": 23143,
+      "points": 34688,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 1,
+      "path": "scene-1059/001.npz",
+      "sha256": "35063a17976adcfeedadf066786c58e83331162afd8565d7d92834c0879cb9b3",
+      "bytes": 4412170,
+      "voxels": 23680,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 2,
+      "path": "scene-1059/002.npz",
+      "sha256": "00e27df2bf46ace8b1fba606173008bbbe8d9f8626faf0e90bbaea0cff19910c",
+      "bytes": 4366671,
+      "voxels": 23417,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 3,
+      "path": "scene-1059/003.npz",
+      "sha256": "981f7d0a1ef328933881d9a3786bdde9d980f77d43a7c3069c817a96065cbd80",
+      "bytes": 4340029,
+      "voxels": 23263,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 4,
+      "path": "scene-1059/004.npz",
+      "sha256": "e185bbfcd193616b818fa64cec0f9f5d23413aa18df614bd234424373453dd2e",
+      "bytes": 4365287,
+      "voxels": 23409,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 5,
+      "path": "scene-1059/005.npz",
+      "sha256": "192052e7292944913abacc2c70d5a21501bfec6157f7c35fb48eacca462d8c68",
+      "bytes": 4365633,
+      "voxels": 23411,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 6,
+      "path": "scene-1059/006.npz",
+      "sha256": "86b0b8bb77fb0d238818e1b304524dc73e0387cc49fb5aff98623682fc8ac8ad",
+      "bytes": 4370131,
+      "voxels": 23437,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 7,
+      "path": "scene-1059/007.npz",
+      "sha256": "ab7519ab9cdf7f5f9c84c70648c899f797166e80a255dec4bc62ab4913f976f7",
+      "bytes": 4369422,
+      "voxels": 23436,
+      "points": 34688,
+      "objects": 2
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 8,
+      "path": "scene-1059/008.npz",
+      "sha256": "1ee3444cfc58c416e9734699c6ed70488a7eb2ca93591e101f80bd2174ebfcca",
+      "bytes": 4394853,
+      "voxels": 23583,
+      "points": 34688,
+      "objects": 2
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 9,
+      "path": "scene-1059/009.npz",
+      "sha256": "23f8928e1472f1da7ed8a794148c3f11caaaa7dd2c4bec41ce9d95d1470f0171",
+      "bytes": 4417631,
+      "voxels": 23713,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 10,
+      "path": "scene-1059/010.npz",
+      "sha256": "0fba731e2e7c1bc0ccdcbbcfcd40b3350eeb1690c8f707bccb07bcf389827dfe",
+      "bytes": 4416264,
+      "voxels": 23702,
+      "points": 34752,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 11,
+      "path": "scene-1059/011.npz",
+      "sha256": "1921c21ed9a5be853a6cfbb3c8649d251d6a38957490768ea6a3647f893f5f9b",
+      "bytes": 4447502,
+      "voxels": 23884,
+      "points": 34752,
+      "objects": 2
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 12,
+      "path": "scene-1059/012.npz",
+      "sha256": "7f95c8b6fdb971806ec470ecd354a9af49a4b497fd0433f9502703d315e183fb",
+      "bytes": 4498883,
+      "voxels": 24181,
+      "points": 34752,
+      "objects": 2
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 13,
+      "path": "scene-1059/013.npz",
+      "sha256": "72b291a171ff25170b7575f79bf11de1c9583de887e7b014e7ea9a4897307801",
+      "bytes": 4510013,
+      "voxels": 24247,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 14,
+      "path": "scene-1059/014.npz",
+      "sha256": "7161de262db71694f93f1ddf1bbf508873f5edbe240c6adb509da8fbc7b745e6",
+      "bytes": 4494979,
+      "voxels": 24157,
+      "points": 34752,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 15,
+      "path": "scene-1059/015.npz",
+      "sha256": "9ae8a28b20b625088518124cf70516efeff3eae6770c83eee5361b800cafc62e",
+      "bytes": 4396081,
+      "voxels": 23587,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 16,
+      "path": "scene-1059/016.npz",
+      "sha256": "b93d0e19382cb30a331e8f9b8393119b1dcfbc2714ab4c0e4431cea6f004b9ad",
+      "bytes": 4406328,
+      "voxels": 23646,
+      "points": 34752,
+      "objects": 2
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 17,
+      "path": "scene-1059/017.npz",
+      "sha256": "a30bed9e24b865f371624974a504283ed123301c39d0e651a1619057d9a0ac50",
+      "bytes": 4387298,
+      "voxels": 23536,
+      "points": 34752,
+      "objects": 2
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 18,
+      "path": "scene-1059/018.npz",
+      "sha256": "5c0cc3393a213658dea3e145f1c4bd6070401abdc49c4af501c69981564fd407",
+      "bytes": 4421840,
+      "voxels": 23734,
+      "points": 34784,
+      "objects": 2
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 19,
+      "path": "scene-1059/019.npz",
+      "sha256": "bf882e17859b5c283d589b46e845e37c979ff3e861caadf9daad8c113531c81e",
+      "bytes": 4417977,
+      "voxels": 23715,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 20,
+      "path": "scene-1059/020.npz",
+      "sha256": "8d3a4d5fa321a84e6920b1a5f91aa4b1491a74a63c6f6de853512c1763d99697",
+      "bytes": 4441234,
+      "voxels": 23848,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 21,
+      "path": "scene-1059/021.npz",
+      "sha256": "55d0c1cce7eb764d2976003499a24f206994c003a6b5643d43b6486af8331aa2",
+      "bytes": 4436350,
+      "voxels": 23820,
+      "points": 34688,
+      "objects": 4
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 22,
+      "path": "scene-1059/022.npz",
+      "sha256": "fc45ca19f392431b95242d2c29d7bdf630256e1806c4b2f00919a203a33a9d32",
+      "bytes": 4423571,
+      "voxels": 23749,
+      "points": 34688,
+      "objects": 2
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 23,
+      "path": "scene-1059/023.npz",
+      "sha256": "7e32ef7e1d558ef387406c8c2f9c04450e081d6befbc93b2a7865a8bdc66b8fe",
+      "bytes": 4444406,
+      "voxels": 23868,
+      "points": 34688,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 24,
+      "path": "scene-1059/024.npz",
+      "sha256": "7afedeacb18ff461bf011852de02c178abf7e0b61ca1728bcfdf1088875892d8",
+      "bytes": 4435583,
+      "voxels": 23817,
+      "points": 34688,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 25,
+      "path": "scene-1059/025.npz",
+      "sha256": "23b91a5cf42295a2deb12562ca1e2000fb12a9994e7cb5be7d7b89761b614b37",
+      "bytes": 4434101,
+      "voxels": 23807,
+      "points": 34688,
+      "objects": 4
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 26,
+      "path": "scene-1059/026.npz",
+      "sha256": "7093238151da68309535b629803f66751470a82dcb2980c8b3d0e960db6a7290",
+      "bytes": 4413208,
+      "voxels": 23686,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 27,
+      "path": "scene-1059/027.npz",
+      "sha256": "6b962fc607b9815b9a1ac5ffa13036175cdbecae812aae56af3c2fae93cea19a",
+      "bytes": 4416051,
+      "voxels": 23701,
+      "points": 34720,
+      "objects": 4
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 28,
+      "path": "scene-1059/028.npz",
+      "sha256": "6e370c709e65ab9117e1be55cbe92b22163073422e1d043471f0366b8c965cfb",
+      "bytes": 4409402,
+      "voxels": 23664,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 29,
+      "path": "scene-1059/029.npz",
+      "sha256": "c5941a274f8af4fe8f18751c9c53edaf275f8d3a1241c2090871b6dcc775f91f",
+      "bytes": 4383452,
+      "voxels": 23514,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 30,
+      "path": "scene-1059/030.npz",
+      "sha256": "3fe0c14298677121fbebfa467fb5e83cf051a49ed8f3e1f62e4c2015090e0215",
+      "bytes": 4398059,
+      "voxels": 23597,
+      "points": 34720,
+      "objects": 4
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 31,
+      "path": "scene-1059/031.npz",
+      "sha256": "f2162ee13b793c77a56863390f0ef949a4501f1e2923a0934ec4af28ae3c1255",
+      "bytes": 4399656,
+      "voxels": 23606,
+      "points": 34752,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 32,
+      "path": "scene-1059/032.npz",
+      "sha256": "134525ee5bc7020324f2241772d09bb1538e92a362354f69f9f9c226445a2d1b",
+      "bytes": 4384259,
+      "voxels": 23517,
+      "points": 34752,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 33,
+      "path": "scene-1059/033.npz",
+      "sha256": "a2882c86ec84eda2783a60b8aa976bde7193e4de6ac015c699f2d0940fc7185b",
+      "bytes": 4371267,
+      "voxels": 23445,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 34,
+      "path": "scene-1059/034.npz",
+      "sha256": "f73f76574778592675883cea9b7464268548ec8a100a1d9314ceba38ef39039c",
+      "bytes": 4392315,
+      "voxels": 23565,
+      "points": 34752,
+      "objects": 2
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 35,
+      "path": "scene-1059/035.npz",
+      "sha256": "962d3a2d3987818258963cc67756a38c4b66b567838bfa35c6235ba9bcae70f8",
+      "bytes": 4391122,
+      "voxels": 23560,
+      "points": 34688,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 36,
+      "path": "scene-1059/036.npz",
+      "sha256": "693401c3eb894b0ea15438c3098056c2913672d098c6f04571d74c8ab7a7530f",
+      "bytes": 4412845,
+      "voxels": 23687,
+      "points": 34688,
+      "objects": 2
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 37,
+      "path": "scene-1059/037.npz",
+      "sha256": "b8dbe55a856733fb7943a3f5c3ccfec62c7c000776502bdcc0244c882f06f7c0",
+      "bytes": 4467530,
+      "voxels": 24000,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 38,
+      "path": "scene-1059/038.npz",
+      "sha256": "aa385a2bbbd9ad24982512155d9465284e47fc8d420b7f72384e3d4d463447da",
+      "bytes": 4444002,
+      "voxels": 23864,
+      "points": 34720,
+      "objects": 3
+    },
+    {
+      "scene": "scene-1059",
+      "frame": 39,
+      "path": "scene-1059/039.npz",
+      "sha256": "dc5b92e9b066e8db040aaef61163aa80ee5540629fa7113065ab2a4da2a67ddf",
+      "bytes": 4480949,
+      "voxels": 24079,
+      "points": 34720,
+      "objects": 2
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 0,
+      "path": "scene-0556/000.npz",
+      "sha256": "ed51517903a179604acfa3e77f23b6da8dc76e8a6a5e313823f598779bae350f",
+      "bytes": 4367000,
+      "voxels": 23406,
+      "points": 34720,
+      "objects": 12
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 1,
+      "path": "scene-0556/001.npz",
+      "sha256": "c010d3c472803b95c7403ac5daff402bf101276c80e47cfafbf10bb7ade1ea12",
+      "bytes": 4336921,
+      "voxels": 23235,
+      "points": 34720,
+      "objects": 10
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 2,
+      "path": "scene-0556/002.npz",
+      "sha256": "b7926882ed02a650eb7b9ac9e8ed2137262cbc6466b6d58749dc8bf7109b630e",
+      "bytes": 4326985,
+      "voxels": 23179,
+      "points": 34720,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 3,
+      "path": "scene-0556/003.npz",
+      "sha256": "dda0bf9067722cfc65b05bc98b1fb4125efc8e91eac5696e436322d2371a5605",
+      "bytes": 4314512,
+      "voxels": 23110,
+      "points": 34688,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 4,
+      "path": "scene-0556/004.npz",
+      "sha256": "97f5b6932277a395ce58a44986b47fa304050d875695db80f29b221b77191bfe",
+      "bytes": 4309126,
+      "voxels": 23076,
+      "points": 34688,
+      "objects": 10
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 5,
+      "path": "scene-0556/005.npz",
+      "sha256": "e4380313af5ec706e43b4fa50765259967c44d004c2f49cece450ab5eb945c0c",
+      "bytes": 4325826,
+      "voxels": 23168,
+      "points": 34720,
+      "objects": 12
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 6,
+      "path": "scene-0556/006.npz",
+      "sha256": "faae387908aab813e1f8fa8474c7ddb7e69aeadb96f3022701adb507860b7567",
+      "bytes": 4330560,
+      "voxels": 23198,
+      "points": 34752,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 7,
+      "path": "scene-0556/007.npz",
+      "sha256": "ecb49179a2764b405f01efb0774f72c81a9fcaa28f4d1aa1b672876fb48fcfa0",
+      "bytes": 4360506,
+      "voxels": 23368,
+      "points": 34784,
+      "objects": 10
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 8,
+      "path": "scene-0556/008.npz",
+      "sha256": "04a0c6dbde40bc776d0bfb66e291844edf54ced3f8534899be4ae476d901587d",
+      "bytes": 4370021,
+      "voxels": 23423,
+      "points": 34784,
+      "objects": 10
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 9,
+      "path": "scene-0556/009.npz",
+      "sha256": "ce71b237e5a648ed1c2c8ae2c186c1b0445711f540c7d8a860f9ee0f2f4249fd",
+      "bytes": 4352473,
+      "voxels": 23323,
+      "points": 34784,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 10,
+      "path": "scene-0556/010.npz",
+      "sha256": "fe075d412b8dc429c7ee74c40f1fd63a6d01ad6de3f23b8089dc067811300b02",
+      "bytes": 4346995,
+      "voxels": 23293,
+      "points": 34752,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 11,
+      "path": "scene-0556/011.npz",
+      "sha256": "8880cda10158192ce2bab04edf23f1de81f6d50935d8d48ac56cfc40265c6f42",
+      "bytes": 4333617,
+      "voxels": 23219,
+      "points": 34688,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 12,
+      "path": "scene-0556/012.npz",
+      "sha256": "def29a9faa4d33a243498a16c1ed1a96c50c7621b17ecf3c17deb6cdbe58ae05",
+      "bytes": 4344960,
+      "voxels": 23286,
+      "points": 34688,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 13,
+      "path": "scene-0556/013.npz",
+      "sha256": "944f6542199eb3228ac41d5c1b47319e9dd1acb2630d42e8878f20ef59199a3f",
+      "bytes": 4359146,
+      "voxels": 23368,
+      "points": 34688,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 14,
+      "path": "scene-0556/014.npz",
+      "sha256": "df5dc0acc0f36bfb5bc6ce13d16cdcea08794cab029542aac4d5b6927868f517",
+      "bytes": 4371792,
+      "voxels": 23438,
+      "points": 34720,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 15,
+      "path": "scene-0556/015.npz",
+      "sha256": "25b33bfc3335094f72f6f85b2ccc08944f99b80391b56200cd86fa66f3f607d4",
+      "bytes": 4385788,
+      "voxels": 23522,
+      "points": 34688,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 16,
+      "path": "scene-0556/016.npz",
+      "sha256": "4c55a7cca6f7e7fba2f9372816ef4ea20998ba537816bc2bb9dfbc93f082f23f",
+      "bytes": 4422308,
+      "voxels": 23730,
+      "points": 34720,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 17,
+      "path": "scene-0556/017.npz",
+      "sha256": "f1b194f2adaf94a7fb405aaad9433ea2d10572ab8aedf3be7dccf19c98951b33",
+      "bytes": 4392708,
+      "voxels": 23562,
+      "points": 34688,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 18,
+      "path": "scene-0556/018.npz",
+      "sha256": "de940e676fc9ec7b64e10acbbbdd241323616a8b14d8ea070201789dfb66da73",
+      "bytes": 4296093,
+      "voxels": 22999,
+      "points": 34720,
+      "objects": 10
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 19,
+      "path": "scene-0556/019.npz",
+      "sha256": "7fa8b993f4ce65a0068c2b7dfd786898d4d179c8d035ffe5e85f0b6d3ae6cc80",
+      "bytes": 4307015,
+      "voxels": 23065,
+      "points": 34720,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 20,
+      "path": "scene-0556/020.npz",
+      "sha256": "65f5f0e4143cb1d80237061731a09234fd7441de64f5afea3e1bbe8a32942d49",
+      "bytes": 4282126,
+      "voxels": 22924,
+      "points": 34720,
+      "objects": 6
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 21,
+      "path": "scene-0556/021.npz",
+      "sha256": "e45464417e687c9742fa302227c7b49fa9ceeaf2e2d153086a48c4b82b74985f",
+      "bytes": 4306790,
+      "voxels": 23068,
+      "points": 34720,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 22,
+      "path": "scene-0556/022.npz",
+      "sha256": "39084fc6a7ca1f39a28b7f4cfe1c3546bd33ef7b1f58159a334d391b8dbe21a2",
+      "bytes": 4347370,
+      "voxels": 23304,
+      "points": 34720,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 23,
+      "path": "scene-0556/023.npz",
+      "sha256": "c0eb74fa60211dca762992a4c93451029a2824837686ea8320217352d1649efd",
+      "bytes": 4365725,
+      "voxels": 23407,
+      "points": 34752,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 24,
+      "path": "scene-0556/024.npz",
+      "sha256": "2620375bb7b36958966f7709d68781574dd7e24d0375791a5df41dca4ca59416",
+      "bytes": 4359249,
+      "voxels": 23371,
+      "points": 34752,
+      "objects": 4
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 25,
+      "path": "scene-0556/025.npz",
+      "sha256": "2c92af655e789648889388899491f9a4a1410f268dbe00881263cc7275ed6292",
+      "bytes": 4347848,
+      "voxels": 23302,
+      "points": 34784,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 26,
+      "path": "scene-0556/026.npz",
+      "sha256": "f5af37f7c63827360d923e5dba50a57324c5d1f00f73490a178ef5087c0042ab",
+      "bytes": 4336834,
+      "voxels": 23240,
+      "points": 34752,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 27,
+      "path": "scene-0556/027.npz",
+      "sha256": "7a0a829c58f2d7424d9ae0a71d5ad53c5aa50131857beb2ca13bc4663bbfcb76",
+      "bytes": 4335335,
+      "voxels": 23233,
+      "points": 34720,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 28,
+      "path": "scene-0556/028.npz",
+      "sha256": "34b872998c19eab5ab032ffd64ec2f0c56cee25463319c24bc33b381cf14ce77",
+      "bytes": 4466388,
+      "voxels": 23986,
+      "points": 34752,
+      "objects": 7
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 29,
+      "path": "scene-0556/029.npz",
+      "sha256": "7fb04ef16bc8ba7e0262b34523140d97013623759512b22bae44cc70751693e5",
+      "bytes": 4476330,
+      "voxels": 24048,
+      "points": 34720,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 30,
+      "path": "scene-0556/030.npz",
+      "sha256": "2763d34ffaf6ef5693386afed8fd38709bd235a910ab76be5040d3a97dd201e5",
+      "bytes": 4405954,
+      "voxels": 23640,
+      "points": 34688,
+      "objects": 7
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 31,
+      "path": "scene-0556/031.npz",
+      "sha256": "feb4bd210f301dc34a0dab2ddc96d9c2fa4d73939d306f633070c82d09dd2060",
+      "bytes": 4351540,
+      "voxels": 23330,
+      "points": 34656,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 32,
+      "path": "scene-0556/032.npz",
+      "sha256": "a713a8b35e42a53f3db01102f8f8b61aed3b2e46259c7a05232455edeed5f803",
+      "bytes": 4391520,
+      "voxels": 23558,
+      "points": 34688,
+      "objects": 6
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 33,
+      "path": "scene-0556/033.npz",
+      "sha256": "a2b35bac86c2316c1c96d16915acd1c1d988a7517a715b80064ad2686266fe14",
+      "bytes": 4402765,
+      "voxels": 23623,
+      "points": 34688,
+      "objects": 6
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 34,
+      "path": "scene-0556/034.npz",
+      "sha256": "7caa2fdadacaef68a3dae1b6bf569ad63206037db0383c1ef8b82e7e4a1cc813",
+      "bytes": 4395539,
+      "voxels": 23581,
+      "points": 34720,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 35,
+      "path": "scene-0556/035.npz",
+      "sha256": "ea7d900ab94459913ab51434f82a9cbcb37f432fd070867b924acaf5d5d12a06",
+      "bytes": 4393175,
+      "voxels": 23569,
+      "points": 34688,
+      "objects": 5
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 36,
+      "path": "scene-0556/036.npz",
+      "sha256": "2782fb8990a33767bee66ceff9aa8260a5da65ae14b60eb984b1e86c8a23e020",
+      "bytes": 4405798,
+      "voxels": 23636,
+      "points": 34720,
+      "objects": 8
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 37,
+      "path": "scene-0556/037.npz",
+      "sha256": "4473851d4b7e563e426d235a91b5132f1139d0ce06af69a181c2080331fffaf8",
+      "bytes": 4405204,
+      "voxels": 23634,
+      "points": 34720,
+      "objects": 7
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 38,
+      "path": "scene-0556/038.npz",
+      "sha256": "51f1125b8c7a3462ee5ccf384b352841a535167741a6aa11c8058086f42cf7a3",
+      "bytes": 4392379,
+      "voxels": 23557,
+      "points": 34720,
+      "objects": 9
+    },
+    {
+      "scene": "scene-0556",
+      "frame": 39,
+      "path": "scene-0556/039.npz",
+      "sha256": "a921315e71da4df5d78ace58f6aa481f0be76538f02357dd1c48045590f29cfa",
+      "bytes": 4402188,
+      "voxels": 23618,
+      "points": 34720,
+      "objects": 6
+    }
+  ],
+  "source_codes": {
+    "src/ptv3_worker.py": "4b346d4f091f4c524e6a5ca6827ed63fb2b751c72316f4ff9a50d9f0f169e6f8",
+    "src/ptv3_loader_verified.py": "bc08e046f4c84a201f77f35fee0edb300d1292f3b0501b2a19a067b43d263e85",
+    "tools/semantic_memory/nuscenes_pilot_cache.py": "551f2a657c90330eb8eb03db31e3e3177e0d14ddc32bc77712ad3e60d1191030",
+    "tools/semantic_memory/pilot_metrics.py": "5538d2add09e83ac591b85f43c612656ce0f62fbc2ace70d553cc8c1c507f1bf"
+  },
+  "total_cache_bytes": 2290803672
+}

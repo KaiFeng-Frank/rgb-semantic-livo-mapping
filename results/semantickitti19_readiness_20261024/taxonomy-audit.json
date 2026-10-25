@@ -1,0 +1,98 @@
+{
+  "native_19_class_model": false,
+  "source_classes": 16,
+  "evaluated_classes": 19,
+  "reachable_classes": 13,
+  "unrepresentable_classes": [
+    "bicyclist",
+    "motorcyclist",
+    "parking",
+    "trunk",
+    "pole",
+    "traffic-sign"
+  ],
+  "fixed_bridge_miou_ceiling_percent": 68.42105263157895,
+  "mapping": [
+    {
+      "source": "barrier",
+      "target_learning_id": 14,
+      "target": "fence"
+    },
+    {
+      "source": "bicycle",
+      "target_learning_id": 2,
+      "target": "bicycle"
+    },
+    {
+      "source": "bus",
+      "target_learning_id": 5,
+      "target": "other-vehicle"
+    },
+    {
+      "source": "car",
+      "target_learning_id": 1,
+      "target": "car"
+    },
+    {
+      "source": "construction_vehicle",
+      "target_learning_id": 5,
+      "target": "other-vehicle"
+    },
+    {
+      "source": "motorcycle",
+      "target_learning_id": 3,
+      "target": "motorcycle"
+    },
+    {
+      "source": "pedestrian",
+      "target_learning_id": 6,
+      "target": "person"
+    },
+    {
+      "source": "traffic_cone",
+      "target_learning_id": 0,
+      "target": "abstain"
+    },
+    {
+      "source": "trailer",
+      "target_learning_id": 5,
+      "target": "other-vehicle"
+    },
+    {
+      "source": "truck",
+      "target_learning_id": 4,
+      "target": "truck"
+    },
+    {
+      "source": "driveable_surface",
+      "target_learning_id": 9,
+      "target": "road"
+    },
+    {
+      "source": "other_flat",
+      "target_learning_id": 12,
+      "target": "other-ground"
+    },
+    {
+      "source": "sidewalk",
+      "target_learning_id": 11,
+      "target": "sidewalk"
+    },
+    {
+      "source": "terrain",
+      "target_learning_id": 17,
+      "target": "terrain"
+    },
+    {
+      "source": "manmade",
+      "target_learning_id": 13,
+      "target": "building"
+    },
+    {
+      "source": "vegetation",
+      "target_learning_id": 15,
+      "target": "vegetation"
+    }
+  ],
+  "caveat": "Fixed coarse-to-fine heuristic, not an adapted 19-class model. No target labels are used to select this mapping. All 19 classes stay in the mean; unsupported predictions count as errors."
+}

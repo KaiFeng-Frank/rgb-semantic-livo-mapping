@@ -1,0 +1,52 @@
+{
+  "device": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+  "torch": "2.11.0.dev20260201+cu128",
+  "cuda": "12.8",
+  "pointcept": "72a799353c568c29a3365c02a15129ebe7fe637a",
+  "attention": "torch SDPA packed segments",
+  "pooling": "torch.segment_reduce",
+  "raw_points": 123389,
+  "scan_sha256": "92e945f37a6cd4a58acc8aa15b275af2e271ecf69c0a44a311d888524473c451",
+  "real_scan": true,
+  "synthetic_targets": true,
+  "benchmark_score": false,
+  "new_19_class_head": true,
+  "training_completed": false,
+  "steps": [
+    {
+      "step": 0,
+      "seconds": 33.265082470024936,
+      "loss": 3.3719396591186523,
+      "gradient_norm": 2.00772762298584,
+      "max_allocated_mib": 5937.59765625,
+      "max_reserved_mib": 6212.0
+    },
+    {
+      "step": 1,
+      "seconds": 0.40507924399571493,
+      "loss": 3.340040445327759,
+      "gradient_norm": 1.9197843074798584,
+      "max_allocated_mib": 6283.59326171875,
+      "max_reserved_mib": 6626.0
+    },
+    {
+      "step": 2,
+      "seconds": 0.5169459199532866,
+      "loss": 3.317293882369995,
+      "gradient_norm": 1.8506767749786377,
+      "max_allocated_mib": 6283.03173828125,
+      "max_reserved_mib": 6766.0
+    }
+  ],
+  "load": {
+    "backbone_tensors": 486,
+    "new_random_head": true,
+    "source_classes": 16,
+    "target_classes": 19
+  },
+  "checkpoint_sha256": "4c1d540a2b0dac5f3dff41c24e76d7f531a9dd3a3c48aac55ee243be7d7df287",
+  "parameters": 46159507,
+  "voxels": 94444,
+  "success": true,
+  "full_point_prediction_count": 123389
+}

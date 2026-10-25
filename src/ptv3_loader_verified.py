@@ -16,12 +16,12 @@ Established facts (each one tested on this machine, 2026-09-21):
 
 NEVER use strict=False here. If keys stop matching, the version pairing is wrong — fix that instead.
 """
-import sys, types, warnings
+import os, sys, types, warnings
 
-POINTCEPT_V151 = "/data/livo_sem/src/Pointcept_v151"
-WEIGHT_DIR     = "/data/livo_sem/weights/nuscenes-semseg-pt-v3m1-0-base"
-CONFIG_PATH    = WEIGHT_DIR + "/config.py"
-CKPT_PATH      = WEIGHT_DIR + "/model/model_best.pth"
+POINTCEPT_V151 = os.environ.get("PTV3_POINTCEPT", "/data/livo_sem/src/Pointcept_v151")
+WEIGHT_DIR     = os.environ.get("PTV3_WEIGHT_DIR", "/data/livo_sem/weights/nuscenes-semseg-pt-v3m1-0-base")
+CONFIG_PATH    = os.environ.get("PTV3_CONFIG", WEIGHT_DIR + "/config.py")
+CKPT_PATH      = os.environ.get("PTV3_CHECKPOINT", WEIGHT_DIR + "/model/model_best.pth")
 
 # The 16 nuScenes classes, in checkpoint order. Index == predicted class id.
 NUSCENES_CLASSES = [
@@ -49,6 +49,20 @@ def _install_stubs():
             m = _Stub(n); m.__file__ = f"<stub {n}>"; sys.modules[n] = m
 
 
+def serialization_policy(model):
+    """Effective policy, including pooling layers whose upstream default is True."""
+    return {name: bool(module.shuffle_orders) for name, module in model.named_modules()
+            if hasattr(module, 'shuffle_orders')}
+
+
+def set_serialization_policy(model, shuffle_orders):
+    """Apply an explicit policy to every serialization stage; None keeps defaults."""
+    if shuffle_orders is not None:
+        for module in model.modules():
+            if hasattr(module, 'shuffle_orders'):
+                module.shuffle_orders = bool(shuffle_orders)
+
+
 def build_ptv3(device="cuda", enable_flash=None, shuffle_orders=None, half=False):
     """Build PTv3 from the frozen HF config and load the released weights with strict=True.
 
@@ -56,7 +70,9 @@ def build_ptv3(device="cuda", enable_flash=None, shuffle_orders=None, half=False
         ungated by self.training, so .eval() does NOT disable it and every forward pass
         draws a fresh torch.randperm over the 4 serialisation orders.  That makes the
         deployed node non-deterministic run to run, which contaminates every A/B.
-        Pass False to pin it.  MEASURED effect on accuracy: see CRITICAL_CONSTRAINTS.md (R1-R8).
+        Pass False to pin ALL stages, including SerializedPooling: upstream does
+        not propagate the backbone setting to its pooling layers. Historical
+        R1-R8 results predate this correction and used only the root setting.
     half : cast the weights to fp16.  The checkpoint was TRAINED under fp16 autocast
         (config.py: enable_amp = True) and flash-attention already runs fp16
         unconditionally inside every block (point_transformer_v3m1_base.py:209 does
@@ -80,6 +96,7 @@ def build_ptv3(device="cuda", enable_flash=None, shuffle_orders=None, half=False
     if shuffle_orders is not None:
         cfg.model.backbone.shuffle_orders = bool(shuffle_orders)
     model = build_model(cfg.model)
+    set_serialization_policy(model, shuffle_orders)
 
     sd = torch.load(CKPT_PATH, map_location="cpu", weights_only=False)
     sd = sd.get("state_dict", sd)
