@@ -15,7 +15,10 @@ class LiveBridge(unittest.TestCase):
     def test_full_size_cloud_delivery(self):
         self.exercise(60000,47)
 
-    def exercise(self,repeats,domain):
+    def test_indexed_scan_reliable_delivery(self):
+        self.exercise(63000,49,indexed=True)
+
+    def exercise(self,repeats,domain,indexed=False):
         import numpy as np
         import rclpy
         from rclpy.node import Node
@@ -33,6 +36,7 @@ class LiveBridge(unittest.TestCase):
             try:
                 process = subprocess.Popen([sys.executable, '-m', 'frontend.input_bridge',
                     '--mode', 'geometry', '--fixed-delay', '--wait-ms', '80',
+                    '--input-reliability', 'reliable' if indexed else 'best_effort',
                     '--input', '/contract/raw', '--output', '/contract/annotated',
                     '--log', temp+'/input.jsonl'], cwd=root, env=env, start_new_session=True,
                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -48,9 +52,18 @@ class LiveBridge(unittest.TestCase):
                 points = np.tile(np.array([[3., 1., -1., .5], [4., 2., -.5, .7]], dtype='<f4'),(repeats,1))
                 fields = [PointField(name=k, offset=4*i, datatype=7, count=1)
                           for i,k in enumerate(('x','y','z','intensity'))]
+                original=points.tobytes();step=16
+                if indexed:
+                    dtype=np.dtype([('xyzi','<f4',(4,)),('time','<f4'),('ring','<u2'),('raw_point_index','<u4')])
+                    arr=np.zeros(len(points),dtype=dtype);arr['xyzi']=points
+                    arr['time']=np.linspace(0,100000,len(points));arr['ring']=np.arange(len(points))%64
+                    arr['raw_point_index']=np.arange(len(points));original=arr.tobytes();step=26
+                    fields += [PointField(name='time',offset=16,datatype=7,count=1),
+                               PointField(name='ring',offset=20,datatype=4,count=1),
+                               PointField(name='raw_point_index',offset=22,datatype=6,count=1)]
                 for i in range(5):
-                    msg = PointCloud2(height=1, width=len(points), point_step=16, row_step=16*len(points),
-                                     is_dense=True, fields=fields, data=points.tobytes())
+                    msg = PointCloud2(height=1, width=len(points), point_step=step, row_step=step*len(points),
+                                     is_dense=True, fields=fields, data=original)
                     msg.header.frame_id='lidar'; msg.header.stamp.sec=100; msg.header.stamp.nanosec=i*100_000_000
                     pub.publish(msg)
                     until=time.monotonic()+.1
@@ -62,9 +75,9 @@ class LiveBridge(unittest.TestCase):
                 for m in received:
                     self.assertEqual(m.header.frame_id,'lidar')
                     data=np.frombuffer(m.data,np.uint8).reshape(len(points),m.point_step)
-                    np.testing.assert_array_equal(data[:,:16],points.view(np.uint8).reshape(len(points),16))
-                    np.testing.assert_array_equal(data[:,16:18].copy().view('<u2').ravel(),np.full(len(points),65535))
-                    self.assertEqual(m.point_step,24)
+                    np.testing.assert_array_equal(data[:,:step],np.frombuffer(original,np.uint8).reshape(len(points),step))
+                    np.testing.assert_array_equal(data[:,step:step+2].copy().view('<u2').ravel(),np.full(len(points),65535))
+                    self.assertEqual(m.point_step,step+8)
                 import json
                 rows=[json.loads(line) for line in Path(temp+'/input.jsonl').read_text().splitlines()]
                 self.assertEqual(len(rows),5)

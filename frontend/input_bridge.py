@@ -104,7 +104,7 @@ def main():
     import numpy as np
     import rclpy
     from rclpy.node import Node
-    from rclpy.qos import qos_profile_sensor_data
+    from rclpy.qos import qos_profile_sensor_data, QoSProfile, ReliabilityPolicy
     from sensor_msgs.msg import PointCloud2
     from sensor_msgs_py.point_cloud2 import read_points
     ap = argparse.ArgumentParser(description=__doc__)
@@ -113,6 +113,8 @@ def main():
     ap.add_argument('--mode', choices=['online', 'geometry'], default='online')
     ap.add_argument('--wait-ms', type=float, default=80.)
     ap.add_argument('--capacity', type=int, default=4)
+    ap.add_argument('--input-reliability', choices=['best_effort', 'reliable'], default='best_effort',
+                    help='reliable requires a reliable publisher; use for complete large-cloud replay')
     ap.add_argument('--fixed-delay', action='store_true', help='emit at the same deadline in semantic and geometry timing controls')
     ap.add_argument('--log', type=Path, required=True)
     args, ros_args = ap.parse_known_args()
@@ -136,7 +138,9 @@ def main():
             self.results = queue.Queue(maxsize=args.capacity)
             self.stopping = threading.Event()
             self.pub = self.create_publisher(PointCloud2, args.output, 10)
-            self.sub = self.create_subscription(PointCloud2, args.input, self.receive, qos_profile_sensor_data)
+            input_qos = (QoSProfile(depth=args.capacity, reliability=ReliabilityPolicy.RELIABLE)
+                         if args.input_reliability == 'reliable' else qos_profile_sensor_data)
+            self.sub = self.create_subscription(PointCloud2, args.input, self.receive, input_qos)
             self.timer = self.create_timer(.002, self.tick)
             self.thread = threading.Thread(target=self.infer, daemon=True)
             self.thread.start()
@@ -147,7 +151,8 @@ def main():
             log.write(json.dumps(dict(stamp_ns=pending.key, semantic=result is not None,
                                       arrival=pending.arrived, deadline=pending.deadline,
                                       inference_complete=pending.completed, emitted=time.monotonic(),
-                                      mode=args.mode, late_discarded=self.buffer.rejected_late))+'\n')
+                                      mode=args.mode, input_reliability=args.input_reliability,
+                                      late_discarded=self.buffer.rejected_late))+'\n')
 
         def receive(self, msg):
             self.tick()

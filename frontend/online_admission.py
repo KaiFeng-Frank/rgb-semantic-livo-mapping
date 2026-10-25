@@ -84,7 +84,7 @@ def direct(scans,out):
     return dict(client=statistics([r['client_ms'] for r in rows]),worker=statistics([r['worker_ms'] for r in rows]))
 
 
-def bridge(scans,meta,out,mode):
+def bridge(scans,meta,out,mode,input_reliability='reliable'):
     # The local controlled large-cloud probe failed on Fast DDS and passed on
     # Cyclone DDS. Record the selected implementation with every admission.
     os.environ.setdefault('RMW_IMPLEMENTATION','rmw_cyclonedds_cpp')
@@ -103,6 +103,7 @@ def bridge(scans,meta,out,mode):
     try:
         with (out/f'{mode}.process.log').open('w') as log:
             process=subprocess.Popen([sys.executable,'-m','frontend.input_bridge','--mode',mode,'--fixed-delay','--wait-ms','80',
+                '--input-reliability',input_reliability,
                 '--input','/admission/raw','--output','/admission/annotated','--log',str(out/f'{mode}.jsonl')],
                 cwd=REPO,env=dict(os.environ,ROS_DOMAIN_ID=str(domain)),stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
             until=time.monotonic()+300
@@ -139,7 +140,7 @@ def bridge(scans,meta,out,mode):
     selected={int(meta['timestamps_start.txt'][f]) for f in MEASURE}
     measured=[r for r in rows if r['stamp_ns'] in selected]
     semantic=sum(r['semantic'] for r in measured)
-    return dict(mode=mode,ros_domain=domain,middleware=os.environ['RMW_IMPLEMENTATION'],scans=len(MEASURE),received_measurement_scans=len(measured),
+    return dict(mode=mode,ros_domain=domain,middleware=os.environ['RMW_IMPLEMENTATION'],input_reliability=input_reliability,scans=len(MEASURE),received_measurement_scans=len(measured),
                 published_total=count,received_total=len(stamps),complete_ordered_coverage=coverage,
                 expected_stamp_ns=list(expected),received_stamp_ns=stamps,
                 semantic_scans=semantic,semantic_fraction=semantic/len(MEASURE),
@@ -151,10 +152,11 @@ def bridge(scans,meta,out,mode):
 def main():
     ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--out',type=Path,required=True)
     ap.add_argument('--runtime-ready',type=Path,help='wait for a verified runtime marker while raw samples stay in RAM')
+    ap.add_argument('--input-reliability',choices=['best_effort','reliable'],default='reliable')
     a=ap.parse_args()
     out=a.out.resolve();out.mkdir(parents=True,exist_ok=False)
     protocol=dict(scope='local GPU and ROS bridge admission, not full LIO accuracy',warm_frames=WARM,measure_frames=MEASURE,
-                  deadline_ms=80,required_semantic_fraction=.95,raw_data_persisted=False,
+                  deadline_ms=80,required_semantic_fraction=.95,raw_data_persisted=False,input_reliability=a.input_reliability,
                   source_sha256={p:hashlib.sha256((REPO/p).read_bytes()).hexdigest() for p in
                                  ['frontend/online_admission.py','frontend/input_bridge.py','src/ptv3_client.py','src/ptv3_worker.py','src/ptv3_loader_verified.py','src/ptv3_fast.py']})
     (out/'protocol.json').write_text(json.dumps(protocol,indent=2)+'\n')
@@ -169,9 +171,9 @@ def main():
                 time.sleep(1)
             (out/'runtime.json').write_bytes(a.runtime_ready.read_bytes())
         inference=direct(scans,out)
-        baseline=bridge(scans,meta,out,'geometry')
+        baseline=bridge(scans,meta,out,'geometry',a.input_reliability)
         (out/'geometry-result.json').write_text(json.dumps(baseline,indent=2)+'\n')
-        online=bridge(scans,meta,out,'online')
+        online=bridge(scans,meta,out,'online',a.input_reliability)
         result=dict(geometry=baseline,inference=inference,online=online,
                     admitted=baseline['complete_ordered_coverage'] and online['complete_ordered_coverage']
                              and online['semantic_fraction']>=.95 and online['all_timely_semantics'],
