@@ -1,0 +1,139 @@
+{
+  "run": 40156371477,
+  "commit": "873fce2d1a865ffbd9cb5a67969bb57555140e75",
+  "paired_timestamps": 235,
+  "summary": {
+    "geometry": {
+      "ate_rmse_m": {
+        "mean": 0.42959540297843674,
+        "min": 0.4088178310695806,
+        "max": 0.44905461570813676
+      },
+      "rpe_1s_translation_rmse_m": {
+        "mean": 0.13234911127999294,
+        "min": 0.1250136654639323,
+        "max": 0.13775904356040977
+      },
+      "rpe_1s_rotation_rmse_deg": {
+        "mean": 0.16619803880370035,
+        "min": 0.1625015263905894,
+        "max": 0.17129155358921516
+      },
+      "active_boundary_fractions": [
+        0,
+        0,
+        0
+      ]
+    },
+    "association_B0": {
+      "ate_rmse_m": {
+        "mean": 0.44323604082112245,
+        "min": 0.3909820000657634,
+        "max": 0.5429638143105153
+      },
+      "rpe_1s_translation_rmse_m": {
+        "mean": 0.13150005608620582,
+        "min": 0.12651676957097355,
+        "max": 0.14128183151222587
+      },
+      "rpe_1s_rotation_rmse_deg": {
+        "mean": 0.1651887738687371,
+        "min": 0.16099312637331542,
+        "max": 0.16825624810698486
+      },
+      "active_boundary_fractions": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "boundary_B0": {
+      "ate_rmse_m": {
+        "mean": 0.4287027571387482,
+        "min": 0.40505157468475356,
+        "max": 0.46124935050055677
+      },
+      "rpe_1s_translation_rmse_m": {
+        "mean": 0.1357664950618596,
+        "min": 0.13542967904488168,
+        "max": 0.1361276770672547
+      },
+      "rpe_1s_rotation_rmse_deg": {
+        "mean": 0.1674959133422411,
+        "min": 0.16609811139735814,
+        "max": 0.1682183246315263
+      },
+      "active_boundary_fractions": [
+        0.9914893617021276,
+        0.9914893617021276,
+        0.9914893617021276
+      ]
+    },
+    "full_B0": {
+      "ate_rmse_m": {
+        "mean": 0.4633563504482859,
+        "min": 0.4111976859192408,
+        "max": 0.506581458820431
+      },
+      "rpe_1s_translation_rmse_m": {
+        "mean": 0.13160649648408218,
+        "min": 0.12501998373878215,
+        "max": 0.13725706880322075
+      },
+      "rpe_1s_rotation_rmse_deg": {
+        "mean": 0.16911729207268,
+        "min": 0.16493446014045918,
+        "max": 0.17601470968530022
+      },
+      "active_boundary_fractions": [
+        0.9914893617021276,
+        0.9914893617021276,
+        0.9914893617021276
+      ]
+    },
+    "full_ZS": {
+      "ate_rmse_m": {
+        "mean": 0.39823219542741306,
+        "min": 0.3796154969206965,
+        "max": 0.4254629527851573
+      },
+      "rpe_1s_translation_rmse_m": {
+        "mean": 0.12920844057297695,
+        "min": 0.12784376298569905,
+        "max": 0.12989828535750828
+      },
+      "rpe_1s_rotation_rmse_deg": {
+        "mean": 0.15909442547623884,
+        "min": 0.1535422741368667,
+        "max": 0.16753645320818678
+      },
+      "active_boundary_fractions": [
+        0.9531914893617022,
+        0.9531914893617022,
+        0.9531914893617022
+      ]
+    }
+  },
+  "full_B0_minus_geometry_ate_m": [
+    -0.019716076238351976,
+    0.06347207553560547,
+    0.05752684311229428
+  ],
+  "full_B0_minus_association_ate_m": [
+    -0.13176612839127455,
+    0.07652759851809732,
+    0.11559945875466765
+  ],
+  "gates": {
+    "complete_matching_trajectories": true,
+    "boundary_activation": true,
+    "all_paired_ate_improve": false,
+    "ate_ranges_separated": false,
+    "rpe_1s_translation_rmse_m_nonregressing": true,
+    "rpe_1s_rotation_rmse_deg_nonregressing": false
+  },
+  "admitted": false,
+  "large_experiment_admitted": false,
+  "online_validated": false,
+  "archive_sha256": "eebb5778e2c683beec21a4fa685e5f158fc74ecf402c9dd15968e079e7b20de4"
+}

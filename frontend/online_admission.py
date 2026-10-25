@@ -155,8 +155,6 @@ def main():
     try:
         scans,meta=recover()
         (out/'scan-hashes.json').write_text(json.dumps({f:dict(points=len(v[0]),sha256=v[1]) for f,v in scans.items()},indent=2)+'\n')
-        baseline=bridge(scans,meta,out,'geometry')
-        (out/'geometry-result.json').write_text(json.dumps(baseline,indent=2)+'\n')
         if a.runtime_ready:
             until=time.monotonic()+3600
             print('WAITING_FOR_VERIFIED_RUNTIME',flush=True)
@@ -165,6 +163,8 @@ def main():
                 time.sleep(1)
             (out/'runtime.json').write_bytes(a.runtime_ready.read_bytes())
         inference=direct(scans,out)
+        baseline=bridge(scans,meta,out,'geometry')
+        (out/'geometry-result.json').write_text(json.dumps(baseline,indent=2)+'\n')
         online=bridge(scans,meta,out,'online')
         result=dict(geometry=baseline,inference=inference,online=online,
                     admitted=online['semantic_fraction']>=.95 and online['all_timely_semantics'],

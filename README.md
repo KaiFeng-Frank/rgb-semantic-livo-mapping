@@ -59,6 +59,10 @@ FAST-LIVO2's error-state update. Synthetic tests exercise pose, velocity cross c
 and uncertainty updates in the actual estimator. The first short replay exposed
 zero active boundary rows; moving extraction before geometry voxelization restored
 activation on 112/115 B0 and 106/115 ZS updates, with paired timestamps.
+The subsequent frozen seq09 validation **did not pass accuracy admission**:
+full B0 mean ATE is 0.463 m versus geometry's 0.430 m across three repeats,
+despite active boundary rows on 233/235 updates. All five arms and failures are
+preserved in the [holdout results](results/semantic_frontend_20261025/holdout09/README.md).
 [Complete verification and the preserved failed admission](results/semantic_frontend_20261025/README.md).
 The revised diagnostic is not scored for accuracy; online model latency and unseen
 trajectory benefit remain unverified.

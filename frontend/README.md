@@ -106,8 +106,35 @@ synthetic fixture. The first short real-data replay completed, but accepted zero
 boundary rows: see [the failed admission](../results/semantic_frontend_20261025/README.md).
 The revised pre-voxel source is checked with `--diagnostic`: geometry, full B0 and
 full ZS once each, with no GT fetch or scoring. The old window is now development
-data. A new frozen unseen window and measured online run are required before
+data. A new frozen frontend holdout and measured online run are required before
 claiming driving accuracy or online performance.
+
+`holdout09.json` freezes the first 240 frames of sequence 09, five ablations and
+three repetitions, with algorithm/configuration hashes checked before recovery.
+This sequence was not used to develop this frontend, but earlier segmentation
+evaluations did use it. All 15 trajectories must be frozen before reading pose GT.
+The admission rule requires paired ATE improvements beyond the repeat ranges,
+non-regressing mean 1-second translation/rotation RPE and active boundary support.
+The `holdout09` workflow input runs this bounded validation without training.
+
+For local GPU validation, `check_gpu_runtime.py` compares CUDA reduction, sparse
+convolution and variable-length attention against separate reference operations,
+then strictly loads the archived B0 checkpoint. `online_admission.py` measures the
+existing worker and the actual ROS input bridge with a fixed 80 ms deadline. Its
+six warm-up and twenty measurement scans are read from the official KITTI archive
+into RAM; only hashes, timings, class histograms and transport logs are saved.
+Set the four `PTV3_*` paths above, then run:
+
+```bash
+"$PTV3_PYTHON" -m frontend.check_gpu_runtime --out /tmp/semantic-runtime-ready.json
+source /opt/ros/jazzy/setup.bash
+/usr/bin/python3 -m frontend.online_admission --out /tmp/semantic-online-admission
+```
+
+The local bridge gate requires at least 95% of measured scans to carry semantic
+predictions completed within the deadline, complete ordered timestamp coverage,
+and unchanged original point bytes. It measures input admission rather than the
+combined live LIO pipeline; passing it alone does not establish online localization.
 
 Cached replay carries `raw_point_index` from the original KITTI bag conversion in
 every arm, including geometry. Annotation verifies a complete index permutation

@@ -1,8 +1,14 @@
 # Semantic frontend verification
 
-The first frontend increment now passes actual-estimator tests and a real-data
-**boundary activation** diagnostic. This does not establish driving accuracy or
-online model throughput. The initial synthetic evidence and source hashes are in
+The frontend passes actual-estimator and **boundary activation** checks, but the
+subsequent frozen sequence 09 accuracy admission **failed**. Across three repeats,
+full B0 mean ATE is 0.463356 m versus geometry's 0.429595 m (7.86% higher), and mean
+rotation RPE also regresses. All 15 runs preserve the same 235 timestamps;
+boundary rows are active on 233/235 B0 updates. See the
+[complete five-arm holdout results and admission checks](holdout09/README.md).
+No localization benefit or larger experiment is admitted by these results.
+
+The initial synthetic evidence and source hashes are in
 [`local-verification.json`](local-verification.json); revised runtime evidence is
 in [pre-voxel-diagnostic.json](pre-voxel-diagnostic.json).
 
