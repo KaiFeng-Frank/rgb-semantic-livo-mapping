@@ -1,0 +1,122 @@
+{
+  "version": 3,
+  "purpose": "Frozen enhanced frontend accuracy validation after mechanism activation; no parameter search",
+  "short_sequence": {
+    "sequence": "09",
+    "first_frame": 240,
+    "end_exclusive": 480
+  },
+  "selection": "First contiguous 240-frame window after the earlier seq09 frontend window 0..239; fixed before enhanced scoring",
+  "taxonomy": "native nuScenes16, archived top1 label/confidence; field values are historical class-vote frequencies, not recovered logits",
+  "arms": [
+    "geometry",
+    "association_B0",
+    "motion_B0",
+    "visual_B0",
+    "likelihood_B0",
+    "enhanced_B0"
+  ],
+  "arm_settings": {
+    "geometry": {
+      "enabled": false,
+      "association": false,
+      "boundaries": false,
+      "dynamics": false,
+      "visual_mask": false,
+      "likelihood": false,
+      "adaptive_boundary_noise": false
+    },
+    "motion_B0": {
+      "enabled": true,
+      "association": false,
+      "boundaries": false,
+      "dynamics": true,
+      "visual_mask": false,
+      "likelihood": false,
+      "adaptive_boundary_noise": false
+    },
+    "visual_B0": {
+      "enabled": true,
+      "association": false,
+      "boundaries": false,
+      "dynamics": false,
+      "visual_mask": true,
+      "likelihood": false,
+      "adaptive_boundary_noise": false
+    },
+    "likelihood_B0": {
+      "enabled": true,
+      "association": false,
+      "boundaries": false,
+      "dynamics": false,
+      "visual_mask": false,
+      "likelihood": true,
+      "adaptive_boundary_noise": false
+    },
+    "enhanced_B0": {
+      "enabled": true,
+      "association": true,
+      "boundaries": false,
+      "dynamics": true,
+      "visual_mask": true,
+      "likelihood": true,
+      "adaptive_boundary_noise": false
+    },
+    "association_B0": {
+      "enabled": true,
+      "association": true,
+      "boundaries": false,
+      "dynamics": false,
+      "visual_mask": false,
+      "likelihood": false,
+      "adaptive_boundary_noise": false
+    }
+  },
+  "repetitions": 3,
+  "minimum_poses": 220,
+  "diagnostic": false,
+  "playback_rate": 0.25,
+  "middleware": "rmw_cyclonedds_cpp",
+  "training": false,
+  "loop_closure": false,
+  "parameter_search": false,
+  "online_validated": false,
+  "scope": "Cached semantic labels with original point identity and identical IMU/image timestamps. Six arms x three repeats, rotated execution order. Geometry shares the preprocessing fix and middleware with enhanced. GT read only after all trajectories hash-frozen.",
+  "gate": {
+    "coverage": "all 18 trajectories finite with identical timestamps",
+    "mechanism": "categorical rows active on at least 80% of updates in every likelihood-only and enhanced run; all boundary rows zero",
+    "primary": "enhanced_B0 versus geometry: all three paired ATE differences negative, nonoverlapping ATE ranges, mean 1s translation and rotation RPE no worse",
+    "increment": "apply the same comparison separately to enhanced_B0 versus association_B0; report without hiding regressions",
+    "motion": "report measured motion/mask activation; do not assume dynamic objects exist in an unseen window",
+    "failure": "preserve all arms, repetitions and failures; no GT-guided changes to estimator, no winner selection",
+    "scope": "a pass applies only to this short window; no automatic large experiment"
+  },
+  "frozen_sources": {
+    "frontend/include/semantic_frontend.hpp": "360ca3dc6a8087356568b6fd408a07b24a8bb0d9ae24641a801527e9c05cc25d",
+    "frontend/include/semantic_likelihood.hpp": "855aa7e5e9a00e29f42bdb1aa1e607f0862b4f14e881ff9644dc4b18f9a1cbd2",
+    "frontend/include/semantic_motion.hpp": "39df5e2172e9726e3da29d5654d7a3ccb0913c09f95a662402d284f009ef71a9",
+    "frontend/include/semantic_pcl.hpp": "ab5fd64cc5cd7fd0dfd6fc92e26bf27a97ac6e5da958593d4f317b890e6749db",
+    "frontend/include/semantic_visual.hpp": "fd7c95bb8ffac79bf270adc9a873f7679a0d86e69e4a678e05a7f7a208fa99ca",
+    "frontend/patches/fastlivo2-semantic.patch": "e7db1e0d3aa980d6f0583d03da5312662fb7d154ec61b751fb4c8e115358c026",
+    "frontend/bootstrap.py": "8bc51048bc9f9471584352c2be4c10025634083a51b64d12aaf3ca58aa95578a",
+    "frontend/replay_smoke.py": "ae9bd63ac64bb3da71435676e53b1ed2fd8764f7f0cf69915b552a3db7e67a64",
+    "frontend/input_bridge.py": "cedfcf9c678ab1265a503bdf8e2b50ca4c39bf26885c7fe456950f8096ba8a42",
+    "src/kitti_scan.py": "5fa4b91431450773684b8bfb76a3b697c94af5187ebb117d8755bf79984f7d03",
+    "src/kitti_to_ros2bag.py": "bdc8ce38da77549a08df0187916dbb43dc1313a93e1cf647db757c1e59bb2784",
+    "config/kitti_velodyne64.yaml": "b868c5a7a0986e8448800d3ef6b9238e1bcde0ccac9dccfa5b0b32c1bc8ddebb",
+    "config/camera_kitti_cam2.yaml": "5748d60a5a867998c55b1cef1e1279199b3ec70945016ac3dc9f2ad7ee97e90f",
+    "frontend/protocol.py": "5137133c3da840ce0b2df530c8e80b1d9173b915b95e208362cd7b431eb06f3e",
+    "frontend/restore_smoke.py": "ffc3182717ce303295c6b0495a8135de7e665759f49e7f690ca0ff1311fe631d",
+    "frontend/score_smoke.py": "8854298f07ad4d36a2d2363fccc133cde318ce644b4e30fe2b7aa84966769206",
+    "frontend/assess_validation.py": "b7416fba086d005870a6f367bcdc8466cf41440c4ad01a58c5a3ce55abde1e49"
+  },
+  "shared_input_fix": "Initialize/recompute upstream blind_sqr from blind in all arms; an uninitialized threshold was exposed by the integration fixture. This is a new shared baseline, not a replay of the old estimator.",
+  "independence": "Unseen by enhanced frontend diagnostics and scoring; not a globally unseen dataset, since historical segmentation/offline mapping used this sequence",
+  "amendment": {
+    "prior_protocol": "frontend/enhanced-validation09.json",
+    "prior_commit": "b5b95db233fa9b11a2650ca23484154ddc0f514b",
+    "prior_run": 40164553378,
+    "reason": "Best-effort large-cloud transport test received 3/5 before any data recovery/replay/scoring. Add optional reliable bridge input and test large clouds with that profile. Estimator, window, arm settings, repetitions and score/decision code unchanged.",
+    "gt_seen": false
+  }
+}

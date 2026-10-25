@@ -65,7 +65,7 @@ jobs:
       OPENBLAS_NUM_THREADS: '1'
       OMP_NUM_THREADS: '2'
       RMW_IMPLEMENTATION: rmw_cyclonedds_cpp
-      REPLAY_PROTOCOL: ${{ inputs.enhanced_validation && 'frontend/enhanced-validation09.json' || inputs.enhanced_diagnostic && 'frontend/enhanced-diagnostic.json' || inputs.holdout09 && 'frontend/holdout09.json' || 'frontend/protocol.json' }}
+      REPLAY_PROTOCOL: ${{ inputs.enhanced_validation && 'frontend/enhanced-validation09-reliable.json' || inputs.enhanced_diagnostic && 'frontend/enhanced-diagnostic.json' || inputs.holdout09 && 'frontend/holdout09.json' || 'frontend/protocol.json' }}
     defaults:
       run:
         shell: bash

@@ -33,13 +33,19 @@ class Protocol(unittest.TestCase):
         self.assertEqual(cfg['short_sequence']['end_exclusive'],120)
 
     def test_enhanced_window_is_bounded_and_cannot_be_scored(self):
-        cfg=load(REPO/'frontend/enhanced-diagnostic.json')
+        cfg=json.loads((REPO/'frontend/enhanced-diagnostic.json').read_text())
         self.assertTrue(cfg['diagnostic'])
         self.assertEqual(cfg['short_sequence'],dict(sequence='07',first_frame=730,end_exclusive=826))
         self.assertEqual(cfg['repetitions'],1)
+        with self.assertRaisesRegex(ValueError,'frozen estimator changed'):
+            load(REPO/'frontend/enhanced-diagnostic.json')
 
     def test_enhanced_accuracy_freeze_is_separate(self):
-        cfg=load(REPO/'frontend/enhanced-validation09.json')
+        # The first attempt stopped in best-effort transport testing before any
+        # dataset replay. Keep its freeze; reliability is an explicit amendment.
+        with self.assertRaisesRegex(ValueError,'frozen estimator changed'):
+            load(REPO/'frontend/enhanced-validation09.json')
+        cfg=load(REPO/'frontend/enhanced-validation09-reliable.json')
         self.assertFalse(cfg['diagnostic'])
         self.assertEqual(cfg['short_sequence'],dict(sequence='09',first_frame=240,end_exclusive=480))
         self.assertEqual(len(cfg['arms']),6)

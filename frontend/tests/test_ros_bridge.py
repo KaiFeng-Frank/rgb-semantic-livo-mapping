@@ -36,7 +36,7 @@ class LiveBridge(unittest.TestCase):
             try:
                 process = subprocess.Popen([sys.executable, '-m', 'frontend.input_bridge',
                     '--mode', 'geometry', '--fixed-delay', '--wait-ms', '80',
-                    '--input-reliability', 'reliable' if indexed else 'best_effort',
+                    '--input-reliability', 'reliable' if repeats>1 else 'best_effort',
                     '--input', '/contract/raw', '--output', '/contract/annotated',
                     '--log', temp+'/input.jsonl'], cwd=root, env=env, start_new_session=True,
                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
