@@ -35,10 +35,11 @@ jobs:
         run: |
           python3 -m venv /tmp/contracts
           /tmp/contracts/bin/pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
-          /tmp/contracts/bin/pip install numpy==1.26.4 pytest==9.0.2 PyYAML==6.0.2 requests==2.32.3 pyquaternion==0.9.9 scipy==1.13.1
+          /tmp/contracts/bin/pip install numpy==1.26.4 pytest==9.0.2 PyYAML==6.0.2 requests==2.32.3 pyquaternion==0.9.9 scipy==1.13.1 opencv-python-headless==4.10.0.84
       - name: Check semantic memory and native-19 contracts
         run: |
           /tmp/contracts/bin/python -m pytest -q -p no:cacheprovider tools/semantic_memory
+          /tmp/contracts/bin/python -m unittest tools.visual_instances.test_association tools.visual_instances.test_lifecycle -v
           /tmp/contracts/bin/python -m unittest tools.semantic_kitti.test_contract tools.semantic_kitti.test_runtime -v
   loop-contracts:
     runs-on: ubuntu-22.04

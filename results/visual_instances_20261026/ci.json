@@ -1,0 +1,89 @@
+{
+  "conclusion": "success",
+  "headSha": "52412cb5d27c7d0ba7182f8db3202bafe70fb10f",
+  "jobs": [
+    {
+      "completedAt": "2026-10-25T22:10:06Z",
+      "conclusion": "success",
+      "databaseId": 121306153189,
+      "name": "semantic-contracts",
+      "startedAt": "2026-10-25T22:09:33Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Check out exact candidate",
+          "number": 2,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Install CPU test dependencies",
+          "number": 3,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Check semantic memory and native-19 contracts",
+          "number": 4,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 5,
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/actions/runs/40238863577/job/121306153189"
+    },
+    {
+      "completedAt": "2026-10-25T22:10:25Z",
+      "conclusion": "success",
+      "databaseId": 121306153382,
+      "name": "loop-contracts",
+      "startedAt": "2026-10-25T22:09:33Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Check out exact candidate",
+          "number": 2,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Install pinned geometry dependencies",
+          "number": 3,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Check graph and semantic fusion contracts",
+          "number": 4,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 5,
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/actions/runs/40238863577/job/121306153382"
+    }
+  ],
+  "url": "https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/actions/runs/40238863577"
+}

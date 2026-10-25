@@ -1,0 +1,109 @@
+{
+  "passed": true,
+  "scope": "synthetic actual-ROS contract, not accuracy",
+  "ids": {
+    "1": [
+      12,
+      12,
+      12,
+      0
+    ],
+    "2": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "3": [
+      12,
+      12,
+      12,
+      0
+    ],
+    "4": [
+      12,
+      12,
+      12,
+      0
+    ]
+  },
+  "info": {
+    "1": {
+      "points": 4,
+      "in_view": 4,
+      "in_mask": 4,
+      "occluded": 1,
+      "associated": 3,
+      "instances": 1,
+      "session": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "camera_stamp_ns": 1000000000,
+      "dt_ms": 0.0,
+      "ego_motion": "same_timestamp",
+      "elapsed_ms": 0.49713393673300743,
+      "stamp_ns": 1000000000,
+      "identity_key": "(session, instance_id)",
+      "semantic_update": false
+    },
+    "2": {
+      "reason": "no_causal_camera_or_pose_bracket",
+      "session": null,
+      "associated": 0,
+      "stamp_ns": 2000000000,
+      "identity_key": "(session, instance_id)",
+      "semantic_update": false
+    },
+    "3": {
+      "points": 4,
+      "in_view": 4,
+      "in_mask": 4,
+      "occluded": 1,
+      "associated": 3,
+      "instances": 1,
+      "session": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "camera_stamp_ns": 3000000000,
+      "dt_ms": 0.0,
+      "ego_motion": "same_timestamp",
+      "elapsed_ms": 0.3204030217602849,
+      "stamp_ns": 3000000000,
+      "identity_key": "(session, instance_id)",
+      "semantic_update": false
+    },
+    "4": {
+      "points": 4,
+      "in_view": 4,
+      "in_mask": 4,
+      "occluded": 1,
+      "associated": 3,
+      "instances": 1,
+      "session": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "camera_stamp_ns": 4000000000,
+      "dt_ms": 0.0,
+      "ego_motion": "same_timestamp",
+      "elapsed_ms": 0.2077510580420494,
+      "stamp_ns": 4000000000,
+      "identity_key": "(session, instance_id)",
+      "semantic_update": false
+    }
+  },
+  "map_parity": {
+    "ok": true,
+    "errors": [],
+    "keys_equal": true,
+    "labels_equal": true,
+    "point_counts_equal": true,
+    "keyframe_counts_equal": true,
+    "scores_equal": true,
+    "confidence_equal": true,
+    "keyframes": 4,
+    "stored_points": 16,
+    "map_voxels": 2,
+    "rebuilt_voxels": 2,
+    "compared_voxels": 2,
+    "max_score_error": 0.0,
+    "max_confidence_error": 0.0,
+    "rebuild_ms": 1.5176939778029919,
+    "snapshot_ms": 0.031739939004182816,
+    "comparison_ms": 0.0750210601836443,
+    "total_ms": 1.6286519821733236
+  }
+}

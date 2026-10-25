@@ -1,0 +1,16 @@
+test_calibration_uses_camera_not_lidar_depth (tools.visual_instances.test_association.AssociationTests.test_calibration_uses_camera_not_lidar_depth) ... ok
+test_camera_ego_motion_uses_only_received_pose_bracket (tools.visual_instances.test_association.AssociationTests.test_camera_ego_motion_uses_only_received_pose_bracket) ... ok
+test_empty_detection_is_explicit_unknown (tools.visual_instances.test_association.AssociationTests.test_empty_detection_is_explicit_unknown) ... ok
+test_invalid_mask_and_camera (tools.visual_instances.test_association.AssociationTests.test_invalid_mask_and_camera) ... ok
+test_overlaps_with_rejected_foreground_and_boundaries_abstain (tools.visual_instances.test_association.AssociationTests.test_overlaps_with_rejected_foreground_and_boundaries_abstain) ... ok
+test_restart_does_not_reuse_old_identity (tools.visual_instances.test_association.AssociationTests.test_restart_does_not_reuse_old_identity) ... ok
+test_roundtrip_and_corrupt_packet (tools.visual_instances.test_association.AssociationTests.test_roundtrip_and_corrupt_packet) ... ok
+test_sparse_object_abstains (tools.visual_instances.test_association.AssociationTests.test_sparse_object_abstains) ... ok
+test_time_gate_never_uses_future_and_never_waits (tools.visual_instances.test_association.AssociationTests.test_time_gate_never_uses_future_and_never_waits) ... ok
+test_two_adjacent_people_and_occluding_surface (tools.visual_instances.test_association.AssociationTests.test_two_adjacent_people_and_occluding_surface) ... ok
+test_cancel_during_startup_reaps_child (tools.visual_instances.test_lifecycle.LifecycleTests.test_cancel_during_startup_reaps_child) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.239s
+
+OK

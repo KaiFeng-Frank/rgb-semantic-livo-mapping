@@ -53,6 +53,8 @@ def run(args):
     qos = QoSProfile(depth=100, reliability=ReliabilityPolicy.BEST_EFFORT)
     rows, statuses, maps, paths = [], [], [], []
     semantic_statuses, semantic_maps, semantic_inputs, semantic_scans, semantic_clouds = [], [], [], [], []
+    visual_statuses, instance_clouds = [], []
+    visual_enabled = getattr(args, 'visual_instances', False)
     arrivals, raw, corrected = {}, {}, {}
     sensor_counts = dict(lidar=0, image=0, imu=0)
     publishers = dict(lidar=node.create_publisher(CustomMsg, '/livox/lidar', 10),
@@ -92,8 +94,20 @@ def run(args):
             node.create_subscription(PointCloud2, '/backend/semantic_map', semantic_map_cloud, qos),
             node.create_subscription(PointCloud2, '/backend/semantic_scan', lambda m:
                 semantic_scans.append(dict(stamp_ns=stamp_ns(m), received=time.monotonic(), points=m.width)), qos)])
+    if visual_enabled:
+        if not args.semantics or args.visual_weights is None:
+            raise ValueError('Visual replay requires semantics and explicit visual weights')
+        def instance_output(m):
+            from sensor_msgs_py.point_cloud2 import dtype_from_fields
+            d = np.frombuffer(m.data, dtype=dtype_from_fields(m.fields, point_step=m.point_step))
+            instance_clouds.append(dict(stamp_ns=stamp_ns(m), received=time.monotonic(), points=m.width,
+                associated=int(np.count_nonzero(d['instance_id'])),
+                instances=len(np.unique(d['instance_id'][d['instance_id'] > 0]))))
+        subs.extend([node.create_subscription(String, '/backend/visual_status', lambda m:
+            visual_statuses.append(dict(received_at=time.monotonic(), **json.loads(m.data))), qos),
+            node.create_subscription(PointCloud2, '/backend/semantic_instances', instance_output, qos)])
     processes, handles = [], []
-    semantic_process = None
+    semantic_process = visual_process = None
     def start(command, name, env=None):
         handle = (args.out/name).open('w'); handles.append(handle)
         proc = subprocess.Popen(command, cwd=ROOT, stdout=handle, stderr=subprocess.STDOUT, env=env,
@@ -127,17 +141,28 @@ def run(args):
             # geometric worker, which can use a different Python ABI.
             if os.environ.get('SEMANTIC_ROS_PYTHONPATH'):
                 env['PYTHONPATH'] = os.environ['SEMANTIC_ROS_PYTHONPATH']+os.pathsep+env.get('PYTHONPATH', '')
+            if visual_enabled:
+                cam = yaml.safe_load(args.camera.read_text())['/**']['ros__parameters']
+                visual_process = start([sys.executable, '-m', 'tools.visual_instances.node',
+                    '--worker-python', str(runtime/'venv/bin/python'), '--weights', str(args.visual_weights),
+                    '--out', str(args.out/'vision'), '--image-topic', common_config['img_topic'],
+                    '--width', str(cam['cam_width']), '--height', str(cam['cam_height'])]+
+                    (['--compressed'] if compressed_transport else []), 'vision.log', env)
             semantic_process = start([sys.executable, '-m', 'tools.loop_closure.semantic_node', '--frontend', str(args.frontend),
                    '--out', str(args.out/'semantics'), '--reflectance-divisor', '255', '--verify-final',
-                   '--consistency', getattr(args, 'consistency', 'off')], 'semantics.log', env)
+                   '--consistency', getattr(args, 'consistency', 'off')]+
+                   (['--visual-instances', '--camera', str(args.camera)] if visual_enabled else []), 'semantics.log', env)
         front = start([str(args.workspace/'install/fast_livo/lib/fast_livo/fastlivo_mapping'),
                        '--ros-args', '--params-file', str(args.frontend)], 'frontend.log')
         until = time.monotonic()+(150 if args.semantics else 45)
         while (not all(p.get_subscription_count() for p in publishers.values()) or
                (args.backend and not any(s['worker_ready'] for s in statuses)) or
-               (args.semantics and not any(s['ready'] for s in semantic_statuses))):
+               (args.semantics and not any(s['ready'] for s in semantic_statuses)) or
+               (visual_enabled and not any(s['ready'] for s in visual_statuses))):
             if any(p.poll() is not None for p in processes):
                 raise RuntimeError('pipeline exited during startup')
+            if any(s.get('failed') for s in semantic_statuses+visual_statuses):
+                raise RuntimeError('perception worker failed during startup; see status logs')
             if time.monotonic() > until:
                 raise TimeoutError('sensor/worker discovery deadline')
             spin(.05)
@@ -239,6 +264,9 @@ def run(args):
                        missing_images_after_initialization=sum(s >= min(raw) and s not in raw for s in arrivals) if raw else None,
                        semantic_input_keyframes=len(semantic_inputs), semantic_scan_outputs=len(semantic_scans),
                        consistency=getattr(args, 'consistency', 'off'),
+                       visual_instances=visual_enabled, visual_status=visual_statuses[-1] if visual_statuses else None,
+                       instance_cloud_outputs=len(instance_clouds),
+                       associated_points=sum(x['associated'] for x in instance_clouds),
                        semantic_map_outputs=len(semantic_maps),
                        semantic_map_clouds_received=len(semantic_clouds),
                        last_semantic_status=semantic_statuses[-1] if semantic_statuses else None,
@@ -252,15 +280,20 @@ def run(args):
                            ('semantic_clouds', semantic_clouds)]:
             if data:
                 (args.out/(name+'.jsonl')).write_text(''.join(json.dumps(r)+'\n' for r in data))
+        for name, data in [('visual_status', visual_statuses), ('instance_clouds', instance_clouds)]:
+            if data:
+                (args.out/(name+'.jsonl')).write_text(''.join(json.dumps(r)+'\n' for r in data))
         print(json.dumps(verdict, indent=2), flush=True)
         if not raw or len(matched) != len(raw) or (args.backend and len(common) != len(raw)):
             raise AssertionError('missing or unpaired sensor-time output')
+        if visual_enabled and (not visual_statuses or visual_statuses[-1].get('failed') or not instance_clouds):
+            raise AssertionError('visual worker failed or instance point clouds were never delivered')
     finally:
         for proc in reversed(processes):
             if proc.poll() is None:
                 # Let a semantic parent close its owned PTv3/display children
                 # and perform the untimed final parity check before group kill.
-                if proc is semantic_process:
+                if proc is semantic_process or proc is visual_process:
                     proc.terminate()
                 else:
                     os.killpg(proc.pid, signal.SIGTERM)
@@ -269,7 +302,7 @@ def run(args):
                 proc.wait(timeout=90 if args.semantics else 5)
             except subprocess.TimeoutExpired:
                 os.killpg(proc.pid, signal.SIGKILL); proc.wait()
-            if proc is semantic_process:
+            if proc is semantic_process or proc is visual_process:
                 try:
                     os.killpg(proc.pid, signal.SIGTERM)
                 except ProcessLookupError:
@@ -293,4 +326,6 @@ if __name__ == '__main__':
     parser.add_argument('--semantic-export', action='store_true', help='Match dense frontend export load in the control arm')
     parser.add_argument('--semantic-runtime', type=Path)
     parser.add_argument('--consistency', choices=('off', 'shadow', 'active'), default='off')
+    parser.add_argument('--visual-instances', action='store_true')
+    parser.add_argument('--visual-weights', type=Path)
     run(parser.parse_args())

@@ -1,0 +1,16 @@
+{
+  "weights": "/home/frank/semantic_livo_runtime/visual-weights/yolo11n-seg.pt",
+  "sha256": "55ed65c56c91713d23e8402371c6c49a6fd84f257f7dce452e8d70e41dcbe152",
+  "ultralytics": "8.3.228",
+  "imgsz": 640,
+  "tracker": "# Pinned baseline. Camera-motion compensation on; appearance ReID off.\ntracker_type: botsort\ntrack_high_thresh: 0.25\ntrack_low_thresh: 0.1\nnew_track_thresh: 0.25\ntrack_buffer: 15\nmatch_thresh: 0.8\nfuse_score: true\ngmc_method: sparseOptFlow\nproximity_thresh: 0.5\nappearance_thresh: 0.25\nwith_reid: false\nmodel: auto\n",
+  "classes": {
+    "0": 6,
+    "1": 1,
+    "2": 3,
+    "3": 5,
+    "5": 2,
+    "7": 9
+  },
+  "training": "none; official COCO pretrained weights"
+}
