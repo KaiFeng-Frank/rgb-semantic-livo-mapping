@@ -1,0 +1,40 @@
+{
+  "source_release": "loop-semantics-40036755735-1",
+  "source_manifest_sha256": "418f036474ec8b365b777fc58c516a975514a581e340d7e9bdd0129888aa73e1",
+  "introduced_after_primary_result": true,
+  "parameter_tuning": false,
+  "original_maps_rebuilt": false,
+  "description": "Only the correction evidence is restricted to one visit. Original map fallback and all masks are shared.",
+  "modes": {
+    "all": {
+      "original_arrays_unchanged": true,
+      "array_hashes": {
+        "key": "578e0d548e2ee2f994b8bc83709d4cfa12ff9bc1b3b730fb5b4cfd4412beeae0",
+        "xyz": "f96a2a630c04691bdc97531527c924f1319c3c45a8c64246cbe548f4a14f5f27",
+        "ordinary": "c48c79362cac4f70200586be34a05d7dc6c9616231d2b70617f3188db6bca017",
+        "protected": "6737c8b5f0eb00a3287998279f6ff76313ca722391aaf5c42975d848b2906f4c",
+        "group_balanced": "fb3b005d0d8a7a7e1ff4d41fb8896f968be127406853f39c8bf2fcde1b6949db",
+        "revisit_balanced": "0749b252493851e739d8e198e16932e6314cd1fd78678ed247214ca480c642bd"
+      },
+      "changed_voxels": {
+        "first_visit_only": 1050,
+        "second_visit_only": 807
+      }
+    },
+    "heldout": {
+      "original_arrays_unchanged": true,
+      "array_hashes": {
+        "key": "f77e5d1132163a3fc34fed780bc63baa4bff7bb2a32c0d0f0d6e09e7167c8d7a",
+        "xyz": "4af85b4212a23e043fd7c593a4e2f9edff571c6015a01971df8db2f8c5d732fc",
+        "ordinary": "e0d5b0eb29f77ee515e93d65acdb560633be296449d4611028471345f5db5d10",
+        "protected": "4b7ca21cdb32296b9217836a52616c95cb750634cad5c19d1e2bcbfab05507c5",
+        "group_balanced": "ec4c74fd3e718832f3997999ac3f5defa4b3d39c85561d1dc869fccfdb4a689c",
+        "revisit_balanced": "91a3276c10c627a76445be88bc1c8d18cab043aec9fb5ba226a7fb32e0e37390"
+      },
+      "changed_voxels": {
+        "first_visit_only": 1039,
+        "second_visit_only": 760
+      }
+    }
+  }
+}
