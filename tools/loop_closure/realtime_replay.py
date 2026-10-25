@@ -16,6 +16,7 @@ import time
 import yaml
 
 import numpy as np
+from .semantic_delivery import match_maps
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -51,7 +52,7 @@ def run(args):
     node = Node('backend_realtime_observer')
     qos = QoSProfile(depth=100, reliability=ReliabilityPolicy.BEST_EFFORT)
     rows, statuses, maps, paths = [], [], [], []
-    semantic_statuses, semantic_maps, semantic_inputs, semantic_scans = [], [], [], []
+    semantic_statuses, semantic_maps, semantic_inputs, semantic_scans, semantic_clouds = [], [], [], [], []
     arrivals, raw, corrected = {}, {}, {}
     sensor_counts = dict(lidar=0, image=0, imu=0)
     publishers = dict(lidar=node.create_publisher(CustomMsg, '/livox/lidar', 10),
@@ -79,11 +80,16 @@ def run(args):
         subs.append(node.create_subscription(PointCloud2, '/backend/input/semantic_cloud', lambda m:
             semantic_inputs.append(dict(stamp_ns=stamp_ns(m), received=time.monotonic(), points=m.width)), qos))
     if args.semantics:
+        def semantic_map_cloud(message):
+            semantic_clouds.append(dict(stamp_ns=stamp_ns(message), received=time.monotonic(),
+                points=message.width, frame_id=message.header.frame_id,
+                sha256=hashlib.sha256(message.data).hexdigest()))
         subs.extend([
             node.create_subscription(String, '/backend/semantic_status', lambda m:
                 semantic_statuses.append(dict(observed_monotonic=time.monotonic(), **json.loads(m.data))), qos),
             node.create_subscription(String, '/backend/semantic_map_info', lambda m:
                 semantic_maps.append(dict(received=time.monotonic(), **json.loads(m.data))), qos),
+            node.create_subscription(PointCloud2, '/backend/semantic_map', semantic_map_cloud, qos),
             node.create_subscription(PointCloud2, '/backend/semantic_scan', lambda m:
                 semantic_scans.append(dict(stamp_ns=stamp_ns(m), received=time.monotonic(), points=m.width)), qos)])
     processes, handles = [], []
@@ -191,7 +197,14 @@ def run(args):
                 s = semantic_statuses[-1] if semantic_statuses else {}
                 info = s.get('map_info') or {}
                 accounted = sum(s.get(k, 0) for k in ('processed', 'dropped_full', 'dropped_stale', 'unanchored', 'capacity_reached'))
+                deliveries = match_maps(semantic_maps, semantic_clouds)
+                delivered = (len(semantic_maps) == s.get('output_publications') and
+                    all(c is not None for _, c in deliveries) and
+                    any(m['publication_id'] == s.get('map_publication_id') and c is not None
+                        for m, c in deliveries))
                 if (s.get('failed') or (s.get('pending') == 0 and accounted == s.get('received') and
+                    delivered and s.get('map_completed_id') == s.get('map_publication_id') and
+                    s.get('scan_publications') == s.get('received') and
                     info.get('graph_stamp_ns') == s.get('latest_graph_stamp_ns') and
                     info.get('graph_version') == s.get('latest_graph_version'))):
                     break
@@ -221,6 +234,7 @@ def run(args):
                        missing_images_after_initialization=sum(s >= min(raw) and s not in raw for s in arrivals) if raw else None,
                        semantic_input_keyframes=len(semantic_inputs), semantic_scan_outputs=len(semantic_scans),
                        semantic_map_outputs=len(semantic_maps),
+                       semantic_map_clouds_received=len(semantic_clouds),
                        last_semantic_status=semantic_statuses[-1] if semantic_statuses else None,
                        scope=('1x real-sensor LIVO + online geometry + live PTv3 semantic keyframes and reversible fusion; no GT accuracy evaluation'
                               if args.semantics else '1x real-sensor LIVO + geometric backend; semantic inference is not part of this measurement'))
@@ -228,7 +242,8 @@ def run(args):
         for name, data in [('poses', rows), ('inputs', source_rows), ('status', statuses), ('maps', maps), ('paths', paths)]:
             (args.out/(name+'.jsonl')).write_text(''.join(json.dumps(r)+'\n' for r in data))
         for name, data in [('semantic_status', semantic_statuses), ('semantic_maps', semantic_maps),
-                           ('semantic_inputs', semantic_inputs), ('semantic_scans', semantic_scans)]:
+                           ('semantic_inputs', semantic_inputs), ('semantic_scans', semantic_scans),
+                           ('semantic_clouds', semantic_clouds)]:
             if data:
                 (args.out/(name+'.jsonl')).write_text(''.join(json.dumps(r)+'\n' for r in data))
         print(json.dumps(verdict, indent=2), flush=True)

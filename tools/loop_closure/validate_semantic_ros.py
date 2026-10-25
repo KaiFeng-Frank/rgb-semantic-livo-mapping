@@ -28,7 +28,11 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_WORKER = Path('/home/frank/semantic_backend_runtime/venv/bin/python')
 KEYFRAMES = ((1, 0., 0.), (11, 2., 2.1), (21, 4., 4.2), (32, 0., .3))
+# Short, loop-free sensor times let three semantic keyframes share the same
+# three-second, 10 Hz odometry interval. The last three exercise scan coalescing.
+FAULT_KEYFRAMES = tuple((index + 1, float(index), index * 1.05) for index in range(7))
 POSE_LIMIT_MS = 200.
+SCAN_LIMIT_MS = 1000.
 FAULT_POSES = 30
 
 
@@ -151,7 +155,7 @@ def signal_child(identity, sig):
 
 
 class RosFixture:
-    def __init__(self, out, worker, verify_final):
+    def __init__(self, out, worker, verify_final, keyframes=KEYFRAMES):
         import rclpy
         from geometry_msgs.msg import PoseStamped
         from nav_msgs.msg import Odometry
@@ -163,6 +167,8 @@ class RosFixture:
         self.processes, self.handles, self.paused = [], [], []
         self.stopped = False
         self.sent, self.corrected = {}, {}
+        self.semantic_sent, self.scans_by_stamp = {}, {}
+        self.keyframes = keyframes
         self.graphs, self.maps, self.infos, self.scans = [], [], [], []
         self.backend_status, self.semantic_status = [], []
         self.input_stamps, self.packets = [], []
@@ -186,12 +192,25 @@ class RosFixture:
             check(stamp_ns(message) in self.input_stamps, 'map uses an unsent/future graph stamp')
             self.maps.append((time.monotonic(), message))
 
+        def collect_scan(message):
+            stamp = stamp_ns(message)
+            check(message.header.frame_id == 'backend_imu', 'semantic scan frame mismatch')
+            check(stamp in self.input_stamps, 'semantic scan has an unsent/future stamp')
+            check(stamp not in self.scans_by_stamp, f'duplicate semantic scan {stamp}')
+            check(not self.scans or stamp > stamp_ns(self.scans[-1][1]), 'semantic scans reordered')
+            received = time.monotonic()
+            expected = self.packets[self.input_stamps.index(stamp)]
+            for actual, original in zip(semantic_rows(message), expected):
+                np.testing.assert_array_equal(actual, original,
+                                               err_msg='original semantic scan points/labels/confidence changed')
+            self.scans.append((received, message))
+            self.scans_by_stamp[stamp] = (received, message)
+
         self.subscriptions = [
             self.node.create_subscription(PoseStamped, '/backend/pose', corrected, reliable),
             self.node.create_subscription(String, '/backend/trajectory', collect_graph, graph_qos),
             self.node.create_subscription(PointCloud2, '/backend/semantic_map', collect_map, best),
-            self.node.create_subscription(PointCloud2, '/backend/semantic_scan',
-                                          lambda m: self.scans.append((time.monotonic(), m)), best),
+            self.node.create_subscription(PointCloud2, '/backend/semantic_scan', collect_scan, best),
             self.node.create_subscription(String, '/backend/semantic_map_info',
                                           lambda m: self.infos.append((time.monotonic(), json.loads(m.data))), best),
             self.node.create_subscription(String, '/backend/status',
@@ -229,6 +248,10 @@ class RosFixture:
             worker_command = (Path('/proc') / str(self.native_worker['pid']) / 'cmdline').read_bytes().split(b'\0')
             check(worker_command[0].decode() == str(worker), 'backend did not launch requested native venv')
             self.output_child = child_identity(self.semantic.pid, 'tools.loop_closure.semantic_outputs')
+            self.scan_child = child_identity(self.semantic.pid, 'tools.loop_closure.semantic_scan_outputs')
+            check(self.scan_child['pid'] != self.output_child['pid'], 'scan and map share an output process')
+            check({'scan_publications', 'scan_superseded', 'scan_output_error'} <= self.semantic_status[-1].keys(),
+                  'independent scan status fields are missing')
             self.spin(.2)
         except BaseException:
             self.close()
@@ -297,7 +320,7 @@ class RosFixture:
         return message
 
     def keyframe(self, index, wait=True):
-        seconds, actual_x, odom_x = KEYFRAMES[index]
+        seconds, actual_x, odom_x = self.keyframes[index]
         stamp = seconds * 10**9
         # Float32 transport precedes the body's float64 fusion/extrinsic math.
         xyz = (room_scene().astype(np.float64) - [actual_x, 0., 0.]).astype(np.float32)
@@ -310,6 +333,7 @@ class RosFixture:
               'diagnostic labels leaked into geometric graph input')
         # Semantic input may precede its graph anchor. Alternate cloud/pose
         # arrival order; every graph pair still has exactly the same sensor stamp.
+        self.semantic_sent[stamp] = time.monotonic()
         self.semantic_pub.publish(semantic)
         if index % 2:
             self.odometry(stamp, odom_x)
@@ -321,24 +345,22 @@ class RosFixture:
             self.wait_keyframe(index)
         return semantic
 
-    def wait_keyframe(self, index):
-        stamp = KEYFRAMES[index][0] * 10**9
+    def wait_keyframe(self, index, require_scan=True):
+        stamp = self.keyframes[index][0] * 10**9
         self.wait(lambda: self.graphs and self.graphs[-1][1]['stamp_ns'] == stamp
                   and self.semantic_status and self.semantic_status[-1]['processed'] == index + 1
                   and self.infos and self.infos[-1][1]['graph_stamp_ns'] == stamp
                   and self.infos[-1][1]['summary']['keyframes'] == index + 1
                   and self.maps and stamp_ns(self.maps[-1][1]) == stamp
-                  and self.scans and stamp_ns(self.scans[-1][1]) == stamp,
+                  and (not require_scan or stamp in self.scans_by_stamp),
                   f'completed semantic keyframe {index}')
         self.spin(.15)
         graph = self.graphs[-1][1]
         check(graph['times_ns'] == self.input_stamps, 'graph did not pair exact keyframe timestamps')
         check(self.infos[-1][1]['graph_version'] == graph['version'], 'map/graph revision mismatch')
         compare_map(self.maps[-1][1], self.packets, np.asarray(graph['poses']), self.config)
-        scan = self.scans[-1][1]
-        check(scan.header.frame_id == 'backend_imu', 'semantic scan was not transformed to body frame')
-        for actual, expected in zip(semantic_rows(scan), self.packets[index]):
-            np.testing.assert_array_equal(actual, expected, err_msg='original semantic scan points/labels changed')
+        if require_scan:
+            check(stamp_ns(self.scans[-1][1]) == stamp, 'latest semantic scan stamp mismatch')
 
     def check_versions(self):
         self.spin(.2)
@@ -349,10 +371,14 @@ class RosFixture:
         for (arrival, message), (_, info) in zip(self.maps, self.infos):
             key = (info['graph_stamp_ns'], info['graph_version'])
             check(stamp_ns(message) == key[0] and key in graphs, 'map stamp/version has no real graph revision')
+            check(info['map_sha256'] == hashlib.sha256(bytes(message.data)).hexdigest()
+                  and info['map_points'] == message.width * message.height,
+                  'map payload does not match its publication metadata')
             check(info['graph_received_monotonic'] <= info['ready_monotonic']
                   <= info['published_monotonic'], 'map publication timing is inconsistent')
             check(self.sent[key[0]] <= arrival, 'semantic output predates its actual input')
-        return dict(publications=len(ids), graph_revisions=len(graphs), coherent=True)
+        return dict(publications=len(ids), graph_revisions=len(graphs), coherent=True,
+                    payload_hashes_match=True)
 
     def close(self):
         if self.stopped:
@@ -387,6 +413,11 @@ class RosFixture:
                                        points=message.width * message.height,
                                        sha256=hashlib.sha256(bytes(message.data)).hexdigest())
                                   for received, message in self.maps],
+                            scans=[dict(received_monotonic=received, stamp_ns=stamp_ns(message),
+                                        sent_monotonic=self.semantic_sent[stamp_ns(message)],
+                                        frame_id=message.header.frame_id, points=message.width * message.height,
+                                        sha256=hashlib.sha256(bytes(message.data)).hexdigest())
+                                   for received, message in self.scans],
                             corrected_poses=[dict(stamp_ns=stamp, sent_monotonic=self.sent.get(stamp),
                                                   received_monotonic=received, frame_id=message.header.frame_id)
                                              for stamp, (received, message) in self.corrected.items()])
@@ -456,6 +487,10 @@ def normal_phase(out, worker, verify):
         for stamp, (_, message) in fixture.corrected.items():
             check(message.header.frame_id == 'map' and stamp in fixture.sent, 'corrected pose frame/stamp mismatch')
         check(first_map < fixture.sent[11 * 10**9], 'first map was not published before future input')
+        check(fixture.semantic_status[-1]['scan_publications'] == 4
+              and fixture.semantic_status[-1]['scan_superseded'] == 0
+              and fixture.semantic_status[-1]['scan_output_error'] is None,
+              'paced semantic scan output lost or superseded a view')
         result = dict(keyframes=4, input_stamps_ns=fixture.input_stamps, loop_count=1,
                       accepted_icp=accepted[0], historical_pose_change_m=history_motion,
                       first_map_before_future_input=True, versions=versions,
@@ -469,56 +504,135 @@ def normal_phase(out, worker, verify):
     return result
 
 
+def scan_pause_phase(fixture):
+    """Keep this in the existing fixture: three more keyframes, no new workers."""
+    print('phase: pause current-scan output; verify maps continue and latest views coalesce', flush=True)
+    baseline = deepcopy(fixture.semantic_status[-1])
+    before_scans, before_maps = len(fixture.scans), len(fixture.maps)
+    identity = child_identity(fixture.semantic.pid, 'tools.loop_closure.semantic_scan_outputs')
+    signal_child(identity, signal.SIGSTOP)
+    fixture.paused.append(identity)
+    fixture.wait(lambda: '\nState:\tT' in (Path('/proc') / str(identity['pid']) / 'status').read_text(),
+                 'owned scan output process to stop', timeout=2.)
+    began = time.monotonic()
+    for index in (4, 5, 6):
+        fixture.keyframe(index, wait=False)
+        fixture.wait_keyframe(index, require_scan=False)
+        check(len(fixture.scans) == before_scans, 'scan output advanced while its process was stopped')
+        check(fixture.semantic_status[-1]['output_error'] is None, 'scan pause blocked map publication')
+    status = fixture.semantic_status[-1]
+    check(status['processed'] == 7 and status['map_info']['summary']['keyframes'] == 7,
+          'fusion did not continue for all three scan-paused keyframes')
+    check(status['scan_publications'] == baseline['scan_publications'], 'stopped scan output acknowledged a view')
+    check(len(fixture.maps) >= before_maps + 3, 'maps stopped while scans were paused')
+    paused_s = time.monotonic() - began
+    signal_child(identity, signal.SIGCONT)
+    fixture.paused.remove(identity)
+    fixture.wait(lambda: fixture.semantic_status[-1]['scan_output_error'] is None
+                 and fixture.semantic_status[-1]['scan_publications']
+                 + fixture.semantic_status[-1]['scan_superseded'] == 7
+                 and 7 * 10**9 in fixture.scans_by_stamp,
+                 'latest scan delivery and superseded accounting after resume')
+    fixture.spin(.1)
+    current = fixture.semantic_status[-1]
+    publications = current['scan_publications'] - baseline['scan_publications']
+    superseded = current['scan_superseded'] - baseline['scan_superseded']
+    delivered = [stamp_ns(message) for _, message in fixture.scans[before_scans:]]
+    check(0 < publications <= 2 and superseded > 0 and publications + superseded == 3,
+          f'scan output did not retain at most one in-flight and one latest view: {current}')
+    check(len(delivered) == publications and delivered[-1] == 7 * 10**9,
+          'scan publication accounting differs from actual received views')
+    check(current['output_error'] is None and current['map_info']['summary']['keyframes'] == 7,
+          'map health changed during scan recovery')
+    compare_map(fixture.maps[-1][1], fixture.packets,
+                np.asarray(fixture.graphs[-1][1]['poses']), fixture.config)
+    return dict(paused_child=identity, paused_s=paused_s, semantic_keyframes_processed=3,
+                map_publications_while_scan_paused=len(fixture.maps) - before_maps,
+                views_delivered_after_resume=publications, delivered_stamps_ns=delivered,
+                views_superseded=superseded, publications_plus_superseded_equals_processed=True,
+                final_scan_stamp_ns=delivered[-1], map_continued=True)
+
+
 def fault_phase(out, worker, verify):
-    print('phase: pause owned semantic output child; continue odometry at 10 Hz for 3 seconds', flush=True)
-    fixture = RosFixture(out, worker, verify)
+    print('phase: pause map output; three semantic keyframes and 30 poses continue independently', flush=True)
+    fixture = RosFixture(out, worker, verify, keyframes=FAULT_KEYFRAMES)
     try:
         fixture.keyframe(0)
-        fixture.wait(lambda: fixture.semantic_status[-1]['output_publications'] == len(fixture.maps),
-                      'first output acknowledgement')
+        fixture.wait(lambda: fixture.semantic_status[-1]['output_publications'] == len(fixture.maps)
+                      and fixture.semantic_status[-1]['scan_publications'] == 1,
+                      'first map and scan output acknowledgements')
         fixture.spin(.2)
         baseline_outputs, baseline_maps = fixture.semantic_status[-1]['output_publications'], len(fixture.maps)
+        baseline_scans, baseline_status = len(fixture.scans), len(fixture.semantic_status)
         identity = child_identity(fixture.semantic.pid, 'tools.loop_closure.semantic_outputs')
+        check(identity['pid'] != fixture.scan_child['pid'], 'pause target also owns current scans')
         signal_child(identity, signal.SIGSTOP)
         fixture.paused.append(identity)
         fixture.wait(lambda: '\nState:\tT' in (Path('/proc') / str(identity['pid']) / 'status').read_text(),
                       'owned semantic output process to stop', timeout=2.)
-        fixture.keyframe(1, wait=False)  # Creates actual pending semantic output while paused.
         began = time.monotonic()
         fault_stamps = []
         for index in range(FAULT_POSES):
             target = began + index / 10.
             fixture.spin(max(0., target - time.monotonic()))
-            stamp = 11 * 10**9 + (index + 1) * 100_000_000
+            stamp = 2 * 10**9 + index * 100_000_000
             fault_stamps.append(stamp)
-            fixture.odometry(stamp, 2.1 + (index + 1) * .01)
+            if index % 10 == 0:
+                fixture.keyframe(1 + index // 10, wait=False)
+            else:
+                fixture.odometry(stamp, 1.05 * (1 + index / 10.))
             fixture.spin(max(0., target + .1 - time.monotonic()))
         fixture.wait(lambda: all(stamp in fixture.corrected for stamp in fault_stamps),
                       'all corrected poses while semantic output remains stopped', timeout=.2)
+        semantic_stamps = [2 * 10**9, 3 * 10**9, 4 * 10**9]
+        fixture.wait(lambda: all(stamp in fixture.scans_by_stamp for stamp in semantic_stamps)
+                      and fixture.semantic_status[-1]['processed'] == 4
+                      and fixture.semantic_status[-1]['scan_publications'] == 4,
+                      'all three current scans and fused keyframes while map output remains stopped', timeout=.5)
         latencies = [(fixture.corrected[stamp][0] - fixture.sent[stamp]) * 1000 for stamp in fault_stamps]
+        scan_latencies = [(fixture.scans_by_stamp[stamp][0] - fixture.semantic_sent[stamp]) * 1000
+                          for stamp in semantic_stamps]
         intervals = np.diff([fixture.sent[stamp] for stamp in fault_stamps])
         check(max(latencies) < POSE_LIMIT_MS, f'pose latency exceeded {POSE_LIMIT_MS} ms: {latencies}')
+        check(max(scan_latencies) < SCAN_LIMIT_MS, f'current-scan latency exceeded {SCAN_LIMIT_MS} ms: {scan_latencies}')
         check(np.max(np.abs(intervals - .1)) < .05, f'fixture could not sustain its 10 Hz input cadence: {intervals}')
         check(len(fixture.maps) == baseline_maps, 'semantic output advanced while its process was stopped')
         fixture.wait(lambda: fixture.semantic_status[-1]['output_error'] is not None,
                       'semantic publication stall health signal', timeout=1.)
         stalled = fixture.semantic_status[-1]
-        check('stalled' in stalled['output_error'] and stalled['processed'] == 2,
+        check('stalled' in stalled['output_error'] and stalled['processed'] == 4,
               'fault did not block publication while fusion continued')
         check(stalled['output_publications'] == baseline_outputs, 'stopped output acknowledged a new map')
+        check(stalled['scan_superseded'] == 0 and len(fixture.scans) == baseline_scans + 3,
+              'paced current scans were dropped or superseded by a stalled map publisher')
+        check(all(row['scan_output_error'] is None for row in fixture.semantic_status[baseline_status:]),
+              'map publication stall affected the independent scan process')
+        check(stalled['map_info']['graph_stamp_ns'] == 4 * 10**9
+              and stalled['map_info']['summary']['keyframes'] == 4,
+              'map fusion did not advance to the final graph while publication was paused')
+        check(stalled['map_publication_id'] > stalled['map_completed_id'], 'map publisher has no pending work')
+        for first, following in zip(semantic_stamps, semantic_stamps[1:]):
+            check(fixture.scans_by_stamp[first][0] < fixture.semantic_sent[following],
+                  'current scan waited for a future keyframe')
         for index, stamp in enumerate(fault_stamps):
             message = fixture.corrected[stamp][1]
             check(message.header.frame_id == 'map', 'corrected pose frame changed during semantic stall')
-            check(abs(message.pose.position.x - (2.1 + (index + 1) * .01)) < 1e-9,
+            check(abs(message.pose.position.x - 1.05 * (1 + index / 10.)) < 1e-9,
                   'no-loop corrected odometry changed during semantic stall')
         paused_s = time.monotonic() - began
+        resume_time = time.monotonic()
+        check(all(fixture.scans_by_stamp[stamp][0] < resume_time for stamp in semantic_stamps),
+              'some current scans arrived only after map resume')
         signal_child(identity, signal.SIGCONT)
         fixture.paused.remove(identity)
-        fixture.wait_keyframe(1)
+        fixture.wait_keyframe(3)
         fixture.wait(lambda: fixture.semantic_status[-1]['output_error'] is None
-                      and fixture.semantic_status[-1]['output_publications'] > baseline_outputs,
+                      and fixture.semantic_status[-1]['output_publications'] > baseline_outputs
+                      and fixture.semantic_status[-1]['map_completed_id']
+                      == fixture.semantic_status[-1]['map_publication_id'],
                       'semantic display recovery after SIGCONT')
-        fixture.check_versions()
+        recovery_map = compare_map(fixture.maps[-1][1], fixture.packets,
+                                   np.asarray(fixture.graphs[-1][1]['poses']), fixture.config)
         check(set(fixture.corrected) == set(fixture.sent), 'some odometry did not produce exactly one corrected pose')
         result = dict(paused_child=identity, paused_s=paused_s, odometry_hz=10,
                       poses_sent_while_paused=FAULT_POSES, corrected_before_resume=len(latencies),
@@ -526,9 +640,18 @@ def fault_phase(out, worker, verify):
                       input_to_pose_max_ms=max(latencies), latency_limit_ms=POSE_LIMIT_MS,
                       input_interval_min_s=float(intervals.min()), input_interval_max_s=float(intervals.max()),
                       stall_reported=stalled['output_error'], fusion_continued=True,
-                      semantic_output_recovered=True, versions=fixture.check_versions())
+                      semantic_keyframes_while_map_paused=3, scans_received_before_map_resume=3,
+                      scan_stamps_ns=semantic_stamps, scan_output_child=fixture.scan_child,
+                      input_to_scan_p95_ms=float(np.percentile(scan_latencies, 95)),
+                      input_to_scan_max_ms=max(scan_latencies), scan_latency_limit_ms=SCAN_LIMIT_MS,
+                      scan_superseded_while_map_paused=stalled['scan_superseded'],
+                      semantic_output_recovered=True, recovery_map=recovery_map,
+                      versions=fixture.check_versions())
         (out / 'pose_latency.json').write_text(json.dumps(dict(stamps_ns=fault_stamps,
-            latency_ms=latencies, input_interval_s=intervals.tolist()), indent=2) + '\n')
+            latency_ms=latencies, input_interval_s=intervals.tolist(), scan_stamps_ns=semantic_stamps,
+            scan_latency_ms=scan_latencies), indent=2) + '\n')
+        result['scan_pause'] = scan_pause_phase(fixture)
+        result['final_versions'] = fixture.check_versions()
     finally:
         fixture.close()
     result['final'] = fixture.final(verify)
@@ -540,6 +663,8 @@ def run(out, worker, verify_final=False):
     check(worker.is_file() and os.access(worker, os.X_OK), f'native worker Python is not executable: {worker}')
     check((ROOT / 'tools/loop_closure/semantic_fusion.py').is_file(),
           'semantic_fusion.py is not present yet; wait for the core agent')
+    check((ROOT / 'tools/loop_closure/semantic_scan_outputs.py').is_file(),
+          'independent semantic_scan_outputs.py is not present yet')
     # The caller sources ROS; this fixture deliberately does not source a shell
     # setup, launch a frontend, import native libraries, or access a GPU.
     os.environ.setdefault('ROS_DOMAIN_ID', '90')
@@ -549,6 +674,8 @@ def run(out, worker, verify_final=False):
                   diagnostic_predictions_only=True, backend_labels_or_gt=False,
                   limits=dict(geometry_keyframes=4, points_per_scan=12000, fault_odometry_hz=10,
                               fault_poses=FAULT_POSES, pose_latency_limit_ms=POSE_LIMIT_MS,
+                              semantic_keyframes_during_each_pause=3, fault_semantic_keyframes=7,
+                              scan_latency_limit_ms=SCAN_LIMIT_MS,
                               input_cadence_tolerance_s=.05, discovery_deadline_s=45,
                               keyframe_deadline_s=15, cpu_threads_per_native_worker=1),
                   worker_python=str(worker), verify_final=verify_final)
@@ -584,6 +711,8 @@ def main():
     print(json.dumps(dict(passed=result['passed'], evidence=str(args.out.absolute()),
                          loop_count=result['normal']['loop_count'],
                          corrected_while_semantic_output_paused=result['fault']['corrected_before_resume'],
+                         scans_while_map_paused=result['fault']['scans_received_before_map_resume'],
+                         scans_superseded_while_scan_paused=result['fault']['scan_pause']['views_superseded'],
                          pose_latency_max_ms=result['fault']['input_to_pose_max_ms']), indent=2))
     return 0
 

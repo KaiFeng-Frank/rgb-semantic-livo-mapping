@@ -43,13 +43,18 @@ class Backpressure(Exception):
 
 
 class PTv3Client(object):
+    _cancel_event = None
+
     def __init__(self, log=None, intensity_scale=0.2, stderr_path=None,
                  use_shm=True, nslot=4, max_pts=200000, grid_size=None,
                  half=None, shuffle=None, fast_voxel=None, tf32=None,
                  memory_checkpoint=None, memory_shadow=False,
-                 startup_timeout_s=120., response_timeout_s=10.):
+                 startup_timeout_s=120., response_timeout_s=10., cancel_event=None):
         if any(not math.isfinite(v) or v <= 0 for v in (startup_timeout_s, response_timeout_s)):
             raise ValueError('Worker timeouts must be finite and positive')
+        self._cancel_event = cancel_event
+        if cancel_event is not None and cancel_event.is_set():
+            raise InterruptedError('PTv3 worker cancelled')
         self._read_timeout_s = startup_timeout_s
         env = dict(os.environ)
         # Memory is opt-in at the client, never inherited accidentally by legacy callers.
@@ -101,9 +106,10 @@ class PTv3Client(object):
         else:
             env["PTV3_SHM"] = "0"
 
-        errf = open(stderr_path, "wb") if stderr_path else None
-        self._errf = errf
+        errf = self._errf = None
         try:
+            errf = open(stderr_path, "wb") if stderr_path else None
+            self._errf = errf
             self.p = subprocess.Popen(
                 [PTV3_PY, "-u", WORKER],
                 stdin=subprocess.PIPE, stdout=subprocess.PIPE,
@@ -117,6 +123,8 @@ class PTv3Client(object):
             if hasattr(self, 'p'):
                 self.p.kill()
                 self.p.wait(timeout=5)
+                self.p.stdin.close()
+                self.p.stdout.close()
             self._unlink_shm()
             if errf:
                 errf.close()
@@ -130,13 +138,29 @@ class PTv3Client(object):
 
     # ----------------------------------------------------------------- io
     def _readn(self, n):
+        """Read with the original deadline; optional cancellation stays responsive.
+
+        The constructing/calling thread owns teardown. Startup exceptions are
+        cleaned here by __init__; runtime callers must close in their finally.
+        """
         buf = bytearray()
         deadline = time.monotonic() + self._read_timeout_s
         while len(buf) < n:
+            if self._cancel_event is not None and self._cancel_event.is_set():
+                raise InterruptedError('PTv3 worker cancelled')
             remaining = deadline - time.monotonic()
-            if remaining <= 0 or not select.select([self.p.stdout], [], [], max(0., remaining))[0]:
+            if remaining <= 0:
                 self.p.kill()
                 raise TimeoutError('PTv3 worker response exceeded %.3f s' % self._read_timeout_s)
+            wait = min(remaining, .1) if self._cancel_event is not None else remaining
+            ready = select.select([self.p.stdout], [], [], wait)[0]
+            if self._cancel_event is not None and self._cancel_event.is_set():
+                raise InterruptedError('PTv3 worker cancelled')
+            if not ready:
+                if self._cancel_event is None:
+                    self.p.kill()
+                    raise TimeoutError('PTv3 worker response exceeded %.3f s' % self._read_timeout_s)
+                continue
             c = os.read(self.p.stdout.fileno(), n - len(buf))
             if not c:
                 raise RuntimeError("ptv3 worker died")
@@ -235,8 +259,12 @@ class PTv3Client(object):
 
     def close(self):
         try:
-            self.p.stdin.write(b"Q")
-            self.p.stdin.flush()
+            if self._cancel_event is not None and self._cancel_event.is_set():
+                # A cancelled inference may not read Q until GPU work completes.
+                self.p.kill()
+            else:
+                self.p.stdin.write(b"Q")
+                self.p.stdin.flush()
             self.p.wait(timeout=5)
         except Exception:
             try:
@@ -244,6 +272,8 @@ class PTv3Client(object):
                 self.p.wait(timeout=5)
             except Exception:
                 pass
+        self.p.stdin.close()
+        self.p.stdout.close()
         self._unlink_shm()
         if self._errf:
             self._errf.close()

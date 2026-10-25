@@ -5,6 +5,7 @@ from pathlib import Path
 
 from .assess_realtime import lines
 from .realtime_replay import stats
+from .semantic_delivery import match_maps
 
 
 def assess(control, online):
@@ -13,6 +14,7 @@ def assess(control, online):
     final = json.loads((online/'semantics/final.json').read_text())
     events = lines(online/'semantics/events.jsonl')
     maps, scans = lines(online/'semantic_maps.jsonl'), lines(online/'semantic_scans.jsonl')
+    map_clouds = lines(online/'semantic_clouds.jsonl')
     states = lines(online/'semantic_status.jsonl')
     geometry = lines(online/'status.jsonl')
     inputs = {r['stamp_ns']: r for r in lines(online/'semantic_inputs.jsonl')}
@@ -20,7 +22,8 @@ def assess(control, online):
     frames = [e for e in events if e['event'] == 'keyframe']
     snapshots = [e for e in events if e['event'] == 'snapshot']
     revisions = [e for e in snapshots if e.get('revision') and e['revision'].get('changed_keyframes', 0)]
-    map_delay = stats([(m['received']-m['graph_received_monotonic'])*1000 for m in maps])
+    delivered_maps = match_maps(maps, map_clouds)
+    map_delay = stats([(c['received']-m['graph_received_monotonic'])*1000 for m, c in delivered_maps if c])
     scan_delay = stats([(s['received']-inputs[s['stamp_ns']]['received'])*1000 for s in scans if s['stamp_ns'] in inputs])
     raw = [[p['stamp_ns'] for p in lines(d/'poses.jsonl') if p['kind'] == 'raw'] for d in (control, online)]
     graph = [r for r in lines(online/'worker.jsonl') if r.get('status') == 'updated']
@@ -41,12 +44,16 @@ def assess(control, online):
         no_semantic_drops=all(final[k] == 0 for k in losses),
         every_keyframe_classified=final['processed'] == final['received'] == len(inputs) == len(graph),
         every_semantic_scan_delivered=len({s['stamp_ns'] for s in scans}) == len(inputs),
+        no_scan_display_supersession=final['scan_superseded'] == 0 and final['scan_publications'] == len(inputs),
+        map_cloud_delivery=bool(maps) and all(c is not None for _, c in delivered_maps),
+        all_map_metadata_received=len(maps) == final['output_publications'],
+        final_map_really_received=any(m['publication_id'] == final['map_publication_id'] and c is not None for m, c in delivered_maps),
         nonempty_static_map=final['map_info']['summary']['map_voxels'] > 0 and final['map_info']['summary']['stored_points'] > 0,
         live_online_loops=bool(graph and graph[-1]['loop_count'] > 0),
         actual_semantic_revisions=bool(revisions),
         graph_and_outputs_healthy=all(not s.get('error') and not s.get('output_error') and not s.get('trajectory_error') for s in geometry),
         no_graph_overload=all(s['ipc']['queue_full'] == s['ipc']['stale'] == s['ipc']['late_results'] == 0 for s in geometry),
-        semantic_healthy=not final['failed'] and all(not s['failed'] and not s['output_error'] for s in states),
+        semantic_healthy=not final['failed'] and all(not s['failed'] and not s['output_error'] and not s['scan_output_error'] for s in states),
         final_queue_empty=final['pending'] == 0,
         latest_revision_applied=final['map_info']['graph_version'] == final['latest_graph_version'] and
                                final['map_info']['graph_stamp_ns'] == final['latest_graph_stamp_ns'],
@@ -57,8 +64,8 @@ def assess(control, online):
     return dict(admitted=all(checks.values()), checks=checks, protocol=cfg,
         control=b, online=o, final=final, graph_keyframes=len(graph), accepted_loops=graph[-1]['loop_count'],
         semantic_revisions=len(revisions), map_publication_ms=map_delay, semantic_scan_ms=scan_delay,
-        map_source_to_received_ms=stats([(m['received']-sensor_inputs[m['graph_stamp_ns']])*1000
-                                         for m in maps if m['graph_stamp_ns'] in sensor_inputs]),
+        map_source_to_received_ms=stats([(c['received']-sensor_inputs[m['graph_stamp_ns']])*1000
+                                         for m, c in delivered_maps if c and m['graph_stamp_ns'] in sensor_inputs]),
         inference_ms=stats([f['infer_ms'] for f in frames]),
         revision_job_ms=stats([s['job_ms'] for s in revisions]),
         all_fusion_job_ms=stats([s['job_ms'] for s in snapshots]),

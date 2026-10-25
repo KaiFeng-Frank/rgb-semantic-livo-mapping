@@ -22,6 +22,16 @@ from .semantic_fusion import ReversibleSemanticMap
 ROOT = Path(__file__).resolve().parents[2]
 
 
+def claim_packet(pending, graph, now, max_age):
+    """Caller holds the queue lock; owned work cannot also be evicted as pending."""
+    if graph is None or not pending:
+        return None
+    stamp, item = next(iter(pending.items()))
+    if now-item[1] > max_age or stamp <= graph['stamp_ns']:
+        return stamp, pending.pop(stamp)
+    return None
+
+
 def checked_trajectory(data, previous=None, capacity=1000, frame='map'):
     if data['frame_id'] != frame or type(data['stamp_ns']) is not int or type(data['version']) is not int:
         raise ValueError('graph frame/stamp/version contract mismatch')
@@ -91,6 +101,7 @@ def make_node(args):
             self.pending, self.trajectory, self.latest = OrderedDict(), None, None
             self.stop, self.wake = threading.Event(), threading.Event()
             self.client, self.last_scan = None, None
+            self.scan_sequence = 0
             self.last_input, self.last_graph = -1, None
             self.publication_id = 0
             self.counters = dict(received=0, processed=0, invalid=0, dropped_full=0,
@@ -105,6 +116,8 @@ def make_node(args):
             self.status_pub = self.create_publisher(String, '/backend/semantic_status', 1)
             self.output = OutputProcess(sys.executable, self.snapshot, args.map_frame,
                                          module='tools.loop_closure.semantic_outputs')
+            self.scan_output = OutputProcess(sys.executable, self.scan_snapshot, args.map_frame,
+                                             module='tools.loop_closure.semantic_scan_outputs')
             self.thread = threading.Thread(target=self.work, name='semantic-fusion', daemon=True)
             self.thread.start()
             self.create_timer(.5, self.status)
@@ -147,11 +160,21 @@ def make_node(args):
             with self.lock:
                 return self.latest
 
+        def scan_snapshot(self):
+            with self.lock:
+                return self.last_scan
+
         def status(self):
             with self.lock:
                 graph, latest, pending = self.trajectory, self.latest, len(self.pending)
             data = dict(self.counters, pending=pending, output_error=self.output.error,
                 output_publications=self.output.published,
+                map_publication_id=latest['publication_id'] if latest else None,
+                map_completed_id=self.output.completed_id,
+                map_snapshots_superseded=self.output.superseded,
+                scan_output_error=self.scan_output.error,
+                scan_publications=self.scan_output.published,
+                scan_superseded=self.scan_output.superseded,
                 latest_graph_stamp_ns=graph['stamp_ns'] if graph else None,
                 latest_graph_version=graph['version'] if graph else None,
                 map_info=latest['info'] if latest else None,
@@ -170,7 +193,7 @@ def make_node(args):
                     from ptv3_client import PTv3Client
                     self.client = PTv3Client(half=True, shuffle=False, max_pts=cfg['max_points'],
                         intensity_scale=args.intensity_scale, stderr_path=str(args.out/'inference.log'),
-                        startup_timeout_s=120., response_timeout_s=3.)
+                        startup_timeout_s=120., response_timeout_s=3., cancel_event=self.stop)
                     if self.client.num_classes != cfg['classes']:
                         raise ValueError('model class count does not match fusion vocabulary')
                 self.counters['ready'] = True
@@ -179,7 +202,7 @@ def make_node(args):
                     self.wake.clear()
                     with self.lock:
                         graph = self.trajectory
-                        packet = next(iter(self.pending.items()), None)
+                        packet = claim_packet(self.pending, graph, time.monotonic(), cfg['max_queue_age_s'])
                     if graph is None:
                         continue
                     graph_id = (graph['stamp_ns'], graph['version'])
@@ -196,8 +219,6 @@ def make_node(args):
                         anchored = index < len(graph['times_ns']) and graph['times_ns'][index] == stamp
                         stale = time.monotonic()-arrival > cfg['max_queue_age_s']
                         if anchored or stale or stamp < graph['stamp_ns']:
-                            with self.lock:
-                                self.pending.pop(stamp, None)
                             if stale:
                                 self.counters['dropped_stale'] += 1
                             elif not anchored:
@@ -224,13 +245,16 @@ def make_node(args):
                                     labels, confidence = labels.copy(), confidence.copy()
                                 infer_ms = (time.monotonic()-infer_start)*1000
                                 body = points[:, :3].astype(np.float64) @ transform[:3, :3].T+transform[:3, 3]
+                                self.scan_sequence += 1
+                                with self.lock:
+                                    self.last_scan = dict(publication_id=self.scan_sequence,
+                                        stamp_ns=stamp, points=body.astype(np.float32),
+                                        labels=labels, confidence=confidence)
                                 added = self.core.add(stamp, body, labels, confidence, graph['poses'][index])
                                 if added['status'] == 'capacity_reached':
                                     self.counters['capacity_reached'] += 1
                                 else:
                                     self.counters['processed'] += 1
-                                self.last_scan = dict(stamp_ns=stamp, points=body.astype(np.float32),
-                                                      labels=labels, confidence=confidence)
                                 self.event(dict(event='keyframe', stamp_ns=stamp, points=len(points),
                                     infer_ms=infer_ms, receipt_to_fusion_ms=(time.monotonic()-arrival)*1000,
                                     graph_stamp_ns=graph['stamp_ns'], graph_version=graph['version'], fusion=added))
@@ -248,10 +272,14 @@ def make_node(args):
                         self.publication_id += 1
                         snapshot = dict(publication_id=self.publication_id, stamp_ns=graph['stamp_ns'],
                             map={k: rendered[k] for k in ('points', 'labels', 'confidence')},
-                            scan=self.last_scan, info=info)
+                            info=info)
                         with self.lock:
                             self.latest = snapshot
                         self.event(dict(event='snapshot', **info))
+            except InterruptedError as exc:
+                if not self.stop.is_set():
+                    self.counters.update(failed=True, error=f'{type(exc).__name__}: {exc}')
+                    self.event(dict(event='error', error=self.counters['error']))
             except Exception as exc:
                 self.counters.update(failed=True, error=f'{type(exc).__name__}: {exc}')
                 self.event(dict(event='error', error=self.counters['error']))
@@ -264,14 +292,19 @@ def make_node(args):
             self.stop.set()
             self.wake.set()
             self.thread.join(timeout=10.)
-            if self.thread.is_alive():
-                raise TimeoutError('semantic worker did not stop')
-            result = self.status()
-            if args.verify_final and not self.counters['failed']:
-                result['rebuild_parity'] = self.core.verify_rebuild()
-            (args.out/'final.json').write_text(json.dumps(result, indent=2, allow_nan=False)+'\n')
-            self.output.close()
-            self.log.close()
+            try:
+                if self.thread.is_alive():
+                    if self.client:
+                        self.client.close()
+                    raise TimeoutError('semantic worker did not stop')
+                result = self.status()
+                if args.verify_final and not self.counters['failed']:
+                    result['rebuild_parity'] = self.core.verify_rebuild()
+                (args.out/'final.json').write_text(json.dumps(result, indent=2, allow_nan=False)+'\n')
+            finally:
+                self.scan_output.close()
+                self.output.close()
+                self.log.close()
 
     return SemanticNode()
 

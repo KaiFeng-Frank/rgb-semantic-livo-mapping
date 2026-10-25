@@ -1,6 +1,7 @@
 """Bounded asynchronous semantic display. Never owns graph or fusion state."""
 import argparse
 import json
+import hashlib
 from multiprocessing.connection import Connection
 import os
 import time
@@ -44,25 +45,20 @@ def main():
     node = rclpy.create_node('semantic_refusion_outputs')
     qos = QoSProfile(depth=1, reliability=ReliabilityPolicy.BEST_EFFORT)
     map_pub = node.create_publisher(PointCloud2, '/backend/semantic_map', qos)
-    scan_pub = node.create_publisher(PointCloud2, '/backend/semantic_scan', qos)
     info_pub = node.create_publisher(String, '/backend/semantic_map_info', qos)
-    last_scan = None
     try:
         while rclpy.ok():
             rclpy.spin_once(node, timeout_sec=.01)
             if not connection.poll(.02):
                 continue
             item = connection.recv()
-            scan = item.get('scan')
-            if scan is not None and scan['stamp_ns'] != last_scan:
-                scan_pub.publish(cloud(scan['points'], scan['labels'], scan['confidence'],
-                                       'backend_imu', scan['stamp_ns']))
-                last_scan = scan['stamp_ns']
             m = item['map']
-            map_pub.publish(cloud(m['points'], m['labels'], m['confidence'],
-                                  args.map_frame, item['stamp_ns']))
+            message = cloud(m['points'], m['labels'], m['confidence'], args.map_frame, item['stamp_ns'])
+            digest = hashlib.sha256(message.data).hexdigest()
+            map_pub.publish(message)
             info_pub.publish(String(data=json.dumps(dict(item['info'],
-                publication_id=item['publication_id'], published_monotonic=time.monotonic()), allow_nan=False)))
+                publication_id=item['publication_id'], map_sha256=digest, map_points=message.width,
+                published_monotonic=time.monotonic()), allow_nan=False)))
             connection.send(dict(stamp_ns=item['stamp_ns'], published_monotonic=time.monotonic()))
     except (EOFError, BrokenPipeError, KeyboardInterrupt):
         pass

@@ -4,13 +4,15 @@ Run with ``python -m unittest tools.loop_closure.test_semantic_online -v``.
 Source ROS externally to also exercise the actual PointCloud2 output schema.
 The separate validate_semantic_ros fixture exercises native graph/ROS processes.
 """
+from collections import OrderedDict
 from copy import deepcopy
 import importlib.util
+import threading
 import unittest
 
 import numpy as np
 
-from .semantic_node import checked_trajectory
+from .semantic_node import checked_trajectory, claim_packet
 from .semantic_trajectory import compact_snapshot
 
 
@@ -112,6 +114,84 @@ class TrajectoryContracts(unittest.TestCase):
         self.assertEqual(set(compact), {'stamp_ns', 'version', 'times_ns', 'poses'})
         np.testing.assert_array_equal(compact['poses'], graph['poses'])
         self.assertIsNone(compact_snapshot(lambda: None))
+
+
+class PacketOwnershipContracts(unittest.TestCase):
+    def test_claimed_packet_cannot_also_be_evicted_or_counted_again(self):
+        # Hold the worker after its atomic claim, as if update_poses were slow.
+        # New arrivals must evict only pending packets, never this owned frame.
+        payloads = {stamp: object() for stamp in range(1, 5)}
+        pending = OrderedDict((stamp, (payloads[stamp], 99.)) for stamp in (1, 2))
+        lock, claimed, release = threading.Lock(), threading.Event(), threading.Event()
+        owned = []
+
+        def worker():
+            with lock:
+                owned.append(claim_packet(pending, {'stamp_ns': 2}, 100., 3.))
+            claimed.set()
+            release.wait(2.)
+
+        thread = threading.Thread(target=worker, daemon=True)
+        thread.start()
+        evicted = []
+        try:
+            self.assertTrue(claimed.wait(1.), 'worker did not claim a packet')
+            with lock:
+                self.assertNotIn(1, pending)
+                for stamp in (3, 4):
+                    pending[stamp] = (payloads[stamp], 100.)
+                    while len(pending) > 2:
+                        evicted.append(pending.popitem(last=False)[0])
+                self.assertEqual(list(pending), [3, 4])
+            self.assertEqual(evicted, [2])
+            self.assertEqual(owned[0][0], 1)
+            self.assertIs(owned[0][1][0], payloads[1])
+        finally:
+            release.set()
+            thread.join(timeout=2.)
+        self.assertFalse(thread.is_alive())
+        processed = [owned[0][0]]
+        with lock:
+            while pending:
+                processed.append(claim_packet(pending, {'stamp_ns': 4}, 100., 3.)[0])
+            self.assertIsNone(claim_packet(pending, {'stamp_ns': 4}, 100., 3.))
+        self.assertEqual(processed, [1, 3, 4])
+        self.assertEqual(sorted(processed + evicted), [1, 2, 3, 4])
+        self.assertTrue(set(processed).isdisjoint(evicted))
+
+    def test_future_unanchored_packet_waits_for_its_graph(self):
+        packet = (object(), 10.)
+        pending = OrderedDict([(2, packet)])
+        self.assertIsNone(claim_packet(pending, {'stamp_ns': 1}, 11., 3.))
+        self.assertIs(pending[2], packet)
+        claimed = claim_packet(pending, {'stamp_ns': 2}, 11., 3.)
+        self.assertEqual(claimed[0], 2)
+        self.assertIs(claimed[1], packet)
+        self.assertFalse(pending)
+
+    def test_stale_future_packet_is_claimed_once_for_rejection(self):
+        pending = OrderedDict([(2, (object(), 10.))])
+        self.assertIsNone(claim_packet(pending, {'stamp_ns': 1}, 13., 3.))
+        claimed = claim_packet(pending, {'stamp_ns': 1}, 13.001, 3.)
+        self.assertEqual(claimed[0], 2)
+        self.assertFalse(pending)
+        self.assertIsNone(claim_packet(pending, {'stamp_ns': 1}, 14., 3.))
+
+    def test_past_unanchored_packet_is_claimed_for_rejection(self):
+        graph = checked_trajectory(revision((1, 3)))
+        pending = OrderedDict([(2, (object(), 10.)), (4, (object(), 10.))])
+        claimed = claim_packet(pending, graph, 10.5, 3.)
+        self.assertEqual(claimed[0], 2)
+        self.assertNotIn(claimed[0], graph['times_ns'])
+        self.assertEqual(list(pending), [4])
+        self.assertIsNone(claim_packet(pending, graph, 10.5, 3.))
+
+    def test_no_graph_or_empty_queue_never_transfers_ownership(self):
+        pending = OrderedDict([(1, (object(), 10.))])
+        original = list(pending.items())
+        self.assertIsNone(claim_packet(pending, None, 100., 3.))
+        self.assertEqual(list(pending.items()), original)
+        self.assertIsNone(claim_packet(OrderedDict(), {'stamp_ns': 1}, 100., 3.))
 
 
 @unittest.skipUnless(importlib.util.find_spec('sensor_msgs') is not None,
