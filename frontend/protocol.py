@@ -13,7 +13,12 @@ def load(path=None):
     legacy = seq in DRIVES and first == 0 and 0 < end <= (120 if seq == '07' else 240)
     enhanced = (cfg.get('version') == 2 and seq == '07' and first == 730 and end == 826
                 and cfg.get('diagnostic') is True and cfg.get('repetitions') == 1)
-    if not (legacy or enhanced):
+    validation = (cfg.get('version') == 3 and seq == '09' and first == 240 and end == 480
+                  and cfg.get('diagnostic') is False and cfg.get('repetitions') == 3
+                  and cfg.get('arms') == ['geometry', 'association_B0', 'motion_B0',
+                                          'visual_B0', 'likelihood_B0', 'enhanced_B0']
+                  and cfg.get('playback_rate') == .25)
+    if not (legacy or enhanced or validation):
         raise ValueError('outside the admitted bounded replay windows')
     for relative, expected in cfg.get('frozen_sources', {}).items():
         if hashlib.sha256((REPO/relative).read_bytes()).hexdigest() != expected:

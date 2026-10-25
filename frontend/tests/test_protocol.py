@@ -38,4 +38,11 @@ class Protocol(unittest.TestCase):
         self.assertEqual(cfg['short_sequence'],dict(sequence='07',first_frame=730,end_exclusive=826))
         self.assertEqual(cfg['repetitions'],1)
 
+    def test_enhanced_accuracy_freeze_is_separate(self):
+        cfg=load(REPO/'frontend/enhanced-validation09.json')
+        self.assertFalse(cfg['diagnostic'])
+        self.assertEqual(cfg['short_sequence'],dict(sequence='09',first_frame=240,end_exclusive=480))
+        self.assertEqual(len(cfg['arms']),6)
+        self.assertEqual(cfg['repetitions'],3)
+
 if __name__=='__main__':unittest.main()

@@ -18,6 +18,10 @@ on:
         description: Check motion, pixel masking and categorical coupling on frozen 96-frame development window
         type: boolean
         default: false
+      enhanced_validation:
+        description: Frozen enhanced seq09 frames 240-479 accuracy validation, six arms and three repeats
+        type: boolean
+        default: false
       holdout09:
         description: Frozen 240-frame seq09 accuracy validation, five arms and three repeats
         type: boolean
@@ -55,13 +59,13 @@ jobs:
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     container: ros:jazzy-ros-base
-    timeout-minutes: 50
+    timeout-minutes: 65
     env:
       CMAKE_BUILD_PARALLEL_LEVEL: '1'
       OPENBLAS_NUM_THREADS: '1'
       OMP_NUM_THREADS: '2'
       RMW_IMPLEMENTATION: rmw_cyclonedds_cpp
-      REPLAY_PROTOCOL: ${{ inputs.enhanced_diagnostic && 'frontend/enhanced-diagnostic.json' || inputs.holdout09 && 'frontend/holdout09.json' || 'frontend/protocol.json' }}
+      REPLAY_PROTOCOL: ${{ inputs.enhanced_validation && 'frontend/enhanced-validation09.json' || inputs.enhanced_diagnostic && 'frontend/enhanced-diagnostic.json' || inputs.holdout09 && 'frontend/holdout09.json' || 'frontend/protocol.json' }}
     defaults:
       run:
         shell: bash
@@ -89,11 +93,14 @@ jobs:
           DIAGNOSTIC: ${{ inputs.mechanism_diagnostic }}
           HOLDOUT: ${{ inputs.holdout09 }}
           ENHANCED: ${{ inputs.enhanced_diagnostic }}
+          VALIDATION: ${{ inputs.enhanced_validation }}
         run: |
           if [ "$DIAGNOSTIC" = true ] && [ "$HOLDOUT" = true ]; then exit 2; fi
           if [ "$ENHANCED" = true ] && { [ "$DIAGNOSTIC" = true ] || [ "$HOLDOUT" = true ]; }; then exit 2; fi
+          if [ "$VALIDATION" = true ] && { [ "$DIAGNOSTIC" = true ] || [ "$HOLDOUT" = true ] || [ "$ENHANCED" = true ]; }; then exit 2; fi
           python3 -c 'import os; from frontend.protocol import load; print(load(os.environ["REPLAY_PROTOCOL"]))'
           python3 -m unittest frontend.tests.test_protocol -v
+          python3 -m unittest frontend.tests.test_assess_validation -v
       - name: Exercise the actual state estimator and original point transport
         run: |
           source /opt/ros/jazzy/setup.bash
@@ -105,10 +112,10 @@ jobs:
           python3 -m unittest frontend.tests.test_replay_identity -v 2>&1 | tee out/frontend/replay-identity-tests.log
           python3 -m frontend.tests.startup --workspace /tmp/semantic-ws --out out/frontend/startup
       - name: Recover only the admitted short sequence
-        if: inputs.dataset_smoke || inputs.mechanism_diagnostic || inputs.holdout09 || inputs.enhanced_diagnostic
+        if: inputs.dataset_smoke || inputs.mechanism_diagnostic || inputs.holdout09 || inputs.enhanced_diagnostic || inputs.enhanced_validation
         run: python3 -u -m frontend.restore_smoke --root /tmp/frontend-inputs --protocol "$REPLAY_PROTOCOL" 2>&1 | tee out/frontend/restore.log
       - name: Freeze paired frontend trajectories before reading GT
-        if: inputs.dataset_smoke || inputs.mechanism_diagnostic || inputs.holdout09 || inputs.enhanced_diagnostic
+        if: inputs.dataset_smoke || inputs.mechanism_diagnostic || inputs.holdout09 || inputs.enhanced_diagnostic || inputs.enhanced_validation
         env:
           MECHANISM_DIAGNOSTIC: ${{ inputs.mechanism_diagnostic }}
         run: |
@@ -118,8 +125,11 @@ jobs:
           if [ "$MECHANISM_DIAGNOSTIC" = true ]; then diagnostic_args+=(--diagnostic); fi
           python3 -u -m frontend.replay_smoke --root /tmp/frontend-inputs --workspace /tmp/semantic-ws --out out/frontend/smoke --protocol "$REPLAY_PROTOCOL" "${diagnostic_args[@]}"
       - name: Score frozen trajectories
-        if: (inputs.dataset_smoke || inputs.holdout09) && !inputs.mechanism_diagnostic
+        if: (inputs.dataset_smoke || inputs.holdout09 || inputs.enhanced_validation) && !inputs.mechanism_diagnostic && !inputs.enhanced_diagnostic
         run: python3 -m frontend.score_smoke --root /tmp/frontend-inputs --out out/frontend/smoke > out/frontend/scoring.log
+      - name: Assess enhanced accuracy against frozen decision rules
+        if: inputs.enhanced_validation
+        run: python3 -m frontend.assess_validation --out out/frontend/smoke
       - name: Preserve evidence without raw data or model archives
         if: always()
         run: |
