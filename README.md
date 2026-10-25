@@ -40,6 +40,12 @@ The subsequent [real-label nuScenes pilot](results/semantic_memory_20261025/real
 fails admission: gated memory reaches 49.40 mIoU versus 49.87 for a matched-supervision
 current-only head across three seeds; recovery outcomes and the 5 ms module budget
 also fail. Trained heads and complete evidence are retained; active fusion remains disabled.
+The [current-anchored repair revision](results/semantic_memory_20261025/repair_revision/README.md)
+adds joint current/history corrections, a learned current path without history,
+motion-tolerant retrieval and bounded queries. Two real-training revisions and
+six fresh confirmation scenes are complete: 56.91 mIoU versus 56.98 for the
+matched current-only control, with worse recovery and about 5.11 ms module cost.
+It remains experimental; weights, ablations and both development attempts are archived.
 
 **Offline loop closure, seq07:** with the same frozen frontend and B0 predictions,
 official KITTI ATE falls **0.837 → 0.557 m** and out-of-frustum map mIoU-9 rises

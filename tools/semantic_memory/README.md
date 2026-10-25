@@ -161,6 +161,16 @@ voxel-level diagnostic, not an official point-level leaderboard submission.
 
 ## Checks and remaining admission
 
+The subsequent [current-anchored repair experiment](../../results/semantic_memory_20261025/repair_revision/README.md)
+is implemented separately in `src/semantic_repair.py` and `repair_pilot.py`.
+It retains a learned current path without historical coverage, generates a joint
+current/history correction, uses repair/retention losses, and bounds queries.
+`repair_confirmation.py` selects independent new logs and scores frozen weights.
+The final revision has completed both real training and fresh-log confirmation,
+but has not passed admission. Its checkpoint schema is experimental and is not
+accepted by the production worker. The existing ROS/training contract above
+continues to describe the original gated implementation.
+
 ```bash
 $PTV3_PYTHON -m pytest -q tools/semantic_memory/test_memory.py \
   tools/semantic_memory/test_training.py tools/semantic_memory/test_interfaces.py
