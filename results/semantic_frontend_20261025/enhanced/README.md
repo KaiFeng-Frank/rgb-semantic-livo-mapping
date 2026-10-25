@@ -60,8 +60,14 @@ configurations, trajectories and input hashes; raw points/images stayed on the
 ephemeral runner. Its [SHA-256](replay/frontend-evidence.sha256) is
 `0f1fc28d8a03b72f51aba971969902e88d85d7f1363d268b8704716db2a3d5ff`.
 
-Local GPU admission was stopped before inference to preserve an independent
-mapping experiment already using 11366 MiB. Full online LIO and real-data accuracy
-benefit remain unvalidated. Projected 3-D masks are not dense 2-D segmentation;
-historical class votes are not full model posteriors. No larger experiment is
-admitted by the local checks.
+The earlier local GPU attempt was stopped before inference to preserve an
+independent mapping experiment. Once the GPU was free, reliable input passed
+three repeated bridge checks, but [full 1x online LIVO admission failed](online/README.md):
+timely semantics cover 87–89% of measured scans and pose-delivery p95 reaches
+3.28–3.36 s. The LIO estimation stage is too slow on this workload; all six runs
+still preserve input coverage and identical 114-pose timestamps. All failures
+and stage timing logs are retained.
+
+[A separate frozen six-arm seq09 accuracy evaluation](accuracy09/README.md) is
+pending. Projected 3-D masks are not dense 2-D segmentation; historical class votes
+are not full model posteriors. No larger experiment is admitted by these checks.

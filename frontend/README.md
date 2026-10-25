@@ -42,6 +42,12 @@ rows remain zero in every arm. These are mechanism activation checks, not
 accuracy or online throughput results. [Complete logs, hashes, settings and
 trajectories](../results/semantic_frontend_20261025/enhanced/README.md) are preserved.
 
+Full live-inference 1x replay subsequently fails realtime admission on the local
+5070 Ti laptop: 87–89% timely semantics and 3.28–3.36 s pose-delivery p95 over three
+paired repetitions. Input coverage and 114-pose timestamps match in all arms, but
+the semantic LIO update takes roughly 123 ms median and the queue grows. See
+[all online runs and timing scope](../results/semantic_frontend_20261025/enhanced/online/README.md).
+
 ## Implementation
 
 * A scan-preserving input bridge adds native nuScenes `semantic_label` (uint16) and

@@ -79,7 +79,9 @@ ROS probes failed scan delivery; controlled full-size geometry messages now pass
 with Cyclone DDS. Subsequent actual-scan best-effort replay still lost scans;
 an explicit reliable-input profile now passes three paired real-scan repetitions,
 with 26/26 scans in every arm and timely semantics on all 20 measured scans in
-each online run. Full LIO throughput remains under separate validation.
+each online run. The subsequent full 1x LIVO replay fails realtime admission:
+three repeats have 87–89% timely semantics and pose-delivery p95 of 3.28–3.36 s,
+with about 3 s of accumulating lag. All arms preserve the same 114 pose timestamps.
 [Online evidence and preserved transport failures](results/semantic_frontend_20261025/enhanced/online/README.md).
 [Local runtime checks and preserved failed probes](results/semantic_frontend_20261025/local_gpu/README.md).
 

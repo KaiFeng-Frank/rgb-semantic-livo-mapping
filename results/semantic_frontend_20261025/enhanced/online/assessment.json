@@ -1,5 +1,5 @@
 {
-  "status": "reliable_bridge_passed_full_lio_pending",
+  "status": "reliable_bridge_passed_full_lio_failed",
   "failed_best_effort": {
     "geometry_received": 16,
     "online_received": 22,
@@ -23,5 +23,6 @@
   "main_cherry_pick": "004013f",
   "method": "Reliable publisher and subscriber for the input cloud. Default best-effort live-sensor compatibility remains available. Same 80 ms inference deadline and same model.",
   "scope": "26 raw scans per arm, 20 measured, three repetitions. Deadline starts at bridge receipt; publication occurs after field assembly/ROS serialization. Not yet full LIO or vehicle perception latency.",
-  "raw_data_saved": false
+  "raw_data_saved": false,
+  "full_lio": "full-lio/interpretation.json"
 }

@@ -1,0 +1,14 @@
+{
+  "status": "not_passed",
+  "source_commit": "97e62bf",
+  "main_cherry_pick": "8a7a6a9",
+  "raw_tmpfs_removed": true,
+  "archive_sha256": "d0203e69ae185c40ae3de53f4da78e65038357fe310906ca8d59e1f2b3c7bab4",
+  "archive_bytes": 457372,
+  "validation": "three paired repetitions, 120 original scans each, all six have identical 114 finite pose timestamps and unchanged original point bytes",
+  "failure": "online semantic coverage 87-89% below frozen95%; pose-delivery medians1.46-1.50s and p95 3.28-3.36s, with ~3s latency growth. Geometry timing controls passed.",
+  "timing_scope": "monotonic observer receipt after complete required scan arrival; includes observer overhead. Both geometry and online wait80ms. Not sensor acquisition-to-display latency; geometry is not a no-delay deployment baseline.",
+  "stage_evidence": "instrumented LIO median about123ms versus geometry13ms; VIO about3-4ms. This supports an estimator throughput bottleneck; individual semantic component cost awaits the six-arm replay.",
+  "code_inspection": "boundary extraction still executes with boundary observations disabled, about15ms median. Categorical field does neighborhood map lookups per query, history frame and IEKF iteration; profiling is needed before assigning its exact cost.",
+  "scope": "short warm-cache development replay, no GT scoring; failure is not a verdict on semantic tight coupling in general"
+}
