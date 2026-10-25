@@ -46,6 +46,9 @@ The tested group-balanced correction raises full-map common-9 mIoU from
 slightly worse per-visit normalization are retained in the linked report.
 This is one offline sequence comparison; the single-scan predictions are unchanged.
 
+**SemanticKITTI 19-class preparation:** [official-metric diagnostics, local GPU checks and native-19 tooling](docs/semantickitti19.md).
+The archived 07/09 bridge scores are diagnostics; complete native-19 sequence-08 validation and a leaderboard submission are still pending.
+
 ![semantic map](docs/img/rviz_class_final.png)
 
 *The full 693 m loop of KITTI seq 07, coloured by predicted class. Cyan is `driveable_surface`,

@@ -1,0 +1,21 @@
+{
+  "mode": "pilot",
+  "sequences": [
+    "04"
+  ],
+  "steps": 101,
+  "accumulation": 4,
+  "max_voxels": 80000,
+  "lr": 0.0001,
+  "seed": 20261024,
+  "source_sha256": "4c1d540a2b0dac5f3dff41c24e76d7f531a9dd3a3c48aac55ee243be7d7df287",
+  "pointcept": "72a799353c568c29a3365c02a15129ebe7fe637a",
+  "classes": 19,
+  "loss": "unweighted cross entropy, ignore_index=-1",
+  "grid_size": 0.05,
+  "intensity_scale": 0.2,
+  "augmentation": "random voxel representative, z rotation, scale .95..1.05",
+  "attention": "torch SDPA",
+  "pooling": "torch.segment_reduce",
+  "torch": "2.11.0.dev20260201+cu128"
+}

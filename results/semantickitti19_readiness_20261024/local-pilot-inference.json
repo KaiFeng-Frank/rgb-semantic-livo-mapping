@@ -1,0 +1,43 @@
+{
+  "task": "single_scan_semantic_segmentation",
+  "num_classes": 19,
+  "label_space": "SemanticKITTI19",
+  "uses_future_scans": false,
+  "map_fusion": false,
+  "frozen_bridge": false,
+  "sequences": [
+    "08"
+  ],
+  "partial_diagnostic": true,
+  "training_mode": "pilot",
+  "checkpoint_sha256": "0ab134b6092319c80659155a0df7f18abba8cd46416fe01cc80873a0049122be",
+  "training_data_disclosure": "nuScenes-supervised source PTv3 backbone; SemanticKITTI 3D training GT, sequences 04; no validation/test GT training; no camera/future scans/map fusion.",
+  "pointcept": "72a799353c568c29a3365c02a15129ebe7fe637a",
+  "torch": "2.11.0.dev20260201+cu128",
+  "attention": "torch SDPA",
+  "predictions": [
+    {
+      "path": "sequences/08/predictions/000000.label",
+      "sha256": "59421eb22b4ef89facf959b45fc13b01fde80cb4fef8fc9bc6f52779bd30b226",
+      "points": 123389,
+      "scan_sha256": "92e945f37a6cd4a58acc8aa15b275af2e271ecf69c0a44a311d888524473c451",
+      "inference_seconds": 1.8676468810299411
+    },
+    {
+      "path": "sequences/08/predictions/001000.label",
+      "sha256": "1d35af5a585f4b5cd2f0963ed9cba9589608f63e3b18844b7a05f91c22e630a4",
+      "points": 126624,
+      "scan_sha256": "f81b9df45136afb7d2cb388e07afe9fa2d1287fdedc45effbdc14b0f99f70214",
+      "inference_seconds": 0.09986174799269065
+    },
+    {
+      "path": "sequences/08/predictions/002000.label",
+      "sha256": "bfecb8b1a4931c7fae4304f2ffb83d031e83002864e6226afa0618a5aebf0c34",
+      "points": 125149,
+      "scan_sha256": "15b8589cc1d203966b8055a159178bb2706e9eec491c6d840c4ec460d65532a4",
+      "inference_seconds": 0.08843261102447286
+    }
+  ],
+  "complete": true,
+  "leaderboard_test_score": false
+}
