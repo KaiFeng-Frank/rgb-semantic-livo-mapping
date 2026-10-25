@@ -34,7 +34,24 @@ trap 'exit 130' INT
 trap 'exit 143' TERM
 /usr/bin/python3 tools/loop_closure/frontend/parameter_blackboard.py --ros-args --params-file "$CAMERA_CONFIG" > "$OUTPUT_DIR/camera.log" 2>&1 &
 pids+=("$!")
-/usr/bin/python3 -m tools.loop_closure.online_node --worker-python "$WORKER_PYTHON" \
+backend_args=()
+if [[ -n "${SEMANTIC_RUNTIME:-}" ]]; then
+  for f in "$SEMANTIC_RUNTIME/venv/bin/python" "$SEMANTIC_RUNTIME/v06-armB0_s1-student.pth" \
+           "$SEMANTIC_RUNTIME/weights/nuscenes-semseg-pt-v3m1-0-base/config.py"; do
+    [[ -f "$f" ]] || { echo "Missing semantic runtime file: $f" >&2; exit 2; }
+  done
+  backend_args+=(--semantic-trajectory)
+  PTV3_PYTHON="$SEMANTIC_RUNTIME/venv/bin/python" \
+  PTV3_POINTCEPT="$SEMANTIC_RUNTIME/src/Pointcept_v151" \
+  PTV3_CONFIG="$SEMANTIC_RUNTIME/weights/nuscenes-semseg-pt-v3m1-0-base/config.py" \
+  PTV3_CHECKPOINT="$SEMANTIC_RUNTIME/v06-armB0_s1-student.pth" \
+  OMP_NUM_THREADS=1 /usr/bin/python3 -m tools.loop_closure.semantic_node \
+    --frontend "$FRONTEND_CONFIG" --out "$OUTPUT_DIR/semantics" \
+    --reflectance-divisor "${SEMANTIC_REFLECTANCE_DIVISOR:-1}" \
+    > "$OUTPUT_DIR/semantics.log" 2>&1 &
+  pids+=("$!")
+fi
+/usr/bin/python3 -m tools.loop_closure.online_node --worker-python "$WORKER_PYTHON" "${backend_args[@]}" \
   --log "$OUTPUT_DIR/backend.jsonl" > "$OUTPUT_DIR/backend.log" 2>&1 &
 pids+=("$!")
 "$WORKSPACE/install/fast_livo/lib/fast_livo/fastlivo_mapping" --ros-args \
@@ -43,4 +60,8 @@ pids+=("$!")
 pids+=("$!")
 echo "Online backend launched; publish LiDAR/IMU/images. Logs: $OUTPUT_DIR"
 echo 'Outputs: /backend/pose /backend/path /backend/map /backend/status and map -> camera_init -> backend_imu TF'
+if [[ -n "${SEMANTIC_RUNTIME:-}" ]]; then
+  echo 'Semantic outputs: /backend/semantic_scan /backend/semantic_map /backend/semantic_map_info /backend/semantic_status'
+  echo 'Wait for /backend/semantic_status ready=true before publishing sensors.'
+fi
 wait -n "${pids[@]}"

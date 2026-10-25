@@ -1,0 +1,97 @@
+{
+  "backend": true,
+  "source": "/media/frank/Extreme SSD/data/fast_livo_mcap/FAST-LIVO/hku1",
+  "source_payload_sha256": "042c59558c43c364b44b70382c1ac40ed80720f86c88f28d8141605a9ff9ab01",
+  "duration_s": 127.695796967,
+  "replay_wall_s": 127.6959837389877,
+  "rmw": "rmw_cyclonedds_cpp",
+  "cyclone_uri": "file:///home/frank/semantic_livo_realtime_main/tools/loop_closure/local_dds.xml",
+  "input_counts": {
+    "lidar": 1277,
+    "image": 1277,
+    "imu": 25871
+  },
+  "frontend_poses": 1274,
+  "corrected_poses": 1274,
+  "matched_sensor_stamps": 1274,
+  "corrected_matches": 1274,
+  "missing_corrected": 0,
+  "frontend_end_to_end": {
+    "n": 1274,
+    "median_ms": 36.647946981247514,
+    "p95_ms": 48.97790001705288,
+    "p99_ms": 55.8496886154171,
+    "max_ms": 70.98799594677985
+  },
+  "corrected_end_to_end": {
+    "n": 1274,
+    "median_ms": 37.24225901532918,
+    "p95_ms": 49.47935450472869,
+    "p99_ms": 56.20896430918946,
+    "max_ms": 71.59283000510186
+  },
+  "backend_added": {
+    "n": 1274,
+    "median_ms": 0.5183655302971601,
+    "p95_ms": 0.9096498019061982,
+    "p99_ms": 1.1318026774097232,
+    "max_ms": 2.3715939605608582
+  },
+  "replay_lateness": {
+    "n": 28425,
+    "median_ms": 0.0917169963940978,
+    "p95_ms": 0.578445615246892,
+    "p99_ms": 1.0851160250604077,
+    "max_ms": 65.61435095500201
+  },
+  "image_transport": "original_compressed",
+  "image_preparation": {
+    "n": 1277,
+    "median_ms": 0.09356706868857145,
+    "p95_ms": 0.16307218465954068,
+    "p99_ms": 0.2048652060329914,
+    "max_ms": 0.2906499430537224
+  },
+  "maps": 31,
+  "paths": 122,
+  "last_status": {
+    "received": 594045.429112251,
+    "output_error": null,
+    "worker_ready": true,
+    "error": null,
+    "trajectory_error": null,
+    "output_publications": 122,
+    "output_wall_age_s": 2.1753477450693026,
+    "poses_published": 1274,
+    "rejected": 0,
+    "pair_evictions": 1120,
+    "pending": 0,
+    "ipc": {
+      "submitted": 122,
+      "completed": 122,
+      "queue_full": 0,
+      "stale": 0,
+      "late_results": 0,
+      "not_ready": 0
+    },
+    "odometry_callback_p95_ms": 0.6820578360930084,
+    "status": "updated",
+    "stamp_ns": 1577837106199649095,
+    "keyframe": 121,
+    "version": 20,
+    "loop_count": 18,
+    "total_ms": 3.33369302097708,
+    "queue_and_processing_ms": 4.926564986817539,
+    "correction_age_s": 0.099829912,
+    "result_wall_age_s": 2.3430394859751686,
+    "late_result": false
+  },
+  "warmup_prefix_images": 3,
+  "missing_images_after_initialization": 0,
+  "semantic_input_keyframes": 122,
+  "semantic_scan_outputs": 0,
+  "semantic_map_outputs": 0,
+  "semantic_map_clouds_received": 0,
+  "last_semantic_status": null,
+  "scope": "1x real-sensor LIVO + geometric backend; semantic inference is not part of this measurement"
+}

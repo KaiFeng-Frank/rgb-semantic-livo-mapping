@@ -58,4 +58,4 @@ jobs:
           python3 -m venv /tmp/geometry
           /tmp/geometry/bin/pip install -r tools/loop_closure/requirements.txt
       - name: Check graph and semantic fusion contracts
-        run: /tmp/geometry/bin/python -m unittest tools.loop_closure.test_backend tools.loop_closure.test_online tools.loop_semantics.test_fusion -v
+        run: /tmp/geometry/bin/python -m unittest tools.loop_closure.test_backend tools.loop_closure.test_online tools.loop_closure.test_semantic_fusion tools.loop_closure.test_semantic_online tools.loop_closure.test_semantic_lifecycle tools.loop_closure.test_semantic_delivery tools.loop_semantics.test_fusion -v

@@ -18,17 +18,19 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 class OutputProcess:
-    def __init__(self, python, snapshot, map_frame):
+    def __init__(self, python, snapshot, map_frame, module='tools.loop_closure.online_outputs'):
         self.stop = threading.Event()
         self.error = None
         self.health_lock = threading.Lock()
         self.waiting_since = None
         self.last_published = None
         self.published = 0
+        self.superseded = 0
+        self.completed_id = None
         parent, child = socket.socketpair()
         try:
             self.process = subprocess.Popen(
-                [str(python), '-m', 'tools.loop_closure.online_outputs',
+                [str(python), '-m', module,
                  '--fd', str(child.fileno()), '--map-frame', map_frame],
                 cwd=ROOT, pass_fds=(child.fileno(),))
         except Exception:
@@ -57,8 +59,11 @@ class OutputProcess:
                 if self.process.poll() is not None:
                     raise RuntimeError(f'display exited with {self.process.returncode}')
                 result = snapshot()
-                if not result or result['stamp_ns'] == last:
+                publication_id = result.get('publication_id', result['stamp_ns']) if result else None
+                if not result or publication_id == last:
                     continue
+                if 'publication_id' in result:
+                    self.superseded += max(0, int(publication_id)-int(last or 0)-1)
                 # Blocking serialization/send is confined to this thread. It
                 # holds no snapshot lock, and the worker replaces snapshots.
                 with self.health_lock:
@@ -74,12 +79,13 @@ class OutputProcess:
                         with self.health_lock:
                             self.last_published = ack['published_monotonic']
                             self.published += 1
+                            self.completed_id = publication_id
                             self.waiting_since = None
                             self.error = None
                         break
                     if self.process.poll() is not None:
                         raise RuntimeError(f'display exited with {self.process.returncode}')
-                last = result['stamp_ns']
+                last = publication_id
         except (OSError, EOFError, RuntimeError) as exc:
             if not self.stop.is_set():
                 with self.health_lock:
@@ -185,6 +191,7 @@ def make_output_node(connection, map_frame):
 
 def main():
     import rclpy
+    from rclpy.executors import ExternalShutdownException
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--fd', type=int, required=True)
     parser.add_argument('--map-frame', required=True)
@@ -196,8 +203,12 @@ def main():
     try:
         while rclpy.ok() and not node.stop.is_set():
             rclpy.spin_once(node, timeout_sec=.1)
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, ExternalShutdownException):
         pass
+    except RuntimeError:
+        # SIGTERM can invalidate the ROS context between the loop guard and wait-set creation.
+        if rclpy.ok():
+            raise
     finally:
         node.destroy_node()
         connection.close()
