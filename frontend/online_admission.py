@@ -91,7 +91,8 @@ def bridge(scans,meta,out,mode):
     from kitti_to_ros2bag import INDEXED_PC_DTYPE,make_pointcloud2
     from kitti_scan import synth
     from frontend.replay_smoke import terminate
-    rclpy.init(domain_id=177);node=Node('semantic_online_admission')
+    domain=180+2*(os.getpid()%20)+int(mode=='online')
+    rclpy.init(domain_id=domain);node=Node('semantic_online_admission')
     received=[]
     pub=node.create_publisher(PointCloud2,'/admission/raw',10)
     sub=node.create_subscription(PointCloud2,'/admission/annotated',received.append,10)
@@ -100,9 +101,9 @@ def bridge(scans,meta,out,mode):
         with (out/f'{mode}.process.log').open('w') as log:
             process=subprocess.Popen([sys.executable,'-m','frontend.input_bridge','--mode',mode,'--fixed-delay','--wait-ms','80',
                 '--input','/admission/raw','--output','/admission/annotated','--log',str(out/f'{mode}.jsonl')],
-                cwd=REPO,env=dict(os.environ,ROS_DOMAIN_ID='177'),stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
+                cwd=REPO,env=dict(os.environ,ROS_DOMAIN_ID=str(domain)),stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
             until=time.monotonic()+300
-            while not pub.get_subscription_count() or not sub.get_publisher_count():
+            while not (out/f'{mode}.jsonl').is_file() or not pub.get_subscription_count() or not sub.get_publisher_count():
                 if process.poll() is not None:raise RuntimeError('bridge startup failed: '+mode)
                 if time.monotonic()>until:raise RuntimeError('bridge discovery timeout: '+mode)
                 rclpy.spin_once(node,timeout_sec=.05)
@@ -135,7 +136,7 @@ def bridge(scans,meta,out,mode):
     selected={int(meta['timestamps_start.txt'][f]) for f in MEASURE}
     measured=[r for r in rows if r['stamp_ns'] in selected]
     semantic=sum(r['semantic'] for r in measured)
-    return dict(mode=mode,scans=len(MEASURE),received_measurement_scans=len(measured),
+    return dict(mode=mode,ros_domain=domain,scans=len(MEASURE),received_measurement_scans=len(measured),
                 published_total=count,received_total=len(stamps),complete_ordered_coverage=coverage,
                 expected_stamp_ns=list(expected),received_stamp_ns=stamps,
                 semantic_scans=semantic,semantic_fraction=semantic/len(MEASURE),
