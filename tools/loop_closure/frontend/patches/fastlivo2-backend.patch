@@ -1,0 +1,324 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -21,18 +21,18 @@
+ if(CMAKE_SYSTEM_PROCESSOR MATCHES "^(arm|aarch64|ARM|AARCH64)")
+   if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
+     # 64-bit ARM optimizations (e.g., RK3588 and Jetson Orin NX)
+-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -mcpu=native -mtune=native -ffast-math")
+-    message(STATUS "Using 64-bit ARM optimizations: -O3 -mcpu=native -mtune=native -ffast-math")
++    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -mcpu=native -mtune=generic -ffast-math")
++    message(STATUS "Using 64-bit ARM optimizations: -O3 -mcpu=native -mtune=generic -ffast-math")
+   else()
+     # 32-bit ARM optimizations with NEON support
+-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -mcpu=native -mtune=native -mfpu=neon -ffast-math")
+-    message(STATUS "Using 32-bit ARM optimizations: -O3 -mcpu=native -mtune=native -mfpu=neon -ffast-math")
++    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -mcpu=native -mtune=generic -mfpu=neon -ffast-math")
++    message(STATUS "Using 32-bit ARM optimizations: -O3 -mcpu=native -mtune=generic -mfpu=neon -ffast-math")
+   endif()
+   add_definitions(-DARM_ARCH)
+ else()
+   # x86-64 (Intel/AMD) optimizations
+-  set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native -mtune=native -funroll-loops") #-flto
+-  message(STATUS "Using general x86 optimizations: -O3 -march=native -mtune=native -funroll-loops") 
++  set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=x86-64 -mtune=generic -funroll-loops") #-flto
++  message(STATUS "Using general x86 optimizations: -O3 -march=x86-64 -mtune=generic -funroll-loops") 
+   add_definitions(-DX86_ARCH)
+ endif()
+ 
+@@ -95,6 +95,9 @@
+ find_package(PCL REQUIRED)
+ find_package(OpenCV REQUIRED)
+ find_package(Sophus REQUIRED)
++if(NOT Sophus_INCLUDE_DIRS AND TARGET Sophus::Sophus)
++  get_target_property(Sophus_INCLUDE_DIRS Sophus::Sophus INTERFACE_INCLUDE_DIRECTORIES)
++endif()
+ find_package(Boost REQUIRED COMPONENTS thread)
+ find_package(fmt REQUIRED)
+ 
+@@ -126,7 +129,7 @@
+   livox_ros_driver2
+ )
+ 
+-set(COMMON_DEPENDENCIES OpenMP::OpenMP_CXX fmt::fmt)
++set(COMMON_DEPENDENCIES OpenMP::OpenMP_CXX fmt::fmt Sophus::Sophus)
+ 
+ # link_directories(${COMMON_DEPENDENCIES}
+ #   ${vikit_common_LIBRARIES}/libvikit_common.so
+@@ -153,7 +156,7 @@
+     ${CMAKE_SOURCE_DIR}/../../install/vikit_ros/lib/libvikit_ros.so
+     ${COMMON_DEPENDENCIES}
+ )
+-target_link_libraries(vio ${COMMON_DEPENDENCIES})
++target_link_libraries(vio ${CMAKE_SOURCE_DIR}/../../install/vikit_common/lib/libvikit_common.so ${COMMON_DEPENDENCIES})
+ target_link_libraries(lio utils ${COMMON_DEPENDENCIES})
+ target_link_libraries(pre ${COMMON_DEPENDENCIES})
+ target_link_libraries(imu_proc ${COMMON_DEPENDENCIES})
+@@ -209,4 +212,4 @@
+   Sophus
+ )
+ 
+-ament_package()
+\ No newline at end of file
++ament_package()
+--- a/include/LIVMapper.h
++++ b/include/LIVMapper.h
+@@ -15,6 +15,7 @@
+ 
+ #include "IMU_Processing.h"
+ #include "vio.h"
++#include <sensor_msgs/msg/compressed_image.hpp>
+ #include "preprocess.h"
+ #if __has_include(<cv_bridge/cv_bridge.hpp>)
+ #include <cv_bridge/cv_bridge.hpp>
+@@ -42,6 +43,12 @@
+   void handleVIO();
+   void handleLIO();
+   void savePCD();
++  void publish_backend_frame();
++  bool backend_enabled_ = false;
++  double backend_interval_ = 1.0, backend_last_cloud_ = -1.0;
++  int backend_max_points_ = 12000;
++  rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr backend_odom_pub_;
++  rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr backend_cloud_pub_;
+   void processImu();
+   
+   bool sync_packages(LidarMeasureGroup &meas);
+@@ -129,6 +136,8 @@
+   deque<sensor_msgs::msg::Imu::ConstSharedPtr> imu_buffer;
+   deque<cv::Mat> img_buffer;
+   deque<double> img_time_buffer;
++  deque<int64_t> img_stamp_ns_buffer;
++  int64_t backend_image_stamp_ns_ = -1;
+   vector<pointWithVar> _pv_list;
+   vector<double> extrinT;
+   vector<double> extrinR;
+@@ -170,6 +179,7 @@
+   std::shared_ptr<rclcpp::SubscriptionBase> sub_pcl;
+   rclcpp::Subscription<sensor_msgs::msg::Imu>::SharedPtr sub_imu;
+   rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr sub_img;
++  rclcpp::Subscription<sensor_msgs::msg::CompressedImage>::SharedPtr sub_img_compressed;
+   rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pubLaserCloudFullRes;
+   rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr pubNormal;
+   rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pubSubVisualMap;
+--- a/src/LIVMapper.cpp
++++ b/src/LIVMapper.cpp
+@@ -11,6 +11,8 @@
+ */
+ 
+ #include "LIVMapper.h"
++#include <cmath>
++#include <stdexcept>
+ #include <vikit/camera_loader.h>
+ 
+ using namespace Sophus;
+@@ -52,6 +54,12 @@
+ 
+ void LIVMapper::readParameters(rclcpp::Node::SharedPtr &node)
+ {
++  this->node->declare_parameter<bool>("common.img_compressed", false);
++  backend_enabled_ = node->declare_parameter<bool>("backend.enabled", false);
++  backend_interval_ = node->declare_parameter<double>("backend.keyframe_interval_s", 1.0);
++  backend_max_points_ = node->declare_parameter<int>("backend.max_points", 12000);
++  if (!std::isfinite(backend_interval_) || backend_interval_ <= 0 || backend_max_points_ < 100 || backend_max_points_ > 48000)
++    throw std::invalid_argument("invalid online backend publication limits");
+   // declare parameters
+   this->node->declare_parameter<std::string>("common.lid_topic", "/livox/lidar");
+   this->node->declare_parameter<std::string>("common.imu_topic", "/livox/imu");
+@@ -259,12 +267,30 @@
+ {
+   image_transport::ImageTransport it(this->node);
+   if (p_pre->lidar_type == AVIA) {
+-    sub_pcl = this->node->create_subscription<livox_ros_driver2::msg::CustomMsg>(lid_topic, 200000, std::bind(&LIVMapper::livox_pcl_cbk, this, std::placeholders::_1));
++    sub_pcl = this->node->create_subscription<livox_ros_driver2::msg::CustomMsg>(lid_topic, 64, std::bind(&LIVMapper::livox_pcl_cbk, this, std::placeholders::_1));
+   } else {
+-    sub_pcl = this->node->create_subscription<sensor_msgs::msg::PointCloud2>(lid_topic, 200000, std::bind(&LIVMapper::standard_pcl_cbk, this, std::placeholders::_1));
+-  }
+-  sub_imu = this->node->create_subscription<sensor_msgs::msg::Imu>(imu_topic, 200000, std::bind(&LIVMapper::imu_cbk, this, std::placeholders::_1));
+-  sub_img = this->node->create_subscription<sensor_msgs::msg::Image>(img_topic, 200000, std::bind(&LIVMapper::img_cbk, this, std::placeholders::_1));
++    sub_pcl = this->node->create_subscription<sensor_msgs::msg::PointCloud2>(lid_topic, 64, std::bind(&LIVMapper::standard_pcl_cbk, this, std::placeholders::_1));
++  }
++  sub_imu = this->node->create_subscription<sensor_msgs::msg::Imu>(imu_topic, 2000, std::bind(&LIVMapper::imu_cbk, this, std::placeholders::_1));
++  // Accept the camera's original compressed transport. Decoding happens
++  // locally, avoiding multi-megabyte raw image fragmentation through DDS.
++  if (this->node->get_parameter("common.img_compressed").as_bool()) {
++    sub_img_compressed = this->node->create_subscription<sensor_msgs::msg::CompressedImage>(
++        img_topic, 8, [this](sensor_msgs::msg::CompressedImage::ConstSharedPtr msg, const rclcpp::MessageInfo &info) {
++          const auto &mi = info.get_rmw_message_info();
++          const auto now = std::chrono::system_clock::now().time_since_epoch();
++          const auto ns = std::chrono::duration_cast<std::chrono::nanoseconds>(now).count();
++          if (mi.source_timestamp > 0 && mi.received_timestamp > 0)
++            RCLCPP_INFO(this->node->get_logger(), "[ Camera delivery ] transport_ms=%.3f dispatch_ms=%.3f",
++              (mi.received_timestamp-mi.source_timestamp)*1e-6, (ns-mi.received_timestamp)*1e-6);
++          try { img_cbk(cv_bridge::toCvCopy(msg, "bgr8")->toImageMsg()); }
++          catch (const cv_bridge::Exception &e) {
++            RCLCPP_ERROR(this->node->get_logger(), "image decode failed: %s", e.what());
++          }
++        });
++  } else {
++    sub_img = this->node->create_subscription<sensor_msgs::msg::Image>(img_topic, 8, std::bind(&LIVMapper::img_cbk, this, std::placeholders::_1));
++  }
+   
+   pubLaserCloudFullRes = this->node->create_publisher<sensor_msgs::msg::PointCloud2>("/cloud_registered", 100);
+   pubNormal = this->node->create_publisher<visualization_msgs::msg::MarkerArray>("/visualization_marker", 100);
+@@ -272,6 +298,11 @@
+   pubLaserCloudEffect = this->node->create_publisher<sensor_msgs::msg::PointCloud2>("/cloud_effected", 100);
+   pubLaserCloudMap = this->node->create_publisher<sensor_msgs::msg::PointCloud2>("/Laser_map", 100);
+   pubOdomAftMapped = this->node->create_publisher<nav_msgs::msg::Odometry>("/aft_mapped_to_init", 10);
++  if (backend_enabled_) {
++    const auto qos = rclcpp::QoS(rclcpp::KeepLast(2)).best_effort().durability_volatile();
++    backend_odom_pub_ = this->node->create_publisher<nav_msgs::msg::Odometry>("/backend/input/odometry", qos);
++    backend_cloud_pub_ = this->node->create_publisher<sensor_msgs::msg::PointCloud2>("/backend/input/cloud", qos);
++  }
+   pubPath = this->node->create_publisher<nav_msgs::msg::Path>("/path", 10);
+   plane_pub = this->node->create_publisher<visualization_msgs::msg::Marker>("/planner_normal", 1);
+   voxel_pub = this->node->create_publisher<visualization_msgs::msg::MarkerArray>("/voxels", 1);
+@@ -395,6 +426,7 @@
+ 
+   publish_frame_world(pubLaserCloudFullRes, vio_manager);
+   publish_img_rgb(pubImage, vio_manager);
++  publish_backend_frame(); // After the same-time visual update.
+ 
+   euler_cur = RotMtoEuler(_state.rot_end);
+   fout_out << std::setw(20) << LidarMeasures.last_lio_update_time - _first_lidar_time << " " << euler_cur.transpose() * 57.3 << " "
+@@ -476,6 +508,7 @@
+   euler_cur = RotMtoEuler(_state.rot_end);
+   geoQuat = tf::createQuaternionMsgFromRollPitchYaw(euler_cur(0), euler_cur(1), euler_cur(2));
+   publish_odometry(pubOdomAftMapped);
++  if (slam_mode_ != LIVO) publish_backend_frame();
+ 
+   double t3 = omp_get_wtime();
+ 
+@@ -602,10 +635,12 @@
+ 
+ void LIVMapper::run(rclcpp::Node::SharedPtr &node) 
+ {
++  rclcpp::executors::SingleThreadedExecutor executor;
++  executor.add_node(this->node);
+   rclcpp::Rate rate(5000);
+   while (rclcpp::ok()) 
+   {
+-    rclcpp::spin_some(this->node);
++    executor.spin_some();
+     if (!sync_packages(LidarMeasures)) 
+     {
+       rate.sleep();
+@@ -898,7 +933,7 @@
+ cv::Mat LIVMapper::getImageFromMsg(const sensor_msgs::msg::Image::ConstSharedPtr &img_msg)
+ {
+   cv::Mat img;
+-  img = cv_bridge::toCvShare(img_msg, "bgr8")->image;
++  img = cv_bridge::toCvCopy(img_msg, "bgr8")->image;
+   return img;
+ }
+ 
+@@ -947,6 +982,10 @@
+   cv::Mat img_cur = getImageFromMsg(msg);
+   img_buffer.push_back(img_cur);
+   img_time_buffer.push_back(img_time_correct);
++  // Epoch seconds in double cannot preserve nanoseconds. Carry the original
++  // integer acquisition stamp through the same queue for backend association.
++  img_stamp_ns_buffer.push_back(rclcpp::Time(msg->header.stamp).nanoseconds() +
++      static_cast<int64_t>(std::llround((img_time_offset + exposure_time_init) * 1e9)));
+ 
+   // ROS_INFO("Correct Image time: %.6f", img_time_correct);
+ 
+@@ -960,9 +999,12 @@
+ 
+ bool LIVMapper::sync_packages(LidarMeasureGroup &meas)
+ {
+-  if (lid_raw_data_buffer.empty() && lidar_en) return false;
++  // Once LIO has reached this image timestamp, its VIO update consumes
++  // the queued image and the already propagated state, not a future scan.
++  const bool pending_vio = slam_mode_ == LIVO && meas.lio_vio_flg == LIO;
++  if (lid_raw_data_buffer.empty() && lidar_en && !pending_vio) return false;
+   if (img_buffer.empty() && img_en) return false;
+-  if (imu_buffer.empty() && imu_en) return false;
++  if (imu_buffer.empty() && imu_en && !pending_vio) return false;
+ 
+   switch (slam_mode_)
+   {
+@@ -1043,6 +1085,7 @@
+       {
+         img_buffer.pop_front();
+         img_time_buffer.pop_front();
++        img_stamp_ns_buffer.pop_front();
+         RCLCPP_ERROR(this->node->get_logger(), "[ Data Cut ] Throw one image frame! \n");
+         return false;
+       }
+@@ -1125,8 +1168,7 @@
+       meas.lio_vio_flg = VIO;
+       // printf("[ Data Cut ] VIO \n");
+       meas.measures.clear();
+-      double imu_time = stamp2Sec(imu_buffer.front()->header.stamp);
+-
++      // LIO already propagated to img_capture_time; no future IMU is required.
+       struct MeasureGroup m;
+       m.vio_time = img_capture_time;
+       m.lio_time = meas.last_lio_update_time;
+@@ -1143,6 +1185,8 @@
+       // }
+       img_buffer.pop_front();
+       img_time_buffer.pop_front();
++      backend_image_stamp_ns_ = img_stamp_ns_buffer.front();
++      img_stamp_ns_buffer.pop_front();
+       mtx_buffer.unlock();
+       sig_buffer.notify_all();
+       meas.measures.push_back(m);
+@@ -1431,6 +1475,50 @@
+   pubOdomAftMapped->publish(odomAftMapped);
+ }
+ 
++void LIVMapper::publish_backend_frame()
++{
++  if (!backend_enabled_ || !feats_down_body || feats_down_body->empty()) return;
++  const double stamp = LidarMeasures.last_lio_update_time;
++  if (!std::isfinite(stamp) || stamp < 0) return;
++  nav_msgs::msg::Odometry odom;
++  odom.header.stamp = rclcpp::Time(slam_mode_ == LIVO ? backend_image_stamp_ns_ :
++      static_cast<int64_t>(std::llround(stamp * 1e9)));
++  odom.header.frame_id = "camera_init";
++  odom.child_frame_id = "backend_imu";
++  odom.pose.pose.position.x = _state.pos_end.x();
++  odom.pose.pose.position.y = _state.pos_end.y();
++  odom.pose.pose.position.z = _state.pos_end.z();
++  const Eigen::Quaterniond q(_state.rot_end);
++  odom.pose.pose.orientation.x = q.x(); odom.pose.pose.orientation.y = q.y();
++  odom.pose.pose.orientation.z = q.z(); odom.pose.pose.orientation.w = q.w();
++  // ROS orders position then rotation; IEKF orders rotation then position.
++  // This is the frontend covariance only, not a posterior graph covariance.
++  for (int r = 0; r < 6; ++r)
++    for (int c = 0; c < 6; ++c)
++      odom.pose.covariance[r*6+c] = _state.cov((r+3)%6, (c+3)%6);
++  backend_odom_pub_->publish(odom);
++  if (backend_cloud_pub_->get_subscription_count() == 0 ||
++      (backend_last_cloud_ >= 0 && stamp-backend_last_cloud_ < backend_interval_)) return;
++  backend_last_cloud_ = stamp;
++  // Reuse deskewed/downsampled geometry. No extraction, registration, or wait.
++  // Evenly subsample to bound serialization; graph uses the IMU body frame.
++  pcl::PointCloud<pcl::PointXYZ> points;
++  const size_t count = feats_down_body->size();
++  const size_t keep = std::min(count, static_cast<size_t>(backend_max_points_));
++  points.reserve(keep);
++  for (size_t k = 0; k < keep; ++k) {
++    const auto &p = feats_down_body->points[k*count/keep];
++    const Eigen::Vector3d body = extR * Eigen::Vector3d(p.x, p.y, p.z) + extT;
++    if (!body.allFinite()) continue;
++    points.emplace_back(static_cast<float>(body.x()), static_cast<float>(body.y()), static_cast<float>(body.z()));
++  }
++  sensor_msgs::msg::PointCloud2 msg;
++  pcl::toROSMsg(points, msg);
++  msg.header.stamp = odom.header.stamp;
++  msg.header.frame_id = odom.child_frame_id;
++  backend_cloud_pub_->publish(msg);
++}
++
+ void LIVMapper::publish_mavros(const rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr &mavros_pose_publisher)
+ {
+   msg_body_pose.header.stamp = this->node->get_clock()->now();
+@@ -1446,4 +1534,4 @@
+   msg_body_pose.header.frame_id = "camera_init";
+   path.poses.push_back(msg_body_pose);
+   pubPath->publish(path);
+-}
+\ No newline at end of file
++}
