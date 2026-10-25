@@ -49,6 +49,19 @@ This is one offline sequence comparison; the single-scan predictions are unchang
 **SemanticKITTI 19-class preparation:** [official-metric diagnostics, local GPU checks and native-19 tooling](docs/semantickitti19.md).
 The archived 07/09 bridge scores are diagnostics; complete native-19 sequence-08 validation and a leaderboard submission are still pending.
 
+**Semantic inference fixes and research tools:** the PTv3 loader now applies the
+requested serialization policy to pooling as well as the root backbone. Worker
+transport has bounded response waits and shared-memory cleanup. The default
+mapper retains its single-frame path; temporal memory is an explicit experiment.
+[Memory tools and controls](tools/semantic_memory/README.md)
+· [real-data evidence-chain audit](results/semantic_memory_20261025/chain_audit/README.md).
+The audit covers 20 scenes / 800 frames and finds limited training coverage and
+many missed corrections despite available correct history. Neither temporal
+repair superiority nor complete cross-process repeatability is established.
+
+[Main integration scope and verification](docs/main_integration_20261026.md)
+records which tools were promoted and which research branches remain separate.
+
 ![semantic map](docs/img/rviz_class_final.png)
 
 *The full 693 m loop of KITTI seq 07, coloured by predicted class. Cyan is `driveable_surface`,
@@ -237,14 +250,18 @@ regression, and reverted the good ones. The instrument is now the deployed class
 
 ### Bonus: know your noise floor before you trust a delta
 
-The model is **non-deterministic run to run**. With `shuffle_orders` pinned off, two forward passes
+The historical model was **non-deterministic run to run**. With the root `shuffle_orders` pinned off, two forward passes
 over the same scan in the same process still disagree on ~4–5 % of points. Bisected with forward
 hooks to `SerializedPooling`'s unstable `torch.sort(cluster)`; forcing `stable=True` did not remove
-it, so at least one more source remains unidentified.
+it. The October 25 audit identified the four pooling layers' independent shuffle
+flags, which were still enabled. The loader now applies the explicit policy to
+every serialization module. Three same-process A-A / A-B-A probes pass, but an
+800-scan reverse-order replay in a separate process still changes 0.0240% of point
+labels and fails exact repeatability. [Full evidence](results/semantic_memory_20261025/chain_audit/README.md).
 
 **On 20 frames the instrument's own spread is ~1 point of coarse mIoU — the same size as the
-acceptance gate.** Every verdict in this repo is therefore taken over all 1101 frames with repeats,
-and the spread is reported next to every delta.
+acceptance gate.** Those historical full-sequence verdicts use 1101 frames with
+repeats; the newer semantic-memory pilots use separately documented scene splits.
 
 ---
 
@@ -438,8 +455,9 @@ Two things that will bite you if skipped:
 * **Dynamic removal recalls 60.1 % of moving points**, and only 17.1 % for pedestrians — they move
   less than one voxel per sweep. Its false-kill floor is set by trajectory error, not by the mechanism.
 * **RGB covers 37.7 % of map voxels.** The camera is a narrow forward frustum; the LiDAR is 360°.
-* **The model is not bit-deterministic** and one source of it remains unidentified (see above).
-  Confidence is meaningful, so the map is gated at `conf ≥ 0.5`.
+* **Cross-process exact repeatability remains unresolved.** The pooling shuffle
+  policy is fixed; the 800-scan reverse replay retains a 0.0240% label discrepancy
+  (see above). Historical maps use `conf ≥ 0.5`.
 * **The 10 Hz acceptance uses a precomputed trajectory.** v0.6 runs the online path on bag
   replay (live poses, FAST-LIVO2 alongside, in-node latency p50 98–108 ms) from its snapshot;
   live-sensor operation is untested, and FAST-LIVO2 itself varies run to run at real-time

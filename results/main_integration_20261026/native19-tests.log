@@ -1,0 +1,16 @@
+test_abstention_is_false_negative_and_all_19_classes_count (tools.semantic_kitti.test_contract.Contracts.test_abstention_is_false_negative_and_all_19_classes_count) ... ok
+test_matches_pinned_official_evaluator (tools.semantic_kitti.test_contract.Contracts.test_matches_pinned_official_evaluator) ... ok
+test_moving_gt_instance_bits_and_unknown_ids (tools.semantic_kitti.test_contract.Contracts.test_moving_gt_instance_bits_and_unknown_ids) ... ok
+test_submission_passes_official_validator_and_rejects_tampering (tools.semantic_kitti.test_contract.Contracts.test_submission_passes_official_validator_and_rejects_tampering) ... ok
+test_submission_rejects_bridge_future_and_missing_frames (tools.semantic_kitti.test_contract.Contracts.test_submission_rejects_bridge_future_and_missing_frames) ... ok
+test_taxonomy_does_not_claim_native_19 (tools.semantic_kitti.test_contract.Contracts.test_taxonomy_does_not_claim_native_19) ... ok
+test_truncated_dataset_does_not_make_submission_complete (tools.semantic_kitti.test_contract.Contracts.test_truncated_dataset_does_not_make_submission_complete) ... ok
+test_validation_rejects_incomplete_and_test_splits (tools.semantic_kitti.test_contract.Contracts.test_validation_rejects_incomplete_and_test_splits) ... ok
+test_attention_matches_independent_dense_equation_and_gradients (tools.semantic_kitti.test_runtime.RuntimeTests.test_attention_matches_independent_dense_equation_and_gradients) ... ok
+test_segment_reductions_match_dense_segments (tools.semantic_kitti.test_runtime.RuntimeTests.test_segment_reductions_match_dense_segments) ... ok
+test_training_excludes_validation_test_and_incomplete_full_split (tools.semantic_kitti.test_runtime.RuntimeTests.test_training_excludes_validation_test_and_incomplete_full_split) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.135s
+
+OK

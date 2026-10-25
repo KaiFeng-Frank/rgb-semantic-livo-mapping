@@ -1,0 +1,61 @@
+name: Main integration contracts
+
+on:
+  pull_request:
+    branches: [main]
+    paths: ['src/**', 'tools/**', '.github/workflows/main-contracts.yml']
+  push:
+    branches: [main]
+    paths: ['src/**', 'tools/**', '.github/workflows/main-contracts.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: main-contracts-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  semantic-contracts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - name: Check out exact candidate
+        run: |
+          git init .
+          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
+          git fetch --depth 1 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+      - name: Install CPU test dependencies
+        run: |
+          python3 -m venv /tmp/contracts
+          /tmp/contracts/bin/pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+          /tmp/contracts/bin/pip install numpy==1.26.4 pytest==9.0.2 PyYAML==6.0.2 requests==2.32.3 pyquaternion==0.9.9 scipy==1.13.1
+      - name: Check semantic memory and native-19 contracts
+        run: |
+          /tmp/contracts/bin/python -m pytest -q -p no:cacheprovider tools/semantic_memory
+          /tmp/contracts/bin/python -m unittest tools.semantic_kitti.test_contract tools.semantic_kitti.test_runtime -v
+  loop-contracts:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    env:
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - name: Check out exact candidate
+        run: |
+          git init .
+          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
+          git fetch --depth 1 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+      - name: Install pinned geometry dependencies
+        run: |
+          python3 -m venv /tmp/geometry
+          /tmp/geometry/bin/pip install -r tools/loop_closure/requirements.txt
+      - name: Check graph and semantic fusion contracts
+        run: /tmp/geometry/bin/python -m unittest tools.loop_closure.test_backend tools.loop_semantics.test_fusion -v
