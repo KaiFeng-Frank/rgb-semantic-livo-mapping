@@ -5,8 +5,11 @@ point-cloud segmentation**. It reads the existing PTv3 decoder features from one
 backbone forward. It adds no pose-estimation residual and changes no LIVO frontend.
 
 The implementation, cache exporter, training/evaluation CLI and opt-in ROS adapter
-are available. **No real-data fusion model has been trained or admitted.** The
-existing B0 backbone is frozen. Attention and memory gates are established
+are available. A [real-label nuScenes pilot](../../results/semantic_memory_20261025/real_pilot/README.md)
+now trains and compares three seeds: gated memory reaches 49.40 mIoU versus 49.87
+for the matched-supervision current-only control and fails the declared admission.
+Event recovery and the 5 ms module budget also fail. Its trained heads remain
+non-deployable. The existing B0 backbone is frozen. Attention and memory gates are established
 components; this implementation does not establish a new research contribution.
 
 ## Data flow and fallback
@@ -173,15 +176,19 @@ actual ROS transport with a fixed-scan fixture. Neither is a driving sequence,
 accuracy experiment, pose-quality check or demonstration of deskewing.
 Compact run evidence is under [results](../../results/semantic_memory_20261025/README.md).
 
-Real-data admission remains necessary: compare frozen single-frame predictions,
+Broader real-data admission remains necessary: compare frozen single-frame predictions,
 ordinary historical fusion and this method on the same held-out chronological
 data. Measure first recognition, disappearance/reappearance, removal of stale
 labels, error recovery time, harm/rescue rates, per-class accuracy, and sustained
 tail latency/memory. Event-level delay requires tracked/annotated event identities;
-the current cache schema and evaluator do not infer these from nearest points.
+the generic cache schema and evaluator do not infer these from nearest points.
+The separate nuScenes pilot uses evaluation-only GT boxes/instance IDs to define
+shared observation episodes, with explicit censoring and keyframe sampling limits.
 Do not replace those measures with an aggregate leaderboard score.
 
 Local SemanticKITTI training annotations were not found. The external SSD has
-some labeled nuScenes training scenes, but they need a separate official scene
-split, label mapping, intensity contract and geometry adapter. No such scene was
-silently renamed, used for training, or counted as validation in this change.
+nuScenes training and validation scans/labels. The separate `nuscenes_pilot*`
+tools now implement official scene-split checks, log-disjoint pilot selection,
+native label mapping, normalized intensity and explicit raw-keyframe alignment.
+They preserve real scene IDs and never label that geometry as deskewed. The
+existing KITTI cache contract and active ROS admission checks remain strict.

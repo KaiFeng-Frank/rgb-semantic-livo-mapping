@@ -1,5 +1,9 @@
 # Causal semantic memory: engineering checks, 2026-10-25
 
+**Follow-up:** the [real-label nuScenes pilot](real_pilot/README.md) has now been
+completed and fails semantic/runtime admission. The results below preserve the
+earlier engineering stage; its "no real training" status describes that stage.
+
 The first implementation and opt-in shadow path pass the checks below. **There is
 no real-data fusion training result, segmentation gain, event-recovery result or
 sustained driving realtime admission.** Existing B0 weights are unchanged.

@@ -36,7 +36,10 @@ observations now feeds local feature attention and a learned history-use gate,
 with explicit single-frame fallback and opt-in ROS shadow operation.
 [Implementation, training contract and limits](tools/semantic_memory/README.md)
 · [engineering checks](results/semantic_memory_20261025/README.md).
-No real-data fusion checkpoint or segmentation improvement is claimed yet.
+The subsequent [real-label nuScenes pilot](results/semantic_memory_20261025/real_pilot/README.md)
+fails admission: gated memory reaches 49.40 mIoU versus 49.87 for a matched-supervision
+current-only head across three seeds; recovery outcomes and the 5 ms module budget
+also fail. Trained heads and complete evidence are retained; active fusion remains disabled.
 
 **Offline loop closure, seq07:** with the same frozen frontend and B0 predictions,
 official KITTI ATE falls **0.837 → 0.557 m** and out-of-frustum map mIoU-9 rises
