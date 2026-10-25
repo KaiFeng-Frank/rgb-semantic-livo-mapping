@@ -1,6 +1,12 @@
 # Semantic frontend verification
 
-The frontend passes actual-estimator and **boundary activation** checks, but the
+The enhanced motion/visual/categorical implementation is assessed separately in
+[the enhanced verification record](enhanced/README.md). Its five-arm development
+replay passes mechanism activation with identical 91-pose coverage. It has not
+been scored for accuracy. The results below remain evidence for the earlier
+association/boundary implementation and do not evaluate the enhanced profile.
+
+The earlier frontend passes actual-estimator and **boundary activation** checks, but the
 subsequent frozen sequence 09 accuracy admission **failed**. Across three repeats,
 full B0 mean ATE is 0.463356 m versus geometry's 0.429595 m (7.86% higher), and mean
 rotation RPE also regresses. All 15 runs preserve the same 235 timestamps;

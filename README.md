@@ -67,8 +67,12 @@ preserved in the [holdout results](results/semantic_frontend_20261025/holdout09/
 The enhanced implementation now adds motion-aware geometric/map admission,
 projected dynamic-pixel gating in both visual update paths, and direct categorical
 likelihood observations with boundary rows disabled. Actual-estimator integration
-tests pass; real-data mechanism validation is pending. The earlier failed result
-does not evaluate this enhanced profile. See [implementation and limits](frontend/README.md).
+tests and the frozen five-arm development replay pass: all arms retain the same
+91 pose timestamps; the combined arm activates categorical observations on 89
+updates, motion detection on 81, and moving-region image masks on 72. This checks
+mechanism activation, not accuracy improvement. The earlier failed result does
+not evaluate this enhanced profile. See [archived evidence](results/semantic_frontend_20261025/enhanced/README.md)
+and [implementation and limits](frontend/README.md).
 The local 5070 Ti now runs the strict B0 model: direct inference medians are
 63–70 ms over three fixed 20-frame timing rounds. The earlier default-middleware
 ROS probes failed scan delivery; controlled full-size geometry messages now pass

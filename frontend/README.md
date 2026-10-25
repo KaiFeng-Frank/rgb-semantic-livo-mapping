@@ -23,6 +23,14 @@ preserving the earlier controls. New real-data admission is separately frozen in
 `enhanced-diagnostic.json`: 96 development frames, five arms, one repeat, no GT
 scoring, no training, no parameter search and no automatic large experiment.
 
+The frozen replay passed on the temporary GitHub CPU runner: all five arms produce
+the same 91 pose timestamps. The combined arm uses categorical observations on
+89 updates, detects moving points on 81, invalidates four old map nodes, and
+generates moving-region image masks on 72 visual updates. Boundary constraint
+rows remain zero in every arm. These are mechanism activation checks, not
+accuracy or online throughput results. [Complete logs, hashes, settings and
+trajectories](../results/semantic_frontend_20261025/enhanced/README.md) are preserved.
+
 ## Implementation
 
 * A scan-preserving input bridge adds native nuScenes `semantic_label` (uint16) and
