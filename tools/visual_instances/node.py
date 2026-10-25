@@ -58,7 +58,7 @@ def make_node(args):
 
         def work(self):
             try:
-                self.client = Client(args.worker_python, args.weights, args.out/'worker.log', args.imgsz)
+                self.client = Client(args.worker_python, args.weights, args.out/'worker.log', args.imgsz, cancel_event=self.stop)
                 (args.out/'model.json').write_text(json.dumps(self.client.meta, indent=2)+'\n')
                 self.counts['ready'] = True
                 while not self.stop.is_set():
@@ -89,6 +89,9 @@ def make_node(args):
                     self.log.write(json.dumps(dict(stamp_ns=stamp, arrival=arrival,
                         published=time.monotonic(), receipt_to_publish_ms=(time.monotonic()-arrival)*1000,
                         **result['info']))+'\n'); self.log.flush()
+            except InterruptedError as exc:
+                if not self.stop.is_set():
+                    self.counts.update(failed=True, error=f'{type(exc).__name__}: {exc}')
             except Exception as exc:
                 self.counts.update(failed=True, error=f'{type(exc).__name__}: {exc}')
             finally:

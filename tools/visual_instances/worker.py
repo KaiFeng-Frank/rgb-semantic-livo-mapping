@@ -9,9 +9,10 @@ import time
 
 
 class Client:
-    def __init__(self, python, weights, log, imgsz=640):
+    def __init__(self, python, weights, log, imgsz=640, cancel_event=None):
         from multiprocessing import Pipe
         self.conn, child = Pipe()
+        self.cancel_event = cancel_event
         self.log = Path(log).open('w')
         env = dict(os.environ, OMP_NUM_THREADS='1', OPENBLAS_NUM_THREADS='1', MKL_NUM_THREADS='1',
                    YOLO_AUTOINSTALL='false')
@@ -22,8 +23,7 @@ class Client:
             env=env)
         child.close()
         try:
-            if not self.conn.poll(90):
-                raise TimeoutError('Visual worker startup deadline')
+            self.wait(90, 'startup')
             self.meta = self.conn.recv()
             if 'error' in self.meta:
                 raise RuntimeError(self.meta['error'])
@@ -33,12 +33,21 @@ class Client:
 
     def step(self, image, stamp_ns):
         self.conn.send((image, stamp_ns))
-        if not self.conn.poll(3):
-            raise TimeoutError('Visual inference deadline')
+        self.wait(3, 'inference')
         result = self.conn.recv()
         if 'error' in result:
             raise RuntimeError(result['error'])
         return result
+
+    def wait(self, seconds, phase):
+        deadline = time.monotonic()+seconds
+        while not self.conn.poll(.05):
+            if self.cancel_event is not None and self.cancel_event.is_set():
+                raise InterruptedError('Visual worker cancelled')
+            if self.process.poll() is not None:
+                raise RuntimeError('Visual worker exited')
+            if time.monotonic() >= deadline:
+                raise TimeoutError(f'Visual {phase} deadline')
 
     def close(self):
         self.conn.close()
