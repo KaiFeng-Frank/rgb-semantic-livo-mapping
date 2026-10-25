@@ -1,0 +1,34 @@
+test_actual_retrieval_icp_incremental_loop_and_map_rebuild (tools.loop_closure.test_online.OnlineContracts) ... ok
+test_idle_worker_failure_is_reported_without_new_inputs (tools.loop_closure.test_online.OnlineContracts) ... ok
+test_invalid_cloud_and_out_of_order_never_mutate_graph (tools.loop_closure.test_online.OnlineContracts) ... ok
+test_loop_direction_and_future_odometry_not_double_corrected (tools.loop_closure.test_online.OnlineContracts) ... ok
+test_no_loop_is_exact_identity_and_input_immutable (tools.loop_closure.test_online.OnlineContracts) ... ok
+test_overload_keeps_latest_pending_frames (tools.loop_closure.test_online.OnlineContracts) ... ok
+test_pairs_are_exact_order_independent_and_bounded (tools.loop_closure.test_online.OnlineContracts) ... ok
+test_rotation_and_left_correction (tools.loop_closure.test_online.OnlineContracts) ... ok
+test_session_capacity_is_explicit (tools.loop_closure.test_online.OnlineContracts) ... ok
+test_skipped_keyframe_gap_increases_edge_uncertainty (tools.loop_closure.test_online.OnlineContracts) ... ok
+test_watchdog_cancellation_and_next_request_are_atomic (tools.loop_closure.test_online.OnlineContracts) ... ok
+test_watchdog_releases_partial_payload_recv (tools.loop_closure.test_online.OnlineContracts) ... ok
+test_worker_process_round_trip_and_shutdown (tools.loop_closure.test_online.OnlineContracts) ... ok
+test_clock_audit_allows_subframe_jitter_but_rejects_a_frame_offset (tools.loop_closure.test_backend.Contracts) ... ok
+test_icp_transform_direction_on_three_planes (tools.loop_closure.test_backend.Contracts) ... ok
+test_odometry_only_graph_and_loop_direction (tools.loop_closure.test_backend.Contracts) ... ok
+test_rounded_extrinsic_is_rigid_before_graph_optimization (tools.loop_closure.test_backend.Contracts) ... ok
+test_scan_context_rotation (tools.loop_closure.test_backend.Contracts) ... ok
+test_world_correction_preserves_imu_lidar_extrinsic (tools.loop_closure.test_backend.Contracts) ... ok
+test_actual_build_excludes_heldout_predictions (tools.loop_semantics.test_fusion.Contracts) ... FUSE 0 {'all': 1, 'heldout': 1} 0
+BUILD_COMPLETE 0.09614264196716249
+ok
+test_attribution_removes_only_the_other_visits_class_votes (tools.loop_semantics.test_fusion.Contracts) ... ok
+test_geometry_and_weak_support_reject_revision (tools.loop_semantics.test_fusion.Contracts) ... ok
+test_moving_class_evidence_and_protected_voxels_never_relabelled (tools.loop_semantics.test_fusion.Contracts) ... ok
+test_point_density_does_not_multiply_frame_evidence (tools.loop_semantics.test_fusion.Contracts) ... ok
+test_protocol_round_trip_accepts_formatting_but_rejects_changed_values (tools.loop_semantics.test_fusion.Contracts) ... ok
+test_repeated_visit_does_not_overwhelm_clearer_revisit (tools.loop_semantics.test_fusion.Contracts) ... ok
+test_unknown_keys_and_unmatched_visits_cannot_create_voxels (tools.loop_semantics.test_fusion.Contracts) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 5.109s
+
+OK

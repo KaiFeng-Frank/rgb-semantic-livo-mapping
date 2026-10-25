@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "input": "complete original FAST-LIVO hku1 LiDAR/IMU/compressed-camera sequence at 1x",
+  "rate": 1.0,
+  "expected_images": 1277,
+  "expected_lidar_scans": 1277,
+  "expected_imu": 25871,
+  "duration_s": 127.695796967,
+  "frontend_end_to_end_p95_budget_ms": 150.0,
+  "frontend_end_to_end_max_budget_ms": 250.0,
+  "corrected_end_to_end_p95_budget_ms": 150.0,
+  "corrected_end_to_end_max_budget_ms": 250.0,
+  "backend_added_p99_budget_ms": 10.0,
+  "replay_wall_ratio_max": 1.01,
+  "missing_backend_outputs": 0,
+  "missing_after_first_output_except_final_image": 0,
+  "runtime_errors": 0,
+  "overload_drops_in_normal_run": 0,
+  "require_matching_source_hash_and_pose_timestamps": true,
+  "require_live_loop_acceptance": true,
+  "declared_after": "Raw-image paired diagnostic found transport stalls in both arms, before compressed-transport evaluation",
+  "scope": "Soft realtime for this measured 10 Hz geometric LIVO session and graph size; not hard realtime, indefinite operation, semantic inference latency, or localization accuracy"
+}

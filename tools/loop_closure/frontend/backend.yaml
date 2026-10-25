@@ -1,0 +1,12 @@
+/**:
+  ros__parameters:
+    backend:
+      enabled: true
+      keyframe_interval_s: 1.0
+      max_points: 12000
+    local_map:
+      map_sliding_en: true
+      half_map_size: 100
+      sliding_thresh: 8.0
+    evo:
+      pose_output_en: false

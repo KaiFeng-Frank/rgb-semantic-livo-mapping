@@ -31,6 +31,17 @@ Trained models and recovery evidence are archived separately from Git source:
 [artefact recovery instructions](docs/artifact_recovery.md) and
 [the exact asset manifest](results/v06/artifacts_20260928/artifact-manifest.json).
 
+**Live geometric backend:** the independent online entry now corrects LIVO poses
+while sensors are arriving. A complete 127.7 s / 10 Hz HKU replay delivers all
+**1,274 initialized poses**, with corrected-pose input-to-output **P95 49.0 ms,
+P99 60.4 ms, max 136.3 ms**; backend-added P99 is **0.92 ms**. It accepts 21 live
+loop constraints. The frontend no longer waits for a future LiDAR scan to finish
+an already-ready visual update, and graph/map work runs outside pose delivery.
+[Run and scope](docs/realtime_backend.md) · [timing evidence](results/realtime_backend_20261026/README.md).
+These are same-host geometric-backend measurements, excluding semantic inference;
+the default graph is bounded to 1,000 keyframes, and XYZ map correction does not
+yet re-fuse the semantic map. Loop acceptance alone is not an accuracy result.
+
 **Offline loop closure, seq07:** with the same frozen frontend and B0 predictions,
 official KITTI ATE falls **0.837 → 0.557 m** and out-of-frustum map mIoU-9 rises
 **77.32 → 78.53%**. Historical baseline replay is reproduced exactly.
