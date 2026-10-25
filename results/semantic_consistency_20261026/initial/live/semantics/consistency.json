@@ -1,0 +1,22 @@
+{
+  "classes": 16,
+  "max_points": 60000,
+  "max_age_s": 1.5,
+  "radius_m": 0.25,
+  "radial_tolerance_m": 0.15,
+  "history_confidence": 0.8,
+  "confidence_advantage": 0.1,
+  "current_veto_confidence": 0.8,
+  "history_weight": 0.35,
+  "decay_s": 2.0,
+  "excluded_classes": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9
+  ]
+}

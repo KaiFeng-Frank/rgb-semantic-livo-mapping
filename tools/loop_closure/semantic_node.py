@@ -81,6 +81,9 @@ def make_node(args):
     from tools.semantic_memory.ros_node import read_xyz_intensity
 
     cfg = json.loads((Path(__file__).with_name('semantic_online.json')).read_text())
+    consistency_mode = getattr(args, 'consistency', 'off')
+    if consistency_mode != 'off' and args.predictions_input:
+        raise ValueError('Consistency requires full model posteriors, not top-1 diagnostic inputs')
     if args.config:
         cfg.update(json.loads(args.config.read_text()))
     if type(cfg['pending_clouds']) is not int or cfg['pending_clouds'] < 1 or cfg['max_queue_age_s'] <= 0:
@@ -94,9 +97,17 @@ def make_node(args):
             super().__init__('online_semantic_refusion')
             args.out.mkdir(parents=True, exist_ok=False)
             (args.out/'config.json').write_text(json.dumps(dict(cfg, T_imu_lidar=transform.tolist(),
+                consistency=consistency_mode, map_evidence='raw_single_frame',
                 predictions_input=args.predictions_input, frontend=str(args.frontend),
                 reflectance_divisor=args.reflectance_divisor, intensity_scale=args.intensity_scale), indent=2)+'\n')
             self.core = ReversibleSemanticMap(**core_args)
+            self.consistency = None
+            if consistency_mode != 'off':
+                from src.semantic_consistency import CausalConsistency
+                if cfg['classes'] != 16:
+                    raise ValueError('Consistency static-class policy is native16 only')
+                self.consistency = CausalConsistency()
+                (args.out/'consistency.json').write_text(json.dumps(self.consistency.config_dict(), indent=2)+'\n')
             self.lock = threading.Lock()
             self.pending, self.trajectory, self.latest = OrderedDict(), None, None
             self.stop, self.wake = threading.Event(), threading.Event()
@@ -192,6 +203,7 @@ def make_node(args):
                     sys.path.insert(0, str(ROOT/'src'))
                     from ptv3_client import PTv3Client
                     self.client = PTv3Client(half=True, shuffle=False, max_pts=cfg['max_points'],
+                        probability_classes=cfg['classes'] if self.consistency else 0,
                         intensity_scale=args.intensity_scale, stderr_path=str(args.out/'inference.log'),
                         startup_timeout_s=120., response_timeout_s=3., cancel_event=self.stop)
                     if self.client.num_classes != cfg['classes']:
@@ -209,6 +221,15 @@ def make_node(args):
                     graph_changed = graph_id != self.last_graph
                     started = time.monotonic()
                     revision = self.core.update_poses(graph['times_ns'], graph['poses']) if graph_changed else None
+                    if self.consistency and graph_changed and self.consistency.history is not None:
+                        # Same received graph revision, with the sensor extrinsic
+                        # applied once. Do not query the growing semantic map.
+                        hstamp = self.consistency.history['stamp_ns']
+                        hi = int(np.searchsorted(graph['times_ns'], hstamp))
+                        if hi < len(graph['times_ns']) and graph['times_ns'][hi] == hstamp:
+                            self.consistency.revise_pose([hstamp], [graph['poses'][hi] @ transform])
+                        else:
+                            self.consistency.history = None
                     self.last_graph = graph_id
                     if revision and revision.get('changed_keyframes', 0):
                         self.counters['revisions'] += 1
@@ -241,15 +262,29 @@ def make_node(args):
                                     # reflectance. Livox exports [0,255]; the
                                     # caller explicitly declares that conversion.
                                     points[:, 3] /= args.reflectance_divisor
-                                    labels, confidence = self.client.segment(points)
+                                    if self.consistency:
+                                        labels, confidence, probabilities = self.client.segment_probabilities(points)
+                                    else:
+                                        labels, confidence = self.client.segment(points)
                                     labels, confidence = labels.copy(), confidence.copy()
                                 infer_ms = (time.monotonic()-infer_start)*1000
+                                scan_labels, scan_confidence = labels, confidence
+                                consistency_status = None
+                                if self.consistency:
+                                    consistent = self.consistency.step(points[:, :3], probabilities,
+                                        stamp_ns=int(stamp), pose=graph['poses'][index] @ transform)
+                                    consistency_status = consistent['status']
+                                    if consistency_mode == 'active':
+                                        scan_labels = consistent['probabilities'].argmax(1).astype(np.uint16)
+                                        scan_confidence = consistent['probabilities'].max(1)
                                 body = points[:, :3].astype(np.float64) @ transform[:3, :3].T+transform[:3, 3]
                                 self.scan_sequence += 1
                                 with self.lock:
                                     self.last_scan = dict(publication_id=self.scan_sequence,
                                         stamp_ns=stamp, points=body.astype(np.float32),
-                                        labels=labels, confidence=confidence)
+                                        labels=scan_labels, confidence=scan_confidence)
+                                # Preserve independent raw evidence for reversible
+                                # map fusion; enhanced outputs must not vote twice.
                                 added = self.core.add(stamp, body, labels, confidence, graph['poses'][index])
                                 if added['status'] == 'capacity_reached':
                                     self.counters['capacity_reached'] += 1
@@ -257,6 +292,7 @@ def make_node(args):
                                     self.counters['processed'] += 1
                                 self.event(dict(event='keyframe', stamp_ns=stamp, points=len(points),
                                     infer_ms=infer_ms, receipt_to_fusion_ms=(time.monotonic()-arrival)*1000,
+                                    consistency=consistency_status,
                                     graph_stamp_ns=graph['stamp_ns'], graph_version=graph['version'], fusion=added))
                     # A snapshot is a coherent completed graph revision, even if
                     # a newer revision arrived while this bounded job was running.
@@ -322,6 +358,8 @@ def main():
                     help='Input normalization before model scale: KITTI=1, Livox uint8 reflectivity=255')
     ap.add_argument('--predictions-input', action='store_true', help='Diagnostic replay only: consume explicit label/confidence fields')
     ap.add_argument('--verify-final', action='store_true', help='After stream ends, compare incremental map to fresh rebuild (not timed online work)')
+    ap.add_argument('--consistency', choices=('off', 'shadow', 'active'), default='off',
+                    help='Opt-in causal short-term scan consistency; map always retains raw evidence')
     args = ap.parse_args()
     if not np.isfinite(args.reflectance_divisor) or args.reflectance_divisor <= 0:
         ap.error('reflectance divisor must be finite and positive')

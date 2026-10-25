@@ -1,0 +1,46 @@
+{
+  "module_timing": {
+    "median_ms": 23.087782436050475,
+    "p95_ms": 227.94912186800494,
+    "max_ms": 379.8062040004879
+  },
+  "used": 81545,
+  "changed": 8302,
+  "pairs": 862971,
+  "peak_history_bytes": 2112128,
+  "module_budget_passed": false,
+  "consistency_statuses": {
+    "no_history": 1,
+    "matched": 121
+  },
+  "semantic_scan_ms": {
+    "n": 122,
+    "median_ms": 167.6057685399428,
+    "p95_ms": 530.068239534739,
+    "p99_ms": 600.7315721584017,
+    "max_ms": 667.530182050541
+  },
+  "map_source_to_received_ms": {
+    "n": 122,
+    "median_ms": 248.11037100153044,
+    "p95_ms": 624.7255738475355,
+    "p99_ms": 685.3941331047098,
+    "max_ms": 755.565257044509
+  },
+  "map_publication_ms": {
+    "n": 122,
+    "median_ms": 135.4819664848037,
+    "p95_ms": 498.3435710484623,
+    "p99_ms": 641.3126715342512,
+    "max_ms": 658.5574049968272
+  },
+  "inference_ms": {
+    "n": 122,
+    "median_ms": 26.55214350670576,
+    "p95_ms": 32.69015773548744,
+    "p99_ms": 40.28785105445418,
+    "max_ms": 44.81088800821453
+  },
+  "accepted_loops": 18,
+  "semantic_revisions": 38
+}

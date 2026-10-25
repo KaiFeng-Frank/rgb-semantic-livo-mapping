@@ -1,0 +1,53 @@
+{
+  "frozen_before_live_replay": true,
+  "arms": [
+    "off",
+    "active"
+  ],
+  "source": "HKU1 complete original MCAP at 1x",
+  "semantic_rate_hz": 1,
+  "pose_rate_hz": 10,
+  "accuracy_gt_available": false,
+  "module_p95_budget_ms": 50,
+  "delivery_protocol": {
+    "scope": "1x complete HKU1 real sensors, live LIVO, live PTv3 dense keyframes, online graph revisions and reversible static semantic fusion",
+    "minimum_sensor_duration_s": 120,
+    "maximum_initialization_images": 3,
+    "maximum_missing_pose_outputs": 0,
+    "pose_p95_ms": 150,
+    "pose_max_ms": 250,
+    "semantic_keyframe_interval_s": 1.0,
+    "semantic_graph_receipt_to_map_publication_p95_ms": 1000,
+    "semantic_graph_receipt_to_map_publication_max_ms": 2000,
+    "semantic_cloud_receipt_to_scan_publication_p95_ms": 1000,
+    "semantic_cloud_receipt_to_scan_publication_max_ms": 2000,
+    "maximum_semantic_drops": 0,
+    "require_actual_online_loop": true,
+    "require_nonzero_semantic_pose_revisions": true,
+    "require_final_incremental_fresh_rebuild_parity": true,
+    "require_no_pending_after_drain": true,
+    "forbidden_inputs": [
+      "GT poses",
+      "GT semantic labels",
+      "final offline trajectory",
+      "cached predictions in live timing arm"
+    ],
+    "limitations": [
+      "keyframe semantics at 1 Hz, not all-frame 10 Hz segmentation",
+      "no HKU semantic GT: no real semantic accuracy gain claim",
+      "static persistent map; moving classes remain in current scan",
+      "bounded session, 1000 keyframes and 4 million stored filtered points"
+    ]
+  },
+  "map_evidence": "raw in both arms",
+  "point_cap": 60000,
+  "full_probability_export_active_only": true,
+  "source_sha256": {
+    "src/ptv3_client.py": "4e77a3832856af8ef1c051f145446dd7b1bfb496368ad950a835f118863b6c05",
+    "src/ptv3_worker.py": "f07301a369b9d06f2f44aa19955bce304b0b44e4ab40acf85eeb708627cef8e4",
+    "src/semantic_consistency.py": "de717e0d17d6b28aafb248ba3981b22bbf1751a407fd40cc4ab3da33fbdb9843",
+    "tools/loop_closure/semantic_node.py": "e71f53e3b83a6167428687d4923e01277663359726f93728f00d78f243f6b55b",
+    "tools/loop_closure/realtime_replay.py": "cee162dd0a12a7f6f80693d5bf41df8d1a0a7fc306878a6381e4d0731cafada1"
+  },
+  "initial_startup_failure": "No sensor replay began: global cp312 scipy path leaked into cp310 geometry worker; isolated dependency path to semantic process only; failed run retained at consistency-20261026-off"
+}

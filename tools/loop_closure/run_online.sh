@@ -45,9 +45,11 @@ if [[ -n "${SEMANTIC_RUNTIME:-}" ]]; then
   PTV3_POINTCEPT="$SEMANTIC_RUNTIME/src/Pointcept_v151" \
   PTV3_CONFIG="$SEMANTIC_RUNTIME/weights/nuscenes-semseg-pt-v3m1-0-base/config.py" \
   PTV3_CHECKPOINT="$SEMANTIC_RUNTIME/v06-armB0_s1-student.pth" \
+  PYTHONPATH="${SEMANTIC_ROS_PYTHONPATH:+${SEMANTIC_ROS_PYTHONPATH}:}${PYTHONPATH:-}" \
   OMP_NUM_THREADS=1 /usr/bin/python3 -m tools.loop_closure.semantic_node \
     --frontend "$FRONTEND_CONFIG" --out "$OUTPUT_DIR/semantics" \
     --reflectance-divisor "${SEMANTIC_REFLECTANCE_DIVISOR:-1}" \
+    --consistency "${SEMANTIC_CONSISTENCY:-off}" \
     > "$OUTPUT_DIR/semantics.log" 2>&1 &
   pids+=("$!")
 fi

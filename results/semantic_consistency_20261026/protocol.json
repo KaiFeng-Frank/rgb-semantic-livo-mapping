@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "config": {
+    "classes": 16,
+    "max_points": 60000,
+    "max_age_s": 1.5,
+    "radius_m": 0.25,
+    "radial_tolerance_m": 0.15,
+    "history_confidence": 0.8,
+    "confidence_advantage": 0.1,
+    "current_veto_confidence": 0.8,
+    "history_weight": 0.35,
+    "decay_s": 2.0,
+    "excluded_classes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9
+    ]
+  },
+  "arms": [
+    "baseline",
+    "uniform",
+    "conditional",
+    "wrong_history"
+  ],
+  "index_sha256": "83a6a5d26d11b85c24966364457623223cab4e21156f5c98c9007f5a1c2bc18f",
+  "backbone_sha256": "35f5d3aec63ae1c383f4a4146e157aa054860cb12b178d899571287e6f97e5f1",
+  "code": {
+    "src/semantic_consistency.py": "1878dafcdcdec6fba68d0cfc36476780064d0efd4622af73e21a77665f06a4ad",
+    "src/ptv3_worker.py": "f07301a369b9d06f2f44aa19955bce304b0b44e4ab40acf85eeb708627cef8e4",
+    "src/ptv3_loader_verified.py": "f00fec63ef983fe7d033910f82360d95fbe10b2853f3ef9bb61417fee33845b3",
+    "tools/semantic_memory/consistency_eval.py": "0027a4d0d0f3103b36384a3538de5c03fa0c17f55d69306afa196748c4bdf5d5",
+    "tools/semantic_memory/pilot_metrics.py": "5538d2add09e83ac591b85f43c612656ce0f62fbc2ace70d553cc8c1c507f1bf"
+  },
+  "geometry": "raw_keyframe_sensor_with_rigid_ego_alignment_not_deskewed",
+  "intensity": "raw remission divided by 255; extractor intensity_scale=1.0",
+  "new_training": false,
+  "frozen_before_inference": true,
+  "shared_forward_per_frame": true,
+  "primary": "native16 point-weighted mIoU; paired scene bootstrap 5000 draws, seed 20261026",
+  "success": "positive conditional-minus-baseline mIoU and net fixes; no unconditional deployment from this pilot",
+  "timing": "CPU module including validation/search/copy/argmax; excludes inference, dataset IO and evaluation",
+  "stability": "same geometry-only reciprocal ray-compatible pairs, equal valid GT label; identical mask across arms",
+  "wrong_history": "rotate static-class posterior columns; geometry unchanged, stress arm only; no GT access",
+  "optimization_check": "Every posterior must equal full-query conditional reference on the SAME forward; reference search is outside module timing",
+  "map": "This evaluates current-scan output; reversible map continues to fuse raw evidence",
+  "limitations": [
+    "raw scans with supplied ego poses, not deskewed online poses",
+    "native16 source-domain diagnostic, not target KITTI19 benchmark",
+    "moving predicted classes excluded; no moving-object identity tracking"
+  ]
+}

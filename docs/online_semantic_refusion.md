@@ -95,6 +95,10 @@ HKU1 MCAP，实时运行 LIVO、PTv3、在线回环和语义重融。对照也�
 HKU1 没有本地语义真值；已有 Seq07 的离线 mIoU 增益不能移作本在线入口的成绩。
 实测结果见[在线重融合记录](../results/online_semantic_refusion_20261026/README.md)。
 
+可选的 `--consistency shadow|active` 为当前扫描增加短时跨帧一致性；默认关闭，
+长期地图仍保存原始分类证据。完整概率传输、几何/置信度门控、回环重对齐、
+依赖隔离及实测限制见[跨帧一致性说明](semantic_consistency.md)。
+
 实采复核使用系统 ROS Python，先 source ROS 与前端工作空间：
 
 ```bash

@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "synthetic": true,
+  "real_ros_transport": true,
+  "scan_labels": {
+    "1": [
+      10,
+      10
+    ],
+    "2": [
+      10,
+      12
+    ],
+    "3": [
+      12,
+      12
+    ]
+  },
+  "enhanced_scan_received": true,
+  "map_retains_raw": true,
+  "history_retains_raw": true,
+  "graph_revision_reanchors": true,
+  "current_evidence_overrides_history": true,
+  "parity": {
+    "ok": true,
+    "errors": [],
+    "keys_equal": true,
+    "labels_equal": true,
+    "point_counts_equal": true,
+    "keyframe_counts_equal": true,
+    "scores_equal": true,
+    "confidence_equal": true,
+    "keyframes": 3,
+    "stored_points": 6,
+    "map_voxels": 2,
+    "rebuilt_voxels": 2,
+    "compared_voxels": 2,
+    "max_score_error": 0.0,
+    "max_confidence_error": 0.0,
+    "rebuild_ms": 1.2693959288299084,
+    "snapshot_ms": 0.02807390410453081,
+    "comparison_ms": 0.07642898708581924,
+    "total_ms": 1.3775560073554516
+  }
+}

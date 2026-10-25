@@ -1,0 +1,47 @@
+{
+  "module_timing": {
+    "median_ms": 15.308816044125706,
+    "p95_ms": 24.808575498173013,
+    "max_ms": 216.8151600053534,
+    "over_50ms": 4
+  },
+  "module_p95_budget_ms": 50,
+  "module_budget_passed": true,
+  "delivery_admitted": true,
+  "admitted": true,
+  "used": 80449,
+  "changed": 7985,
+  "pairs": 230351,
+  "peak_history_bytes": 2112128,
+  "no_semantic_accuracy_gt": true,
+  "semantic_scan_ms": {
+    "n": 122,
+    "median_ms": 145.1869999873452,
+    "p95_ms": 453.5547445120755,
+    "p99_ms": 584.8622174572663,
+    "max_ms": 595.8197639556602
+  },
+  "map_source_to_received_ms": {
+    "n": 122,
+    "median_ms": 219.224389991723,
+    "p95_ms": 544.24757300294,
+    "p99_ms": 641.2085978686808,
+    "max_ms": 673.6405490664765
+  },
+  "map_publication_ms": {
+    "n": 122,
+    "median_ms": 119.59247244521976,
+    "p95_ms": 412.7398205280769,
+    "p99_ms": 555.0268998602404,
+    "max_ms": 560.9696439933032
+  },
+  "inference_ms": {
+    "n": 122,
+    "median_ms": 27.138560020830482,
+    "p95_ms": 35.83666154881939,
+    "p99_ms": 42.48588986461977,
+    "max_ms": 47.16487298719585
+  },
+  "accepted_loops": 19,
+  "semantic_revisions": 40
+}
