@@ -1,0 +1,19 @@
+{
+  "initial_observer_smoke": "Rejected: received counter collided with observer timestamp key; renamed observer field.",
+  "dense_export_smoke": "Rejected: VIO Process2 cleared feats_undistort; all eight clouds were empty. Cache owned LIO keyframe before clear, publish after VIO.",
+  "first_complete_run": {
+    "source": "ee435e6",
+    "classified": 122,
+    "semantic_revisions": 41,
+    "voxels": 108410,
+    "fresh_rebuild_equal": true,
+    "scope": "Pre-hardening diagnostic. Did not prove final PointCloud2 delivery; excluded from admission."
+  },
+  "hardening": [
+    "Independent current-scan publisher and explicit supersession accounting",
+    "Atomically claim pending semantic packets before re-fusion",
+    "Cancellable PTv3 startup/response with owned child and SHM cleanup",
+    "Actual semantic map subscription; one-to-one stamp/hash/count/frame/ready-time matching and final publication acknowledgement"
+  ],
+  "no_raw_data_copied": true
+}

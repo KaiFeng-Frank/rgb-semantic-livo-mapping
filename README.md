@@ -47,6 +47,11 @@ and re-fuses affected spatial tiles. Dense deskewed XYZI and exact acquisition
 timestamps are retained; moving classes stay in the current scan and are excluded
 from the persistent static map. This entry maps semantic keyframes at about **1 Hz**,
 with independent pose, graph, inference/fusion and display execution.
+Complete live HKU1 replay delivered **122/122 semantic keyframes** and **1,274/1,274
+initialized poses**. Corrected-pose P95 is **53.4 ms** (max **220.3 ms**); semantic-map
+sensor-input-to-reception P95 is **539.6 ms**. The **108,944-voxel** final map exactly
+matches a fresh rebuild from the retained predictions and arrived poses. These are
+bounded-session runtime/consistency results; online semantic accuracy is not evaluated.
 [Run and boundaries](docs/online_semantic_refusion.md)
 · [live validation](results/online_semantic_refusion_20261026/README.md).
 

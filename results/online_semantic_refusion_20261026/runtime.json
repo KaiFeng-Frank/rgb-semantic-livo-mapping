@@ -1,0 +1,49 @@
+{
+  "gpu": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+  "capability": [
+    12,
+    0
+  ],
+  "torch": "2.11.0.dev20260201+cu128",
+  "cuda": "12.8",
+  "packages": {
+    "spconv-cu126": "2.3.8",
+    "cumm-cu126": "0.7.11",
+    "torch-scatter": "2.1.2",
+    "flash-attn": "2.8.3"
+  },
+  "checks": {
+    "scatter_max_abs": 2.86102294921875e-06,
+    "spconv_max_abs": 0.0004843473434448242,
+    "flash_max_abs": [
+      0.00031447410583496094,
+      0.0004132986068725586
+    ]
+  },
+  "model": {
+    "strict_load": true,
+    "state_tensors": 488,
+    "parameters": 46159312,
+    "classes": 16,
+    "checkpoint_sha256": "35f5d3aec63ae1c383f4a4146e157aa054860cb12b178d899571287e6f97e5f1",
+    "config_sha256": "e76714dbd93b7eed2e436df0cc2041072d17b1225ef0fd9897283d47edb68804",
+    "source_root": "/home/frank/semantic_livo_runtime/src/Pointcept_v151"
+  },
+  "checkpoint": "/home/frank/semantic_livo_runtime/v06-armB0_s1-student.pth",
+  "checkpoint_sha256_rechecked": "35f5d3aec63ae1c383f4a4146e157aa054860cb12b178d899571287e6f97e5f1",
+  "cpu": "AMD Ryzen 9 9955HX",
+  "ros": "Jazzy",
+  "ros_domain": 91,
+  "threads": {
+    "frontend_OMP": 2,
+    "semantic_OMP": 1,
+    "geometry_OMP": 1
+  },
+  "raw_data_copied": false,
+  "source": "HKU1 original MCAP read in place",
+  "memory_policy": {
+    "max_keyframes": 1000,
+    "max_filtered_points": 4000000
+  },
+  "scope": "Live inference on dense deskewed keyframes at 1 Hz; all-frame LIVO poses at about 10 Hz"
+}

@@ -1,0 +1,20 @@
+{
+  "scope": "1x complete HKU1 real sensors, live LIVO, live PTv3 dense keyframes, online graph revisions and reversible static semantic fusion",
+  "minimum_sensor_duration_s": 120,
+  "maximum_initialization_images": 3,
+  "maximum_missing_pose_outputs": 0,
+  "pose_p95_ms": 150,
+  "pose_max_ms": 250,
+  "semantic_keyframe_interval_s": 1.0,
+  "semantic_graph_receipt_to_map_publication_p95_ms": 1000,
+  "semantic_graph_receipt_to_map_publication_max_ms": 2000,
+  "semantic_cloud_receipt_to_scan_publication_p95_ms": 1000,
+  "semantic_cloud_receipt_to_scan_publication_max_ms": 2000,
+  "maximum_semantic_drops": 0,
+  "require_actual_online_loop": true,
+  "require_nonzero_semantic_pose_revisions": true,
+  "require_final_incremental_fresh_rebuild_parity": true,
+  "require_no_pending_after_drain": true,
+  "forbidden_inputs": ["GT poses", "GT semantic labels", "final offline trajectory", "cached predictions in live timing arm"],
+  "limitations": ["keyframe semantics at 1 Hz, not all-frame 10 Hz segmentation", "no HKU semantic GT: no real semantic accuracy gain claim", "static persistent map; moving classes remain in current scan", "bounded session, 1000 keyframes and 4 million stored filtered points"]
+}

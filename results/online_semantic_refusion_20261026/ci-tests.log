@@ -1,0 +1,122 @@
+loop-contracts	Check graph and semantic fusion contracts	﻿2026-10-25T19:34:06.4905336Z ##[group]Run /tmp/geometry/bin/python -m unittest tools.loop_closure.test_backend tools.loop_closure.test_online tools.loop_closure.test_semantic_fusion tools.loop_closure.test_semantic_online tools.loop_closure.test_semantic_lifecycle tools.loop_closure.test_semantic_delivery tools.loop_semantics.test_fusion -v
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:06.4907593Z [36;1m/tmp/geometry/bin/python -m unittest tools.loop_closure.test_backend tools.loop_closure.test_online tools.loop_closure.test_semantic_fusion tools.loop_closure.test_semantic_online tools.loop_closure.test_semantic_lifecycle tools.loop_closure.test_semantic_delivery tools.loop_semantics.test_fusion -v[0m
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:06.4984247Z shell: /usr/bin/bash -e {0}
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:06.4984518Z env:
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:06.4984713Z   OMP_NUM_THREADS: 1
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:06.4984946Z   OPENBLAS_NUM_THREADS: 1
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:06.4985178Z ##[endgroup]
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:08.1054485Z test_clock_audit_allows_subframe_jitter_but_rejects_a_frame_offset (tools.loop_closure.test_backend.Contracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:08.2516725Z test_icp_transform_direction_on_three_planes (tools.loop_closure.test_backend.Contracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:08.2533734Z test_odometry_only_graph_and_loop_direction (tools.loop_closure.test_backend.Contracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:08.2611286Z test_rounded_extrinsic_is_rigid_before_graph_optimization (tools.loop_closure.test_backend.Contracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:08.2676803Z test_scan_context_rotation (tools.loop_closure.test_backend.Contracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:08.2684501Z test_world_correction_preserves_imu_lidar_extrinsic (tools.loop_closure.test_backend.Contracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:08.3316358Z test_actual_retrieval_icp_incremental_loop_and_map_rebuild (tools.loop_closure.test_online.OnlineContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:09.8760687Z test_idle_worker_failure_is_reported_without_new_inputs (tools.loop_closure.test_online.OnlineContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:09.8822924Z test_invalid_cloud_and_out_of_order_never_mutate_graph (tools.loop_closure.test_online.OnlineContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:09.8847423Z test_loop_direction_and_future_odometry_not_double_corrected (tools.loop_closure.test_online.OnlineContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:09.8994024Z test_no_loop_is_exact_identity_and_input_immutable (tools.loop_closure.test_online.OnlineContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:11.3100721Z test_overload_keeps_latest_pending_frames (tools.loop_closure.test_online.OnlineContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:11.3102769Z test_pairs_are_exact_order_independent_and_bounded (tools.loop_closure.test_online.OnlineContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:11.3121047Z test_rotation_and_left_correction (tools.loop_closure.test_online.OnlineContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:11.3218552Z test_session_capacity_is_explicit (tools.loop_closure.test_online.OnlineContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:11.3310792Z test_skipped_keyframe_gap_increases_edge_uncertainty (tools.loop_closure.test_online.OnlineContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:13.2469676Z test_watchdog_cancellation_and_next_request_are_atomic (tools.loop_closure.test_online.OnlineContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:14.3054812Z test_watchdog_releases_partial_payload_recv (tools.loop_closure.test_online.OnlineContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:15.7630808Z test_worker_process_round_trip_and_shutdown (tools.loop_closure.test_online.OnlineContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:15.7657088Z test_all_empty_and_all_filtered_packets_still_own_timestamps (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:15.7671849Z test_caller_policy_threshold_zero_weight_and_filtered_count (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:15.7677141Z test_configuration_rejects_invalid_values (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:15.7703769Z test_default_protected_policy_keeps_barrier_cone_and_static_classes (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:15.8259964Z test_dense_frame_preserves_all_200k_observations_without_truncation (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:15.8285190Z test_full_graph_unknown_stamps_are_validated_then_ignored (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:15.8335859Z test_geometry_overflow_after_valid_rigid_transforms_is_atomic (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:15.8557189Z test_immutable_inputs_outputs_and_pose_revision_round_trip (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:15.8659868Z test_invalid_geometry_labels_confidence_are_rejected_even_if_filtered (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:15.8785592Z test_invalid_transforms_in_add_and_update_are_atomic (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:15.8826008Z test_keyframe_input_and_total_capacities_reject_without_mutation (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:15.8859561Z test_negative_floor_tile_boundaries_rotation_and_sorted_keys (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:15.8893931Z test_offline_rebuild_preserves_configuration_state_and_reports_errors (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:15.8934654Z test_overlap_removal_retains_other_keyframes_and_erases_empty_tiles (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:15.9183943Z test_partial_revision_work_is_bounded_to_relevant_tiles (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:15.9247203Z test_pose_batch_bounds_shapes_stamps_and_duplicates_are_atomic (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.7618653Z test_random_revisions_match_independent_raw_history_reference (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.7675983Z test_repeated_duplicate_and_subvoxel_updates_do_not_accumulate_votes (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.7741668Z test_snapshot_cap_is_deterministic_and_does_not_limit_full_map (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.7796182Z test_stamps_strictly_increase_with_nanosecond_precision (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.8209022Z test_update_batch_order_and_grouping_do_not_change_final_evidence (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.8236705Z test_weighted_votes_ties_centers_and_evidence_counts (tools.loop_closure.test_semantic_fusion.SemanticFusionTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.8239706Z test_claimed_packet_cannot_also_be_evicted_or_counted_again (tools.loop_closure.test_semantic_online.PacketOwnershipContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.8242321Z test_future_unanchored_packet_waits_for_its_graph (tools.loop_closure.test_semantic_online.PacketOwnershipContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.8244986Z test_no_graph_or_empty_queue_never_transfers_ownership (tools.loop_closure.test_semantic_online.PacketOwnershipContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.8247463Z test_past_unanchored_packet_is_claimed_for_rejection (tools.loop_closure.test_semantic_online.PacketOwnershipContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.8249931Z test_stale_future_packet_is_claimed_once_for_rejection (tools.loop_closure.test_semantic_online.PacketOwnershipContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.8251881Z test_actual_label_confidence_schema_round_trip (tools.loop_closure.test_semantic_online.SemanticOutputSchema) ... skipped 'source ROS externally for PointCloud2 schema tests'
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.8254227Z test_empty_output_retains_the_schema (tools.loop_closure.test_semantic_online.SemanticOutputSchema) ... skipped 'source ROS externally for PointCloud2 schema tests'
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.8256038Z test_append_without_revising_history_keeps_revision (tools.loop_closure.test_semantic_online.TrajectoryContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.8258053Z test_compact_graph_payload_excludes_dense_geometry_and_labels (tools.loop_closure.test_semantic_online.TrajectoryContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.8263581Z test_exact_duplicate_and_new_revision_are_accepted (tools.loop_closure.test_semantic_online.TrajectoryContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.8272980Z test_nonrigid_or_nonfinite_poses_are_rejected (tools.loop_closure.test_semantic_online.TrajectoryContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.8281509Z test_reset_reordering_and_version_rollback_are_rejected (tools.loop_closure.test_semantic_online.TrajectoryContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.8289188Z test_same_revision_different_history_is_rejected (tools.loop_closure.test_semantic_online.TrajectoryContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.8293087Z test_timestamp_and_version_require_actual_integers (tools.loop_closure.test_semantic_online.TrajectoryContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.8297535Z test_timestamp_order_watermark_capacity_and_version (tools.loop_closure.test_semantic_online.TrajectoryContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.8298908Z test_unknown_frame_is_rejected (tools.loop_closure.test_semantic_online.TrajectoryContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.8303199Z test_valid_revision_is_independent_of_ros_and_native_backend (tools.loop_closure.test_semantic_online.TrajectoryContracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.8310527Z test_already_cancelled_does_not_spawn_or_allocate_shm (tools.loop_closure.test_semantic_lifecycle.SemanticLifecycleTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:16.9343533Z test_cancel_before_ready_kills_reaps_and_unlinks_owned_resources (tools.loop_closure.test_semantic_lifecycle.SemanticLifecycleTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:17.0550962Z test_cancel_partial_class_header_after_ready_tag (tools.loop_closure.test_semantic_lifecycle.SemanticLifecycleTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:17.1756187Z test_cancel_partial_ready_header (tools.loop_closure.test_semantic_lifecycle.SemanticLifecycleTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:17.3534269Z test_default_keeps_blocking_wait_and_worker_environment_contract (tools.loop_closure.test_semantic_lifecycle.SemanticLifecycleTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:17.6065278Z test_polling_retains_original_timeout_and_cleans_up (tools.loop_closure.test_semantic_lifecycle.SemanticLifecycleTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:17.6079214Z test_popen_and_stderr_open_failures_unlink_preallocated_shm (tools.loop_closure.test_semantic_lifecycle.SemanticLifecycleTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:17.7288643Z test_runtime_cancel_partial_response_and_owner_finally_cleanup (tools.loop_closure.test_semantic_lifecycle.SemanticLifecycleTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:18.0062365Z test_unset_event_polling_does_not_create_spurious_timeouts (tools.loop_closure.test_semantic_lifecycle.SemanticLifecycleTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:18.0065807Z test_geometry_frame_stamp_hash_and_count_must_match (tools.loop_closure.test_semantic_delivery.MapDeliveryTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:18.0068120Z test_identical_maps_require_distinct_receptions (tools.loop_closure.test_semantic_delivery.MapDeliveryTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:18.0070353Z test_prior_reception_cannot_prove_new_snapshot (tools.loop_closure.test_semantic_delivery.MapDeliveryTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:18.0167546Z test_two_distinct_receptions_are_matched_once_in_order (tools.loop_closure.test_semantic_delivery.MapDeliveryTests) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:18.0168624Z FUSE 0 {'all': 1, 'heldout': 1} 0
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:18.1078474Z BUILD_COMPLETE 0.09830717900000252
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:18.1094143Z test_actual_build_excludes_heldout_predictions (tools.loop_semantics.test_fusion.Contracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:18.1099513Z test_attribution_removes_only_the_other_visits_class_votes (tools.loop_semantics.test_fusion.Contracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:18.1105241Z test_geometry_and_weak_support_reject_revision (tools.loop_semantics.test_fusion.Contracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:18.1110531Z test_moving_class_evidence_and_protected_voxels_never_relabelled (tools.loop_semantics.test_fusion.Contracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:18.1128819Z test_point_density_does_not_multiply_frame_evidence (tools.loop_semantics.test_fusion.Contracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:18.1140122Z test_protocol_round_trip_accepts_formatting_but_rejects_changed_values (tools.loop_semantics.test_fusion.Contracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:18.1146562Z test_repeated_visit_does_not_overwhelm_clearer_revisit (tools.loop_semantics.test_fusion.Contracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:18.1151913Z test_unknown_keys_and_unmatched_visits_cannot_create_voxels (tools.loop_semantics.test_fusion.Contracts) ... ok
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:18.1152969Z 
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:18.1153245Z ----------------------------------------------------------------------
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:18.1153832Z Ran 79 tests in 10.010s
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:18.1154049Z 
+loop-contracts	Check graph and semantic fusion contracts	2026-10-25T19:34:18.1154184Z OK (skipped=2)
+semantic-contracts	Check semantic memory and native-19 contracts	﻿2026-10-25T19:33:53.9521664Z ##[group]Run /tmp/contracts/bin/python -m pytest -q -p no:cacheprovider tools/semantic_memory
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:33:53.9522465Z [36;1m/tmp/contracts/bin/python -m pytest -q -p no:cacheprovider tools/semantic_memory[0m
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:33:53.9523271Z [36;1m/tmp/contracts/bin/python -m unittest tools.semantic_kitti.test_contract tools.semantic_kitti.test_runtime -v[0m
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:33:53.9589868Z shell: /usr/bin/bash -e {0}
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:33:53.9590177Z env:
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:33:53.9590404Z   OMP_NUM_THREADS: 1
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:33:53.9590669Z   OPENBLAS_NUM_THREADS: 1
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:33:53.9590961Z   PYTHONDONTWRITEBYTECODE: 1
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:33:53.9591430Z ##[endgroup]
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:33:57.0019197Z ........s............................................................................... [ 49%]
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:33:57.4158447Z ........................................................................ [ 89%]
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:34:01.5452792Z ...................                                                      [100%]
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:34:01.5454218Z 178 passed, 1 skipped, 128 subtests passed in 6.99s
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:34:03.2635670Z test_abstention_is_false_negative_and_all_19_classes_count (tools.semantic_kitti.test_contract.Contracts.test_abstention_is_false_negative_and_all_19_classes_count) ... ok
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:34:03.2738251Z test_matches_pinned_official_evaluator (tools.semantic_kitti.test_contract.Contracts.test_matches_pinned_official_evaluator) ... ok
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:34:03.2747789Z test_moving_gt_instance_bits_and_unknown_ids (tools.semantic_kitti.test_contract.Contracts.test_moving_gt_instance_bits_and_unknown_ids) ... ok
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:34:03.4041197Z test_submission_passes_official_validator_and_rejects_tampering (tools.semantic_kitti.test_contract.Contracts.test_submission_passes_official_validator_and_rejects_tampering) ... ok
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:34:03.4142296Z test_submission_rejects_bridge_future_and_missing_frames (tools.semantic_kitti.test_contract.Contracts.test_submission_rejects_bridge_future_and_missing_frames) ... ok
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:34:03.4144638Z test_taxonomy_does_not_claim_native_19 (tools.semantic_kitti.test_contract.Contracts.test_taxonomy_does_not_claim_native_19) ... ok
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:34:03.4221196Z test_truncated_dataset_does_not_make_submission_complete (tools.semantic_kitti.test_contract.Contracts.test_truncated_dataset_does_not_make_submission_complete) ... ok
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:34:03.4233052Z test_validation_rejects_incomplete_and_test_splits (tools.semantic_kitti.test_contract.Contracts.test_validation_rejects_incomplete_and_test_splits) ... ok
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:34:03.4328287Z test_attention_matches_independent_dense_equation_and_gradients (tools.semantic_kitti.test_runtime.RuntimeTests.test_attention_matches_independent_dense_equation_and_gradients) ... ok
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:34:03.4355609Z test_segment_reductions_match_dense_segments (tools.semantic_kitti.test_runtime.RuntimeTests.test_segment_reductions_match_dense_segments) ... ok
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:34:03.4369884Z test_training_excludes_validation_test_and_incomplete_full_split (tools.semantic_kitti.test_runtime.RuntimeTests.test_training_excludes_validation_test_and_incomplete_full_split) ... ok
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:34:03.4371213Z 
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:34:03.4371504Z ----------------------------------------------------------------------
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:34:03.4372211Z Ran 11 tests in 0.174s
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:34:03.4372515Z 
+semantic-contracts	Check semantic memory and native-19 contracts	2026-10-25T19:34:03.4372649Z OK

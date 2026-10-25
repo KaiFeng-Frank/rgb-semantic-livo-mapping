@@ -94,3 +94,17 @@ HKU1 MCAP，实时运行 LIVO、PTv3、在线回环和语义重融。对照也�
 `--predictions-input` 仅供明确标注的合成 ROS 合约测试，生产入口默认实时推理。
 HKU1 没有本地语义真值；已有 Seq07 的离线 mIoU 增益不能移作本在线入口的成绩。
 实测结果见[在线重融合记录](../results/online_semantic_refusion_20261026/README.md)。
+
+实采复核使用系统 ROS Python，先 source ROS 与前端工作空间：
+
+```bash
+python3 -m tools.loop_closure.realtime_replay \
+  --workspace /path/to/backend_ws --worker /path/to/geometry-venv/bin/python \
+  --bag /path/to/FAST-LIVO/hku1 --out /path/to/new-control --backend --semantic-export
+python3 -m tools.loop_closure.realtime_replay \
+  --workspace /path/to/backend_ws --worker /path/to/geometry-venv/bin/python \
+  --bag /path/to/FAST-LIVO/hku1 --out /path/to/new-online --backend \
+  --semantics --semantic-runtime /path/to/semantic_runtime
+python3 -m tools.loop_closure.assess_semantic_realtime \
+  --control /path/to/new-control --online /path/to/new-online --out /path/to/new-assessment.json
+```

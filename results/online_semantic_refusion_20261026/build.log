@@ -1,0 +1,63 @@
+Starting >>> livox_ros_driver2
+Finished <<< livox_ros_driver2 [0.27s]
+Starting >>> sophus
+Finished <<< sophus [0.04s]
+Starting >>> vikit_common
+Finished <<< vikit_common [0.07s]
+Starting >>> vikit_ros
+Finished <<< vikit_ros [0.06s]
+Starting >>> fast_livo
+--- stderr: fast_livo
+CMake Warning (dev) at /usr/lib/x86_64-linux-gnu/cmake/pcl/Modules/FindFLANN.cmake:45 (find_package):
+  Policy CMP0144 is not set: find_package uses upper-case <PACKAGENAME>_ROOT
+  variables.  Run "cmake --help-policy CMP0144" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+
+  CMake variable FLANN_ROOT is set to:
+
+    /usr
+
+  For compatibility, find_package is ignoring the variable, but code in a
+  .cmake module might still use it.
+Call Stack (most recent call first):
+  /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:261 (find_package)
+  /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:306 (find_flann)
+  /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:570 (find_external_library)
+  /opt/ros/jazzy/share/pcl_conversions/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)
+  /opt/ros/jazzy/share/pcl_conversions/cmake/pcl_conversionsConfig.cmake:41 (include)
+  /opt/ros/jazzy/share/pcl_ros/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)
+  /opt/ros/jazzy/share/pcl_ros/cmake/pcl_rosConfig.cmake:41 (include)
+  CMakeLists.txt:86 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at CMakeLists.txt:95 (find_package):
+  Policy CMP0074 is not set: find_package uses <PackageName>_ROOT variables.
+  Run "cmake --help-policy CMP0074" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  CMake variable PCL_ROOT is set to:
+
+    /usr
+
+  For compatibility, CMake is ignoring the variable.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+In file included from /home/frank/semantic_livo_realtime_ws/install/vikit_ros/include/vikit/camera_loader.h:20,
+                 from /home/frank/semantic_livo_realtime_ws/src/fast_livo/include/LIVMapper.h:29,
+                 from /home/frank/semantic_livo_realtime_ws/src/fast_livo/src/LIVMapper.cpp:13:
+/home/frank/semantic_livo_realtime_ws/install/vikit_ros/include/vikit/params_helper.h: In function ‘T vk::getParam(const std::string&, const std::string&, const T&)’:
+/home/frank/semantic_livo_realtime_ws/install/vikit_ros/include/vikit/params_helper.h:35:48: warning: ignoring attributes on template argument ‘int (*)(FILE*)’ [-Wignored-attributes]
+   35 |         std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(command.c_str(), "r"), pclose);
+      |                                                ^
+In file included from /home/frank/semantic_livo_realtime_ws/install/vikit_ros/include/vikit/camera_loader.h:20,
+                 from /home/frank/semantic_livo_realtime_ws/src/fast_livo/include/LIVMapper.h:29,
+                 from /home/frank/semantic_livo_realtime_ws/src/fast_livo/src/main.cpp:1:
+/home/frank/semantic_livo_realtime_ws/install/vikit_ros/include/vikit/params_helper.h: In function ‘T vk::getParam(const std::string&, const std::string&, const T&)’:
+/home/frank/semantic_livo_realtime_ws/install/vikit_ros/include/vikit/params_helper.h:35:48: warning: ignoring attributes on template argument ‘int (*)(FILE*)’ [-Wignored-attributes]
+   35 |         std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(command.c_str(), "r"), pclose);
+      |                                                ^
+---
+Finished <<< fast_livo [39.5s]
+
+Summary: 5 packages finished [40.0s]
+  1 package had stderr output: fast_livo
