@@ -5,6 +5,17 @@ filter. It does not estimate another ICP pose and feed it into a pose graph. The
 original 19-state prior, cross covariance, and LiDAR/visual sequential update remain
 the estimator. Dataset improvement and online throughput require separate evidence.
 
+The separate [global backend](../tools/loop_closure/backend.py) is an offline
+LiDAR-geometric pose graph: Pose3 nodes, an initial prior, odometry edges and ICP
+loop edges. Its odometry can inherit visual information from the LIVO frontend,
+but the graph has no independent visual residuals, IMU preintegration, velocity
+or bias states. Semantic pose refinement weights geometric registration before
+calling this same graph. This is not a validated joint global LIVO backend.
+The author's separate [Global-LVBA](https://github.com/xuankuzcr/Global-LVBA) offers
+offline LiDAR/visual refinement; [OKVIS2-X](https://github.com/ethz-mrl/OKVIS2-X)
+is a candidate for joint visual/inertial/LiDAR optimization. Neither has been
+integrated or validated in this repository.
+
 The enhanced profile is `frontend/enhanced.yaml`. It adds three independently
 switchable paths: ego-compensated motion decisions in geometric residuals and map
 admission, image-space motion masks in the actual photometric update, and a
