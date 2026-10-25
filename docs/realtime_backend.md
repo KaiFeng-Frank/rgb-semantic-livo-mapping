@@ -15,6 +15,8 @@ FAST-LIVO2 ROS 2 提交 `837b7bbc1431cb04cf936528e52c83c835efba8e`。
 ```bash
 python3 tools/loop_closure/frontend/bootstrap.py --workspace /path/to/backend_ws
 bash tools/loop_closure/frontend/build.sh /path/to/backend_ws
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+export CYCLONEDDS_URI="file://$PWD/tools/loop_closure/local_dds.xml"
 bash tools/loop_closure/run_online.sh /path/to/backend_ws \
   /path/to/geometry-venv/bin/python /path/to/new-run
 ```
@@ -23,14 +25,9 @@ bash tools/loop_closure/run_online.sh /path/to/backend_ws \
 传入对应前端与相机配置。每次运行创建新的日志目录。bootstrap 校验固定上游
 文件的 Git blob 哈希，拒绝覆盖不同版本的工作空间；不会下载数据或模型。
 
-同机传感器驱动和处理进程可共同使用 `tools/loop_closure/local_dds.xml`：
-
-```bash
-export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
-export CYCLONEDDS_URI="file://$PWD/tools/loop_closure/local_dds.xml"
-```
-
-该配置固定 loopback、单播发现、适合本机 MTU 的分片和 4 MiB socket 缓冲。
+上述实测启动配置使用 `tools/loop_closure/local_dds.xml`；同机传感器驱动与
+处理进程须使用一致的设置。它固定 loopback、单播发现、适合本机 MTU 的
+分片和 4 MiB socket 缓冲。
 它仅用于同一主机；跨机器 ROS 驱动应使用对应网络配置，不能套用 loopback
 的大报文设置。无需更改全局 sysctl，操作系统达不到缓冲要求时启动失败。
 HKU 配置开启 `common.img_compressed`，直接解码原始相机 JPEG 消息，不重新编码。

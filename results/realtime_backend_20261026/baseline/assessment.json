@@ -1,0 +1,49 @@
+{
+  "backend": false,
+  "source": "/media/frank/Extreme SSD/data/fast_livo_mcap/FAST-LIVO/hku1",
+  "source_payload_sha256": "042c59558c43c364b44b70382c1ac40ed80720f86c88f28d8141605a9ff9ab01",
+  "duration_s": 127.695796967,
+  "replay_wall_s": 127.69603218394332,
+  "rmw": "rmw_cyclonedds_cpp",
+  "cyclone_uri": "file:///home/frank/semantic_livo_realtime_main/tools/loop_closure/local_dds.xml",
+  "input_counts": {
+    "lidar": 1277,
+    "image": 1277,
+    "imu": 25871
+  },
+  "frontend_poses": 1274,
+  "corrected_poses": 0,
+  "matched_sensor_stamps": 1274,
+  "corrected_matches": 0,
+  "missing_corrected": null,
+  "frontend_end_to_end": {
+    "n": 1274,
+    "median_ms": 36.453537992201746,
+    "p95_ms": 49.04584014439024,
+    "p99_ms": 58.32519106217657,
+    "max_ms": 81.05385804083198
+  },
+  "corrected_end_to_end": null,
+  "backend_added": null,
+  "replay_lateness": {
+    "n": 28425,
+    "median_ms": 0.09167299140244722,
+    "p95_ms": 0.5903285928070542,
+    "p99_ms": 1.1192381568253036,
+    "max_ms": 64.6137009607628
+  },
+  "image_transport": "original_compressed",
+  "image_preparation": {
+    "n": 1277,
+    "median_ms": 0.1042649382725358,
+    "p95_ms": 0.18074526451528075,
+    "p99_ms": 0.2306501427665353,
+    "max_ms": 0.3351790364831686
+  },
+  "maps": 0,
+  "paths": 0,
+  "last_status": null,
+  "warmup_prefix_images": 3,
+  "missing_images_after_initialization": 0,
+  "scope": "1x real-sensor LIVO + geometric backend; semantic inference is not part of this measurement"
+}

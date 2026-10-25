@@ -1,0 +1,118 @@
+/**:
+  ros__parameters:
+    backend:
+      enabled: true
+      keyframe_interval_s: 1.0
+      max_points: 12000
+    common:
+      img_en: 1
+      img_topic: /camera/image_raw
+      imu_topic: /imu
+      lid_topic: /velodyne_points
+      lidar_en: 1
+      ros_driver_bug_fix: false
+    evo:
+      pose_output_en: false
+      seq_name: online_backend_synthetic_contract
+    extrin_calib:
+      Pcl:
+      - 0.056246554
+      - -0.074814016
+      - -0.327793583
+      Rcl:
+      - -0.001857739
+      - -0.999965951
+      - -0.008039975
+      - -0.006481466
+      - 0.00805186
+      - -0.999946608
+      - 0.99997731
+      - -0.001805529
+      - -0.006496204
+      extrinsic_R:
+      - 0.999997685
+      - -0.000785403
+      - 0.002024406
+      - 0.000755307
+      - 0.99988985
+      - 0.014824544
+      - -0.002035826
+      - -0.014822976
+      - 0.999888022
+      extrinsic_T:
+      - 0.810543972
+      - -0.307054372
+      - 0.802723995
+    image_save:
+      img_save_en: false
+      interval: 1
+    imu:
+      acc_cov: 0.5
+      b_acc_cov: 0.0001
+      b_gyr_cov: 0.0001
+      ba_bg_est_en: true
+      gravity_est_en: true
+      gyr_cov: 0.3
+      imu_en: true
+      imu_int_frame: 30
+    lio:
+      beam_err: 0.05
+      dept_err: 0.02
+      layer_init_num:
+      - 5
+      - 5
+      - 5
+      - 5
+      - 5
+      max_iterations: 5
+      max_layer: 2
+      max_points_num: 50
+      min_eigen_value: 0.0025
+      min_iterations: 5
+      voxel_size: 1.0
+    local_map:
+      half_map_size: 100
+      map_sliding_en: false
+      sliding_thresh: 8.0
+    pcd_save:
+      colmap_output_en: false
+      filter_size_pcd: 0.15
+      interval: -1
+      pcd_save_en: false
+      type: 0
+    preprocess:
+      blind: 2.0
+      filter_size_surf: 0.5
+      hilti_en: false
+      lidar_type: 2
+      point_filter_num: 3
+      scan_line: 64
+    publish:
+      blind_rgb_points: 0.0
+      dense_map_en: false
+      pub_effect_point_en: false
+      pub_plane_en: false
+      pub_scan_num: 1
+    semantic:
+      enabled: false
+    time_offset:
+      exposure_time_init: 0.0
+      img_time_offset: 0.0
+      imu_time_offset: 0.0
+      lidar_time_offset: 0.0
+    uav:
+      gravity_align_en: false
+      imu_rate_odom: false
+    vio:
+      exposure_estimate_en: true
+      grid_n_height: 17
+      grid_size: 5
+      img_point_cov: 100
+      inv_expo_cov: 0.1
+      inverse_composition_en: false
+      max_iterations: 5
+      normal_en: true
+      outlier_threshold: 1000
+      patch_pyrimid_level: 4
+      patch_size: 8
+      raycast_en: false

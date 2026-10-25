@@ -21,8 +21,9 @@
 - [语义定位前端](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/tree/f3262e8)：
   包含精度、实时性未通过的尝试，未引入 main。
 - [在线几何后端](https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/tree/60965ea)：
-  工程接口检查通过，但现有 bootstrap 会先应用整套实验前端补丁，再应用后端
-  补丁。此次不把这条依赖链一起纳入；独立部署和持续驾驶验证另行处理。
+  原始版本的 bootstrap 依赖实验前端，PR #8 当时未引入。
+  后续已拆成独立入口，修复前端多等下一扫描的调度问题，并做完整原速回放；
+  见[实时后端说明](realtime_backend.md)。原始研究分支继续保留，未整体合并。
 
 这些分支、权重、失败结果及对应 PR 均保留。
 
