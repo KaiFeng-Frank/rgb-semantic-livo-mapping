@@ -8,6 +8,13 @@ boundary rows are active on 233/235 B0 updates. See the
 [complete five-arm holdout results and admission checks](holdout09/README.md).
 No localization benefit or larger experiment is admitted by these results.
 
+The local 5070 Ti also passes strict B0 model loading and independent CUDA-kernel
+checks. Three fixed 20-frame direct-inference rounds have medians of 63.22–70.20 ms
+and P95 values of 66.72–80.97 ms. The ROS bridge fails complete scan delivery even
+in the geometry control; therefore its online deadline cannot be effectively
+evaluated and full online LIO remains unvalidated. See
+[the runtime checks and every failed input probe](local_gpu/README.md).
+
 The initial synthetic evidence and source hashes are in
 [`local-verification.json`](local-verification.json); revised runtime evidence is
 in [pre-voxel-diagnostic.json](pre-voxel-diagnostic.json).

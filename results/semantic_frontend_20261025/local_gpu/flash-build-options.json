@@ -1,0 +1,15 @@
+{
+  "upstream_commit": "060c9188beec3a8b62b33a3bfa6d5d2d44975fab",
+  "cutlass_commit": "dc4817921edda44a549197ff3a9dcf5df0636e7b",
+  "cuda_arch": "120",
+  "max_jobs": 2,
+  "disabled_features": [
+    "FLASHATTENTION_DISABLE_BACKWARD",
+    "FLASHATTENTION_DISABLE_DROPOUT",
+    "FLASHATTENTION_DISABLE_ALIBI",
+    "FLASHATTENTION_DISABLE_SOFTCAP",
+    "FLASHATTENTION_DISABLE_LOCAL"
+  ],
+  "kernel_sources_changed": false,
+  "scope": "inference-only; disabled options are rejected by upstream API guards"
+}

@@ -64,8 +64,10 @@ full B0 mean ATE is 0.463 m versus geometry's 0.430 m across three repeats,
 despite active boundary rows on 233/235 updates. All five arms and failures are
 preserved in the [holdout results](results/semantic_frontend_20261025/holdout09/README.md).
 [Complete verification and the preserved failed admission](results/semantic_frontend_20261025/README.md).
-The revised diagnostic is not scored for accuracy; online model latency and unseen
-trajectory benefit remain unverified.
+The local 5070 Ti now runs the strict B0 model: direct inference medians are
+63–70 ms over three fixed 20-frame timing rounds. The ROS bridge fails complete
+scan delivery, so online deadline and full-LIO throughput remain unvalidated.
+[Local runtime checks and preserved failed probes](results/semantic_frontend_20261025/local_gpu/README.md).
 
 ![semantic map](docs/img/rviz_class_final.png)
 
