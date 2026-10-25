@@ -1,0 +1,9 @@
+/**:
+  ros__parameters:
+    backend:
+      enabled: true
+      keyframe_interval_s: 1.0
+      max_points: 12000
+    # The expensive semantic frontend remains outside the admitted online path.
+    semantic:
+      enabled: false

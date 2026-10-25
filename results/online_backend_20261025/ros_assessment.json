@@ -1,0 +1,37 @@
+{
+  "scope": "synthetic sensor ROS integration; not accuracy or sustained realtime admission",
+  "frontend_poses": 65,
+  "corrected_poses": 65,
+  "keyframe_clouds": 7,
+  "exact_sensor_timestamps": true,
+  "no_loop_max_position_error_m": 0.0,
+  "no_loop_max_quaternion_error": 4.4474267057737396e-15,
+  "backend_keyframes": 7,
+  "pose_outputs_while_worker_paused": 12,
+  "overload_dropped_keyframes": 9,
+  "last_status": {
+    "worker_ready": true,
+    "error": null,
+    "poses_published": 77,
+    "rejected": 0,
+    "pair_evictions": 27,
+    "pending": 0,
+    "ipc": {
+      "submitted": 10,
+      "completed": 10,
+      "queue_full": 9,
+      "stale": 0,
+      "not_ready": 0
+    },
+    "odometry_callback_p95_ms": 0.580102251842618,
+    "status": "updated",
+    "stamp_ns": 1012000000000,
+    "keyframe": 9,
+    "version": 0,
+    "loop_count": 0,
+    "total_ms": 0.9892990346997976,
+    "queue_and_processing_ms": 417.67771099694073,
+    "correction_age_s": 9.0
+  },
+  "passed": true
+}

@@ -1,0 +1,41 @@
+{
+  "scope": "engineering contracts, not driving accuracy/realtime admission",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+  "worker_python": "/home/frank/semantic_backend_runtime/venv/bin/python",
+  "worker_python_version": "3.10.19",
+  "worker_libraries": {
+    "numpy": "1.26.4",
+    "scipy": "1.15.3",
+    "gtsam": "4.2",
+    "open3d": "0.19.0"
+  },
+  "worker_environment": "isolated NumPy 1.26.4 venv inheriting existing active-gs libraries read-only; original environment untouched",
+  "ros_python": "/usr/bin/python3 (3.12)",
+  "ros_distro": "jazzy",
+  "middleware": "rmw_cyclonedds_cpp",
+  "native_worker_threads": 1,
+  "frontend_threads": 2,
+  "build_marker": {
+    "upstream": "837b7bbc1431cb04cf936528e52c83c835efba8e",
+    "patch_sha256": "e7db1e0d3aa980d6f0583d03da5312662fb7d154ec61b751fb4c8e115358c026",
+    "online_backend_patch_sha256": "1344d30bc40d95c1f073cf53c83102f64df81bde9dc40006a20a3809c34e1fb6"
+  },
+  "sources_sha256": {
+    "frontend/bootstrap.py": "a16c651965f588fd4e9ffd8e4e707d94e1ade7d21ac020c37b164260232cd365",
+    "frontend/backend.yaml": "3d89af9bf74108fc69429e82bf8271958a1b20faad7666201e0eb1e35e87f935",
+    "frontend/patches/fastlivo2-online-backend.patch": "1344d30bc40d95c1f073cf53c83102f64df81bde9dc40006a20a3809c34e1fb6",
+    "frontend/patches/fastlivo2-semantic.patch": "e7db1e0d3aa980d6f0583d03da5312662fb7d154ec61b751fb4c8e115358c026",
+    "tools/loop_closure/protocol.json": "83df7180cbd2454e2be182a1101bd2555d6d1e240e24f8574ea4126af337f0f8",
+    "tools/loop_closure/online.json": "1c280a94c2c25a8209010946bceab5e3ee44c742f629c39e29323b03f036f8fe",
+    "tools/loop_closure/online.py": "9fd9f334702ef82452ec70c3b04e4c281272d0c7fb503b841556562e3a21e396",
+    "tools/loop_closure/online_transport.py": "55c5d18a633e2b8e082ca94185453dfd05a04745b5cd8142a58f7f735775261d",
+    "tools/loop_closure/online_node.py": "434b4b83abd697ecf49acebd75752f90394298fcd8b86dd050ef0fd4895fddd6",
+    "tools/loop_closure/test_online.py": "8c97db217ddf744ab8bc6f3b6cc2171f2b85d79a713acc9043e1a3325a0f32b2",
+    "tools/loop_closure/validate_online_ros.py": "8ea9c06330654c031d1c400bc659bba92c11f28785ed40ec6b7a5aab101acddc",
+    "tools/loop_closure/validate_archived_graph.py": "babc12b94bba0f0f29789fa45011727af3c05973da2a32eda90571e2804d0343",
+    "tools/loop_closure/run_online.sh": "499dc9fb2331567964382fea50917ae54ff5cd6b5cbe30eda413f775ffc90004"
+  },
+  "original_semantic_patch_unchanged": true,
+  "new_training": false,
+  "new_raw_data_download": false
+}

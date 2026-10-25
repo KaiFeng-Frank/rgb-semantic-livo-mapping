@@ -1,5 +1,9 @@
 # Offline loop closure for the semantic map
 
+For the new streaming execution path, see the
+[online geometric backend](online_loop_backend.md). The offline protocol and
+results below remain unchanged for reproduction.
+
 This experiment adds a geometric backend to the frozen FAST-LIVO2 trajectory,
 then replays exactly the archived v0.6 B0 seed-1 pass-1 predictions into a fresh
 semantic voxel map. It does not retrain the segmentation model. The initial
