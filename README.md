@@ -46,6 +46,10 @@ motion-tolerant retrieval and bounded queries. Two real-training revisions and
 six fresh confirmation scenes are complete: 56.91 mIoU versus 56.98 for the
 matched current-only control, with worse recovery and about 5.11 ms module cost.
 It remains experimental; weights, ablations and both development attempts are archived.
+An [object-level opportunity audit](results/semantic_memory_20261025/opportunity_audit/README.md)
+finds 316–371 fresh-set object-frame cases per seed where the current-only path
+fails and the previous raw observation of the same GT instance succeeds; history
+repairs 31–63. This establishes observational complementarity, not retrieval success.
 
 **Offline loop closure, seq07:** with the same frozen frontend and B0 predictions,
 official KITTI ATE falls **0.837 → 0.557 m** and out-of-frustum map mIoU-9 rises
