@@ -1,0 +1,129 @@
+diff --git a/tools/loop_closure/online_node.py b/tools/loop_closure/online_node.py
+index b1fffe2..b864d39 100644
+--- a/tools/loop_closure/online_node.py
++++ b/tools/loop_closure/online_node.py
+@@ -181,14 +181,19 @@ def arguments(argv=None):
+ 
+ def main():
+     import rclpy
++    from rclpy.executors import ExternalShutdownException
+     args, ros_args = arguments()
+     rclpy.init(args=ros_args)
+     node = None
+     try:
+         node = make_node(args)
+         rclpy.spin(node)
+-    except KeyboardInterrupt:
++    except (KeyboardInterrupt, ExternalShutdownException):
+         pass
++    except RuntimeError:
++        # SIGTERM can invalidate the ROS context between the loop guard and wait-set creation.
++        if rclpy.ok():
++            raise
+     finally:
+         if node:
+             node.destroy_node()
+diff --git a/tools/loop_closure/online_outputs.py b/tools/loop_closure/online_outputs.py
+index 8236d0a..c7f2823 100644
+--- a/tools/loop_closure/online_outputs.py
++++ b/tools/loop_closure/online_outputs.py
+@@ -191,6 +191,7 @@ def make_output_node(connection, map_frame):
+ 
+ def main():
+     import rclpy
++    from rclpy.executors import ExternalShutdownException
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument('--fd', type=int, required=True)
+     parser.add_argument('--map-frame', required=True)
+@@ -202,8 +203,12 @@ def main():
+     try:
+         while rclpy.ok() and not node.stop.is_set():
+             rclpy.spin_once(node, timeout_sec=.1)
+-    except KeyboardInterrupt:
++    except (KeyboardInterrupt, ExternalShutdownException):
+         pass
++    except RuntimeError:
++        # SIGTERM can invalidate the ROS context between the loop guard and wait-set creation.
++        if rclpy.ok():
++            raise
+     finally:
+         node.destroy_node()
+         connection.close()
+diff --git a/tools/loop_closure/semantic_outputs.py b/tools/loop_closure/semantic_outputs.py
+index e75ec42..1abba35 100644
+--- a/tools/loop_closure/semantic_outputs.py
++++ b/tools/loop_closure/semantic_outputs.py
+@@ -32,6 +32,7 @@ def cloud(points, labels, confidence, frame, stamp):
+ 
+ def main():
+     import rclpy
++    from rclpy.executors import ExternalShutdownException
+     from rclpy.qos import QoSProfile, ReliabilityPolicy
+     from sensor_msgs.msg import PointCloud2
+     from std_msgs.msg import String
+@@ -60,8 +61,12 @@ def main():
+                 publication_id=item['publication_id'], map_sha256=digest, map_points=message.width,
+                 published_monotonic=time.monotonic()), allow_nan=False)))
+             connection.send(dict(stamp_ns=item['stamp_ns'], published_monotonic=time.monotonic()))
+-    except (EOFError, BrokenPipeError, KeyboardInterrupt):
++    except (EOFError, BrokenPipeError, KeyboardInterrupt, ExternalShutdownException):
+         pass
++    except RuntimeError:
++        # Suppress only the expected teardown race, never errors in a live context.
++        if rclpy.ok():
++            raise
+     finally:
+         connection.close()
+         node.destroy_node()
+diff --git a/tools/loop_closure/semantic_scan_outputs.py b/tools/loop_closure/semantic_scan_outputs.py
+index 2bf781d..6d041a3 100644
+--- a/tools/loop_closure/semantic_scan_outputs.py
++++ b/tools/loop_closure/semantic_scan_outputs.py
+@@ -9,6 +9,7 @@ from .semantic_outputs import cloud
+ 
+ def main():
+     import rclpy
++    from rclpy.executors import ExternalShutdownException
+     from rclpy.qos import QoSProfile, ReliabilityPolicy
+     from sensor_msgs.msg import PointCloud2
+     parser = argparse.ArgumentParser(description=__doc__)
+@@ -29,8 +30,12 @@ def main():
+             item = connection.recv()
+             pub.publish(cloud(item['points'], item['labels'], item['confidence'], 'backend_imu', item['stamp_ns']))
+             connection.send(dict(stamp_ns=item['stamp_ns'], published_monotonic=time.monotonic()))
+-    except (EOFError, BrokenPipeError, KeyboardInterrupt):
++    except (EOFError, BrokenPipeError, KeyboardInterrupt, ExternalShutdownException):
+         pass
++    except RuntimeError:
++        # Suppress only the expected teardown race, never errors in a live context.
++        if rclpy.ok():
++            raise
+     finally:
+         connection.close()
+         node.destroy_node()
+diff --git a/tools/loop_closure/semantic_trajectory.py b/tools/loop_closure/semantic_trajectory.py
+index dd34d2f..226d7eb 100644
+--- a/tools/loop_closure/semantic_trajectory.py
++++ b/tools/loop_closure/semantic_trajectory.py
+@@ -15,6 +15,7 @@ def compact_snapshot(snapshot):
+ 
+ def main():
+     import rclpy
++    from rclpy.executors import ExternalShutdownException
+     from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy
+     from std_msgs.msg import String
+     parser = argparse.ArgumentParser(description=__doc__)
+@@ -39,8 +40,12 @@ def main():
+                            poses=result['poses'].tolist())
+             publisher.publish(String(data=json.dumps(payload, allow_nan=False)))
+             connection.send(dict(stamp_ns=result['stamp_ns'], published_monotonic=time.monotonic()))
+-    except (EOFError, BrokenPipeError, KeyboardInterrupt):
++    except (EOFError, BrokenPipeError, KeyboardInterrupt, ExternalShutdownException):
+         pass
++    except RuntimeError:
++        # Suppress only the expected teardown race, never errors in a live context.
++        if rclpy.ok():
++            raise
+     finally:
+         connection.close()
+         node.destroy_node()

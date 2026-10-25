@@ -6,5 +6,13 @@
   "protocol_sha256": "e85a61622d155145b7fcc34283b0b745ab31606c4ca0b603e5efc506f9becb77",
   "source_payload_sha256": "042c59558c43c364b44b70382c1ac40ed80720f86c88f28d8141605a9ff9ab01",
   "admitted": true,
-  "accuracy_evaluated": false
+  "accuracy_evaluated": false,
+  "post_timing_shutdown_fix": {
+    "patch": "shutdown-fix.patch",
+    "sha256": "2f8ac7df745a51f5977a0b4b29a979c5921729ccb935680fe9dcf45201004f75",
+    "scope": "Only handling the expected ROS context invalidation during termination; runtime inference/fusion/math unchanged",
+    "reproduces_current_sources": true,
+    "ros_fixture_passed": true,
+    "shutdown_tracebacks": 0
+  }
 }

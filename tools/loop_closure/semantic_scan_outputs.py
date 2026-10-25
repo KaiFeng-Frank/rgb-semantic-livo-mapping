@@ -9,6 +9,7 @@ from .semantic_outputs import cloud
 
 def main():
     import rclpy
+    from rclpy.executors import ExternalShutdownException
     from rclpy.qos import QoSProfile, ReliabilityPolicy
     from sensor_msgs.msg import PointCloud2
     parser = argparse.ArgumentParser(description=__doc__)
@@ -29,8 +30,12 @@ def main():
             item = connection.recv()
             pub.publish(cloud(item['points'], item['labels'], item['confidence'], 'backend_imu', item['stamp_ns']))
             connection.send(dict(stamp_ns=item['stamp_ns'], published_monotonic=time.monotonic()))
-    except (EOFError, BrokenPipeError, KeyboardInterrupt):
+    except (EOFError, BrokenPipeError, KeyboardInterrupt, ExternalShutdownException):
         pass
+    except RuntimeError:
+        # Suppress only the expected teardown race, never errors in a live context.
+        if rclpy.ok():
+            raise
     finally:
         connection.close()
         node.destroy_node()

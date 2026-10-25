@@ -15,6 +15,7 @@ def compact_snapshot(snapshot):
 
 def main():
     import rclpy
+    from rclpy.executors import ExternalShutdownException
     from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy
     from std_msgs.msg import String
     parser = argparse.ArgumentParser(description=__doc__)
@@ -39,8 +40,12 @@ def main():
                            poses=result['poses'].tolist())
             publisher.publish(String(data=json.dumps(payload, allow_nan=False)))
             connection.send(dict(stamp_ns=result['stamp_ns'], published_monotonic=time.monotonic()))
-    except (EOFError, BrokenPipeError, KeyboardInterrupt):
+    except (EOFError, BrokenPipeError, KeyboardInterrupt, ExternalShutdownException):
         pass
+    except RuntimeError:
+        # Suppress only the expected teardown race, never errors in a live context.
+        if rclpy.ok():
+            raise
     finally:
         connection.close()
         node.destroy_node()

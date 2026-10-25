@@ -32,6 +32,7 @@ def cloud(points, labels, confidence, frame, stamp):
 
 def main():
     import rclpy
+    from rclpy.executors import ExternalShutdownException
     from rclpy.qos import QoSProfile, ReliabilityPolicy
     from sensor_msgs.msg import PointCloud2
     from std_msgs.msg import String
@@ -60,8 +61,12 @@ def main():
                 publication_id=item['publication_id'], map_sha256=digest, map_points=message.width,
                 published_monotonic=time.monotonic()), allow_nan=False)))
             connection.send(dict(stamp_ns=item['stamp_ns'], published_monotonic=time.monotonic()))
-    except (EOFError, BrokenPipeError, KeyboardInterrupt):
+    except (EOFError, BrokenPipeError, KeyboardInterrupt, ExternalShutdownException):
         pass
+    except RuntimeError:
+        # Suppress only the expected teardown race, never errors in a live context.
+        if rclpy.ok():
+            raise
     finally:
         connection.close()
         node.destroy_node()

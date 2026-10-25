@@ -181,14 +181,19 @@ def arguments(argv=None):
 
 def main():
     import rclpy
+    from rclpy.executors import ExternalShutdownException
     args, ros_args = arguments()
     rclpy.init(args=ros_args)
     node = None
     try:
         node = make_node(args)
         rclpy.spin(node)
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, ExternalShutdownException):
         pass
+    except RuntimeError:
+        # SIGTERM can invalidate the ROS context between the loop guard and wait-set creation.
+        if rclpy.ok():
+            raise
     finally:
         if node:
             node.destroy_node()

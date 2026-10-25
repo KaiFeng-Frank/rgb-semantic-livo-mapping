@@ -191,6 +191,7 @@ def make_output_node(connection, map_frame):
 
 def main():
     import rclpy
+    from rclpy.executors import ExternalShutdownException
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--fd', type=int, required=True)
     parser.add_argument('--map-frame', required=True)
@@ -202,8 +203,12 @@ def main():
     try:
         while rclpy.ok() and not node.stop.is_set():
             rclpy.spin_once(node, timeout_sec=.1)
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, ExternalShutdownException):
         pass
+    except RuntimeError:
+        # SIGTERM can invalidate the ROS context between the loop guard and wait-set creation.
+        if rclpy.ok():
+            raise
     finally:
         node.destroy_node()
         connection.close()
