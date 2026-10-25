@@ -153,8 +153,25 @@ being tested. It now imports `ptv3_worker.Segmenter`, literally the class the no
 co-process runs. Anything scored before this fix against "86.3 % / 61.3 %" was scored
 with an instrument pointed at the wrong model.
 
-### R2. The pipeline output is NON-DETERMINISTIC run to run, and shuffle_orders is only
-### half the reason
+### R2. Historical nondeterminism: the root shuffle flag did not reach pooling
+
+**2026-10-25 correction:** the investigation below stopped before identifying that
+Pointcept v1.5.1 constructs all four `SerializedPooling` layers with their own
+`shuffle_orders=True`, regardless of the backbone flag. They call `torch.randperm`
+even in evaluation. The verified loader now propagates an explicit policy to all
+serialization modules; the memory feature fingerprint records each effective
+flag. In a real-scan A-A / A-B-A probe across three scenes, the legacy policy
+changes 307–626 voxel labels per comparison, while all-off produces identical
+features and logits in all six comparisons and consumes no CPU RNG.
+See [probe evidence](results/semantic_memory_20261025/chain_audit/serialization-probe.json).
+The stricter separate-process, reversed-order replay of all 800 scans still
+changes 6,672 / 27,775,488 point labels (0.0240%), despite consuming no CPU RNG;
+its exact-repeatability check **fails**. Maximum absolute logit difference is
+0.125. The remaining source has not been isolated. See
+[complete reverse replay](results/semantic_memory_20261025/chain_audit/reverse-order-check.json).
+Only the shuffle-policy bug is fixed; general bitwise reproducibility is unresolved.
+The historical measurements below are retained, not retroactively corrected.
+
 `weights/.../config.py:52` ships `shuffle_orders=True`; `build_ptv3` never overrode it,
 and v1.5.1 applies it inside `forward()` ungated by `self.training`, so `.eval()` does
 not disable it. `build_ptv3` now takes `shuffle_orders=` and the worker pins it False.
@@ -163,7 +180,7 @@ SAME process still disagree on ~4-5 % of points. Bisected with forward hooks to
 `SerializedPooling` — `torch.sort(cluster)` (unstable on CUDA) picks a different
 representative per pooled cell, so `serialized_code`/`serialized_order` differ from run
 to run. Forcing `stable=True` there did NOT remove it, so there is at least one more
-source; not chased further. CONSEQUENCE FOR MEASUREMENT: on 20 frames the instrument's
+source; not chased further at that time. CONSEQUENCE FOR HISTORICAL MEASUREMENT: on 20 frames the instrument's
 own run-to-run spread is ~1 point of coarse mIoU — the same size as the acceptance gate.
 Use >= 100 frames for exploration and the full 1101 for a verdict, and always report the
 repeat spread next to the delta.
@@ -275,7 +292,9 @@ tools/extract_student.py keeps backbone.*+seg_head.* only -> weights/v05/<tag>_s
 loads it strict=True 488/488.  VERIFY BEHAVIOUR, NOT JUST KEYS (the C1 lesson): every tensor torch.equal to the
 DistilSegmentorMiB student (fp32 and fp16), identical module tree, and on 101 seq07 frames the argmax agreement
 extracted-vs-original equals the SAME-MODEL repeat agreement at every logit-margin stratum (a different student
-drops to 0.90 / 0.92-0.96 at margin>2).  The forward is non-deterministic (R2): never demand bitwise equality.
+drops to 0.90 / 0.92-0.96 at margin>2). Historical forward randomness is discussed
+in R2; current checks record exact equality and retain any failures rather than
+assuming that all discrepancies have the same cause.
 
 ### V2. Latency is architecture-bound, not weight-bound -- but one run stepped
 Saturated (rate 2.0) frame period, 3 reps each: ZS 57.8/56.5/58.1 ms, B0 57.7/58.6/57.6, Rprime_noKL 65.5/58.1/60.4.

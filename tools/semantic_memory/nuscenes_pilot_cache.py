@@ -20,7 +20,7 @@ from .pilot_metrics import object_groups
 def extract(index_path, cache):
     import torch
     from ptv3_worker import Segmenter
-    from ptv3_loader_verified import CKPT_PATH
+    from ptv3_loader_verified import CKPT_PATH, serialization_policy
     index = json.loads(index_path.read_text())
     cache.mkdir(parents=True, exist_ok=False)
     torch.set_num_threads(1)
@@ -28,6 +28,7 @@ def extract(index_path, cache):
     segmenter = Segmenter(half=True, shuffle=False, intensity_scale=1.)
     manifest = dict(index_sha256=digest(index_path), backbone_sha256=digest(CKPT_PATH),
         model_config_sha256=segmenter.memory_model_sha256(), synthetic=False,
+        serialization_policy=serialization_policy(segmenter.model),
         geometry=index['geometry'], intensity=index['intensity'], files=[], source_codes={})
     for name in ('src/ptv3_worker.py','src/ptv3_loader_verified.py',
                  'tools/semantic_memory/nuscenes_pilot_cache.py','tools/semantic_memory/pilot_metrics.py'):

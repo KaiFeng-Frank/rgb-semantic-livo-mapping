@@ -1,0 +1,302 @@
+"""Frozen-weight tracing of semantic correction space on train/dev/evaluation.
+
+GT is joined only by diagnostics. Privileged clean/supply counterfactuals are
+explicitly labeled and are NOT deployable methods or measured performance bounds.
+The ordinary instrumented model must equal the untouched model on every frame.
+"""
+import argparse
+from collections import defaultdict
+from dataclasses import asdict
+import gzip
+import json
+import os
+from pathlib import Path
+
+os.environ.setdefault('CUBLAS_WORKSPACE_CONFIG',':4096:8')
+import numpy as np
+import torch
+from torch.nn import functional as F
+
+from .repair_pilot import anchor_model, call, REPO
+from .nuscenes_pilot import load, current_output, save, announce
+from .nuscenes_pilot_data import digest
+from .pilot_metrics import confusion, scores, events
+from .chain_trace import TracedEvidence, FusionCapture, voxel_instances, candidate_tags
+from .chain_metrics import aggregate
+from semantic_memory import MemoryConfig
+from semantic_repair import CurrentAnchoredRepair, RepairConfig
+
+NORMAL_ARMS = ('baseline','anchor','current_extra','no_history','temporal')
+ALL_ARMS = NORMAL_ARMS + ('clean_existing_gt','supply_raw_gt')
+
+
+def new_model(path, traced=False):
+    saved = torch.load(path,map_location='cpu',weights_only=True)
+    model = CurrentAnchoredRepair(MemoryConfig(**saved['config']),RepairConfig(**saved['repair']),'cuda').eval()
+    model.fusion.load_state_dict(saved['fusion'],strict=True)
+    model.requires_grad_(False)
+    if traced:
+        model.memory = TracedEvidence(model.cfg,'cuda',model.repair.moving_classes)
+    return model
+
+
+def clone_candidates(candidates):
+    return {k:v.clone() for k,v in candidates.items()}
+
+
+def compose(anchor,indices,selected):
+    return anchor.float().index_copy(0,indices,selected)
+
+
+@torch.no_grad()
+def supply_positive_raw(candidates,trace,previous,query_instances,opportunity_ids,cfg):
+    """Privileged diagnostic: bypass compression/shortlisting, keep real raw
+    features, current query set, radius, age and cosine rules. No label logits
+    are injected. An unavailable positive observation gives current-only fallback.
+    """
+    result = clone_candidates(candidates)
+    if previous is None or not opportunity_ids:
+        return result
+    if not 0 < trace['stamp']-previous['stamp'] <= cfg.max_age_s:
+        raise ValueError('Diagnostic supply requires eligible past observations')
+    for instance in opportunity_ids:
+        qi = (query_instances==instance).nonzero().flatten()
+        pi = ((previous['instances']==instance)&
+              (previous['prediction']==previous['labels'])).nonzero().flatten()
+        if not len(qi):
+            continue
+        for key in result:
+            result[key][qi] = 0
+        if not len(pi):
+            continue
+        delta = previous['world'][pi][None]-trace['query_xyz'][qi,None]
+        distance2 = delta.square().sum(-1)
+        cosine = F.cosine_similarity(trace['query_features'][qi,None].float(),
+                                     previous['features'][pi][None].float(),dim=-1)
+        valid = (distance2<=trace['query_radius'][qi,None]**2)&(cosine>=cfg.min_cosine)
+        k = min(cfg.neighbors,len(pi))
+        _,selected = distance2.masked_fill(~valid,float('inf')).topk(k,largest=False)
+        chosen = pi[selected]
+        result['features'][qi,:k] = previous['features'][chosen]
+        result['probabilities'][qi,:k] = previous['probabilities'][chosen]
+        result['delta'][qi,:k] = previous['world'][chosen]-trace['query_xyz'][qi,None]
+        result['age'][qi,:k] = trace['stamp']-previous['stamp']
+        result['valid'][qi,:k] = valid.gather(1,selected)
+        if 'frame' in result:
+            result['frame'][qi,:k] = previous['frame']
+    return result
+
+
+def group_observations(arrays,groups, predictions):
+    result = {}
+    for i,g in enumerate(groups):
+        mask = arrays['group_owner']==i
+        result[g['instance']] = dict(group=i,label=g['label'],points=int(mask.sum()),
+            correct_fraction={k:float((v[mask]==g['label']).mean()) for k,v in predictions.items()})
+    return result
+
+
+@torch.no_grad()
+def run_seed(seed,index,cache,models,anchors,out):
+    anchor = anchor_model(anchors/f'seed-{seed}'/'current_only.pt')
+    temporal_path = models/f'seed-{seed}'/'temporal.pt'
+    traced,reference = new_model(temporal_path,True),new_model(temporal_path)
+    current = new_model(models/f'seed-{seed}'/'current_extra.pt')
+    capture = FusionCapture(traced.fusion)
+    part_results = {}
+    total_parity_frames = 0
+    for part,scenes in index['parts'].items():
+        matrices = {k:np.zeros((16,16),np.int64) for k in NORMAL_ARMS}
+        records, frame_checks = [], []
+        for scene in scenes:
+            traced.reset();reference.reset()
+            ids = {name:i for i,name in enumerate(sorted({o['instance'] for r in index['sequences'][scene] for o in r['objects']}))}
+            previous, previous_groups = None, {}
+            for row in index['sequences'][scene]:
+                raw, arrays = load(cache,scene,row)
+                groups = json.loads(arrays['groups'].item())
+                vi = torch.from_numpy(voxel_instances(arrays,groups,ids)).cuda()
+                anchor_logits = current_output(anchor,raw)['logits']
+                normal = call(traced,raw,anchor_logits)
+                untouched = call(reference,raw,anchor_logits)
+                if not (torch.equal(normal['logits'],untouched['logits']) and
+                        torch.equal(normal['query_indices'],untouched['query_indices']) and
+                        torch.equal(traced.memory.xyz,reference.memory.xyz) and
+                        torch.equal(traced.memory.probabilities,reference.memory.probabilities)):
+                    raise AssertionError('Instrumentation changed normal inference or memory')
+                total_parity_frames += 1
+                f,b,candidates = capture.value
+                query = normal['query_indices']
+                trace = traced.memory.trace
+                trace['stamp'] = raw['stamp']
+                top = anchor_logits[query].softmax(-1).topk(2,dim=1).indices
+                moving = torch.isin(top,traced.memory.moving_classes).any(1)
+                trace['query_radius'] = torch.where(moving,traced.repair.moving_radius,traced.repair.static_radius)
+                empty = clone_candidates(candidates);empty['valid'].zero_()
+                no_history = compose(anchor_logits,query,traced.fusion(f,b,empty))
+                current_extra = compose(anchor_logits,query,current.fusion(f,b,empty))
+                outputs = dict(baseline=raw['logits'],anchor=anchor_logits,current_extra=current_extra,
+                               no_history=no_history,temporal=normal['logits'])
+                inverse = arrays['inverse']
+                predictions = {k:v.argmax(-1).cpu().numpy()[inverse] for k,v in outputs.items()}
+                observed = group_observations(arrays,groups,predictions)
+                recent = (previous is not None and raw['frame']==previous['frame']+1 and
+                          0 < raw['stamp']-previous['stamp']<=traced.cfg.max_age_s)
+                opportunities = {name for name,o in observed.items() if recent and name in previous_groups and
+                    previous_groups[name]['correct_fraction']['baseline']>=.5 and o['correct_fraction']['no_history']<.5}
+                if previous is None:
+                    slots = torch.zeros_like(candidates['valid'])
+                    tags = {k:torch.zeros(len(query),dtype=torch.bool,device='cuda') for k in
+                            ('local_correct','shortlist_correct','retrieved_correct')}
+                    tags['correct_slots'] = slots
+                    stored_good,readable_good = np.empty(0,np.int64),np.empty(0,np.int64)
+                    raw_good_ids = np.empty(0,np.int64)
+                else:
+                    tags = candidate_tags(trace,previous['instances'],previous['prediction'],previous['labels'],
+                                          vi[query],candidates)
+                    good = (previous['prediction']==previous['labels'])&(previous['instances']>=0)
+                    def good_ids(source):
+                        return previous['instances'][source][good[source]].cpu().numpy()
+                    raw_good_ids = previous['instances'][good].cpu().numpy() if recent else np.empty(0,np.int64)
+                    stored_good = good_ids(trace['written_source'])
+                    readable_good = good_ids(trace['record_source'][trace['readable']])
+                clean = clone_candidates(candidates)
+                clean['valid'] &= (vi[query,None]<0)|tags['correct_slots']
+                outputs['clean_existing_gt'] = compose(anchor_logits,query,traced.fusion(f,b,clean))
+                supplied = supply_positive_raw(clean,trace,previous,vi[query],{ids[n] for n in opportunities},traced.cfg)
+                outputs['supply_raw_gt'] = compose(anchor_logits,query,traced.fusion(f,b,supplied))
+                for k in ('clean_existing_gt','supply_raw_gt'):
+                    predictions[k] = outputs[k].argmax(-1).cpu().numpy()[inverse]
+                observed = group_observations(arrays,groups,predictions)
+                # Actual query assignment and class-dependent geometric search are
+                # from normal inference, not a GT-defined replacement query policy.
+                n = len(raw['xyz'])
+                selected_mask = np.zeros(n,bool);selected_mask[query.cpu().numpy()] = True
+                confidence_mask = (anchor_logits.softmax(-1).max(-1).values<traced.repair.confidence).cpu().numpy()
+                masks = {}
+                for key in ('local_correct','shortlist_correct','retrieved_correct'):
+                    mask = np.zeros(n,bool);mask[query.cpu().numpy()] = tags[key].cpu().numpy()
+                    masks[key] = mask[inverse]
+                cosine = F.cosine_similarity(f[:,None].float(),candidates['features'].float(),dim=-1)
+                weights = torch.softmax((4*cosine).masked_fill(~candidates['valid'],-1e4),dim=1)*candidates['valid']
+                weights = weights/weights.sum(1,keepdim=True).clamp_min(1e-8)
+                positive_mass = np.zeros(n,np.float32)
+                positive_mass[query.cpu().numpy()] = (weights*tags['correct_slots']).sum(1).cpu().numpy()
+                supply_mask = np.zeros(n,bool)
+                supply_mask[query.cpu().numpy()] = supplied['valid'].any(1).cpu().numpy()
+                # On opportunity objects supply contains only positive same-instance
+                # raw tokens, with original radius/cosine rules unchanged.
+                selected_point,confident_point = selected_mask[inverse],confidence_mask[inverse]
+                labels = arrays['point_label'].astype(np.int64)
+                for k in NORMAL_ARMS:
+                    matrices[k] += confusion(labels,predictions[k])
+                anchor_cpu = anchor_logits.cpu().numpy()[inverse]
+                for name,o in observed.items():
+                    g = o['group'];label = o['label'];inst = ids[name]
+                    mask = arrays['group_owner']==g
+                    wrong = mask & (predictions['no_history']!=label)
+                    correct_count = int((mask & (predictions['no_history']==label)).sum())
+                    # The ±2 logit correction can change a class gap by <4 at most.
+                    gap = anchor_cpu.max(1)-anchor_cpu[:,label]
+                    bounded = selected_point & (gap < 2*traced.repair.residual_limit)
+                    previous_fraction = previous_groups.get(name,{}).get('correct_fraction',{}).get('baseline') if recent else None
+                    received_positive = wrong & masks['retrieved_correct']
+                    r = dict(scene=scene,frame=row['frame'],stamp=raw['stamp'],instance=name,label=label,
+                        points=o['points'],correct_fraction=o['correct_fraction'],
+                        previous_raw_correct_fraction=previous_fraction,
+                        points_needed=max(0,(o['points']+1)//2-correct_count),
+                        raw_good_voxels=int((raw_good_ids==inst).sum()),
+                        stored_good_voxels=int((stored_good==inst).sum()),
+                        readable_good_voxels=int((readable_good==inst).sum()),
+                        confidence_error_points=int((wrong & confident_point).sum()),
+                        queried_error_points=int((wrong & selected_point).sum()),
+                        bounded_reachable_error_points=int((wrong & bounded).sum()),
+                        local_good_error_points=int((wrong & masks['local_correct']).sum()),
+                        shortlist_good_error_points=int((wrong & masks['shortlist_correct']).sum()),
+                        retrieved_good_error_points=int((wrong & masks['retrieved_correct']).sum()),
+                        correct_history_attention_mass_mean=float(positive_mass[inverse][received_positive].mean()) if received_positive.any() else None,
+                        supplied_good_error_points=int((wrong & supply_mask[inverse] &
+                            (vi.cpu().numpy()[inverse]==inst)).sum()) if name in opportunities else 0,
+                        ambiguous_voxel_object_points=int((mask & (vi.cpu().numpy()[inverse]<0)).sum()))
+                    records.append(r)
+                frame_checks.append(dict(scene=scene,frame=row['frame'],output_equal=True,memory_equal=True,
+                    queries=len(query),records=len(traced.memory.xyz),objects=len(groups)))
+                previous = dict(instances=vi,labels=raw['label'].long(),prediction=raw['logits'].argmax(-1),
+                    features=raw['features'],probabilities=raw['logits'].float().softmax(-1).half().float(),
+                    world=raw['xyz'].float()@raw['transform'][:3,:3].float().T+raw['transform'][:3,3].float(),
+                    stamp=raw['stamp'],frame=raw['frame'])
+                previous_groups = observed
+            announce(stage='chain_scene',seed=seed,partition=part,scene=scene,frames=len(index['sequences'][scene]))
+        result = aggregate(records)
+        result['point_metrics'] = {k:scores(v) for k,v in matrices.items()}
+        result['events'] = events(records,NORMAL_ARMS)
+        result['parity_frames'] = len(frame_checks)
+        folder = out/f'seed-{seed}'/part;folder.mkdir(parents=True)
+        save(folder/'summary.json',result)
+        save(folder/'frames.json',frame_checks)
+        payload = ''.join(json.dumps(r,separators=(',',':'))+'\n' for r in records).encode()
+        (folder/'object-frames.jsonl.gz').write_bytes(gzip.compress(payload,mtime=0))
+        part_results[part] = result
+        announce(stage='chain_partition',seed=seed,partition=part,totals=result['totals'],funnel=result['funnel'])
+    capture.close()
+    return dict(seed=seed,partitions=part_results,parity_frames=total_parity_frames,
+                temporal_checkpoint_sha256=digest(temporal_path))
+
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__)
+    for key in ('index','cache','models','anchors','out'):
+        p.add_argument('--'+key,type=Path,required=True)
+    p.add_argument('--feature-policy', required=True,
+                   choices=('legacy_root_off_pooling_on', 'all_off_frozen_weight_sensitivity'))
+    a = p.parse_args()
+    a.out.mkdir(parents=True,exist_ok=False)
+    index = json.loads(a.index.read_text())
+    manifest = json.loads((a.cache/'manifest.json').read_text())
+    trained = json.loads((a.models/'protocol.json').read_text())
+    if manifest['index_sha256'] != digest(a.index) or manifest['backbone_sha256']!=trained['backbone_sha256']:
+        raise ValueError('Index/backbone provenance mismatch')
+    if a.feature_policy == 'all_off_frozen_weight_sensitivity':
+        policy = manifest.get('serialization_policy')
+        if not policy or any(policy.values()):
+            raise ValueError('All-off audit requires an explicit all-off feature manifest')
+    for name,expected in trained['source_sha256'].items():
+        if digest(REPO/name)!=expected:
+            raise ValueError('Frozen model implementation changed: '+name)
+    for entry in manifest['files']:
+        if digest(a.cache/entry['path']) != entry['sha256']:
+            raise ValueError('Cache file hash mismatch')
+    for seed in range(3):
+        if digest(a.anchors/f'seed-{seed}'/'current_only.pt')!=trained['anchors'][str(seed)]:
+            raise ValueError('Anchor mismatch')
+    protocol = dict(scope='frozen diagnostic; no optimizer, retraining, parameter search or reselection',
+        seeds=[0,1,2],parts=index['parts'],index_sha256=digest(a.index),
+        cache_manifest_sha256=digest(a.cache/'manifest.json'),
+        feature_policy=a.feature_policy,
+        feature_model_config_sha256=manifest['model_config_sha256'],
+        sensitivity_only=a.feature_policy=='all_off_frozen_weight_sensitivity',
+        training_feature_note='Weights were trained under the legacy root-off / pooling-on extraction policy',
+        source_sha256={str(x.relative_to(REPO)):digest(x) for x in
+            [Path(__file__),REPO/'tools/semantic_memory/chain_trace.py',REPO/'tools/semantic_memory/chain_metrics.py']},
+        frozen_model_source_sha256=trained['source_sha256'],
+        checkpoint_sha256={f'{s}/{k}':digest(a.models/f'seed-{s}'/f'{k}.pt') for s in range(3) for k in ('temporal','current_extra')},
+        opportunity='same-instance immediate previous raw B0 recognized; current same-weight no-history path fails',
+        privileged_diagnostics=['clean_existing_gt: remove wrong-instance or wrong-label tokens on GT object queries',
+            'supply_raw_gt: for opportunity objects bypass compression/shortlisting, retain query/radius/cosine/age rules'],
+        restricted_oracle='enough correctly predicted same-instance retrieved tokens to replace current error points; not an upper bound on feature fusion',
+        parity='instrumented normal output, query indices, memory xyz/probabilities equal unmodified model every frame',
+        limitations=['GT identity is diagnostic only and is not available to the deployed association',
+            'ambiguous voxels excluded from same-instance provenance',
+            'raw keyframes rigidly ego aligned, not deskewed; labels sampled at ~2Hz',
+            'all evaluation logs previously inspected; no new generalization claim',
+            'GT-guided variants are diagnostic, not deployable or model performance bounds',
+            'trace execution overhead is not a realtime benchmark'])
+    save(a.out/'protocol.json',protocol)
+    torch.set_num_threads(1);torch.use_deterministic_algorithms(True)
+    results = [run_seed(s,index,a.cache,a.models,a.anchors,a.out) for s in protocol['seeds']]
+    save(a.out/'summary.json',dict(seeds=results,total_parity_frames=sum(r['parity_frames'] for r in results)))
+    announce(stage='chain_complete',total_parity_frames=sum(r['parity_frames'] for r in results))
+
+
+if __name__ == '__main__':
+    main()

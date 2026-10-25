@@ -92,9 +92,15 @@ class ExportTests(unittest.TestCase):
         model = Segmenter.__new__(Segmenter)
         model.half, model.shuffle, model.torch = True, False, torch
         model.fast_voxel = model.gpu_voxel = model.fast_hilbert = False
+        model.model = torch.nn.Sequential(torch.nn.Identity())
+        model.model[0].shuffle_orders = False
         config = dict(backbone=dict(patch_size=1024), num_classes=16)
         model.cfg = SimpleNamespace(model=SimpleNamespace(to_dict=lambda: config))
         before = model.memory_model_sha256()
+        model.model[0].shuffle_orders = True
+        self.assertNotEqual(before, model.memory_model_sha256())
+        model.model[0].shuffle_orders = False
+        self.assertEqual(before, model.memory_model_sha256())
         config['backbone']['patch_size'] = 512
         self.assertNotEqual(before, model.memory_model_sha256())
         with tempfile.TemporaryDirectory() as temporary:
@@ -109,6 +115,22 @@ class ExportTests(unittest.TestCase):
         model.shuffle = True
         with self.assertRaisesRegex(ValueError, 'shuffle=False'):
             model.enable_memory(shadow=True)
+
+    def test_serialization_policy_reaches_pooling_without_changing_weights(self):
+        import torch
+        from ptv3_loader_verified import set_serialization_policy, serialization_policy
+        model = torch.nn.Sequential(torch.nn.Sequential(torch.nn.Linear(2, 2)))
+        model.shuffle_orders = False
+        model[0].shuffle_orders = True
+        before = {k:v.clone() for k,v in model.state_dict().items()}
+        set_serialization_policy(model, None)
+        self.assertEqual(serialization_policy(model), {'':False, '0':True})
+        for enabled in (False, True):
+            set_serialization_policy(model, enabled)
+            self.assertEqual(serialization_policy(model), {'':enabled, '0':enabled})
+        self.assertFalse(hasattr(model[0][0], 'shuffle_orders'))
+        for k,v in model.state_dict().items():
+            self.assertTrue(torch.equal(v, before[k]))
 
     def test_export_preserves_synthetic_flag_and_consumable_metadata(self):
         import torch

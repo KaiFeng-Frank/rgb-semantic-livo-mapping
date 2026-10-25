@@ -211,8 +211,10 @@ class Segmenter(object):
         """Fingerprint effective architecture and feature-producing execution."""
         import hashlib
         import json
+        from ptv3_loader_verified import serialization_policy
         contract = dict(model=self.cfg.model.to_dict(), half=self.half,
                         shuffle=self.shuffle, fast_voxel=self.fast_voxel,
+                        serialization_policy=serialization_policy(self.model),
                         gpu_voxel=self.gpu_voxel, fast_hilbert=self.fast_hilbert,
                         tf32_matmul=self.torch.backends.cuda.matmul.allow_tf32,
                         tf32_cudnn=self.torch.backends.cudnn.allow_tf32)

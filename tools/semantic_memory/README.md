@@ -92,6 +92,13 @@ voxel size and intensity scale. Half precision and fixed serialization order
 (`shuffle=False`) are required. The current worker does not implement a 19-class
 head. `trained=True` records training provenance, not successful evaluation.
 
+The October 25 loader correction applies `shuffle=False` to the four pooling
+layers as well as the root backbone. Effective per-module flags now enter the
+feature fingerprint, so pre-fix memory checkpoints fail configuration matching
+instead of silently consuming changed features. This fixes an unpropagated
+policy; the all-scan reverse replay still has a small numerical/label discrepancy
+whose cause is unresolved. [Evidence-chain audit](../../results/semantic_memory_20261025/chain_audit/README.md).
+
 The shared-memory client has an explicit temporal request carrying frame, sensor
 time, epoch and transform. Legacy clients stay on the independent default path.
 Callers must collect pending asynchronous requests before using synchronous
