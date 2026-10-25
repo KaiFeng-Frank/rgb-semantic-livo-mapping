@@ -70,6 +70,12 @@ def make_node(args):
             self.odom_sub = self.create_subscription(Odometry, args.odometry, self.on_odom, qos)
             self.cloud_sub = self.create_subscription(PointCloud2, args.cloud, self.on_cloud, qos)
             self.outputs = OutputProcess(sys.executable, self.client.snapshot, args.map_frame)
+            self.trajectory = None
+            if args.semantic_trajectory:
+                from .semantic_trajectory import compact_snapshot
+                self.trajectory = OutputProcess(sys.executable,
+                    lambda: compact_snapshot(self.client.snapshot), args.map_frame,
+                    module='tools.loop_closure.semantic_trajectory')
             self.status_timer = self.create_timer(1., self.status)
 
         def on_odom(self, msg):
@@ -131,6 +137,7 @@ def make_node(args):
         def status(self):
             snapshot = self.client.snapshot()
             data = dict(output_error=self.outputs.error, worker_ready=self.client.ready.is_set(), error=self.client.error,
+                        trajectory_error=self.trajectory.error if self.trajectory else None,
                         output_publications=self.outputs.published,
                         output_wall_age_s=(time.monotonic()-self.outputs.last_published) if self.outputs.last_published else None,
                         poses_published=self.poses_out, rejected=self.rejected,
@@ -148,6 +155,8 @@ def make_node(args):
             self.status_pub.publish(msg)
 
         def destroy_node(self):
+            if self.trajectory:
+                self.trajectory.close()
             self.outputs.close()
             self.client.close()
             return super().destroy_node()
@@ -165,6 +174,8 @@ def arguments(argv=None):
     parser.add_argument('--map-frame', default='map')
     parser.add_argument('--odom-frame', default='camera_init')
     parser.add_argument('--body-frame', default='backend_imu')
+    parser.add_argument('--semantic-trajectory', action='store_true',
+                        help='Publish compact graph revisions in an independent process')
     return parser.parse_known_args(argv)
 
 

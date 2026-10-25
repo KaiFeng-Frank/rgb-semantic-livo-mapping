@@ -1,0 +1,13 @@
+{
+  "voxel": 0.2,
+  "classes": 16,
+  "tile_voxels": 20,
+  "max_keyframes": 1000,
+  "max_points": 200000,
+  "max_total_points": 4000000,
+  "excluded_classes": [1, 2, 3, 4, 5, 6, 8, 9],
+  "minimum_confidence": 0.35,
+  "pending_clouds": 2,
+  "max_queue_age_s": 3.0,
+  "display_points": 200000
+}

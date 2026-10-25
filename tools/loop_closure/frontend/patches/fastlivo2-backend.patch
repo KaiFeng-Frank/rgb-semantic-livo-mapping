@@ -70,7 +70,7 @@
  #include "preprocess.h"
  #if __has_include(<cv_bridge/cv_bridge.hpp>)
  #include <cv_bridge/cv_bridge.hpp>
-@@ -42,6 +43,12 @@
+@@ -42,6 +43,16 @@
    void handleVIO();
    void handleLIO();
    void savePCD();
@@ -78,12 +78,16 @@
 +  bool backend_enabled_ = false;
 +  double backend_interval_ = 1.0, backend_last_cloud_ = -1.0;
 +  int backend_max_points_ = 12000;
++  int backend_semantic_max_points_ = 200000;
++  PointCloudXYZI backend_semantic_points_;
++  double backend_semantic_stamp_ = -1.;
++  rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr backend_semantic_pub_;
 +  rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr backend_odom_pub_;
 +  rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr backend_cloud_pub_;
    void processImu();
    
    bool sync_packages(LidarMeasureGroup &meas);
-@@ -129,6 +136,8 @@
+@@ -129,6 +140,8 @@
    deque<sensor_msgs::msg::Imu::ConstSharedPtr> imu_buffer;
    deque<cv::Mat> img_buffer;
    deque<double> img_time_buffer;
@@ -92,7 +96,7 @@
    vector<pointWithVar> _pv_list;
    vector<double> extrinT;
    vector<double> extrinR;
-@@ -170,6 +179,7 @@
+@@ -170,6 +183,7 @@
    std::shared_ptr<rclcpp::SubscriptionBase> sub_pcl;
    rclcpp::Subscription<sensor_msgs::msg::Imu>::SharedPtr sub_imu;
    rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr sub_img;
@@ -111,7 +115,7 @@
  #include <vikit/camera_loader.h>
  
  using namespace Sophus;
-@@ -52,6 +54,12 @@
+@@ -52,6 +54,15 @@
  
  void LIVMapper::readParameters(rclcpp::Node::SharedPtr &node)
  {
@@ -119,12 +123,15 @@
 +  backend_enabled_ = node->declare_parameter<bool>("backend.enabled", false);
 +  backend_interval_ = node->declare_parameter<double>("backend.keyframe_interval_s", 1.0);
 +  backend_max_points_ = node->declare_parameter<int>("backend.max_points", 12000);
++  backend_semantic_max_points_ = node->declare_parameter<int>("backend.semantic_max_points", 200000);
++  if (backend_semantic_max_points_ < 100 || backend_semantic_max_points_ > 200000)
++    throw std::invalid_argument("invalid semantic export point limit");
 +  if (!std::isfinite(backend_interval_) || backend_interval_ <= 0 || backend_max_points_ < 100 || backend_max_points_ > 48000)
 +    throw std::invalid_argument("invalid online backend publication limits");
    // declare parameters
    this->node->declare_parameter<std::string>("common.lid_topic", "/livox/lidar");
    this->node->declare_parameter<std::string>("common.imu_topic", "/livox/imu");
-@@ -259,12 +267,30 @@
+@@ -259,12 +270,30 @@
  {
    image_transport::ImageTransport it(this->node);
    if (p_pre->lidar_type == AVIA) {
@@ -160,7 +167,7 @@
    
    pubLaserCloudFullRes = this->node->create_publisher<sensor_msgs::msg::PointCloud2>("/cloud_registered", 100);
    pubNormal = this->node->create_publisher<visualization_msgs::msg::MarkerArray>("/visualization_marker", 100);
-@@ -272,6 +298,11 @@
+@@ -272,6 +301,12 @@
    pubLaserCloudEffect = this->node->create_publisher<sensor_msgs::msg::PointCloud2>("/cloud_effected", 100);
    pubLaserCloudMap = this->node->create_publisher<sensor_msgs::msg::PointCloud2>("/Laser_map", 100);
    pubOdomAftMapped = this->node->create_publisher<nav_msgs::msg::Odometry>("/aft_mapped_to_init", 10);
@@ -168,11 +175,12 @@
 +    const auto qos = rclcpp::QoS(rclcpp::KeepLast(2)).best_effort().durability_volatile();
 +    backend_odom_pub_ = this->node->create_publisher<nav_msgs::msg::Odometry>("/backend/input/odometry", qos);
 +    backend_cloud_pub_ = this->node->create_publisher<sensor_msgs::msg::PointCloud2>("/backend/input/cloud", qos);
++    backend_semantic_pub_ = this->node->create_publisher<sensor_msgs::msg::PointCloud2>("/backend/input/semantic_cloud", qos);
 +  }
    pubPath = this->node->create_publisher<nav_msgs::msg::Path>("/path", 10);
    plane_pub = this->node->create_publisher<visualization_msgs::msg::Marker>("/planner_normal", 1);
    voxel_pub = this->node->create_publisher<visualization_msgs::msg::MarkerArray>("/voxels", 1);
-@@ -395,6 +426,7 @@
+@@ -395,6 +430,7 @@
  
    publish_frame_world(pubLaserCloudFullRes, vio_manager);
    publish_img_rgb(pubImage, vio_manager);
@@ -180,7 +188,25 @@
  
    euler_cur = RotMtoEuler(_state.rot_end);
    fout_out << std::setw(20) << LidarMeasures.last_lio_update_time - _first_lidar_time << " " << euler_cur.transpose() * 57.3 << " "
-@@ -476,6 +508,7 @@
+@@ -417,6 +453,17 @@
+ 
+   double t0 = omp_get_wtime();
+ 
++  // Process2 clears feats_undistort on the following VIO phase. Retain only
++  // the pending semantic keyframe before that clear, without changing estimator data.
++  if (backend_enabled_ && backend_semantic_pub_->get_subscription_count() &&
++      (backend_last_cloud_ < 0 || LidarMeasures.last_lio_update_time-backend_last_cloud_ >= backend_interval_)) {
++    backend_semantic_points_.clear();
++    backend_semantic_stamp_ = LidarMeasures.last_lio_update_time;
++    if (feats_undistort->size() <= static_cast<size_t>(backend_semantic_max_points_))
++      backend_semantic_points_ = *feats_undistort;
++    else
++      RCLCPP_WARN(node->get_logger(), "semantic export exceeds point cap; dropped whole keyframe");
++  }
+   downSizeFilterSurf.setInputCloud(feats_undistort);
+   downSizeFilterSurf.filter(*feats_down_body);
+   
+@@ -476,6 +523,7 @@
    euler_cur = RotMtoEuler(_state.rot_end);
    geoQuat = tf::createQuaternionMsgFromRollPitchYaw(euler_cur(0), euler_cur(1), euler_cur(2));
    publish_odometry(pubOdomAftMapped);
@@ -188,7 +214,7 @@
  
    double t3 = omp_get_wtime();
  
-@@ -602,10 +635,12 @@
+@@ -602,10 +650,12 @@
  
  void LIVMapper::run(rclcpp::Node::SharedPtr &node) 
  {
@@ -202,7 +228,7 @@
      if (!sync_packages(LidarMeasures)) 
      {
        rate.sleep();
-@@ -898,7 +933,7 @@
+@@ -898,7 +948,7 @@
  cv::Mat LIVMapper::getImageFromMsg(const sensor_msgs::msg::Image::ConstSharedPtr &img_msg)
  {
    cv::Mat img;
@@ -211,7 +237,7 @@
    return img;
  }
  
-@@ -947,6 +982,10 @@
+@@ -947,6 +997,10 @@
    cv::Mat img_cur = getImageFromMsg(msg);
    img_buffer.push_back(img_cur);
    img_time_buffer.push_back(img_time_correct);
@@ -222,7 +248,7 @@
  
    // ROS_INFO("Correct Image time: %.6f", img_time_correct);
  
-@@ -960,9 +999,12 @@
+@@ -960,9 +1014,12 @@
  
  bool LIVMapper::sync_packages(LidarMeasureGroup &meas)
  {
@@ -237,7 +263,7 @@
  
    switch (slam_mode_)
    {
-@@ -1043,6 +1085,7 @@
+@@ -1043,6 +1100,7 @@
        {
          img_buffer.pop_front();
          img_time_buffer.pop_front();
@@ -245,7 +271,7 @@
          RCLCPP_ERROR(this->node->get_logger(), "[ Data Cut ] Throw one image frame! \n");
          return false;
        }
-@@ -1125,8 +1168,7 @@
+@@ -1125,8 +1183,7 @@
        meas.lio_vio_flg = VIO;
        // printf("[ Data Cut ] VIO \n");
        meas.measures.clear();
@@ -255,7 +281,7 @@
        struct MeasureGroup m;
        m.vio_time = img_capture_time;
        m.lio_time = meas.last_lio_update_time;
-@@ -1143,6 +1185,8 @@
+@@ -1143,6 +1200,8 @@
        // }
        img_buffer.pop_front();
        img_time_buffer.pop_front();
@@ -264,7 +290,7 @@
        mtx_buffer.unlock();
        sig_buffer.notify_all();
        meas.measures.push_back(m);
-@@ -1431,6 +1475,50 @@
+@@ -1431,6 +1490,71 @@
    pubOdomAftMapped->publish(odomAftMapped);
  }
  
@@ -290,7 +316,7 @@
 +    for (int c = 0; c < 6; ++c)
 +      odom.pose.covariance[r*6+c] = _state.cov((r+3)%6, (c+3)%6);
 +  backend_odom_pub_->publish(odom);
-+  if (backend_cloud_pub_->get_subscription_count() == 0 ||
++  if ((backend_cloud_pub_->get_subscription_count() == 0 && backend_semantic_pub_->get_subscription_count() == 0) ||
 +      (backend_last_cloud_ >= 0 && stamp-backend_last_cloud_ < backend_interval_)) return;
 +  backend_last_cloud_ = stamp;
 +  // Reuse deskewed/downsampled geometry. No extraction, registration, or wait.
@@ -310,12 +336,33 @@
 +  msg.header.stamp = odom.header.stamp;
 +  msg.header.frame_id = odom.child_frame_id;
 +  backend_cloud_pub_->publish(msg);
++  // Semantic inference needs the dense deskewed scan and original reflectance,
++  // not the graph's uniformly subsampled geometry. Same acquisition timestamp.
++  // Export is opt-in by subscription, at the same bounded keyframe cadence.
++  if (backend_semantic_pub_->get_subscription_count() &&
++      backend_semantic_stamp_ == stamp && !backend_semantic_points_.empty()) {
++    pcl::PointCloud<pcl::PointXYZI> semantic;
++    semantic.reserve(backend_semantic_points_.size());
++    for (const auto &p : backend_semantic_points_.points) {
++      if (!std::isfinite(p.x) || !std::isfinite(p.y) || !std::isfinite(p.z) || !std::isfinite(p.intensity)) continue;
++      pcl::PointXYZI q;
++      q.x = p.x; q.y = p.y; q.z = p.z; q.intensity = p.intensity;
++      semantic.push_back(q);
++    }
++    sensor_msgs::msg::PointCloud2 sem_msg;
++    pcl::toROSMsg(semantic, sem_msg);
++    sem_msg.header.stamp = odom.header.stamp;
++    sem_msg.header.frame_id = "backend_lidar";
++    backend_semantic_pub_->publish(sem_msg);
++    backend_semantic_points_.clear();
++    backend_semantic_stamp_ = -1.;
++  }
 +}
 +
  void LIVMapper::publish_mavros(const rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr &mavros_pose_publisher)
  {
    msg_body_pose.header.stamp = this->node->get_clock()->now();
-@@ -1446,4 +1534,4 @@
+@@ -1446,4 +1570,4 @@
    msg_body_pose.header.frame_id = "camera_init";
    path.poses.push_back(msg_body_pose);
    pubPath->publish(path);

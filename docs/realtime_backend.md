@@ -55,7 +55,9 @@ HKU 配置开启 `common.img_compressed`，直接解码原始相机 JPEG 消息�
 不会把修正位姿回灌为独立 IEKF 测量。无回环时保持严格单位校正。
 
 `/backend/map` 是 XYZ 几何图。它保留关键帧局部点云，并按优化位姿重新摆放
-历史几何；它还不是回环后可撤回、重新融合的语义地图。
+历史几何。独立的[在线语义入口](online_semantic_refusion.md)通过
+`SEMANTIC_RUNTIME` 启用：完整去畸变关键帧实时推理，历史语义贡献可随回环
+撤回并重融，输出为 `/backend/semantic_map`。下述早期几何计时仍不包含语义链路。
 
 ## 可复核测量
 

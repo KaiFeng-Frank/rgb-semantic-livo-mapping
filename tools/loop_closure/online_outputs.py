@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 class OutputProcess:
-    def __init__(self, python, snapshot, map_frame):
+    def __init__(self, python, snapshot, map_frame, module='tools.loop_closure.online_outputs'):
         self.stop = threading.Event()
         self.error = None
         self.health_lock = threading.Lock()
@@ -28,7 +28,7 @@ class OutputProcess:
         parent, child = socket.socketpair()
         try:
             self.process = subprocess.Popen(
-                [str(python), '-m', 'tools.loop_closure.online_outputs',
+                [str(python), '-m', module,
                  '--fd', str(child.fileno()), '--map-frame', map_frame],
                 cwd=ROOT, pass_fds=(child.fileno(),))
         except Exception:
@@ -57,7 +57,8 @@ class OutputProcess:
                 if self.process.poll() is not None:
                     raise RuntimeError(f'display exited with {self.process.returncode}')
                 result = snapshot()
-                if not result or result['stamp_ns'] == last:
+                publication_id = result.get('publication_id', result['stamp_ns']) if result else None
+                if not result or publication_id == last:
                     continue
                 # Blocking serialization/send is confined to this thread. It
                 # holds no snapshot lock, and the worker replaces snapshots.
@@ -79,7 +80,7 @@ class OutputProcess:
                         break
                     if self.process.poll() is not None:
                         raise RuntimeError(f'display exited with {self.process.returncode}')
-                last = result['stamp_ns']
+                last = publication_id
         except (OSError, EOFError, RuntimeError) as exc:
             if not self.stop.is_set():
                 with self.health_lock:

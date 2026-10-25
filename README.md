@@ -39,8 +39,16 @@ loop constraints. The frontend no longer waits for a future LiDAR scan to finish
 an already-ready visual update, and graph/map work runs outside pose delivery.
 [Run and scope](docs/realtime_backend.md) · [timing evidence](results/realtime_backend_20261026/README.md).
 These are same-host geometric-backend measurements, excluding semantic inference;
-the default graph is bounded to 1,000 keyframes, and XYZ map correction does not
-yet re-fuse the semantic map. Loop acceptance alone is not an accuracy result.
+the default graph is bounded to 1,000 keyframes. Loop acceptance alone is not an accuracy result.
+
+**Online semantic re-fusion:** a separate live PTv3 keyframe mapper now consumes
+causal graph revisions, withdraws each moved keyframe's old semantic contribution,
+and re-fuses affected spatial tiles. Dense deskewed XYZI and exact acquisition
+timestamps are retained; moving classes stay in the current scan and are excluded
+from the persistent static map. This entry maps semantic keyframes at about **1 Hz**,
+with independent pose, graph, inference/fusion and display execution.
+[Run and boundaries](docs/online_semantic_refusion.md)
+· [live validation](results/online_semantic_refusion_20261026/README.md).
 
 **Offline loop closure, seq07:** with the same frozen frontend and B0 predictions,
 official KITTI ATE falls **0.837 → 0.557 m** and out-of-frustum map mIoU-9 rises

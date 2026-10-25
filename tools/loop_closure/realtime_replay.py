@@ -51,6 +51,7 @@ def run(args):
     node = Node('backend_realtime_observer')
     qos = QoSProfile(depth=100, reliability=ReliabilityPolicy.BEST_EFFORT)
     rows, statuses, maps, paths = [], [], [], []
+    semantic_statuses, semantic_maps, semantic_inputs, semantic_scans = [], [], [], []
     arrivals, raw, corrected = {}, {}, {}
     sensor_counts = dict(lidar=0, image=0, imu=0)
     publishers = dict(lidar=node.create_publisher(CustomMsg, '/livox/lidar', 10),
@@ -74,10 +75,22 @@ def run(args):
                 dict(stamp_ns=stamp_ns(m), received=time.monotonic(), poses=len(m.poses))), qos)]
     # Subscribe in both arms so the frontend performs the same bounded export.
     subs.append(node.create_subscription(PointCloud2, '/backend/input/cloud', lambda m: None, qos))
+    if args.semantics or args.semantic_export:
+        subs.append(node.create_subscription(PointCloud2, '/backend/input/semantic_cloud', lambda m:
+            semantic_inputs.append(dict(stamp_ns=stamp_ns(m), received=time.monotonic(), points=m.width)), qos))
+    if args.semantics:
+        subs.extend([
+            node.create_subscription(String, '/backend/semantic_status', lambda m:
+                semantic_statuses.append(dict(observed_monotonic=time.monotonic(), **json.loads(m.data))), qos),
+            node.create_subscription(String, '/backend/semantic_map_info', lambda m:
+                semantic_maps.append(dict(received=time.monotonic(), **json.loads(m.data))), qos),
+            node.create_subscription(PointCloud2, '/backend/semantic_scan', lambda m:
+                semantic_scans.append(dict(stamp_ns=stamp_ns(m), received=time.monotonic(), points=m.width)), qos)])
     processes, handles = [], []
-    def start(command, name):
+    semantic_process = None
+    def start(command, name, env=None):
         handle = (args.out/name).open('w'); handles.append(handle)
-        proc = subprocess.Popen(command, cwd=ROOT, stdout=handle, stderr=subprocess.STDOUT,
+        proc = subprocess.Popen(command, cwd=ROOT, stdout=handle, stderr=subprocess.STDOUT, env=env,
                                 start_new_session=True)
         processes.append(proc)
         return proc
@@ -93,12 +106,25 @@ def run(args):
         spin(1.)
         if args.backend:
             start([sys.executable, '-m', 'tools.loop_closure.online_node', '--worker-python',
-                   str(args.worker), '--log', str(args.out/'worker.jsonl')], 'backend.log')
+                   str(args.worker), '--log', str(args.out/'worker.jsonl')]+
+                   (['--semantic-trajectory'] if args.semantics else []), 'backend.log')
+        if args.semantics:
+            runtime = args.semantic_runtime
+            if not args.backend or runtime is None:
+                raise ValueError('--semantics requires --backend and --semantic-runtime')
+            env = dict(os.environ, PTV3_PYTHON=str(runtime/'venv/bin/python'),
+                PTV3_POINTCEPT=str(runtime/'src/Pointcept_v151'),
+                PTV3_CONFIG=str(runtime/'weights/nuscenes-semseg-pt-v3m1-0-base/config.py'),
+                PTV3_CHECKPOINT=str(runtime/'v06-armB0_s1-student.pth'),
+                OMP_NUM_THREADS='1', OPENBLAS_NUM_THREADS='1', MKL_NUM_THREADS='1')
+            semantic_process = start([sys.executable, '-m', 'tools.loop_closure.semantic_node', '--frontend', str(args.frontend),
+                   '--out', str(args.out/'semantics'), '--reflectance-divisor', '255', '--verify-final'], 'semantics.log', env)
         front = start([str(args.workspace/'install/fast_livo/lib/fast_livo/fastlivo_mapping'),
                        '--ros-args', '--params-file', str(args.frontend)], 'frontend.log')
-        until = time.monotonic()+45
+        until = time.monotonic()+(150 if args.semantics else 45)
         while (not all(p.get_subscription_count() for p in publishers.values()) or
-               (args.backend and not any(s['worker_ready'] for s in statuses))):
+               (args.backend and not any(s['worker_ready'] for s in statuses)) or
+               (args.semantics and not any(s['ready'] for s in semantic_statuses))):
             if any(p.poll() is not None for p in processes):
                 raise RuntimeError('pipeline exited during startup')
             if time.monotonic() > until:
@@ -159,6 +185,17 @@ def run(args):
                 raise RuntimeError(f'frontend exited {front.returncode}')
         playback_end = time.monotonic()
         spin(3.)
+        if args.semantics:
+            drain_deadline = time.monotonic()+15.
+            while time.monotonic() < drain_deadline:
+                s = semantic_statuses[-1] if semantic_statuses else {}
+                info = s.get('map_info') or {}
+                accounted = sum(s.get(k, 0) for k in ('processed', 'dropped_full', 'dropped_stale', 'unanchored', 'capacity_reached'))
+                if (s.get('failed') or (s.get('pending') == 0 and accounted == s.get('received') and
+                    info.get('graph_stamp_ns') == s.get('latest_graph_stamp_ns') and
+                    info.get('graph_version') == s.get('latest_graph_version'))):
+                    break
+                spin(.1)
         if any(p.poll() is not None for p in processes):
             raise RuntimeError('pipeline exited during replay')
         common = sorted(set(raw)&set(corrected))
@@ -182,22 +219,40 @@ def run(args):
                        last_status=statuses[-1] if statuses else None,
                        warmup_prefix_images=sum(s < min(raw) for s in arrivals) if raw else len(arrivals),
                        missing_images_after_initialization=sum(s >= min(raw) and s not in raw for s in arrivals) if raw else None,
-                       scope='1x real-sensor LIVO + geometric backend; semantic inference is not part of this measurement')
+                       semantic_input_keyframes=len(semantic_inputs), semantic_scan_outputs=len(semantic_scans),
+                       semantic_map_outputs=len(semantic_maps),
+                       last_semantic_status=semantic_statuses[-1] if semantic_statuses else None,
+                       scope=('1x real-sensor LIVO + online geometry + live PTv3 semantic keyframes and reversible fusion; no GT accuracy evaluation'
+                              if args.semantics else '1x real-sensor LIVO + geometric backend; semantic inference is not part of this measurement'))
         (args.out/'assessment.json').write_text(json.dumps(verdict, indent=2)+'\n')
         for name, data in [('poses', rows), ('inputs', source_rows), ('status', statuses), ('maps', maps), ('paths', paths)]:
             (args.out/(name+'.jsonl')).write_text(''.join(json.dumps(r)+'\n' for r in data))
+        for name, data in [('semantic_status', semantic_statuses), ('semantic_maps', semantic_maps),
+                           ('semantic_inputs', semantic_inputs), ('semantic_scans', semantic_scans)]:
+            if data:
+                (args.out/(name+'.jsonl')).write_text(''.join(json.dumps(r)+'\n' for r in data))
         print(json.dumps(verdict, indent=2), flush=True)
         if not raw or len(matched) != len(raw) or (args.backend and len(common) != len(raw)):
             raise AssertionError('missing or unpaired sensor-time output')
     finally:
         for proc in reversed(processes):
             if proc.poll() is None:
-                os.killpg(proc.pid, signal.SIGTERM)
+                # Let a semantic parent close its owned PTv3/display children
+                # and perform the untimed final parity check before group kill.
+                if proc is semantic_process:
+                    proc.terminate()
+                else:
+                    os.killpg(proc.pid, signal.SIGTERM)
         for proc in processes:
             try:
-                proc.wait(timeout=5)
+                proc.wait(timeout=90 if args.semantics else 5)
             except subprocess.TimeoutExpired:
                 os.killpg(proc.pid, signal.SIGKILL); proc.wait()
+            if proc is semantic_process:
+                try:
+                    os.killpg(proc.pid, signal.SIGTERM)
+                except ProcessLookupError:
+                    pass
         for handle in handles:
             handle.close()
         node.destroy_node()
@@ -213,4 +268,7 @@ if __name__ == '__main__':
     parser.add_argument('--camera', type=Path, default=ROOT/'tools/loop_closure/frontend/camera_hku.yaml')
     parser.add_argument('--seconds', type=float, default=130.)
     parser.add_argument('--backend', action='store_true')
+    parser.add_argument('--semantics', action='store_true')
+    parser.add_argument('--semantic-export', action='store_true', help='Match dense frontend export load in the control arm')
+    parser.add_argument('--semantic-runtime', type=Path)
     run(parser.parse_args())
