@@ -89,6 +89,14 @@ def make_node(args):
     if type(cfg['pending_clouds']) is not int or cfg['pending_clouds'] < 1 or cfg['max_queue_age_s'] <= 0:
         raise ValueError('invalid semantic queue bounds')
     transform = extrinsic(args.frontend)
+    visual_enabled = getattr(args, 'visual_instances', False)
+    if visual_enabled:
+        import cv2
+        cv2.setNumThreads(1)  # Import before readiness, outside the first scan timing.
+        from tools.visual_instances.geometry import Camera, FrameCache, InstanceFrame, associate, camera_at_scan
+        if cfg['classes'] != 16 or consistency_mode != 'off':
+            raise ValueError('Visual association requires native16 and consistency=off (no double fusion)')
+        camera = Camera.from_livo(args.frontend, args.camera)
     core_args = {key: cfg[key] for key in ('voxel', 'classes', 'tile_voxels', 'max_keyframes',
                  'max_points', 'max_total_points', 'excluded_classes', 'minimum_confidence')}
 
@@ -97,7 +105,10 @@ def make_node(args):
             super().__init__('online_semantic_refusion')
             args.out.mkdir(parents=True, exist_ok=False)
             (args.out/'config.json').write_text(json.dumps(dict(cfg, T_imu_lidar=transform.tolist(),
-                consistency=consistency_mode, map_evidence='raw_single_frame',
+                consistency=consistency_mode, visual_instances=visual_enabled, map_evidence='raw_single_frame',
+                visual_camera=(dict(width=camera.width, height=camera.height, K=camera.K.tolist(),
+                    distortion=camera.distortion.tolist(), T_camera_lidar=camera.T_camera_lidar.tolist(),
+                    max_dt_ms=getattr(args, 'visual_max_dt_ms', 20.)) if visual_enabled else None),
                 predictions_input=args.predictions_input, frontend=str(args.frontend),
                 reflectance_divisor=args.reflectance_divisor, intensity_scale=args.intensity_scale), indent=2)+'\n')
             self.core = ReversibleSemanticMap(**core_args)
@@ -110,6 +121,8 @@ def make_node(args):
                 (args.out/'consistency.json').write_text(json.dumps(self.consistency.config_dict(), indent=2)+'\n')
             self.lock = threading.Lock()
             self.pending, self.trajectory, self.latest = OrderedDict(), None, None
+            self.visual_cache = FrameCache(max_dt_ms=getattr(args, 'visual_max_dt_ms', 20.)) if visual_enabled else None
+            self.visual_counts = dict(received=0, invalid=0, matched_scans=0, unmatched_scans=0, associated_points=0)
             self.stop, self.wake = threading.Event(), threading.Event()
             self.client, self.last_scan = None, None
             self.scan_sequence = 0
@@ -124,6 +137,8 @@ def make_node(args):
                                   durability=DurabilityPolicy.TRANSIENT_LOCAL)
             self.create_subscription(PointCloud2, args.input_cloud, self.on_cloud, qos)
             self.create_subscription(String, '/backend/trajectory', self.on_graph, graph_qos)
+            if visual_enabled:
+                self.create_subscription(String, '/backend/visual_instances', self.on_instances, qos)
             self.status_pub = self.create_publisher(String, '/backend/semantic_status', 1)
             self.output = OutputProcess(sys.executable, self.snapshot, args.map_frame,
                                          module='tools.loop_closure.semantic_outputs')
@@ -132,6 +147,19 @@ def make_node(args):
             self.thread = threading.Thread(target=self.work, name='semantic-fusion', daemon=True)
             self.thread.start()
             self.create_timer(.5, self.status)
+
+        def on_instances(self, message):
+            try:
+                frame = InstanceFrame.decode(message.data)
+                if frame.index.shape != (camera.height, camera.width):
+                    raise ValueError('Camera dimensions mismatch')
+                with self.lock:
+                    self.visual_cache.add(frame)
+                    self.visual_counts['received'] += 1
+            except Exception as exc:
+                # Bad/absent vision must not stop semantic inference or pose output.
+                self.visual_counts['invalid'] += 1
+                self.visual_counts['last_error'] = f'{type(exc).__name__}: {exc}'
 
         def on_graph(self, message):
             try:
@@ -179,6 +207,7 @@ def make_node(args):
             with self.lock:
                 graph, latest, pending = self.trajectory, self.latest, len(self.pending)
             data = dict(self.counters, pending=pending, output_error=self.output.error,
+                visual=dict(self.visual_counts),
                 output_publications=self.output.published,
                 map_publication_id=latest['publication_id'] if latest else None,
                 map_completed_id=self.output.completed_id,
@@ -270,6 +299,7 @@ def make_node(args):
                                 infer_ms = (time.monotonic()-infer_start)*1000
                                 scan_labels, scan_confidence = labels, confidence
                                 consistency_status = None
+                                visual_result = None
                                 if self.consistency:
                                     consistent = self.consistency.step(points[:, :3], probabilities,
                                         stamp_ns=int(stamp), pose=graph['poses'][index] @ transform)
@@ -277,12 +307,30 @@ def make_node(args):
                                     if consistency_mode == 'active':
                                         scan_labels = consistent['probabilities'].argmax(1).astype(np.uint16)
                                         scan_confidence = consistent['probabilities'].max(1)
+                                if visual_enabled:
+                                    with self.lock:
+                                        visual_frame = self.visual_cache.get(int(stamp))
+                                    association_start = time.monotonic()
+                                    projection_camera = (camera_at_scan(camera, graph, int(stamp),
+                                        visual_frame.stamp_ns, transform) if visual_frame is not None else None)
+                                    if projection_camera is not None:
+                                        visual_result = associate(points[:, :3], projection_camera, visual_frame)
+                                        visual_result['info'].update(dt_ms=(stamp-visual_frame.stamp_ns)/1e6,
+                                            ego_motion='same_timestamp' if stamp==visual_frame.stamp_ns else 'received_graph_interpolation',
+                                            elapsed_ms=(time.monotonic()-association_start)*1000)
+                                        self.visual_counts['matched_scans'] += 1
+                                        self.visual_counts['associated_points'] += visual_result['info']['associated']
+                                    else:
+                                        self.visual_counts['unmatched_scans'] += 1
+                                        visual_result = dict(ids=np.zeros(len(points), np.uint32),
+                                            labels=np.full(len(points), 65535, np.uint16), scores=np.zeros(len(points), np.float32),
+                                            info=dict(reason='no_causal_camera_or_pose_bracket', session=None, associated=0))
                                 body = points[:, :3].astype(np.float64) @ transform[:3, :3].T+transform[:3, 3]
                                 self.scan_sequence += 1
                                 with self.lock:
                                     self.last_scan = dict(publication_id=self.scan_sequence,
                                         stamp_ns=stamp, points=body.astype(np.float32),
-                                        labels=scan_labels, confidence=scan_confidence)
+                                        labels=scan_labels, confidence=scan_confidence, instances=visual_result)
                                 # Preserve independent raw evidence for reversible
                                 # map fusion; enhanced outputs must not vote twice.
                                 added = self.core.add(stamp, body, labels, confidence, graph['poses'][index])
@@ -293,6 +341,7 @@ def make_node(args):
                                 self.event(dict(event='keyframe', stamp_ns=stamp, points=len(points),
                                     infer_ms=infer_ms, receipt_to_fusion_ms=(time.monotonic()-arrival)*1000,
                                     consistency=consistency_status,
+                                    visual=visual_result['info'] if visual_result else None,
                                     graph_stamp_ns=graph['stamp_ns'], graph_version=graph['version'], fusion=added))
                     # A snapshot is a coherent completed graph revision, even if
                     # a newer revision arrived while this bounded job was running.
@@ -360,6 +409,9 @@ def main():
     ap.add_argument('--verify-final', action='store_true', help='After stream ends, compare incremental map to fresh rebuild (not timed online work)')
     ap.add_argument('--consistency', choices=('off', 'shadow', 'active'), default='off',
                     help='Opt-in causal short-term scan consistency; map always retains raw evidence')
+    ap.add_argument('--visual-instances', action='store_true', help='Publish visual instance association; semantic labels remain raw')
+    ap.add_argument('--camera', type=Path, help='Full-resolution raw camera calibration for visual association')
+    ap.add_argument('--visual-max-dt-ms', type=float, default=20.)
     args = ap.parse_args()
     if not np.isfinite(args.reflectance_divisor) or args.reflectance_divisor <= 0:
         ap.error('reflectance divisor must be finite and positive')

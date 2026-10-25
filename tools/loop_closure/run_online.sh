@@ -35,6 +35,18 @@ trap 'exit 143' TERM
 /usr/bin/python3 tools/loop_closure/frontend/parameter_blackboard.py --ros-args --params-file "$CAMERA_CONFIG" > "$OUTPUT_DIR/camera.log" 2>&1 &
 pids+=("$!")
 backend_args=()
+visual_args=()
+if [[ -n "${VISUAL_INSTANCE_WEIGHTS:-}" ]]; then
+  [[ -n "${SEMANTIC_RUNTIME:-}" && -f "$VISUAL_INSTANCE_WEIGHTS" && "${SEMANTIC_CONSISTENCY:-off}" == off ]] || {
+    echo 'Visual instances require SEMANTIC_RUNTIME, an existing weights file, and SEMANTIC_CONSISTENCY=off.' >&2; exit 2;
+  }
+  visual_args=(--visual-instances --camera "$CAMERA_CONFIG")
+  /usr/bin/python3 -m tools.visual_instances.node \
+    --worker-python "$SEMANTIC_RUNTIME/venv/bin/python" --weights "$VISUAL_INSTANCE_WEIGHTS" \
+    --out "$OUTPUT_DIR/vision" --frontend "$FRONTEND_CONFIG" --camera "$CAMERA_CONFIG" \
+    > "$OUTPUT_DIR/vision.log" 2>&1 &
+  pids+=("$!")
+fi
 if [[ -n "${SEMANTIC_RUNTIME:-}" ]]; then
   for f in "$SEMANTIC_RUNTIME/venv/bin/python" "$SEMANTIC_RUNTIME/v06-armB0_s1-student.pth" \
            "$SEMANTIC_RUNTIME/weights/nuscenes-semseg-pt-v3m1-0-base/config.py"; do
@@ -50,6 +62,7 @@ if [[ -n "${SEMANTIC_RUNTIME:-}" ]]; then
     --frontend "$FRONTEND_CONFIG" --out "$OUTPUT_DIR/semantics" \
     --reflectance-divisor "${SEMANTIC_REFLECTANCE_DIVISOR:-1}" \
     --consistency "${SEMANTIC_CONSISTENCY:-off}" \
+    "${visual_args[@]}" \
     > "$OUTPUT_DIR/semantics.log" 2>&1 &
   pids+=("$!")
 fi
@@ -65,5 +78,9 @@ echo 'Outputs: /backend/pose /backend/path /backend/map /backend/status and map 
 if [[ -n "${SEMANTIC_RUNTIME:-}" ]]; then
   echo 'Semantic outputs: /backend/semantic_scan /backend/semantic_map /backend/semantic_map_info /backend/semantic_status'
   echo 'Wait for /backend/semantic_status ready=true before publishing sensors.'
+fi
+if [[ -n "${VISUAL_INSTANCE_WEIGHTS:-}" ]]; then
+  echo 'Instance outputs: /backend/semantic_instances + /backend/semantic_instance_info (pair by stamp; identity is session + ID).'
+  echo 'Also wait for /backend/visual_status ready=true. Instance association does not change semantic labels.'
 fi
 wait -n "${pids[@]}"
