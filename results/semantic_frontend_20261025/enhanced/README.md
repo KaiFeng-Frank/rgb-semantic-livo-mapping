@@ -78,3 +78,178 @@ normally initialized full-sequence benchmark. Its complete failure, all repetiti
 and component timings are preserved without retuning or selecting a replacement.
 Projected 3-D masks are not dense 2-D segmentation; historical class votes are not
 full model posteriors. No larger experiment is admitted by these checks.
+
+## Feasibility decision after the design review, 2026-10-25
+
+This is an analysis of the current implementation, existing evidence and primary
+literature. No new training, replay, parameter sweep or estimator change was made
+for this review. The project objective is useful improvement in localization and
+semantic mapping while retaining the direct LIVO pipeline's realtime behavior.
+Adding more named components or independent residual blocks is not itself a goal.
+
+**Decision:** reject further development of the current boundary/history-field
+frontend structure. Prefer a bounded design that uses semantic and temporal
+evidence to maintain reliability in the existing geometric/visual map and
+measurement model. This is technically feasible as an engineering direction;
+neither a new independent semantic pose observation nor a research contribution
+has yet been established. Do not start another implementation merely by replacing
+the expensive field with a faster one.
+
+### Information available and what it can justify
+
+The current [worker](../../../src/ptv3_worker.py) consumes XYZ and intensity, computes
+16-class scores, and exports only the winning class and its score. It does not
+consume RGB. [The class field](../../../frontend/include/semantic_likelihood.hpp)
+smooths historical top-1 votes; it does not recover the missing class distribution
+or a calibrated probability of a pose measurement being correct. The static field
+uses only classes 10–15: driveable surface, other flat, sidewalk, terrain, manmade
+and vegetation. There is no separate lane-marking, pole identity or persistent
+object-instance measurement available to this frontend. Projected 3-D motion
+regions are not an independent image-segmentation observation.
+
+The worker already computes all class scores before taking the maximum. A future
+interface could export scores for retained voxels without retraining the model,
+but score calibration and efficient aggregation would still be required. Old
+top-1 archives cannot reconstruct those scores. Exporting every raw point's full
+distribution is not assumed free and is not part of the current interface.
+
+For fixed model parameters, the labels are derived from the same scan. They can
+provide learned scene priors and information discarded by a simplified geometric
+residual, but cannot simply be counted as an independently noisy second sensor.
+An added class factor needs a joint/conditional error model and correlation
+analysis; a syntactically correct Jacobian does not supply either. In a locally
+constant class region the class-field gradient is zero, so its pose Jacobian is
+zero. Smoothing labels can create a gradient, but cannot establish that this
+gradient corresponds to an accurate, independent metric constraint. Where a class
+transition coincides with an already used geometric edge, independence also needs
+justification. These limitations are visible before running another experiment.
+
+For fixed retained geometric Jacobians, reweighting cannot constrain a direction
+that is in the null space of every row. Changing correspondences or recovering
+previously rejected static structure can improve the usable information, but
+does not justify a blanket claim of resolving geometric degeneracy with semantics.
+
+### Timing and estimator capabilities
+
+Existing local measurements put direct inference medians around 63–70 ms. These
+are observed medians, not worst-case execution guarantees. A current scan's final
+semantic prediction cannot affect an already published pose for that scan without
+either waiting for the result or revisiting the historical state. Asynchronous
+execution alone does not remove this causal dependency or CPU contention.
+Stable 10 Hz throughput and low output latency are different requirements: a
+bounded wait can be compatible with throughput if the rest fits, but it changes
+latency and must be stated. The preferred direction here preserves the original
+geometry output path and avoids a fixed semantic wait.
+
+Under that choice, the fast update uses only semantic context already available
+at its timestamp. Late labels may update the original scan's surviving map
+entries, through point identity, node generation/version and the historical pose,
+for future updates. They must not be relabelled as a current observation or used
+to reinject a completed geometric measurement. No claim of immediate semantic
+rejection of a newly seen moving object follows from this design. Such objects
+initially rely on the existing geometric/photometric robustness mechanisms.
+
+The current [offline backend](../../../tools/loop_closure/backend.py) contains
+Pose3 odometry/loop edges. It has no fixed-lag IMU/visual state history for delayed
+measurement updates. Adding that capability would be a substantial estimator
+project, not a small use of the existing backend. Loop corrections must also
+change or invalidate the coordinate/version context of pending semantic updates;
+the current online frontend has no validated implementation of this feedback.
+
+### Route selection
+
+| Route | Decision | Reason |
+|---|---|---|
+| Separate boundary extraction, matching and history in the high-rate frontend | Reject for this project | Adds a second feature pipeline without established incremental information; current cost and accuracy both fail. |
+| Current smoothed top-1 class field as an extra high-rate pose factor | Reject as the next implementation | Coarse evidence, uncalibrated measurement meaning, correlation and repeated searches; caching alone addresses only the searches. |
+| Semantic reliability in the shared direct LIVO map/measurements | Preferred design candidate | Reuses existing points, planes and visual patches; has a concrete route to reducing bad correspondence and map contamination without a second registration system. |
+| Independent 2-D semantic factors plus delayed-state joint optimization | Defer | Current independent 2-D predictions and joint fixed-lag backend are absent; this would expand both perception and estimator scope. |
+| Semantic support for verified loop associations and map consistency | Secondary direction | Can help long-term consistency, but does not replace a working realtime frontend or provide same-frame semantic fusion. |
+
+The preferred candidate should represent whether a map surface is currently a
+reliable static reference, not equate an object class with motion. Current motion
+code [withholds unconfirmed candidates and assigns weight 0.25](../../../frontend/include/semantic_motion.hpp);
+its centroid tests have shape/uncertainty safeguards but are not validated motion
+probabilities. View changes, occlusion and pose error remain confounders. Likewise,
+projecting an object's 3-D hull does not establish that every enclosed image patch
+belongs to the object. These heuristics should not become unquestioned priors in
+the replacement.
+
+A conceptual observation model introduces a shared latent validity state `a_v`
+for a map element and uses semantic/temporal context available before the update:
+
+`p(z_v | x, h_<t) = sum_a p(a_v=a | h_<t) p(z_v | x, a_v=a, h_<t)`.
+
+Here `z_v` groups the relevant geometric/photometric observations, and `h_<t`
+includes timestamped semantic evidence and its reliability. This is a candidate
+conditional robust model, not a calibrated model implemented in the repository.
+It changes which existing measurements are trusted rather than inventing another
+metric distance from a hard class label. A geometry-only/null hypothesis must
+remain available for unknown or conflicting semantics. Applying the same semantic
+prior independently to every point and again to the visual update would duplicate
+evidence; a sequential implementation must carry the latent belief consistently
+and account for the approximations in its covariance. Increasing the model's
+complexity without solving this issue would repeat the current mistake.
+
+The useful two-way mechanism is explicit: semantic/temporal reliability conditions
+the direct pose update; pose uncertainty limits how strongly observations change
+semantic class/motion/map-validity beliefs. During poor pose observability, map
+evidence should become less decisive rather than falsely confirming motion or
+class conflict. Changed-object/changed-voxel work replaces full-map invalidation;
+existing visible map points/patches replace full-image masks per object wherever
+their support suffices. Fresh semantics cannot be assumed available at zero cost.
+
+The computational design must reuse existing geometric candidate queries, keep a
+bounded active semantic cache, freeze consistent map snapshots during a solve,
+and cap incremental maintenance. Semantic priors are computed per map element
+when its context changes, not recomputed over all classes for every point in every
+iteration. With `N` retained measurements, fixed class count `C=16`, existing
+iteration count `K`, and bounded changed entries `B`, the target extra arithmetic
+is `O(K*N + B*C)` with no additional full-map traversal or history-map
+neighbourhood search. This is an operation-count target, not a runtime
+prediction. A proposed local critical-path budget is at most 3 ms of added CPU work
+per update, without reducing the original sensor rate or geometric point budget;
+this is a design acceptance target, not a measured result. Background CPU/GPU,
+serialization, memory and semantic evidence age remain part of eventual full
+system accounting. No experiment is launched to test that target in this review.
+
+### Research value and stopping conditions
+
+[SuMa++](https://arxiv.org/abs/2105.11320) already uses semantics in scan matching and
+dynamic filtering. [Semantic-weighted ICP](https://arxiv.org/abs/2606.03905) directly
+studies class-dependent residual weighting and reports environment dependence.
+[Probabilistic Data Association via Mixture Models](https://arxiv.org/abs/1909.11213)
+already handles uncertain semantic association and a null hypothesis. These are
+precedents, not evidence of novelty for the candidate above. Reimplementing
+weighting, filtering or a mixture under a LIVO name is insufficient as the central
+research contribution. This focused review is also not an exhaustive novelty audit.
+
+A defensible research question is how to use delayed, fallible semantics without
+letting semantic errors, pose errors and map updates reinforce each other in a
+direct LIVO system. Our archived [pose-swap mapping evidence](../../../CRITICAL_CONSTRAINTS.md)
+already reports static false-removal changing from 0.260% with estimated poses to
+0.052% with GT poses at the same configuration. That supports investigating the
+pose-to-semantic direction; it does not establish the reverse localization gain
+or promise that the new candidate closes the gap.
+
+The expected opportunity is reduced failure from dynamic contamination and
+ambiguous association, plus more reliable semantic maps. There is no theoretical
+promise of lower ATE in every clean static scene, new observability on a uniformly
+labelled plane, or improved segmentation class discrimination from map consensus.
+Temporal agreement can reinforce a wrong label and must not be equated with
+accuracy. Before implementation, the candidate needs a concrete treatment of
+prior calibration, shared-evidence correlation, delayed-map attachment, uncertainty
+feedback and a contribution beyond the cited approaches. If it reduces to fixed
+class weights and heuristics, classify it as an engineering baseline and stop
+presenting it as a new semantic tight-coupling method. The unhealthy cold-start
+geometry baseline also needs resolution before any later accuracy claim; the
+current failed scores remain unchanged and are not used to choose a new window.
+
+The resulting investment decision is deliberately narrower than "semantic LIVO is
+possible": the shared-map reliability route is a plausible engineering component,
+but implementing it now as the main research contribution is not justified by
+this review. The next research investment should settle the joint uncertainty/
+causality model and its distinction from prior work on paper. If those do not
+yield a substantive mechanism beyond semantic weighting and map filtering, keep
+the component as a baseline and prioritize the project's demonstrated semantic
+mapping strengths instead of expanding the frontend study.
