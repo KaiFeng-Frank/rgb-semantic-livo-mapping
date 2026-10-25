@@ -1,0 +1,19 @@
+{
+  "scope": "archived odometry and accepted edges; no new retrieval, raw sensors or GT",
+  "nodes": 110,
+  "loops": 1,
+  "graph_error": 2.4805235901751255,
+  "batch": {
+    "error_before": 24.027282807525516,
+    "error_after": 2.480523578288575
+  },
+  "position_difference_to_batch_max_m": 5.194087475109317e-05,
+  "update_median_ms": 0.05117896944284439,
+  "update_max_ms": 1.9880080362781882,
+  "inputs_sha256": {
+    "baseline_imu_tum.txt": "e375b20c71058aecbc247e064d42b43eb1affbf0e52a5632a6cef6cf8998c492",
+    "loops.json": "6de9822114aa1d6953e17225cf047a5487b2465f78d1bb9ee91a0a1abfd29c91",
+    "keyframe_times_ns.json": "cabe6ead5731daf64e23d956a6fbd7ce9303f1804e6d4cb6da268eecbe16dff2"
+  },
+  "passed": true
+}

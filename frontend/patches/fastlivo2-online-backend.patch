@@ -1,0 +1,125 @@
+--- a/include/LIVMapper.h
++++ b/include/LIVMapper.h
+@@ -42,6 +42,12 @@
+   void handleVIO();
+   void handleLIO();
+   void savePCD();
++  void publish_backend_frame();
++  bool backend_enabled_ = false;
++  double backend_interval_ = 1.0, backend_last_cloud_ = -1.0;
++  int backend_max_points_ = 12000;
++  rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr backend_odom_pub_;
++  rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr backend_cloud_pub_;
+   void processImu();
+   
+   bool sync_packages(LidarMeasureGroup &meas);
+--- a/src/LIVMapper.cpp
++++ b/src/LIVMapper.cpp
+@@ -60,6 +60,11 @@
+ 
+ void LIVMapper::readParameters(rclcpp::Node::SharedPtr &node)
+ {
++  backend_enabled_ = node->declare_parameter<bool>("backend.enabled", false);
++  backend_interval_ = node->declare_parameter<double>("backend.keyframe_interval_s", 1.0);
++  backend_max_points_ = node->declare_parameter<int>("backend.max_points", 12000);
++  if (!std::isfinite(backend_interval_) || backend_interval_ <= 0 || backend_max_points_ < 100 || backend_max_points_ > 48000)
++    throw std::invalid_argument("invalid online backend publication limits");
+   node->declare_parameter<bool>("semantic.enabled", false);
+   node->declare_parameter<bool>("semantic.association", true);
+   node->declare_parameter<bool>("semantic.boundaries", true);
+@@ -290,6 +295,11 @@
+   pubLaserCloudEffect = this->node->create_publisher<sensor_msgs::msg::PointCloud2>("/cloud_effected", 100);
+   pubLaserCloudMap = this->node->create_publisher<sensor_msgs::msg::PointCloud2>("/Laser_map", 100);
+   pubOdomAftMapped = this->node->create_publisher<nav_msgs::msg::Odometry>("/aft_mapped_to_init", 10);
++  if (backend_enabled_) {
++    const auto qos = rclcpp::QoS(rclcpp::KeepLast(2)).best_effort().durability_volatile();
++    backend_odom_pub_ = this->node->create_publisher<nav_msgs::msg::Odometry>("/backend/input/odometry", qos);
++    backend_cloud_pub_ = this->node->create_publisher<sensor_msgs::msg::PointCloud2>("/backend/input/cloud", qos);
++  }
+   pubPath = this->node->create_publisher<nav_msgs::msg::Path>("/path", 10);
+   plane_pub = this->node->create_publisher<visualization_msgs::msg::Marker>("/planner_normal", 1);
+   voxel_pub = this->node->create_publisher<visualization_msgs::msg::MarkerArray>("/voxels", 1);
+@@ -413,6 +423,7 @@
+ 
+   publish_frame_world(pubLaserCloudFullRes, vio_manager);
+   publish_img_rgb(pubImage, vio_manager);
++  publish_backend_frame(); // LIVO: same-time pose AFTER the visual update.
+ 
+   euler_cur = RotMtoEuler(_state.rot_end);
+   fout_out << std::setw(20) << LidarMeasures.last_lio_update_time - _first_lidar_time << " " << euler_cur.transpose() * 57.3 << " "
+@@ -497,6 +508,7 @@
+   euler_cur = RotMtoEuler(_state.rot_end);
+   geoQuat = tf::createQuaternionMsgFromRollPitchYaw(euler_cur(0), euler_cur(1), euler_cur(2));
+   publish_odometry(pubOdomAftMapped);
++  if (slam_mode_ != LIVO) publish_backend_frame();
+ 
+   double t3 = omp_get_wtime();
+ 
+@@ -938,7 +950,9 @@
+ cv::Mat LIVMapper::getImageFromMsg(const sensor_msgs::msg::Image::ConstSharedPtr &img_msg)
+ {
+   cv::Mat img;
+-  img = cv_bridge::toCvShare(img_msg, "bgr8")->image;
++  // The cv::Mat outlives the ROS callback/message in img_buffer. toCvShare
++  // alone loses its tracked owner for native bgr8 input and leaves dangling pixels.
++  img = cv_bridge::toCvCopy(img_msg, "bgr8")->image;
+   return img;
+ }
+ 
+@@ -1471,6 +1485,49 @@
+   pubOdomAftMapped->publish(odomAftMapped);
+ }
+ 
++void LIVMapper::publish_backend_frame()
++{
++  if (!backend_enabled_ || !feats_down_body || feats_down_body->empty()) return;
++  const double stamp = LidarMeasures.last_lio_update_time;
++  if (!std::isfinite(stamp) || stamp < 0) return;
++  nav_msgs::msg::Odometry odom;
++  odom.header.stamp = rclcpp::Time(static_cast<int64_t>(std::llround(stamp * 1e9)));
++  odom.header.frame_id = "camera_init";
++  odom.child_frame_id = "backend_imu";
++  odom.pose.pose.position.x = _state.pos_end.x();
++  odom.pose.pose.position.y = _state.pos_end.y();
++  odom.pose.pose.position.z = _state.pos_end.z();
++  const Eigen::Quaterniond q(_state.rot_end);
++  odom.pose.pose.orientation.x = q.x(); odom.pose.pose.orientation.y = q.y();
++  odom.pose.pose.orientation.z = q.z(); odom.pose.pose.orientation.w = q.w();
++  // ROS orders position then rotation; IEKF orders rotation then position.
++  // This is the frontend covariance only, not a posterior graph covariance.
++  for (int r = 0; r < 6; ++r)
++    for (int c = 0; c < 6; ++c)
++      odom.pose.covariance[r*6+c] = _state.cov((r+3)%6, (c+3)%6);
++  backend_odom_pub_->publish(odom);
++  if (backend_cloud_pub_->get_subscription_count() == 0 ||
++      (backend_last_cloud_ >= 0 && stamp-backend_last_cloud_ < backend_interval_)) return;
++  backend_last_cloud_ = stamp;
++  // Reuse deskewed/downsampled geometry. No extraction, registration, or wait.
++  // Evenly subsample to bound serialization; graph uses the IMU body frame.
++  pcl::PointCloud<pcl::PointXYZ> points;
++  const size_t count = feats_down_body->size();
++  const size_t keep = std::min(count, static_cast<size_t>(backend_max_points_));
++  points.reserve(keep);
++  for (size_t k = 0; k < keep; ++k) {
++    const auto &p = feats_down_body->points[k*count/keep];
++    const Eigen::Vector3d body = extR * Eigen::Vector3d(p.x, p.y, p.z) + extT;
++    if (!body.allFinite()) continue;
++    points.emplace_back(static_cast<float>(body.x()), static_cast<float>(body.y()), static_cast<float>(body.z()));
++  }
++  sensor_msgs::msg::PointCloud2 msg;
++  pcl::toROSMsg(points, msg);
++  msg.header.stamp = odom.header.stamp;
++  msg.header.frame_id = odom.child_frame_id;
++  backend_cloud_pub_->publish(msg);
++}
++
+ void LIVMapper::publish_mavros(const rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr &mavros_pose_publisher)
+ {
+   msg_body_pose.header.stamp = this->node->get_clock()->now();
+@@ -1486,4 +1543,4 @@
+   msg_body_pose.header.frame_id = "camera_init";
+   path.poses.push_back(msg_body_pose);
+   pubPath->publish(path);
+-}
+\ No newline at end of file
++}

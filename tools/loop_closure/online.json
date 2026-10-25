@@ -1,0 +1,15 @@
+{
+  "keyframe_interval_s": 1.0,
+  "max_keyframes": 1000,
+  "max_points_per_keyframe": 12000,
+  "max_map_points": 200000,
+  "map_every_keyframes": 10,
+  "max_icp_attempts": 2,
+  "pending_keyframes": 2,
+  "max_queue_age_s": 3.0,
+  "worker_timeout_s": 30.0,
+  "pair_cache_size": 32,
+  "minimum_points": 100,
+  "relinearize_threshold": 0.01,
+  "loop_update_passes": 3
+}

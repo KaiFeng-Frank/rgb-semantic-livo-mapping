@@ -49,12 +49,15 @@ def replace(path, old, new):
     path.write_text(s.replace(old, new))
 
 
-def prepare(workspace):
+def prepare(workspace, online_backend=False):
     workspace = workspace.resolve()
     marker = workspace/'.semantic-frontend-source.json'
     patch = HERE/'patches/fastlivo2-semantic.patch'
     wanted = dict(upstream=json.loads((HERE/'upstream-files.json').read_text())['commit'],
                   patch_sha256=hashlib.sha256(patch.read_bytes()).hexdigest())
+    backend_patch = HERE/'patches/fastlivo2-online-backend.patch'
+    if online_backend:
+        wanted['online_backend_patch_sha256'] = hashlib.sha256(backend_patch.read_bytes()).hexdigest()
     source = workspace/'src/fast_livo'
     if marker.exists():
         if json.loads(marker.read_text()) != wanted:
@@ -63,6 +66,9 @@ def prepare(workspace):
         restore(json.loads((HERE/'upstream-files.json').read_text()), source)
         subprocess.run(['git','apply','--check',str(patch)], cwd=source, check=True)
         subprocess.run(['git','apply',str(patch)], cwd=source, check=True)
+        if online_backend:
+            subprocess.run(['git','apply','--check',str(backend_patch)], cwd=source, check=True)
+            subprocess.run(['git','apply',str(backend_patch)], cwd=source, check=True)
         marker.write_text(json.dumps(wanted, indent=2)+'\n')
     for header in ('semantic_frontend.hpp','semantic_pcl.hpp','semantic_motion.hpp',
                    'semantic_likelihood.hpp','semantic_visual.hpp'):
@@ -121,4 +127,6 @@ def prepare(workspace):
 if __name__=='__main__':
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--workspace',type=Path,required=True)
-    prepare(ap.parse_args().workspace)
+    ap.add_argument('--online-backend', action='store_true', help='add optional sensor-time backend outputs')
+    args = ap.parse_args()
+    prepare(args.workspace, args.online_backend)
