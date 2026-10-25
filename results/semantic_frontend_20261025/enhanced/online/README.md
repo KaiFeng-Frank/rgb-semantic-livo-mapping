@@ -56,6 +56,19 @@ the new semantic components needs the separate six-arm timing evidence; the
 categorical field's repeated neighbourhood queries are a code-level candidate,
 not an independently measured share of the cost.
 
+This exposes a design failure in the current high-frequency computation path,
+not merely an optional performance polish. Query centroid construction and
+historical class-field neighbourhood searches repeat inside the IEKF iterations;
+the measured complete pipeline cannot sustain the input rate. Removing the
+unused boundary extraction alone does not demonstrate that the remaining work
+fits the scan period. A revised design must move reusable field/index maintenance
+out of the update loop, bound the online observation work, and avoid making
+semantic inference a fixed waiting dependency of localization. Such a revision
+has not been implemented or validated here. Direct semantic state coupling still
+requires correct observation timestamps and Jacobians; cheaper execution alone
+would not establish its accuracy. Both accuracy and sustained queue stability
+must be measured before admitting a replacement.
+
 [Full assessment](full-lio/assessment.json), [interpretation](full-lio/interpretation.json),
 [frozen protocol](full-lio/protocol.json), and the
 [complete compressed logs/configs/trajectories](full-lio/online-lio-evidence.tar.gz)

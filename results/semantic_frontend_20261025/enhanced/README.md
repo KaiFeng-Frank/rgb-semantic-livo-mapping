@@ -49,8 +49,8 @@ This passes the bounded mechanism check. It does not measure an accuracy gain,
 motion-classification quality, or online throughput: labels are cached, playback
 is 0.125x, and there is one development repetition. The combined arm also enables
 class-conditioned association, so its difference from an individual arm cannot be
-attributed to a single new component. A separate frozen, repeated paired evaluation
-is still needed before claiming a localization benefit.
+attributed to a single new component. The separate frozen repeated accuracy check
+below subsequently failed; mechanism activation does not establish a benefit.
 
 [Assessment](replay/assessment.json), [all arm counters](replay/runs.json),
 [exact protocol](replay/protocol.json), [workflow metadata](replay/workflow.json),
@@ -68,6 +68,13 @@ timely semantics cover 87–89% of measured scans and pose-delivery p95 reaches
 still preserve input coverage and identical 114-pose timestamps. All failures
 and stage timing logs are retained.
 
-[A separate frozen six-arm seq09 accuracy evaluation](accuracy09/README.md) is
-pending. Projected 3-D masks are not dense 2-D segmentation; historical class votes
-are not full model posteriors. No larger experiment is admitted by these checks.
+[The separate frozen six-arm seq09 accuracy evaluation](accuracy09/README.md)
+also failed: all eighteen runs preserve identical 235-pose coverage, but combined
+mean ATE is 20.894547 m versus 16.204397 m for geometry, with worse translation
+and rotation RPE. Categorical-only reduces ATE/translation RPE but worsens rotation
+RPE; no semantic arm passes every declared comparison rule. The geometry baseline
+itself has large errors after a cold start at frame 240, so this window is not a
+normally initialized full-sequence benchmark. Its complete failure, all repetitions
+and component timings are preserved without retuning or selecting a replacement.
+Projected 3-D masks are not dense 2-D segmentation; historical class votes are not
+full model posteriors. No larger experiment is admitted by these checks.

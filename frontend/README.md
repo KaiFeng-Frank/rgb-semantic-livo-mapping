@@ -48,6 +48,64 @@ paired repetitions. Input coverage and 114-pose timestamps match in all arms, bu
 the semantic LIO update takes roughly 123 ms median and the queue grows. See
 [all online runs and timing scope](../results/semantic_frontend_20261025/enhanced/online/README.md).
 
+The frozen six-arm, three-repeat seq09 accuracy screen also fails: combined mean
+ATE is 20.894547 m versus geometry's 16.204397 m, with worse translation and
+rotation RPE. No semantic arm meets all declared comparison rules. All eighteen
+trajectories have identical 235-pose coverage. The cold start at frame 240 also
+leaves an unhealthy geometric baseline; initialization needs separate diagnosis
+before using such a window as a normal-operation accuracy benchmark.
+[All scores, stage timings and the unchanged failed protocol](../results/semantic_frontend_20261025/enhanced/accuracy09/README.md)
+are retained. Current computational layout and accuracy are not admitted for
+deployment; no performance redesign has yet been validated.
+
+## Design review after failed admission
+
+Information gain and computational structure must be checked before another
+implementation or experiment. [FAST-LIO2](https://arxiv.org/abs/2107.06829) combines
+raw-point registration with efficient iterative filtering and incremental spatial
+indexing. [FAST-LIVO2](https://arxiv.org/html/2408.14035v2) retains direct LiDAR and
+photometric measurements in a shared voxel representation.
+[LOAM](https://publications.ri.cmu.edu/loam-lidar-odometry-and-mapping-in-real-time)
+instead explicitly extracts geometric edge/surface features and separates work
+across frequencies. Feature extraction does not inherently prevent realtime
+operation; neither does calling a residual direct guarantee efficiency.
+
+Semantic class transitions are not identical to geometric edges: labels can
+change on a geometrically flat surface. But a separate boundary extraction,
+correspondence and history pipeline must justify independent information beyond
+the existing geometry. Counting a curb twice does not supply a second independent
+observation. The enhanced categorical residual is already a direct class-field
+observation, yet its current execution is too expensive: five iterations, up to
+256 queries, twelve historical maps and 343 neighbouring cells permit roughly
+5.27 million ordered-map lookups per scan, plus repeated query aggregation.
+Dynamic invalidation also walks the geometric map every frame, even when the
+invalidation list is empty. These costs are visible from the code before replay.
+
+The next design should preserve the direct LIVO update and distinguish two goals:
+
+* Use semantic identity and measured motion to improve existing correspondence,
+  outlier weighting, visual validity and map retention. Reuse geometric candidate
+  queries and the same voxel entries; update only affected object/map regions.
+  A class such as car is not itself evidence of motion. Missing or uncertain
+  semantics must leave a usable geometric fallback. This is semantic conditioning
+  of geometric/photometric measurements, not an independent semantic pose factor.
+* Add an independent semantic measurement only where its state Jacobian supplies
+  justified information beyond the retained geometry. Reweighting existing rows
+  alone cannot resolve a common null direction of those rows. A candidate is
+  sparse direct class-field alignment using a cached field in the shared map,
+  evaluated on selected keyframes; its field maintenance must be incremental and
+  its per-update query work bounded without repeated historical-map searches.
+  This remains a proposal, not a validated implementation or accuracy claim.
+
+Semantic inference must be asynchronous with explicit observation timestamps and
+age checks; delayed labels must not be treated as current measurements. Field and
+map maintenance need bounded background work and consistent snapshots. Moving
+work to another thread alone does not bound latency or remove CPU contention.
+An added observation must justify its information, correlation handling and
+cost before experiments; subsequent checks still establish numerical correctness,
+accuracy and sustained queue stability. The failed estimator and protocol remain
+unchanged for reproduction, and no new experiment is started by this review.
+
 ## Implementation
 
 * A scan-preserving input bridge adds native nuScenes `semantic_label` (uint16) and

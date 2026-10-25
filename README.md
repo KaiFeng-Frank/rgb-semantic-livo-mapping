@@ -73,6 +73,12 @@ updates, motion detection on 81, and moving-region image masks on 72. This check
 mechanism activation, not accuracy improvement. The earlier failed result does
 not evaluate this enhanced profile. See [archived evidence](results/semantic_frontend_20261025/enhanced/README.md)
 and [implementation and limits](frontend/README.md).
+The subsequent frozen six-arm accuracy check also fails: mean ATE is 20.89 m for
+the combined arm versus 16.20 m for geometry, and both translation and rotation
+RPE worsen. No semantic arm passes every declared comparison rule. The baseline
+itself has large errors after starting at frame 240 without earlier initialization;
+this is not a normally initialized full-sequence benchmark. All eighteen runs,
+limitations and component timings are [preserved](results/semantic_frontend_20261025/enhanced/accuracy09/README.md).
 The local 5070 Ti now runs the strict B0 model: direct inference medians are
 63–70 ms over three fixed 20-frame timing rounds. The earlier default-middleware
 ROS probes failed scan delivery; controlled full-size geometry messages now pass

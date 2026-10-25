@@ -1,0 +1,212 @@
+{
+  "status": "not_passed",
+  "scope": "single frozen 240-frame validation window, cached labels, three repeats; no full-sequence or online claim",
+  "mechanism": {
+    "boundary_rows_disabled": true,
+    "categorical_support": true
+  },
+  "summary": {
+    "geometry": {
+      "ate_rmse_m": {
+        "mean": 16.20439714201011,
+        "minimum": 16.199228811370883,
+        "maximum": 16.21202532924581
+      },
+      "rpe_1s_translation_rmse_m": {
+        "mean": 5.327160932039552,
+        "minimum": 5.327159072816771,
+        "maximum": 5.327162999502914
+      },
+      "rpe_1s_rotation_rmse_deg": {
+        "mean": 1.3044915285187875,
+        "minimum": 1.304446176550441,
+        "maximum": 1.3045778714477534
+      }
+    },
+    "association_B0": {
+      "ate_rmse_m": {
+        "mean": 33.51421739329689,
+        "minimum": 32.91660291547701,
+        "maximum": 34.36584285733491
+      },
+      "rpe_1s_translation_rmse_m": {
+        "mean": 7.089273815444718,
+        "minimum": 7.065662962654423,
+        "maximum": 7.124346697672535
+      },
+      "rpe_1s_rotation_rmse_deg": {
+        "mean": 1.4402834409146106,
+        "minimum": 1.4330286235011815,
+        "maximum": 1.4547094815748902
+      }
+    },
+    "motion_B0": {
+      "ate_rmse_m": {
+        "mean": 23.62848308134013,
+        "minimum": 23.605742025659143,
+        "maximum": 23.644303382047124
+      },
+      "rpe_1s_translation_rmse_m": {
+        "mean": 5.946883803935449,
+        "minimum": 5.946867177826505,
+        "maximum": 5.946913245022309
+      },
+      "rpe_1s_rotation_rmse_deg": {
+        "mean": 1.5746154427886183,
+        "minimum": 1.5741397730420963,
+        "maximum": 1.5753021584701594
+      }
+    },
+    "visual_B0": {
+      "ate_rmse_m": {
+        "mean": 20.08157916184394,
+        "minimum": 20.08157916184394,
+        "maximum": 20.08157916184394
+      },
+      "rpe_1s_translation_rmse_m": {
+        "mean": 5.738287455199271,
+        "minimum": 5.738287455199271,
+        "maximum": 5.738287455199271
+      },
+      "rpe_1s_rotation_rmse_deg": {
+        "mean": 1.4958216517866643,
+        "minimum": 1.4958216517866643,
+        "maximum": 1.4958216517866643
+      }
+    },
+    "likelihood_B0": {
+      "ate_rmse_m": {
+        "mean": 15.60964961801183,
+        "minimum": 15.464949698510543,
+        "maximum": 15.826298250898688
+      },
+      "rpe_1s_translation_rmse_m": {
+        "mean": 5.02746213956323,
+        "minimum": 4.9576141033718555,
+        "maximum": 5.1601054446758
+      },
+      "rpe_1s_rotation_rmse_deg": {
+        "mean": 1.4147590656932567,
+        "minimum": 1.400629774340848,
+        "maximum": 1.4351453722187244
+      }
+    },
+    "enhanced_B0": {
+      "ate_rmse_m": {
+        "mean": 20.894546603543922,
+        "minimum": 20.894546603543922,
+        "maximum": 20.894546603543922
+      },
+      "rpe_1s_translation_rmse_m": {
+        "mean": 5.9213840377678535,
+        "minimum": 5.9213840377678535,
+        "maximum": 5.9213840377678535
+      },
+      "rpe_1s_rotation_rmse_deg": {
+        "mean": 2.0148134269753175,
+        "minimum": 2.0148134269753175,
+        "maximum": 2.0148134269753175
+      }
+    }
+  },
+  "comparisons_to_geometry": [
+    {
+      "candidate": "association_B0",
+      "control": "geometry",
+      "paired_ate_differences_m": [
+        16.714665630063376,
+        18.1538175280891,
+        17.060977595707858
+      ],
+      "checks": {
+        "all_paired_ate_lower": false,
+        "ate_ranges_nonoverlapping": false,
+        "mean_translation_rpe_no_worse": false,
+        "mean_rotation_rpe_no_worse": false
+      },
+      "passed": false
+    },
+    {
+      "candidate": "motion_B0",
+      "control": "geometry",
+      "paired_ate_differences_m": [
+        7.433466550900484,
+        7.432278052801312,
+        7.40651321428826
+      ],
+      "checks": {
+        "all_paired_ate_lower": false,
+        "ate_ranges_nonoverlapping": false,
+        "mean_translation_rpe_no_worse": false,
+        "mean_rotation_rpe_no_worse": false
+      },
+      "passed": false
+    },
+    {
+      "candidate": "visual_B0",
+      "control": "geometry",
+      "paired_ate_differences_m": [
+        3.879641876430309,
+        3.869553832598129,
+        3.8823503504730574
+      ],
+      "checks": {
+        "all_paired_ate_lower": false,
+        "ate_ranges_nonoverlapping": false,
+        "mean_translation_rpe_no_worse": false,
+        "mean_rotation_rpe_no_worse": false
+      },
+      "passed": false
+    },
+    {
+      "candidate": "likelihood_B0",
+      "control": "geometry",
+      "paired_ate_differences_m": [
+        -0.6642363807873757,
+        -0.3857270783471236,
+        -0.7342791128603405
+      ],
+      "checks": {
+        "all_paired_ate_lower": true,
+        "ate_ranges_nonoverlapping": true,
+        "mean_translation_rpe_no_worse": true,
+        "mean_rotation_rpe_no_worse": false
+      },
+      "passed": false
+    },
+    {
+      "candidate": "enhanced_B0",
+      "control": "geometry",
+      "paired_ate_differences_m": [
+        4.692609318130291,
+        4.682521274298111,
+        4.695317792173039
+      ],
+      "checks": {
+        "all_paired_ate_lower": false,
+        "ate_ranges_nonoverlapping": false,
+        "mean_translation_rpe_no_worse": false,
+        "mean_rotation_rpe_no_worse": false
+      },
+      "passed": false
+    }
+  ],
+  "increment_over_association": {
+    "candidate": "enhanced_B0",
+    "control": "association_B0",
+    "paired_ate_differences_m": [
+      -12.022056311933085,
+      -13.471296253790989,
+      -12.365659803534818
+    ],
+    "checks": {
+      "all_paired_ate_lower": true,
+      "ate_ranges_nonoverlapping": true,
+      "mean_translation_rpe_no_worse": true,
+      "mean_rotation_rpe_no_worse": false
+    },
+    "passed": false
+  },
+  "automatic_expansion": false,
+  "interpretation": "A failed screen constrains this implementation on this window; it does not establish that semantic tight coupling is ineffective."
+}
