@@ -61,7 +61,8 @@ not a full joint covariance over robot pose and every semantic map variable.
 
 ## Build and contracts
 
-Use Ubuntu 24.04 / ROS 2 Jazzy, Eigen, PCL, OpenCV, glog, Ceres, fmt, and colcon. The source
+Use Ubuntu 24.04 / ROS 2 Jazzy, Eigen, PCL, OpenCV, glog, Ceres, fmt, and colcon.
+The validated large-cloud transport profile also needs `ros-jazzy-rmw-cyclonedds-cpp`. The source
 and dependency revisions are locked in `upstream-files.json`, `vikit-files.json`,
 and `dependencies.json`. Bootstrap retrieves only the source files needed to build,
 with Git blob hash verification; it does not download upstream videos or datasets.
@@ -70,6 +71,7 @@ with Git blob hash verification; it does not download upstream videos or dataset
 python3 frontend/bootstrap.py --workspace "$HOME/semantic_livo_ws_clean"
 bash frontend/build.sh "$HOME/semantic_livo_ws_clean"
 source /opt/ros/jazzy/setup.bash
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 source "$HOME/semantic_livo_ws_clean/install/setup.bash"
 ctest --test-dir "$HOME/semantic_livo_ws_clean/build/fast_livo" --output-on-failure
 python3 -m unittest frontend.tests.test_input_bridge -v

@@ -1,0 +1,15 @@
+Internal ctest changing into directory: /home/frank/semantic_livo_v2/build/fast_livo
+Test project /home/frank/semantic_livo_v2/build/fast_livo
+    Start 1: semantic_lio_integration
+1/1 Test #1: semantic_lio_integration .........Subprocess aborted***Exception:   1.12 sec
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  preprocessing changed point coverage
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   1.12 sec
+
+The following tests FAILED:
+	  1 - semantic_lio_integration (Subprocess aborted)
+Errors while running CTest
