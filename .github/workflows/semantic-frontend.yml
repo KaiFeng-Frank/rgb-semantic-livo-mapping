@@ -14,6 +14,10 @@ on:
         description: Check pre-voxel boundary activation on development frames without fetching or scoring GT
         type: boolean
         default: false
+      holdout09:
+        description: Frozen 240-frame seq09 accuracy validation, five arms and three repeats
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -52,6 +56,7 @@ jobs:
       CMAKE_BUILD_PARALLEL_LEVEL: '1'
       OPENBLAS_NUM_THREADS: '1'
       OMP_NUM_THREADS: '2'
+      REPLAY_PROTOCOL: ${{ inputs.holdout09 && 'frontend/holdout09.json' || 'frontend/protocol.json' }}
     defaults:
       run:
         shell: bash
@@ -74,6 +79,14 @@ jobs:
           mkdir -p out/frontend
           python3 frontend/bootstrap.py --workspace /tmp/semantic-ws | tee out/frontend/bootstrap.json
           bash frontend/build.sh /tmp/semantic-ws 2>&1 | tee out/frontend/build.log
+      - name: Validate frozen experiment sources
+        env:
+          DIAGNOSTIC: ${{ inputs.mechanism_diagnostic }}
+          HOLDOUT: ${{ inputs.holdout09 }}
+        run: |
+          if [ "$DIAGNOSTIC" = true ] && [ "$HOLDOUT" = true ]; then exit 2; fi
+          python3 -c 'import os; from frontend.protocol import load; print(load(os.environ["REPLAY_PROTOCOL"]))'
+          python3 -m unittest frontend.tests.test_protocol -v
       - name: Exercise the actual state estimator and original point transport
         run: |
           source /opt/ros/jazzy/setup.bash
@@ -85,10 +98,10 @@ jobs:
           python3 -m unittest frontend.tests.test_replay_identity -v 2>&1 | tee out/frontend/replay-identity-tests.log
           python3 -m frontend.tests.startup --workspace /tmp/semantic-ws --out out/frontend/startup
       - name: Recover only the admitted short sequence
-        if: inputs.dataset_smoke || inputs.mechanism_diagnostic
-        run: python3 -u -m frontend.restore_smoke --root /tmp/frontend-inputs 2>&1 | tee out/frontend/restore.log
+        if: inputs.dataset_smoke || inputs.mechanism_diagnostic || inputs.holdout09
+        run: python3 -u -m frontend.restore_smoke --root /tmp/frontend-inputs --protocol "$REPLAY_PROTOCOL" 2>&1 | tee out/frontend/restore.log
       - name: Freeze paired frontend trajectories before reading GT
-        if: inputs.dataset_smoke || inputs.mechanism_diagnostic
+        if: inputs.dataset_smoke || inputs.mechanism_diagnostic || inputs.holdout09
         env:
           MECHANISM_DIAGNOSTIC: ${{ inputs.mechanism_diagnostic }}
         run: |
@@ -96,9 +109,9 @@ jobs:
           source /tmp/semantic-ws/install/setup.bash
           diagnostic_args=()
           if [ "$MECHANISM_DIAGNOSTIC" = true ]; then diagnostic_args+=(--diagnostic); fi
-          python3 -u -m frontend.replay_smoke --root /tmp/frontend-inputs --workspace /tmp/semantic-ws --out out/frontend/smoke "${diagnostic_args[@]}"
+          python3 -u -m frontend.replay_smoke --root /tmp/frontend-inputs --workspace /tmp/semantic-ws --out out/frontend/smoke --protocol "$REPLAY_PROTOCOL" "${diagnostic_args[@]}"
       - name: Score frozen trajectories
-        if: inputs.dataset_smoke && !inputs.mechanism_diagnostic
+        if: (inputs.dataset_smoke || inputs.holdout09) && !inputs.mechanism_diagnostic
         run: python3 -m frontend.score_smoke --root /tmp/frontend-inputs --out out/frontend/smoke > out/frontend/scoring.log
       - name: Preserve evidence without raw data or model archives
         if: always()

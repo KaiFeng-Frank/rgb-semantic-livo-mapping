@@ -14,6 +14,8 @@ REPO=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(REPO/'tools'))
 from restore_driving_comparison import RemoteZip, client, download
 from compare_driving_semantics import RELEASE
+sys.path.insert(0,str(REPO))
+from frontend.protocol import load, drive
 BASE='https://s3.eu-central-1.amazonaws.com/avg-kitti/'
 DRIVE='2011_09_30_drive_0027'
 
@@ -24,10 +26,12 @@ def save_member(z, member, dest, records):
     records.append(dict(member=member,bytes=len(b),sha256=hashlib.sha256(b).hexdigest()))
 
 
-def restore(root):
-    cfg=json.loads((REPO/'frontend/protocol.json').read_text())['short_sequence']
+def restore(root, protocol=None):
+    plan=load(protocol)
+    cfg=plan['short_sequence']
+    DRIVE=drive(plan)
+    seq=cfg['sequence']
     first,end=cfg['first_frame'],cfg['end_exclusive']
-    if first!=0 or end>120:raise ValueError('only the admitted 120-frame startup smoke is authorized here')
     root.mkdir(parents=True,exist_ok=True)
     records=[]
     raw=root/'raw/2011_09_30'/f'{DRIVE}_sync'
@@ -66,14 +70,14 @@ def restore(root):
     print('IMU_RECOVERED',len(indices),flush=True)
     assets={a['name']:a for a in json.loads((REPO/'results/v06/artifacts_20260928/artifact-manifest.json').read_text())['assets']}
     for arm in ['armB0_s1','ZS']:
-        name=f'v06-pred-{arm}-seq07-r1.tar'
+        name=f'v06-pred-{arm}-seq{seq}-r1.tar'
         archive=root/name
         download(session,RELEASE+name,archive,assets[name]['sha256'])
         index_name=name+'.index.json';download(session,RELEASE+index_name,root/index_name,assets[index_name]['sha256'])
         index={r['path']:r for r in json.loads((root/index_name).read_text())}
         with tarfile.open(archive) as tf:
             for f in range(first,end):
-                rel=f'out/v06_score/pred/{arm}_07_r1/f{f:06d}.npz';data=tf.extractfile(rel).read()
+                rel=f'out/v06_score/pred/{arm}_{seq}_r1/f{f:06d}.npz';data=tf.extractfile(rel).read()
                 if hashlib.sha256(data).hexdigest()!=index[rel]['sha256']:raise ValueError('prediction hash mismatch')
                 p=root/f'pred/{arm}/f{f:06d}.npz';p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(data)
         print('PREDICTIONS_VERIFIED',arm,end-first,flush=True)
@@ -85,4 +89,5 @@ def restore(root):
 
 if __name__=='__main__':
     ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--root',type=Path,required=True)
-    restore(ap.parse_args().root)
+    ap.add_argument('--protocol',type=Path)
+    a=ap.parse_args();restore(a.root,a.protocol)

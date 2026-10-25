@@ -16,6 +16,7 @@ REPO=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(REPO));sys.path.insert(0,str(REPO/'src'))
 from frontend.input_bridge import add_fields
 from kitti_scan import synth
+from frontend.protocol import load, raw_dir
 
 
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -39,7 +40,8 @@ def raw_point_order(msg, points):
     return order
 
 
-def annotate(root, source, dest, arm):
+def annotate(root, source, dest, arm, cfg=None):
+    cfg=cfg or load()
     import rosbag2_py
     from rclpy.serialization import serialize_message,deserialize_message
     from sensor_msgs.msg import PointCloud2
@@ -48,7 +50,7 @@ def annotate(root, source, dest, arm):
     writer=rosbag2_py.SequentialWriter()
     writer.open(rosbag2_py.StorageOptions(uri=str(dest),storage_id='mcap'),rosbag2_py.ConverterOptions('',''))
     for topic in reader.get_all_topics_and_types():writer.create_topic(topic)
-    raw=root/'raw/2011_09_30/2011_09_30_drive_0027_sync'
+    raw=raw_dir(root,cfg)
     starts=np.asarray((raw/'velodyne_points/timestamps_start.txt').read_text().splitlines(),dtype='datetime64[ns]').astype(np.int64)
     ends=np.asarray((raw/'velodyne_points/timestamps_end.txt').read_text().splitlines(),dtype='datetime64[ns]').astype(np.int64)
     lookup={int(t):i for i,t in enumerate(starts)}
@@ -72,7 +74,8 @@ def annotate(root, source, dest, arm):
             data=serialize_message(msg);seen.append(f)
         writer.write(topic,data,when)
     del writer
-    if seen!=list(range(120)):raise ValueError('smoke frame coverage changed')
+    part=cfg['short_sequence']
+    if seen!=list(range(part['first_frame'],part['end_exclusive'])):raise ValueError('smoke frame coverage changed')
     (root/f'annotation-{arm}.json').write_text(json.dumps(audit,indent=2)+'\n')
     print('POINT_IDENTITY_VERIFIED',arm,len(seen),'frames; recomputed disagreements',
           sum(r['recomputed_disagreements'] for r in audit),flush=True)
@@ -90,8 +93,9 @@ def run(args):
     root,ws,out=args.root.resolve(),args.workspace.resolve(),args.out.resolve()
     if out.exists():raise ValueError('refusing to overwrite an experiment directory')
     out.mkdir(parents=True)
-    cfg=json.loads((REPO/'frontend/protocol.json').read_text())
+    cfg=load(args.protocol)
     if args.diagnostic:
+        if cfg['short_sequence']['sequence']!='07':raise ValueError('diagnostic only uses development sequence 07')
         # The first scored window is now development data. This rerun checks
         # activation only; score_smoke explicitly rejects this protocol.
         cfg.update(purpose='Boundary source diagnostic only; no accuracy scoring',
@@ -99,11 +103,13 @@ def run(args):
                    diagnostic=True,reference_run=40125959560,
                    change='extract from deskewed pre-voxel cloud; same gates and information caps')
     (out/'protocol.json').write_text(json.dumps(cfg,indent=2)+'\n')
-    raw=root/'raw/2011_09_30/2011_09_30_drive_0027_sync'
+    raw=raw_dir(root,cfg)
+    part=cfg['short_sequence']
     subprocess.run([sys.executable,str(REPO/'src/kitti_to_ros2bag.py'),'--drive',str(raw),
                     '--oxts100',str(root/'oxts100'),'--out',str(root/'bag_geometry'),
-                    '--end','120','--time-unit','us','--point-index-field'],check=True)
-    for arm in ['armB0_s1','ZS']:annotate(root,root/'bag_geometry',root/f'bag_{arm}',arm)
+                    '--start',str(part['first_frame']),'--end',str(part['end_exclusive']),
+                    '--time-unit','us','--point-index-field'],check=True)
+    for arm in ['armB0_s1','ZS']:annotate(root,root/'bag_geometry',root/f'bag_{arm}',arm,cfg)
     for path in root.glob('annotation-*.json'):(out/path.name).write_bytes(path.read_bytes())
     env=dict(os.environ,ROS_DOMAIN_ID='173',RCUTILS_LOGGING_BUFFERED_STREAM='0',OMP_NUM_THREADS='2')
     executable=ws/'install/fast_livo/lib/fast_livo/fastlivo_mapping'
@@ -131,7 +137,7 @@ def run(args):
                         time.sleep(.1)
                     else:raise RuntimeError('camera intrinsics not confirmed')
                     with (out/f'{name}.bag.log').open('w') as bag_log:
-                        subprocess.run(['ros2','bag','play',str(root/f'bag_{bag}'),'--rate','0.5','--delay','3'],env=env,stdout=bag_log,stderr=subprocess.STDOUT,check=True,timeout=90)
+                        subprocess.run(['ros2','bag','play',str(root/f'bag_{bag}'),'--rate',str(cfg.get('playback_rate',.5)),'--delay','3'],env=env,stdout=bag_log,stderr=subprocess.STDOUT,check=True,timeout=120)
                     time.sleep(3)
                     if node.poll() is not None:raise RuntimeError('frontend died during replay: '+name)
                 finally:
@@ -139,7 +145,7 @@ def run(args):
                     terminate(camera)
             tum=ws/f'src/fast_livo/Log/result/{name}.txt'
             e=np.loadtxt(tum)
-            if e.ndim!=2 or len(e)<100 or not np.isfinite(e).all():raise RuntimeError('invalid/short trajectory: '+name)
+            if e.ndim!=2 or len(e)<cfg.get('minimum_poses',100) or not np.isfinite(e).all():raise RuntimeError('invalid/short trajectory: '+name)
             if reference_times is None:reference_times=e[:,0]
             if not np.array_equal(reference_times,e[:,0]):raise RuntimeError('pose timestamp coverage differs: '+name)
             saved=out/f'{name}.tum';saved.write_bytes(tum.read_bytes())
@@ -158,4 +164,5 @@ if __name__=='__main__':
     ap=argparse.ArgumentParser(description=__doc__)
     for name in ['root','workspace','out']:ap.add_argument('--'+name,type=Path,required=True)
     ap.add_argument('--diagnostic',action='store_true')
+    ap.add_argument('--protocol',type=Path)
     run(ap.parse_args())
