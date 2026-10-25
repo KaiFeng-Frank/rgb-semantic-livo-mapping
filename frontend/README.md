@@ -104,9 +104,17 @@ mandatory; a 19-class checkpoint is not interchangeable.
 
 ```bash
 python3 -m frontend.input_bridge --mode online --wait-ms 80 \
+  --input-reliability reliable \
   --input /velodyne_points --output /semantic_frontend/points \
   --log /tmp/semantic-input.jsonl
 ```
+
+This complete-replay profile requires a reliable input publisher, such as the
+tested rosbag replay. For best-effort-only sensors, select
+`--input-reliability best_effort` (the compatibility default). Actual indexed
+scans still lost messages with best-effort input on this setup even under
+Cyclone DDS; reliable input passed three paired repetitions. See
+[the complete online transport evidence](../results/semantic_frontend_20261025/enhanced/online/README.md).
 
 Run `python3 frontend/parameter_blackboard.py --ros-args --params-file
 config/camera_kitti_cam2.yaml` and FAST-LIVO2 with the original KITTI

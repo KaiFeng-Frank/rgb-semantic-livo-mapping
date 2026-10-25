@@ -1,0 +1,20 @@
+test_full_size_cloud_delivery (frontend.tests.test_ros_bridge.LiveBridge.test_full_size_cloud_delivery) ... FAIL
+test_once_only_fallback_preserves_sensor_points (frontend.tests.test_ros_bridge.LiveBridge.test_once_only_fallback_preserves_sensor_points) ... ok
+
+======================================================================
+FAIL: test_full_size_cloud_delivery (frontend.tests.test_ros_bridge.LiveBridge.test_full_size_cloud_delivery)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/__w/rgb-semantic-livo-mapping/rgb-semantic-livo-mapping/frontend/tests/test_ros_bridge.py", line 16, in test_full_size_cloud_delivery
+    self.exercise(60000,47)
+  File "/__w/rgb-semantic-livo-mapping/rgb-semantic-livo-mapping/frontend/tests/test_ros_bridge.py", line 60, in exercise
+    self.assertEqual(len(received),5,Path(temp+'/input.jsonl').read_text())
+AssertionError: 3 != 5 : {"stamp_ns": 100000000000, "semantic": false, "arrival": 333.962069692, "deadline": 334.042069692, "inference_complete": null, "emitted": 334.052427191, "mode": "geometry", "late_discarded": 0}
+{"stamp_ns": 100300000000, "semantic": false, "arrival": 334.279778597, "deadline": 334.359778597, "inference_complete": null, "emitted": 334.369857805, "mode": "geometry", "late_discarded": 0}
+{"stamp_ns": 100400000000, "semantic": false, "arrival": 334.3814638, "deadline": 334.4614638, "inference_complete": null, "emitted": 334.472046641, "mode": "geometry", "late_discarded": 0}
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 4.406s
+
+FAILED (failures=1)

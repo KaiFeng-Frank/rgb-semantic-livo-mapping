@@ -1,0 +1,49 @@
+{
+  "warm_frames": [
+    0,
+    20,
+    40,
+    60,
+    80,
+    100
+  ],
+  "measure_frames": [
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139
+  ],
+  "repetitions": 3,
+  "deadline_ms": 80,
+  "input_reliability": "reliable",
+  "middleware": "rmw_cyclonedds_cpp",
+  "required_semantic_fraction": 0.95,
+  "required_coverage": "all warm and measured scans, exact timestamps/order/bytes, every run",
+  "raw_data_persisted": false,
+  "full_lio": false,
+  "source_sha256": {
+    "frontend/input_bridge.py": "cedfcf9c678ab1265a503bdf8e2b50ca4c39bf26885c7fe456950f8096ba8a42",
+    "frontend/online_admission.py": "048745ccbfb0224b87f8d91f4595b9482fe86a1a8314d36b7abbf6bdedc644c9",
+    "frontend/online_reliable_validation.py": "83318f99f7664f033d63ae0e6332539f162db2a7bd2a9dc0c3fa5b7f07587460",
+    "src/ptv3_client.py": "bd221934010c2e275cd2eebb969c9c0fce3ea99da76e36871383a638854da652",
+    "src/ptv3_worker.py": "aefb4706c7f0a53f8106acc23c8f1aba8a7a78a989f73d8ff31e44f7b4c7e51d",
+    "src/ptv3_loader_verified.py": "bc08e046f4c84a201f77f35fee0edb300d1292f3b0501b2a19a067b43d263e85",
+    "src/ptv3_fast.py": "496d2774bfb5010eef711d881f2260cd3d8eb164463f54ccc6f504a7cb222c00"
+  }
+}

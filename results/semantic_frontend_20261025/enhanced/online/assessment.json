@@ -1,0 +1,27 @@
+{
+  "status": "reliable_bridge_passed_full_lio_pending",
+  "failed_best_effort": {
+    "geometry_received": 16,
+    "online_received": 22,
+    "published_per_arm": 26
+  },
+  "reliable": {
+    "repetitions": 3,
+    "all_six_runs_complete": true,
+    "semantic_fractions": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "online_emission_median_ms": [
+      86.18075493723154,
+      85.31461795791984,
+      85.3729410446249
+    ]
+  },
+  "source_commit": "21d2ec5",
+  "main_cherry_pick": "004013f",
+  "method": "Reliable publisher and subscriber for the input cloud. Default best-effort live-sensor compatibility remains available. Same 80 ms inference deadline and same model.",
+  "scope": "26 raw scans per arm, 20 measured, three repetitions. Deadline starts at bridge receipt; publication occurs after field assembly/ROS serialization. Not yet full LIO or vehicle perception latency.",
+  "raw_data_saved": false
+}

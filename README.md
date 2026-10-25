@@ -76,9 +76,11 @@ and [implementation and limits](frontend/README.md).
 The local 5070 Ti now runs the strict B0 model: direct inference medians are
 63–70 ms over three fixed 20-frame timing rounds. The earlier default-middleware
 ROS probes failed scan delivery; controlled full-size geometry messages now pass
-with Cyclone DDS. New real-scan GPU admission is deferred while another local
-mapping experiment uses the GPU. Online deadline and full-LIO throughput remain
-unvalidated.
+with Cyclone DDS. Subsequent actual-scan best-effort replay still lost scans;
+an explicit reliable-input profile now passes three paired real-scan repetitions,
+with 26/26 scans in every arm and timely semantics on all 20 measured scans in
+each online run. Full LIO throughput remains under separate validation.
+[Online evidence and preserved transport failures](results/semantic_frontend_20261025/enhanced/online/README.md).
 [Local runtime checks and preserved failed probes](results/semantic_frontend_20261025/local_gpu/README.md).
 
 ![semantic map](docs/img/rviz_class_final.png)
