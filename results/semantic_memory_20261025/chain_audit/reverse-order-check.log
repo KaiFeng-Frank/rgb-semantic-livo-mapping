@@ -1,0 +1,30 @@
+W1025 23:48:31.229000 3384410 site-packages/torch/fx/_symbolic_trace.py:53] is_fx_tracing will return true for both fx.symbolic_trace and torch.export. Please use is_fx_tracing_symbolic_tracing() for specifically fx.symbolic_trace or torch.compiler.is_compiling() for specifically torch.export/compile.
+{"stage": "reverse_replay", "frames": 40, "changed_points": 186}
+{"stage": "reverse_replay", "frames": 80, "changed_points": 1932}
+{"stage": "reverse_replay", "frames": 120, "changed_points": 2174}
+{"stage": "reverse_replay", "frames": 160, "changed_points": 2407}
+{"stage": "reverse_replay", "frames": 200, "changed_points": 2673}
+{"stage": "reverse_replay", "frames": 240, "changed_points": 3350}
+{"stage": "reverse_replay", "frames": 280, "changed_points": 3589}
+{"stage": "reverse_replay", "frames": 320, "changed_points": 3786}
+{"stage": "reverse_replay", "frames": 360, "changed_points": 4041}
+{"stage": "reverse_replay", "frames": 400, "changed_points": 4260}
+{"stage": "reverse_replay", "frames": 440, "changed_points": 4489}
+{"stage": "reverse_replay", "frames": 480, "changed_points": 4720}
+{"stage": "reverse_replay", "frames": 520, "changed_points": 4986}
+{"stage": "reverse_replay", "frames": 560, "changed_points": 5216}
+{"stage": "reverse_replay", "frames": 600, "changed_points": 5547}
+{"stage": "reverse_replay", "frames": 640, "changed_points": 5886}
+{"stage": "reverse_replay", "frames": 680, "changed_points": 6218}
+{"stage": "reverse_replay", "frames": 720, "changed_points": 6410}
+{"stage": "reverse_replay", "frames": 760, "changed_points": 6574}
+{"stage": "reverse_replay", "frames": 800, "changed_points": 6672}
+{"scope": "all scans, reversed scene/frame order, separate process and different RNG seed", "index_sha256": "b43abd890ecab0841209facb5571b821bd09eb00d6d065506c40d2f1faec2bc6", "cache_manifest_sha256": "f9ff0f921ef88c732f1f3416eb25822305a661af31ca771c48d2997dfaaf8643", "source_sha256": {"src/ptv3_loader_verified.py": "f00fec63ef983fe7d033910f82360d95fbe10b2853f3ef9bb61417fee33845b3", "src/ptv3_worker.py": "f305676325ac044d481d99326fd5232c4d40b04521a139f311e070dbdaa5cca3", "tools/semantic_memory/verify_cache_order.py": "0ba69fc5a43ba466f2c3e5613f4e660de7e63044b8e772abf3800906f1ff75b8"}, "frames": 800, "exact_feature_frames": 0, "exact_logit_frames": 0, "changed_points": 6672, "changed_voxels": 2063, "cpu_rng_consumed": false}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/frank/桌面/rgb-semantic-livo-mapping/tools/semantic_memory/verify_cache_order.py", line 67, in <module>
+    main()
+  File "/home/frank/桌面/rgb-semantic-livo-mapping/tools/semantic_memory/verify_cache_order.py", line 63, in main
+    raise AssertionError('Unresolved inference repeatability failure; see saved evidence')
+AssertionError: Unresolved inference repeatability failure; see saved evidence

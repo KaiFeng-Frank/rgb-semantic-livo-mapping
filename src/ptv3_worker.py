@@ -194,8 +194,74 @@ class Segmenter(object):
             ptv3_fast.install_fast_hilbert()
         self.feat_dtype = torch.float16 if half else torch.float32
         self.last_voxels = 0
+        self.memory = None
+        self.memory_shadow = False
+        self.last_memory_status = None
+        self._decoder_features = None
+        self._capture_features = False
+        # A head pre-hook exposes the existing decoder output without a second
+        # backbone forward, changing checkpoint keys, or patching Pointcept.
+        self.model.seg_head.register_forward_pre_hook(self._capture_decoder)
 
-    def segment(self, pts_n4, out_lab=None, out_conf=None):
+    def _capture_decoder(self, module, args):
+        if self._capture_features:
+            self._decoder_features = args[0].detach()
+
+    def memory_model_sha256(self):
+        """Fingerprint effective architecture and feature-producing execution."""
+        import hashlib
+        import json
+        from ptv3_loader_verified import serialization_policy
+        contract = dict(model=self.cfg.model.to_dict(), half=self.half,
+                        shuffle=self.shuffle, fast_voxel=self.fast_voxel,
+                        serialization_policy=serialization_policy(self.model),
+                        gpu_voxel=self.gpu_voxel, fast_hilbert=self.fast_hilbert,
+                        tf32_matmul=self.torch.backends.cuda.matmul.allow_tf32,
+                        tf32_cudnn=self.torch.backends.cudnn.allow_tf32)
+        return hashlib.sha256(json.dumps(contract, sort_keys=True,
+                                        allow_nan=False).encode()).hexdigest()
+
+    def enable_memory(self, checkpoint_path=None, *, shadow=False):
+        """Explicit opt-in. Untrained/synthetic weights can only run in shadow."""
+        from semantic_memory import CausalSemanticMemory, MemoryConfig
+        import hashlib
+        from ptv3_loader_verified import CKPT_PATH
+        if not self.half or self.shuffle:
+            raise ValueError('Memory feature contract requires half=True and shuffle=False')
+        if checkpoint_path:
+            saved = self.torch.load(checkpoint_path, map_location='cpu', weights_only=True)
+            if not isinstance(saved, dict) or type(saved.get('schema')) is not int or saved['schema'] != 1:
+                raise ValueError('Unknown semantic-memory checkpoint schema')
+            cfg = MemoryConfig(**saved['config'])
+            provenance = saved.get('provenance', {})
+            if not shadow and (saved.get('trained') is not True or provenance.get('scope') != 'real_training'
+                               or provenance.get('deployable') is not True):
+                raise ValueError('Active memory requires a real-training checkpoint')
+            with open(CKPT_PATH, 'rb') as f:
+                actual = hashlib.file_digest(f, 'sha256').hexdigest()
+            if provenance.get('backbone_sha256') != actual:
+                raise ValueError('Memory checkpoint belongs to a different backbone')
+            if provenance.get('model_config_sha256') != self.memory_model_sha256():
+                raise ValueError('Memory checkpoint model/execution configuration differs')
+            contract = provenance.get('feature_contract', {})
+            expected = dict(grid_size=self.grid_size, intensity_scale=self.intensity_scale,
+                            feature_source='unfused_decoder', geometry='deskewed_sensor',
+                            half=True, shuffle=False, label_space='native16')
+            if any(contract.get(k) != v for k, v in expected.items()) or provenance.get('label_space') != 'native16':
+                raise ValueError('Memory checkpoint feature/label contract differs from this worker')
+        elif shadow:
+            cfg = MemoryConfig(feature_dim=self.model.seg_head.in_features, classes=self.num_classes)
+            saved = None
+        else:
+            raise ValueError('Untrained memory is allowed only in explicit shadow mode')
+        if cfg.classes != self.num_classes or cfg.feature_dim != self.model.seg_head.in_features:
+            raise ValueError('Memory feature/label dimensions differ from PTv3')
+        self.memory = CausalSemanticMemory(cfg, self.device).eval()
+        if saved:
+            self.memory.fusion.load_state_dict(saved['fusion'], strict=True)
+        self.memory_shadow = bool(shadow)
+
+    def segment(self, pts_n4, out_lab=None, out_conf=None, *, memory_context=None, return_features=False):
         """pts_n4 (N,4) float32.  Returns (label uint16 [N], conf float32 [N]).
 
         out_lab / out_conf, when given, are pre-allocated CPU uint16/float32 views
@@ -203,6 +269,15 @@ class Segmenter(object):
         which deletes the `.to(int32).cpu().numpy().astype(uint16)` cast chain.
         """
         torch = self.torch
+        if memory_context is not None and self.memory is None:
+            raise ValueError('Memory context supplied without enable_memory()')
+        if self.memory is not None and memory_context is None and not getattr(self, '_warming', False):
+            raise ValueError('Enabled memory requires explicit sensor time, transform, frame and epoch')
+        if return_features and (out_lab is not None or memory_context is not None):
+            raise ValueError('Raw feature export is a separate, unfused operation')
+        pts_n4 = np.asarray(pts_n4)
+        if (return_features or memory_context is not None) and (pts_n4.ndim != 2 or pts_n4.shape[1] != 4 or not len(pts_n4) or not np.isfinite(pts_n4).all()):
+            raise ValueError('Expected nonempty finite Nx4 scan')
         coord = np.ascontiguousarray(pts_n4[:, :3], dtype=np.float32)
         strength = np.ascontiguousarray(
             pts_n4[:, 3:4] * self.intensity_scale, dtype=np.float32)
@@ -227,7 +302,24 @@ class Segmenter(object):
             feat = torch.cat([c.to(fd), s.to(fd)], dim=1)   # feat_keys=('coord','strength')
             inp = dict(coord=c.to(fd), grid_coord=gc, feat=feat,
                        offset=torch.tensor([c.shape[0]], device=dev, dtype=torch.long))
-            logits = self.model(inp)["seg_logits"]
+            self._capture_features = return_features or memory_context is not None
+            try:
+                logits = self.model(inp)["seg_logits"]
+                if return_features:
+                    iv = inv if isinstance(inv, torch.Tensor) else torch.from_numpy(inv).to(dev)
+                    return dict(xyz=c.detach(), features=self._decoder_features,
+                                logits=logits.detach(), inverse=iv)
+                if memory_context is not None:
+                    transform = torch.as_tensor(memory_context['transform'], dtype=torch.float32, device=dev)
+                    result = self.memory(c.float(), self._decoder_features, logits,
+                                         stamp=float(memory_context['stamp']), frame=memory_context['frame'],
+                                         transform=transform, epoch=memory_context.get('epoch', 0),
+                                         shadow=self.memory_shadow)
+                    logits = result['logits']
+                    self.last_memory_status = dict(self.memory.last_status)
+            finally:
+                self._capture_features = False
+                self._decoder_features = None
             prob = torch.softmax(logits.float(), dim=-1)
             conf_v, lab_v = prob.max(dim=-1)
             iv = inv if isinstance(inv, torch.Tensor) else torch.from_numpy(inv).to(dev)
@@ -335,6 +427,11 @@ def main():
         sys.stderr.flush()
 
     seg.warmup()
+    memory_ckpt = os.environ.get('PTV3_MEMORY_CHECKPOINT')
+    memory_shadow = os.environ.get('PTV3_MEMORY_SHADOW', '0') == '1'
+    if memory_ckpt or memory_shadow:
+        seg.enable_memory(memory_ckpt, shadow=memory_shadow)
+        sys.stderr.write('[semantic_memory] enabled shadow=%s\n' % memory_shadow)
     sys.stderr.write("[ptv3_worker] warm\n")
     sys.stderr.flush()
 
@@ -345,11 +442,21 @@ def main():
         tag = _readn(inp, 1)
         if tag is None or tag == b"Q":
             break
-        if tag == b"H":                     # shm control request
+        if tag in (b"H", b"T"):            # legacy / explicit temporal shm request
             seq, slot, n = struct.unpack("<IBI", _readn(inp, 9))
+            if in_np is None or slot >= SHM_NSLOT or not 0 < n <= SHM_MAXPTS:
+                raise ValueError('Invalid shared-memory request')
+            context = None
+            if tag == b'T':
+                meta = struct.unpack('<QdI16d', _readn(inp, struct.calcsize('<QdI16d')))
+                context = dict(frame=meta[0], stamp=meta[1], epoch=meta[2],
+                               transform=np.array(meta[3:]).reshape(4, 4))
             pts = in_np[slot, :n]
             t0 = time.perf_counter()
-            seg.segment(pts, out_lab=out_lab_t[slot, :n], out_conf=out_conf_t[slot, :n])
+            seg.segment(pts, out_lab=out_lab_t[slot, :n], out_conf=out_conf_t[slot, :n], memory_context=context)
+            if context is not None:
+                import json
+                sys.stderr.write('[semantic_memory] ' + json.dumps(seg.last_memory_status) + '\n')
             dt = (time.perf_counter() - t0) * 1000.0
             out.write(b"r" + struct.pack("<IBIdI", seq, slot, n, dt,
                                          int(seg.last_voxels)))
@@ -371,10 +478,12 @@ def main():
         out.write(struct.pack("<dI", dt, int(seg.last_voxels)))
 
     if shm is not None:
-        try:
-            shm.close()
-        except Exception:
-            pass
+        # Release every numpy/torch exported view before closing the mmap.
+        pts = in_np = lab_np = conf_np = out_lab_t = out_conf_t = None
+        buf.release()
+        import gc
+        gc.collect()
+        shm.close()
 
 
 if __name__ == "__main__":

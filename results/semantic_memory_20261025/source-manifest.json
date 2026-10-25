@@ -1,0 +1,20 @@
+{
+  "base_commit": "60965eaae602c16230bdb674476c040c66b472bb",
+  "backbone_sha256": "35f5d3aec63ae1c383f4a4146e157aa054860cb12b178d899571287e6f97e5f1",
+  "source_sha256": {
+    "src/semantic_memory.py": "1750963a421c263e3b3bb37a95e6bf32b140cfa143babde90f2681f5d79a025b",
+    "src/ptv3_worker.py": "4b346d4f091f4c524e6a5ca6827ed63fb2b751c72316f4ff9a50d9f0f169e6f8",
+    "src/ptv3_client.py": "aa547f101a45bf3a8598ea173cbed66d976a940dec930af47b380dfeca556a71",
+    "tools/semantic_memory/cache.py": "5ae034d8ec10af2c7f93f230cb6115b463bc5490deb572b58850fe59bc3040cc",
+    "tools/semantic_memory/check_ros.py": "5685f9927401bd9b6906e09b90a64b046c0b62f65bb25913ff8f0c7273e92734",
+    "tools/semantic_memory/check_runtime.py": "0992c755315f10d3850f1bc63f0a4eb31af95bfd5f18c99e8c34e5c7ea1b26b5",
+    "tools/semantic_memory/ros_node.py": "43d39fbe274ce4ce92dd7f6b076bc824c27d8000a28a09154befc607de421e69",
+    "tools/semantic_memory/test_interfaces.py": "a262531078fc0aa0cd4f84b3af9cd8a8fcbdde05b1f5741da551cedce62b65f2",
+    "tools/semantic_memory/test_memory.py": "e631cacffab2b6894d4940143bfaf5a4cdc28e32157bb9677940f6351841e046",
+    "tools/semantic_memory/test_training.py": "fc055e216d50510e8d1280ca9ad99ace895010ac76415c4eb09982eaed84f70b",
+    "tools/semantic_memory/train.py": "bc1ed19ba6f082aea5b7be08ffe78943d61d457cf1b3834c54721c32147631cf"
+  },
+  "scope": "engineering and synthetic training only; no real-data fusion checkpoint",
+  "raw_dataset_copied": false,
+  "weights_copied": false
+}

@@ -31,6 +31,33 @@ Trained models and recovery evidence are archived separately from Git source:
 [artefact recovery instructions](docs/artifact_recovery.md) and
 [the exact asset manifest](results/v06/artifacts_20260928/artifact-manifest.json).
 
+**Experimental causal semantic memory:** a bounded history of unfused PTv3
+observations now feeds local feature attention and a learned history-use gate,
+with explicit single-frame fallback and opt-in ROS shadow operation.
+[Implementation, training contract and limits](tools/semantic_memory/README.md)
+· [engineering checks](results/semantic_memory_20261025/README.md).
+The subsequent [real-label nuScenes pilot](results/semantic_memory_20261025/real_pilot/README.md)
+fails admission: gated memory reaches 49.40 mIoU versus 49.87 for a matched-supervision
+current-only head across three seeds; recovery outcomes and the 5 ms module budget
+also fail. Trained heads and complete evidence are retained; active fusion remains disabled.
+The [current-anchored repair revision](results/semantic_memory_20261025/repair_revision/README.md)
+adds joint current/history corrections, a learned current path without history,
+motion-tolerant retrieval and bounded queries. Two real-training revisions and
+six fresh confirmation scenes are complete: 56.91 mIoU versus 56.98 for the
+matched current-only control, with worse recovery and about 5.11 ms module cost.
+It remains experimental; weights, ablations and both development attempts are archived.
+An [object-level opportunity audit](results/semantic_memory_20261025/opportunity_audit/README.md)
+finds 316–371 fresh-set object-frame cases per seed where the current-only path
+fails and the previous raw observation of the same GT instance succeeds; history
+repairs 31–63. This establishes observational complementarity, not retrieval success.
+A subsequent [full evidence-chain audit](results/semantic_memory_20261025/chain_audit/README.md)
+traces all 20 scenes / 800 frames, including training, with three frozen heads.
+It confirms sparse pedestrian correction opportunities in training and many failures
+despite sufficient correct historical candidates. GT-guided candidate cleaning or
+supply barely improves the frozen heads. The audit also fixes an unpropagated
+PTv3 pooling-shuffle flag, repeats all diagnostics under the corrected policy,
+and preserves a failed cross-process exact-repeatability check (0.0240% label disagreement).
+
 **Offline loop closure, seq07:** with the same frozen frontend and B0 predictions,
 official KITTI ATE falls **0.837 → 0.557 m** and out-of-frustum map mIoU-9 rises
 **77.32 → 78.53%**. Historical baseline replay is reproduced exactly.
@@ -286,14 +313,21 @@ regression, and reverted the good ones. The instrument is now the deployed class
 
 ### Bonus: know your noise floor before you trust a delta
 
-The model is **non-deterministic run to run**. With `shuffle_orders` pinned off, two forward passes
+The historical model was **non-deterministic run to run**. With the root `shuffle_orders` pinned off, two forward passes
 over the same scan in the same process still disagree on ~4–5 % of points. Bisected with forward
 hooks to `SerializedPooling`'s unstable `torch.sort(cluster)`; forcing `stable=True` did not remove
-it, so at least one more source remains unidentified.
+it. The October 25 audit identified the missing pooling-layer shuffle flags: the
+root setting had never disabled those four independent random permutations.
+The loader now applies the policy recursively and fingerprints the effective
+flags. Three real-scene A-A / A-B-A probes give identical features and logits
+with all flags disabled. This is a scoped check, not a universal determinism claim.
+The stricter 800-scan reverse-order, separate-process replay still changes
+0.0240% of point labels and fails exact repeatability; its failure is archived.
+[Probe and chain audit](results/semantic_memory_20261025/chain_audit/README.md).
 
 **On 20 frames the instrument's own spread is ~1 point of coarse mIoU — the same size as the
-acceptance gate.** Every verdict in this repo is therefore taken over all 1101 frames with repeats,
-and the spread is reported next to every delta.
+acceptance gate.** Those historical full-sequence verdicts use 1101 frames with
+repeats; the newer, separately documented semantic-memory pilots use scene splits.
 
 ---
 
@@ -487,8 +521,9 @@ Two things that will bite you if skipped:
 * **Dynamic removal recalls 60.1 % of moving points**, and only 17.1 % for pedestrians — they move
   less than one voxel per sweep. Its false-kill floor is set by trajectory error, not by the mechanism.
 * **RGB covers 37.7 % of map voxels.** The camera is a narrow forward frustum; the LiDAR is 360°.
-* **The model is not bit-deterministic** and one source of it remains unidentified (see above).
-  Confidence is meaningful, so the map is gated at `conf ≥ 0.5`.
+* **Historical inference retained random pooling order.** The loader now disables
+  it when requested; three same-process probes pass, but the 800-scan reverse
+  replay retains a 0.0240% label discrepancy (see above). The map is gated at `conf ≥ 0.5`.
 * **The 10 Hz acceptance uses a precomputed trajectory.** v0.6 runs the online path on bag
   replay (live poses, FAST-LIVO2 alongside, in-node latency p50 98–108 ms) from its snapshot;
   live-sensor operation is untested, and FAST-LIVO2 itself varies run to run at real-time
