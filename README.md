@@ -31,6 +31,13 @@ Trained models and recovery evidence are archived separately from Git source:
 [artefact recovery instructions](docs/artifact_recovery.md) and
 [the exact asset manifest](results/v06/artifacts_20260928/artifact-manifest.json).
 
+**Experimental causal semantic memory:** a bounded history of unfused PTv3
+observations now feeds local feature attention and a learned history-use gate,
+with explicit single-frame fallback and opt-in ROS shadow operation.
+[Implementation, training contract and limits](tools/semantic_memory/README.md)
+· [engineering checks](results/semantic_memory_20261025/README.md).
+No real-data fusion checkpoint or segmentation improvement is claimed yet.
+
 **Offline loop closure, seq07:** with the same frozen frontend and B0 predictions,
 official KITTI ATE falls **0.837 → 0.557 m** and out-of-frustum map mIoU-9 rises
 **77.32 → 78.53%**. Historical baseline replay is reproduced exactly.
