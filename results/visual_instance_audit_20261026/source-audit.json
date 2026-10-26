@@ -1,0 +1,56 @@
+{
+  "ultralytics": "8.3.228",
+  "files": {
+    "byte_tracker.py": {
+      "path": "/home/frank/semantic_livo_runtime/visual-deps/ultralytics/trackers/byte_tracker.py",
+      "sha256": "b50ee763b6760e71b2e6e2116bb5e85484f87cf8ac7fc165fa66482e9cae9a0d",
+      "methods": [
+        {
+          "method": "STrack.re_activate",
+          "line": 138,
+          "end_line": 152
+        },
+        {
+          "method": "STrack.update",
+          "line": 154,
+          "end_line": 180
+        },
+        {
+          "method": "BYTETracker.update",
+          "line": 294,
+          "end_line": 405
+        },
+        {
+          "method": "BYTETracker.get_dists",
+          "line": 419,
+          "end_line": 424
+        }
+      ],
+      "upstream": "https://github.com/ultralytics/ultralytics/blob/v8.3.228/ultralytics/trackers/byte_tracker.py"
+    },
+    "bot_sort.py": {
+      "path": "/home/frank/semantic_livo_runtime/visual-deps/ultralytics/trackers/bot_sort.py",
+      "sha256": "040d7709c8f000f325fe22d2e388ad458c065b9742ae5ce84b18cc23fa6a3a96",
+      "methods": [
+        {
+          "method": "BOTrack.re_activate",
+          "line": 105,
+          "end_line": 109
+        },
+        {
+          "method": "BOTrack.update",
+          "line": 111,
+          "end_line": 115
+        },
+        {
+          "method": "BOTSORT.get_dists",
+          "line": 223,
+          "end_line": 236
+        }
+      ],
+      "upstream": "https://github.com/ultralytics/ultralytics/blob/v8.3.228/ultralytics/trackers/bot_sort.py"
+    }
+  },
+  "unchanged_visual_label_in_wrong_identity_pairs": 22,
+  "runtime_semantics": "PTv3 labels unchanged; no per-instance semantic posterior is stored."
+}

@@ -69,8 +69,11 @@ training objective or a demonstrated moving-object improvement.
 now projects observed person/vehicle masks and session-scoped track IDs onto live
 PTv3 scans. A real 41-frame nuScenes ROS replay delivered 4,826 associated points
 in 40 frames with the original semantic labels preserved. Six development scenes
-expose **22 wrong identities in 180 checkable adjacent-track pairs**; this path
-therefore supplies association hypotheses, without temporal semantic overwrites.
+expose **22 GT-box-majority identity changes in 180 adjacent-track pairs**.
+[The per-instance audit](results/visual_instance_audit_20261026/README.md) finds
+three involve tied support and all 22 preserve the visual class; these must not
+be read as 22 semantic class flips. This path supplies association hypotheses,
+without temporal semantic overwrites.
 The full HKU runtime test processes 1,277 images at 10 Hz with CPU isolation;
 semantic keyframes remain about 1 Hz. Timing comparisons retain a control stall
 and the slower run without isolation, and do not establish hard real-time bounds.
