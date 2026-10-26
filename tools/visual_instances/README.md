@@ -120,6 +120,14 @@ The HKU replay evaluates integrated runtime at 10 Hz camera / 1 Hz semantic
 keyframes. It contains almost no detected traffic participants and cannot validate
 dynamic-object identity accuracy. There is no HKU semantic ground truth.
 
+`evaluate.py --audit-instances` additionally records each observed ID's current
+visual class, GT-box support, ambiguous votes and adjacent identity/label changes.
+These are different events: two different cars can both be classified correctly
+while a track ID moves between them. Conversely, the same physical object and ID
+can receive a different current-frame class, because no track-level semantic
+state is accumulated. [The reproduced 242-frame audit](../../results/visual_instance_audit_20261026/README.md)
+separates these cases and qualifies sparse/tied GT-box-majority evidence.
+
 Only camera-visible surfaces are associated. Sparse depth checks cannot detect
 every occlusion; image masks can include background, and object motion or ego motion
 between timestamps can break projection. The exact-synchronized HKU input avoids

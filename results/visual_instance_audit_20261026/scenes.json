@@ -1,0 +1,268 @@
+[
+  {
+    "scene": "scene-0035",
+    "frames": 40,
+    "counts": {
+      "points": 1389088,
+      "associated": 1353,
+      "semantic_labeled": 1349,
+      "gt_thing_points_in_frustum": 2889,
+      "associated_gt_thing_points": 1224,
+      "semantic_correct": 1180,
+      "instance_box_supported": 1222,
+      "within_mask_dominant_points": 1202,
+      "within_mask_box_points": 1220,
+      "adjacent_track_pairs": 25,
+      "wrong_identity_pairs": 1,
+      "adjacent_gt_pairs": 25,
+      "id_switches": 1,
+      "unsupported_instances": 2
+    },
+    "by_visual_class": {
+      "3": {
+        "associated": 682,
+        "correct": 578
+      },
+      "2": {
+        "associated": 667,
+        "correct": 602
+      }
+    },
+    "inference": {
+      "n": 40,
+      "median_ms": 29.898153559770435,
+      "p95_ms": 35.72985626524314,
+      "max_ms": 38.681644946336746
+    },
+    "projection": {
+      "n": 40,
+      "median_ms": 2.2264429717324674,
+      "p95_ms": 2.439828962087631,
+      "max_ms": 4.102068021893501
+    }
+  },
+  {
+    "scene": "scene-0519",
+    "frames": 41,
+    "counts": {
+      "points": 1423648,
+      "associated": 4914,
+      "semantic_labeled": 4902,
+      "gt_thing_points_in_frustum": 7581,
+      "associated_gt_thing_points": 4171,
+      "semantic_correct": 3870,
+      "instance_box_supported": 3625,
+      "within_mask_dominant_points": 3533,
+      "within_mask_box_points": 3608,
+      "unsupported_instances": 35,
+      "adjacent_track_pairs": 70,
+      "wrong_identity_pairs": 7,
+      "adjacent_gt_pairs": 76,
+      "id_switches": 13
+    },
+    "by_visual_class": {
+      "3": {
+        "associated": 3040,
+        "correct": 2200
+      },
+      "9": {
+        "associated": 1862,
+        "correct": 1670
+      }
+    },
+    "inference": {
+      "n": 41,
+      "median_ms": 34.256041049957275,
+      "p95_ms": 37.91920596268028,
+      "max_ms": 38.88275206554681
+    },
+    "projection": {
+      "n": 41,
+      "median_ms": 2.2145400289446115,
+      "p95_ms": 2.4803790729492903,
+      "max_ms": 2.725086989812553
+    }
+  },
+  {
+    "scene": "scene-0003",
+    "frames": 40,
+    "counts": {
+      "points": 1388768,
+      "associated": 4353,
+      "semantic_labeled": 4352,
+      "gt_thing_points_in_frustum": 6013,
+      "associated_gt_thing_points": 3669,
+      "semantic_correct": 3465,
+      "instance_box_supported": 3642,
+      "within_mask_dominant_points": 3554,
+      "within_mask_box_points": 3642,
+      "adjacent_track_pairs": 23,
+      "wrong_identity_pairs": 0,
+      "adjacent_gt_pairs": 28,
+      "id_switches": 5
+    },
+    "by_visual_class": {
+      "3": {
+        "associated": 3883,
+        "correct": 3313
+      },
+      "6": {
+        "associated": 265,
+        "correct": 152
+      },
+      "2": {
+        "associated": 62,
+        "correct": 0
+      },
+      "9": {
+        "associated": 142,
+        "correct": 0
+      }
+    },
+    "inference": {
+      "n": 40,
+      "median_ms": 20.290252519771457,
+      "p95_ms": 23.54528632131405,
+      "max_ms": 24.28205800242722
+    },
+    "projection": {
+      "n": 40,
+      "median_ms": 2.21427547512576,
+      "p95_ms": 2.382007479900494,
+      "max_ms": 2.4883230216801167
+    }
+  },
+  {
+    "scene": "scene-0092",
+    "frames": 40,
+    "counts": {
+      "points": 1388704,
+      "associated": 3539,
+      "semantic_labeled": 3536,
+      "gt_thing_points_in_frustum": 4096,
+      "associated_gt_thing_points": 3089,
+      "semantic_correct": 2454,
+      "instance_box_supported": 3080,
+      "within_mask_dominant_points": 2967,
+      "within_mask_box_points": 3078,
+      "adjacent_track_pairs": 57,
+      "wrong_identity_pairs": 13,
+      "adjacent_gt_pairs": 57,
+      "id_switches": 13,
+      "unsupported_instances": 2
+    },
+    "by_visual_class": {
+      "3": {
+        "associated": 793,
+        "correct": 538
+      },
+      "9": {
+        "associated": 2626,
+        "correct": 1833
+      },
+      "6": {
+        "associated": 117,
+        "correct": 83
+      }
+    },
+    "inference": {
+      "n": 40,
+      "median_ms": 24.126981967128813,
+      "p95_ms": 31.4603642153088,
+      "max_ms": 33.38972700294107
+    },
+    "projection": {
+      "n": 40,
+      "median_ms": 2.2646940196864307,
+      "p95_ms": 2.401886397274211,
+      "max_ms": 2.4425869341939688
+    }
+  },
+  {
+    "scene": "scene-0012",
+    "frames": 40,
+    "counts": {
+      "points": 1388672,
+      "associated": 368,
+      "semantic_labeled": 368,
+      "gt_thing_points_in_frustum": 558,
+      "associated_gt_thing_points": 274,
+      "semantic_correct": 274,
+      "instance_box_supported": 274,
+      "unsupported_instances": 3,
+      "within_mask_dominant_points": 271,
+      "within_mask_box_points": 271,
+      "adjacent_track_pairs": 4,
+      "wrong_identity_pairs": 0,
+      "adjacent_gt_pairs": 4,
+      "id_switches": 0
+    },
+    "by_visual_class": {
+      "3": {
+        "associated": 105,
+        "correct": 75
+      },
+      "2": {
+        "associated": 263,
+        "correct": 199
+      }
+    },
+    "inference": {
+      "n": 40,
+      "median_ms": 20.884756522718817,
+      "p95_ms": 26.71558083966374,
+      "max_ms": 28.395977918989956
+    },
+    "projection": {
+      "n": 40,
+      "median_ms": 2.1230740239843726,
+      "p95_ms": 2.323599497321993,
+      "max_ms": 2.693968010134995
+    }
+  },
+  {
+    "scene": "scene-0962",
+    "frames": 41,
+    "counts": {
+      "points": 1423392,
+      "associated": 219,
+      "semantic_labeled": 219,
+      "gt_thing_points_in_frustum": 674,
+      "associated_gt_thing_points": 183,
+      "semantic_correct": 180,
+      "instance_box_supported": 182,
+      "within_mask_dominant_points": 179,
+      "within_mask_box_points": 182,
+      "adjacent_track_pairs": 1,
+      "wrong_identity_pairs": 1,
+      "adjacent_gt_pairs": 1,
+      "id_switches": 1
+    },
+    "by_visual_class": {
+      "2": {
+        "associated": 45,
+        "correct": 44
+      },
+      "3": {
+        "associated": 141,
+        "correct": 111
+      },
+      "6": {
+        "associated": 33,
+        "correct": 25
+      }
+    },
+    "inference": {
+      "n": 41,
+      "median_ms": 23.721677949652076,
+      "p95_ms": 29.236634029075503,
+      "max_ms": 32.21104806289077
+    },
+    "projection": {
+      "n": 41,
+      "median_ms": 2.0220389124006033,
+      "p95_ms": 2.2203619591891766,
+      "max_ms": 2.3495240602642298
+    }
+  }
+]

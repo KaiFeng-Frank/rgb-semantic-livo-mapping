@@ -1,0 +1,847 @@
+[
+  {
+    "scene": "scene-0092",
+    "previous_frame": 4,
+    "frame": 5,
+    "track_id": 1,
+    "same_gt_object": false,
+    "visual_label_changed": false,
+    "gt_class_changed": false,
+    "previous_visual_correct": true,
+    "current_visual_correct": true,
+    "ambiguous_vote": true,
+    "previous": {
+      "scene": "scene-0092",
+      "frame": 4,
+      "stamp_ns": 1533151063412404000,
+      "image_path": "samples/CAM_FRONT/n008-2018-08-01-15-16-36-0400__CAM_FRONT__1533151063412404.jpg",
+      "image_sha256": "7e05d1f98c5678ca6cc2d2f8e225680d491df0552ab2f81727adb686246526b8",
+      "session": "60eb5de087f74b739f240eea21bb8f17",
+      "track_id": 1,
+      "visual_label": 3,
+      "score": 0.556640625,
+      "detector_bbox": [
+        540.8316040039062,
+        477.7676696777344,
+        663.8330078125,
+        523.1058959960938
+      ],
+      "interior_mask_bbox": [
+        548,
+        481,
+        665,
+        519
+      ],
+      "interior_mask_pixels": 3799,
+      "associated_points": 4,
+      "gt_label_counts": {
+        "3": 4
+      },
+      "objects": [
+        {
+          "token": "233e77a88ba548afb8778e2cb6c447f1",
+          "points": 2,
+          "label": 3,
+          "world_center": [
+            2196.22,
+            782.569,
+            1.134
+          ],
+          "size": [
+            1.839,
+            4.414,
+            1.722
+          ]
+        },
+        {
+          "token": "d46972d60a0948e6a98a02db2fecc24b",
+          "points": 1,
+          "label": 3,
+          "world_center": [
+            2201.643,
+            782.795,
+            0.896
+          ],
+          "size": [
+            1.771,
+            4.737,
+            1.498
+          ]
+        },
+        {
+          "token": "c10945c3e9334d23b88fb5c8e532e60c",
+          "points": 1,
+          "label": 3,
+          "world_center": [
+            2193.543,
+            782.411,
+            1.045
+          ],
+          "size": [
+            1.901,
+            4.514,
+            1.803
+          ]
+        }
+      ],
+      "box_supported_points": 4,
+      "dominant_share_of_supported": 0.5,
+      "dominant_share_of_associated": 0.5,
+      "tied_majority": false
+    },
+    "current": {
+      "scene": "scene-0092",
+      "frame": 5,
+      "stamp_ns": 1533151063912404000,
+      "image_path": "samples/CAM_FRONT/n008-2018-08-01-15-16-36-0400__CAM_FRONT__1533151063912404.jpg",
+      "image_sha256": "249ba081b2a53a5e7f7b90622dc12df623ee5ddf62edb94d238166f9d5ed85f6",
+      "session": "60eb5de087f74b739f240eea21bb8f17",
+      "track_id": 1,
+      "visual_label": 3,
+      "score": 0.60400390625,
+      "detector_bbox": [
+        516.7236938476562,
+        469.04107666015625,
+        649.8490600585938,
+        514.57177734375
+      ],
+      "interior_mask_bbox": [
+        518,
+        471,
+        647,
+        512
+      ],
+      "interior_mask_pixels": 4274,
+      "associated_points": 4,
+      "gt_label_counts": {
+        "14": 1,
+        "3": 3
+      },
+      "objects": [
+        {
+          "token": "d46972d60a0948e6a98a02db2fecc24b",
+          "points": 1,
+          "label": 3,
+          "world_center": [
+            2201.641,
+            782.799,
+            0.87
+          ],
+          "size": [
+            1.771,
+            4.737,
+            1.498
+          ]
+        },
+        {
+          "token": "84fd04db9f444ac58fee8dfeabc7f49f",
+          "points": 1,
+          "label": 3,
+          "world_center": [
+            2182.161,
+            782.622,
+            1.592
+          ],
+          "size": [
+            2.495,
+            5.975,
+            2.9
+          ]
+        },
+        {
+          "token": "233e77a88ba548afb8778e2cb6c447f1",
+          "points": 1,
+          "label": 3,
+          "world_center": [
+            2196.251,
+            782.571,
+            1.069
+          ],
+          "size": [
+            1.839,
+            4.414,
+            1.722
+          ]
+        }
+      ],
+      "box_supported_points": 3,
+      "dominant_share_of_supported": 0.3333333333333333,
+      "dominant_share_of_associated": 0.25,
+      "tied_majority": true
+    }
+  },
+  {
+    "scene": "scene-0092",
+    "previous_frame": 5,
+    "frame": 6,
+    "track_id": 1,
+    "same_gt_object": false,
+    "visual_label_changed": false,
+    "gt_class_changed": false,
+    "previous_visual_correct": true,
+    "current_visual_correct": true,
+    "ambiguous_vote": true,
+    "previous": {
+      "scene": "scene-0092",
+      "frame": 5,
+      "stamp_ns": 1533151063912404000,
+      "image_path": "samples/CAM_FRONT/n008-2018-08-01-15-16-36-0400__CAM_FRONT__1533151063912404.jpg",
+      "image_sha256": "249ba081b2a53a5e7f7b90622dc12df623ee5ddf62edb94d238166f9d5ed85f6",
+      "session": "60eb5de087f74b739f240eea21bb8f17",
+      "track_id": 1,
+      "visual_label": 3,
+      "score": 0.60400390625,
+      "detector_bbox": [
+        516.7236938476562,
+        469.04107666015625,
+        649.8490600585938,
+        514.57177734375
+      ],
+      "interior_mask_bbox": [
+        518,
+        471,
+        647,
+        512
+      ],
+      "interior_mask_pixels": 4274,
+      "associated_points": 4,
+      "gt_label_counts": {
+        "14": 1,
+        "3": 3
+      },
+      "objects": [
+        {
+          "token": "d46972d60a0948e6a98a02db2fecc24b",
+          "points": 1,
+          "label": 3,
+          "world_center": [
+            2201.641,
+            782.799,
+            0.87
+          ],
+          "size": [
+            1.771,
+            4.737,
+            1.498
+          ]
+        },
+        {
+          "token": "84fd04db9f444ac58fee8dfeabc7f49f",
+          "points": 1,
+          "label": 3,
+          "world_center": [
+            2182.161,
+            782.622,
+            1.592
+          ],
+          "size": [
+            2.495,
+            5.975,
+            2.9
+          ]
+        },
+        {
+          "token": "233e77a88ba548afb8778e2cb6c447f1",
+          "points": 1,
+          "label": 3,
+          "world_center": [
+            2196.251,
+            782.571,
+            1.069
+          ],
+          "size": [
+            1.839,
+            4.414,
+            1.722
+          ]
+        }
+      ],
+      "box_supported_points": 3,
+      "dominant_share_of_supported": 0.3333333333333333,
+      "dominant_share_of_associated": 0.25,
+      "tied_majority": true
+    },
+    "current": {
+      "scene": "scene-0092",
+      "frame": 6,
+      "stamp_ns": 1533151064362404000,
+      "image_path": "samples/CAM_FRONT/n008-2018-08-01-15-16-36-0400__CAM_FRONT__1533151064362404.jpg",
+      "image_sha256": "4c57bf384c361e704bf9431f412fdc65d0a52a2b6a0c96fcd7406547ce81a7bf",
+      "session": "60eb5de087f74b739f240eea21bb8f17",
+      "track_id": 1,
+      "visual_label": 3,
+      "score": 0.6689453125,
+      "detector_bbox": [
+        478.93267822265625,
+        497.4345397949219,
+        651.4369506835938,
+        551.246826171875
+      ],
+      "interior_mask_bbox": [
+        474,
+        499,
+        654,
+        548
+      ],
+      "interior_mask_pixels": 6577,
+      "associated_points": 6,
+      "gt_label_counts": {
+        "3": 5,
+        "14": 1
+      },
+      "objects": [
+        {
+          "token": "c10945c3e9334d23b88fb5c8e532e60c",
+          "points": 2,
+          "label": 3,
+          "world_center": [
+            2193.542,
+            782.452,
+            0.945
+          ],
+          "size": [
+            1.901,
+            4.514,
+            1.803
+          ]
+        },
+        {
+          "token": "d46972d60a0948e6a98a02db2fecc24b",
+          "points": 1,
+          "label": 3,
+          "world_center": [
+            2201.64,
+            782.803,
+            0.844
+          ],
+          "size": [
+            1.771,
+            4.737,
+            1.498
+          ]
+        },
+        {
+          "token": "dac8b63bdc974964b9affbe04f7a21d4",
+          "points": 1,
+          "label": 3,
+          "world_center": [
+            2198.762,
+            782.348,
+            0.854
+          ],
+          "size": [
+            1.783,
+            4.697,
+            1.703
+          ]
+        },
+        {
+          "token": "84fd04db9f444ac58fee8dfeabc7f49f",
+          "points": 1,
+          "label": 3,
+          "world_center": [
+            2182.2,
+            782.637,
+            1.553
+          ],
+          "size": [
+            2.495,
+            5.975,
+            2.9
+          ]
+        }
+      ],
+      "box_supported_points": 5,
+      "dominant_share_of_supported": 0.4,
+      "dominant_share_of_associated": 0.3333333333333333,
+      "tied_majority": false
+    }
+  },
+  {
+    "scene": "scene-0092",
+    "previous_frame": 10,
+    "frame": 11,
+    "track_id": 8,
+    "same_gt_object": false,
+    "visual_label_changed": false,
+    "gt_class_changed": false,
+    "previous_visual_correct": true,
+    "current_visual_correct": true,
+    "ambiguous_vote": true,
+    "previous": {
+      "scene": "scene-0092",
+      "frame": 10,
+      "stamp_ns": 1533151066412404000,
+      "image_path": "samples/CAM_FRONT/n008-2018-08-01-15-16-36-0400__CAM_FRONT__1533151066412404.jpg",
+      "image_sha256": "86d2ce8a513c2c27d20e835abb7788fb74c7a53a073de8c65620d5176a19151e",
+      "session": "60eb5de087f74b739f240eea21bb8f17",
+      "track_id": 8,
+      "visual_label": 3,
+      "score": 0.482421875,
+      "detector_bbox": [
+        471.02154541015625,
+        478.3754577636719,
+        571.9835815429688,
+        541.3759155273438
+      ],
+      "interior_mask_bbox": [
+        481,
+        481,
+        566,
+        534
+      ],
+      "interior_mask_pixels": 2917,
+      "associated_points": 10,
+      "gt_label_counts": {
+        "3": 10
+      },
+      "objects": [
+        {
+          "token": "233e77a88ba548afb8778e2cb6c447f1",
+          "points": 5,
+          "label": 3,
+          "world_center": [
+            2196.346,
+            782.579,
+            0.832
+          ],
+          "size": [
+            1.839,
+            4.414,
+            1.722
+          ]
+        },
+        {
+          "token": "c10945c3e9334d23b88fb5c8e532e60c",
+          "points": 5,
+          "label": 3,
+          "world_center": [
+            2193.542,
+            782.449,
+            0.846
+          ],
+          "size": [
+            1.901,
+            4.514,
+            1.803
+          ]
+        }
+      ],
+      "box_supported_points": 10,
+      "dominant_share_of_supported": 0.5,
+      "dominant_share_of_associated": 0.5,
+      "tied_majority": true
+    },
+    "current": {
+      "scene": "scene-0092",
+      "frame": 11,
+      "stamp_ns": 1533151067012404000,
+      "image_path": "samples/CAM_FRONT/n008-2018-08-01-15-16-36-0400__CAM_FRONT__1533151067012404.jpg",
+      "image_sha256": "c9334e43b8616c21b2df335268afde82740a6adf7c0d75ad2d5f7df9603087bb",
+      "session": "60eb5de087f74b739f240eea21bb8f17",
+      "track_id": 8,
+      "visual_label": 3,
+      "score": 0.42626953125,
+      "detector_bbox": [
+        438.8843994140625,
+        477.7197265625,
+        539.31298828125,
+        544.3126220703125
+      ],
+      "interior_mask_bbox": [
+        463,
+        481,
+        535,
+        537
+      ],
+      "interior_mask_pixels": 2453,
+      "associated_points": 10,
+      "gt_label_counts": {
+        "3": 10
+      },
+      "objects": [
+        {
+          "token": "c10945c3e9334d23b88fb5c8e532e60c",
+          "points": 10,
+          "label": 3,
+          "world_center": [
+            2193.543,
+            782.441,
+            0.83
+          ],
+          "size": [
+            1.901,
+            4.514,
+            1.803
+          ]
+        }
+      ],
+      "box_supported_points": 10,
+      "dominant_share_of_supported": 1.0,
+      "dominant_share_of_associated": 1.0,
+      "tied_majority": false
+    }
+  },
+  {
+    "scene": "scene-0092",
+    "previous_frame": 11,
+    "frame": 12,
+    "track_id": 2,
+    "same_gt_object": true,
+    "visual_label_changed": true,
+    "gt_class_changed": false,
+    "previous_visual_correct": true,
+    "current_visual_correct": false,
+    "ambiguous_vote": false,
+    "previous": {
+      "scene": "scene-0092",
+      "frame": 11,
+      "stamp_ns": 1533151067012404000,
+      "image_path": "samples/CAM_FRONT/n008-2018-08-01-15-16-36-0400__CAM_FRONT__1533151067012404.jpg",
+      "image_sha256": "c9334e43b8616c21b2df335268afde82740a6adf7c0d75ad2d5f7df9603087bb",
+      "session": "60eb5de087f74b739f240eea21bb8f17",
+      "track_id": 2,
+      "visual_label": 3,
+      "score": 0.352294921875,
+      "detector_bbox": [
+        502.73175048828125,
+        452.0343017578125,
+        645.0708618164062,
+        534.354248046875
+      ],
+      "interior_mask_bbox": [
+        493,
+        454,
+        636,
+        531
+      ],
+      "interior_mask_pixels": 6479,
+      "associated_points": 22,
+      "gt_label_counts": {
+        "3": 22
+      },
+      "objects": [
+        {
+          "token": "84fd04db9f444ac58fee8dfeabc7f49f",
+          "points": 22,
+          "label": 3,
+          "world_center": [
+            2182.264,
+            782.652,
+            1.371
+          ],
+          "size": [
+            2.495,
+            5.975,
+            2.9
+          ]
+        }
+      ],
+      "box_supported_points": 22,
+      "dominant_share_of_supported": 1.0,
+      "dominant_share_of_associated": 1.0,
+      "tied_majority": false
+    },
+    "current": {
+      "scene": "scene-0092",
+      "frame": 12,
+      "stamp_ns": 1533151067512404000,
+      "image_path": "samples/CAM_FRONT/n008-2018-08-01-15-16-36-0400__CAM_FRONT__1533151067512404.jpg",
+      "image_sha256": "fb58626fcbe0d50e9a0534007ee94713c409394d9f4571610780363d44c9279a",
+      "session": "60eb5de087f74b739f240eea21bb8f17",
+      "track_id": 2,
+      "visual_label": 9,
+      "score": 0.490234375,
+      "detector_bbox": [
+        466.22418212890625,
+        447.3438415527344,
+        629.1494750976562,
+        539.4705200195312
+      ],
+      "interior_mask_bbox": [
+        460,
+        449,
+        624,
+        535
+      ],
+      "interior_mask_pixels": 8185,
+      "associated_points": 27,
+      "gt_label_counts": {
+        "3": 27
+      },
+      "objects": [
+        {
+          "token": "84fd04db9f444ac58fee8dfeabc7f49f",
+          "points": 27,
+          "label": 3,
+          "world_center": [
+            2182.237,
+            782.637,
+            1.338
+          ],
+          "size": [
+            2.495,
+            5.975,
+            2.9
+          ]
+        }
+      ],
+      "box_supported_points": 27,
+      "dominant_share_of_supported": 1.0,
+      "dominant_share_of_associated": 1.0,
+      "tied_majority": false
+    }
+  },
+  {
+    "scene": "scene-0092",
+    "previous_frame": 12,
+    "frame": 13,
+    "track_id": 2,
+    "same_gt_object": true,
+    "visual_label_changed": true,
+    "gt_class_changed": false,
+    "previous_visual_correct": false,
+    "current_visual_correct": true,
+    "ambiguous_vote": false,
+    "previous": {
+      "scene": "scene-0092",
+      "frame": 12,
+      "stamp_ns": 1533151067512404000,
+      "image_path": "samples/CAM_FRONT/n008-2018-08-01-15-16-36-0400__CAM_FRONT__1533151067512404.jpg",
+      "image_sha256": "fb58626fcbe0d50e9a0534007ee94713c409394d9f4571610780363d44c9279a",
+      "session": "60eb5de087f74b739f240eea21bb8f17",
+      "track_id": 2,
+      "visual_label": 9,
+      "score": 0.490234375,
+      "detector_bbox": [
+        466.22418212890625,
+        447.3438415527344,
+        629.1494750976562,
+        539.4705200195312
+      ],
+      "interior_mask_bbox": [
+        460,
+        449,
+        624,
+        535
+      ],
+      "interior_mask_pixels": 8185,
+      "associated_points": 27,
+      "gt_label_counts": {
+        "3": 27
+      },
+      "objects": [
+        {
+          "token": "84fd04db9f444ac58fee8dfeabc7f49f",
+          "points": 27,
+          "label": 3,
+          "world_center": [
+            2182.237,
+            782.637,
+            1.338
+          ],
+          "size": [
+            2.495,
+            5.975,
+            2.9
+          ]
+        }
+      ],
+      "box_supported_points": 27,
+      "dominant_share_of_supported": 1.0,
+      "dominant_share_of_associated": 1.0,
+      "tied_majority": false
+    },
+    "current": {
+      "scene": "scene-0092",
+      "frame": 13,
+      "stamp_ns": 1533151068013025000,
+      "image_path": "samples/CAM_FRONT/n008-2018-08-01-15-16-36-0400__CAM_FRONT__1533151068013025.jpg",
+      "image_sha256": "aa47cad3dab02d1f36f2f578f659d2b4a976fb2d53e3d497354881f368a8047f",
+      "session": "60eb5de087f74b739f240eea21bb8f17",
+      "track_id": 2,
+      "visual_label": 3,
+      "score": 0.453369140625,
+      "detector_bbox": [
+        423.7264709472656,
+        438.0400085449219,
+        613.8564453125,
+        542.8119506835938
+      ],
+      "interior_mask_bbox": [
+        417,
+        439,
+        611,
+        533
+      ],
+      "interior_mask_pixels": 10592,
+      "associated_points": 41,
+      "gt_label_counts": {
+        "3": 32,
+        "14": 8,
+        "9": 1
+      },
+      "objects": [
+        {
+          "token": "84fd04db9f444ac58fee8dfeabc7f49f",
+          "points": 32,
+          "label": 3,
+          "world_center": [
+            2182.209,
+            782.621,
+            1.305
+          ],
+          "size": [
+            2.495,
+            5.975,
+            2.9
+          ]
+        },
+        {
+          "token": "c5809733341c44088ba366250c316fd7",
+          "points": 1,
+          "label": 9,
+          "world_center": [
+            2165.1,
+            781.046,
+            0.98
+          ],
+          "size": [
+            2.201,
+            6.067,
+            2.143
+          ]
+        }
+      ],
+      "box_supported_points": 33,
+      "dominant_share_of_supported": 0.9696969696969697,
+      "dominant_share_of_associated": 0.7804878048780488,
+      "tied_majority": false
+    }
+  },
+  {
+    "scene": "scene-0092",
+    "previous_frame": 13,
+    "frame": 14,
+    "track_id": 16,
+    "same_gt_object": false,
+    "visual_label_changed": false,
+    "gt_class_changed": false,
+    "previous_visual_correct": true,
+    "current_visual_correct": true,
+    "ambiguous_vote": false,
+    "previous": {
+      "scene": "scene-0092",
+      "frame": 13,
+      "stamp_ns": 1533151068013025000,
+      "image_path": "samples/CAM_FRONT/n008-2018-08-01-15-16-36-0400__CAM_FRONT__1533151068013025.jpg",
+      "image_sha256": "aa47cad3dab02d1f36f2f578f659d2b4a976fb2d53e3d497354881f368a8047f",
+      "session": "60eb5de087f74b739f240eea21bb8f17",
+      "track_id": 16,
+      "visual_label": 3,
+      "score": 0.7216796875,
+      "detector_bbox": [
+        183.1344451904297,
+        477.1763916015625,
+        363.3966064453125,
+        580.5709228515625
+      ],
+      "interior_mask_bbox": [
+        185,
+        479,
+        364,
+        575
+      ],
+      "interior_mask_pixels": 7707,
+      "associated_points": 27,
+      "gt_label_counts": {
+        "3": 27
+      },
+      "objects": [
+        {
+          "token": "233e77a88ba548afb8778e2cb6c447f1",
+          "points": 26,
+          "label": 3,
+          "world_center": [
+            2196.346,
+            782.579,
+            0.772
+          ],
+          "size": [
+            1.839,
+            4.414,
+            1.722
+          ]
+        },
+        {
+          "token": "c10945c3e9334d23b88fb5c8e532e60c",
+          "points": 1,
+          "label": 3,
+          "world_center": [
+            2193.543,
+            782.425,
+            0.797
+          ],
+          "size": [
+            1.901,
+            4.514,
+            1.803
+          ]
+        }
+      ],
+      "box_supported_points": 27,
+      "dominant_share_of_supported": 0.9629629629629629,
+      "dominant_share_of_associated": 0.9629629629629629,
+      "tied_majority": false
+    },
+    "current": {
+      "scene": "scene-0092",
+      "frame": 14,
+      "stamp_ns": 1533151068512404000,
+      "image_path": "samples/CAM_FRONT/n008-2018-08-01-15-16-36-0400__CAM_FRONT__1533151068512404.jpg",
+      "image_sha256": "ada80f12a5e001331275922b29c4ebcb3932f1942bbcf763f0f68919e23cb118",
+      "session": "60eb5de087f74b739f240eea21bb8f17",
+      "track_id": 16,
+      "visual_label": 3,
+      "score": 0.71533203125,
+      "detector_bbox": [
+        156.41644287109375,
+        470.971435546875,
+        343.0495910644531,
+        584.4849853515625
+      ],
+      "interior_mask_bbox": [
+        162,
+        472,
+        342,
+        569
+      ],
+      "interior_mask_pixels": 7756,
+      "associated_points": 26,
+      "gt_label_counts": {
+        "3": 26
+      },
+      "objects": [
+        {
+          "token": "c10945c3e9334d23b88fb5c8e532e60c",
+          "points": 26,
+          "label": 3,
+          "world_center": [
+            2193.543,
+            782.417,
+            0.781
+          ],
+          "size": [
+            1.901,
+            4.514,
+            1.803
+          ]
+        }
+      ],
+      "box_supported_points": 26,
+      "dominant_share_of_supported": 1.0,
+      "dominant_share_of_associated": 1.0,
+      "tied_majority": false
+    }
+  }
+]

@@ -46,6 +46,10 @@ def run(args):
         source={str(p):digest(p) for p in [Path(__file__), Path(__file__).with_name('geometry.py'),
                                          Path(__file__).with_name('detector.py'), Path(__file__).with_name('botsort.yaml')]})
     (args.out/'protocol.json').write_text(json.dumps(protocol,indent=2)+'\n')
+    audit = None
+    if getattr(args, 'audit_instances', False):
+        from .audit import AssociationAudit
+        audit = AssociationAudit(args.out)
     summaries, allrows = [], []
     for scene, rows in index['sequences'].items():
         detector = Detector(args.weights)
@@ -92,6 +96,11 @@ def run(args):
                 overlap |= mask & (object_ids>=0)
                 object_ids[mask] = oi
             object_ids[overlap] = -1
+            if audit is not None:
+                boxes = detector.model.predictor.results[0].boxes
+                tracked_boxes = ({int(t): b for t,b in zip(boxes.id.cpu().tolist(), boxes.xyxy.cpu().tolist())}
+                                 if boxes.id is not None else {})
+                audit.step(scene, i, row, src, f, result, gt, object_ids, tracked_boxes)
             associated = result['ids']>0
             valid = associated & (gt>=0)
             correct = valid & (result['labels']==gt)
@@ -146,6 +155,10 @@ def run(args):
         scope='Association pilot only; no claim of semantic mIoU gain, official tracking score or full-view coverage.')
     (args.out/'summary.json').write_text(json.dumps(report,indent=2)+'\n')
     (args.out/'frames.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in allrows))
+    if audit is not None:
+        audited = audit.finish()
+        assert audited['adjacent_track_pairs'] == total['adjacent_track_pairs']
+        assert audited['wrong_identity_pairs'] == total['wrong_identity_pairs']
     print(json.dumps(report,indent=2),flush=True)
 
 
@@ -154,4 +167,5 @@ if __name__=='__main__':
     p.add_argument('--index',type=Path,required=True)
     p.add_argument('--weights',type=Path,required=True)
     p.add_argument('--out',type=Path,required=True)
+    p.add_argument('--audit-instances',action='store_true',help='Evaluation-only per-instance identity/label evidence')
     run(p.parse_args())

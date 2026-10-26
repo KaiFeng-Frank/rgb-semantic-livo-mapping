@@ -1,0 +1,36 @@
+{
+  "frames": 242,
+  "counts": {
+    "points": 8402272,
+    "associated": 14746,
+    "semantic_labeled": 14726,
+    "gt_thing_points_in_frustum": 21811,
+    "associated_gt_thing_points": 12610,
+    "semantic_correct": 11423,
+    "instance_box_supported": 12025,
+    "within_mask_dominant_points": 11706,
+    "within_mask_box_points": 12001,
+    "adjacent_track_pairs": 180,
+    "wrong_identity_pairs": 22,
+    "adjacent_gt_pairs": 191,
+    "id_switches": 33,
+    "unsupported_instances": 42
+  },
+  "thing_frustum_coverage": 0.5781486405941956,
+  "semantic_precision": 0.7757028385169089,
+  "within_mask_box_purity": 0.9754187151070745,
+  "adjacent_identity_agreement": 0.8777777777777778,
+  "inference": {
+    "n": 242,
+    "median_ms": 24.303207523189485,
+    "p95_ms": 35.66398867405951,
+    "max_ms": 38.88275206554681
+  },
+  "projection": {
+    "n": 242,
+    "median_ms": 2.189187449403107,
+    "p95_ms": 2.3977669654414058,
+    "max_ms": 4.102068021893501
+  },
+  "scope": "Association pilot only; no claim of semantic mIoU gain, official tracking score or full-view coverage."
+}

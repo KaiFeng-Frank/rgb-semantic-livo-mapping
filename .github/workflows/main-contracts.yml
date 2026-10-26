@@ -39,7 +39,7 @@ jobs:
       - name: Check semantic memory and native-19 contracts
         run: |
           /tmp/contracts/bin/python -m pytest -q -p no:cacheprovider tools/semantic_memory
-          /tmp/contracts/bin/python -m unittest tools.visual_instances.test_association tools.visual_instances.test_lifecycle -v
+          /tmp/contracts/bin/python -m unittest tools.visual_instances.test_association tools.visual_instances.test_lifecycle tools.visual_instances.test_audit -v
           /tmp/contracts/bin/python -m unittest tools.semantic_kitti.test_contract tools.semantic_kitti.test_runtime -v
   loop-contracts:
     runs-on: ubuntu-22.04
