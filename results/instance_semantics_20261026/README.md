@@ -115,6 +115,13 @@ zero post-initialization missing images and zero visual queue drops.
 | Off | 38.67 ms | 51.29 ms | 87.85 ms |
 | Active | 38.08 ms | 51.32 ms | 73.62 ms |
 
+Semantic-input-to-instance-output latency is measured separately: active median
+132.12 ms / P95 **471.35 ms** / maximum 602.35 ms, versus off 136.55 / **454.34** /
+589.39 ms. These include the existing semantic/map pipeline and begin at the
+frontend semantic input subscriber, not the raw sensor. [Timing and boundaries](semantic-delivery-timing.json).
+The 51 ms numbers above are pose latency, not semantic latency; semantic output
+is still about 1 Hz in the integrated pipeline.
+
 [Active record](hku-active/assessment.json) · [off record](hku-off/assessment.json)
 · [exact local launch script](run-hku-local.sh).
 The active/off P95 difference is about 0.04 ms in these two runs, not a measured
