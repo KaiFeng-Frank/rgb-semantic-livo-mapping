@@ -90,6 +90,8 @@ All **41/41** outputs arrive, including 4,826 associated points in 40 frames.
 LiDAR-publish-to-instance-receipt latency: median **86.05 ms**, P95 **115.34 ms**,
 maximum **121.15 ms**. No semantic queue drops; final raw-map rebuild parity passes.
 [Subscriber report](real-ros/report.json) · [synthetic actual-ROS contracts](ros-fixture.json).
+Shared-state CPU processing inside that actual ROS run is median 3.60 ms,
+P95 4.47 ms and maximum 8.67 ms; these are component times, not total latency.
 
 The synthetic ROS test separately exercises wrong-initial-class correction,
 actual history-induced label change, same-ID replacement, a +100 m pose revision,
@@ -98,6 +100,42 @@ evidence. Development harness failures are retained: missing initial DDS discove
 an incorrectly strong synthetic expectation at a one-second gap, the blanket
 veto producing zero real changes, and a Python 3.11 test accidentally loading
 Python 3.12 SciPy through ROS PYTHONPATH. Each was corrected and rerun.
+
+## Full LIVO runtime
+
+Two separate 1× replays of the same 127.696 s HKU recording use local RTX 5070 Ti
+Laptop GPU, CycloneDDS and the same explicit CPU isolation. Vision is enabled
+in **both** arms; only shared instance semantics is active/off. No other GPU
+experiment runs concurrently. Both process all 1,277 camera images, produce all
+1,274 initialized frontend/corrected poses and all 122 semantic keyframes, with
+zero post-initialization missing images and zero visual queue drops.
+
+| Shared state | Corrected pose median | P95 | Maximum |
+|---|---:|---:|---:|
+| Off | 38.67 ms | 51.29 ms | 87.85 ms |
+| Active | 38.08 ms | 51.32 ms | 73.62 ms |
+
+[Active record](hku-active/assessment.json) · [off record](hku-off/assessment.json)
+· [exact local launch script](run-hku-local.sh).
+The active/off P95 difference is about 0.04 ms in these two runs, not a measured
+hard upper bound or a claim of a speedup. Full posterior export and the optional
+processing path were enabled, but this HKU clip has **zero associated instance
+points**. It validates integration and empty-instance overhead at 10 Hz camera /
+about 1 Hz semantic keyframes; it cannot validate populated-instance runtime or
+dynamic traffic accuracy. Populated-instance behavior is separately exercised by
+the real 2 Hz nuScenes ROS run above. Existing prior control stalls remain in
+[the earlier runtime records](../visual_instances_20261026/README.md).
+
+## Verification
+
+24 visual/instance unit contracts pass, including confident-current corrections,
+contradictory history rejection, strong new evidence, geometry competition,
+appearance veto, pose revision and no enhanced-output feedback. The existing
+semantic-memory suite reports 199 passed, one skipped and 128 subtests; 79
+graph/map/fusion tests run with two skipped. The native19 contracts also pass.
+Logs are retained in [tests](tests/). GitHub runs both integration contract jobs
+on the PR. Synthetic data establish behavior; the paired and subscriber reports
+provide the real-data accuracy evidence.
 
 ## Reproduction and scope
 
