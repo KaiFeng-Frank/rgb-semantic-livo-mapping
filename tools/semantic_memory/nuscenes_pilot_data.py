@@ -78,7 +78,7 @@ def transform(row):
     return t
 
 
-def build_index(out, train_scenes=6, dev_scenes=2, test_scenes=6):
+def build_index(out, train_scenes=6, dev_scenes=2, test_scenes=6, *, selection_salt=None, excluded_scenes=()):
     out = Path(out)
     out.mkdir(parents=True, exist_ok=False)
     metadata = DATA/'v1.0-trainval'
@@ -109,9 +109,11 @@ def build_index(out, train_scenes=6, dev_scenes=2, test_scenes=6):
             raise ValueError('Insufficient independent logs')
         chosen = [sorted(groups[log])[0] for log in ranked[:count]]
         return chosen, set(ranked[:count])
-    test, test_logs = choose(official['test'], test_scenes, 'memory-pilot-20261025-test-', set())
+    excluded_logs = {scenes[n]['log_token'] for n in excluded_scenes}
+    salt = selection_salt or 'memory-pilot-20261025'
+    test, test_logs = choose(official['test'], test_scenes, salt+'-test-', excluded_logs)
     train_dev, train_dev_logs = choose(official['train'], train_scenes+dev_scenes,
-                                        'memory-pilot-20261025-train-', test_logs)
+                                        salt+'-train-', test_logs | excluded_logs)
     parts = dict(train=train_dev[:train_scenes], dev=train_dev[train_scenes:], test=test)
     selected = {name: sorted(by_scene[name], key=lambda x:x['timestamp_us']) for names in parts.values() for name in names}
     tokens = {r['sample_data_token'] for rows in selected.values() for r in rows}
@@ -160,7 +162,7 @@ def build_index(out, train_scenes=6, dev_scenes=2, test_scenes=6):
         split_source_sha256=digest(SPLITS), source_manifest_sha256=manifests,
         selection='one lexicographically first scene per hashed collection log; no prediction/label selection',
         parts=parts, scene_logs={n:scenes[n]['log_token'] for n in selected}, sequences=selected,
-        label_map=LABEL_MAP.tolist(), selection_seed=20261025,
+        label_map=LABEL_MAP.tolist(), selection_seed=selection_salt or 20261025,
         official_reference='https://www.nuscenes.org/lidar-segmentation')
     (out/'index.json').write_text(json.dumps(result, separators=(',',':'))+'\n')
     print(json.dumps(dict(stage='index_ready', path=str(out/'index.json'))), flush=True)

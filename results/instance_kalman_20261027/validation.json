@@ -1,0 +1,19 @@
+{
+  "cpu_contracts": {
+    "command": "CUDA_VISIBLE_DEVICES='' bash tools/visual_instances/run_kalman_local.sh -m pytest -q tools/visual_instances tools/semantic_memory",
+    "passed": 232,
+    "skipped": 1,
+    "subtests_passed": 128,
+    "seconds": 3.83
+  },
+  "ros_contracts": {
+    "interpreter": "system Python with ROS Jazzy",
+    "passed": 52,
+    "note": "Prior non-ROS interpreter invocation failed two ROS message imports; correct interpreter passed."
+  },
+  "gpu_transport": "not run",
+  "training": "not run",
+  "held_out_accuracy": "not run",
+  "online_replay": "not run",
+  "default_promotion": false
+}

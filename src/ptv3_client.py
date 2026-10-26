@@ -50,7 +50,7 @@ class PTv3Client(object):
                  half=None, shuffle=None, fast_voxel=None, tf32=None,
                  memory_checkpoint=None, memory_shadow=False,
                  startup_timeout_s=120., response_timeout_s=10., cancel_event=None,
-                 probability_classes=0):
+                 probability_classes=0, instance_features=False):
         if any(not math.isfinite(v) or v <= 0 for v in (startup_timeout_s, response_timeout_s)):
             raise ValueError('Worker timeouts must be finite and positive')
         self._cancel_event = cancel_event
@@ -62,6 +62,13 @@ class PTv3Client(object):
         env.pop('PTV3_MEMORY_CHECKPOINT', None)
         env.pop('PTV3_MEMORY_SHADOW', None)
         env.pop('PTV3_PROBABILITY_CLASSES', None)
+        env.pop('PTV3_INSTANCE_FEATURES', None)
+        if instance_features and not probability_classes:
+            raise ValueError('Instance features require probability export')
+        self.instance_features = bool(instance_features)
+        self.group_np = self.pooled_np = None
+        if instance_features:
+            env['PTV3_INSTANCE_FEATURES'] = '1'
         if type(probability_classes) is not int or probability_classes < 0 or probability_classes > 256:
             raise ValueError('Invalid probability class count')
         if probability_classes and (not use_shm or memory_checkpoint or memory_shadow):
@@ -97,8 +104,9 @@ class PTv3Client(object):
             lab_bytes = self.nslot * self.max_pts * 2
             conf_bytes = self.nslot * self.max_pts * 4
             prob_bytes = self.nslot * self.max_pts * self.probability_classes * 4
+            feature_bytes = self.nslot*(self.max_pts*2+128*128*4) if self.instance_features else 0
             self.shm = shared_memory.SharedMemory(
-                create=True, size=in_bytes + lab_bytes + conf_bytes + prob_bytes)
+                create=True, size=in_bytes + lab_bytes + conf_bytes + prob_bytes + feature_bytes)
             b = self.shm.buf
             self.in_np = np.frombuffer(b, dtype=np.float32,
                                        count=self.nslot * self.max_pts * 4,
@@ -115,6 +123,11 @@ class PTv3Client(object):
                     count=self.nslot*self.max_pts*self.probability_classes,
                     offset=in_bytes+lab_bytes+conf_bytes
                     ).reshape(self.nslot, self.max_pts, self.probability_classes)
+            if self.instance_features:
+                offset = in_bytes+lab_bytes+conf_bytes+prob_bytes
+                self.group_np = np.frombuffer(b, np.uint16, self.nslot*self.max_pts, offset).reshape(self.nslot,self.max_pts)
+                self.pooled_np = np.frombuffer(b, np.float32, self.nslot*128*128,
+                    offset+self.nslot*self.max_pts*2).reshape(self.nslot,128,128)
             env["PTV3_SHM"] = "1"
             env["PTV3_SHM_NAME"] = self.shm.name
             env["PTV3_SHM_NSLOT"] = str(self.nslot)
@@ -152,6 +165,7 @@ class PTv3Client(object):
         self.last_voxels = 0
         self.seq = 0
         self.pending = []                     # FIFO of (seq, slot, n)
+        self._last_completed = None
         self.max_inflight = max(1, self.nslot - 2) if self.use_shm else 1
 
     # ----------------------------------------------------------------- io
@@ -189,7 +203,7 @@ class PTv3Client(object):
     def can_submit(self):
         return len(self.pending) < self.max_inflight
 
-    def submit(self, pts_n4, *, memory_context=None):
+    def submit(self, pts_n4, *, memory_context=None, feature_groups=None, group_count=0):
         """Non-blocking.  Copies the scan into a shm slot and writes 10 bytes."""
         if not self.use_shm:
             raise RuntimeError("submit() requires the shm transport")
@@ -210,8 +224,16 @@ class PTv3Client(object):
         if n > self.max_pts:
             raise RuntimeError("scan of %d points exceeds shm slot of %d" % (n, self.max_pts))
         slot = self.seq % self.nslot
+        if feature_groups is not None:
+            g = np.asarray(feature_groups)
+            if (not self.instance_features or memory_context is not None or type(group_count) is not int
+                    or not 0 <= group_count <= 128 or g.shape != (n,) or g.dtype.kind not in 'iu'
+                    or np.any((g < 0) | (g > group_count))):
+                raise ValueError('Invalid instance pooling request')
+            self.group_np[slot,:n] = g
+            meta = struct.pack('<I', group_count)
         self.in_np[slot, :n] = pts_n4[:, :4]
-        self.p.stdin.write((b'T' if self.memory_enabled else b'H') + REQ.pack(self.seq, slot, n) + meta)
+        self.p.stdin.write((b'F' if feature_groups is not None else b'T' if self.memory_enabled else b'H') + REQ.pack(self.seq, slot, n) + meta)
         self.p.stdin.flush()
         h = (self.seq, slot, n)
         self.pending.append(h)
@@ -233,9 +255,39 @@ class PTv3Client(object):
         exp = self.pending.pop(0)
         assert (seq, slot, n) == exp, ("out-of-order worker response", (seq, slot, n), exp)
         self.last_infer_ms, self.last_voxels = ms, nvox
+        self._last_completed = (seq,slot,n)
         return self.lab_np[slot, :n].view(np.uint16), self.conf_np[slot, :n]
 
     # ----------------------------------------------------------------- sync
+    def pool_last_instances(self, groups, count):
+        """Pool the last forward after asynchronous camera evidence has arrived.
+
+        Worker retains only the most recent raw decoder features. Sequence IDs
+        reject stale requests; a second network forward is never performed.
+        """
+        if not self.instance_features or self.pending or self._last_completed is None:
+            raise RuntimeError('No completed exclusive instance-feature forward')
+        seq,slot,n=self._last_completed
+        g=np.asarray(groups)
+        if type(count) is not int or not 0<=count<=128 or g.shape!=(n,) or g.dtype.kind not in 'iu' or np.any((g<0)|(g>count)):
+            raise ValueError('Invalid retained-feature groups')
+        self.group_np[slot,:n]=g
+        self.p.stdin.write(b'G'+REQ.pack(seq,slot,n)+struct.pack('<I',count));self.p.stdin.flush()
+        if self._readn(1)!=b'r':raise RuntimeError('Invalid pooling response')
+        a,b,c,ms,_=RESP.unpack(self._readn(RESP.size))
+        if (a,b,c)!=(seq,slot,n):raise RuntimeError('Wrong retained-feature sequence')
+        self.last_pool_ms=ms
+        return self.pooled_np[slot,:count].copy()
+
+    def segment_instances(self, pts_n4, groups, count):
+        """Raw posteriors and compact mean/std decoder features, same forward."""
+        if not self.instance_features or self.pending:
+            raise RuntimeError('Enable instance features and drain pending requests')
+        _, slot, n = self.submit(np.ascontiguousarray(pts_n4[:,:4], np.float32),
+                                feature_groups=groups, group_count=count)
+        lab, conf = self.collect()
+        return lab.copy(), conf.copy(), self.prob_np[slot,:n].copy(), self.pooled_np[slot,:count].copy()
+
     def segment_probabilities(self, pts_n4):
         """One forward, owned full posteriors; legacy segment() stays a 2-tuple."""
         if not self.probability_classes:
@@ -272,6 +324,7 @@ class PTv3Client(object):
         if self.shm is not None:
             shared = self.shm
             self.in_np = self.lab_np = self.conf_np = self.prob_np = None
+            self.group_np = self.pooled_np = None
             try:
                 shared.close()
             except BufferError:

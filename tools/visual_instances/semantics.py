@@ -35,6 +35,22 @@ class Config:
 THING = np.array([1, 2, 3, 5, 6, 9])
 
 
+def instance_groups(xyz, association, cfg=None):
+    """Geometry-only grouping for bounded decoder-feature pooling."""
+    cfg = cfg or Config()
+    groups = np.zeros(len(xyz), np.uint16)
+    tracks = []
+    if association['info'].get('session'):
+        for tid in np.unique(association['ids'][association['ids'] > 0]):
+            if len(tracks) >= min(cfg.max_tracks, 128):
+                break
+            at = np.flatnonzero(association['ids'] == tid)
+            chosen = component(xyz[at], cfg)
+            if chosen is not None and int(association['labels'][at[0]]) in THING:
+                tracks.append(int(tid)); groups[at[chosen]] = len(tracks)
+    return groups, tracks
+
+
 def component(xyz, cfg):
     """Largest connected surface, with bounded neighbor edges and ambiguity veto."""
     from scipy.spatial import cKDTree
@@ -91,7 +107,7 @@ class InstanceSemantics:
                 tolerance = self.cfg.position_slack_m+.5*self.cfg.acceleration_mps2*dt*dt
         return center, tolerance
 
-    def step(self, xyz, probabilities, association, *, stamp_ns, pose):
+    def step(self, xyz, probabilities, association, *, stamp_ns, pose, collect_observations=False):
         started = time.perf_counter(); cfg = self.cfg
         xyz = np.asarray(xyz, dtype=np.float64); p = np.asarray(probabilities, dtype=np.float32)
         pose = np.asarray(pose, dtype=np.float64)
@@ -110,6 +126,8 @@ class InstanceSemantics:
         result = dict(labels=labels, confidence=confidence, raw_labels=raw_labels, raw_confidence=raw_conf,
                       valid=np.zeros(n, np.uint8), epochs=np.zeros(n, np.uint32),
                       instance_labels=np.full(n, 65535, np.uint16), instance_confidence=np.zeros(n, np.float32))
+        if collect_observations:
+            result['observations'] = []
         session = association['info'].get('session')
         if session is not None and session != self.session:
             self.states.clear(); self.session = session
@@ -193,6 +211,17 @@ class InstanceSemantics:
             best = int(state_p.argmax()); top = np.sort(state_p)[-2:]
             accepted = best in THING and top[-1] >= cfg.posterior_min and top[-1]-top[-2] >= cfg.posterior_margin
             at = obs.pop('at')
+            if collect_observations:
+                result['observations'].append(dict(track_id=tid, epoch=epoch, indices=at.copy(),
+                    identity=reason, stamp_ns=stamp_ns, image_stamp=image_stamp,
+                    center=obs['center'].copy(), visual_label=int(association['labels'][at[0]]),
+                    visual_score=float(np.median(association['scores'][at])),
+                    raw_mean=p[at].mean(0), visual_scores=association.get('class_scores', {}).get(tid),
+                    quality=np.array([np.log1p(len(at))/8., len(at)/max(1,np.count_nonzero(ids==tid)),
+                        np.linalg.norm(obs['center'])/80., np.linalg.norm(np.std(xyz[at],axis=0))/10.,
+                        -(p[at]*np.log(np.maximum(p[at],1e-8))).sum(1).mean()/np.log(cfg.classes),
+                        p[at].std(0).mean(), (stamp_ns-image_stamp)*1e-9,
+                        float(np.median(association['scores'][at]))], np.float32)))
             # History must not manufacture confidence over current counterevidence.
             # If the current instance already supports this same decision, keep
             # ordinary single-frame pooling. Otherwise contrary confident points

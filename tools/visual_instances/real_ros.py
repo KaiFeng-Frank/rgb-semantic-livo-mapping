@@ -111,6 +111,7 @@ def run(args):
         start([sys.executable,'-m','tools.loop_closure.semantic_node','--frontend',str(frontend),'--camera',str(camera),
             '--out',str(args.out/'semantics'),'--visual-instances','--visual-max-dt-ms','60',
             '--instance-semantics',args.instance_semantics,
+            *(['--instance-kalman-checkpoint',str(args.instance_kalman_checkpoint)] if getattr(args,'instance_kalman_checkpoint',None) else []),
             '--reflectance-divisor','255','--intensity-scale','1','--verify-final'],'semantics.log')
         spin_until(lambda:status.get('ready') and visual_status.get('ready') and image_pub.get_subscription_count()>0 and cloud_pub.get_subscription_count()>0)
         origin=min(src[rows[0]['sample_data_token']]['camera_timestamp_us'],rows[0]['timestamp_us'])*1000
@@ -168,4 +169,5 @@ if __name__=='__main__':
     for key in ('index','runtime','weights','out'):p.add_argument('--'+key,type=Path,required=True)
     p.add_argument('--scene',default='scene-0519')
     p.add_argument('--instance-semantics',choices=('off','shadow','active'),default='off')
+    p.add_argument('--instance-kalman-checkpoint',type=Path)
     run(p.parse_args())

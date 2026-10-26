@@ -64,6 +64,7 @@ class InstanceFrame:
     labels: np.ndarray
     scores: np.ndarray
     appearance: np.ndarray | None = None  # Optional normalized HSV histogram, not learned ReID.
+    class_scores: np.ndarray | None = None  # Raw COCO80 sigmoid scores, not normalized probabilities.
 
     def __post_init__(self):
         if type(self.stamp_ns) is not int or self.stamp_ns < 0 or not re.fullmatch('[a-f0-9]{32}', self.session):
@@ -84,11 +85,17 @@ class InstanceFrame:
             if (self.appearance.shape != (n, 24) or not np.isfinite(self.appearance).all()
                     or np.any(self.appearance < 0) or not np.allclose(self.appearance.sum(1), 1., atol=1e-4)):
                 raise ValueError('Invalid appearance histogram')
+        if self.class_scores is not None:
+            self.class_scores = np.asarray(self.class_scores, dtype=np.float32)
+            if (self.class_scores.shape != (n, 80) or not np.isfinite(self.class_scores).all()
+                    or np.any((self.class_scores < 0) | (self.class_scores > 1))):
+                raise ValueError('Invalid visual class evidence')
 
     def encode(self):
         return json.dumps(dict(schema=1, stamp_ns=self.stamp_ns, session=self.session,
             shape=list(self.index.shape), ids=self.ids.tolist(), labels=self.labels.tolist(),
             scores=self.scores.tolist(), appearance=self.appearance.tolist() if self.appearance is not None else None,
+            class_scores=self.class_scores.tolist() if self.class_scores is not None else None,
             index=base64.b64encode(zlib.compress(
                 self.index.astype('<u2').tobytes(), 1)).decode()), separators=(',', ':'), allow_nan=False)
 
@@ -109,7 +116,8 @@ class InstanceFrame:
         return cls(d['stamp_ns'], d['session'], np.frombuffer(raw, '<u2').reshape(shape),
                    np.asarray(d['ids']) if d['ids'] else np.empty(0, np.int64),
                    np.asarray(d['labels']), np.asarray(d['scores']),
-                   np.asarray(d['appearance'], dtype=np.float32).reshape(-1, 24) if d.get('appearance') is not None else None)
+                   np.asarray(d['appearance'], dtype=np.float32).reshape(-1, 24) if d.get('appearance') is not None else None,
+                   np.asarray(d['class_scores'], dtype=np.float32).reshape(-1, 80) if d.get('class_scores') is not None else None)
 
 
 class FrameCache:
@@ -138,7 +146,7 @@ class FrameCache:
         return next((f for f in reversed(self.frames) if 0 <= stamp_ns-f.stamp_ns <= self.max_dt_ns), None)
 
 
-def mask_frame(masks, ids, coco_labels, scores, stamp_ns, session, shape):
+def mask_frame(masks, ids, coco_labels, scores, stamp_ns, session, shape, class_scores=None):
     """Keep mask interiors; overlaps include low-confidence rejected objects."""
     import cv2
     masks = np.asarray(masks, dtype=bool)
@@ -156,8 +164,15 @@ def mask_frame(masks, ids, coco_labels, scores, stamp_ns, session, shape):
         kept_ids.append(tid); labels.append(COCO_TO_NATIVE[cls]); confidence.append(score)
         index[inner] = len(kept_ids)
     index[overlap] = 0
+    evidence = None
+    if class_scores is not None:
+        evidence = np.asarray(class_scores, np.float32)
+        if evidence.shape != (len(ids), 80):
+            raise ValueError('Class evidence/mask count mismatch')
+        evidence = evidence[[i for i,(cls,s) in enumerate(zip(coco_labels,scores))
+                             if s >= .35 and cls in COCO_TO_NATIVE]]
     return InstanceFrame(stamp_ns, session, index, np.asarray(kept_ids, np.int64),
-                         np.asarray(labels, np.uint16), np.asarray(confidence, np.float32))
+                         np.asarray(labels, np.uint16), np.asarray(confidence, np.float32), class_scores=evidence)
 
 
 def camera_at_scan(camera, graph, scan_stamp, image_stamp, T_imu_lidar):
@@ -237,4 +252,5 @@ def associate(xyz, camera, frame, *, depth_tolerance=.4, cell_pixels=3, min_poin
         info['associated'] = int(np.count_nonzero(ids))
         info['instances'] = int(len(np.unique(ids[ids > 0])))
     return dict(ids=ids, labels=labels, scores=scores, info=info,
+                class_scores={int(t): frame.class_scores[i] for i,t in enumerate(frame.ids)} if frame.class_scores is not None else {},
                 appearance={int(t): frame.appearance[i] for i,t in enumerate(frame.ids)} if frame.appearance is not None else {})

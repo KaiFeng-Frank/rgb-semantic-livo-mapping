@@ -91,6 +91,9 @@ def make_node(args):
     transform = extrinsic(args.frontend)
     visual_enabled = getattr(args, 'visual_instances', False)
     instance_mode = getattr(args, 'instance_semantics', 'off')
+    instance_checkpoint = getattr(args, 'instance_kalman_checkpoint', None)
+    if instance_checkpoint and (instance_mode == 'off' or args.predictions_input):
+        raise ValueError('Learned instance semantics requires real PTv3 inference and enabled instance semantics')
     if instance_mode not in ('off', 'shadow', 'active') or instance_mode != 'off' and not visual_enabled:
         raise ValueError('Instance semantics requires visual association and a valid mode')
     if visual_enabled:
@@ -102,6 +105,9 @@ def make_node(args):
         camera = Camera.from_livo(args.frontend, args.camera)
         if instance_mode != 'off':
             from tools.visual_instances.semantics import InstanceSemantics
+            if instance_checkpoint:
+                from tools.visual_instances.kalman import KalmanInstanceSemantics
+                from tools.visual_instances.semantics import instance_groups
             # Import sparse geometry before online readiness.
             from scipy.spatial import cKDTree
             from scipy.sparse.csgraph import connected_components
@@ -123,6 +129,8 @@ def make_node(args):
             self.core = ReversibleSemanticMap(**core_args)
             self.consistency = None
             self.instance_semantics = InstanceSemantics() if instance_mode != 'off' else None
+            if instance_checkpoint:
+                self.instance_semantics = KalmanInstanceSemantics(instance_checkpoint)
             if self.instance_semantics:
                 (args.out/'instance-semantics.json').write_text(json.dumps(self.instance_semantics.configuration(),indent=2)+'\n')
             if consistency_mode != 'off':
@@ -245,6 +253,7 @@ def make_node(args):
                     from ptv3_client import PTv3Client
                     self.client = PTv3Client(half=True, shuffle=False, max_pts=cfg['max_points'],
                         probability_classes=cfg['classes'] if self.consistency or self.instance_semantics else 0,
+                        instance_features=bool(instance_checkpoint),
                         intensity_scale=args.intensity_scale, stderr_path=str(args.out/'inference.log'),
                         startup_timeout_s=120., response_timeout_s=3., cancel_event=self.stop)
                     if self.client.num_classes != cfg['classes']:
@@ -345,9 +354,15 @@ def make_node(args):
                                         visual_result = dict(ids=np.zeros(len(points), np.uint32),
                                             labels=np.full(len(points), 65535, np.uint16), scores=np.zeros(len(points), np.float32),
                                             info=dict(reason='no_causal_camera_or_pose_bracket', session=None, associated=0))
+                                    if instance_checkpoint:
+                                        groups, tracks = instance_groups(points[:,:3],visual_result)
+                                        pooled = self.client.pool_last_instances(groups,len(tracks))
+                                        instance_features = dict(zip(tracks,pooled))
+                                        visual_result['info']['feature_pool_ms'] = self.client.last_pool_ms
                                     if self.instance_semantics:
                                         enhanced = self.instance_semantics.step(points[:,:3], probabilities, visual_result,
-                                            stamp_ns=int(stamp), pose=graph['poses'][index] @ transform)
+                                            stamp_ns=int(stamp), pose=graph['poses'][index] @ transform,
+                                            **(dict(features=instance_features) if instance_checkpoint else {}))
                                         visual_result['semantics'] = enhanced
                                         visual_result['info'].update(instance_semantics=enhanced['info'],
                                             semantic_update=instance_mode=='active', instance_mode=instance_mode)
@@ -441,6 +456,7 @@ def main():
     ap.add_argument('--camera', type=Path, help='Full-resolution raw camera calibration for visual association')
     ap.add_argument('--visual-max-dt-ms', type=float, default=20.)
     ap.add_argument('--instance-semantics',choices=('off','shadow','active'),default='off')
+    ap.add_argument('--instance-kalman-checkpoint',type=Path)
     args = ap.parse_args()
     if not np.isfinite(args.reflectance_divisor) or args.reflectance_divisor <= 0:
         ap.error('reflectance divisor must be finite and positive')

@@ -16,6 +16,7 @@ class Detector:
         import torch
         from ultralytics import YOLO
         import ultralytics
+        from .evidence_predictor import EvidencePredictor
         cv2.setNumThreads(1)
         torch.set_num_threads(1)
         try:
@@ -34,7 +35,8 @@ class Detector:
         # Warm inference without creating track identities from synthetic inputs.
         for _ in range(3):
             self.model.predict(np.zeros((imgsz, imgsz, 3), np.uint8), device=device,
-                               imgsz=imgsz, rect=False, verbose=False, half=device != 'cpu')
+                               imgsz=imgsz, rect=False, verbose=False, half=device != 'cpu',
+                               predictor=EvidencePredictor)
         # Import/initialize tracking before declaring online readiness. Reset all
         # synthetic warmup state so it cannot contribute an observation or ID.
         self.model.track(np.zeros((imgsz, imgsz, 3), np.uint8), persist=True,
@@ -67,7 +69,8 @@ class Detector:
             masks = r.masks.data.cpu().numpy() > .5
             boxes = r.boxes
             frame = mask_frame(masks, boxes.id.int().cpu().tolist(), boxes.cls.int().cpu().tolist(),
-                               boxes.conf.cpu().tolist(), stamp_ns, self.session, image.shape[:2])
+                               boxes.conf.cpu().tolist(), stamp_ns, self.session, image.shape[:2],
+                               class_scores=r.class_scores.float().cpu().numpy())
             if len(frame.ids):
                 hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV).reshape(-1, 3)
                 descriptors = []

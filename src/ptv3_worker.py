@@ -199,6 +199,8 @@ class Segmenter(object):
         self.last_memory_status = None
         self._decoder_features = None
         self._capture_features = False
+        self.retain_instance_features = False
+        self._retained_features = None
         # A head pre-hook exposes the existing decoder output without a second
         # backbone forward, changing checkpoint keys, or patching Pointcept.
         self.model.seg_head.register_forward_pre_hook(self._capture_decoder)
@@ -262,7 +264,7 @@ class Segmenter(object):
         self.memory_shadow = bool(shadow)
 
     def segment(self, pts_n4, out_lab=None, out_conf=None, *, memory_context=None, return_features=False,
-                out_prob=None, return_probabilities=False):
+                out_prob=None, return_probabilities=False, feature_groups=None, out_group_features=None):
         """pts_n4 (N,4) float32.  Returns (label uint16 [N], conf float32 [N]).
 
         out_lab / out_conf, when given, are pre-allocated CPU uint16/float32 views
@@ -270,6 +272,8 @@ class Segmenter(object):
         which deletes the `.to(int32).cpu().numpy().astype(uint16)` cast chain.
         """
         torch = self.torch
+        if feature_groups is not None and (memory_context is not None or return_features or out_group_features is None):
+            raise ValueError('Instance pooling requires independent raw decoder features and an output buffer')
         if (out_prob is not None or return_probabilities) and (memory_context is not None or return_features):
             raise ValueError('Raw posterior export cannot be combined with feature/memory export')
         if out_prob is not None and out_lab is None:
@@ -307,9 +311,16 @@ class Segmenter(object):
             feat = torch.cat([c.to(fd), s.to(fd)], dim=1)   # feat_keys=('coord','strength')
             inp = dict(coord=c.to(fd), grid_coord=gc, feat=feat,
                        offset=torch.tensor([c.shape[0]], device=dev, dtype=torch.long))
-            self._capture_features = return_features or memory_context is not None
+            self._retained_features = None
+            self._capture_features = return_features or memory_context is not None or feature_groups is not None or self.retain_instance_features
             try:
                 logits = self.model(inp)["seg_logits"]
+                if self.retain_instance_features:
+                    self._retained_features = (self._decoder_features, inv)
+                if feature_groups is not None:
+                    from instance_features import pool_features
+                    pooled = pool_features(self._decoder_features, inv, feature_groups, len(out_group_features))
+                    out_group_features.copy_(pooled)
                 if return_features:
                     iv = inv if isinstance(inv, torch.Tensor) else torch.from_numpy(inv).to(dev)
                     return dict(xyz=c.detach(), features=self._decoder_features,
@@ -410,6 +421,11 @@ def main():
     shm = None
     in_np = out_lab_t = out_conf_t = prob_np = out_prob_t = None
     probability_classes = int(os.environ.get('PTV3_PROBABILITY_CLASSES', '0'))
+    instance_features = os.environ.get('PTV3_INSTANCE_FEATURES', '0') == '1'
+    seg.retain_instance_features = instance_features
+    group_np = pooled_np = out_pooled_t = None
+    if instance_features and (not probability_classes or not USE_SHM):
+        raise ValueError('Instance features require raw probability SHM transport')
     if probability_classes and (probability_classes != seg.num_classes or not USE_SHM):
         raise ValueError('Invalid full-posterior transport contract')
     if USE_SHM and SHM_NAME:
@@ -440,6 +456,13 @@ def main():
                 offset=in_bytes+SHM_NSLOT*SHM_MAXPTS*6
                 ).reshape(SHM_NSLOT, SHM_MAXPTS, probability_classes)
             out_prob_t = torch.from_numpy(prob_np)
+        if instance_features:
+            from instance_features import MAX_GROUPS, FEATURE_DIM
+            offset = in_bytes+SHM_NSLOT*SHM_MAXPTS*(6+probability_classes*4)
+            group_np = np.frombuffer(buf, np.uint16, SHM_NSLOT*SHM_MAXPTS, offset).reshape(SHM_NSLOT, SHM_MAXPTS)
+            pooled_np = np.frombuffer(buf, np.float32, SHM_NSLOT*MAX_GROUPS*FEATURE_DIM*2,
+                offset+SHM_NSLOT*SHM_MAXPTS*2).reshape(SHM_NSLOT, MAX_GROUPS, FEATURE_DIM*2)
+            out_pooled_t = torch.from_numpy(pooled_np)
         sys.stderr.write("[ptv3_worker] shm attached %s (%d slots x %d pts)\n"
                          % (SHM_NAME, SHM_NSLOT, SHM_MAXPTS))
         sys.stderr.flush()
@@ -455,16 +478,33 @@ def main():
 
     inp = sys.stdin.buffer
     out.write(b"RDY0" + struct.pack("<I", seg.num_classes))
+    retained_request = None
 
     while True:
         tag = _readn(inp, 1)
         if tag is None or tag == b"Q":
             break
-        if tag in (b"H", b"T"):            # legacy / explicit temporal shm request
+        if tag == b'G':
+            seq, slot, n = struct.unpack('<IBI', _readn(inp,9))
+            count = struct.unpack('<I', _readn(inp,4))[0]
+            if not instance_features or retained_request != (seq,slot,n) or not 0<=count<=MAX_GROUPS:
+                raise ValueError('Stale or invalid retained-feature request')
+            from instance_features import pool_features
+            t0=time.perf_counter()
+            with torch.inference_mode():
+                out_pooled_t[slot,:count].copy_(pool_features(*seg._retained_features,group_np[slot,:n],count))
+            out.write(b'r'+struct.pack('<IBIdI',seq,slot,n,(time.perf_counter()-t0)*1000,int(seg.last_voxels)))
+            continue
+        if tag in (b"H", b"T", b"F"):
             seq, slot, n = struct.unpack("<IBI", _readn(inp, 9))
             if in_np is None or slot >= SHM_NSLOT or not 0 < n <= SHM_MAXPTS:
                 raise ValueError('Invalid shared-memory request')
             context = None
+            group_count = 0
+            if tag == b'F':
+                group_count = struct.unpack('<I', _readn(inp, 4))[0]
+                if not instance_features or not 0 <= group_count <= MAX_GROUPS:
+                    raise ValueError('Invalid instance pooling request')
             if tag == b'T':
                 meta = struct.unpack('<QdI16d', _readn(inp, struct.calcsize('<QdI16d')))
                 context = dict(frame=meta[0], stamp=meta[1], epoch=meta[2],
@@ -472,11 +512,14 @@ def main():
             pts = in_np[slot, :n]
             t0 = time.perf_counter()
             seg.segment(pts, out_lab=out_lab_t[slot, :n], out_conf=out_conf_t[slot, :n], memory_context=context,
-                        out_prob=out_prob_t[slot, :n] if out_prob_t is not None else None)
+                        out_prob=out_prob_t[slot, :n] if out_prob_t is not None else None,
+                        feature_groups=group_np[slot, :n] if tag == b'F' else None,
+                        out_group_features=out_pooled_t[slot, :group_count] if tag == b'F' else None)
             if context is not None:
                 import json
                 sys.stderr.write('[semantic_memory] ' + json.dumps(seg.last_memory_status) + '\n')
             dt = (time.perf_counter() - t0) * 1000.0
+            retained_request = (seq,slot,n)
             out.write(b"r" + struct.pack("<IBIdI", seq, slot, n, dt,
                                          int(seg.last_voxels)))
             continue
@@ -499,6 +542,7 @@ def main():
     if shm is not None:
         # Release every numpy/torch exported view before closing the mmap.
         pts = in_np = lab_np = conf_np = out_lab_t = out_conf_t = prob_np = out_prob_t = None
+        group_np = pooled_np = out_pooled_t = None
         buf.release()
         import gc
         gc.collect()
