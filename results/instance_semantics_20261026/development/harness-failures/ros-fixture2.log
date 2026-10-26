@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/validate_ros.py", line 123, in <module>
+    args=p.parse_args();run(args.out,args.instance_semantics)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/validate_ros.py", line 85, in run
+    assert received[3]['label'][:6].tolist()==[3]*6
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

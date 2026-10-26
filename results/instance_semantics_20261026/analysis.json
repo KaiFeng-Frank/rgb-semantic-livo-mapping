@@ -1,0 +1,247 @@
+{
+  "scope": "Development diagnostic; GT-majority association proxy, not official identity accuracy.",
+  "arms": {
+    "raw": {
+      "miou_percent": 58.017029803235644,
+      "changed": 0,
+      "rescued": 0,
+      "harmed": 0,
+      "unified_points": 0
+    },
+    "single_frame_instance": {
+      "miou_percent": 58.035944613934795,
+      "changed": 84,
+      "rescued": 84,
+      "harmed": 0,
+      "unified_points": 7005
+    },
+    "track_only": {
+      "miou_percent": 58.035944613934795,
+      "changed": 84,
+      "rescued": 84,
+      "harmed": 0,
+      "unified_points": 6943
+    },
+    "guarded_without_conflict": {
+      "miou_percent": 58.0356855676594,
+      "changed": 86,
+      "rescued": 84,
+      "harmed": 2,
+      "unified_points": 6949
+    },
+    "guarded": {
+      "miou_percent": 58.035944613934795,
+      "changed": 84,
+      "rescued": 84,
+      "harmed": 0,
+      "unified_points": 6943
+    }
+  },
+  "guarded_vs_single_frame": {
+    "changed": 0,
+    "rescued": 0,
+    "harmed": 0
+  },
+  "corrected_points_by_gt_class": {
+    "9": 35,
+    "3": 20,
+    "2": 29
+  },
+  "identity_pair_counts": {
+    "same_gt_majority:accepted": 51,
+    "changed_gt_majority:no_credible_component": 15,
+    "same_gt_majority:no_credible_component": 78,
+    "same_gt_majority:new": 13,
+    "changed_gt_majority:motion": 3,
+    "same_gt_majority:motion": 16,
+    "changed_gt_majority:new": 4
+  },
+  "changed_gt_majority_cases": [
+    {
+      "scene": "scene-0035",
+      "frame": 11,
+      "track_id": 15,
+      "reason": "no_credible_component",
+      "unified": false,
+      "tied_vote": false
+    },
+    {
+      "scene": "scene-0519",
+      "frame": 11,
+      "track_id": 7,
+      "reason": "no_credible_component",
+      "unified": false,
+      "tied_vote": false
+    },
+    {
+      "scene": "scene-0519",
+      "frame": 11,
+      "track_id": 16,
+      "reason": "no_credible_component",
+      "unified": false,
+      "tied_vote": false
+    },
+    {
+      "scene": "scene-0519",
+      "frame": 12,
+      "track_id": 33,
+      "reason": "no_credible_component",
+      "unified": false,
+      "tied_vote": false
+    },
+    {
+      "scene": "scene-0519",
+      "frame": 14,
+      "track_id": 33,
+      "reason": "motion",
+      "unified": true,
+      "tied_vote": false
+    },
+    {
+      "scene": "scene-0519",
+      "frame": 35,
+      "track_id": 54,
+      "reason": "no_credible_component",
+      "unified": false,
+      "tied_vote": false
+    },
+    {
+      "scene": "scene-0519",
+      "frame": 37,
+      "track_id": 54,
+      "reason": "no_credible_component",
+      "unified": false,
+      "tied_vote": false
+    },
+    {
+      "scene": "scene-0519",
+      "frame": 39,
+      "track_id": 54,
+      "reason": "new",
+      "unified": true,
+      "tied_vote": false
+    },
+    {
+      "scene": "scene-0092",
+      "frame": 2,
+      "track_id": 1,
+      "reason": "no_credible_component",
+      "unified": false,
+      "tied_vote": false
+    },
+    {
+      "scene": "scene-0092",
+      "frame": 5,
+      "track_id": 1,
+      "reason": "no_credible_component",
+      "unified": false,
+      "tied_vote": true
+    },
+    {
+      "scene": "scene-0092",
+      "frame": 6,
+      "track_id": 1,
+      "reason": "no_credible_component",
+      "unified": false,
+      "tied_vote": true
+    },
+    {
+      "scene": "scene-0092",
+      "frame": 11,
+      "track_id": 8,
+      "reason": "no_credible_component",
+      "unified": false,
+      "tied_vote": true
+    },
+    {
+      "scene": "scene-0092",
+      "frame": 13,
+      "track_id": 1,
+      "reason": "new",
+      "unified": true,
+      "tied_vote": false
+    },
+    {
+      "scene": "scene-0092",
+      "frame": 13,
+      "track_id": 8,
+      "reason": "no_credible_component",
+      "unified": false,
+      "tied_vote": false
+    },
+    {
+      "scene": "scene-0092",
+      "frame": 13,
+      "track_id": 11,
+      "reason": "new",
+      "unified": true,
+      "tied_vote": false
+    },
+    {
+      "scene": "scene-0092",
+      "frame": 14,
+      "track_id": 1,
+      "reason": "motion",
+      "unified": true,
+      "tied_vote": false
+    },
+    {
+      "scene": "scene-0092",
+      "frame": 14,
+      "track_id": 16,
+      "reason": "no_credible_component",
+      "unified": false,
+      "tied_vote": false
+    },
+    {
+      "scene": "scene-0092",
+      "frame": 15,
+      "track_id": 19,
+      "reason": "motion",
+      "unified": true,
+      "tied_vote": false
+    },
+    {
+      "scene": "scene-0092",
+      "frame": 16,
+      "track_id": 11,
+      "reason": "no_credible_component",
+      "unified": false,
+      "tied_vote": false
+    },
+    {
+      "scene": "scene-0092",
+      "frame": 28,
+      "track_id": 44,
+      "reason": "no_credible_component",
+      "unified": false,
+      "tied_vote": false
+    },
+    {
+      "scene": "scene-0092",
+      "frame": 29,
+      "track_id": 45,
+      "reason": "new",
+      "unified": false,
+      "tied_vote": false
+    },
+    {
+      "scene": "scene-0962",
+      "frame": 1,
+      "track_id": 4,
+      "reason": "no_credible_component",
+      "unified": false,
+      "tied_vote": false
+    }
+  ],
+  "observed_peak_state": {
+    "tracks": 8,
+    "history_observations": 11
+  },
+  "processing_ms": {
+    "median": 2.5713040377013385,
+    "p95": 3.2360863406211133,
+    "max": 3.5018010530620813
+  },
+  "timing_scope": "Offline diagnostic only; not an end-to-end online timing claim."
+}

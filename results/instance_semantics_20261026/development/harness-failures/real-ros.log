@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/real_ros.py", line 171, in <module>
+    run(p.parse_args())
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/real_ros.py", line 137, in run
+    assert sum(r['changed'] for r in received.values())>0, 'Active delivery must demonstrate an actual semantic change'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Active delivery must demonstrate an actual semantic change

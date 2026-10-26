@@ -14,6 +14,9 @@ REPO_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)
 FRONTEND_CONFIG=${4:-"$REPO_DIR/config/kitti_velodyne64.yaml"}
 CAMERA_CONFIG=${5:-"$REPO_DIR/config/camera_kitti_cam2.yaml"}
 [[ -x "$WORKER_PYTHON" && -f "$WORKSPACE/install/setup.bash" ]]
+if [[ "${INSTANCE_SEMANTICS:-off}" != off && -z "${VISUAL_INSTANCE_WEIGHTS:-}" ]]; then
+  echo 'INSTANCE_SEMANTICS requires VISUAL_INSTANCE_WEIGHTS.' >&2; exit 2
+fi
 mkdir "$OUTPUT_DIR"  # Each run has separate evidence; never overwrite old logs.
 set +u
 source /opt/ros/jazzy/setup.bash
@@ -40,7 +43,7 @@ if [[ -n "${VISUAL_INSTANCE_WEIGHTS:-}" ]]; then
   [[ -n "${SEMANTIC_RUNTIME:-}" && -f "$VISUAL_INSTANCE_WEIGHTS" && "${SEMANTIC_CONSISTENCY:-off}" == off ]] || {
     echo 'Visual instances require SEMANTIC_RUNTIME, an existing weights file, and SEMANTIC_CONSISTENCY=off.' >&2; exit 2;
   }
-  visual_args=(--visual-instances --camera "$CAMERA_CONFIG")
+  visual_args=(--visual-instances --camera "$CAMERA_CONFIG" --instance-semantics "${INSTANCE_SEMANTICS:-off}")
   /usr/bin/python3 -m tools.visual_instances.node \
     --worker-python "$SEMANTIC_RUNTIME/venv/bin/python" --weights "$VISUAL_INSTANCE_WEIGHTS" \
     --out "$OUTPUT_DIR/vision" --frontend "$FRONTEND_CONFIG" --camera "$CAMERA_CONFIG" \
@@ -80,7 +83,7 @@ if [[ -n "${SEMANTIC_RUNTIME:-}" ]]; then
   echo 'Wait for /backend/semantic_status ready=true before publishing sensors.'
 fi
 if [[ -n "${VISUAL_INSTANCE_WEIGHTS:-}" ]]; then
-  echo 'Instance outputs: /backend/semantic_instances + /backend/semantic_instance_info (pair by stamp; identity is session + ID).'
-  echo 'Also wait for /backend/visual_status ready=true. Instance association does not change semantic labels.'
+  echo 'Instance outputs: /backend/semantic_instances + /backend/semantic_instance_info (pair by stamp; semantic identity includes its epoch).'
+  echo "Also wait for /backend/visual_status ready=true. Instance semantics mode: ${INSTANCE_SEMANTICS:-off}."
 fi
 wait -n "${pids[@]}"

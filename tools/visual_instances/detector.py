@@ -68,5 +68,16 @@ class Detector:
             boxes = r.boxes
             frame = mask_frame(masks, boxes.id.int().cpu().tolist(), boxes.cls.int().cpu().tolist(),
                                boxes.conf.cpu().tolist(), stamp_ns, self.session, image.shape[:2])
+            if len(frame.ids):
+                hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV).reshape(-1, 3)
+                descriptors = []
+                for slot in range(len(frame.ids)):
+                    at = np.flatnonzero(frame.index.reshape(-1) == slot+1)
+                    if len(at) > 1024:
+                        at = at[np.linspace(0, len(at)-1, 1024, dtype=int)]
+                    hist = np.concatenate([np.histogram(hsv[at, c], bins=8, range=(0, limit))[0]
+                                           for c,limit in enumerate([180, 256, 256])]).astype(np.float32)+1e-3
+                    descriptors.append(hist/hist.sum())
+                frame.appearance = np.stack(descriptors)
         return frame, dict(elapsed_ms=(time.perf_counter()-start)*1000, instances=len(frame.ids), reset=reset,
                            model_stages_ms=dict(r.speed))

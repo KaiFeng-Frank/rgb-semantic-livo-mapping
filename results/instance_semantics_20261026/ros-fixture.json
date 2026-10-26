@@ -1,0 +1,359 @@
+{
+  "passed": true,
+  "scope": "synthetic actual-ROS active instance semantics",
+  "labels": {
+    "1": [
+      9,
+      9,
+      9,
+      9,
+      9,
+      9,
+      10
+    ],
+    "2": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      10
+    ],
+    "3": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      10
+    ],
+    "4": [
+      9,
+      9,
+      9,
+      9,
+      9,
+      9,
+      10
+    ],
+    "5": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      10
+    ],
+    "6": [
+      9,
+      9,
+      9,
+      9,
+      9,
+      9,
+      10
+    ]
+  },
+  "raw_labels": {
+    "1": [
+      9,
+      9,
+      9,
+      9,
+      9,
+      9,
+      10
+    ],
+    "2": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      10
+    ],
+    "3": [
+      9,
+      9,
+      9,
+      9,
+      9,
+      9,
+      10
+    ],
+    "4": [
+      9,
+      9,
+      9,
+      9,
+      9,
+      9,
+      10
+    ],
+    "5": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      10
+    ],
+    "6": [
+      9,
+      9,
+      9,
+      9,
+      9,
+      9,
+      10
+    ]
+  },
+  "info": {
+    "1": {
+      "points": 7,
+      "in_view": 7,
+      "in_mask": 6,
+      "occluded": 0,
+      "associated": 6,
+      "instances": 1,
+      "session": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "camera_stamp_ns": 1000000000,
+      "dt_ms": 0.0,
+      "ego_motion": "same_timestamp",
+      "elapsed_ms": 0.2185160992667079,
+      "instance_semantics": {
+        "new": 1,
+        "unified_points": 6,
+        "unified_instances": 1,
+        "changed_points": 0,
+        "tracks": 1,
+        "history_observations": 1,
+        "instances": [
+          {
+            "track_id": 12,
+            "epoch": 1,
+            "identity": "new",
+            "points": 6,
+            "label": 9,
+            "confidence": 0.9618749989579956,
+            "unified": true,
+            "semantic_conflict": false
+          }
+        ],
+        "elapsed_ms": 0.8204440819099545,
+        "identity_key": "(visual_session, track_id, semantic_epoch)",
+        "semantic_update": true
+      },
+      "semantic_update": true,
+      "instance_mode": "active",
+      "stamp_ns": 1000000000,
+      "identity_key": "(session, instance_id, semantic_epoch)"
+    },
+    "2": {
+      "points": 7,
+      "in_view": 7,
+      "in_mask": 6,
+      "occluded": 0,
+      "associated": 6,
+      "instances": 1,
+      "session": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "camera_stamp_ns": 2000000000,
+      "dt_ms": 0.0,
+      "ego_motion": "same_timestamp",
+      "elapsed_ms": 0.253031961619854,
+      "instance_semantics": {
+        "accepted": 1,
+        "semantic_reset": 1,
+        "unified_points": 6,
+        "unified_instances": 1,
+        "changed_points": 0,
+        "tracks": 1,
+        "history_observations": 1,
+        "instances": [
+          {
+            "track_id": 12,
+            "epoch": 1,
+            "identity": "accepted",
+            "points": 6,
+            "label": 3,
+            "confidence": 0.9618749989579956,
+            "unified": true,
+            "semantic_conflict": false
+          }
+        ],
+        "elapsed_ms": 0.6471429951488972,
+        "identity_key": "(visual_session, track_id, semantic_epoch)",
+        "semantic_update": true
+      },
+      "semantic_update": true,
+      "instance_mode": "active",
+      "stamp_ns": 2000000000,
+      "identity_key": "(session, instance_id, semantic_epoch)"
+    },
+    "3": {
+      "points": 7,
+      "in_view": 7,
+      "in_mask": 6,
+      "occluded": 0,
+      "associated": 6,
+      "instances": 1,
+      "session": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "camera_stamp_ns": 3000000000,
+      "dt_ms": 0.0,
+      "ego_motion": "same_timestamp",
+      "elapsed_ms": 0.10280602145940065,
+      "instance_semantics": {
+        "accepted": 1,
+        "history_instances": 1,
+        "unified_points": 6,
+        "unified_instances": 1,
+        "changed_points": 6,
+        "tracks": 1,
+        "history_observations": 2,
+        "instances": [
+          {
+            "track_id": 12,
+            "epoch": 1,
+            "identity": "accepted",
+            "points": 6,
+            "label": 3,
+            "confidence": 0.6177035312544732,
+            "unified": true,
+            "semantic_conflict": false
+          }
+        ],
+        "elapsed_ms": 0.4656770033761859,
+        "identity_key": "(visual_session, track_id, semantic_epoch)",
+        "semantic_update": true
+      },
+      "semantic_update": true,
+      "instance_mode": "active",
+      "stamp_ns": 3000000000,
+      "identity_key": "(session, instance_id, semantic_epoch)"
+    },
+    "4": {
+      "points": 7,
+      "in_view": 7,
+      "in_mask": 6,
+      "occluded": 0,
+      "associated": 6,
+      "instances": 1,
+      "session": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "camera_stamp_ns": 4000000000,
+      "dt_ms": 0.0,
+      "ego_motion": "same_timestamp",
+      "elapsed_ms": 0.12873508967459202,
+      "instance_semantics": {
+        "motion": 1,
+        "unified_points": 6,
+        "unified_instances": 1,
+        "changed_points": 0,
+        "tracks": 1,
+        "history_observations": 1,
+        "instances": [
+          {
+            "track_id": 12,
+            "epoch": 2,
+            "identity": "motion",
+            "points": 6,
+            "label": 9,
+            "confidence": 0.9618749989579956,
+            "unified": true,
+            "semantic_conflict": false
+          }
+        ],
+        "elapsed_ms": 0.5065359873697162,
+        "identity_key": "(visual_session, track_id, semantic_epoch)",
+        "semantic_update": true
+      },
+      "semantic_update": true,
+      "instance_mode": "active",
+      "stamp_ns": 4000000000,
+      "identity_key": "(session, instance_id, semantic_epoch)"
+    },
+    "5": {
+      "points": 7,
+      "in_view": 7,
+      "in_mask": 6,
+      "occluded": 0,
+      "associated": 6,
+      "instances": 1,
+      "session": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "camera_stamp_ns": 5000000000,
+      "dt_ms": 0.0,
+      "ego_motion": "same_timestamp",
+      "elapsed_ms": 0.24773203767836094,
+      "instance_semantics": {
+        "new": 1,
+        "unified_points": 6,
+        "unified_instances": 1,
+        "changed_points": 0,
+        "tracks": 1,
+        "history_observations": 1,
+        "instances": [
+          {
+            "track_id": 12,
+            "epoch": 3,
+            "identity": "new",
+            "points": 6,
+            "label": 3,
+            "confidence": 0.9618749989579956,
+            "unified": true,
+            "semantic_conflict": false
+          }
+        ],
+        "elapsed_ms": 0.5593560636043549,
+        "identity_key": "(visual_session, track_id, semantic_epoch)",
+        "semantic_update": true
+      },
+      "semantic_update": true,
+      "instance_mode": "active",
+      "stamp_ns": 5000000000,
+      "identity_key": "(session, instance_id, semantic_epoch)"
+    },
+    "6": {
+      "reason": "no_causal_camera_or_pose_bracket",
+      "session": null,
+      "associated": 0,
+      "instance_semantics": {
+        "changed_points": 0,
+        "tracks": 1,
+        "history_observations": 1,
+        "instances": [],
+        "elapsed_ms": 0.14241202734410763,
+        "identity_key": "(visual_session, track_id, semantic_epoch)",
+        "semantic_update": true
+      },
+      "semantic_update": true,
+      "instance_mode": "active",
+      "stamp_ns": 6000000000,
+      "identity_key": "(session, instance_id, semantic_epoch)"
+    }
+  },
+  "map_parity": {
+    "ok": true,
+    "errors": [],
+    "keys_equal": true,
+    "labels_equal": true,
+    "point_counts_equal": true,
+    "keyframe_counts_equal": true,
+    "scores_equal": true,
+    "confidence_equal": true,
+    "keyframes": 6,
+    "stored_points": 6,
+    "map_voxels": 1,
+    "rebuilt_voxels": 1,
+    "compared_voxels": 1,
+    "max_score_error": 0.0,
+    "max_confidence_error": 0.0,
+    "rebuild_ms": 1.5149560058489442,
+    "snapshot_ms": 0.022612977772951126,
+    "comparison_ms": 0.047170091420412064,
+    "total_ms": 1.5871840296313167
+  }
+}

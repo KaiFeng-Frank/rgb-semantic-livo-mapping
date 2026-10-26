@@ -72,8 +72,16 @@ in 40 frames with the original semantic labels preserved. Six development scenes
 expose **22 GT-box-majority identity changes in 180 adjacent-track pairs**.
 [The per-instance audit](results/visual_instance_audit_20261026/README.md) finds
 three involve tied support and all 22 preserve the visual class; these must not
-be read as 22 semantic class flips. This path supplies association hypotheses,
-without temporal semantic overwrites.
+be read as 22 semantic class flips. Association-only remains the default.
+Optional **shared instance semantics** now validates continuity in 3D, resets
+history on suspected identity changes, and publishes one class per accepted
+component. Contrary current evidence can veto a history-dependent overwrite.
+A same-forward 242-frame development comparison corrects **84 points with zero
+new errors**, native16 mIoU **58.0170 → 58.0359%**. Single-frame instance pooling
+gets the same labels: extra accuracy from temporal history is **not established**.
+A real 41-frame ROS run actually publishes 34 corrected points, zero newly wrong
+points, and receives all 41 outputs (P95 115.34 ms at 2 Hz, supplied ego poses).
+[Implementation, counterexamples and controls](results/instance_semantics_20261026/README.md).
 The full HKU runtime test processes 1,277 images at 10 Hz with CPU isolation;
 semantic keyframes remain about 1 Hz. Timing comparisons retain a control stall
 and the slower run without isolation, and do not establish hard real-time bounds.

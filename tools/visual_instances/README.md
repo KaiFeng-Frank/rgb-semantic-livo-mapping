@@ -1,8 +1,10 @@
-# Online visual instance association
+# Online visual instances and shared semantics
 
 This optional path preserves PTv3 and adds visual **instance association** to
-current semantic scans. It does not modify class predictions, train a new head,
-distill a model, or feed instance hypotheses into the persistent map.
+current semantic scans. Association-only remains the default. Optional
+`--instance-semantics active` also publishes shared instance semantic labels.
+PTv3 stays in place; no new training or distillation is required. The persistent
+static map continues to receive independent raw PTv3 evidence.
 
 The implementation uses the official COCO-pretrained **YOLO11n-seg** model with
 Ultralytics **BoT-SORT**, sparse optical-flow camera-motion compensation, and
@@ -38,8 +40,43 @@ input; no ground-truth data enter inference or association.
 Identity is the pair **(session UUID, instance_id)**. A worker restart, new
 sequence, or image gap over 750 ms starts a new session. This prevents an ID
 counter reset from joining unrelated histories. IDs can still switch *within*
-a session: BoT-SORT is not a physical identity guarantee. No semantic history
-accumulation is enabled in this implementation.
+a session: BoT-SORT is not a physical identity guarantee.
+
+## Optional shared semantic state
+
+`off` retains the original association-only behavior. `shadow` computes semantic
+proposals without changing scan labels. `active` changes `label/confidence` on
+both current-scan topics. The modes cannot be combined with old point-level
+temporal consistency, which would count correlated evidence twice.
+
+The semantic identity is **(session UUID, instance_id, semantic_epoch)**. A
+bounded connected 3D surface must first survive the projection gate (6–2048
+points; the largest component must contain at least 60% of associated points).
+History reuse then requires compatible world-space motion, no closer competing
+instance, and compatible HSV appearance when available. HSV histograms are a
+cheap veto, not learned ReID. A rejected continuation starts a new semantic epoch;
+no old semantic state follows it. Neither geometric checks nor histograms can
+guarantee physical identity.
+
+Each accepted observation combines the raw PTv3 posterior mean with a bounded
+current visual vote. At most four raw observations per track and 128 tracks are
+retained, expiring after two seconds. Decayed history has no more total weight
+than the current observation. A strong new observation can replace a wrong old
+class. If only history makes a decision acceptable, confident contrary current
+points cause the **whole component to abstain** and clear semantic history.
+A decision already supported by the current instance can still use ordinary
+single-frame pooling; a blanket per-point veto discarded most valid corrections
+in the development diagnostic. Abstention preserves raw point labels.
+The same fixed posterior confidence/margin gates apply to contrary evidence;
+these are uncalibrated model scores, not correctness probabilities.
+
+Accepted components publish one shared class and confidence; an abstained
+component is explicitly marked invalid and may retain differing raw point labels.
+Only raw observations enter subsequent history, never enhanced outputs. Retained
+sensor-space centers follow received graph pose revisions, preventing a loop
+correction from looking like an object jump. The state is a short-term current
+scan layer, not persistent dynamic-object map reconstruction or tracking ground
+truth. Fast motion, sparse points and occlusion can reduce coverage.
 
 ## Outputs
 
@@ -47,9 +84,14 @@ accumulation is enabled in this implementation.
   per-instance metadata; camera acquisition timestamp.
 - `/backend/visual_status`: queue/drop/failure/readiness counters.
 - `/backend/semantic_instances`: current scan in `backend_imu`, preserving XYZ,
-  `label`, and `confidence`; adds `instance_id` (uint32), `visual_label` (uint16),
+  with `label`, and `confidence`; adds `instance_id` (uint32), `visual_label` (uint16),
   and `instance_score` (float32). ID 0 means unassociated; visual label 65535 means
   unknown. The score is the detector score, **not** calibrated association confidence.
+  With shared semantics enabled, it also contains `raw_label`, `raw_confidence`,
+  `instance_label`, `instance_confidence`, `semantic_epoch` and `instance_valid`.
+  `instance_label=65535` / `instance_valid=0` means the component abstained.
+  In active mode `label/confidence` contain the enhanced output; raw fields
+  preserve the same forward pass for diagnosis. Shadow mode keeps raw labels.
 - `/backend/semantic_instance_info`: pair by exact cloud timestamp to obtain the
   session UUID and association diagnostics. Do not use bare IDs across sessions
   or consume a cloud with missing identity metadata as a temporal observation.
@@ -74,6 +116,7 @@ Add these environment settings before `tools/loop_closure/run_online.sh`:
 export VISUAL_INSTANCE_WEIGHTS=/path/to/yolo11n-seg.pt
 export VISUAL_PYTHONPATH=/path/to/isolated/visual-deps
 export SEMANTIC_CONSISTENCY=off
+export INSTANCE_SEMANTICS=active  # off (default), shadow, or active
 ```
 
 Keep perception CPU work away from the pose cores on a resource-constrained
@@ -93,6 +136,7 @@ For the existing paced real-sensor replay, add:
 
 ```bash
 --visual-instances --visual-weights /path/to/yolo11n-seg.pt
+--instance-semantics active
 ```
 
 ## Validation and limits
@@ -104,11 +148,16 @@ overlap, rejected foreground, boundary rejection, camera axes, malformed transpo
 causality, expiry and identity reset. `validate_ros.py` checks actual ROS delivery,
 including a conflicting visual class that must not change semantic predictions,
 future-camera rejection, restart identity and exact raw-map rebuild parity.
+With `--instance-semantics`, the synthetic actual-ROS fixture additionally checks
+actual label changes, wrong-initial-state correction, same-ID object replacement,
+pose revision, session restart, missing vision and raw-map rebuild parity.
 
 `real_ros.py` feeds real nuScenes images and raw LiDAR at their original 2 Hz
 timestamps through the separate visual worker, live PTv3 and the same semantic
-ROS node. It checks nonzero instance delivery and exact preservation of semantic
-labels at the actual subscribers. Its graph poses are supplied nuScenes ego
+ROS node. It checks nonzero instance delivery and equality between the two output
+topics at actual subscribers. Active mode additionally requires real label changes,
+evaluates raw/enhanced semantics in the subscriber, and checks one label per
+accepted component. Its graph poses are supplied nuScenes ego
 poses, not a live SLAM result; GT semantic labels and boxes are not sent to nodes.
 
 `evaluate.py` runs real images and LiDAR with labels/boxes used **only after
@@ -124,8 +173,7 @@ dynamic-object identity accuracy. There is no HKU semantic ground truth.
 visual class, GT-box support, ambiguous votes and adjacent identity/label changes.
 These are different events: two different cars can both be classified correctly
 while a track ID moves between them. Conversely, the same physical object and ID
-can receive a different current-frame class, because no track-level semantic
-state is accumulated. [The reproduced 242-frame audit](../../results/visual_instance_audit_20261026/README.md)
+can receive a different current-frame visual class. [The original 242-frame audit](../../results/visual_instance_audit_20261026/README.md)
 separates these cases and qualifies sparse/tied GT-box-majority evidence.
 
 Only camera-visible surfaces are associated. Sparse depth checks cannot detect
@@ -138,6 +186,9 @@ camera time; it abstains if no bracket exists or its interval exceeds 1.5 second
 This is an approximation to within-scan motion, not deskewing raw nuScenes scans.
 The offline nuScenes diagnostic uses supplied ego poses at both acquisition times.
 
-Do not infer semantic improvement from having instance IDs. The next semantic
-fusion experiment must separately measure corrected points, newly wrong points,
-identity failures, coverage and latency, with a raw single-frame control.
+`evaluate.py --semantic-fusion --audit-instances` compares raw PTv3, single-frame
+instance pooling, temporal pooling without the identity veto, the original
+temporal rule without the contradiction veto, and the complete rule, all sharing
+the same model forwards. GT access occurs after all predictions. It retains
+corrected/newly wrong points, per-class confusion matrices and instance evidence.
+[Shared semantic state results and failures](../../results/instance_semantics_20261026/README.md).

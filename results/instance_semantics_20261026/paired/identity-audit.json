@@ -1,0 +1,18 @@
+{
+  "counts": {
+    "adjacent_track_pairs": 180,
+    "wrong_identity_pairs": 22,
+    "wrong_identity_same_gt_class": 19,
+    "wrong_identity_both_visual_labels_correct": 19,
+    "wrong_identity_with_tied_vote": 3,
+    "wrong_identity_strong_box_support": 3,
+    "same_identity_pairs": 158,
+    "same_identity_visual_label_changes": 7,
+    "same_identity_both_visual_correct": 137,
+    "same_identity_both_visual_wrong": 14,
+    "same_identity_visual_correct_to_wrong": 4,
+    "same_identity_visual_wrong_to_correct": 3
+  },
+  "scope": "Evaluation-only GT-box majority proxy of raw visual associations, independent of semantic fusion.",
+  "support_diagnostic": "Both observations have >=10 box-supported points, >=80% dominant support and >=80% dominant/associated. This does not alter the original metric."
+}

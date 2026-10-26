@@ -1,0 +1,110 @@
+{
+  "voxel": 0.2,
+  "classes": 16,
+  "tile_voxels": 20,
+  "max_keyframes": 1000,
+  "max_points": 200000,
+  "max_total_points": 4000000,
+  "excluded_classes": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9
+  ],
+  "minimum_confidence": 0.35,
+  "pending_clouds": 2,
+  "max_queue_age_s": 3.0,
+  "display_points": 200000,
+  "T_imu_lidar": [
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "consistency": "off",
+  "visual_instances": true,
+  "instance_semantics": "active",
+  "map_evidence": "raw_single_frame",
+  "visual_camera": {
+    "width": 1600,
+    "height": 900,
+    "K": [
+      [
+        1252.8131021185304,
+        0.0,
+        826.588114781398
+      ],
+      [
+        0.0,
+        1252.8131021185304,
+        469.9846626224581
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "distortion": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "T_camera_lidar": [
+      [
+        0.9998986137987435,
+        0.011220259396799237,
+        -0.008767434198194311,
+        -0.007022340992421175
+      ],
+      [
+        -0.009368031550067449,
+        0.05464515701518938,
+        -0.9984618905094288,
+        -0.35150598215132156
+      ],
+      [
+        -0.01072390359095364,
+        0.9984427938514324,
+        0.054744728494331714,
+        -0.7332408994883366
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "max_dt_ms": 60.0
+  },
+  "predictions_input": false,
+  "frontend": "/home/frank/semantic_livo_runtime/instance-semantics-20261026-real-ros-release/frontend.yaml",
+  "reflectance_divisor": 255.0,
+  "intensity_scale": 1.0
+}
