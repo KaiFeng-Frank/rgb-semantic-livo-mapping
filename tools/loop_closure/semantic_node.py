@@ -90,6 +90,9 @@ def make_node(args):
         raise ValueError('invalid semantic queue bounds')
     transform = extrinsic(args.frontend)
     visual_enabled = getattr(args, 'visual_instances', False)
+    instance_mode = getattr(args, 'instance_semantics', 'off')
+    if instance_mode not in ('off', 'shadow', 'active') or instance_mode != 'off' and not visual_enabled:
+        raise ValueError('Instance semantics requires visual association and a valid mode')
     if visual_enabled:
         import cv2
         cv2.setNumThreads(1)  # Import before readiness, outside the first scan timing.
@@ -97,6 +100,11 @@ def make_node(args):
         if cfg['classes'] != 16 or consistency_mode != 'off':
             raise ValueError('Visual association requires native16 and consistency=off (no double fusion)')
         camera = Camera.from_livo(args.frontend, args.camera)
+        if instance_mode != 'off':
+            from tools.visual_instances.semantics import InstanceSemantics
+            # Import sparse geometry before online readiness.
+            from scipy.spatial import cKDTree
+            from scipy.sparse.csgraph import connected_components
     core_args = {key: cfg[key] for key in ('voxel', 'classes', 'tile_voxels', 'max_keyframes',
                  'max_points', 'max_total_points', 'excluded_classes', 'minimum_confidence')}
 
@@ -105,7 +113,8 @@ def make_node(args):
             super().__init__('online_semantic_refusion')
             args.out.mkdir(parents=True, exist_ok=False)
             (args.out/'config.json').write_text(json.dumps(dict(cfg, T_imu_lidar=transform.tolist(),
-                consistency=consistency_mode, visual_instances=visual_enabled, map_evidence='raw_single_frame',
+                consistency=consistency_mode, visual_instances=visual_enabled, instance_semantics=instance_mode,
+                map_evidence='raw_single_frame',
                 visual_camera=(dict(width=camera.width, height=camera.height, K=camera.K.tolist(),
                     distortion=camera.distortion.tolist(), T_camera_lidar=camera.T_camera_lidar.tolist(),
                     max_dt_ms=getattr(args, 'visual_max_dt_ms', 20.)) if visual_enabled else None),
@@ -113,6 +122,9 @@ def make_node(args):
                 reflectance_divisor=args.reflectance_divisor, intensity_scale=args.intensity_scale), indent=2)+'\n')
             self.core = ReversibleSemanticMap(**core_args)
             self.consistency = None
+            self.instance_semantics = InstanceSemantics() if instance_mode != 'off' else None
+            if self.instance_semantics:
+                (args.out/'instance-semantics.json').write_text(json.dumps(self.instance_semantics.configuration(),indent=2)+'\n')
             if consistency_mode != 'off':
                 from src.semantic_consistency import CausalConsistency
                 if cfg['classes'] != 16:
@@ -232,7 +244,7 @@ def make_node(args):
                     sys.path.insert(0, str(ROOT/'src'))
                     from ptv3_client import PTv3Client
                     self.client = PTv3Client(half=True, shuffle=False, max_pts=cfg['max_points'],
-                        probability_classes=cfg['classes'] if self.consistency else 0,
+                        probability_classes=cfg['classes'] if self.consistency or self.instance_semantics else 0,
                         intensity_scale=args.intensity_scale, stderr_path=str(args.out/'inference.log'),
                         startup_timeout_s=120., response_timeout_s=3., cancel_event=self.stop)
                     if self.client.num_classes != cfg['classes']:
@@ -260,6 +272,8 @@ def make_node(args):
                         else:
                             self.consistency.history = None
                     self.last_graph = graph_id
+                    if self.instance_semantics and graph_changed:
+                        self.instance_semantics.revise_poses(graph['times_ns'], graph['poses'] @ transform)
                     if revision and revision.get('changed_keyframes', 0):
                         self.counters['revisions'] += 1
                     added = None
@@ -286,12 +300,18 @@ def make_node(args):
                                         buffer=message.data, strides=(message.row_step, message.point_step))
                                     labels = rows['label'].reshape(-1).copy()
                                     confidence = rows['confidence'].reshape(-1).copy()
+                                    if self.instance_semantics:
+                                        # Explicit probability fields are fixture-only; never infer
+                                        # a fake full posterior from a top-1 label/confidence pair.
+                                        probabilities = np.column_stack([rows[f'p{i}'].reshape(-1) for i in range(cfg['classes'])])
+                                        if not np.array_equal(labels, probabilities.argmax(1)) or not np.allclose(confidence, probabilities.max(1), atol=1e-5):
+                                            raise ValueError('Fixture label/confidence differs from posterior')
                                 else:
                                     # B0's KITTI training inputs use [0,1]
                                     # reflectance. Livox exports [0,255]; the
                                     # caller explicitly declares that conversion.
                                     points[:, 3] /= args.reflectance_divisor
-                                    if self.consistency:
+                                    if self.consistency or self.instance_semantics:
                                         labels, confidence, probabilities = self.client.segment_probabilities(points)
                                     else:
                                         labels, confidence = self.client.segment(points)
@@ -325,6 +345,14 @@ def make_node(args):
                                         visual_result = dict(ids=np.zeros(len(points), np.uint32),
                                             labels=np.full(len(points), 65535, np.uint16), scores=np.zeros(len(points), np.float32),
                                             info=dict(reason='no_causal_camera_or_pose_bracket', session=None, associated=0))
+                                    if self.instance_semantics:
+                                        enhanced = self.instance_semantics.step(points[:,:3], probabilities, visual_result,
+                                            stamp_ns=int(stamp), pose=graph['poses'][index] @ transform)
+                                        visual_result['semantics'] = enhanced
+                                        visual_result['info'].update(instance_semantics=enhanced['info'],
+                                            semantic_update=instance_mode=='active', instance_mode=instance_mode)
+                                        if instance_mode == 'active':
+                                            scan_labels, scan_confidence = enhanced['labels'], enhanced['confidence']
                                 body = points[:, :3].astype(np.float64) @ transform[:3, :3].T+transform[:3, 3]
                                 self.scan_sequence += 1
                                 with self.lock:
@@ -409,9 +437,10 @@ def main():
     ap.add_argument('--verify-final', action='store_true', help='After stream ends, compare incremental map to fresh rebuild (not timed online work)')
     ap.add_argument('--consistency', choices=('off', 'shadow', 'active'), default='off',
                     help='Opt-in causal short-term scan consistency; map always retains raw evidence')
-    ap.add_argument('--visual-instances', action='store_true', help='Publish visual instance association; semantic labels remain raw')
+    ap.add_argument('--visual-instances', action='store_true', help='Publish visual instance association; label updates require --instance-semantics active')
     ap.add_argument('--camera', type=Path, help='Full-resolution raw camera calibration for visual association')
     ap.add_argument('--visual-max-dt-ms', type=float, default=20.)
+    ap.add_argument('--instance-semantics',choices=('off','shadow','active'),default='off')
     args = ap.parse_args()
     if not np.isfinite(args.reflectance_divisor) or args.reflectance_divisor <= 0:
         ap.error('reflectance divisor must be finite and positive')

@@ -1,0 +1,21 @@
+[WARN] [1793005654.026332307] [rcl]: ROS_LOCALHOST_ONLY is deprecated but still honored if it is enabled. Use ROS_AUTOMATIC_DISCOVERY_RANGE and ROS_STATIC_PEERS instead.
+[WARN] [1793005654.026354180] [rcl]: 'localhost_only' is enabled, 'automatic_discovery_range' and 'static_peers' will be ignored.
+[WARN] [1793005654.713676462] [rcl]: ROS_LOCALHOST_ONLY is deprecated but still honored if it is enabled. Use ROS_AUTOMATIC_DISC[WARN] [1793005654.713674509] [rcl]: ROS_LOCALHOST_ONLY is deprecated but still honored if it is enabled. Use ROS_AUTOMATIC_DISCOVERY_RANGE and ROS_STATIC_PEERS instead.
+OVERY_RANGE and ROS_STATIC_PEERS instead.
+[WARN] [1793005654.713710648] [rcl]: 'localhost_only' is enabled, 'automatic_discovery_range' and 'static_peers' will be ignored[WARN] [1793005654.713710668] [rcl]: 'localhost_only' is enabled, 'automatic_discovery_range' and 'static_peers' will be ignored.
+.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/validate_ros.py", line 122, in <module>
+    args=p.parse_args();run(args.out,args.instance_semantics)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/validate_ros.py", line 79, in run
+    visual(1,'a'*32,9);send_prob(1,car=.05)
+                       ^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/validate_ros.py", line 75, in send_prob
+    until(lambda:sec in received and sec in infos)
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/validate_ros.py", line 46, in until
+    if time.monotonic()>end:raise TimeoutError('ROS delivery deadline')
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: ROS delivery deadline

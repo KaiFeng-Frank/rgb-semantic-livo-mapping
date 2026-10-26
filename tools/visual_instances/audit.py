@@ -75,6 +75,6 @@ class AssociationAudit:
         (self.out/'instance-observations.jsonl').write_text(''.join(json.dumps(o)+'\n' for o in self.observations))
         (self.out/'identity-pairs.jsonl').write_text(''.join(json.dumps(o)+'\n' for o in self.pairs))
         (self.out/'identity-audit.json').write_text(json.dumps(dict(counts=counts,
-            scope='Evaluation-only GT-box majority proxy; no temporal semantic fusion is enabled.',
+            scope='Evaluation-only GT-box majority proxy of raw visual associations, independent of semantic fusion.',
             support_diagnostic='Both observations have >=10 box-supported points, >=80% dominant support and >=80% dominant/associated. This does not alter the original metric.'), indent=2)+'\n')
         return counts

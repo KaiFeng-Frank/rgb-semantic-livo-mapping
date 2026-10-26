@@ -1,0 +1,110 @@
+{
+  "voxel": 0.2,
+  "classes": 16,
+  "tile_voxels": 20,
+  "max_keyframes": 1000,
+  "max_points": 200000,
+  "max_total_points": 4000000,
+  "excluded_classes": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9
+  ],
+  "minimum_confidence": 0.35,
+  "pending_clouds": 2,
+  "max_queue_age_s": 3.0,
+  "display_points": 200000,
+  "T_imu_lidar": [
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.04165
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      0.02326
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      -0.0284
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "consistency": "off",
+  "visual_instances": true,
+  "instance_semantics": "active",
+  "map_evidence": "raw_single_frame",
+  "visual_camera": {
+    "width": 1280,
+    "height": 1024,
+    "K": [
+      [
+        863.590518438,
+        0.0,
+        621.666074632
+      ],
+      [
+        0.0,
+        863.100180534,
+        533.971978652
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "distortion": [
+      -0.0944205499243979,
+      0.0946727677776504,
+      -0.00807970960613932,
+      8.07461209775283e-05
+    ],
+    "T_camera_lidar": [
+      [
+        0.00162756,
+        -0.999991,
+        0.00390957,
+        0.04092572644096969
+      ],
+      [
+        -0.0126748,
+        -0.00392989,
+        -0.999912,
+        0.031842407373632
+      ],
+      [
+        0.999918,
+        0.00157786,
+        -0.012681,
+        -0.09272155403985799
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "max_dt_ms": 20.0
+  },
+  "predictions_input": false,
+  "frontend": "/home/frank/semantic_livo_realtime_main/tools/loop_closure/frontend/hku.yaml",
+  "reflectance_divisor": 255.0,
+  "intensity_scale": 0.2
+}

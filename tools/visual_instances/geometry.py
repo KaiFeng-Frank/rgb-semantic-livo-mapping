@@ -63,6 +63,7 @@ class InstanceFrame:
     ids: np.ndarray
     labels: np.ndarray
     scores: np.ndarray
+    appearance: np.ndarray | None = None  # Optional normalized HSV histogram, not learned ReID.
 
     def __post_init__(self):
         if type(self.stamp_ns) is not int or self.stamp_ns < 0 or not re.fullmatch('[a-f0-9]{32}', self.session):
@@ -78,11 +79,17 @@ class InstanceFrame:
                 or not np.isin(self.labels, list(COCO_TO_NATIVE.values())).all()
                 or not np.isfinite(self.scores).all() or np.any((self.scores < 0) | (self.scores > 1))):
             raise ValueError('Invalid instance mask/metadata')
+        if self.appearance is not None:
+            self.appearance = np.asarray(self.appearance, dtype=np.float32)
+            if (self.appearance.shape != (n, 24) or not np.isfinite(self.appearance).all()
+                    or np.any(self.appearance < 0) or not np.allclose(self.appearance.sum(1), 1., atol=1e-4)):
+                raise ValueError('Invalid appearance histogram')
 
     def encode(self):
         return json.dumps(dict(schema=1, stamp_ns=self.stamp_ns, session=self.session,
             shape=list(self.index.shape), ids=self.ids.tolist(), labels=self.labels.tolist(),
-            scores=self.scores.tolist(), index=base64.b64encode(zlib.compress(
+            scores=self.scores.tolist(), appearance=self.appearance.tolist() if self.appearance is not None else None,
+            index=base64.b64encode(zlib.compress(
                 self.index.astype('<u2').tobytes(), 1)).decode()), separators=(',', ':'), allow_nan=False)
 
     @classmethod
@@ -101,7 +108,8 @@ class InstanceFrame:
             raise ValueError('Invalid compressed mask length')
         return cls(d['stamp_ns'], d['session'], np.frombuffer(raw, '<u2').reshape(shape),
                    np.asarray(d['ids']) if d['ids'] else np.empty(0, np.int64),
-                   np.asarray(d['labels']), np.asarray(d['scores']))
+                   np.asarray(d['labels']), np.asarray(d['scores']),
+                   np.asarray(d['appearance'], dtype=np.float32).reshape(-1, 24) if d.get('appearance') is not None else None)
 
 
 class FrameCache:
@@ -228,4 +236,5 @@ def associate(xyz, camera, frame, *, depth_tolerance=.4, cell_pixels=3, min_poin
             ids[at], labels[at], scores[at] = frame.ids[slot], frame.labels[slot], frame.scores[slot]
         info['associated'] = int(np.count_nonzero(ids))
         info['instances'] = int(len(np.unique(ids[ids > 0])))
-    return dict(ids=ids, labels=labels, scores=scores, info=info)
+    return dict(ids=ids, labels=labels, scores=scores, info=info,
+                appearance={int(t): frame.appearance[i] for i,t in enumerate(frame.ids)} if frame.appearance is not None else {})

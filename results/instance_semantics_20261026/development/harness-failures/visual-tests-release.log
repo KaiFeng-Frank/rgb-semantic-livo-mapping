@@ -1,0 +1,328 @@
+======================================================================
+ERROR: test_camera_ego_motion_uses_only_received_pose_bracket (tools.visual_instances.test_association.AssociationTests.test_camera_ego_motion_uses_only_received_pose_bracket)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 86, in <module>
+    from scipy._lib._ccallback import LowLevelCallable
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/_ccallback.py", line 1, in <module>
+    from . import _ccallback_c
+ImportError: cannot import name '_ccallback_c' from 'scipy._lib' (/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/__init__.py)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_association.py", line 95, in test_camera_ego_motion_uses_only_received_pose_bracket
+    c=camera_at_scan(self.camera(),graph,2*10**9,1_500_000_000,np.eye(4))
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/geometry.py", line 184, in camera_at_scan
+    from scipy.spatial.transform import Rotation, Slerp
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 91, in <module>
+    raise ImportError(msg) from e
+ImportError: The `scipy` install you are using seems to be broken, (extension modules cannot be imported), please try reinstalling.
+
+======================================================================
+ERROR: test_appearance_veto_is_independent_of_same_semantic_class (tools.visual_instances.test_semantics.InstanceSemanticTests.test_appearance_veto_is_independent_of_same_semantic_class)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 86, in <module>
+    from scipy._lib._ccallback import LowLevelCallable
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/_ccallback.py", line 1, in <module>
+    from . import _ccallback_c
+ImportError: cannot import name '_ccallback_c' from 'scipy._lib' (/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/__init__.py)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_semantics.py", line 46, in test_appearance_veto_is_independent_of_same_semantic_class
+    r=c.step(xyz,p,a,stamp_ns=int((i+1)*5e8),pose=np.eye(4))
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 127, in step
+    chosen = component(xyz[at], cfg)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 40, in component
+    from scipy.spatial import cKDTree
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 91, in <module>
+    raise ImportError(msg) from e
+ImportError: The `scipy` install you are using seems to be broken, (extension modules cannot be imported), please try reinstalling.
+
+======================================================================
+ERROR: test_competing_object_prevents_history_transfer_even_without_large_motion (tools.visual_instances.test_semantics.InstanceSemanticTests.test_competing_object_prevents_history_transfer_even_without_large_motion)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 86, in <module>
+    from scipy._lib._ccallback import LowLevelCallable
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/_ccallback.py", line 1, in <module>
+    from . import _ccallback_c
+ImportError: cannot import name '_ccallback_c' from 'scipy._lib' (/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/__init__.py)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_semantics.py", line 60, in test_competing_object_prevents_history_transfer_even_without_large_motion
+    c=InstanceSemantics();self.step(c,0)
+                          ^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_semantics.py", line 17, in step
+    return core.step(*self.observation(**kwargs), stamp_ns=int((i+1)*500_000_000),pose=np.eye(4))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 127, in step
+    chosen = component(xyz[at], cfg)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 40, in component
+    from scipy.spatial import cKDTree
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 91, in <module>
+    raise ImportError(msg) from e
+ImportError: The `scipy` install you are using seems to be broken, (extension modules cannot be imported), please try reinstalling.
+
+======================================================================
+ERROR: test_confident_current_counterevidence_abstains_and_clears_old_semantics (tools.visual_instances.test_semantics.InstanceSemanticTests.test_confident_current_counterevidence_abstains_and_clears_old_semantics)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 86, in <module>
+    from scipy._lib._ccallback import LowLevelCallable
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/_ccallback.py", line 1, in <module>
+    from . import _ccallback_c
+ImportError: cannot import name '_ccallback_c' from 'scipy._lib' (/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/__init__.py)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_semantics.py", line 50, in test_confident_current_counterevidence_abstains_and_clears_old_semantics
+    c=InstanceSemantics(); self.step(c,0)
+                           ^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_semantics.py", line 17, in step
+    return core.step(*self.observation(**kwargs), stamp_ns=int((i+1)*500_000_000),pose=np.eye(4))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 127, in step
+    chosen = component(xyz[at], cfg)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 40, in component
+    from scipy.spatial import cKDTree
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 91, in <module>
+    raise ImportError(msg) from e
+ImportError: The `scipy` install you are using seems to be broken, (extension modules cannot be imported), please try reinstalling.
+
+======================================================================
+ERROR: test_current_instance_can_correct_outlier_without_history_manufacturing_confidence (tools.visual_instances.test_semantics.InstanceSemanticTests.test_current_instance_can_correct_outlier_without_history_manufacturing_confidence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 86, in <module>
+    from scipy._lib._ccallback import LowLevelCallable
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/_ccallback.py", line 1, in <module>
+    from . import _ccallback_c
+ImportError: cannot import name '_ccallback_c' from 'scipy._lib' (/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/__init__.py)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_semantics.py", line 67, in test_current_instance_can_correct_outlier_without_history_manufacturing_confidence
+    c=InstanceSemantics();self.step(c,0)
+                          ^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_semantics.py", line 17, in step
+    return core.step(*self.observation(**kwargs), stamp_ns=int((i+1)*500_000_000),pose=np.eye(4))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 127, in step
+    chosen = component(xyz[at], cfg)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 40, in component
+    from scipy.spatial import cKDTree
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 91, in <module>
+    raise ImportError(msg) from e
+ImportError: The `scipy` install you are using seems to be broken, (extension modules cannot be imported), please try reinstalling.
+
+======================================================================
+ERROR: test_disconnected_background_is_not_unified (tools.visual_instances.test_semantics.InstanceSemanticTests.test_disconnected_background_is_not_unified)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 86, in <module>
+    from scipy._lib._ccallback import LowLevelCallable
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/_ccallback.py", line 1, in <module>
+    from . import _ccallback_c
+ImportError: cannot import name '_ccallback_c' from 'scipy._lib' (/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/__init__.py)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_semantics.py", line 86, in test_disconnected_background_is_not_unified
+    r=InstanceSemantics().step(xyz,p,a,stamp_ns=1,pose=np.eye(4))
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 127, in step
+    chosen = component(xyz[at], cfg)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 40, in component
+    from scipy.spatial import cKDTree
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 91, in <module>
+    raise ImportError(msg) from e
+ImportError: The `scipy` install you are using seems to be broken, (extension modules cannot be imported), please try reinstalling.
+
+======================================================================
+ERROR: test_enhanced_output_never_reenters_evidence (tools.visual_instances.test_semantics.InstanceSemanticTests.test_enhanced_output_never_reenters_evidence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 86, in <module>
+    from scipy._lib._ccallback import LowLevelCallable
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/_ccallback.py", line 1, in <module>
+    from . import _ccallback_c
+ImportError: cannot import name '_ccallback_c' from 'scipy._lib' (/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/__init__.py)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_semantics.py", line 91, in test_enhanced_output_never_reenters_evidence
+    c=InstanceSemantics();self.step(c,0)
+                          ^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_semantics.py", line 17, in step
+    return core.step(*self.observation(**kwargs), stamp_ns=int((i+1)*500_000_000),pose=np.eye(4))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 127, in step
+    chosen = component(xyz[at], cfg)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 40, in component
+    from scipy.spatial import cKDTree
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 91, in <module>
+    raise ImportError(msg) from e
+ImportError: The `scipy` install you are using seems to be broken, (extension modules cannot be imported), please try reinstalling.
+
+======================================================================
+ERROR: test_pose_revision_reanchors_history_without_false_identity_break (tools.visual_instances.test_semantics.InstanceSemanticTests.test_pose_revision_reanchors_history_without_false_identity_break)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 86, in <module>
+    from scipy._lib._ccallback import LowLevelCallable
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/_ccallback.py", line 1, in <module>
+    from . import _ccallback_c
+ImportError: cannot import name '_ccallback_c' from 'scipy._lib' (/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/__init__.py)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_semantics.py", line 75, in test_pose_revision_reanchors_history_without_false_identity_break
+    c=InstanceSemantics();a=self.step(c,0)
+                            ^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_semantics.py", line 17, in step
+    return core.step(*self.observation(**kwargs), stamp_ns=int((i+1)*500_000_000),pose=np.eye(4))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 127, in step
+    chosen = component(xyz[at], cfg)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 40, in component
+    from scipy.spatial import cKDTree
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 91, in <module>
+    raise ImportError(msg) from e
+ImportError: The `scipy` install you are using seems to be broken, (extension modules cannot be imported), please try reinstalling.
+
+======================================================================
+ERROR: test_same_id_other_object_does_not_inherit_semantics (tools.visual_instances.test_semantics.InstanceSemanticTests.test_same_id_other_object_does_not_inherit_semantics)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 86, in <module>
+    from scipy._lib._ccallback import LowLevelCallable
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/_ccallback.py", line 1, in <module>
+    from . import _ccallback_c
+ImportError: cannot import name '_ccallback_c' from 'scipy._lib' (/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/__init__.py)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_semantics.py", line 36, in test_same_id_other_object_does_not_inherit_semantics
+    c=InstanceSemantics();a=self.step(c,0)
+                            ^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_semantics.py", line 17, in step
+    return core.step(*self.observation(**kwargs), stamp_ns=int((i+1)*500_000_000),pose=np.eye(4))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 127, in step
+    chosen = component(xyz[at], cfg)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 40, in component
+    from scipy.spatial import cKDTree
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 91, in <module>
+    raise ImportError(msg) from e
+ImportError: The `scipy` install you are using seems to be broken, (extension modules cannot be imported), please try reinstalling.
+
+======================================================================
+ERROR: test_same_object_weak_class_flip_uses_shared_history (tools.visual_instances.test_semantics.InstanceSemanticTests.test_same_object_weak_class_flip_uses_shared_history)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 86, in <module>
+    from scipy._lib._ccallback import LowLevelCallable
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/_ccallback.py", line 1, in <module>
+    from . import _ccallback_c
+ImportError: cannot import name '_ccallback_c' from 'scipy._lib' (/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/__init__.py)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_semantics.py", line 20, in test_same_object_weak_class_flip_uses_shared_history
+    c=InstanceSemantics(); self.step(c,0)
+                           ^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_semantics.py", line 17, in step
+    return core.step(*self.observation(**kwargs), stamp_ns=int((i+1)*500_000_000),pose=np.eye(4))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 127, in step
+    chosen = component(xyz[at], cfg)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 40, in component
+    from scipy.spatial import cKDTree
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 91, in <module>
+    raise ImportError(msg) from e
+ImportError: The `scipy` install you are using seems to be broken, (extension modules cannot be imported), please try reinstalling.
+
+======================================================================
+ERROR: test_session_ttl_and_absent_vision_do_not_propagate_old_label (tools.visual_instances.test_semantics.InstanceSemanticTests.test_session_ttl_and_absent_vision_do_not_propagate_old_label)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 86, in <module>
+    from scipy._lib._ccallback import LowLevelCallable
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/_ccallback.py", line 1, in <module>
+    from . import _ccallback_c
+ImportError: cannot import name '_ccallback_c' from 'scipy._lib' (/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/__init__.py)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_semantics.py", line 99, in test_session_ttl_and_absent_vision_do_not_propagate_old_label
+    c=InstanceSemantics();self.step(c,0)
+                          ^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_semantics.py", line 17, in step
+    return core.step(*self.observation(**kwargs), stamp_ns=int((i+1)*500_000_000),pose=np.eye(4))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 127, in step
+    chosen = component(xyz[at], cfg)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 40, in component
+    from scipy.spatial import cKDTree
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 91, in <module>
+    raise ImportError(msg) from e
+ImportError: The `scipy` install you are using seems to be broken, (extension modules cannot be imported), please try reinstalling.
+
+======================================================================
+ERROR: test_strong_new_evidence_corrects_wrong_initial_label (tools.visual_instances.test_semantics.InstanceSemanticTests.test_strong_new_evidence_corrects_wrong_initial_label)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 86, in <module>
+    from scipy._lib._ccallback import LowLevelCallable
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/_ccallback.py", line 1, in <module>
+    from . import _ccallback_c
+ImportError: cannot import name '_ccallback_c' from 'scipy._lib' (/home/frank/semantic_livo_runtime/ros-deps/scipy/_lib/__init__.py)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_semantics.py", line 28, in test_strong_new_evidence_corrects_wrong_initial_label
+    c=InstanceSemantics();a=self.step(c,0,car=.05,visual=9)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/test_semantics.py", line 17, in step
+    return core.step(*self.observation(**kwargs), stamp_ns=int((i+1)*500_000_000),pose=np.eye(4))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 127, in step
+    chosen = component(xyz[at], cfg)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py", line 40, in component
+    from scipy.spatial import cKDTree
+  File "/home/frank/semantic_livo_runtime/ros-deps/scipy/__init__.py", line 91, in <module>
+    raise ImportError(msg) from e
+ImportError: The `scipy` install you are using seems to be broken, (extension modules cannot be imported), please try reinstalling.
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.206s
+
+FAILED (errors=12)

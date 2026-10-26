@@ -55,6 +55,8 @@ def run(args):
     semantic_statuses, semantic_maps, semantic_inputs, semantic_scans, semantic_clouds = [], [], [], [], []
     visual_statuses, instance_clouds = [], []
     visual_enabled = getattr(args, 'visual_instances', False)
+    if getattr(args,'instance_semantics','off') != 'off' and not visual_enabled:
+        raise ValueError('Instance semantics requires --visual-instances')
     arrivals, raw, corrected = {}, {}, {}
     sensor_counts = dict(lidar=0, image=0, imu=0)
     publishers = dict(lidar=node.create_publisher(CustomMsg, '/livox/lidar', 10),
@@ -102,6 +104,8 @@ def run(args):
             d = np.frombuffer(m.data, dtype=dtype_from_fields(m.fields, point_step=m.point_step))
             instance_clouds.append(dict(stamp_ns=stamp_ns(m), received=time.monotonic(), points=m.width,
                 associated=int(np.count_nonzero(d['instance_id'])),
+                changed=int(np.count_nonzero(d['label']!=d['raw_label'])) if 'raw_label' in d.dtype.names else 0,
+                unified=int(np.count_nonzero(d['instance_valid'])) if 'instance_valid' in d.dtype.names else 0,
                 instances=len(np.unique(d['instance_id'][d['instance_id'] > 0]))))
         subs.extend([node.create_subscription(String, '/backend/visual_status', lambda m:
             visual_statuses.append(dict(received_at=time.monotonic(), **json.loads(m.data))), qos),
@@ -151,7 +155,8 @@ def run(args):
             semantic_process = start([sys.executable, '-m', 'tools.loop_closure.semantic_node', '--frontend', str(args.frontend),
                    '--out', str(args.out/'semantics'), '--reflectance-divisor', '255', '--verify-final',
                    '--consistency', getattr(args, 'consistency', 'off')]+
-                   (['--visual-instances', '--camera', str(args.camera)] if visual_enabled else []), 'semantics.log', env)
+                   (['--visual-instances', '--camera', str(args.camera), '--instance-semantics',
+                     getattr(args,'instance_semantics','off')] if visual_enabled else []), 'semantics.log', env)
         front = start([str(args.workspace/'install/fast_livo/lib/fast_livo/fastlivo_mapping'),
                        '--ros-args', '--params-file', str(args.frontend)], 'frontend.log')
         until = time.monotonic()+(150 if args.semantics else 45)
@@ -264,9 +269,12 @@ def run(args):
                        missing_images_after_initialization=sum(s >= min(raw) and s not in raw for s in arrivals) if raw else None,
                        semantic_input_keyframes=len(semantic_inputs), semantic_scan_outputs=len(semantic_scans),
                        consistency=getattr(args, 'consistency', 'off'),
+                       instance_semantics=getattr(args,'instance_semantics','off'),
                        visual_instances=visual_enabled, visual_status=visual_statuses[-1] if visual_statuses else None,
                        instance_cloud_outputs=len(instance_clouds),
                        associated_points=sum(x['associated'] for x in instance_clouds),
+                       instance_changed_points=sum(x['changed'] for x in instance_clouds),
+                       instance_unified_points=sum(x['unified'] for x in instance_clouds),
                        semantic_map_outputs=len(semantic_maps),
                        semantic_map_clouds_received=len(semantic_clouds),
                        last_semantic_status=semantic_statuses[-1] if semantic_statuses else None,
@@ -328,4 +336,5 @@ if __name__ == '__main__':
     parser.add_argument('--consistency', choices=('off', 'shadow', 'active'), default='off')
     parser.add_argument('--visual-instances', action='store_true')
     parser.add_argument('--visual-weights', type=Path)
+    parser.add_argument('--instance-semantics',choices=('off','shadow','active'),default='off')
     run(parser.parse_args())

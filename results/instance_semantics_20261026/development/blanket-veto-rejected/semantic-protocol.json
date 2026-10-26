@@ -1,0 +1,39 @@
+{
+  "config": {
+    "classes": 16,
+    "min_points": 6,
+    "max_object_points": 2048,
+    "max_tracks": 128,
+    "history_frames": 4,
+    "ttl_s": 2.0,
+    "component_fraction": 0.6,
+    "visual_weight": 0.25,
+    "posterior_min": 0.6,
+    "posterior_margin": 0.15,
+    "decisive_current": 0.85,
+    "history_decay_s": 1.5,
+    "initial_speed_mps": 2.0,
+    "position_slack_m": 0.75,
+    "acceleration_mps2": 3.0,
+    "identity_margin_m": 0.35,
+    "appearance_distance": 0.45,
+    "temporal": true,
+    "identity_guard": true,
+    "conflict_guard": true,
+    "evidence": "raw frame posterior means + bounded current visual vote; no enhanced-output feedback"
+  },
+  "controls": [
+    "raw",
+    "single_frame_instance",
+    "track_only",
+    "guarded_without_conflict",
+    "guarded"
+  ],
+  "model_sha256": "cc8a67d4161396c2fd13e5a4cc26b5b64ca603b462b6dbe62ffe122dbe4cc841",
+  "scope": "Same-forward native16 development diagnostic. GT only after inference; no tuning/sweep.",
+  "source": {
+    "/home/frank/semantic_livo_realtime_main/tools/visual_instances/semantics.py": "3e574e0392e7beed0f39eea44bb3a706f18a639bc8d920c87377b495e3b10225",
+    "/home/frank/semantic_livo_realtime_main/tools/visual_instances/geometry.py": "b5b5b76eb24f309775177d789f54950f7232be05aab482e9b8c4938300a5ad32",
+    "/home/frank/semantic_livo_realtime_main/tools/visual_instances/detector.py": "b82f55be1a049bd183cdd56f7361fb056e9f0e389f25219491cea64f5b8db10d"
+  }
+}
