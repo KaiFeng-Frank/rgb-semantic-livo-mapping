@@ -21,7 +21,7 @@ URL='https://hf-mirror.com/datasets/Xiaodong/Nuscenes-v1.0-trainval-CAM_FRONT_Sw
 
 class RemoteZipFile(io.RawIOBase):
     def __init__(self,url=URL):
-        self.url=url;self.session=requests.Session();self.position=0;self.size=None;self.downloaded=0;self.cache=OrderedDict();self.block=1024*1024
+        self.url=url;self.download_url=None;self.session=requests.Session();self.position=0;self.size=None;self.downloaded=0;self.cache=OrderedDict();self.block=1024*1024
         self._range(0,3)
     def readable(self):return True
     def seekable(self):return True
@@ -36,19 +36,30 @@ class RemoteZipFile(io.RawIOBase):
             try:
                 # Query key avoids caches serving a different Range at the same
                 # resolve URL. The pinned archive content is unchanged.
-                with self.session.get(self.url+f'?download=true&range_start={start}&range_end={end}',
+                target=self.download_url or self.url+f'?download=true&range_start={start}&range_end={end}'
+                with self.session.get(target,
                         headers={'Range':f'bytes={start}-{end}','Accept-Encoding':'identity'},stream=True,timeout=(10,30)) as r:
                     if r.status_code!=206:raise ValueError(f'Range refused: HTTP {r.status_code}')
                     m=re.fullmatch(r'bytes (\d+)-(\d+)/(\d+)',r.headers.get('Content-Range',''))
                     if not m or (int(m[1]),int(m[2]))!=(start,end):raise ValueError('Incorrect Content-Range')
                     size=int(m[3])
                     if self.size is not None and size!=self.size:raise ValueError('Remote archive changed')
+                    # Reuse the resolved CDN URL while it works; do not resolve
+                    # again through the intermittently slow mirror per block.
+                    # Signed URLs stay in memory and are never logged/archived.
+                    self.download_url=getattr(r,'url',None)
                     self.size=size;content=r.raw.read(end-start+2)
                     self.downloaded+=len(content)
                     if len(content)!=end-start+1:raise ValueError('Truncated/oversized range')
                     return content
-            except (requests.RequestException,ValueError):
-                if attempt==2:raise
+            except (requests.RequestException,ValueError) as e:
+                self.download_url=None
+                if attempt==2:
+                    detail=str(e) if isinstance(e,ValueError) else type(e).__name__
+                    # requests exceptions inherit OSError, which zipfile can
+                    # misreport as BadZipFile. Preserve the actual transport
+                    # failure without including a temporary signed URL.
+                    raise RuntimeError(f'Range request {start}-{end} failed: {detail}') from None
                 time.sleep(1+attempt)
     def read(self,n=-1):
         # zipfile asks for read-to-EOF while parsing the small end record.
