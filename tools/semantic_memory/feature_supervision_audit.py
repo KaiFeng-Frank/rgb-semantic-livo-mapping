@@ -124,8 +124,16 @@ def run(index_path,sealed_index,cache,anchors,models,out):
                 groups=dict(repair=qvalid&~correct&predicted_good.any(1),
                     preserve=qvalid&correct&(valid&(hp!=qgt[:,None])).any(1))
                 groups['other']=qvalid&~(groups['repair']|groups['preserve'])
+                q=torch.tensor(np.maximum(qgt,0),device='cuda',dtype=torch.long)
+                # A 2*tanh correction can reduce a class gap by strictly less
+                # than 4; this is a necessary, not a learnability guarantee.
+                gap=(qa.max(1).values-qa.gather(1,q[:,None]).squeeze(1)).cpu().numpy()
+                reachable=qvalid&(gap<2*temporal.repair.residual_limit)
                 events=dict(queries=qvalid,queries_with_history=qvalid&valid.any(1),anchor_wrong=qvalid&~correct,
                     repair_supported=groups['repair'],repair_strictly_supported=qvalid&~correct&strict.any(1),
+                    repair_supported_within_residual_bound=groups['repair']&reachable,
+                    repair_strictly_supported_within_residual_bound=qvalid&~correct&strict.any(1)&reachable,
+                    anchor_wrong_within_residual_bound=qvalid&~correct&reachable,
                     preserve_conflict=groups['preserve'],other=groups['other'])
                 frame_counts={}
                 for event,mask in events.items():
@@ -135,7 +143,6 @@ def run(index_path,sealed_index,cache,anchors,models,out):
                         at=np.flatnonzero(vid==obj);c=int(labels[at[0]])
                         instances[str(c)][event].add(int(obj))
                 # Existing per-query objective, before train-derived class weights.
-                q=torch.tensor(np.maximum(qgt,0),device='cuda',dtype=torch.long)
                 logits=output['selected_logits'];mask=F.one_hot(q,16).bool()
                 margin=logits.gather(1,q[:,None]).squeeze(1)-logits.masked_fill(mask,-1e4).max(1).values
                 old_margin=qa.gather(1,q[:,None]).squeeze(1)-qa.masked_fill(mask,-1e4).max(1).values
@@ -146,6 +153,8 @@ def run(index_path,sealed_index,cache,anchors,models,out):
                 objects=object_rows(gt,identity,predictions)
                 for a,pred in predictions.items():mats[a]+=confusion(gt,pred)
                 supported=np.zeros(len(labels),bool);supported[query]=strict.any(1)
+                supported_reachable=np.zeros(len(labels),bool);supported_reachable[query]=strict.any(1)&reachable
+                query_reachable=np.zeros(len(labels),bool);query_reachable[query]=reachable
                 for obj,obs in objects.items():
                     if previous is None or not 0<raw['stamp']-previous['stamp']<=temporal.cfg.max_age_s:continue
                     before=previous['objects'].get(obj)
@@ -154,6 +163,16 @@ def run(index_path,sealed_index,cache,anchors,models,out):
                     item=dict(instance=obj,label=obs['label'],frame=k,points=obs['points'],
                         anchor_opportunity=not obs['success']['anchor'],no_history_opportunity=not obs['success']['no_history'],
                         temporal_success=obs['success']['temporal'],strict_support_wrong_points=int((at&(predictions['anchor']!=gt)&supported[inverse]).sum()))
+                    for arm in ('anchor','no_history'):
+                        wrong=at&(predictions[arm]!=gt)
+                        need=max(0,(obs['points']+1)//2-int((at&(predictions[arm]==gt)).sum()))
+                        supported_count=int((wrong&supported_reachable[inverse]).sum())
+                        reachable_count=int((wrong&query_reachable[inverse]).sum())
+                        item[arm+'_required_fixes']=need
+                        item[arm+'_strict_supported_reachable_wrong_points']=supported_count
+                        item[arm+'_bound_reachable_wrong_points']=reachable_count
+                        item[arm+'_strict_supported_reachable_enough']=supported_count>=need
+                        item[arm+'_bound_reachable_enough']=reachable_count>=need
                     if item['anchor_opportunity'] or item['no_history_opportunity']:object_events.append(item)
                 frames.append(dict(frame=k,parity=True,counts=frame_counts,records=len(temporal.memory.xyz)))
                 previous=dict(labels=labels,vid=vid,objects=objects,stamp=raw['stamp'])
