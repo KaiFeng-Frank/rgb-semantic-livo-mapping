@@ -1,0 +1,290 @@
+{
+  "counts": {
+    "observations": 262,
+    "history_observations": 186,
+    "foreground_points": 23083,
+    "foreground_errors": 1323,
+    "correctable_foreground_points": 798
+  },
+  "distinct_gt_instances": 2,
+  "distinct_logs": 1,
+  "data_gate_passed": false,
+  "identity_availability": {
+    "gt_points": 881514,
+    "pred_points": 22105,
+    "identity_true_positive": 20396,
+    "associated_gt_points": 21884,
+    "visual_point_idf1": 0.04514291974825673,
+    "optimistic_fixed_coverage_upper_bound": 0.048436343193314885,
+    "max_gain_pp": 0.32934234450581534,
+    "original_1pp_identity_gate_reachable": false
+  },
+  "scenes": [
+    {
+      "scene": "scene-0546",
+      "counts": {
+        "observations": 57,
+        "history_observations": 47,
+        "foreground_points": 1862,
+        "foreground_errors": 0,
+        "correctable_foreground_points": 0
+      },
+      "opportunities": [],
+      "visual_identity": {
+        "point_idf1": 0.014471604037455916,
+        "association_quality": 0.013456240079563234,
+        "gt_points": 244879,
+        "pred_points": 1811,
+        "identity_true_positive": 1785,
+        "associated_gt_points": 1805,
+        "gt_instances": 32,
+        "pred_tracks": 7,
+        "id_switches": 1,
+        "supported_transitions": 20,
+        "reappearance_transitions": 12
+      }
+    },
+    {
+      "scene": "scene-0535",
+      "counts": {
+        "observations": 2,
+        "history_observations": 1,
+        "foreground_points": 16,
+        "foreground_errors": 0,
+        "correctable_foreground_points": 0
+      },
+      "opportunities": [],
+      "visual_identity": {
+        "point_idf1": 0.001843424160377902,
+        "association_quality": 1.3638472853312365e-05,
+        "gt_points": 17343,
+        "pred_points": 16,
+        "identity_true_positive": 16,
+        "associated_gt_points": 16,
+        "gt_instances": 30,
+        "pred_tracks": 1,
+        "id_switches": 0,
+        "supported_transitions": 1,
+        "reappearance_transitions": 0
+      }
+    },
+    {
+      "scene": "scene-0129",
+      "counts": {
+        "observations": 43,
+        "history_observations": 23,
+        "foreground_points": 1692,
+        "foreground_errors": 0,
+        "correctable_foreground_points": 0
+      },
+      "opportunities": [],
+      "visual_identity": {
+        "point_idf1": 0.0256941566514712,
+        "association_quality": 0.0006195294436168681,
+        "gt_points": 73102,
+        "pred_points": 1701,
+        "identity_true_positive": 961,
+        "associated_gt_points": 1692,
+        "gt_instances": 102,
+        "pred_tracks": 14,
+        "id_switches": 2,
+        "supported_transitions": 14,
+        "reappearance_transitions": 3
+      }
+    },
+    {
+      "scene": "scene-0122",
+      "counts": {
+        "observations": 10,
+        "history_observations": 9,
+        "foreground_points": 287,
+        "foreground_errors": 0,
+        "correctable_foreground_points": 0
+      },
+      "opportunities": [],
+      "visual_identity": {
+        "point_idf1": 0.09660033167495855,
+        "association_quality": 0.005853996287539947,
+        "gt_points": 4537,
+        "pred_points": 287,
+        "identity_true_positive": 233,
+        "associated_gt_points": 287,
+        "gt_instances": 13,
+        "pred_tracks": 2,
+        "id_switches": 1,
+        "supported_transitions": 9,
+        "reappearance_transitions": 3
+      }
+    },
+    {
+      "scene": "scene-1110",
+      "counts": {
+        "observations": 16,
+        "history_observations": 10,
+        "foreground_points": 1287,
+        "foreground_errors": 0,
+        "correctable_foreground_points": 0
+      },
+      "opportunities": [],
+      "visual_identity": {
+        "point_idf1": 0.021311804232273593,
+        "association_quality": 0.004321333695488122,
+        "gt_points": 39419,
+        "pred_points": 465,
+        "identity_true_positive": 425,
+        "associated_gt_points": 440,
+        "gt_instances": 71,
+        "pred_tracks": 9,
+        "id_switches": 1,
+        "supported_transitions": 2,
+        "reappearance_transitions": 1
+      }
+    },
+    {
+      "scene": "scene-1108",
+      "counts": {
+        "observations": 11,
+        "history_observations": 7,
+        "foreground_points": 1208,
+        "foreground_errors": 190,
+        "correctable_foreground_points": 0
+      },
+      "opportunities": [],
+      "visual_identity": {
+        "point_idf1": 0.013903377985394991,
+        "association_quality": 0.0001239980698185762,
+        "gt_points": 107091,
+        "pred_points": 1228,
+        "identity_true_positive": 753,
+        "associated_gt_points": 1061,
+        "gt_instances": 42,
+        "pred_tracks": 6,
+        "id_switches": 3,
+        "supported_transitions": 6,
+        "reappearance_transitions": 5
+      }
+    },
+    {
+      "scene": "scene-0398",
+      "counts": {
+        "observations": 97,
+        "history_observations": 70,
+        "foreground_points": 13184,
+        "foreground_errors": 849,
+        "correctable_foreground_points": 798
+      },
+      "opportunities": [
+        {
+          "frame": 12,
+          "identity": 23011,
+          "correctable_points": 334,
+          "past_classes": [
+            9,
+            9,
+            9,
+            9,
+            9,
+            9
+          ]
+        },
+        {
+          "frame": 13,
+          "identity": 23011,
+          "correctable_points": 198,
+          "past_classes": [
+            2,
+            9,
+            9,
+            9,
+            9,
+            9
+          ]
+        },
+        {
+          "frame": 19,
+          "identity": 23037,
+          "correctable_points": 4,
+          "past_classes": [
+            9
+          ]
+        },
+        {
+          "frame": 22,
+          "identity": 23037,
+          "correctable_points": 48,
+          "past_classes": [
+            3,
+            9
+          ]
+        },
+        {
+          "frame": 23,
+          "identity": 23037,
+          "correctable_points": 65,
+          "past_classes": [
+            2,
+            3,
+            9
+          ]
+        },
+        {
+          "frame": 24,
+          "identity": 23037,
+          "correctable_points": 64,
+          "past_classes": [
+            3,
+            2,
+            3,
+            9
+          ]
+        },
+        {
+          "frame": 32,
+          "identity": 23037,
+          "correctable_points": 85,
+          "past_classes": [
+            9
+          ]
+        }
+      ],
+      "visual_identity": {
+        "point_idf1": 0.0796549245147376,
+        "association_quality": 0.00735514852926306,
+        "gt_points": 306835,
+        "pred_points": 13095,
+        "identity_true_positive": 12742,
+        "associated_gt_points": 13084,
+        "gt_instances": 63,
+        "pred_tracks": 22,
+        "id_switches": 1,
+        "supported_transitions": 47,
+        "reappearance_transitions": 12
+      }
+    },
+    {
+      "scene": "scene-0392",
+      "counts": {
+        "observations": 26,
+        "history_observations": 19,
+        "foreground_points": 3547,
+        "foreground_errors": 284,
+        "correctable_foreground_points": 0
+      },
+      "opportunities": [],
+      "visual_identity": {
+        "point_idf1": 0.07583051955124714,
+        "association_quality": 0.004792515931360178,
+        "gt_points": 88308,
+        "pred_points": 3502,
+        "identity_true_positive": 3481,
+        "associated_gt_points": 3499,
+        "gt_instances": 85,
+        "pred_tracks": 5,
+        "id_switches": 0,
+        "supported_transitions": 17,
+        "reappearance_transitions": 1
+      }
+    }
+  ],
+  "scope": "GT-filtered availability upper bound on added development only; not policy accuracy or an identity/semantic improvement"
+}
