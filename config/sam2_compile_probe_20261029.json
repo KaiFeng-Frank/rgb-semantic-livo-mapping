@@ -1,0 +1,16 @@
+{
+  "stage": "Implementation-only audit of the previously failed synchronous 512 configuration; not an accuracy experiment",
+  "source_commit": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+  "checkpoint_sha256": "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69",
+  "image_size": 512,
+  "selection": "First 32 chronological full-rate images of scene-0218, all supported current detections, no GT or holdout access",
+  "change": "Official SAM2VideoPredictorVOS compilation and cloning only, via build_sam2 to preserve the original postprocessing and memory encoding settings",
+  "invariants": "Same weights, model layers, image size, masks/boxes, IDs, grouping, batch size, memory length, expiry and output materialization. Cache current detector outputs once and share between eager and compiled runs.",
+  "runtime": "Record the initial compiled pass including every compilation stall; reset all tracking histories and repeat the same input three times. Report warm p95 separately; this is not startup or ROS real-time admission.",
+  "accuracy_equivalence": {"max_pixel_disagreement_fraction": 0.001, "min_mean_nonempty_object_iou": 0.99, "min_nonempty_object_iou": 0.95},
+  "runtime_gate_ms": 50,
+  "max_compiled_process_seconds": 1200,
+  "min_free_disk_bytes": 4294967296,
+  "if_failed": "Stop official compilation assessment; do not sweep model, resolution, memory capacity or accuracy coefficients. Keep original failed results.",
+  "if_passed": "Only permits subsequent bounded accuracy and unseen-input latency checks; warm timings are not end-to-end deployment evidence."
+}

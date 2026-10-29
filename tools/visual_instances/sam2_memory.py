@@ -14,19 +14,28 @@ import torch
 
 
 class SAM2Pair:
-    def __init__(self,source,weights,image_size=1024):
+    def __init__(self,source,weights,image_size=1024,official_compile=False):
         if image_size not in (512,1024):raise ValueError('Only the two explicitly recorded inference sizes are supported')
         sys.path.insert(0,str(source))
         from sam2.build_sam import build_sam2
         from sam2.utils.transforms import SAM2Transforms
+        overrides=[f'++model.image_size={image_size}']
+        if official_compile:
+            # Keep build_sam2's exact postprocessing settings. The video builder
+            # would additionally binarize prompted memories and fill holes.
+            # The official VOS subclass only adds compilation/output clones to
+            # the low-level methods used here; no predictor session is involved.
+            overrides += ['++model._target_=sam2.sam2_video_predictor.SAM2VideoPredictorVOS',
+                          '++model.compile_image_encoder=True']
         self.model=build_sam2('configs/sam2.1/sam2.1_hiera_t.yaml',str(weights),apply_postprocessing=True,
-            hydra_overrides_extra=[f'++model.image_size={image_size}'])
+            hydra_overrides_extra=overrides)
         self.transforms=SAM2Transforms(self.model.image_size,mask_threshold=0.)
         self.histories={};self.last_seen={};self.stamp=None;self.session=None;self.frame=0
         self.meta=dict(weights_sha256=hashlib.sha256(Path(weights).read_bytes()).hexdigest(),num_maskmem=self.model.num_maskmem,image_size=image_size,
             max_tracks=128,absent_ttl_s=2.,max_batch=4,object_pointer_history=self.model.max_obj_ptrs_in_encoder,
             prompts='same current detector-mask boxes for both arms',history='official recurrent mask features; no semantic-logit feedback',
-            model='official SAM2.1 Hiera Tiny, pretrained, no fine tuning',precision='bfloat16 autocast, uncompiled')
+            model='official SAM2.1 Hiera Tiny, pretrained, no fine tuning',
+            precision='bfloat16 autocast, official VOS compilation' if official_compile else 'bfloat16 autocast, uncompiled')
 
     def _batched_history(self,keys):
         result={}
