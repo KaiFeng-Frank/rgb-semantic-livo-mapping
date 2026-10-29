@@ -1,0 +1,14 @@
+{
+  "gpu": "NVIDIA GeForce RTX 5070 Ti Laptop GPU, 595.99.02, 12227, [N/A]",
+  "source_commit": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+  "cpu_affinity": [
+    14
+  ],
+  "torch_threads": 1,
+  "priority": "nice 15",
+  "dependencies": {
+    "iopath": "0.1.10",
+    "portalocker": "3.2.0"
+  },
+  "source_unmodified": true
+}

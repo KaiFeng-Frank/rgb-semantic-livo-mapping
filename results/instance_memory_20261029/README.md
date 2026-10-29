@@ -3,6 +3,9 @@
 后续状态：连续图像已有[八日志实例收益](fullrate/README.md)，并完成
 [真实 ROS 交付与语义对照](fullrate-delivery/README.md)。实例收益在一个在线片段
 的两个重复中保留；新增语义平滑均未通过门槛。下面第一轮训练结果保持不变。
+进一步的[概率记忆对照](point-probability/README.md)获得整体 mIoU 收益，但前景
+退化使准入失败；[SAM 2 同步特征记忆](sam2-feasibility/README.md)的两次成本检查
+也未通过，没有启动完整精度回放或默认部署。
 
 **Result: failed the advancement gates.** The implementation and actual ROS delivery work; the memory has not demonstrated a reliable semantic or identity improvement over the matched controls. It remains opt-in.
 

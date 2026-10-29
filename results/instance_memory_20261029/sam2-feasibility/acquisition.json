@@ -1,0 +1,17 @@
+{
+  "source": "facebook/sam2.1-hiera-tiny",
+  "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+  "sha256": "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69",
+  "bytes": 156008466,
+  "transport": "hf-mirror to existing authorized server, then SSH transfer; content must match official HuggingFace LFS SHA256",
+  "failed_downloads": {
+    "facebook": "300s timeout/retry, explicitly stopped",
+    "huggingface_local": "HTTP/2 CANCEL exit 92",
+    "huggingface_remote": "network unreachable"
+  },
+  "deleted_own_incomplete_files": {
+    "sam2.1_hiera_tiny.pt.part": 12398592,
+    "sam2.1_hiera_tiny.pt.hf-part": 47320273
+  },
+  "local_transfer": "complete and SHA256 verified"
+}
