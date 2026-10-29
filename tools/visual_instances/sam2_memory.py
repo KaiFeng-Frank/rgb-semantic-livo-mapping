@@ -30,6 +30,15 @@ class SAM2Pair:
         self.model=build_sam2('configs/sam2.1/sam2.1_hiera_t.yaml',str(weights),apply_postprocessing=True,
             hydra_overrides_extra=overrides)
         if official_compile:
+            # RoPE initializes for the official 1024 grid. At the frozen 512
+            # size, first use would otherwise persist a tensor CREATED inside
+            # the compiled attention graph, whose storage can later be reused.
+            # Precompute the identical native frequencies in owned eager memory.
+            from sam2.modeling.sam.transformer import RoPEAttention
+            for module in self.model.modules():
+                if isinstance(module,RoPEAttention):
+                    side=image_size//self.model.backbone_stride
+                    module.freqs_cis=module.compute_cis(end_x=float(side),end_y=float(side)).to(self.model.device).clone()
             # On the installed Torch build, a later compiled prompt encoder can
             # recycle the memory-attention CUDAGraph output before the mask head
             # reads it. Own this intermediate just as official VOS owns its
