@@ -1,0 +1,12 @@
+{
+  "source_sha256": "470c6ae2cc7aa0ed42c5a5e89a267c12532725209ffd86672ef79101ddcc8691",
+  "index_sha256": "7094a62436c1138bca6a961cb88544e2a80eda1611115d0098379847203b0fe3",
+  "reference_sha256": "6cccf77f47dcd14400b0b4117717e2d858e744d088bab3bc255e4b3a192aa0eb",
+  "arms": [
+    "raw",
+    "previous_raw",
+    "gt_same_class",
+    "gt_same_object"
+  ],
+  "scope": "After reproducing the frozen raw-history control, GT filters only remove wrong correspondences; retained historical labels remain original predictions. No GT logits, training, parameter changes or deployment claims."
+}

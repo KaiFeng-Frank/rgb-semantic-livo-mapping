@@ -1,0 +1,37 @@
+{
+  "config": {
+    "hypothesis": "The failed four-neighbor hard vote discarded predictive confidence and gave one historical scan up to four times the current-point mass. Test the existing equal-per-frame probability-mixture baseline, without training or parameter search.",
+    "selection": "All eight independent_dev_added scenes / 321 keyframes. Development only; new holdout stays closed.",
+    "backbone": "Frozen existing PTv3 B0, one forward per scan shared by every arm; original current point ordering",
+    "geometry": "Unchanged four nearest neighbors within 0.25m, preceding raw scan only, 0.75s expiry, supplied ego poses; no motion or GT correction",
+    "arms": [
+      "raw",
+      "current_spatial_probability",
+      "previous_raw_probability",
+      "previous_hard_vote"
+    ],
+    "operator": "0.5 * current point probability + 0.5 * mean of available neighbor raw probabilities; absent history returns current exactly. The 0.5 coefficient is inherited from the existing UniformFusion baseline in tools/semantic_memory/nuscenes_pilot.py, not selected from this evaluation.",
+    "controls": "Current-spatial uses the identical probability operator and neighbor budget, excluding the query itself. Exact posterior ties preserve the current prediction. Hard-history vote reproduces the previous policy on the same new forward. History never stores corrected predictions.",
+    "gate": {
+      "miou_vs_raw_pp": 0.05,
+      "miou_vs_current_spatial_pp": 0.05,
+      "positive_logs_vs_both": 5,
+      "camera_foreground_accuracy_loss_max_pp": 0.1
+    },
+    "failure_action": "No alpha/radius/neighbor sweep, no training or new holdout access. Archive result and stop this probability readout variant.",
+    "timing": "Record component CPU retrieval and readout plus synchronized backbone, not full ROS latency. Additional online deployment requires separate verification."
+  },
+  "config_sha256": "599d3999d17babf0dd0c6d18410a409db5a747edb581d1e7338feb786c7fc28a",
+  "index_sha256": "7094a62436c1138bca6a961cb88544e2a80eda1611115d0098379847203b0fe3",
+  "sources": {
+    "evaluate_point_probability.py": "88ea03d227e4f6c8739bd7de252a44284b8c0fcaaa4e11ed39a14b5a166f8584",
+    "point_probability_memory.py": "fc16bc7e428777f82ded14e8b61b986e5dd73f70218850fe765cdd89fa67f371",
+    "point_history_audit.py": "b424a74c6bcbddb842eb31a5b96207c7838a752ff4ebe7ed50b4b08a243a2baa"
+  },
+  "checkpoint_sha256": "35f5d3aec63ae1c383f4a4146e157aa054860cb12b178d899571287e6f97e5f1",
+  "admission": {
+    "time": 1793247790.268678,
+    "pid": 1664607,
+    "compute_processes": []
+  }
+}
