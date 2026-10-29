@@ -1,0 +1,14 @@
+{
+  "scope": "Frozen development-only semantic readout of raw continuous visual evidence; no new model/training, no holdout access",
+  "data": "Exactly the 8 fixed independent development scenes: 1857 real camera images, 321 original LiDAR keyframes. Ground-truth point labels and instance IDs enter only the observer.",
+  "identity": "Production single-stream adapter for the already frozen non-ReID full-rate tracker. Score projected-mask point IDF1 and compare with archived paired full-rate results to check adapter parity.",
+  "memory": {"max_tracks":128,"records":12,"ttl_s":2.0,"spacing_s":0.1,"decay_s":0.75,"history_total_weight_at_most":1.0},
+  "state": "Store only raw COCO80 sigmoid scores on a visual track. Read strictly past samples before writing current raw values. No point-prediction feedback or ground-truth association. Session/reset isolation and real timestamps.",
+  "readout": "Normalize supported COCO scores into native16 six foreground classes. Blend each current point posterior with this distribution using alpha=0.25*current detection confidence (the existing visual-weight constant). Apply only original trusted geometric components; identity output retains projected mask coverage.",
+  "controls": ["raw PTv3", "current image scores with full-rate identities", "current plus raw historical image scores with identical full-rate identities"],
+  "fairness": "Same PTv3 forward and current point probabilities, exact same IDs/components/current confidence and fusion operation. Only the visual class distribution differs. Current-only fusion is a required comparator, not raw alone.",
+  "primary": "Whole-scan native16 mIoU, foreground accuracy on the fixed camera-observable domain, net fixes/harms vs both raw and current-image fusion, per-log and per-object counts. GT-only availability counts are explicitly separate from actual output gains.",
+  "semantic_continuation_gate": "History must improve full-scan mIoU by >=0.05 pp over BOTH raw and matched current-image fusion; improve camera foreground accuracy by >=0.5 pp over matched current-image fusion; net positive corrections on at least 5 true objects in at least 2 logs; positive full-scan mIoU change in a majority of the 8 logs. Failure remains failure and does not trigger a coefficient sweep.",
+  "runtime": "Record actual feature/readout cost and memory bounds. Offline component timing is not end-to-end ROS latency; actual online delivery remains a separate required verification.",
+  "attribution": "Any identity gain comes from continuous past images supplied to the existing tracker. Any semantic memory gain must exceed the matched current-image fusion. No Transformer novelty or trained-model contribution is claimed."
+}

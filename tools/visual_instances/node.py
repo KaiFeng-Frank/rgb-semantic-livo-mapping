@@ -59,7 +59,8 @@ def make_node(args):
         def work(self):
             try:
                 self.client = Client(args.worker_python, args.weights, args.out/'worker.log', args.imgsz, cancel_event=self.stop,
-                                     feature_embeddings=getattr(args,'feature_embeddings',False))
+                                     feature_embeddings=getattr(args,'feature_embeddings',False),
+                                     fullrate=getattr(args,'fullrate',False),visual_history=getattr(args,'visual_history',False))
                 (args.out/'model.json').write_text(json.dumps(self.client.meta, indent=2)+'\n')
                 self.counts['ready'] = True
                 while not self.stop.is_set():
@@ -122,6 +123,8 @@ def main():
     p.add_argument('--height', type=int, default=1024)
     p.add_argument('--imgsz', type=int, default=640)
     p.add_argument('--feature-embeddings',action='store_true')
+    p.add_argument('--fullrate',action='store_true')
+    p.add_argument('--visual-history',action='store_true')
     p.add_argument('--frontend', type=Path, help='Read image topic/transport from existing frontend config')
     p.add_argument('--camera', type=Path, help='Read raw image dimensions from existing camera config')
     args = p.parse_args()

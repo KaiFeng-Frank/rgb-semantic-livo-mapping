@@ -9,7 +9,7 @@ import time
 
 
 class Client:
-    def __init__(self, python, weights, log, imgsz=640, cancel_event=None, feature_embeddings=False):
+    def __init__(self, python, weights, log, imgsz=640, cancel_event=None, feature_embeddings=False,fullrate=False,visual_history=False):
         from multiprocessing import Pipe
         self.conn, child = Pipe()
         self.cancel_event = cancel_event
@@ -19,7 +19,8 @@ class Client:
         env['PYTHONPATH'] = env.get('VISUAL_PYTHONPATH', '')
         self.process = subprocess.Popen([str(python), '-m', 'tools.visual_instances.worker', '--fd', str(child.fileno()),
             '--weights', str(weights), '--imgsz', str(imgsz),
-            *(['--feature-embeddings'] if feature_embeddings else [])], pass_fds=[child.fileno()],
+            *(['--feature-embeddings'] if feature_embeddings else []),
+            *(['--fullrate'] if fullrate else []),*(['--visual-history'] if visual_history else [])], pass_fds=[child.fileno()],
             cwd=Path(__file__).resolve().parents[2], stdout=self.log, stderr=subprocess.STDOUT,
             env=env)
         child.close()
@@ -67,12 +68,19 @@ def main():
     p.add_argument('--weights', required=True)
     p.add_argument('--imgsz', type=int, default=640)
     p.add_argument('--feature-embeddings',action='store_true')
+    p.add_argument('--fullrate',action='store_true')
+    p.add_argument('--visual-history',action='store_true')
     args = p.parse_args()
     os.nice(5)
     conn = Connection(args.fd)
     try:
-        from .detector import Detector
-        model = Detector(args.weights, imgsz=args.imgsz,feature_embeddings=args.feature_embeddings)
+        if args.visual_history and not args.fullrate:raise ValueError('Visual history requires the explicit full-rate mode')
+        if args.fullrate:
+            from .fullrate import FullRateDetector
+            model=FullRateDetector(args.weights,imgsz=args.imgsz,feature_embeddings=args.feature_embeddings,visual_history=args.visual_history)
+        else:
+            from .detector import Detector
+            model = Detector(args.weights, imgsz=args.imgsz,feature_embeddings=args.feature_embeddings)
         conn.send(model.meta)
         while True:
             image, stamp = conn.recv()
