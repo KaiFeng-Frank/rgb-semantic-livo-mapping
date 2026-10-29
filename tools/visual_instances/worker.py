@@ -9,7 +9,7 @@ import time
 
 
 class Client:
-    def __init__(self, python, weights, log, imgsz=640, cancel_event=None, feature_embeddings=False,fullrate=False,visual_history=False):
+    def __init__(self, python, weights, log, imgsz=640, cancel_event=None, feature_embeddings=False,fullrate=False,visual_history=False,keyframe_reference=False):
         from multiprocessing import Pipe
         self.conn, child = Pipe()
         self.cancel_event = cancel_event
@@ -20,7 +20,8 @@ class Client:
         self.process = subprocess.Popen([str(python), '-m', 'tools.visual_instances.worker', '--fd', str(child.fileno()),
             '--weights', str(weights), '--imgsz', str(imgsz),
             *(['--feature-embeddings'] if feature_embeddings else []),
-            *(['--fullrate'] if fullrate else []),*(['--visual-history'] if visual_history else [])], pass_fds=[child.fileno()],
+            *(['--fullrate'] if fullrate else []),*(['--visual-history'] if visual_history else []),
+            *(['--keyframe-reference'] if keyframe_reference else [])], pass_fds=[child.fileno()],
             cwd=Path(__file__).resolve().parents[2], stdout=self.log, stderr=subprocess.STDOUT,
             env=env)
         child.close()
@@ -70,14 +71,15 @@ def main():
     p.add_argument('--feature-embeddings',action='store_true')
     p.add_argument('--fullrate',action='store_true')
     p.add_argument('--visual-history',action='store_true')
+    p.add_argument('--keyframe-reference',action='store_true')
     args = p.parse_args()
     os.nice(5)
     conn = Connection(args.fd)
     try:
-        if args.visual_history and not args.fullrate:raise ValueError('Visual history requires the explicit full-rate mode')
+        if (args.visual_history or args.keyframe_reference) and not args.fullrate:raise ValueError('Visual history/reference requires the explicit full-rate implementation')
         if args.fullrate:
             from .fullrate import FullRateDetector
-            model=FullRateDetector(args.weights,imgsz=args.imgsz,feature_embeddings=args.feature_embeddings,visual_history=args.visual_history)
+            model=FullRateDetector(args.weights,imgsz=args.imgsz,feature_embeddings=args.feature_embeddings,visual_history=args.visual_history,keyframe_reference=args.keyframe_reference)
         else:
             from .detector import Detector
             model = Detector(args.weights, imgsz=args.imgsz,feature_embeddings=args.feature_embeddings)

@@ -12,12 +12,12 @@ from .visual_memory import VisualMemory
 
 
 class FullRateDetector(PairedNativeTrackers):
-    def __init__(self,weights,imgsz=640,feature_embeddings=False,visual_history=False):
+    def __init__(self,weights,imgsz=640,feature_embeddings=False,visual_history=False,keyframe_reference=False):
         import yaml,ultralytics
         if imgsz!=640:raise ValueError('Frozen full-rate policy uses imgsz=640')
         start=time.perf_counter();super().__init__(weights)
         self.hook.remove();self.model.predictor._feats=None
-        cfg=yaml.safe_load(Path(__file__).with_name('botsort.yaml').read_text());cfg['track_buffer']=90
+        cfg=yaml.safe_load(Path(__file__).with_name('botsort.yaml').read_text());cfg['track_buffer']=15 if keyframe_reference else 90
         self.tracker=NativeFeatureBOTSORT(SimpleNamespace(**cfg));self.trackers={}
         self.times={};self.session=uuid.uuid4().hex;self.imgsz=imgsz;self.last_stamp=None
         self.visual_features=None
@@ -26,7 +26,7 @@ class FullRateDetector(PairedNativeTrackers):
             self.visual_features=VisualFeatures(self)
         self.visual_memory=VisualMemory() if visual_history else None
         self.meta=dict(weights=str(Path(weights).resolve()),sha256=hashlib.sha256(Path(weights).read_bytes()).hexdigest(),
-            ultralytics=ultralytics.__version__,tracking='fullrate',tracker=cfg,real_time_expiry_s=7.5,gap_reset_s=.75,
+            ultralytics=ultralytics.__version__,tracking='keyframe_reference' if keyframe_reference else 'fullrate',tracker=cfg,real_time_expiry_s=7.5,gap_reset_s=.75,
             feature_embeddings=feature_embeddings,visual_memory=self.visual_memory.configuration() if self.visual_memory else None,
             cpu_affinity=sorted(os.sched_getaffinity(0)),training='none; frozen original YOLO11n-seg',
             startup_seconds=time.perf_counter()-start,paired_reference='40a38c4 fullrate arm')

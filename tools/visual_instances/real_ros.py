@@ -33,7 +33,17 @@ def run(args):
     rows=index['sequences'][args.scene]
     row_by_stamp={int(r['timestamp_us']*1000):r for r in rows}
     matrices={a:np.zeros((16,16),np.int64) for a in ('raw','published')}
-    src={r['sample_data_token']:r for r in json.loads((ROOT/'runs/s0_formal/val_manifest.json').read_text())['samples']}
+    # New metadata-selected training-pool clips already carry exact camera rows.
+    # Preserve the legacy validation-manifest path for old saved protocols.
+    src=({r['sample_data_token']:r for r in rows} if all('camera_token' in r and 'image_path' in r for r in rows)
+        else {r['sample_data_token']:r for r in json.loads((ROOT/'runs/s0_formal/val_manifest.json').read_text())['samples']})
+    dense=bool(getattr(args,'fullrate_frames',None))
+    if dense:
+        if not args.fullrate_images:raise ValueError('Full-rate image directory required')
+        camera_rows=json.loads(args.fullrate_frames.read_text())['scenes'][args.scene]
+        if args.keyframes_only:camera_rows=[r for r in camera_rows if r['keyframe'] is not None]
+        image_hashes={r['name']:r['sha256'] for r in json.loads((args.fullrate_images.parent/'manifest.json').read_text())['files']}
+    else:camera_rows=[dict(timestamp_us=src[r['sample_data_token']]['camera_timestamp_us'],path=src[r['sample_data_token']]['image_path'],keyframe=i) for i,r in enumerate(rows)]
     tokens={src[r['sample_data_token']]['camera_token'] for r in rows}|{r['sample_data_token'] for r in rows}
     meta=DATA/'v1.0-trainval'
     sd={r['token']:r for r in records(meta/'sample_data.json') if r['token'] in tokens}
@@ -57,6 +67,19 @@ def run(args):
     cloud_pub=node.create_publisher(PointCloud2,'/backend/input/semantic_cloud',10)
     graph_pub=node.create_publisher(String,'/backend/trajectory',QoSProfile(depth=1,reliability=ReliabilityPolicy.RELIABLE,durability=DurabilityPolicy.TRANSIENT_LOCAL))
     status,visual_status,received,raw,infos={},{},{},{},{}
+    visual_packets={}
+    identity_metrics=None;identity_targets=None
+    if getattr(args,'identity_cache',None):
+        from tools.instance_memory.data import read
+        from tools.instance_memory.metrics import IdentityMetrics,identity_truth
+        identity_metrics={scope:IdentityMetrics() for scope in ['full','camera']}
+        targets=read(args.identity_cache/(args.scene+'.targets.json.gz'))['frames']
+        identity_targets={int(r['timestamp_us']*1000):(i,t) for i,(r,t) in enumerate(zip(rows,targets))}
+    def observe_visual(message):
+        from tools.visual_instances.geometry import InstanceFrame
+        f=InstanceFrame.decode(message.data)
+        visual_packets[f.stamp_ns]=dict(instances=len(f.ids),history_instances=int(np.count_nonzero(f.temporal_observations)) if f.temporal_observations is not None else 0,
+            max_history=int(f.temporal_observations.max()) if f.temporal_observations is not None and len(f.ids) else 0)
     def stamp(m):return m.header.stamp.sec*10**9+m.header.stamp.nanosec
     def observe(m):
         arrival=time.monotonic()
@@ -67,6 +90,10 @@ def run(args):
         good=gt>=0
         matrices['raw']+=confusion(gt,original,16)
         matrices['published']+=confusion(gt,d['label'],16)
+        if identity_metrics is not None:
+            frame_i,target=identity_targets[stamp(m)];truth=identity_truth(target)
+            valid=good&(np.asarray(target['panoptic'])>0);inside=np.zeros(len(gt),bool);inside[target['camera_in_view_indices']]=True
+            for scope,mask in [('full',valid),('camera',valid&inside)]:identity_metrics[scope].add(truth,d['instance_id'],frame_i,mask)
         received[stamp(m)]=dict(points=m.width,associated=int(np.count_nonzero(d['instance_id'])),
             instances=len(np.unique(d['instance_id'][d['instance_id']>0])),
             semantic_sha256=hashlib.sha256(d['label'].tobytes()).hexdigest(),received=arrival,
@@ -83,7 +110,8 @@ def run(args):
     def observe_raw(m):
         d=np.frombuffer(m.data,dtype=dtype_from_fields(m.fields,point_step=m.point_step))
         raw[stamp(m)]=hashlib.sha256(d['label'].tobytes()).hexdigest()
-    subs=[node.create_subscription(String,'/backend/semantic_status',lambda m:status.update(json.loads(m.data)),qos),
+    subs=[node.create_subscription(String,'/backend/visual_instances',observe_visual,QoSProfile(depth=20,reliability=ReliabilityPolicy.BEST_EFFORT)),
+        node.create_subscription(String,'/backend/semantic_status',lambda m:status.update(json.loads(m.data)),qos),
         node.create_subscription(String,'/backend/visual_status',lambda m:visual_status.update(json.loads(m.data)),qos),
         node.create_subscription(PointCloud2,'/backend/semantic_instances',observe,qos),
         node.create_subscription(PointCloud2,'/backend/semantic_scan',observe_raw,QoSProfile(depth=10,reliability=ReliabilityPolicy.BEST_EFFORT)),
@@ -109,6 +137,8 @@ def run(args):
         start([sys.executable,'-m','tools.visual_instances.node','--worker-python',str(args.runtime/'venv/bin/python'),
             '--weights',str(args.weights),'--out',str(args.out/'vision'),'--image-topic','/visual_pilot/image',
             '--compressed','--width','1600','--height','900',
+            *(['--fullrate'] if dense else []),*(['--visual-history'] if getattr(args,'visual_history',False) else []),
+            *(['--keyframe-reference'] if dense and args.keyframes_only else []),
             *(['--feature-embeddings'] if getattr(args,'instance_memory_checkpoint',None) else [])],'vision.log')
         start([sys.executable,'-m','tools.loop_closure.semantic_node','--frontend',str(frontend),'--camera',str(camera),
             '--out',str(args.out/'semantics'),'--visual-instances','--visual-max-dt-ms','60',
@@ -119,24 +149,26 @@ def run(args):
             '--reflectance-divisor','255','--intensity-scale','1','--verify-final'],'semantics.log')
         spin_until(lambda:status.get('ready') and visual_status.get('ready') and image_pub.get_subscription_count()>0 and cloud_pub.get_subscription_count()>0)
         startup_seconds=time.monotonic()-launch_started
-        origin=min(src[rows[0]['sample_data_token']]['camera_timestamp_us'],rows[0]['timestamp_us'])*1000
+        origin=min(camera_rows[0]['timestamp_us'],rows[0]['timestamp_us'])*1000
         base=time.monotonic()+.1;times=[];poses=[];sent={};late=[]
-        for row in rows:
-            s=src[row['sample_data_token']]
-            scan=np.fromfile(DATA/row['scan_path'],dtype='<f4').reshape(-1,5)[:,:4]
-            scan_stamp=int(row['timestamp_us']*1000);cam_stamp=int(s['camera_timestamp_us']*1000)
-            cloud=create_cloud(header(scan_stamp),[PointField(name=n,offset=i*4,datatype=7,count=1) for i,n in enumerate(('x','y','z','intensity'))],scan)
-            image=CompressedImage(header=header(cam_stamp),format='jpeg',data=(DATA/s['image_path']).read_bytes())
-            for ns,kind,message in sorted([(cam_stamp,'image',image),(scan_stamp,'scan',cloud)],key=lambda x:x[0]):
-                deadline=base+(ns-origin)*1e-9
-                spin_until(lambda:time.monotonic()>=deadline)
-                late.append(max(0.,time.monotonic()-deadline)*1000)
-                if kind=='image':image_pub.publish(message)
-                else:
-                    times.append(scan_stamp);poses.append(row['transform'])
-                    graph_pub.publish(String(data=json.dumps(dict(frame_id='map',stamp_ns=scan_stamp,version=0,times_ns=times,poses=poses))))
-                    cloud_pub.publish(message);sent[scan_stamp]=time.monotonic()
-        spin_until(lambda:len(received)==len(rows) and len(raw)==len(rows) and len(infos)==len(rows),30)
+        events=[(int(r['timestamp_us']*1000),'image',r) for r in camera_rows]+[(int(r['timestamp_us']*1000),'scan',r) for r in rows]
+        for ns,kind,row in sorted(events,key=lambda e:e[0]):
+            if kind=='image':
+                path=(args.fullrate_images/Path(row['path']).name if dense and row['keyframe'] is None else DATA/row['path'])
+                payload=path.read_bytes()
+                if dense and row['keyframe'] is None and hashlib.sha256(payload).hexdigest()!=image_hashes[path.name]:raise ValueError('Full-rate image hash mismatch')
+                message=CompressedImage(header=header(ns),format='jpeg',data=payload)
+            else:
+                scan=np.fromfile(DATA/row['scan_path'],dtype='<f4').reshape(-1,5)[:,:4]
+                message=create_cloud(header(ns),[PointField(name=n,offset=i*4,datatype=7,count=1) for i,n in enumerate(('x','y','z','intensity'))],scan)
+            deadline=base+(ns-origin)*1e-9;spin_until(lambda:time.monotonic()>=deadline)
+            late.append(max(0.,time.monotonic()-deadline)*1000)
+            if kind=='image':image_pub.publish(message)
+            else:
+                times.append(ns);poses.append(row['transform'])
+                graph_pub.publish(String(data=json.dumps(dict(frame_id='map',stamp_ns=ns,version=0,times_ns=times,poses=poses))))
+                cloud_pub.publish(message);sent[ns]=time.monotonic()
+        spin_until(lambda:len(received)==len(rows) and len(raw)==len(rows) and len(infos)==len(rows) and visual_status.get('processed',0)+visual_status.get('superseded',0)+visual_status.get('stale',0)>=len(camera_rows),30)
         assert all(raw[s]==r['semantic_sha256'] for s,r in received.items())
         assert sum(r['associated'] for r in received.values())>0
         if args.instance_semantics=='active':
@@ -150,8 +182,13 @@ def run(args):
             accuracy={a:scores(m) for a,m in matrices.items()},
             latency_ms=dict(median=float(np.median(lat)),p95=float(np.percentile(lat,95)),max=float(max(lat))),
             startup_seconds=startup_seconds,first_scan_latency_ms=lat[0],
+            camera_frames_sent=len(camera_rows),camera_packets_observed=len(visual_packets),fullrate=dense and not args.keyframes_only,
+            identity={s:m.result() for s,m in identity_metrics.items()} if identity_metrics else None,
+            visual_history=getattr(args,'visual_history',False),
+            visual_history_packets=sum(r['history_instances']>0 for r in visual_packets.values()),
+            visual_max_history=max((r['max_history'] for r in visual_packets.values()),default=0),
             replay_lateness_max_ms=max(late),visual_status=visual_status,semantic_status=status,
-            scope='Real camera + raw LiDAR + live PTv3 + ROS instance output at original 2Hz; supplied ego poses. GT evaluation only in subscriber.',
+            scope=('Real full-rate camera + original 2Hz raw LiDAR + live PTv3 + ROS instance/map output; supplied ego poses. GT evaluation only in subscriber.' if dense else 'Real camera + raw LiDAR + live PTv3 + ROS instance output at original 2Hz; supplied ego poses. GT evaluation only in subscriber.'),
             time_alignment='Causal camera <= scan, 60ms bound; ego pose interpolated from received graph; no object-motion compensation.')
         (args.out/'report.json').write_text(json.dumps(summary,indent=2)+'\n')
         (args.out/'instances.jsonl').write_text(''.join(json.dumps(dict(stamp_ns=s,**r,info=infos[s]))+'\n' for s,r in sorted(received.items())))
@@ -178,4 +215,9 @@ if __name__=='__main__':
     p.add_argument('--instance-kalman-checkpoint',type=Path)
     p.add_argument('--instance-memory-checkpoint',type=Path)
     p.add_argument('--memory-mode',choices=('feature_memory','matched_current','same_memory_head_without_history','uniform_history'),default='feature_memory')
+    p.add_argument('--fullrate-frames',type=Path)
+    p.add_argument('--fullrate-images',type=Path)
+    p.add_argument('--visual-history',action='store_true')
+    p.add_argument('--keyframes-only',action='store_true')
+    p.add_argument('--identity-cache',type=Path)
     run(p.parse_args())
