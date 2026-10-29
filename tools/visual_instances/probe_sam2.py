@@ -12,6 +12,13 @@ def run(source,weights,yolo,frames,images,out):
     from .fullrate import FullRateDetector
     from .sam2_memory import SAM2Pair
     from .kalman_cache import gpu_admission
+    protocol_path=Path(__file__).resolve().parents[2]/'config/sam2_memory_probe_20261029.json'
+    protocol=read(protocol_path)
+    commit=subprocess.check_output(['git','-C',str(source),'rev-parse','HEAD'],text=True).strip()
+    if commit!=protocol['source_commit'] or digest(weights)!=protocol['checkpoint_sha256']:
+        raise ValueError('Frozen official source/checkpoint mismatch')
+    if subprocess.check_output(['git','-C',str(source),'status','--porcelain'],text=True).strip():
+        raise ValueError('Official implementation has local modifications')
     admission=gpu_admission();torch.set_num_threads(1);cv2.setNumThreads(1)
     if out.exists():raise ValueError('Refuse overwrite')
     sequence=read(frames)['scenes']['scene-0218'][:8]
@@ -26,7 +33,7 @@ def run(source,weights,yolo,frames,images,out):
         row=dict(frame=i,stamp_ns=frame.stamp_ns,image_sha256=digest(path),yolo_ms=visual['elapsed_ms'],**timing,changed_mask_pixels=changed)
         rows.append(row);print(row,flush=True)
     v=[r['encoder_ms']+r['temporal_ms'] for r in rows[1:]]
-    report=dict(scene='scene-0218',frames=rows,metadata=model.meta,source_commit=subprocess.check_output(['git','-C',str(source),'rev-parse','HEAD'],text=True).strip(),
+    report=dict(scene='scene-0218',frames=rows,metadata=model.meta,source_commit=commit,protocol=protocol,protocol_sha256=digest(protocol_path),frames_index_sha256=digest(frames),
         startup_seconds=startup,peak_allocated_bytes=torch.cuda.max_memory_allocated(),admission=admission,
         source_sha256={p.name:digest(p) for p in [Path(__file__),Path(__file__).with_name('sam2_memory.py')]},
         sam_only_ms=dict(median=float(np.median(v)),p95=float(np.percentile(v,95)),max=max(v)),
