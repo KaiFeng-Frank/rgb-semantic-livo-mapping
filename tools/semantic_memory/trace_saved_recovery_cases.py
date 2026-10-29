@@ -109,7 +109,7 @@ def run(index,targets,models,anchor_path,saved_cases,out):
                     seeds=per_seed,trace_sha256=digest(out/(name+'.npz')))
                 save(out/(name+'.json'),report);reports.append(report);print(report,flush=True)
             cap.close();handle.remove()
-    save(out/'report.json',dict(cases=reports,scope='Frozen two-case mechanism trace; diagnostic substitutions and same-object reproduction only. Not a new dataset result or trained fix.')))
+    save(out/'report.json',dict(cases=reports,scope='Frozen two-case mechanism trace; diagnostic substitutions and same-object reproduction only. Not a new dataset result or trained fix.'))
 
 
 if __name__=='__main__':
