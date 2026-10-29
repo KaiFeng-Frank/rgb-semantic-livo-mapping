@@ -1,0 +1,721 @@
+{
+  "entries": [
+    {
+      "frame": 0,
+      "image": "/media/frank/Extreme SSD/rgb_lidar_shared_backbone/remote_snapshot/rgb_lidar_shared_backbone/datasets/nuscenes/s0_trainval/samples/CAM_FRONT/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707721112404.jpg",
+      "image_sha256": "4ef2ab26611388a40265686ce920e0540b59bfc71137bc3ede3997d5cb63259b",
+      "stamp_ns": 1532707721112404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "000.npz",
+      "cache_sha256": "b89ef3022fbaa641425eb8f0a8de6115abdb64832bec770cb5881ce37733798e",
+      "detector": {
+        "elapsed_ms": 46.85156303457916,
+        "instances": 11,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 3.223680891096592,
+          "inference": 2.529810997657478,
+          "postprocess": 13.443929958157241
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 1,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707721162404.jpg",
+      "image_sha256": "2e247dab60f9381e20196d7fbda230d33657773ff4a20265323356e8c888fdf1",
+      "stamp_ns": 1532707721162404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "001.npz",
+      "cache_sha256": "95aba882aff8482b917f918cec39f3e7a733a2d9228b9e1c30279724878402bc",
+      "detector": {
+        "elapsed_ms": 40.31563096214086,
+        "instances": 12,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.053621992468834,
+          "inference": 3.5238160053268075,
+          "postprocess": 5.601976998150349
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 2,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707721262414.jpg",
+      "image_sha256": "82157c64cd504ba5ce9b589eb1e55dd519c0b27dcd67c2a9492e125e5e260ca0",
+      "stamp_ns": 1532707721262414000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "002.npz",
+      "cache_sha256": "e090d03fbbac3f2df2c1ab537238abe1244f7a8af57d93a05169a3346c963ba9",
+      "detector": {
+        "elapsed_ms": 37.61836502235383,
+        "instances": 12,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.2765669962391257,
+          "inference": 3.5832240246236324,
+          "postprocess": 4.777491092681885
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 3,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707721362404.jpg",
+      "image_sha256": "c63fb22c0b91664d5026ecb321dd4495cadd959f93d4ae6f264e22abcfdcf482",
+      "stamp_ns": 1532707721362404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "003.npz",
+      "cache_sha256": "00646d62d01e6ecfed734b4c3f6a69504f1d94f0da88fae2daaa8e658dae2ce8",
+      "detector": {
+        "elapsed_ms": 39.751076023094356,
+        "instances": 11,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 2.9059540247544646,
+          "inference": 3.5557729424908757,
+          "postprocess": 5.2169079426676035
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 4,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707721412404.jpg",
+      "image_sha256": "840e81568c6666b4f65c093e664812180c11b39dbfca7258af0662d731d58f34",
+      "stamp_ns": 1532707721412404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "004.npz",
+      "cache_sha256": "51bde59dd5f795a73ab91ef793de9d9a00b994f196a79cc6144f65a0b85b7f4f",
+      "detector": {
+        "elapsed_ms": 39.00090395472944,
+        "instances": 11,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.1967619648203254,
+          "inference": 3.593623056076467,
+          "postprocess": 4.638509009964764
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 5,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707721512404.jpg",
+      "image_sha256": "697fbac8dc3affd240e5d2028038e12738deb949db7a36ff439a681367f16125",
+      "stamp_ns": 1532707721512404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "005.npz",
+      "cache_sha256": "bdb4f0f00e187940312559b7de3c33461692efd86954a8a83b469ef3cef05a0e",
+      "detector": {
+        "elapsed_ms": 34.638867946341634,
+        "instances": 10,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.2218679767102003,
+          "inference": 3.5589190665632486,
+          "postprocess": 4.748808918520808
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 6,
+      "image": "/media/frank/Extreme SSD/rgb_lidar_shared_backbone/remote_snapshot/rgb_lidar_shared_backbone/datasets/nuscenes/s0_trainval/samples/CAM_FRONT/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707721612404.jpg",
+      "image_sha256": "99b3785049f0213d31cfb39675f43256010bb7927ebac669f768deccd4234889",
+      "stamp_ns": 1532707721612404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "006.npz",
+      "cache_sha256": "af44e516666136029380941a068380f11a84d248818269d86c832984d809dd32",
+      "detector": {
+        "elapsed_ms": 38.55323197785765,
+        "instances": 12,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.2117390288040042,
+          "inference": 3.514138050377369,
+          "postprocess": 5.102191003970802
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 7,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707721662404.jpg",
+      "image_sha256": "7be7efadab3d058302bb5efee58d2723ec147c67a2367c77e25c788e9fea08df",
+      "stamp_ns": 1532707721662404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "007.npz",
+      "cache_sha256": "86a45c4692b2c5c4f429c41a8fa41664b0250dda362f81942d96a8da57e4f6b4",
+      "detector": {
+        "elapsed_ms": 34.73974100779742,
+        "instances": 10,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.1892379261553288,
+          "inference": 3.5627359757199883,
+          "postprocess": 4.465835052542388
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 8,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707721762404.jpg",
+      "image_sha256": "6b6af66ff67348246d126f3e0e30e38b6c13de720f71b706a802d4550a982fbe",
+      "stamp_ns": 1532707721762404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "008.npz",
+      "cache_sha256": "d68ea84134bf0f66f910add45d89fad2233ea45ac5bfbebbcf98396b14013597",
+      "detector": {
+        "elapsed_ms": 38.486461038701236,
+        "instances": 10,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.238507917150855,
+          "inference": 3.5157708916813135,
+          "postprocess": 5.592109984718263
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 9,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707721862404.jpg",
+      "image_sha256": "35aa04429b1555a12704d0600887f534578b466e1911e45250822b3f4f8f9d8f",
+      "stamp_ns": 1532707721862404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "009.npz",
+      "cache_sha256": "19e6eeb0f740fe335ed2a8a3c34e6ae406c53cfb65a9d5c65ee59a7285a70bbb",
+      "detector": {
+        "elapsed_ms": 37.461680942215025,
+        "instances": 12,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.2225289829075336,
+          "inference": 3.5163220018148422,
+          "postprocess": 4.475072026252747
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 10,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707721912404.jpg",
+      "image_sha256": "8b73105d3be6ec6054764c7a0fc5615f7a0973f7e0acbe488112d710b5875265",
+      "stamp_ns": 1532707721912404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "010.npz",
+      "cache_sha256": "7b0478bccfffd05a9645f6289131a7dfd67acc568efb3f6690978b24533c7b9a",
+      "detector": {
+        "elapsed_ms": 40.18319002352655,
+        "instances": 10,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.5140579780563712,
+          "inference": 3.594613983295858,
+          "postprocess": 5.339210038073361
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 11,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707722012404.jpg",
+      "image_sha256": "dc08331cdce558a1b7a0f6a3c9c0548643c51343272f07619cd18b1171512195",
+      "stamp_ns": 1532707722012404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "011.npz",
+      "cache_sha256": "b6071b58e4da5861f3ef37f73126142f1e5ddcd7fe9fe3db54645d3e4032df80",
+      "detector": {
+        "elapsed_ms": 35.46595899388194,
+        "instances": 10,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.1770359706133604,
+          "inference": 3.578544012270868,
+          "postprocess": 4.467787919566035
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 12,
+      "image": "/media/frank/Extreme SSD/rgb_lidar_shared_backbone/remote_snapshot/rgb_lidar_shared_backbone/datasets/nuscenes/s0_trainval/samples/CAM_FRONT/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707722112404.jpg",
+      "image_sha256": "ae0fe13dd2a80cf131715ed256839e048a11fae99ae000671583f42c339fb3c1",
+      "stamp_ns": 1532707722112404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "012.npz",
+      "cache_sha256": "f89757076ef509ffbb3bf10bfe80ac5d4036a2b26654bf06271e829793c960f9",
+      "detector": {
+        "elapsed_ms": 37.390260957181454,
+        "instances": 11,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.2119089951738715,
+          "inference": 3.523375024087727,
+          "postprocess": 5.046629928983748
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 13,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707722162408.jpg",
+      "image_sha256": "55e90511ad6c168e8d6ce0d10704593b61443a2b549dd4c5b59a57859a213956",
+      "stamp_ns": 1532707722162408000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "013.npz",
+      "cache_sha256": "c8b14a38282a2d30f96b45b4d2afa31341fa5b5e1d2850c4b5297b0adffad837",
+      "detector": {
+        "elapsed_ms": 36.577987018972635,
+        "instances": 10,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.153683988377452,
+          "inference": 3.519427962601185,
+          "postprocess": 4.914940916933119
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 14,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707722262404.jpg",
+      "image_sha256": "3d16768ac38817ded10a48eacdca28a070a831d4c90ee76ebeea5a869d360b5a",
+      "stamp_ns": 1532707722262404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "014.npz",
+      "cache_sha256": "5628d46234b4c6e3588419e15292bdfabeeb06656bfaff2dea43cdbfebda6cf4",
+      "detector": {
+        "elapsed_ms": 38.29946194309741,
+        "instances": 11,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.0826140642166138,
+          "inference": 3.5595509689301252,
+          "postprocess": 4.912786069326103
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 15,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707722362404.jpg",
+      "image_sha256": "709abf6231b46b19f37fb2dd7447a1f1f4f12d4cf86d79cf12999af067934c21",
+      "stamp_ns": 1532707722362404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "015.npz",
+      "cache_sha256": "5c664105ff60767f1415c86b5aa69a8bc0cca48cd34a8480a377e7217dbaea0e",
+      "detector": {
+        "elapsed_ms": 37.43670496623963,
+        "instances": 12,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.2131219264119864,
+          "inference": 3.508848021738231,
+          "postprocess": 4.317746963351965
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 16,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707722412404.jpg",
+      "image_sha256": "76c233342889dd93a6b35d1e6cc26f74f61780425cb9e54a62ad14c87110ae0c",
+      "stamp_ns": 1532707722412404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "016.npz",
+      "cache_sha256": "f664c9c3c8577e74997c4cc98c624d6a7cb6c2b41a64fa22df41e0fb96146b14",
+      "detector": {
+        "elapsed_ms": 39.060456096194685,
+        "instances": 12,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.178208040073514,
+          "inference": 3.509739995934069,
+          "postprocess": 4.932002048008144
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 17,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707722512404.jpg",
+      "image_sha256": "fc1513ad9b0ab57d8c4058a9d5dc784c0ce52972c6b1aa3f558d717c980a6bfd",
+      "stamp_ns": 1532707722512404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "017.npz",
+      "cache_sha256": "ad12d91af63a451ad27854aeec43b774c990a9a30428767d8290c0ccfdcc5909",
+      "detector": {
+        "elapsed_ms": 35.3691769996658,
+        "instances": 12,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.181814935989678,
+          "inference": 3.5230449866503477,
+          "postprocess": 4.330369993112981
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 18,
+      "image": "/media/frank/Extreme SSD/rgb_lidar_shared_backbone/remote_snapshot/rgb_lidar_shared_backbone/datasets/nuscenes/s0_trainval/samples/CAM_FRONT/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707722612404.jpg",
+      "image_sha256": "7eea01265295da5c3e65a0bf7d314fbe0246da2f234261bf118900ea615dd1e9",
+      "stamp_ns": 1532707722612404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "018.npz",
+      "cache_sha256": "063d36f17a5f6549e1dafebce82c082876c735b1c1a2344a3aa917a472370c58",
+      "detector": {
+        "elapsed_ms": 38.91204798128456,
+        "instances": 12,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.2832189677283168,
+          "inference": 3.5033890744671226,
+          "postprocess": 4.9432129599153996
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 19,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707722662404.jpg",
+      "image_sha256": "d0d81e98faa022acac7007cf994f5758e467445e8ca554393461619782c6811e",
+      "stamp_ns": 1532707722662404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "019.npz",
+      "cache_sha256": "4ad2ca4a1c813f64989fa3b6943610a8fc89761399a930f2274a62388cdc75b3",
+      "detector": {
+        "elapsed_ms": 37.87469503004104,
+        "instances": 11,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.1614379473030567,
+          "inference": 3.507395973429084,
+          "postprocess": 4.911695956252515
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 20,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707722762404.jpg",
+      "image_sha256": "0a58f72cf6129fb52b8a39876e8403026b76d8626b27cb28ba16bec32673bcfc",
+      "stamp_ns": 1532707722762404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "020.npz",
+      "cache_sha256": "c19af4282f4d5f45fcc55487c7c4baaa467092d13698b88fe079dd5adf14eeab",
+      "detector": {
+        "elapsed_ms": 40.610000025480986,
+        "instances": 11,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.219314057379961,
+          "inference": 3.504620981402695,
+          "postprocess": 5.095850094221532
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 21,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707722862404.jpg",
+      "image_sha256": "d4bac67a0b30372d6511dd09a6e18d45786e3213e92cf76f942d0b70c9549304",
+      "stamp_ns": 1532707722862404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "021.npz",
+      "cache_sha256": "6f202202f66cd69820c9d7a7c535685089305fecf80f163c735434b573b7b2ea",
+      "detector": {
+        "elapsed_ms": 36.37367102783173,
+        "instances": 12,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.1937359813600779,
+          "inference": 3.513506962917745,
+          "postprocess": 4.584531066939235
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 22,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707722912404.jpg",
+      "image_sha256": "530d959c39c4ac41126185fdae6c5707db3171889310b08acca8fac228dbd133",
+      "stamp_ns": 1532707722912404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "022.npz",
+      "cache_sha256": "3dfe223af536f7cbd8c25308bcec11d112f1bd774dd43f9cbc53b3f4c9573619",
+      "detector": {
+        "elapsed_ms": 39.087626966647804,
+        "instances": 12,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.0892970021814108,
+          "inference": 3.552467911504209,
+          "postprocess": 5.638303933665156
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 23,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707723012404.jpg",
+      "image_sha256": "8523e61963a7ad214a6fc7cdbafde75a91bde97e78130bb4c99775ed23bf5aa7",
+      "stamp_ns": 1532707723012404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "023.npz",
+      "cache_sha256": "95c14a97317da9116d4dafaf1aebd8800ffc71614f94b61eb8fd6fd59555b95e",
+      "detector": {
+        "elapsed_ms": 35.28218995779753,
+        "instances": 12,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.1727589881047606,
+          "inference": 3.5203100414946675,
+          "postprocess": 4.197208094410598
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 24,
+      "image": "/media/frank/Extreme SSD/rgb_lidar_shared_backbone/remote_snapshot/rgb_lidar_shared_backbone/datasets/nuscenes/s0_trainval/samples/CAM_FRONT/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707723112404.jpg",
+      "image_sha256": "e4409adc8e94aea8a77e61b8fafd4bcb6557b534ea0d04dfc51ad45c038bce05",
+      "stamp_ns": 1532707723112404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "024.npz",
+      "cache_sha256": "a255a5dd0ef6ea99b090b95923b95d4f536e6383b32344067734617ae646b512",
+      "detector": {
+        "elapsed_ms": 38.39263506233692,
+        "instances": 11,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.2482060119509697,
+          "inference": 3.6004349822178483,
+          "postprocess": 4.760660929605365
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 25,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707723162404.jpg",
+      "image_sha256": "d2e1bc9868c6133057a8c7f5f26518b262911cd4e8fe0dede5da280cd7a3cf8f",
+      "stamp_ns": 1532707723162404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "025.npz",
+      "cache_sha256": "3b98d9c98bbf5f6cf62c986c35809490ecf2f02ef01340644ea1c5b107a02183",
+      "detector": {
+        "elapsed_ms": 32.75878995191306,
+        "instances": 9,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.2035350082442164,
+          "inference": 3.5332830157130957,
+          "postprocess": 3.782966989092529
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 26,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707723262404.jpg",
+      "image_sha256": "2db47995d449e75a130aa6098dcc5df8703424da3661ee3aa7fe3f0bd4ce7daa",
+      "stamp_ns": 1532707723262404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "026.npz",
+      "cache_sha256": "556dfab74e1c30c2220960c2e408b4219342bcc1c97dc2b2abfcd9e620de7609",
+      "detector": {
+        "elapsed_ms": 40.71220604237169,
+        "instances": 10,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 5.557928001508117,
+          "inference": 3.522253013215959,
+          "postprocess": 4.492835025303066
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 27,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707723362404.jpg",
+      "image_sha256": "b57e30085719b5c4eb33901349f0f2dc82b3e44f312bb17d663f1acef38252e7",
+      "stamp_ns": 1532707723362404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "027.npz",
+      "cache_sha256": "01fd0fb473a18dec6dede0d0d40fb74cfd6a3384ed7c26a51e76c6b2b049dde9",
+      "detector": {
+        "elapsed_ms": 37.54544700495899,
+        "instances": 11,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 2.12293304502964,
+          "inference": 3.528413944877684,
+          "postprocess": 4.05815604608506
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 28,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707723412404.jpg",
+      "image_sha256": "9fca17d2065767a33d89ff0508bab07b4801208c951a3faf57039ffecda16b22",
+      "stamp_ns": 1532707723412404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "028.npz",
+      "cache_sha256": "9f79c1fac3f7cb08621e5c6dfd7f76fe301ce9db1c52fa69a1365be39c2ab31d",
+      "detector": {
+        "elapsed_ms": 36.69404296670109,
+        "instances": 11,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.2297519715502858,
+          "inference": 3.513987991027534,
+          "postprocess": 4.557081963866949
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 29,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707723512404.jpg",
+      "image_sha256": "58baf4a416d0e44abe07d1af20d8709bf811b54cc078e15a2b17699639c831b0",
+      "stamp_ns": 1532707723512404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "029.npz",
+      "cache_sha256": "3174922eaf3b50813b406690763c2447389e0481580bd0f00564713d77beae7e",
+      "detector": {
+        "elapsed_ms": 33.32595806568861,
+        "instances": 9,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.2101370375603437,
+          "inference": 3.528194036334753,
+          "postprocess": 4.705430008471012
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 30,
+      "image": "/media/frank/Extreme SSD/rgb_lidar_shared_backbone/remote_snapshot/rgb_lidar_shared_backbone/datasets/nuscenes/s0_trainval/samples/CAM_FRONT/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707723612404.jpg",
+      "image_sha256": "435affe2b4807b927ba7e80d44f777837bc2b6ade361a64f95b4ca853152ce70",
+      "stamp_ns": 1532707723612404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "030.npz",
+      "cache_sha256": "9589cdc4c4271078aecf3c297e2f2d7df186a3deaab71ee44c1bec2084abd01b",
+      "detector": {
+        "elapsed_ms": 35.11667903512716,
+        "instances": 10,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.2437370605766773,
+          "inference": 3.5078569781035185,
+          "postprocess": 4.404594888910651
+        },
+        "visual_memory": null
+      }
+    },
+    {
+      "frame": 31,
+      "image": "/home/frank/semantic_livo_runtime/instance-fullrate-20261029/data/images/n008-2018-07-27-12-07-38-0400__CAM_FRONT__1532707723662404.jpg",
+      "image_sha256": "1ac27a725cd23114fedd8abfde0c5771358eb5c0bd9c1f5058fe9d360c6ac1c7",
+      "stamp_ns": 1532707723662404000,
+      "session": "589c504e99e34a5380593193523f406b",
+      "cache": "031.npz",
+      "cache_sha256": "80aebe22edebdf26f220acb5e2913f63a0a17a729ca82d50568b611b453bbeb7",
+      "detector": {
+        "elapsed_ms": 33.78329903353006,
+        "instances": 11,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.1525519657880068,
+          "inference": 3.519288031384349,
+          "postprocess": 4.0662100072950125
+        },
+        "visual_memory": null
+      }
+    }
+  ],
+  "admission": {
+    "time": 1793250394.4629698,
+    "pid": 1673191,
+    "compute_processes": []
+  },
+  "detector": {
+    "weights": "/home/frank/semantic_livo_runtime/visual-weights/yolo11n-seg.pt",
+    "sha256": "55ed65c56c91713d23e8402371c6c49a6fd84f257f7dce452e8d70e41dcbe152",
+    "ultralytics": "8.3.228",
+    "tracking": "fullrate",
+    "tracker": {
+      "tracker_type": "botsort",
+      "track_high_thresh": 0.25,
+      "track_low_thresh": 0.1,
+      "new_track_thresh": 0.25,
+      "track_buffer": 90,
+      "match_thresh": 0.8,
+      "fuse_score": true,
+      "gmc_method": "sparseOptFlow",
+      "proximity_thresh": 0.5,
+      "appearance_thresh": 0.25,
+      "with_reid": false,
+      "model": "auto"
+    },
+    "real_time_expiry_s": 7.5,
+    "gap_reset_s": 0.75,
+    "feature_embeddings": false,
+    "visual_memory": null,
+    "cpu_affinity": [
+      12,
+      13,
+      14,
+      15
+    ],
+    "training": "none; frozen original YOLO11n-seg",
+    "startup_seconds": 1.7642194159561768,
+    "paired_reference": "40a38c4 fullrate arm",
+    "precision": {
+      "matmul_tf32": false,
+      "cudnn_tf32": true,
+      "scope": "isolated native visual-worker policy, restored after each call"
+    }
+  },
+  "frames_index_sha256": "5d4668193f5e5e4a6cf4fe2f4cb4297a81ac840426e63f705c50583aaeeceafd",
+  "protocol_sha256": "24e729c7f95b956e5cddd91f1383fb4f703fe0f436d5b93df8ed41969889bd45"
+}

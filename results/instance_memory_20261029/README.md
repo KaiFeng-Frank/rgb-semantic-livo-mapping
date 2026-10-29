@@ -9,6 +9,9 @@
 随后[补齐完整调用计时并检查官方编译](sam2-compile/README.md)：等价 CPU 优化使
 32 帧组件中位耗时从 85.51 降至 66.84 ms，但仍超预算；编译的掩码等价性与
 重复输出检查失败。没有新增语义精度声明。
+另一项[DEVA 原生在线记忆检查](deva-feasibility/README.md)完成四次同输入回放，
+输出一致但组件中位耗时约 275–280 ms；分阶段确认主要成本在多目标神经网络。
+该同步配置停止，没有启动完整精度评价。
 
 **Result: failed the advancement gates.** The implementation and actual ROS delivery work; the memory has not demonstrated a reliable semantic or identity improvement over the matched controls. It remains opt-in.
 

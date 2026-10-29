@@ -1,0 +1,12 @@
+{
+  "same_32_current_inputs_as_previous_probe": true,
+  "runtime_and_profiler_sources_exact": true,
+  "four_complete_runs_timing_recomputed": true,
+  "historical_reads": 124,
+  "future_buffer_count_zero": true,
+  "repeat_output_assertions_completed": true,
+  "profiler_timings_and_completed_output_checks_verified": true,
+  "first_pass_mask_cache_intact": true,
+  "local_checkpoint_pin_verified": true,
+  "scope_review": "Source/input audit only, not syscall tracing: no GT target loader and no new holdout accessed. Changed labels and IDs are not accuracy evidence."
+}

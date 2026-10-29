@@ -1,0 +1,2531 @@
+{
+  "frames": [
+    {
+      "frame": 0,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 148.49233406130224
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 35.17882293090224
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 41.072026011534035
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 83.22915306780487
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.0968939857557416
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 2.166014048270881
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 37.39962098188698
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 0.06127706728875637
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 148.49233406130224,
+        "transform_key": 35.17882293090224,
+        "match_and_merge": 2.166014048270881,
+        "encode_mask": 37.39962098188698,
+        "memory_write_compress": 0.06127706728875637
+      },
+      "timing": {
+        "wall_both_arms_ms": 389.5753900287673,
+        "prep_encode_ms": 210.0201799767092,
+        "current_ms": 135.03634801600128,
+        "temporal_ms": 44.41925301216543,
+        "deploy_component_ms": 254.539042012766,
+        "input_objects": 11,
+        "objects": 11,
+        "memory_reads": 0,
+        "buffered_future_frames": 0,
+        "work_tokens": 1620,
+        "long_tokens": 0,
+        "metadata_observations": 11
+      }
+    },
+    {
+      "frame": 1,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 2.9138049576431513
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.2257790183648467
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 2.089038025587797
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 40.387404966168106
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.05797098856419325
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 35.1347989635542
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 77.458843938075
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 6.585857947356999
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 49.93276402819902
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 0.21900597494095564
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 2.9138049576431513,
+        "transform_key": 0.2257790183648467,
+        "match_memory": 35.1347989635542,
+        "segment": 77.458843938075,
+        "match_and_merge": 6.585857947356999,
+        "encode_mask": 49.93276402819902,
+        "memory_write_compress": 0.21900597494095564
+      },
+      "timing": {
+        "wall_both_arms_ms": 232.0164869306609,
+        "prep_encode_ms": 9.710573009215295,
+        "current_ms": 47.07768210209906,
+        "temporal_ms": 175.15642591752112,
+        "deploy_component_ms": 184.93880482856184,
+        "input_objects": 12,
+        "objects": 13,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 4860,
+        "long_tokens": 0,
+        "metadata_observations": 23
+      }
+    },
+    {
+      "frame": 2,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 3.685880918055773
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.25478401221334934
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 2.2363869938999414
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 35.335269989445806
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.054092961363494396
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 4.108533030375838
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 91.53606893960387
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 7.054738001897931
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 56.848730077035725
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 0.3045080229640007
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 3.685880918055773,
+        "transform_key": 0.25478401221334934,
+        "match_memory": 4.108533030375838,
+        "segment": 91.53606893960387,
+        "match_and_merge": 7.054738001897931,
+        "encode_mask": 56.848730077035725,
+        "memory_write_compress": 0.3045080229640007
+      },
+      "timing": {
+        "wall_both_arms_ms": 217.72266901098192,
+        "prep_encode_ms": 10.045608971267939,
+        "current_ms": 42.416438926011324,
+        "temporal_ms": 165.1866310276091,
+        "deploy_component_ms": 175.3062300849706,
+        "input_objects": 11,
+        "objects": 15,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 9720,
+        "long_tokens": 0,
+        "metadata_observations": 34
+      }
+    },
+    {
+      "frame": 3,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 3.4667240688577294
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.24287099950015545
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 1.8255669856444001
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 33.72341895010322
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.05490402691066265
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 7.224961998872459
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 148.8767119590193
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 9.994521969929338
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 107.82589507289231
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 0.5891290493309498
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 3.4667240688577294,
+        "transform_key": 0.24287099950015545,
+        "match_memory": 7.224961998872459,
+        "segment": 148.8767119590193,
+        "match_and_merge": 9.994521969929338,
+        "encode_mask": 107.82589507289231,
+        "memory_write_compress": 0.5891290493309498
+      },
+      "timing": {
+        "wall_both_arms_ms": 329.9042839789763,
+        "prep_encode_ms": 9.914559894241393,
+        "current_ms": 39.63483602274209,
+        "temporal_ms": 280.29004496056587,
+        "deploy_component_ms": 290.2694479562342,
+        "input_objects": 10,
+        "objects": 15,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 14580,
+        "long_tokens": 0,
+        "metadata_observations": 44
+      }
+    },
+    {
+      "frame": 4,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 4.679988021962345
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.2775070024654269
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 2.433461952023208
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 43.83332992438227
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.04861201159656048
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 13.310408918187022
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 128.1783899758011
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 8.624410023912787
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 61.60862906835973
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 0.5279630422592163
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 4.679988021962345,
+        "transform_key": 0.2775070024654269,
+        "match_memory": 13.310408918187022,
+        "segment": 128.1783899758011,
+        "match_and_merge": 8.624410023912787,
+        "encode_mask": 61.60862906835973,
+        "memory_write_compress": 0.5279630422592163
+      },
+      "timing": {
+        "wall_both_arms_ms": 279.6597060514614,
+        "prep_encode_ms": 11.052391026169062,
+        "current_ms": 50.625549047254026,
+        "temporal_ms": 217.92127203661948,
+        "deploy_component_ms": 229.03415700420737,
+        "input_objects": 11,
+        "objects": 16,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 21060,
+        "long_tokens": 0,
+        "metadata_observations": 55
+      }
+    },
+    {
+      "frame": 5,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 3.77072102855891
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.2452159533277154
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 1.5553439734503627
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 28.00773293711245
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.05466293077915907
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 14.555605011992157
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 115.4108609771356
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 8.077570935711265
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 70.89386391453445
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 0.7639409741386771
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 3.77072102855891,
+        "transform_key": 0.2452159533277154,
+        "match_memory": 14.555605011992157,
+        "segment": 115.4108609771356,
+        "match_and_merge": 8.077570935711265,
+        "encode_mask": 70.89386391453445,
+        "memory_write_compress": 0.7639409741386771
+      },
+      "timing": {
+        "wall_both_arms_ms": 259.4196160789579,
+        "prep_encode_ms": 10.237133014015853,
+        "current_ms": 33.31122605595738,
+        "temporal_ms": 215.81049298401922,
+        "deploy_component_ms": 226.10839002300054,
+        "input_objects": 9,
+        "objects": 18,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 29160,
+        "long_tokens": 0,
+        "metadata_observations": 64
+      }
+    },
+    {
+      "frame": 6,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 2.9336520237848163
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.2185450866818428
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 1.4883870026096702
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 33.11420197132975
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.04879198968410492
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 19.17912601493299
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 145.8052060334012
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 11.847631074488163
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 102.76430996600538
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 1.2101390166208148
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 2.9336520237848163,
+        "transform_key": 0.2185450866818428,
+        "match_memory": 19.17912601493299,
+        "segment": 145.8052060334012,
+        "match_and_merge": 11.847631074488163,
+        "encode_mask": 102.76430996600538,
+        "memory_write_compress": 1.2101390166208148
+      },
+      "timing": {
+        "wall_both_arms_ms": 335.1147250505164,
+        "prep_encode_ms": 9.172991965897381,
+        "current_ms": 38.4702340234071,
+        "temporal_ms": 287.41596394684166,
+        "deploy_component_ms": 296.6444910271093,
+        "input_objects": 10,
+        "objects": 17,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 37260,
+        "long_tokens": 0,
+        "metadata_observations": 73
+      }
+    },
+    {
+      "frame": 7,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 4.99432603828609
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.2863240661099553
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 1.9354859832674265
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 39.25502405036241
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.048412010073661804
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 25.650967028923333
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 146.22283703647554
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 9.642162942327559
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 73.47225898411125
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 0.9748509619385004
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 4.99432603828609,
+        "transform_key": 0.2863240661099553,
+        "match_memory": 25.650967028923333,
+        "segment": 146.22283703647554,
+        "match_and_merge": 9.642162942327559,
+        "encode_mask": 73.47225898411125,
+        "memory_write_compress": 0.9748509619385004
+      },
+      "timing": {
+        "wall_both_arms_ms": 318.4424580540508,
+        "prep_encode_ms": 11.53914607129991,
+        "current_ms": 44.980217004194856,
+        "temporal_ms": 261.8713170522824,
+        "deploy_component_ms": 273.46224104985595,
+        "input_objects": 9,
+        "objects": 17,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 35640,
+        "long_tokens": 0,
+        "metadata_observations": 80
+      }
+    },
+    {
+      "frame": 8,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 3.913191962055862
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.25066593661904335
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 1.2742700055241585
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 23.84720102418214
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.052870018407702446
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 23.759825038723648
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 125.69961906410754
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 8.614500984549522
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 67.67593102995306
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 1.0491319699212909
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 3.913191962055862,
+        "transform_key": 0.25066593661904335,
+        "match_memory": 23.759825038723648,
+        "segment": 125.69961906410754,
+        "match_and_merge": 8.614500984549522,
+        "encode_mask": 67.67593102995306,
+        "memory_write_compress": 1.0491319699212909
+      },
+      "timing": {
+        "wall_both_arms_ms": 271.5810580411926,
+        "prep_encode_ms": 10.21888805553317,
+        "current_ms": 28.652466950006783,
+        "temporal_ms": 232.65727295074612,
+        "deploy_component_ms": 242.9285910911858,
+        "input_objects": 8,
+        "objects": 17,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 45360,
+        "long_tokens": 0,
+        "metadata_observations": 87
+      }
+    },
+    {
+      "frame": 9,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 4.157866002060473
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.25988405104726553
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 2.8442019829526544
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 40.84176698233932
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.05581590812653303
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 28.140383888967335
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 139.19785502366722
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 11.708406964316964
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 108.18770795594901
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 24.63529701344669
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 4.157866002060473,
+        "transform_key": 0.25988405104726553,
+        "match_memory": 28.140383888967335,
+        "segment": 139.19785502366722,
+        "match_and_merge": 11.708406964316964,
+        "encode_mask": 108.18770795594901,
+        "memory_write_compress": 24.63529701344669
+      },
+      "timing": {
+        "wall_both_arms_ms": 378.20774991996586,
+        "prep_encode_ms": 10.624667978845537,
+        "current_ms": 48.296313965693116,
+        "temporal_ms": 319.2228650441393,
+        "deploy_component_ms": 329.91143595427275,
+        "input_objects": 12,
+        "objects": 18,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 48600,
+        "long_tokens": 128,
+        "metadata_observations": 95
+      }
+    },
+    {
+      "frame": 10,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 4.027919960208237
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.26842893566936255
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 2.034164033830166
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 34.80886807665229
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.05568598862737417
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 29.4857689877972
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 151.66571096051484
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 10.473430971615016
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 78.36638204753399
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 0.8699620375409722
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 4.027919960208237,
+        "transform_key": 0.26842893566936255,
+        "match_memory": 29.4857689877972,
+        "segment": 151.66571096051484,
+        "match_and_merge": 10.473430971615016,
+        "encode_mask": 78.36638204753399,
+        "memory_write_compress": 0.8699620375409722
+      },
+      "timing": {
+        "wall_both_arms_ms": 329.2960929684341,
+        "prep_encode_ms": 10.923565947450697,
+        "current_ms": 40.83855007775128,
+        "temporal_ms": 277.47326204553246,
+        "deploy_component_ms": 288.4575428906828,
+        "input_objects": 10,
+        "objects": 19,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 61560,
+        "long_tokens": 128,
+        "metadata_observations": 100
+      }
+    },
+    {
+      "frame": 11,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 3.331397078000009
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.21094107069075108
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 1.4899499947205186
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 32.963092904537916
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.046708970330655575
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 33.10544299893081
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 151.60580701194704
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 10.342902969568968
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 77.2029320942238
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 1.3696309179067612
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 3.331397078000009,
+        "transform_key": 0.21094107069075108,
+        "match_memory": 33.10544299893081,
+        "segment": 151.60580701194704,
+        "match_and_merge": 10.342902969568968,
+        "encode_mask": 77.2029320942238,
+        "memory_write_compress": 1.3696309179067612
+      },
+      "timing": {
+        "wall_both_arms_ms": 327.8485039481893,
+        "prep_encode_ms": 9.555517928674817,
+        "current_ms": 38.24260993860662,
+        "temporal_ms": 279.99707602430135,
+        "deploy_component_ms": 289.6058940095827,
+        "input_objects": 10,
+        "objects": 18,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 56700,
+        "long_tokens": 256,
+        "metadata_observations": 108
+      }
+    },
+    {
+      "frame": 12,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 3.5252650268375874
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.2352370647713542
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 1.84814992826432
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 33.87517505325377
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.04541699308902025
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 37.5151380430907
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 186.03747501038015
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 10.214018053375185
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 82.63302396517247
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 1.158811035566032
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 3.5252650268375874,
+        "transform_key": 0.2352370647713542,
+        "match_memory": 37.5151380430907,
+        "segment": 186.03747501038015,
+        "match_and_merge": 10.214018053375185,
+        "encode_mask": 82.63302396517247,
+        "memory_write_compress": 1.158811035566032
+      },
+      "timing": {
+        "wall_both_arms_ms": 373.9552740007639,
+        "prep_encode_ms": 9.75326297339052,
+        "current_ms": 39.7991850040853,
+        "temporal_ms": 324.3486010469496,
+        "deploy_component_ms": 334.1560889966786,
+        "input_objects": 10,
+        "objects": 19,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 71280,
+        "long_tokens": 256,
+        "metadata_observations": 118
+      }
+    },
+    {
+      "frame": 13,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 3.3618250163272023
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.2139359712600708
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 1.237379969097674
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 31.2166849616915
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.04942400846630335
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 47.52810299396515
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 158.78941596020013
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 9.829116985201836
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 74.26884898450226
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 1.5424599405378103
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 3.3618250163272023,
+        "transform_key": 0.2139359712600708,
+        "match_memory": 47.52810299396515,
+        "segment": 158.78941596020013,
+        "match_and_merge": 9.829116985201836,
+        "encode_mask": 74.26884898450226,
+        "memory_write_compress": 1.5424599405378103
+      },
+      "timing": {
+        "wall_both_arms_ms": 344.19636393431574,
+        "prep_encode_ms": 9.622304001823068,
+        "current_ms": 36.20166203472763,
+        "temporal_ms": 298.3216409338638,
+        "deploy_component_ms": 307.9947018995881,
+        "input_objects": 9,
+        "objects": 18,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 68040,
+        "long_tokens": 384,
+        "metadata_observations": 125
+      }
+    },
+    {
+      "frame": 14,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 3.048598999157548
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.21031999494880438
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 1.4927550218999386
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 33.72040099930018
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.044934917241334915
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 41.428550030104816
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 145.52249992266297
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 10.0248180096969
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 78.94204300828278
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 2.6727759977802634
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 3.048598999157548,
+        "transform_key": 0.21031999494880438,
+        "match_memory": 41.428550030104816,
+        "segment": 145.52249992266297,
+        "match_and_merge": 10.0248180096969,
+        "encode_mask": 78.94204300828278,
+        "memory_write_compress": 2.6727759977802634
+      },
+      "timing": {
+        "wall_both_arms_ms": 333.730788086541,
+        "prep_encode_ms": 9.262611041776836,
+        "current_ms": 39.18944695033133,
+        "temporal_ms": 285.22747301030904,
+        "deploy_component_ms": 294.54134113620967,
+        "input_objects": 10,
+        "objects": 18,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 64800,
+        "long_tokens": 512,
+        "metadata_observations": 134
+      }
+    },
+    {
+      "frame": 15,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 4.69186098780483
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.27176609728485346
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 3.2051269663497806
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 51.354800001718104
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.04783098120242357
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 42.68035606946796
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 150.53281199652702
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 11.466916999779642
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 78.24713201262057
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 0.9175430750474334
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 4.69186098780483,
+        "transform_key": 0.27176609728485346,
+        "match_memory": 42.68035606946796,
+        "segment": 150.53281199652702,
+        "match_and_merge": 11.466916999779642,
+        "encode_mask": 78.24713201262057,
+        "memory_write_compress": 0.9175430750474334
+      },
+      "timing": {
+        "wall_both_arms_ms": 360.4142270050943,
+        "prep_encode_ms": 11.004670057445765,
+        "current_ms": 59.062418062239885,
+        "temporal_ms": 290.294439997524,
+        "deploy_component_ms": 301.3518089428544,
+        "input_objects": 12,
+        "objects": 18,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 69660,
+        "long_tokens": 384,
+        "metadata_observations": 142
+      }
+    },
+    {
+      "frame": 16,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 3.562496043741703
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.23946503642946482
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 2.702041994780302
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 43.77605696208775
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.050336006097495556
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 40.69911304395646
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 140.9570169635117
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 10.282066999934614
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 75.5086219869554
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 1.4051679754629731
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 3.562496043741703,
+        "transform_key": 0.23946503642946482,
+        "match_memory": 40.69911304395646,
+        "segment": 140.9570169635117,
+        "match_and_merge": 10.282066999934614,
+        "encode_mask": 75.5086219869554,
+        "memory_write_compress": 1.4051679754629731
+      },
+      "timing": {
+        "wall_both_arms_ms": 336.252880981192,
+        "prep_encode_ms": 9.813887998461723,
+        "current_ms": 51.09095899388194,
+        "temporal_ms": 275.29421204235405,
+        "deploy_component_ms": 285.16192198731005,
+        "input_objects": 12,
+        "objects": 18,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 66420,
+        "long_tokens": 512,
+        "metadata_observations": 152
+      }
+    },
+    {
+      "frame": 17,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 3.0139939626678824
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.21002895664423704
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 2.0882260287180543
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 42.550169047899544
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.049002934247255325
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 38.84537308476865
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 163.30336593091488
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 12.087475974112749
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 83.00723100546747
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 1.1167610064148903
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 3.0139939626678824,
+        "transform_key": 0.21002895664423704,
+        "match_memory": 38.84537308476865,
+        "segment": 163.30336593091488,
+        "match_and_merge": 12.087475974112749,
+        "encode_mask": 83.00723100546747,
+        "memory_write_compress": 1.1167610064148903
+      },
+      "timing": {
+        "wall_both_arms_ms": 363.1331279175356,
+        "prep_encode_ms": 9.224588982760906,
+        "current_ms": 48.961072927340865,
+        "temporal_ms": 304.89672999829054,
+        "deploy_component_ms": 314.17205499019474,
+        "input_objects": 12,
+        "objects": 18,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 71280,
+        "long_tokens": 512,
+        "metadata_observations": 163
+      }
+    },
+    {
+      "frame": 18,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 3.142316942103207
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.21270406432449818
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 1.4994579833000898
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 35.52947496064007
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.046478002332150936
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 44.58495194558054
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 162.2086629504338
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 9.623236022889614
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 69.01306402869523
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 1.5556539874523878
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 3.142316942103207,
+        "transform_key": 0.21270406432449818,
+        "match_memory": 44.58495194558054,
+        "segment": 162.2086629504338,
+        "match_and_merge": 9.623236022889614,
+        "encode_mask": 69.01306402869523,
+        "memory_write_compress": 1.5556539874523878
+      },
+      "timing": {
+        "wall_both_arms_ms": 343.74315792229027,
+        "prep_encode_ms": 9.387798025272787,
+        "current_ms": 41.088672005571425,
+        "temporal_ms": 293.21375698782504,
+        "deploy_component_ms": 302.65448591671884,
+        "input_objects": 10,
+        "objects": 17,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 66420,
+        "long_tokens": 640,
+        "metadata_observations": 172
+      }
+    },
+    {
+      "frame": 19,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 2.9761919286102057
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.20959798712283373
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 1.7483499832451344
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 38.74372900463641
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.047581037506461143
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 41.85277398210019
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 138.76025204081088
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 9.060587035492063
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 69.13478497881442
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 2.433351008221507
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 2.9761919286102057,
+        "transform_key": 0.20959798712283373,
+        "match_memory": 41.85277398210019,
+        "segment": 138.76025204081088,
+        "match_and_merge": 9.060587035492063,
+        "encode_mask": 69.13478497881442,
+        "memory_write_compress": 2.433351008221507
+      },
+      "timing": {
+        "wall_both_arms_ms": 321.19294290896505,
+        "prep_encode_ms": 9.220921900123358,
+        "current_ms": 44.589109951630235,
+        "temporal_ms": 267.3301419708878,
+        "deploy_component_ms": 276.6038329573348,
+        "input_objects": 11,
+        "objects": 17,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 61560,
+        "long_tokens": 768,
+        "metadata_observations": 182
+      }
+    },
+    {
+      "frame": 20,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 4.288213909603655
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.25687809102237225
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 2.484978991560638
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 40.969696012325585
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.05226000212132931
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 38.012510049156845
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 156.00223606452346
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 9.988919948227704
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 78.32282211165875
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 0.9038670687004924
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 4.288213909603655,
+        "transform_key": 0.25687809102237225,
+        "match_memory": 38.012510049156845,
+        "segment": 156.00223606452346,
+        "match_and_merge": 9.988919948227704,
+        "encode_mask": 78.32282211165875,
+        "memory_write_compress": 0.9038670687004924
+      },
+      "timing": {
+        "wall_both_arms_ms": 348.1912430142984,
+        "prep_encode_ms": 10.574652929790318,
+        "current_ms": 47.78270493261516,
+        "temporal_ms": 289.7818360943347,
+        "deploy_component_ms": 300.4085380816832,
+        "input_objects": 11,
+        "objects": 18,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 64800,
+        "long_tokens": 768,
+        "metadata_observations": 192
+      }
+    },
+    {
+      "frame": 21,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 2.9219089774414897
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.2154590329155326
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 1.480823033489287
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 35.547427949495614
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.048130983486771584
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 43.493798933923244
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 154.88243696745485
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 8.895403007045388
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 71.7320159310475
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 1.4733480056747794
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 2.9219089774414897,
+        "transform_key": 0.2154590329155326,
+        "match_memory": 43.493798933923244,
+        "segment": 154.88243696745485,
+        "match_and_merge": 8.895403007045388,
+        "encode_mask": 71.7320159310475,
+        "memory_write_compress": 1.4733480056747794
+      },
+      "timing": {
+        "wall_both_arms_ms": 336.79465507157147,
+        "prep_encode_ms": 9.124108008109033,
+        "current_ms": 41.015141061507165,
+        "temporal_ms": 286.60084202419966,
+        "deploy_component_ms": 295.7795140100643,
+        "input_objects": 10,
+        "objects": 17,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 69660,
+        "long_tokens": 896,
+        "metadata_observations": 201
+      }
+    },
+    {
+      "frame": 22,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 4.019413026981056
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.20802498329430819
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 1.4804210513830185
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 33.75727799721062
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.04812190309166908
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 41.02825606241822
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 140.88666799943894
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 8.945417939685285
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 59.762164019048214
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 1.0788990184664726
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 4.019413026981056,
+        "transform_key": 0.20802498329430819,
+        "match_memory": 41.02825606241822,
+        "segment": 140.88666799943894,
+        "match_and_merge": 8.945417939685285,
+        "encode_mask": 59.762164019048214,
+        "memory_write_compress": 1.0788990184664726
+      },
+      "timing": {
+        "wall_both_arms_ms": 306.95202201604843,
+        "prep_encode_ms": 10.222673998214304,
+        "current_ms": 39.25493895076215,
+        "temporal_ms": 257.42154801264405,
+        "deploy_component_ms": 267.6970830652863,
+        "input_objects": 10,
+        "objects": 15,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 71280,
+        "long_tokens": 896,
+        "metadata_observations": 209
+      }
+    },
+    {
+      "frame": 23,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 3.2100359676405787
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.21294504404067993
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 2.078718040138483
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 44.90872600581497
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.048591988161206245
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 53.03121195174754
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 143.95595504902303
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 9.019349003210664
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 65.12700102757663
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 1.4899889938533306
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 3.2100359676405787,
+        "transform_key": 0.21294504404067993,
+        "match_memory": 53.03121195174754,
+        "segment": 143.95595504902303,
+        "match_and_merge": 9.019349003210664,
+        "encode_mask": 65.12700102757663,
+        "memory_write_compress": 1.4899889938533306
+      },
+      "timing": {
+        "wall_both_arms_ms": 339.26510298624635,
+        "prep_encode_ms": 9.459945023991168,
+        "current_ms": 51.37877305969596,
+        "temporal_ms": 278.3736540004611,
+        "deploy_component_ms": 287.8863299265504,
+        "input_objects": 12,
+        "objects": 16,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 61560,
+        "long_tokens": 1024,
+        "metadata_observations": 219
+      }
+    },
+    {
+      "frame": 24,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 3.898484050296247
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.21389697212725878
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 1.0128840804100037
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 24.75302794482559
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.04801107570528984
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 44.30478799622506
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 137.8332549938932
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 7.8872679732739925
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 67.95244698878378
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 2.4385509314015508
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 3.898484050296247,
+        "transform_key": 0.21389697212725878,
+        "match_memory": 44.30478799622506,
+        "segment": 137.8332549938932,
+        "match_and_merge": 7.8872679732739925,
+        "encode_mask": 67.95244698878378,
+        "memory_write_compress": 2.4385509314015508
+      },
+      "timing": {
+        "wall_both_arms_ms": 305.8920620242134,
+        "prep_encode_ms": 10.116211953572929,
+        "current_ms": 29.478731914423406,
+        "temporal_ms": 266.24449796509,
+        "deploy_component_ms": 276.41333010978997,
+        "input_objects": 8,
+        "objects": 16,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 64800,
+        "long_tokens": 1152,
+        "metadata_observations": 227
+      }
+    },
+    {
+      "frame": 25,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 3.507210058160126
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.20553998183459044
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 1.0435919975861907
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 25.181000004522502
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.04607799928635359
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 37.18434495385736
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 142.24274992011487
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 9.09170601516962
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 63.159244949929416
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 0.7733779493719339
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 3.507210058160126,
+        "transform_key": 0.20553998183459044,
+        "match_memory": 37.18434495385736,
+        "segment": 142.24274992011487,
+        "match_and_merge": 9.09170601516962,
+        "encode_mask": 63.159244949929416,
+        "memory_write_compress": 0.7733779493719339
+      },
+      "timing": {
+        "wall_both_arms_ms": 297.3593070637435,
+        "prep_encode_ms": 9.72283398732543,
+        "current_ms": 29.66407500207424,
+        "temporal_ms": 257.9235560260713,
+        "deploy_component_ms": 267.69523206166923,
+        "input_objects": 8,
+        "objects": 15,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 51840,
+        "long_tokens": 1152,
+        "metadata_observations": 232
+      }
+    },
+    {
+      "frame": 26,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 3.896780079230666
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.25184801779687405
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 1.2838179245591164
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 23.409727029502392
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.0446949852630496
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 36.90573701169342
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 139.3180440645665
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 7.576737902127206
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 61.601373949088156
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 1.2670460855588317
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 3.896780079230666,
+        "transform_key": 0.25184801779687405,
+        "match_memory": 36.90573701169342,
+        "segment": 139.3180440645665,
+        "match_and_merge": 7.576737902127206,
+        "encode_mask": 61.601373949088156,
+        "memory_write_compress": 1.2670460855588317
+      },
+      "timing": {
+        "wall_both_arms_ms": 290.8466460648924,
+        "prep_encode_ms": 10.149294044822454,
+        "current_ms": 28.512056916952133,
+        "temporal_ms": 252.13491008616984,
+        "deploy_component_ms": 262.3345891479403,
+        "input_objects": 8,
+        "objects": 14,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 43740,
+        "long_tokens": 1280,
+        "metadata_observations": 238
+      }
+    },
+    {
+      "frame": 27,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 2.9327389784157276
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.21221290808171034
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 1.2481709709390998
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 29.99723597895354
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.04620791878551245
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 28.140309965237975
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 118.14422195311636
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 7.039207965135574
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 69.0354920225218
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 0.9660549694672227
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 2.9327389784157276,
+        "transform_key": 0.21221290808171034,
+        "match_memory": 28.140309965237975,
+        "segment": 118.14422195311636,
+        "match_and_merge": 7.039207965135574,
+        "encode_mask": 69.0354920225218,
+        "memory_write_compress": 0.9660549694672227
+      },
+      "timing": {
+        "wall_both_arms_ms": 272.982558934018,
+        "prep_encode_ms": 9.186896961182356,
+        "current_ms": 34.8979530390352,
+        "temporal_ms": 228.847122984007,
+        "deploy_component_ms": 238.08460589498281,
+        "input_objects": 9,
+        "objects": 15,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 55080,
+        "long_tokens": 1280,
+        "metadata_observations": 247
+      }
+    },
+    {
+      "frame": 28,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 3.7682559341192245
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.24692900478839874
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 1.5399539843201637
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 29.034528066404164
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.04704995080828667
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 33.12936401925981
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 117.72115889471024
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 7.2349089896306396
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 65.12788101099432
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 1.6373589169234037
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 3.7682559341192245,
+        "transform_key": 0.24692900478839874,
+        "match_memory": 33.12936401925981,
+        "segment": 117.72115889471024,
+        "match_and_merge": 7.2349089896306396,
+        "encode_mask": 65.12788101099432,
+        "memory_write_compress": 1.6373589169234037
+      },
+      "timing": {
+        "wall_both_arms_ms": 274.95913207530975,
+        "prep_encode_ms": 10.027031996287405,
+        "current_ms": 34.39574898220599,
+        "temporal_ms": 230.48317001666874,
+        "deploy_component_ms": 240.56338309310377,
+        "input_objects": 9,
+        "objects": 15,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 58320,
+        "long_tokens": 1408,
+        "metadata_observations": 256
+      }
+    },
+    {
+      "frame": 29,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 2.91166000533849
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.20797504112124443
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 0.8093370124697685
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 23.334653000347316
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.05243998020887375
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 36.03831899818033
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 129.70313301775604
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 7.480725995264947
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 59.2610799940303
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 2.400618977844715
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 2.91166000533849,
+        "transform_key": 0.20797504112124443,
+        "match_memory": 36.03831899818033,
+        "segment": 129.70313301775604,
+        "match_and_merge": 7.480725995264947,
+        "encode_mask": 59.2610799940303,
+        "memory_write_compress": 2.400618977844715
+      },
+      "timing": {
+        "wall_both_arms_ms": 276.7171310260892,
+        "prep_encode_ms": 9.114469052292407,
+        "current_ms": 27.42011204827577,
+        "temporal_ms": 240.13233406003565,
+        "deploy_component_ms": 249.29701897781342,
+        "input_objects": 7,
+        "objects": 13,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 38880,
+        "long_tokens": 1024,
+        "metadata_observations": 241
+      }
+    },
+    {
+      "frame": 30,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 4.410716006532311
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.265854992903769
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 1.5622270293533802
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 35.32710706349462
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.04617706872522831
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 25.294695049524307
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 106.03900195565075
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 7.49471306335181
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 65.65991009119898
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 0.7380619645118713
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 4.410716006532311,
+        "transform_key": 0.265854992903769,
+        "match_memory": 25.294695049524307,
+        "segment": 106.03900195565075,
+        "match_and_merge": 7.49471306335181,
+        "encode_mask": 65.65991009119898,
+        "memory_write_compress": 0.7380619645118713
+      },
+      "timing": {
+        "wall_both_arms_ms": 262.47441698797047,
+        "prep_encode_ms": 10.677126003429294,
+        "current_ms": 41.021652054041624,
+        "temporal_ms": 210.7171780662611,
+        "deploy_component_ms": 221.45276493392885,
+        "input_objects": 10,
+        "objects": 15,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 50220,
+        "long_tokens": 1024,
+        "metadata_observations": 251
+      }
+    },
+    {
+      "frame": 31,
+      "events": [
+        {
+          "stage": "encode_image",
+          "arm": "shared",
+          "ms": 4.3020599987357855
+        },
+        {
+          "stage": "transform_key",
+          "arm": "shared",
+          "ms": 0.25928299874067307
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "current",
+          "ms": 2.0661139860749245
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "current",
+          "ms": 40.989711065776646
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "current",
+          "ms": 0.048261950723826885
+        },
+        {
+          "stage": "match_memory",
+          "arm": "temporal",
+          "ms": 32.81337406951934
+        },
+        {
+          "stage": "segment",
+          "arm": "temporal",
+          "ms": 121.9875980168581
+        },
+        {
+          "stage": "match_and_merge",
+          "arm": "temporal",
+          "ms": 8.551639970391989
+        },
+        {
+          "stage": "encode_mask",
+          "arm": "temporal",
+          "ms": 68.54588992428035
+        },
+        {
+          "stage": "memory_write_compress",
+          "arm": "temporal",
+          "ms": 0.9423299925401807
+        }
+      ],
+      "temporal_stages_ms": {
+        "encode_image": 4.3020599987357855,
+        "transform_key": 0.25928299874067307,
+        "match_memory": 32.81337406951934,
+        "segment": 121.9875980168581,
+        "match_and_merge": 8.551639970391989,
+        "encode_mask": 68.54588992428035,
+        "memory_write_compress": 0.9423299925401807
+      },
+      "timing": {
+        "wall_both_arms_ms": 296.5325739933178,
+        "prep_encode_ms": 10.571695980615914,
+        "current_ms": 47.259898972697556,
+        "temporal_ms": 238.64661704283208,
+        "deploy_component_ms": 249.27267502062023,
+        "input_objects": 11,
+        "objects": 16,
+        "memory_reads": 1,
+        "buffered_future_frames": 0,
+        "work_tokens": 63180,
+        "long_tokens": 1024,
+        "metadata_observations": 262
+      }
+    }
+  ],
+  "summary": {
+    "encode_image": {
+      "median_ms": 3.562496043741703,
+      "p95_ms": 4.685924504883587
+    },
+    "encode_mask": {
+      "median_ms": 69.13478497881442,
+      "p95_ms": 105.29510251944885
+    },
+    "match_and_merge": {
+      "median_ms": 9.060587035492063,
+      "p95_ms": 11.778019019402564
+    },
+    "match_memory": {
+      "median_ms": 36.03831899818033,
+      "p95_ms": 46.056527469772846
+    },
+    "memory_write_compress": {
+      "median_ms": 1.1167610064148903,
+      "p95_ms": 2.555663464590907
+    },
+    "segment": {
+      "median_ms": 140.9570169635117,
+      "p95_ms": 162.75601444067433
+    },
+    "transform_key": {
+      "median_ms": 0.2352370647713542,
+      "p95_ms": 0.2746365498751402
+    }
+  },
+  "all_outputs_exact": true,
+  "admission": {
+    "time": 1793253392.8885372,
+    "pid": 1687049,
+    "compute_processes": []
+  },
+  "source_sha256": {
+    "profile_deva.py": "483ad96f0eb808f169b746f81eaf37703db5ca24baea95fd11769711ff7ea41f",
+    "deva_memory.py": "68e7a917c475de6583d9a38166ae8405129501725849075b16aa3253b98c2456"
+  },
+  "reference_report_sha256": "df5e0a1a194ce54f86617d7242d127162dd081eb9c6c0f7c49a8bb9f0b79c1ea",
+  "protocol_sha256": "b5c1d178c5db32fff5e5f773545bd24ea17abe64504b366b04c883608a7c0a01",
+  "scope": "Single diagnostic replay with synchronization at disjoint stage boundaries; same32 outputs as original run. No GT. Not a new runtime or accuracy admission."
+}
