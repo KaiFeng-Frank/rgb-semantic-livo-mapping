@@ -1,0 +1,14 @@
+{
+  "purpose": "Bounded point-level check of information lost by object/class pooling; not a new trained architecture",
+  "selection": "All eight independent_dev_added logs, all 321 cached keyframes; no new test access",
+  "inputs": "Previously cached raw PTv3 labels, raw XYZ and supplied ego poses only",
+  "history": "Exactly the preceding raw scan, at most 0.75 seconds old; no corrected-label feedback",
+  "neighbors": 4,
+  "radius_m": 0.25,
+  "controls": ["raw", "current_spatial", "previous_raw"],
+  "operator": "Current point plus up to four neighboring raw labels, plurality vote; ties keep current label when possible, otherwise choose the lowest label. Current-spatial excludes the query point itself.",
+  "observer_only": "After predictions, count current errors with a correct same-class/same-instance historical neighbor, and whether the matched current neighborhood already contains a correct answer. GT never gates the actual vote.",
+  "continuation_gate": {"miou_vs_raw_pp": 0.05, "miou_vs_current_spatial_pp": 0.05, "positive_logs_vs_current_spatial": 5, "unique_opportunity_classes": 3, "unique_opportunity_logs": 3},
+  "failure_action": "Do not tune radius, neighbor count, train a point-memory network or open holdout on this evidence. Preserve the negative comparison.",
+  "scope": "Development diagnosis with fixed cached backbone outputs; raw 2Hz scans and supplied poses, not live estimated-motion or latency proof"
+}
