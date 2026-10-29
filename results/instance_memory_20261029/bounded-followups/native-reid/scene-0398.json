@@ -1,0 +1,1075 @@
+{
+  "scene": "scene-0398",
+  "log": "efa31cf3cd2f452789ca7f3e7541ea69",
+  "identity": {
+    "full": {
+      "baseline/projected_mask": {
+        "point_idf1": 0.1261919228987565,
+        "association_quality": 0.017609144403867925,
+        "gt_points": 306835,
+        "pred_points": 25611,
+        "identity_true_positive": 20976,
+        "associated_gt_points": 22673,
+        "gt_instances": 63,
+        "pred_tracks": 28,
+        "id_switches": 12,
+        "supported_transitions": 142,
+        "reappearance_transitions": 11
+      },
+      "baseline/trusted_component": {
+        "point_idf1": 0.0796549245147376,
+        "association_quality": 0.00735514852926306,
+        "gt_points": 306835,
+        "pred_points": 13095,
+        "identity_true_positive": 12742,
+        "associated_gt_points": 13084,
+        "gt_instances": 63,
+        "pred_tracks": 22,
+        "id_switches": 1,
+        "supported_transitions": 47,
+        "reappearance_transitions": 12
+      },
+      "baseline/largest_component": {
+        "point_idf1": 0.1003060635166729,
+        "association_quality": 0.011341399068362377,
+        "gt_points": 306835,
+        "pred_points": 16954,
+        "identity_true_positive": 16239,
+        "associated_gt_points": 16886,
+        "gt_instances": 63,
+        "pred_tracks": 28,
+        "id_switches": 3,
+        "supported_transitions": 91,
+        "reappearance_transitions": 14
+      },
+      "native_reid/projected_mask": {
+        "point_idf1": 0.11832820370180011,
+        "association_quality": 0.020009731073093093,
+        "gt_points": 306835,
+        "pred_points": 23923,
+        "identity_true_positive": 19569,
+        "associated_gt_points": 21215,
+        "gt_instances": 63,
+        "pred_tracks": 34,
+        "id_switches": 13,
+        "supported_transitions": 130,
+        "reappearance_transitions": 15
+      },
+      "native_reid/trusted_component": {
+        "point_idf1": 0.07415882489389314,
+        "association_quality": 0.007224909933293208,
+        "gt_points": 306835,
+        "pred_points": 12183,
+        "identity_true_positive": 11829,
+        "associated_gt_points": 12172,
+        "gt_instances": 63,
+        "pred_tracks": 26,
+        "id_switches": 2,
+        "supported_transitions": 45,
+        "reappearance_transitions": 13
+      },
+      "native_reid/largest_component": {
+        "point_idf1": 0.0934106124473097,
+        "association_quality": 0.011108085863799327,
+        "gt_points": 306835,
+        "pred_points": 15805,
+        "identity_true_positive": 15069,
+        "associated_gt_points": 15752,
+        "gt_instances": 63,
+        "pred_tracks": 31,
+        "id_switches": 4,
+        "supported_transitions": 85,
+        "reappearance_transitions": 16
+      }
+    },
+    "camera": {
+      "baseline/projected_mask": {
+        "point_idf1": 0.8067537162746871,
+        "association_quality": 0.24300438206843772,
+        "gt_points": 26390,
+        "pred_points": 25611,
+        "identity_true_positive": 20976,
+        "associated_gt_points": 22673,
+        "gt_instances": 42,
+        "pred_tracks": 28,
+        "id_switches": 14,
+        "supported_transitions": 174,
+        "reappearance_transitions": 13
+      },
+      "baseline/trusted_component": {
+        "point_idf1": 0.6454096492338863,
+        "association_quality": 0.13158378876967042,
+        "gt_points": 26390,
+        "pred_points": 13095,
+        "identity_true_positive": 12742,
+        "associated_gt_points": 13084,
+        "gt_instances": 42,
+        "pred_tracks": 22,
+        "id_switches": 1,
+        "supported_transitions": 72,
+        "reappearance_transitions": 17
+      },
+      "baseline/largest_component": {
+        "point_idf1": 0.7493078626799557,
+        "association_quality": 0.17996150447753514,
+        "gt_points": 26390,
+        "pred_points": 16954,
+        "identity_true_positive": 16239,
+        "associated_gt_points": 16886,
+        "gt_instances": 42,
+        "pred_tracks": 28,
+        "id_switches": 4,
+        "supported_transitions": 121,
+        "reappearance_transitions": 18
+      },
+      "native_reid/projected_mask": {
+        "point_idf1": 0.7778904060580765,
+        "association_quality": 0.23126190302341315,
+        "gt_points": 26390,
+        "pred_points": 23923,
+        "identity_true_positive": 19569,
+        "associated_gt_points": 21215,
+        "gt_instances": 42,
+        "pred_tracks": 34,
+        "id_switches": 16,
+        "supported_transitions": 158,
+        "reappearance_transitions": 17
+      },
+      "native_reid/trusted_component": {
+        "point_idf1": 0.6133305680138957,
+        "association_quality": 0.1241395085872403,
+        "gt_points": 26390,
+        "pred_points": 12183,
+        "identity_true_positive": 11829,
+        "associated_gt_points": 12172,
+        "gt_instances": 42,
+        "pred_tracks": 26,
+        "id_switches": 2,
+        "supported_transitions": 65,
+        "reappearance_transitions": 17
+      },
+      "native_reid/largest_component": {
+        "point_idf1": 0.7142552435122644,
+        "association_quality": 0.16840595968758545,
+        "gt_points": 26390,
+        "pred_points": 15805,
+        "identity_true_positive": 15069,
+        "associated_gt_points": 15752,
+        "gt_instances": 42,
+        "pred_tracks": 31,
+        "id_switches": 5,
+        "supported_transitions": 110,
+        "reappearance_transitions": 19
+      }
+    }
+  },
+  "cached_baseline_coverage_symmetric_difference": {
+    "trusted_component": 0,
+    "largest_component": 0
+  },
+  "native_feature_track_frames": 449,
+  "frames": [
+    {
+      "frame": 0,
+      "timing": {
+        "forward_ms": 8.624490932561457,
+        "gmc_ms": 2.5621189270168543,
+        "tracker_ms": {
+          "baseline": 1.157797989435494,
+          "native_reid": 0.9182569338008761
+        },
+        "raw_detections": 11,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 1056,
+        "baseline/trusted_component": 755,
+        "baseline/largest_component": 772,
+        "native_reid/projected_mask": 1056,
+        "native_reid/trusted_component": 755,
+        "native_reid/largest_component": 772
+      }
+    },
+    {
+      "frame": 1,
+      "timing": {
+        "forward_ms": 9.515618090517819,
+        "gmc_ms": 11.94019801914692,
+        "tracker_ms": {
+          "baseline": 1.2882630107924342,
+          "native_reid": 1.4808749547228217
+        },
+        "raw_detections": 15,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 976,
+        "baseline/trusted_component": 704,
+        "baseline/largest_component": 737,
+        "native_reid/projected_mask": 976,
+        "native_reid/trusted_component": 704,
+        "native_reid/largest_component": 737
+      }
+    },
+    {
+      "frame": 2,
+      "timing": {
+        "forward_ms": 9.61457402445376,
+        "gmc_ms": 12.586173019371927,
+        "tracker_ms": {
+          "baseline": 1.791468937881291,
+          "native_reid": 5.340664996765554
+        },
+        "raw_detections": 14,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 885,
+        "baseline/trusted_component": 625,
+        "baseline/largest_component": 662,
+        "native_reid/projected_mask": 885,
+        "native_reid/trusted_component": 625,
+        "native_reid/largest_component": 662
+      }
+    },
+    {
+      "frame": 3,
+      "timing": {
+        "forward_ms": 11.380215059034526,
+        "gmc_ms": 12.050305027514696,
+        "tracker_ms": {
+          "baseline": 1.3474939623847604,
+          "native_reid": 1.746013993397355
+        },
+        "raw_detections": 18,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 748,
+        "baseline/trusted_component": 442,
+        "baseline/largest_component": 543,
+        "native_reid/projected_mask": 748,
+        "native_reid/trusted_component": 442,
+        "native_reid/largest_component": 543
+      }
+    },
+    {
+      "frame": 4,
+      "timing": {
+        "forward_ms": 9.926500031724572,
+        "gmc_ms": 11.155131971463561,
+        "tracker_ms": {
+          "baseline": 1.4010349987074733,
+          "native_reid": 3.147720010019839
+        },
+        "raw_detections": 17,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 673,
+        "baseline/trusted_component": 240,
+        "baseline/largest_component": 429,
+        "native_reid/projected_mask": 673,
+        "native_reid/trusted_component": 240,
+        "native_reid/largest_component": 429
+      }
+    },
+    {
+      "frame": 5,
+      "timing": {
+        "forward_ms": 10.1693170145154,
+        "gmc_ms": 11.254748096689582,
+        "tracker_ms": {
+          "baseline": 1.4016559580340981,
+          "native_reid": 1.7981819109991193
+        },
+        "raw_detections": 18,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 698,
+        "baseline/trusted_component": 250,
+        "baseline/largest_component": 429,
+        "native_reid/projected_mask": 698,
+        "native_reid/trusted_component": 250,
+        "native_reid/largest_component": 429
+      }
+    },
+    {
+      "frame": 6,
+      "timing": {
+        "forward_ms": 12.765079038217664,
+        "gmc_ms": 10.458591976203024,
+        "tracker_ms": {
+          "baseline": 1.3657489325851202,
+          "native_reid": 1.7521060071885586
+        },
+        "raw_detections": 15,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 736,
+        "baseline/trusted_component": 370,
+        "baseline/largest_component": 464,
+        "native_reid/projected_mask": 736,
+        "native_reid/trusted_component": 370,
+        "native_reid/largest_component": 464
+      }
+    },
+    {
+      "frame": 7,
+      "timing": {
+        "forward_ms": 13.656525989063084,
+        "gmc_ms": 11.569731985218823,
+        "tracker_ms": {
+          "baseline": 1.539896009489894,
+          "native_reid": 1.725386013276875
+        },
+        "raw_detections": 18,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 824,
+        "baseline/trusted_component": 412,
+        "baseline/largest_component": 539,
+        "native_reid/projected_mask": 824,
+        "native_reid/trusted_component": 412,
+        "native_reid/largest_component": 539
+      }
+    },
+    {
+      "frame": 8,
+      "timing": {
+        "forward_ms": 9.687550948001444,
+        "gmc_ms": 11.152607039548457,
+        "tracker_ms": {
+          "baseline": 1.4003239339217544,
+          "native_reid": 1.6843079356476665
+        },
+        "raw_detections": 15,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 621,
+        "baseline/trusted_component": 237,
+        "baseline/largest_component": 409,
+        "native_reid/projected_mask": 823,
+        "native_reid/trusted_component": 405,
+        "native_reid/largest_component": 577
+      }
+    },
+    {
+      "frame": 9,
+      "timing": {
+        "forward_ms": 9.589847060851753,
+        "gmc_ms": 10.781980003230274,
+        "tracker_ms": {
+          "baseline": 1.4154830714687705,
+          "native_reid": 1.6681269044056535
+        },
+        "raw_detections": 15,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 848,
+        "baseline/trusted_component": 474,
+        "baseline/largest_component": 590,
+        "native_reid/projected_mask": 848,
+        "native_reid/trusted_component": 474,
+        "native_reid/largest_component": 590
+      }
+    },
+    {
+      "frame": 10,
+      "timing": {
+        "forward_ms": 9.547016932629049,
+        "gmc_ms": 10.02567692194134,
+        "tracker_ms": {
+          "baseline": 1.4325740048661828,
+          "native_reid": 1.8373760394752026
+        },
+        "raw_detections": 15,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 860,
+        "baseline/trusted_component": 537,
+        "baseline/largest_component": 574,
+        "native_reid/projected_mask": 332,
+        "native_reid/trusted_component": 158,
+        "native_reid/largest_component": 195
+      }
+    },
+    {
+      "frame": 11,
+      "timing": {
+        "forward_ms": 13.351893983781338,
+        "gmc_ms": 11.074880021624267,
+        "tracker_ms": {
+          "baseline": 1.9805749179795384,
+          "native_reid": 3.1292660860344768
+        },
+        "raw_detections": 17,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 692,
+        "baseline/trusted_component": 447,
+        "baseline/largest_component": 487,
+        "native_reid/projected_mask": 574,
+        "native_reid/trusted_component": 344,
+        "native_reid/largest_component": 384
+      }
+    },
+    {
+      "frame": 12,
+      "timing": {
+        "forward_ms": 10.574540006928146,
+        "gmc_ms": 11.2504200078547,
+        "tracker_ms": {
+          "baseline": 1.442182925529778,
+          "native_reid": 1.941641909070313
+        },
+        "raw_detections": 19,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 769,
+        "baseline/trusted_component": 334,
+        "baseline/largest_component": 509,
+        "native_reid/projected_mask": 262,
+        "native_reid/trusted_component": 0,
+        "native_reid/largest_component": 139
+      }
+    },
+    {
+      "frame": 13,
+      "timing": {
+        "forward_ms": 11.429126025177538,
+        "gmc_ms": 14.978643041104078,
+        "tracker_ms": {
+          "baseline": 1.50607293471694,
+          "native_reid": 2.431462984532118
+        },
+        "raw_detections": 23,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 534,
+        "baseline/trusted_component": 414,
+        "baseline/largest_component": 421,
+        "native_reid/projected_mask": 288,
+        "native_reid/trusted_component": 216,
+        "native_reid/largest_component": 216
+      }
+    },
+    {
+      "frame": 14,
+      "timing": {
+        "forward_ms": 11.327215004712343,
+        "gmc_ms": 15.730005921795964,
+        "tracker_ms": {
+          "baseline": 4.981760052032769,
+          "native_reid": 2.14778003282845
+        },
+        "raw_detections": 23,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 459,
+        "baseline/trusted_component": 14,
+        "baseline/largest_component": 244,
+        "native_reid/projected_mask": 146,
+        "native_reid/trusted_component": 14,
+        "native_reid/largest_component": 79
+      }
+    },
+    {
+      "frame": 15,
+      "timing": {
+        "forward_ms": 13.682825956493616,
+        "gmc_ms": 14.362193993292749,
+        "tracker_ms": {
+          "baseline": 1.9599059596657753,
+          "native_reid": 2.2120510693639517
+        },
+        "raw_detections": 19,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 446,
+        "baseline/trusted_component": 153,
+        "baseline/largest_component": 257,
+        "native_reid/projected_mask": 456,
+        "native_reid/trusted_component": 153,
+        "native_reid/largest_component": 257
+      }
+    },
+    {
+      "frame": 16,
+      "timing": {
+        "forward_ms": 10.844877921044827,
+        "gmc_ms": 12.778133968822658,
+        "tracker_ms": {
+          "baseline": 1.5432820655405521,
+          "native_reid": 1.8265049438923597
+        },
+        "raw_detections": 20,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 423,
+        "baseline/trusted_component": 134,
+        "baseline/largest_component": 225,
+        "native_reid/projected_mask": 396,
+        "native_reid/trusted_component": 111,
+        "native_reid/largest_component": 202
+      }
+    },
+    {
+      "frame": 17,
+      "timing": {
+        "forward_ms": 10.178304044529796,
+        "gmc_ms": 12.420561048202217,
+        "tracker_ms": {
+          "baseline": 1.4764670049771667,
+          "native_reid": 1.9715880043804646
+        },
+        "raw_detections": 17,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 667,
+        "baseline/trusted_component": 338,
+        "baseline/largest_component": 411,
+        "native_reid/projected_mask": 657,
+        "native_reid/trusted_component": 338,
+        "native_reid/largest_component": 411
+      }
+    },
+    {
+      "frame": 18,
+      "timing": {
+        "forward_ms": 11.215043952688575,
+        "gmc_ms": 13.190009049139917,
+        "tracker_ms": {
+          "baseline": 1.4940300025045872,
+          "native_reid": 3.096945001743734
+        },
+        "raw_detections": 23,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 657,
+        "baseline/trusted_component": 316,
+        "baseline/largest_component": 414,
+        "native_reid/projected_mask": 528,
+        "native_reid/trusted_component": 278,
+        "native_reid/largest_component": 342
+      }
+    },
+    {
+      "frame": 19,
+      "timing": {
+        "forward_ms": 12.913959915749729,
+        "gmc_ms": 15.261494903825223,
+        "tracker_ms": {
+          "baseline": 1.9132390152662992,
+          "native_reid": 2.649322967045009
+        },
+        "raw_detections": 18,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 555,
+        "baseline/trusted_component": 322,
+        "baseline/largest_component": 363,
+        "native_reid/projected_mask": 547,
+        "native_reid/trusted_component": 315,
+        "native_reid/largest_component": 356
+      }
+    },
+    {
+      "frame": 20,
+      "timing": {
+        "forward_ms": 10.354476049542427,
+        "gmc_ms": 14.16682603303343,
+        "tracker_ms": {
+          "baseline": 1.6055699670687318,
+          "native_reid": 1.8880909774452448
+        },
+        "raw_detections": 18,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 459,
+        "baseline/trusted_component": 138,
+        "baseline/largest_component": 266,
+        "native_reid/projected_mask": 459,
+        "native_reid/trusted_component": 138,
+        "native_reid/largest_component": 266
+      }
+    },
+    {
+      "frame": 21,
+      "timing": {
+        "forward_ms": 10.131175979040563,
+        "gmc_ms": 13.66095500998199,
+        "tracker_ms": {
+          "baseline": 1.5127750812098384,
+          "native_reid": 1.8964670598506927
+        },
+        "raw_detections": 18,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 410,
+        "baseline/trusted_component": 80,
+        "baseline/largest_component": 227,
+        "native_reid/projected_mask": 336,
+        "native_reid/trusted_component": 33,
+        "native_reid/largest_component": 180
+      }
+    },
+    {
+      "frame": 22,
+      "timing": {
+        "forward_ms": 9.64563200250268,
+        "gmc_ms": 13.807039009407163,
+        "tracker_ms": {
+          "baseline": 1.6274020308628678,
+          "native_reid": 2.0222129533067346
+        },
+        "raw_detections": 16,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 538,
+        "baseline/trusted_component": 352,
+        "baseline/largest_component": 378,
+        "native_reid/projected_mask": 537,
+        "native_reid/trusted_component": 352,
+        "native_reid/largest_component": 378
+      }
+    },
+    {
+      "frame": 23,
+      "timing": {
+        "forward_ms": 10.575921973213553,
+        "gmc_ms": 15.131609980016947,
+        "tracker_ms": {
+          "baseline": 2.5292070349678397,
+          "native_reid": 2.294825972057879
+        },
+        "raw_detections": 12,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 545,
+        "baseline/trusted_component": 300,
+        "baseline/largest_component": 381,
+        "native_reid/projected_mask": 551,
+        "native_reid/trusted_component": 300,
+        "native_reid/largest_component": 381
+      }
+    },
+    {
+      "frame": 24,
+      "timing": {
+        "forward_ms": 8.875183062627912,
+        "gmc_ms": 14.313653111457825,
+        "tracker_ms": {
+          "baseline": 1.6030250117182732,
+          "native_reid": 1.6615550266578794
+        },
+        "raw_detections": 12,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 672,
+        "baseline/trusted_component": 402,
+        "baseline/largest_component": 459,
+        "native_reid/projected_mask": 677,
+        "native_reid/trusted_component": 402,
+        "native_reid/largest_component": 459
+      }
+    },
+    {
+      "frame": 25,
+      "timing": {
+        "forward_ms": 8.43779998831451,
+        "gmc_ms": 14.782804995775223,
+        "tracker_ms": {
+          "baseline": 4.163310048170388,
+          "native_reid": 1.7781249480322003
+        },
+        "raw_detections": 10,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 1057,
+        "baseline/trusted_component": 689,
+        "baseline/largest_component": 777,
+        "native_reid/projected_mask": 1057,
+        "native_reid/trusted_component": 689,
+        "native_reid/largest_component": 777
+      }
+    },
+    {
+      "frame": 26,
+      "timing": {
+        "forward_ms": 8.681238978169858,
+        "gmc_ms": 16.793255927041173,
+        "tracker_ms": {
+          "baseline": 1.4453880721703172,
+          "native_reid": 1.5882770530879498
+        },
+        "raw_detections": 12,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 1099,
+        "baseline/trusted_component": 705,
+        "baseline/largest_component": 838,
+        "native_reid/projected_mask": 1099,
+        "native_reid/trusted_component": 705,
+        "native_reid/largest_component": 838
+      }
+    },
+    {
+      "frame": 27,
+      "timing": {
+        "forward_ms": 9.033130016177893,
+        "gmc_ms": 16.58547599799931,
+        "tracker_ms": {
+          "baseline": 1.897257985547185,
+          "native_reid": 1.9713779911398888
+        },
+        "raw_detections": 12,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 1102,
+        "baseline/trusted_component": 527,
+        "baseline/largest_component": 729,
+        "native_reid/projected_mask": 1050,
+        "native_reid/trusted_component": 527,
+        "native_reid/largest_component": 704
+      }
+    },
+    {
+      "frame": 28,
+      "timing": {
+        "forward_ms": 9.229418938048184,
+        "gmc_ms": 16.389827011153102,
+        "tracker_ms": {
+          "baseline": 1.4432750176638365,
+          "native_reid": 1.6377500724047422
+        },
+        "raw_detections": 11,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 1096,
+        "baseline/trusted_component": 35,
+        "baseline/largest_component": 498,
+        "native_reid/projected_mask": 1096,
+        "native_reid/trusted_component": 35,
+        "native_reid/largest_component": 498
+      }
+    },
+    {
+      "frame": 29,
+      "timing": {
+        "forward_ms": 8.757772040553391,
+        "gmc_ms": 19.654758041724563,
+        "tracker_ms": {
+          "baseline": 2.5399680016562343,
+          "native_reid": 1.490121940150857
+        },
+        "raw_detections": 12,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 1160,
+        "baseline/trusted_component": 432,
+        "baseline/largest_component": 580,
+        "native_reid/projected_mask": 1160,
+        "native_reid/trusted_component": 432,
+        "native_reid/largest_component": 580
+      }
+    },
+    {
+      "frame": 30,
+      "timing": {
+        "forward_ms": 9.772480931133032,
+        "gmc_ms": 19.475581008009613,
+        "tracker_ms": {
+          "baseline": 2.2322690347209573,
+          "native_reid": 1.7256049904972315
+        },
+        "raw_detections": 16,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 1471,
+        "baseline/trusted_component": 543,
+        "baseline/largest_component": 884,
+        "native_reid/projected_mask": 1471,
+        "native_reid/trusted_component": 543,
+        "native_reid/largest_component": 884
+      }
+    },
+    {
+      "frame": 31,
+      "timing": {
+        "forward_ms": 8.879540953785181,
+        "gmc_ms": 20.138278021477163,
+        "tracker_ms": {
+          "baseline": 1.6477089375257492,
+          "native_reid": 1.8176690209656954
+        },
+        "raw_detections": 12,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 1135,
+        "baseline/trusted_component": 969,
+        "baseline/largest_component": 969,
+        "native_reid/projected_mask": 1140,
+        "native_reid/trusted_component": 969,
+        "native_reid/largest_component": 969
+      }
+    },
+    {
+      "frame": 32,
+      "timing": {
+        "forward_ms": 11.009617941454053,
+        "gmc_ms": 16.81760197971016,
+        "tracker_ms": {
+          "baseline": 1.4460000675171614,
+          "native_reid": 1.5443250304087996
+        },
+        "raw_detections": 17,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 532,
+        "baseline/trusted_component": 440,
+        "baseline/largest_component": 440,
+        "native_reid/projected_mask": 532,
+        "native_reid/trusted_component": 440,
+        "native_reid/largest_component": 440
+      }
+    },
+    {
+      "frame": 33,
+      "timing": {
+        "forward_ms": 10.366388014517725,
+        "gmc_ms": 14.25997109618038,
+        "tracker_ms": {
+          "baseline": 1.5394659712910652,
+          "native_reid": 2.0276139257475734
+        },
+        "raw_detections": 18,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 7,
+        "baseline/trusted_component": 0,
+        "baseline/largest_component": 0,
+        "native_reid/projected_mask": 49,
+        "native_reid/trusted_component": 47,
+        "native_reid/largest_component": 47
+      }
+    },
+    {
+      "frame": 34,
+      "timing": {
+        "forward_ms": 9.506090078502893,
+        "gmc_ms": 12.364516034722328,
+        "tracker_ms": {
+          "baseline": 1.5800719847902656,
+          "native_reid": 1.9513600273057818
+        },
+        "raw_detections": 15,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 23,
+        "baseline/trusted_component": 14,
+        "baseline/largest_component": 14,
+        "native_reid/projected_mask": 23,
+        "native_reid/trusted_component": 14,
+        "native_reid/largest_component": 14
+      }
+    },
+    {
+      "frame": 35,
+      "timing": {
+        "forward_ms": 9.645982994697988,
+        "gmc_ms": 12.841262971051037,
+        "tracker_ms": {
+          "baseline": 1.5429219929501414,
+          "native_reid": 1.9550779834389687
+        },
+        "raw_detections": 16,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 35,
+        "baseline/trusted_component": 8,
+        "baseline/largest_component": 15,
+        "native_reid/projected_mask": 35,
+        "native_reid/trusted_component": 8,
+        "native_reid/largest_component": 15
+      }
+    },
+    {
+      "frame": 36,
+      "timing": {
+        "forward_ms": 12.398179969750345,
+        "gmc_ms": 13.766111922450364,
+        "tracker_ms": {
+          "baseline": 1.867852988652885,
+          "native_reid": 4.01944003533572
+        },
+        "raw_detections": 15,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 48,
+        "baseline/trusted_component": 37,
+        "baseline/largest_component": 37,
+        "native_reid/projected_mask": 48,
+        "native_reid/trusted_component": 37,
+        "native_reid/largest_component": 37
+      }
+    },
+    {
+      "frame": 37,
+      "timing": {
+        "forward_ms": 10.105808032676578,
+        "gmc_ms": 12.164240004494786,
+        "tracker_ms": {
+          "baseline": 1.6216400545090437,
+          "native_reid": 1.984021975658834
+        },
+        "raw_detections": 17,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 0,
+        "baseline/trusted_component": 0,
+        "baseline/largest_component": 0,
+        "native_reid/projected_mask": 0,
+        "native_reid/trusted_component": 0,
+        "native_reid/largest_component": 0
+      }
+    },
+    {
+      "frame": 38,
+      "timing": {
+        "forward_ms": 9.989700047299266,
+        "gmc_ms": 12.586263008415699,
+        "tracker_ms": {
+          "baseline": 1.5707550337538123,
+          "native_reid": 1.8679829081520438
+        },
+        "raw_detections": 17,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 73,
+        "baseline/trusted_component": 0,
+        "baseline/largest_component": 26,
+        "native_reid/projected_mask": 69,
+        "native_reid/trusted_component": 0,
+        "native_reid/largest_component": 26
+      }
+    },
+    {
+      "frame": 39,
+      "timing": {
+        "forward_ms": 9.913205984048545,
+        "gmc_ms": 14.312320039607584,
+        "tracker_ms": {
+          "baseline": 1.4181770384311676,
+          "native_reid": 1.7900270177051425
+        },
+        "raw_detections": 17,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 127,
+        "baseline/trusted_component": 0,
+        "baseline/largest_component": 57,
+        "native_reid/projected_mask": 135,
+        "native_reid/trusted_component": 0,
+        "native_reid/largest_component": 57
+      }
+    },
+    {
+      "frame": 40,
+      "timing": {
+        "forward_ms": 10.42177202180028,
+        "gmc_ms": 14.803824946284294,
+        "tracker_ms": {
+          "baseline": 1.6338429413735867,
+          "native_reid": 1.9330859649926424
+        },
+        "raw_detections": 19,
+        "feature_dimension": 64,
+        "gmc_error": null
+      },
+      "covered_points": {
+        "baseline/projected_mask": 172,
+        "baseline/trusted_component": 6,
+        "baseline/largest_component": 72,
+        "native_reid/projected_mask": 180,
+        "native_reid/trusted_component": 6,
+        "native_reid/largest_component": 72
+      }
+    }
+  ]
+}

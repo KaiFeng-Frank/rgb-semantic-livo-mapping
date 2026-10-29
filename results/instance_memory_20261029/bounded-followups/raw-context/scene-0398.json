@@ -1,0 +1,2878 @@
+{
+  "scene": "scene-0398",
+  "log": "efa31cf3cd2f452789ca7f3e7541ea69",
+  "arms": {
+    "current_only": {
+      "miou_fixed16": 0.5107144484707145,
+      "miou_present": 0.5836736553951021,
+      "accuracy": 0.9710902337616363,
+      "class_iou": [
+        0.0,
+        0.3695652173913043,
+        0.8780960114938938,
+        0.9366905136152855,
+        null,
+        0.9407605279698303,
+        0.7510316368638239,
+        0.0,
+        0.0,
+        0.8843339681266914,
+        0.9697759588134506,
+        null,
+        0.7104782587236563,
+        0.0,
+        0.9750538520020273,
+        0.7556452305314674
+      ],
+      "labeled_points": 1096031,
+      "confusion": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          408,
+          0,
+          183,
+          0,
+          9,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          12,
+          0,
+          36,
+          0
+        ],
+        [
+          0,
+          0,
+          28114,
+          1802,
+          0,
+          0,
+          49,
+          0,
+          0,
+          1789,
+          39,
+          0,
+          0,
+          0,
+          47,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          191290,
+          0,
+          0,
+          11,
+          0,
+          0,
+          13,
+          568,
+          0,
+          6,
+          0,
+          207,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          143,
+          0,
+          5987,
+          0,
+          0,
+          0,
+          5,
+          82,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          14,
+          22,
+          102,
+          0,
+          0,
+          2730,
+          0,
+          0,
+          14,
+          20,
+          0,
+          33,
+          0,
+          378,
+          26
+        ],
+        [
+          0,
+          1,
+          0,
+          48,
+          0,
+          0,
+          4,
+          0,
+          0,
+          0,
+          1,
+          0,
+          8,
+          0,
+          12,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          112,
+          6497,
+          0,
+          0,
+          0,
+          0,
+          54,
+          70584,
+          184,
+          0,
+          0,
+          0,
+          199,
+          21
+        ],
+        [
+          0,
+          0,
+          6,
+          87,
+          0,
+          18,
+          7,
+          0,
+          0,
+          4,
+          358275,
+          0,
+          5825,
+          0,
+          192,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          55,
+          0,
+          92,
+          0,
+          9,
+          10,
+          0,
+          0,
+          1,
+          3973,
+          0,
+          28790,
+          4,
+          433,
+          26
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          386,
+          37,
+          3101,
+          0,
+          110,
+          120,
+          0,
+          0,
+          339,
+          154,
+          0,
+          1170,
+          0,
+          369366,
+          975
+        ],
+        [
+          0,
+          0,
+          0,
+          69,
+          0,
+          1,
+          95,
+          0,
+          0,
+          0,
+          6,
+          0,
+          75,
+          0,
+          1551,
+          8801
+        ]
+      ],
+      "counts": {
+        "repaired": 0,
+        "harmed": 0,
+        "history_points": 0,
+        "frames": 41
+      },
+      "gt_track_semantic_transitions": {
+        "transitions": 798,
+        "changed_predicted_class": 82,
+        "both_correct": 669,
+        "wrong_to_correct": 28,
+        "correct_to_wrong": 36,
+        "both_wrong": 65
+      }
+    },
+    "unwarped": {
+      "miou_fixed16": 0.501220170536665,
+      "miou_present": 0.6682935607155533,
+      "accuracy": 0.9625074473258511,
+      "class_iou": [
+        null,
+        0.43538767395626243,
+        0.8789349259674007,
+        0.9098041082522077,
+        null,
+        0.9232239566741001,
+        0.724821133736929,
+        0.0,
+        null,
+        0.8107112210388168,
+        0.9622864449713912,
+        null,
+        0.6507551834716409,
+        0.0,
+        0.9769291650178077,
+        0.7466689155000843
+      ],
+      "labeled_points": 1096031,
+      "confusion": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          438,
+          0,
+          147,
+          0,
+          8,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          15,
+          0,
+          40,
+          0
+        ],
+        [
+          0,
+          0,
+          28256,
+          2077,
+          0,
+          0,
+          66,
+          0,
+          0,
+          1359,
+          59,
+          0,
+          0,
+          0,
+          23,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          191118,
+          0,
+          0,
+          0,
+          0,
+          0,
+          6,
+          752,
+          0,
+          17,
+          0,
+          201,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          313,
+          0,
+          5796,
+          1,
+          0,
+          0,
+          3,
+          99,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          23,
+          43,
+          115,
+          0,
+          0,
+          2634,
+          0,
+          0,
+          19,
+          16,
+          0,
+          35,
+          0,
+          431,
+          23
+        ],
+        [
+          0,
+          0,
+          0,
+          35,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          12,
+          0,
+          26,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          202,
+          12740,
+          0,
+          0,
+          0,
+          0,
+          0,
+          64244,
+          270,
+          0,
+          0,
+          0,
+          178,
+          17
+        ],
+        [
+          0,
+          0,
+          2,
+          66,
+          0,
+          15,
+          2,
+          0,
+          0,
+          1,
+          356709,
+          0,
+          6252,
+          1058,
+          309,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          22,
+          0,
+          130,
+          0,
+          3,
+          9,
+          0,
+          0,
+          0,
+          4920,
+          0,
+          26584,
+          1135,
+          531,
+          59
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          310,
+          61,
+          2271,
+          0,
+          35,
+          139,
+          0,
+          0,
+          205,
+          151,
+          0,
+          1098,
+          25,
+          370305,
+          1161
+        ],
+        [
+          0,
+          0,
+          0,
+          76,
+          0,
+          0,
+          78,
+          0,
+          0,
+          0,
+          6,
+          0,
+          29,
+          8,
+          1547,
+          8854
+        ]
+      ],
+      "counts": {
+        "repaired": 9622,
+        "harmed": 19029,
+        "history_points": 203583,
+        "frames": 41
+      },
+      "gt_track_semantic_transitions": {
+        "transitions": 798,
+        "changed_predicted_class": 93,
+        "both_correct": 660,
+        "wrong_to_correct": 35,
+        "correct_to_wrong": 40,
+        "both_wrong": 63
+      }
+    },
+    "ego": {
+      "miou_fixed16": 0.5086407075754353,
+      "miou_present": 0.5813036658004974,
+      "accuracy": 0.9682755323526433,
+      "class_iou": [
+        0.0,
+        0.3774193548387097,
+        0.9161751396560871,
+        0.9258290464149737,
+        0.0,
+        0.953343949044586,
+        0.7183751363140676,
+        0.0,
+        null,
+        0.8829770933884931,
+        0.9648347850504636,
+        null,
+        0.6723824747511443,
+        0.0,
+        0.9734744648148441,
+        0.7534398769335954
+      ],
+      "labeled_points": 1096031,
+      "confusion": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          468,
+          0,
+          151,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          0,
+          29357,
+          2057,
+          0,
+          0,
+          21,
+          0,
+          0,
+          339,
+          43,
+          0,
+          0,
+          0,
+          23,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          191130,
+          0,
+          0,
+          3,
+          0,
+          0,
+          10,
+          754,
+          0,
+          14,
+          0,
+          184,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          95,
+          0,
+          5987,
+          0,
+          0,
+          0,
+          5,
+          110,
+          0,
+          0,
+          0,
+          20,
+          0
+        ],
+        [
+          0,
+          41,
+          49,
+          113,
+          0,
+          0,
+          2635,
+          0,
+          0,
+          6,
+          29,
+          0,
+          35,
+          0,
+          407,
+          24
+        ],
+        [
+          0,
+          1,
+          0,
+          46,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          2,
+          0,
+          6,
+          0,
+          17,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          107,
+          7978,
+          0,
+          0,
+          0,
+          0,
+          0,
+          69153,
+          213,
+          0,
+          0,
+          0,
+          175,
+          25
+        ],
+        [
+          0,
+          0,
+          15,
+          50,
+          0,
+          17,
+          3,
+          0,
+          0,
+          4,
+          357342,
+          0,
+          6637,
+          131,
+          215,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          52,
+          0,
+          135,
+          0,
+          2,
+          9,
+          0,
+          0,
+          0,
+          4662,
+          0,
+          27762,
+          363,
+          360,
+          48
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4,
+          498,
+          32,
+          3623,
+          228,
+          40,
+          172,
+          0,
+          0,
+          303,
+          132,
+          0,
+          1113,
+          0,
+          368610,
+          1006
+        ],
+        [
+          0,
+          0,
+          0,
+          99,
+          0,
+          1,
+          118,
+          0,
+          0,
+          0,
+          7,
+          0,
+          74,
+          0,
+          1483,
+          8816
+        ]
+      ],
+      "counts": {
+        "repaired": 8821,
+        "harmed": 11906,
+        "history_points": 391071,
+        "frames": 41
+      },
+      "gt_track_semantic_transitions": {
+        "transitions": 798,
+        "changed_predicted_class": 70,
+        "both_correct": 671,
+        "wrong_to_correct": 26,
+        "correct_to_wrong": 33,
+        "both_wrong": 68
+      }
+    },
+    "motion": {
+      "miou_fixed16": 0.5077598507037324,
+      "miou_present": 0.580296972232837,
+      "accuracy": 0.9678950686613791,
+      "class_iou": [
+        0.0,
+        0.37297734627831713,
+        0.9143382811525508,
+        0.924234511305828,
+        0.0,
+        0.9530404329831264,
+        0.7173972229784917,
+        0.0,
+        null,
+        0.8779410450524058,
+        0.9648399422144814,
+        null,
+        0.6724759760850095,
+        0.0,
+        0.9734917105478591,
+        0.753421142661649
+      ],
+      "labeled_points": 1096031,
+      "confusion": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          461,
+          0,
+          158,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17,
+          0,
+          9,
+          0
+        ],
+        [
+          0,
+          0,
+          29321,
+          2071,
+          0,
+          0,
+          28,
+          0,
+          0,
+          354,
+          44,
+          0,
+          0,
+          0,
+          22,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          191128,
+          0,
+          0,
+          4,
+          0,
+          0,
+          9,
+          758,
+          0,
+          14,
+          0,
+          182,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          95,
+          0,
+          5987,
+          0,
+          0,
+          0,
+          5,
+          110,
+          0,
+          0,
+          0,
+          20,
+          0
+        ],
+        [
+          0,
+          41,
+          46,
+          115,
+          0,
+          0,
+          2635,
+          0,
+          0,
+          7,
+          27,
+          0,
+          37,
+          0,
+          407,
+          24
+        ],
+        [
+          0,
+          1,
+          0,
+          43,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          2,
+          0,
+          6,
+          0,
+          20,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          129,
+          8345,
+          0,
+          0,
+          0,
+          0,
+          0,
+          68770,
+          209,
+          0,
+          0,
+          0,
+          189,
+          9
+        ],
+        [
+          0,
+          0,
+          14,
+          49,
+          0,
+          16,
+          3,
+          0,
+          0,
+          4,
+          357314,
+          0,
+          6666,
+          139,
+          209,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          51,
+          0,
+          142,
+          0,
+          2,
+          9,
+          0,
+          0,
+          0,
+          4624,
+          0,
+          27782,
+          373,
+          362,
+          48
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4,
+          495,
+          39,
+          3587,
+          228,
+          43,
+          169,
+          0,
+          0,
+          301,
+          140,
+          0,
+          1106,
+          0,
+          368636,
+          1013
+        ],
+        [
+          0,
+          0,
+          0,
+          96,
+          0,
+          1,
+          118,
+          0,
+          0,
+          0,
+          7,
+          0,
+          74,
+          0,
+          1493,
+          8809
+        ]
+      ],
+      "counts": {
+        "repaired": 8742,
+        "harmed": 12244,
+        "history_points": 390439,
+        "frames": 41
+      },
+      "gt_track_semantic_transitions": {
+        "transitions": 798,
+        "changed_predicted_class": 76,
+        "both_correct": 668,
+        "wrong_to_correct": 27,
+        "correct_to_wrong": 34,
+        "both_wrong": 69
+      }
+    }
+  },
+  "frames": [
+    {
+      "frame": 0,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 27.702316059730947,
+          "total_ms": 27.702316059730947
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 0,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 0.028282986022531986,
+          "forward_ms": 27.702316059730947,
+          "total_ms": 27.73059904575348
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 0,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 0.0180340139195323,
+          "forward_ms": 27.702316059730947,
+          "total_ms": 27.72035007365048
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 0,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 0.017702928744256496,
+          "forward_ms": 27.702316059730947,
+          "total_ms": 27.720018988475204
+        }
+      }
+    },
+    {
+      "frame": 1,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 29.32566497474909,
+          "total_ms": 29.32566497474909
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 6676,
+          "motion_points": 0,
+          "unmatched_instance_points": 68,
+          "prepare_ms": 8.120505954138935,
+          "forward_ms": 31.774981995113194,
+          "total_ms": 39.89548794925213
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 9646,
+          "motion_points": 0,
+          "unmatched_instance_points": 68,
+          "prepare_ms": 8.364586043171585,
+          "forward_ms": 33.5426430683583,
+          "total_ms": 41.90722911152989
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 9715,
+          "motion_points": 704,
+          "unmatched_instance_points": 68,
+          "prepare_ms": 8.151324931532145,
+          "forward_ms": 36.006376962177455,
+          "total_ms": 44.1577018937096
+        }
+      }
+    },
+    {
+      "frame": 2,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 31.4900140510872,
+          "total_ms": 31.4900140510872
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 7212,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 9.685856057330966,
+          "forward_ms": 32.83052099868655,
+          "total_ms": 42.51637705601752
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 10377,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 8.84185591712594,
+          "forward_ms": 35.401968052610755,
+          "total_ms": 44.243823969736695
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 10383,
+          "motion_points": 737,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 8.971811039373279,
+          "forward_ms": 34.458730020560324,
+          "total_ms": 43.4305410599336
+        }
+      }
+    },
+    {
+      "frame": 3,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 28.346890001557767,
+          "total_ms": 28.346890001557767
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 7107,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.309792981483042,
+          "forward_ms": 31.82679892051965,
+          "total_ms": 38.13659190200269
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 10573,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.920092971995473,
+          "forward_ms": 34.28210807032883,
+          "total_ms": 41.202201042324305
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 10608,
+          "motion_points": 662,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.797623005695641,
+          "forward_ms": 32.741522998549044,
+          "total_ms": 39.539146004244685
+        }
+      }
+    },
+    {
+      "frame": 4,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 30.223577981814742,
+          "total_ms": 30.223577981814742
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 6470,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.31899107247591,
+          "forward_ms": 31.735566910356283,
+          "total_ms": 38.05455798283219
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 10467,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.7379799438640475,
+          "forward_ms": 33.301387913525105,
+          "total_ms": 40.03936785738915
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 10486,
+          "motion_points": 543,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 7.522779051214457,
+          "forward_ms": 32.4976840056479,
+          "total_ms": 40.020463056862354
+        }
+      }
+    },
+    {
+      "frame": 5,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 30.296424054540694,
+          "total_ms": 30.296424054540694
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 6526,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.270940066315234,
+          "forward_ms": 32.686478924006224,
+          "total_ms": 38.95741899032146
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 10208,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.576886051334441,
+          "forward_ms": 32.45579497888684,
+          "total_ms": 39.03268103022128
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 10210,
+          "motion_points": 429,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.5123350359499454,
+          "forward_ms": 32.30248601175845,
+          "total_ms": 38.81482104770839
+        }
+      }
+    },
+    {
+      "frame": 6,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 30.68215202074498,
+          "total_ms": 30.68215202074498
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 6462,
+          "motion_points": 0,
+          "unmatched_instance_points": 42,
+          "prepare_ms": 6.823099916800857,
+          "forward_ms": 35.39093700237572,
+          "total_ms": 42.21403691917658
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 10238,
+          "motion_points": 0,
+          "unmatched_instance_points": 42,
+          "prepare_ms": 6.537723005749285,
+          "forward_ms": 36.51344298850745,
+          "total_ms": 43.051165994256735
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 10291,
+          "motion_points": 387,
+          "unmatched_instance_points": 42,
+          "prepare_ms": 6.691952934488654,
+          "forward_ms": 35.56623705662787,
+          "total_ms": 42.258189991116524
+        }
+      }
+    },
+    {
+      "frame": 7,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 30.956899980083108,
+          "total_ms": 30.956899980083108
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 6641,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.007833988405764,
+          "forward_ms": 32.75973803829402,
+          "total_ms": 38.76757202669978
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 10278,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.444917991757393,
+          "forward_ms": 36.385641898959875,
+          "total_ms": 42.83055989071727
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 10300,
+          "motion_points": 464,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 8.93315696157515,
+          "forward_ms": 38.99352706503123,
+          "total_ms": 47.92668402660638
+        }
+      }
+    },
+    {
+      "frame": 8,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 35.27648199815303,
+          "total_ms": 35.27648199815303
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 6612,
+          "motion_points": 0,
+          "unmatched_instance_points": 162,
+          "prepare_ms": 7.954342989251018,
+          "forward_ms": 34.38259696122259,
+          "total_ms": 42.33693995047361
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 9945,
+          "motion_points": 0,
+          "unmatched_instance_points": 162,
+          "prepare_ms": 10.98437502514571,
+          "forward_ms": 39.64276099577546,
+          "total_ms": 50.62713602092117
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 9942,
+          "motion_points": 377,
+          "unmatched_instance_points": 162,
+          "prepare_ms": 10.31018397770822,
+          "forward_ms": 38.58695097733289,
+          "total_ms": 48.89713495504111
+        }
+      }
+    },
+    {
+      "frame": 9,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 32.22178295254707,
+          "total_ms": 32.22178295254707
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 6767,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 8.299092995002866,
+          "forward_ms": 33.45914592500776,
+          "total_ms": 41.758238920010626
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 10226,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 8.704787935130298,
+          "forward_ms": 34.20500201173127,
+          "total_ms": 42.909789946861565
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 10301,
+          "motion_points": 409,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 8.990215021185577,
+          "forward_ms": 32.960506970994174,
+          "total_ms": 41.95072199217975
+        }
+      }
+    },
+    {
+      "frame": 10,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 27.920456021092832,
+          "total_ms": 27.920456021092832
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 7595,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.435209070332348,
+          "forward_ms": 31.991991098038852,
+          "total_ms": 38.4272001683712
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 10786,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.675682961940765,
+          "forward_ms": 34.45182798895985,
+          "total_ms": 41.127510950900614
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 10781,
+          "motion_points": 590,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.93995098117739,
+          "forward_ms": 33.916999003849924,
+          "total_ms": 40.85694998502731
+        }
+      }
+    },
+    {
+      "frame": 11,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 28.516980004496872,
+          "total_ms": 28.516980004496872
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 7300,
+          "motion_points": 0,
+          "unmatched_instance_points": 120,
+          "prepare_ms": 6.306546973064542,
+          "forward_ms": 33.25406997464597,
+          "total_ms": 39.560616947710514
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 10958,
+          "motion_points": 0,
+          "unmatched_instance_points": 120,
+          "prepare_ms": 6.784567958675325,
+          "forward_ms": 36.063736071810126,
+          "total_ms": 42.84830403048545
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 10914,
+          "motion_points": 454,
+          "unmatched_instance_points": 120,
+          "prepare_ms": 6.784518016502261,
+          "forward_ms": 35.46691092196852,
+          "total_ms": 42.25142893847078
+        }
+      }
+    },
+    {
+      "frame": 12,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 31.630579964257777,
+          "total_ms": 31.630579964257777
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 5458,
+          "motion_points": 0,
+          "unmatched_instance_points": 103,
+          "prepare_ms": 6.293802987784147,
+          "forward_ms": 31.99930500704795,
+          "total_ms": 38.2931079948321
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 11002,
+          "motion_points": 0,
+          "unmatched_instance_points": 103,
+          "prepare_ms": 7.212675060145557,
+          "forward_ms": 37.257706047967076,
+          "total_ms": 44.47038110811263
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 10964,
+          "motion_points": 384,
+          "unmatched_instance_points": 103,
+          "prepare_ms": 6.910014082677662,
+          "forward_ms": 36.45546408370137,
+          "total_ms": 43.365478166379035
+        }
+      }
+    },
+    {
+      "frame": 13,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 31.216719071380794,
+          "total_ms": 31.216719071380794
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 4834,
+          "motion_points": 0,
+          "unmatched_instance_points": 43,
+          "prepare_ms": 5.83007896784693,
+          "forward_ms": 33.53131201583892,
+          "total_ms": 39.36139098368585
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 11213,
+          "motion_points": 0,
+          "unmatched_instance_points": 43,
+          "prepare_ms": 8.814934990368783,
+          "forward_ms": 38.19864895194769,
+          "total_ms": 47.01358394231647
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 11122,
+          "motion_points": 466,
+          "unmatched_instance_points": 43,
+          "prepare_ms": 8.765642065554857,
+          "forward_ms": 39.425551891326904,
+          "total_ms": 48.19119395688176
+        }
+      }
+    },
+    {
+      "frame": 14,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 36.77896305453032,
+          "total_ms": 36.77896305453032
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 5014,
+          "motion_points": 0,
+          "unmatched_instance_points": 230,
+          "prepare_ms": 9.176986990496516,
+          "forward_ms": 37.947426084429026,
+          "total_ms": 47.12441307492554
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 10957,
+          "motion_points": 0,
+          "unmatched_instance_points": 230,
+          "prepare_ms": 11.203376925550401,
+          "forward_ms": 36.993698915466666,
+          "total_ms": 48.19707584101707
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 11033,
+          "motion_points": 191,
+          "unmatched_instance_points": 230,
+          "prepare_ms": 8.645895984955132,
+          "forward_ms": 39.151796023361385,
+          "total_ms": 47.79769200831652
+        }
+      }
+    },
+    {
+      "frame": 15,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 33.22951390873641,
+          "total_ms": 33.22951390873641
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 5046,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.10394508112222,
+          "forward_ms": 33.098796964623034,
+          "total_ms": 39.202742045745254
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 11352,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.515720975585282,
+          "forward_ms": 35.15265800524503,
+          "total_ms": 41.66837898083031
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 11419,
+          "motion_points": 244,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.681162980385125,
+          "forward_ms": 35.91403306927532,
+          "total_ms": 42.595196049660444
+        }
+      }
+    },
+    {
+      "frame": 16,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 31.735677970573306,
+          "total_ms": 31.735677970573306
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 4327,
+          "motion_points": 0,
+          "unmatched_instance_points": 23,
+          "prepare_ms": 5.842552985996008,
+          "forward_ms": 33.24310900643468,
+          "total_ms": 39.08566199243069
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 11003,
+          "motion_points": 0,
+          "unmatched_instance_points": 23,
+          "prepare_ms": 6.465206039138138,
+          "forward_ms": 35.779358935542405,
+          "total_ms": 42.24456497468054
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 11062,
+          "motion_points": 234,
+          "unmatched_instance_points": 23,
+          "prepare_ms": 6.451831082813442,
+          "forward_ms": 37.41240699309856,
+          "total_ms": 43.864238075912
+        }
+      }
+    },
+    {
+      "frame": 17,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 31.879038084298372,
+          "total_ms": 31.879038084298372
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 4587,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 5.803748965263367,
+          "forward_ms": 34.881578059867024,
+          "total_ms": 40.68532702513039
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 10654,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.357774022035301,
+          "forward_ms": 35.44395696371794,
+          "total_ms": 41.80173098575324
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 10673,
+          "motion_points": 225,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.295987986959517,
+          "forward_ms": 36.33849392645061,
+          "total_ms": 42.63448191341013
+        }
+      }
+    },
+    {
+      "frame": 18,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 34.45657598786056,
+          "total_ms": 34.45657598786056
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 4190,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 5.919627961702645,
+          "forward_ms": 35.71819409262389,
+          "total_ms": 41.637822054326534
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 10305,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.475506001152098,
+          "forward_ms": 38.42416498810053,
+          "total_ms": 44.89967098925263
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 10304,
+          "motion_points": 411,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 7.197916973382235,
+          "forward_ms": 37.69331693183631,
+          "total_ms": 44.89123390521854
+        }
+      }
+    },
+    {
+      "frame": 19,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 33.619208028540015,
+          "total_ms": 33.619208028540015
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 3673,
+          "motion_points": 0,
+          "unmatched_instance_points": 117,
+          "prepare_ms": 5.654679029248655,
+          "forward_ms": 34.415408968925476,
+          "total_ms": 40.07008799817413
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 9419,
+          "motion_points": 0,
+          "unmatched_instance_points": 117,
+          "prepare_ms": 6.2714009545743465,
+          "forward_ms": 40.94819293823093,
+          "total_ms": 47.21959389280528
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 9384,
+          "motion_points": 297,
+          "unmatched_instance_points": 117,
+          "prepare_ms": 8.217789931222796,
+          "forward_ms": 46.18084500543773,
+          "total_ms": 54.39863493666053
+        }
+      }
+    },
+    {
+      "frame": 20,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 32.40491892211139,
+          "total_ms": 32.40491892211139
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 4125,
+          "motion_points": 0,
+          "unmatched_instance_points": 24,
+          "prepare_ms": 7.302675046958029,
+          "forward_ms": 36.6782839410007,
+          "total_ms": 43.98095898795873
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 9748,
+          "motion_points": 0,
+          "unmatched_instance_points": 24,
+          "prepare_ms": 9.512859978713095,
+          "forward_ms": 44.19885901734233,
+          "total_ms": 53.711718996055424
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 9676,
+          "motion_points": 339,
+          "unmatched_instance_points": 24,
+          "prepare_ms": 8.174789021722972,
+          "forward_ms": 41.69236496090889,
+          "total_ms": 49.86715398263186
+        }
+      }
+    },
+    {
+      "frame": 21,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 37.15517197269946,
+          "total_ms": 37.15517197269946
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 3390,
+          "motion_points": 0,
+          "unmatched_instance_points": 172,
+          "prepare_ms": 7.467796094715595,
+          "forward_ms": 37.689029006287456,
+          "total_ms": 45.15682510100305
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 9294,
+          "motion_points": 0,
+          "unmatched_instance_points": 172,
+          "prepare_ms": 6.869949051178992,
+          "forward_ms": 36.75891598686576,
+          "total_ms": 43.62886503804475
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 9254,
+          "motion_points": 94,
+          "unmatched_instance_points": 172,
+          "prepare_ms": 6.20954402256757,
+          "forward_ms": 38.18412194959819,
+          "total_ms": 44.39366597216576
+        }
+      }
+    },
+    {
+      "frame": 22,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 32.32172306161374,
+          "total_ms": 32.32172306161374
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 3293,
+          "motion_points": 0,
+          "unmatched_instance_points": 56,
+          "prepare_ms": 5.779923987574875,
+          "forward_ms": 35.90798191726208,
+          "total_ms": 41.68790590483695
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 9594,
+          "motion_points": 0,
+          "unmatched_instance_points": 56,
+          "prepare_ms": 6.304161972366273,
+          "forward_ms": 37.70871588494629,
+          "total_ms": 44.01287785731256
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 9550,
+          "motion_points": 171,
+          "unmatched_instance_points": 56,
+          "prepare_ms": 6.339518935419619,
+          "forward_ms": 40.578415035270154,
+          "total_ms": 46.917933970689774
+        }
+      }
+    },
+    {
+      "frame": 23,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 35.358206019736826,
+          "total_ms": 35.358206019736826
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 3236,
+          "motion_points": 0,
+          "unmatched_instance_points": 141,
+          "prepare_ms": 5.866407998837531,
+          "forward_ms": 36.15205199457705,
+          "total_ms": 42.01845999341458
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 9094,
+          "motion_points": 0,
+          "unmatched_instance_points": 141,
+          "prepare_ms": 6.231826031580567,
+          "forward_ms": 41.22334090061486,
+          "total_ms": 47.455166932195425
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 9087,
+          "motion_points": 237,
+          "unmatched_instance_points": 141,
+          "prepare_ms": 6.204474018886685,
+          "forward_ms": 41.06811806559563,
+          "total_ms": 47.27259208448231
+        }
+      }
+    },
+    {
+      "frame": 24,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 36.19658597745001,
+          "total_ms": 36.19658597745001
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 3578,
+          "motion_points": 0,
+          "unmatched_instance_points": 33,
+          "prepare_ms": 5.755838938057423,
+          "forward_ms": 35.72401497513056,
+          "total_ms": 41.47985391318798
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 10155,
+          "motion_points": 0,
+          "unmatched_instance_points": 33,
+          "prepare_ms": 6.528255064040422,
+          "forward_ms": 40.1310920715332,
+          "total_ms": 46.659347135573626
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 10142,
+          "motion_points": 348,
+          "unmatched_instance_points": 33,
+          "prepare_ms": 6.150542991235852,
+          "forward_ms": 40.01868993509561,
+          "total_ms": 46.16923292633146
+        }
+      }
+    },
+    {
+      "frame": 25,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 42.15214098803699,
+          "total_ms": 42.15214098803699
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 4415,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 7.870825938880444,
+          "forward_ms": 42.04899596516043,
+          "total_ms": 49.91982190404087
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 10943,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 8.480804972350597,
+          "forward_ms": 43.05342095904052,
+          "total_ms": 51.53422593139112
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 10931,
+          "motion_points": 459,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 9.590657078661025,
+          "forward_ms": 42.98882803414017,
+          "total_ms": 52.579485112801194
+        }
+      }
+    },
+    {
+      "frame": 26,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 38.47150306683034,
+          "total_ms": 38.47150306683034
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 4356,
+          "motion_points": 0,
+          "unmatched_instance_points": 15,
+          "prepare_ms": 7.90981890168041,
+          "forward_ms": 40.14160193037242,
+          "total_ms": 48.05142083205283
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 11386,
+          "motion_points": 0,
+          "unmatched_instance_points": 15,
+          "prepare_ms": 6.628403905779123,
+          "forward_ms": 40.344273089431226,
+          "total_ms": 46.97267699521035
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 11120,
+          "motion_points": 762,
+          "unmatched_instance_points": 15,
+          "prepare_ms": 6.894123973324895,
+          "forward_ms": 39.09274493344128,
+          "total_ms": 45.986868906766176
+        }
+      }
+    },
+    {
+      "frame": 27,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 35.82445392385125,
+          "total_ms": 35.82445392385125
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 4972,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 7.054126006551087,
+          "forward_ms": 36.81310801766813,
+          "total_ms": 43.867234024219215
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 10727,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.429068045690656,
+          "forward_ms": 38.97424100432545,
+          "total_ms": 45.403309050016105
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 10653,
+          "motion_points": 838,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.487398059107363,
+          "forward_ms": 38.24934491422027,
+          "total_ms": 44.73674297332764
+        }
+      }
+    },
+    {
+      "frame": 28,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 33.648012089543045,
+          "total_ms": 33.648012089543045
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 4572,
+          "motion_points": 0,
+          "unmatched_instance_points": 15,
+          "prepare_ms": 5.998015985824168,
+          "forward_ms": 31.850934959948063,
+          "total_ms": 37.84895094577223
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 9931,
+          "motion_points": 0,
+          "unmatched_instance_points": 15,
+          "prepare_ms": 6.587816984392703,
+          "forward_ms": 35.70709307678044,
+          "total_ms": 42.29491006117314
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 9814,
+          "motion_points": 714,
+          "unmatched_instance_points": 15,
+          "prepare_ms": 6.467259954661131,
+          "forward_ms": 35.96116206608713,
+          "total_ms": 42.42842202074826
+        }
+      }
+    },
+    {
+      "frame": 29,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 30.38664406631142,
+          "total_ms": 30.38664406631142
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 4187,
+          "motion_points": 0,
+          "unmatched_instance_points": 200,
+          "prepare_ms": 5.881014978513122,
+          "forward_ms": 30.992577085271478,
+          "total_ms": 36.8735920637846
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 8069,
+          "motion_points": 0,
+          "unmatched_instance_points": 200,
+          "prepare_ms": 6.222038064152002,
+          "forward_ms": 33.012154046446085,
+          "total_ms": 39.23419211059809
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 8086,
+          "motion_points": 298,
+          "unmatched_instance_points": 200,
+          "prepare_ms": 6.344810011796653,
+          "forward_ms": 33.19700201973319,
+          "total_ms": 39.541812031529844
+        }
+      }
+    },
+    {
+      "frame": 30,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 26.916994946077466,
+          "total_ms": 26.916994946077466
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 4730,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.170229986310005,
+          "forward_ms": 31.46627906244248,
+          "total_ms": 37.63650904875249
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 7374,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.086330977268517,
+          "forward_ms": 32.38930995576084,
+          "total_ms": 38.475640933029354
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 7353,
+          "motion_points": 580,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 5.955434986390173,
+          "forward_ms": 32.11850894149393,
+          "total_ms": 38.0739439278841
+        }
+      }
+    },
+    {
+      "frame": 31,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 29.217430972494185,
+          "total_ms": 29.217430972494185
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 4048,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 7.551533984951675,
+          "forward_ms": 31.95079299621284,
+          "total_ms": 39.502326981164515
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 7786,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 8.277031010948122,
+          "forward_ms": 32.154217013157904,
+          "total_ms": 40.431248024106026
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 7569,
+          "motion_points": 884,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 8.08411801699549,
+          "forward_ms": 30.701918993145227,
+          "total_ms": 38.78603701014072
+        }
+      }
+    },
+    {
+      "frame": 32,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 30.46288900077343,
+          "total_ms": 30.46288900077343
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 3872,
+          "motion_points": 0,
+          "unmatched_instance_points": 9,
+          "prepare_ms": 9.33882303070277,
+          "forward_ms": 32.77786204125732,
+          "total_ms": 42.11668507196009
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 7116,
+          "motion_points": 0,
+          "unmatched_instance_points": 9,
+          "prepare_ms": 8.693475974723697,
+          "forward_ms": 31.008075922727585,
+          "total_ms": 39.70155189745128
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 7061,
+          "motion_points": 960,
+          "unmatched_instance_points": 9,
+          "prepare_ms": 8.665832923725247,
+          "forward_ms": 31.95344901178032,
+          "total_ms": 40.61928193550557
+        }
+      }
+    },
+    {
+      "frame": 33,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 26.69870399404317,
+          "total_ms": 26.69870399404317
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 3431,
+          "motion_points": 0,
+          "unmatched_instance_points": 440,
+          "prepare_ms": 7.772078970447183,
+          "forward_ms": 25.754633941687644,
+          "total_ms": 33.526712912134826
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 4713,
+          "motion_points": 0,
+          "unmatched_instance_points": 440,
+          "prepare_ms": 5.889380932785571,
+          "forward_ms": 26.139949914067984,
+          "total_ms": 32.029330846853554
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 4713,
+          "motion_points": 0,
+          "unmatched_instance_points": 440,
+          "prepare_ms": 5.8350079925730824,
+          "forward_ms": 26.416843058541417,
+          "total_ms": 32.2518510511145
+        }
+      }
+    },
+    {
+      "frame": 34,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 25.91515693347901,
+          "total_ms": 25.91515693347901
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 2319,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 5.590106011368334,
+          "forward_ms": 27.186342980712652,
+          "total_ms": 32.77644899208099
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 4559,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.842246046289802,
+          "forward_ms": 27.97178295440972,
+          "total_ms": 34.81402900069952
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 4559,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 5.705964984372258,
+          "forward_ms": 27.758231037296355,
+          "total_ms": 33.46419602166861
+        }
+      }
+    },
+    {
+      "frame": 35,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 30.669016996398568,
+          "total_ms": 30.669016996398568
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 4441,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 5.881306016817689,
+          "forward_ms": 31.808054074645042,
+          "total_ms": 37.68936009146273
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 7778,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.042869994416833,
+          "forward_ms": 33.78465899731964,
+          "total_ms": 39.82752899173647
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 7787,
+          "motion_points": 14,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.208603037521243,
+          "forward_ms": 33.285910030826926,
+          "total_ms": 39.49451306834817
+        }
+      }
+    },
+    {
+      "frame": 36,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 33.46651000902057,
+          "total_ms": 33.46651000902057
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 5277,
+          "motion_points": 0,
+          "unmatched_instance_points": 15,
+          "prepare_ms": 6.03074801620096,
+          "forward_ms": 34.76573899388313,
+          "total_ms": 40.79648701008409
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 10143,
+          "motion_points": 0,
+          "unmatched_instance_points": 15,
+          "prepare_ms": 7.02751602511853,
+          "forward_ms": 37.18406695406884,
+          "total_ms": 44.21158297918737
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 10143,
+          "motion_points": 0,
+          "unmatched_instance_points": 15,
+          "prepare_ms": 6.214522989466786,
+          "forward_ms": 39.63304404169321,
+          "total_ms": 45.84756703116
+        }
+      }
+    },
+    {
+      "frame": 37,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 39.270470035262406,
+          "total_ms": 39.270470035262406
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 5861,
+          "motion_points": 0,
+          "unmatched_instance_points": 37,
+          "prepare_ms": 5.997675005346537,
+          "forward_ms": 38.99459994863719,
+          "total_ms": 44.992274953983724
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 11133,
+          "motion_points": 0,
+          "unmatched_instance_points": 37,
+          "prepare_ms": 8.53485707193613,
+          "forward_ms": 40.38559191394597,
+          "total_ms": 48.9204489858821
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 11133,
+          "motion_points": 0,
+          "unmatched_instance_points": 37,
+          "prepare_ms": 8.301055990159512,
+          "forward_ms": 38.98991097230464,
+          "total_ms": 47.290966962464154
+        }
+      }
+    },
+    {
+      "frame": 38,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 40.66017898730934,
+          "total_ms": 40.66017898730934
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 5814,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 9.784171939827502,
+          "forward_ms": 44.68773992266506,
+          "total_ms": 54.47191186249256
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 11051,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 9.035581024363637,
+          "forward_ms": 45.26425700169057,
+          "total_ms": 54.2998380260542
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 11051,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 8.580403053201735,
+          "forward_ms": 46.79585399571806,
+          "total_ms": 55.3762570489198
+        }
+      }
+    },
+    {
+      "frame": 39,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 35.64490599092096,
+          "total_ms": 35.64490599092096
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 5886,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 7.206564070656896,
+          "forward_ms": 39.66796898748726,
+          "total_ms": 46.87453305814415
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 10738,
+          "motion_points": 0,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 6.591593963094056,
+          "forward_ms": 42.84970602020621,
+          "total_ms": 49.44129998330027
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 10744,
+          "motion_points": 26,
+          "unmatched_instance_points": 0,
+          "prepare_ms": 7.718557957559824,
+          "forward_ms": 43.513096985407174,
+          "total_ms": 51.231654942967
+        }
+      }
+    },
+    {
+      "frame": 40,
+      "modes": {
+        "current_only": {
+          "history_points": 0,
+          "prepare_ms": 0.0,
+          "forward_ms": 32.8460109885782,
+          "total_ms": 32.8460109885782
+        },
+        "unwarped": {
+          "mode": "unwarped",
+          "history_points": 5283,
+          "motion_points": 0,
+          "unmatched_instance_points": 6,
+          "prepare_ms": 6.071333074942231,
+          "forward_ms": 37.615561042912304,
+          "total_ms": 43.686894117854536
+        },
+        "ego": {
+          "mode": "ego",
+          "history_points": 10132,
+          "motion_points": 0,
+          "unmatched_instance_points": 6,
+          "prepare_ms": 6.484412006102502,
+          "forward_ms": 41.47998499684036,
+          "total_ms": 47.96439700294286
+        },
+        "motion": {
+          "mode": "motion",
+          "history_points": 10121,
+          "motion_points": 51,
+          "unmatched_instance_points": 6,
+          "prepare_ms": 6.331162992864847,
+          "forward_ms": 41.6639510076493,
+          "total_ms": 47.99511400051415
+        }
+      }
+    }
+  ]
+}

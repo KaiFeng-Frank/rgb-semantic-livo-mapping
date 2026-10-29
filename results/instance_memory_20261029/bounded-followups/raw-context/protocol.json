@@ -1,0 +1,26 @@
+{
+  "index_sha256": "33f15006ea3e6ab513a3472769e0a7e250ea1f74ee880d131b9ad66ffa6da42e",
+  "cache_protocol_sha256": "80675df8a2f00b8980dfa1b391449337d11d4f22f819038fc4f150e14ee6b99a",
+  "checkpoint_sha256": "35f5d3aec63ae1c383f4a4146e157aa054860cb12b178d899571287e6f97e5f1",
+  "config": {
+    "ttl_s": 1.0,
+    "max_history_points": 12000,
+    "max_fraction": 0.5,
+    "support_voxel_m": 0.4,
+    "history_voxel_m": 0.1,
+    "native_voxel_m": 0.05,
+    "max_speed_mps": 35.0,
+    "max_scan_points": 200000
+  },
+  "source": {
+    "raw_context_probe.py": "5f76eff3f4019abd9e67071fe9db4580cedd3b709079a1ce0b1a9e9aba2c14b7",
+    "raw_context.py": "835f2d50bafeb0187fcebff1da60b12b5aa6c14a64f41601022327e75f26f940"
+  },
+  "admission": {
+    "time": 1793239353.056942,
+    "pid": 1617981,
+    "compute_processes": []
+  },
+  "startup_seconds": 4.4794160650344566,
+  "scope": "Development only. Supplied ego poses. Cached causal detector associations. GT never enters raw context. No predicted identity accuracy is measured here."
+}

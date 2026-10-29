@@ -1,0 +1,33 @@
+{
+  "index_sha256": "33f15006ea3e6ab513a3472769e0a7e250ea1f74ee880d131b9ad66ffa6da42e",
+  "cache_protocol_sha256": "80675df8a2f00b8980dfa1b391449337d11d4f22f819038fc4f150e14ee6b99a",
+  "weights_sha256": "55ed65c56c91713d23e8402371c6c49a6fd84f257f7dce452e8d70e41dcbe152",
+  "admission": {
+    "time": 1793241247.2822852,
+    "pid": 1624430,
+    "compute_processes": []
+  },
+  "sources": {
+    "evaluate_reid.py": "daca5ecaa9b4dc0b1bfc145c7a8e8d722230b63ba73e4dd8c76f3e86a7623ee6",
+    "reid.py": "f351d8020057c163c6c92d627aa55c108ada2bfb374ed3c927f39edbf7725dee",
+    "evidence_predictor.py": "587cefc04da3cbe4173bf8a721d1664b6fe953741f42012029c7f08d23430820",
+    "botsort.yaml": "55d4224828acd42d5d097c9e214d2621f8ac5d6c44ec786c919e1572c90c717a",
+    "botsort_reid.yaml": "c2915a7776120f4b7abd433139faab78031b0bf6398e01068d8c5ec2dcde125f"
+  },
+  "preregistration": {
+    "scope": "Reuse official BoT-SORT native detector-feature memory; development-only identity experiment",
+    "source": "Installed Ultralytics 8.3.228. A local subclass fixes BOTrack feature-deque initialization order. Installed packages are unchanged.",
+    "detector": "Same frozen YOLO11n-seg and exact shared predictions for both trackers; native features from its existing forward, no new neural model/download/training",
+    "tracking": "Same baseline confidence, Kalman, buffer, motion and GMC settings. ReID enables the library's native feature encoder and uses its published 0.8 appearance threshold. The disabled baseline's 0.25 field was unused.",
+    "fairness": "Each image is forwarded once, and GMC is estimated once from the same high-confidence detections then shared. Empty-mask filtering and tracker indexing preserve matching features/class-score rows.",
+    "data": "12 already inspected development scenes, 483 frames. Official panoptic point GT is used only by the observer. New holdout remains closed.",
+    "geometry": [
+      "projected_mask",
+      "trusted_component",
+      "largest_component"
+    ],
+    "metrics": "Whole-scan and camera-observable point IDF1/AQ, identity switches with coverage denominators, per-log results, native feature/tracker timing. These are not official MOT/PAT scores.",
+    "gate": "Identity continuation requires at least +1 pp camera-domain point IDF1 with no whole-scan loss and a majority of logs improving under the same geometric policy. No threshold sweep after inspection. Full objective still requires independently verified semantic gains and online deployment.",
+    "attribution": "An interface repair is not a learned-memory contribution. This experiment compares the repaired same-input baseline with native ReID and reports coverage changes."
+  }
+}

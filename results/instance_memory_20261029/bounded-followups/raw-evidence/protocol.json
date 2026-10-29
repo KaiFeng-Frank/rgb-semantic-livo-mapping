@@ -1,0 +1,48 @@
+{
+  "train": [
+    "scene-0328",
+    "scene-0254",
+    "scene-0321",
+    "scene-0045",
+    "scene-1044",
+    "scene-0639",
+    "scene-0161",
+    "scene-0283",
+    "scene-0975",
+    "scene-0155",
+    "scene-0739",
+    "scene-0786",
+    "scene-0847",
+    "scene-0457",
+    "scene-0376",
+    "scene-0499"
+  ],
+  "dev": [
+    "scene-0525",
+    "scene-0120",
+    "scene-1106",
+    "scene-0388",
+    "scene-0546",
+    "scene-0535",
+    "scene-0129",
+    "scene-0122",
+    "scene-1110",
+    "scene-1108",
+    "scene-0398",
+    "scene-0392"
+  ],
+  "index_sha256": "33f15006ea3e6ab513a3472769e0a7e250ea1f74ee880d131b9ad66ffa6da42e",
+  "train_cache_sha256": "02c6b91bfc33ecbbcbd2acbe63cf05c40b125a574a56519f76fc31ffa51d0f61",
+  "dev_cache_sha256": "80675df8a2f00b8980dfa1b391449337d11d4f22f819038fc4f150e14ee6b99a",
+  "source_sha256": "3a8083a47fdb9b0d9bd67f0976d358f1041d63170e128278ff0eaf0f3dd22a9d",
+  "controls": [
+    "raw_point",
+    "current_pool",
+    "history_pool",
+    "half_raw_half_history"
+  ],
+  "history": "Same baseline visual session/ID; last 6 raw observations within 8 seconds; strictly past; trusted components only",
+  "opportunity": "GT-sidecar same-instance past class correct while current pooled class is wrong; unique objects and logs, not frame windows",
+  "decision": "No training from this audit alone. Report TRAIN/DEV separately and require evidence beyond same-frame pooling and repeated sightings of one object.",
+  "scope": "Post-failure availability diagnosis. Fixed causal controls are development diagnostics, privileged opportunities are not deployable performance."
+}

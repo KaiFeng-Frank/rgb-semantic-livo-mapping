@@ -1,0 +1,36 @@
+test_bounded_raw_history_and_expiry (tools.instance_memory.test_memory.MemoryTests.test_bounded_raw_history_and_expiry) ... ok
+test_no_read_until_write_and_no_time_reversal (tools.instance_memory.test_memory.MemoryTests.test_no_read_until_write_and_no_time_reversal) ... ok
+test_no_semantic_gate_and_no_identity_reuse_for_other_object (tools.instance_memory.test_memory.MemoryTests.test_no_semantic_gate_and_no_identity_reuse_for_other_object) ... ok
+test_pose_revision_keeps_each_objects_sensor_center (tools.instance_memory.test_memory.MemoryTests.test_pose_revision_keeps_each_objects_sensor_center) ... ok
+test_unchanged_growing_trajectory_preserves_motion_state (tools.instance_memory.test_memory.MemoryTests.test_unchanged_growing_trajectory_preserves_motion_state) ... ok
+test_visual_id_changes_but_object_persists (tools.instance_memory.test_memory.MemoryTests.test_visual_id_changes_but_object_persists) ... ok
+test_zero_long_memory_really_zero (tools.instance_memory.test_memory.MemoryTests.test_zero_long_memory_really_zero) ... ok
+test_perfect_and_missing_coverage (tools.instance_memory.test_memory.MetricTests.test_perfect_and_missing_coverage) ... ok
+test_stable_semantics_does_not_hide_identity_switch (tools.instance_memory.test_memory.MetricTests.test_stable_semantics_does_not_hide_identity_switch) ... ok
+test_current_only_does_not_read_past (tools.instance_memory.test_memory.ModelTests.test_current_only_does_not_read_past) ... ok
+test_future_history_is_rejected (tools.instance_memory.test_memory.ModelTests.test_future_history_is_rejected) ... ok
+test_gradients_reach_reader (tools.instance_memory.test_memory.ModelTests.test_gradients_reach_reader) ... ok
+test_runtime_empty_frames_and_gt_cannot_change_prediction (tools.instance_memory.test_memory.ModelTests.test_runtime_empty_frames_and_gt_cannot_change_prediction) ... ok
+test_candidates_do_not_create_or_refresh_their_own_history (tools.instance_memory.test_fragments.FragmentTests.test_candidates_do_not_create_or_refresh_their_own_history) ... ok
+test_eval_targets_cannot_change_admission (tools.instance_memory.test_fragments.FragmentTests.test_eval_targets_cannot_change_admission) ... ok
+test_future_camera_and_reused_image_rejected (tools.instance_memory.test_fragments.FragmentTests.test_future_camera_and_reused_image_rejected) ... ok
+test_other_nearby_identity_vetoes_a_visual_id_hint (tools.instance_memory.test_fragments.FragmentTests.test_other_nearby_identity_vetoes_a_visual_id_hint) ... ok
+test_trusted_stream_state_and_outputs_are_identical (tools.instance_memory.test_fragments.FragmentTests.test_trusted_stream_state_and_outputs_are_identical) ... ok
+test_two_past_observations_required_and_no_class_gate (tools.instance_memory.test_fragments.FragmentTests.test_two_past_observations_required_and_no_class_gate) ... ok
+test_calibration_uses_camera_not_lidar_depth (tools.visual_instances.test_association.AssociationTests.test_calibration_uses_camera_not_lidar_depth) ... ok
+test_camera_ego_motion_uses_only_received_pose_bracket (tools.visual_instances.test_association.AssociationTests.test_camera_ego_motion_uses_only_received_pose_bracket) ... ok
+test_empty_detection_is_explicit_unknown (tools.visual_instances.test_association.AssociationTests.test_empty_detection_is_explicit_unknown) ... ok
+test_frozen_features_survive_wire_without_changing_association (tools.visual_instances.test_association.AssociationTests.test_frozen_features_survive_wire_without_changing_association) ... ok
+test_invalid_mask_and_camera (tools.visual_instances.test_association.AssociationTests.test_invalid_mask_and_camera) ... ok
+test_overlaps_with_rejected_foreground_and_boundaries_abstain (tools.visual_instances.test_association.AssociationTests.test_overlaps_with_rejected_foreground_and_boundaries_abstain) ... ok
+test_restart_does_not_reuse_old_identity (tools.visual_instances.test_association.AssociationTests.test_restart_does_not_reuse_old_identity) ... ok
+test_roundtrip_and_corrupt_packet (tools.visual_instances.test_association.AssociationTests.test_roundtrip_and_corrupt_packet) ... ok
+test_sparse_object_abstains (tools.visual_instances.test_association.AssociationTests.test_sparse_object_abstains) ... ok
+test_time_gate_never_uses_future_and_never_waits (tools.visual_instances.test_association.AssociationTests.test_time_gate_never_uses_future_and_never_waits) ... ok
+test_two_adjacent_people_and_occluding_surface (tools.visual_instances.test_association.AssociationTests.test_two_adjacent_people_and_occluding_surface) ... ok
+test_cancel_during_startup_reaps_child (tools.visual_instances.test_lifecycle.LifecycleTests.test_cancel_during_startup_reaps_child) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 3.063s
+
+OK
