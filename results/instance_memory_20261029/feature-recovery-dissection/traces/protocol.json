@@ -1,0 +1,38 @@
+{
+  "cases": [
+    {
+      "scene": "scene-0149",
+      "frame": 17,
+      "instance": 17030,
+      "seeds": [
+        0
+      ]
+    },
+    {
+      "scene": "scene-0218",
+      "frame": 39,
+      "instance": 17019,
+      "seeds": [
+        1,
+        2
+      ]
+    }
+  ],
+  "index_sha256": "7094a62436c1138bca6a961cb88544e2a80eda1611115d0098379847203b0fe3",
+  "saved_cases_sha256": "14ffdbd4af73f2cb522bffaaa192aee493ff4d7fa357d7f218e7d06ca9034ad7",
+  "source_sha256": "0f791a1550c62c8ea633434f6c19b25a66b23d068a20d0d00fadb914af8eedaa",
+  "anchor_sha256": "c5f908f88d595dea521a817a03c5df13282843b2a9d03662a941ea7fddc80e7a",
+  "checkpoints_sha256": {
+    "0": "118b5a2d6632af0c49351e215a4abd90247e70e916fedc6b8c3108961bd25ff0",
+    "1": "bc7a75dca35d2ff41eb7bca306b1009983c9477aebc9a0e4f9d683d42b26b679",
+    "2": "4f3153cae276c3b6e3f259ac1c8708c996a71896672884d122d17628cbdc2d69"
+  },
+  "backbone_sha256": "35f5d3aec63ae1c383f4a4146e157aa054860cb12b178d899571287e6f97e5f1",
+  "admission": {
+    "time": 1793261897.274313,
+    "pid": 1736521,
+    "compute_processes": []
+  },
+  "scope": "Two archived object/frame failures only. Each uses its immediately previous raw scan, because PreviousEvidence replaces its entire contents at each write independently of prior predictions. Original scene origin and timestamps retained. No optimizer or output selection.",
+  "variants": "Original and current-token input; GT-correct candidate subset; each candidate alone; native feature/probability/geometry chunks inserted individually into the current-token input. Diagnostic substitutions are not deployment policies."
+}

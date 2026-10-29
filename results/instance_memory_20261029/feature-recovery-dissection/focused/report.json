@@ -1,0 +1,284 @@
+{
+  "scope": "Only the archived 14/18/19 lost same-weight recovery episodes. No new inference, training, thresholds or checkpoint selection.",
+  "episode_seed_records": 51,
+  "unique_scene_object_intervals": 27,
+  "seeds": [
+    {
+      "seed": 0,
+      "lost_episodes": 14,
+      "decisive_frames": 14,
+      "exact_fraction_frames": 34,
+      "numerically_different_frames": [
+        {
+          "scene": "scene-0149",
+          "instance": 17009,
+          "frame": 16,
+          "original_current": 1.0,
+          "trace_current": 1.0,
+          "original_temporal": 0.0,
+          "trace_temporal": 0.14285714285714285
+        },
+        {
+          "scene": "scene-0149",
+          "instance": 17050,
+          "frame": 28,
+          "original_current": 0.9615384615384616,
+          "trace_current": 0.9615384615384616,
+          "original_temporal": 0.15384615384615385,
+          "trace_temporal": 0.11538461538461539
+        }
+      ],
+      "association_resolves": 2,
+      "correct_prediction_filter_resolves": 14,
+      "anchor_never_succeeds": 12,
+      "point_counts": {
+        "harm": 105,
+        "fix": 0,
+        "harm_anchor_wrong": 77,
+        "harm_no_history": 0,
+        "harm_all_same": 81,
+        "harm_all_correct": 0,
+        "harm_any_correct": 0,
+        "harm_unknown": 0,
+        "harm_query_majority_mismatch": 0,
+        "harm_resolved_association": 17,
+        "harm_resolved_correct": 105
+      },
+      "corrected_by_empty_history_fallback": 105,
+      "corrected_with_nonempty_correct_history": 0,
+      "still_wrong_with_nonempty_correct_history": 0,
+      "certified_anchor_wrong_same_identity_no_correct_candidate_intersection_bounds": [
+        53,
+        55
+      ],
+      "selection": {
+        "selected": {
+          "epoch": 5,
+          "miou_percent": 57.25706579768062,
+          "foreground_percent": 87.6343116287459
+        },
+        "highest_saved_foreground": {
+          "epoch": 5,
+          "miou_percent": 57.25706579768062,
+          "foreground_percent": 87.6343116287459
+        },
+        "foreground_sacrificed_pp": 0.0,
+        "miou_selected_advantage_pp": 0.0,
+        "epochs": [
+          {
+            "epoch": 1,
+            "miou_percent": 56.939115470099445,
+            "foreground_percent": 86.64485042129402
+          },
+          {
+            "epoch": 2,
+            "miou_percent": 56.88725527786841,
+            "foreground_percent": 86.73245896570383
+          },
+          {
+            "epoch": 3,
+            "miou_percent": 57.24212037235672,
+            "foreground_percent": 86.76595635033111
+          },
+          {
+            "epoch": 4,
+            "miou_percent": 56.8572835918868,
+            "foreground_percent": 87.3276817233116
+          },
+          {
+            "epoch": 5,
+            "miou_percent": 57.25706579768062,
+            "foreground_percent": 87.6343116287459
+          }
+        ],
+        "scope": "Descriptive objective tradeoff only. No reselection; per-episode recovery was not saved for unselected epochs."
+      }
+    },
+    {
+      "seed": 1,
+      "lost_episodes": 18,
+      "decisive_frames": 18,
+      "exact_fraction_frames": 43,
+      "numerically_different_frames": [
+        {
+          "scene": "scene-0868",
+          "instance": 2024,
+          "frame": 23,
+          "original_current": 1.0,
+          "trace_current": 1.0,
+          "original_temporal": 0.36363636363636365,
+          "trace_temporal": 0.4090909090909091
+        }
+      ],
+      "association_resolves": 3,
+      "correct_prediction_filter_resolves": 17,
+      "anchor_never_succeeds": 12,
+      "point_counts": {
+        "harm": 150,
+        "fix": 0,
+        "harm_anchor_wrong": 95,
+        "harm_no_history": 0,
+        "harm_all_same": 112,
+        "harm_all_correct": 0,
+        "harm_any_correct": 12,
+        "harm_unknown": 4,
+        "harm_query_majority_mismatch": 0,
+        "harm_resolved_association": 28,
+        "harm_resolved_correct": 139
+      },
+      "corrected_by_empty_history_fallback": 138,
+      "corrected_with_nonempty_correct_history": 1,
+      "still_wrong_with_nonempty_correct_history": 11,
+      "certified_anchor_wrong_same_identity_no_correct_candidate_intersection_bounds": [
+        46,
+        48
+      ],
+      "selection": {
+        "selected": {
+          "epoch": 3,
+          "miou_percent": 56.841913300985304,
+          "foreground_percent": 86.93859671725632
+        },
+        "highest_saved_foreground": {
+          "epoch": 5,
+          "miou_percent": 56.73118600771569,
+          "foreground_percent": 87.61627457548506
+        },
+        "foreground_sacrificed_pp": 0.6776778582287477,
+        "miou_selected_advantage_pp": 0.11072729326961195,
+        "epochs": [
+          {
+            "epoch": 1,
+            "miou_percent": 56.571909359813645,
+            "foreground_percent": 86.88448555747378
+          },
+          {
+            "epoch": 2,
+            "miou_percent": 56.535741515482286,
+            "foreground_percent": 86.98497771135561
+          },
+          {
+            "epoch": 3,
+            "miou_percent": 56.841913300985304,
+            "foreground_percent": 86.93859671725632
+          },
+          {
+            "epoch": 4,
+            "miou_percent": 56.809888724412986,
+            "foreground_percent": 87.24264990079621
+          },
+          {
+            "epoch": 5,
+            "miou_percent": 56.73118600771569,
+            "foreground_percent": 87.61627457548506
+          }
+        ],
+        "scope": "Descriptive objective tradeoff only. No reselection; per-episode recovery was not saved for unselected epochs."
+      }
+    },
+    {
+      "seed": 2,
+      "lost_episodes": 19,
+      "decisive_frames": 20,
+      "exact_fraction_frames": 50,
+      "numerically_different_frames": [],
+      "association_resolves": 3,
+      "correct_prediction_filter_resolves": 18,
+      "anchor_never_succeeds": 13,
+      "point_counts": {
+        "harm": 156,
+        "fix": 0,
+        "harm_anchor_wrong": 103,
+        "harm_no_history": 0,
+        "harm_all_same": 126,
+        "harm_all_correct": 0,
+        "harm_any_correct": 11,
+        "harm_unknown": 4,
+        "harm_query_majority_mismatch": 0,
+        "harm_resolved_association": 21,
+        "harm_resolved_correct": 145
+      },
+      "corrected_by_empty_history_fallback": 145,
+      "corrected_with_nonempty_correct_history": 0,
+      "still_wrong_with_nonempty_correct_history": 11,
+      "certified_anchor_wrong_same_identity_no_correct_candidate_intersection_bounds": [
+        62,
+        62
+      ],
+      "selection": {
+        "selected": {
+          "epoch": 5,
+          "miou_percent": 57.27697836823504,
+          "foreground_percent": 86.81233734443042
+        },
+        "highest_saved_foreground": {
+          "epoch": 1,
+          "miou_percent": 56.99923964166238,
+          "foreground_percent": 87.46940142750394
+        },
+        "foreground_sacrificed_pp": 0.6570640830735215,
+        "miou_selected_advantage_pp": 0.2777387265726645,
+        "epochs": [
+          {
+            "epoch": 1,
+            "miou_percent": 56.99923964166238,
+            "foreground_percent": 87.46940142750394
+          },
+          {
+            "epoch": 2,
+            "miou_percent": 56.60840794359277,
+            "foreground_percent": 86.63969697750522
+          },
+          {
+            "epoch": 3,
+            "miou_percent": 57.13720268504405,
+            "foreground_percent": 87.00816820840527
+          },
+          {
+            "epoch": 4,
+            "miou_percent": 57.08185283413226,
+            "foreground_percent": 86.68607797160452
+          },
+          {
+            "epoch": 5,
+            "miou_percent": 57.27697836823504,
+            "foreground_percent": 86.81233734443042
+          }
+        ],
+        "scope": "Descriptive objective tradeoff only. No reselection; per-episode recovery was not saved for unselected epochs."
+      }
+    }
+  ],
+  "sources_sha256": {
+    "results/instance_memory_20261029/feature-supervision-training/attribution.json": "0a4c1d36121f4d178ffd0a29fe9c25dc0d03216918631dcd27598a1c54bcb0fc",
+    "/home/frank/semantic_livo_runtime/feature-recovery-provenance-20261029/report.json": "05e791ced0d5af7830a6917837c9bfc7e9ae7a1aedfe434f0583f8894ca2801e",
+    "/home/frank/semantic_livo_runtime/feature-recovery-provenance-20261029/object-observations.json.gz": "45fd2f4195530cfd8ed8d238ee7c41b361b4fc83fcdad4a7f35e5d7d985c9e2d",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-0/object-observations.json.gz": "5513e34219d35b07a682ac096b87dfb24ac42edd11a6c344d1688f83c77a37dd",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-0/epoch-1.json": "00eb6cdb5360ea743c69e4b74597359f08142a00d00faeaad4c7802964c04c29",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-0/epoch-2.json": "0e555e0e1235751e771719637144c0b313b0cf94b6000403d850526b3fafad4a",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-0/epoch-3.json": "0ad4e6ee9910387a5b7df37a075765d1e1c1be00197121b7fa157542d3b0be1e",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-0/epoch-4.json": "d46c73186b7b38d383b05c6d90acbe00e5f0afc8beca28eef3b8729124fb24fc",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-0/epoch-5.json": "b0ce108d8589f9ce69a7a71531f39d7b93f0f9ec652e7738fada03d73e5d9026",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-0/selected.json": "fdb5943ee8e79daced38c8e440f4f6cc9255f403644a075638e7005881e66da7",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-1/object-observations.json.gz": "f2fa7a3ac0a2112e34070d528e2c2645e994d1b777e10315808b243447f7cefe",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-1/epoch-1.json": "6394569f2df9e0d78836276dbfe15c6e02e38beff2cbabe6fe81f06a334c7007",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-1/epoch-2.json": "43b5f740ffd17285f118ec150ee01864f57ddd5340fd219caa91c0668338dc86",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-1/epoch-3.json": "92ace1e1c9a17222d3190b7e83493bd3fc6b84f6b1616d75f7c705d545d7122f",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-1/epoch-4.json": "9f2ab324de33864039a8f4d0f8177088489c33aa22820a0f85b59810fcd201f4",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-1/epoch-5.json": "8655ff718f4d5149357b02cc0f0a41cbfec1eb19f09e49dbbbde2248e26507e3",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-1/selected.json": "69494416e32888f141522548c755b6b3fe53171aa90bb9a347db6991754c31f1",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-2/object-observations.json.gz": "c90a17ad2c3529158d2cdc1951d56998fc25531d1257300db73c6cb9848844e1",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-2/epoch-1.json": "12b333b3a87784c0b860fa85ada5c02f03aa54468d01aeab88b9df1d0ec60e76",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-2/epoch-2.json": "16a3b2fc0fa7d0177e10c4797d9207cfee1b66b48ab37efc06124154437aa4fc",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-2/epoch-3.json": "846f9af41c7577515d0283aa947c933fb738c306497726b01bac29f7059f319b",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-2/epoch-4.json": "bd668f1205562ae744ecda11b5ed8f651a2adf9137231c1db8ab593c30e42e12",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-2/epoch-5.json": "ea3be25764e339b29b8476e1ca4501bb07fcf4d42003b101d8d4b8916061e76f",
+    "results/instance_memory_20261029/feature-supervision-training/run/seed-2/selected.json": "15693f232b005a5b3c8f5e314a9978f865813df99fc551a528bd6c2bd41e219f"
+  },
+  "limitations": [
+    "Three traced object-frame fractions differ numerically from the original extraction; all original lost-episode identities and decisive current-success/history-failure relations remain unchanged.",
+    "Saved provenance contains masks/counts, not full candidate vectors, pooled vectors or intermediate logits. It cannot numerically separate feature aggregation from the neural readout.",
+    "GT correctness filtering usually clears all candidates and invokes current fallback; this is not evidence of learnable online correctness prediction.",
+    "Retention targets the old frozen anchor. This is an objective coverage gap, not an isolated causal proof that changing the loss would succeed."
+  ]
+}

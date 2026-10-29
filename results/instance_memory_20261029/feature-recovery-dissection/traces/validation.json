@@ -1,0 +1,171 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": {
+        "scene": "scene-0149",
+        "frame": 17,
+        "instance": 17030,
+        "seeds": [
+          0
+        ]
+      },
+      "pooled_input_max_error": 4.76837158203125e-07,
+      "correct_candidates_per_query": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "seeds": [
+        {
+          "seed": 0,
+          "max_cpu_gpu_logit_error": 9.5367431640625e-07,
+          "max_feature_effect_formula_error": 1.255422830581665e-06,
+          "target_margin": {
+            "native": {
+              "min": -1.522474765777588,
+              "median": -1.2926323413848877,
+              "max": -1.1737165451049805
+            },
+            "current": {
+              "min": 0.04868900775909424,
+              "median": 0.3662421703338623,
+              "max": 0.4940304756164551
+            },
+            "correct_candidates": {
+              "min": 0.04868900775909424,
+              "median": 0.3662421703338623,
+              "max": 0.4940304756164551
+            },
+            "features_only": {
+              "min": -1.4694222211837769,
+              "median": -1.2230141162872314,
+              "max": -1.1156717538833618
+            },
+            "probabilities_only": {
+              "min": -0.009166598320007324,
+              "median": 0.29608774185180664,
+              "max": 0.42738258838653564
+            },
+            "geometry_only": {
+              "min": 0.040621042251586914,
+              "median": 0.3560163974761963,
+              "max": 0.47701358795166016
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case": {
+        "scene": "scene-0218",
+        "frame": 39,
+        "instance": 17019,
+        "seeds": [
+          1,
+          2
+        ]
+      },
+      "pooled_input_max_error": 4.76837158203125e-07,
+      "correct_candidates_per_query": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "seeds": [
+        {
+          "seed": 1,
+          "max_cpu_gpu_logit_error": 4.76837158203125e-07,
+          "max_feature_effect_formula_error": 8.642673492431641e-07,
+          "target_margin": {
+            "native": {
+              "min": -2.424553155899048,
+              "median": -0.6895904541015625,
+              "max": -0.6281298398971558
+            },
+            "current": {
+              "min": -2.204622745513916,
+              "median": 0.2828989028930664,
+              "max": 0.6939387321472168
+            },
+            "correct_candidates": {
+              "min": -2.204622745513916,
+              "median": -0.447994589805603,
+              "max": -0.3307218551635742
+            },
+            "features_only": {
+              "min": -2.5340495109558105,
+              "median": -0.6698920726776123,
+              "max": -0.6296323537826538
+            },
+            "probabilities_only": {
+              "min": -2.075319290161133,
+              "median": 0.2961430549621582,
+              "max": 0.7047182321548462
+            },
+            "geometry_only": {
+              "min": -2.2098541259765625,
+              "median": 0.274320125579834,
+              "max": 0.6294059753417969
+            }
+          }
+        },
+        {
+          "seed": 2,
+          "max_cpu_gpu_logit_error": 4.76837158203125e-07,
+          "max_feature_effect_formula_error": 1.5795230865478516e-06,
+          "target_margin": {
+            "native": {
+              "min": -2.21370792388916,
+              "median": -0.3034396171569824,
+              "max": -0.1992354393005371
+            },
+            "current": {
+              "min": -1.9534411430358887,
+              "median": 0.28472328186035156,
+              "max": 0.44513940811157227
+            },
+            "correct_candidates": {
+              "min": -1.9534411430358887,
+              "median": -0.17999672889709473,
+              "max": -0.0531611442565918
+            },
+            "features_only": {
+              "min": -2.2855212688446045,
+              "median": -0.296553373336792,
+              "max": -0.23346519470214844
+            },
+            "probabilities_only": {
+              "min": -1.8372845649719238,
+              "median": 0.3450772762298584,
+              "max": 0.48937904834747314
+            },
+            "geometry_only": {
+              "min": -1.994225025177002,
+              "median": 0.2787182331085205,
+              "max": 0.4344722032546997
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "scope": "CPU reconstruction of saved candidate pooling, singleton interventions, logits and feature-channel preactivation identity. No new data or trained model."
+}

@@ -1,0 +1,1965 @@
+[
+  {
+    "seed": 0,
+    "scene": "scene-0149",
+    "instance": 17009,
+    "start": 15,
+    "end": 16,
+    "label": "car",
+    "anchor_never_succeeds": false,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 16,
+        "points": 7,
+        "original_current": 1.0,
+        "original_temporal": 0.0,
+        "traced_current": 1.0,
+        "traced_temporal": 0.14285714285714285,
+        "provenance": {
+          "harm": 6,
+          "fix": 0,
+          "harm_anchor_wrong": 3,
+          "harm_no_history": 0,
+          "harm_all_same": 6,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 6
+        },
+        "corrected_by_empty_history_fallback": 6,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 0,
+    "scene": "scene-0149",
+    "instance": 17030,
+    "start": 14,
+    "end": 17,
+    "label": "car",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 17,
+        "points": 11,
+        "original_current": 1.0,
+        "original_temporal": 0.0,
+        "traced_current": 1.0,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 11,
+          "fix": 0,
+          "harm_anchor_wrong": 11,
+          "harm_no_history": 0,
+          "harm_all_same": 11,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 11
+        },
+        "corrected_by_empty_history_fallback": 11,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 0,
+    "scene": "scene-0149",
+    "instance": 17029,
+    "start": 24,
+    "end": 26,
+    "label": "car",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 26,
+        "points": 18,
+        "original_current": 0.6666666666666666,
+        "original_temporal": 0.16666666666666666,
+        "traced_current": 0.6666666666666666,
+        "traced_temporal": 0.16666666666666666,
+        "provenance": {
+          "harm": 9,
+          "fix": 0,
+          "harm_anchor_wrong": 7,
+          "harm_no_history": 0,
+          "harm_all_same": 2,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 2,
+          "harm_resolved_correct": 9
+        },
+        "corrected_by_empty_history_fallback": 9,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 0,
+    "scene": "scene-0149",
+    "instance": 17044,
+    "start": 25,
+    "end": 26,
+    "label": "car",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 26,
+        "points": 13,
+        "original_current": 1.0,
+        "original_temporal": 0.0,
+        "traced_current": 1.0,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 13,
+          "fix": 0,
+          "harm_anchor_wrong": 13,
+          "harm_no_history": 0,
+          "harm_all_same": 13,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 13
+        },
+        "corrected_by_empty_history_fallback": 13,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 0,
+    "scene": "scene-0149",
+    "instance": 17050,
+    "start": 27,
+    "end": 28,
+    "label": "car",
+    "anchor_never_succeeds": false,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 28,
+        "points": 26,
+        "original_current": 0.9615384615384616,
+        "original_temporal": 0.15384615384615385,
+        "traced_current": 0.9615384615384616,
+        "traced_temporal": 0.11538461538461539,
+        "provenance": {
+          "harm": 22,
+          "fix": 0,
+          "harm_anchor_wrong": 0,
+          "harm_no_history": 0,
+          "harm_all_same": 22,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 22
+        },
+        "corrected_by_empty_history_fallback": 22,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 0,
+    "scene": "scene-0149",
+    "instance": 17050,
+    "start": 31,
+    "end": 32,
+    "label": "car",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 32,
+        "points": 10,
+        "original_current": 0.9,
+        "original_temporal": 0.0,
+        "traced_current": 0.9,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 9,
+          "fix": 0,
+          "harm_anchor_wrong": 9,
+          "harm_no_history": 0,
+          "harm_all_same": 9,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 9
+        },
+        "corrected_by_empty_history_fallback": 9,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 0,
+    "scene": "scene-0803",
+    "instance": 2028,
+    "start": 33,
+    "end": 39,
+    "label": "pedestrian",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 35,
+        "points": 14,
+        "original_current": 0.5,
+        "original_temporal": 0.42857142857142855,
+        "traced_current": 0.5,
+        "traced_temporal": 0.42857142857142855,
+        "provenance": {
+          "harm": 1,
+          "fix": 0,
+          "harm_anchor_wrong": 1,
+          "harm_no_history": 0,
+          "harm_all_same": 0,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 1
+        },
+        "corrected_by_empty_history_fallback": 1,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 0,
+    "scene": "scene-0868",
+    "instance": 2027,
+    "start": 16,
+    "end": 18,
+    "label": "pedestrian",
+    "anchor_never_succeeds": true,
+    "association_resolves": true,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 17,
+        "points": 17,
+        "original_current": 0.6470588235294118,
+        "original_temporal": 0.11764705882352941,
+        "traced_current": 0.6470588235294118,
+        "traced_temporal": 0.11764705882352941,
+        "provenance": {
+          "harm": 9,
+          "fix": 0,
+          "harm_anchor_wrong": 9,
+          "harm_no_history": 0,
+          "harm_all_same": 0,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 9,
+          "harm_resolved_correct": 9
+        },
+        "corrected_by_empty_history_fallback": 9,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 0,
+    "scene": "scene-0383",
+    "instance": 2016,
+    "start": 6,
+    "end": 8,
+    "label": "pedestrian",
+    "anchor_never_succeeds": true,
+    "association_resolves": true,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 7,
+        "points": 11,
+        "original_current": 0.9090909090909091,
+        "original_temporal": 0.36363636363636365,
+        "traced_current": 0.9090909090909091,
+        "traced_temporal": 0.36363636363636365,
+        "provenance": {
+          "harm": 6,
+          "fix": 0,
+          "harm_anchor_wrong": 6,
+          "harm_no_history": 0,
+          "harm_all_same": 0,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 6,
+          "harm_resolved_correct": 6
+        },
+        "corrected_by_empty_history_fallback": 6,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 0,
+    "scene": "scene-0383",
+    "instance": 3028,
+    "start": 18,
+    "end": 18,
+    "label": "pedestrian",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 18,
+        "points": 5,
+        "original_current": 1.0,
+        "original_temporal": 0.4,
+        "traced_current": 1.0,
+        "traced_temporal": 0.4,
+        "provenance": {
+          "harm": 3,
+          "fix": 0,
+          "harm_anchor_wrong": 3,
+          "harm_no_history": 0,
+          "harm_all_same": 3,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 3
+        },
+        "corrected_by_empty_history_fallback": 3,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 0,
+    "scene": "scene-0347",
+    "instance": 2025,
+    "start": 20,
+    "end": 20,
+    "label": "pedestrian",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 20,
+        "points": 7,
+        "original_current": 0.5714285714285714,
+        "original_temporal": 0.0,
+        "traced_current": 0.5714285714285714,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 4,
+          "fix": 0,
+          "harm_anchor_wrong": 4,
+          "harm_no_history": 0,
+          "harm_all_same": 3,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 4
+        },
+        "corrected_by_empty_history_fallback": 4,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 0,
+    "scene": "scene-0420",
+    "instance": 17044,
+    "start": 31,
+    "end": 32,
+    "label": "car",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 32,
+        "points": 6,
+        "original_current": 1.0,
+        "original_temporal": 0.16666666666666666,
+        "traced_current": 1.0,
+        "traced_temporal": 0.16666666666666666,
+        "provenance": {
+          "harm": 5,
+          "fix": 0,
+          "harm_anchor_wrong": 5,
+          "harm_no_history": 0,
+          "harm_all_same": 5,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 5
+        },
+        "corrected_by_empty_history_fallback": 5,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 0,
+    "scene": "scene-0420",
+    "instance": 17058,
+    "start": 11,
+    "end": 12,
+    "label": "car",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 12,
+        "points": 5,
+        "original_current": 0.6,
+        "original_temporal": 0.0,
+        "traced_current": 0.6,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 3,
+          "fix": 0,
+          "harm_anchor_wrong": 2,
+          "harm_no_history": 0,
+          "harm_all_same": 3,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 3
+        },
+        "corrected_by_empty_history_fallback": 3,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 0,
+    "scene": "scene-0420",
+    "instance": 17075,
+    "start": 27,
+    "end": 28,
+    "label": "car",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 28,
+        "points": 12,
+        "original_current": 0.75,
+        "original_temporal": 0.4166666666666667,
+        "traced_current": 0.75,
+        "traced_temporal": 0.4166666666666667,
+        "provenance": {
+          "harm": 4,
+          "fix": 0,
+          "harm_anchor_wrong": 4,
+          "harm_no_history": 0,
+          "harm_all_same": 4,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 4
+        },
+        "corrected_by_empty_history_fallback": 4,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "scene": "scene-0149",
+    "instance": 17001,
+    "start": 6,
+    "end": 7,
+    "label": "car",
+    "anchor_never_succeeds": false,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 7,
+        "points": 17,
+        "original_current": 1.0,
+        "original_temporal": 0.0,
+        "traced_current": 1.0,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 17,
+          "fix": 0,
+          "harm_anchor_wrong": 0,
+          "harm_no_history": 0,
+          "harm_all_same": 17,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 17
+        },
+        "corrected_by_empty_history_fallback": 17,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "scene": "scene-0149",
+    "instance": 17009,
+    "start": 15,
+    "end": 16,
+    "label": "car",
+    "anchor_never_succeeds": false,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 16,
+        "points": 7,
+        "original_current": 1.0,
+        "original_temporal": 0.0,
+        "traced_current": 1.0,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 7,
+          "fix": 0,
+          "harm_anchor_wrong": 3,
+          "harm_no_history": 0,
+          "harm_all_same": 7,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 7
+        },
+        "corrected_by_empty_history_fallback": 7,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "scene": "scene-0149",
+    "instance": 17008,
+    "start": 12,
+    "end": 13,
+    "label": "car",
+    "anchor_never_succeeds": false,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 13,
+        "points": 5,
+        "original_current": 1.0,
+        "original_temporal": 0.2,
+        "traced_current": 1.0,
+        "traced_temporal": 0.2,
+        "provenance": {
+          "harm": 4,
+          "fix": 0,
+          "harm_anchor_wrong": 0,
+          "harm_no_history": 0,
+          "harm_all_same": 4,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 4
+        },
+        "corrected_by_empty_history_fallback": 4,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "scene": "scene-0149",
+    "instance": 17008,
+    "start": 18,
+    "end": 23,
+    "label": "car",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 23,
+        "points": 10,
+        "original_current": 1.0,
+        "original_temporal": 0.0,
+        "traced_current": 1.0,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 10,
+          "fix": 0,
+          "harm_anchor_wrong": 10,
+          "harm_no_history": 0,
+          "harm_all_same": 6,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 4,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 3,
+          "harm_resolved_correct": 10
+        },
+        "corrected_by_empty_history_fallback": 10,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "scene": "scene-0149",
+    "instance": 17027,
+    "start": 14,
+    "end": 15,
+    "label": "car",
+    "anchor_never_succeeds": false,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 15,
+        "points": 9,
+        "original_current": 0.7777777777777778,
+        "original_temporal": 0.0,
+        "traced_current": 0.7777777777777778,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 7,
+          "fix": 0,
+          "harm_anchor_wrong": 2,
+          "harm_no_history": 0,
+          "harm_all_same": 7,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 7
+        },
+        "corrected_by_empty_history_fallback": 7,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "scene": "scene-0149",
+    "instance": 17050,
+    "start": 27,
+    "end": 28,
+    "label": "car",
+    "anchor_never_succeeds": false,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 28,
+        "points": 26,
+        "original_current": 0.6923076923076923,
+        "original_temporal": 0.0,
+        "traced_current": 0.6923076923076923,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 18,
+          "fix": 0,
+          "harm_anchor_wrong": 0,
+          "harm_no_history": 0,
+          "harm_all_same": 18,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 18
+        },
+        "corrected_by_empty_history_fallback": 18,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "scene": "scene-0868",
+    "instance": 2024,
+    "start": 23,
+    "end": 24,
+    "label": "pedestrian",
+    "anchor_never_succeeds": true,
+    "association_resolves": true,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 23,
+        "points": 22,
+        "original_current": 1.0,
+        "original_temporal": 0.36363636363636365,
+        "traced_current": 1.0,
+        "traced_temporal": 0.4090909090909091,
+        "provenance": {
+          "harm": 13,
+          "fix": 0,
+          "harm_anchor_wrong": 13,
+          "harm_no_history": 0,
+          "harm_all_same": 0,
+          "harm_all_correct": 0,
+          "harm_any_correct": 1,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 13,
+          "harm_resolved_correct": 13
+        },
+        "corrected_by_empty_history_fallback": 12,
+        "correct_candidates_retained": 1,
+        "corrected_with_nonempty_correct_history": 1,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "scene": "scene-0868",
+    "instance": 2030,
+    "start": 22,
+    "end": 25,
+    "label": "pedestrian",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 23,
+        "points": 27,
+        "original_current": 0.7037037037037037,
+        "original_temporal": 0.0,
+        "traced_current": 0.7037037037037037,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 19,
+          "fix": 0,
+          "harm_anchor_wrong": 17,
+          "harm_no_history": 0,
+          "harm_all_same": 15,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 1,
+          "harm_resolved_correct": 19
+        },
+        "corrected_by_empty_history_fallback": 19,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "scene": "scene-0383",
+    "instance": 2016,
+    "start": 6,
+    "end": 8,
+    "label": "pedestrian",
+    "anchor_never_succeeds": true,
+    "association_resolves": true,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 7,
+        "points": 11,
+        "original_current": 0.9090909090909091,
+        "original_temporal": 0.45454545454545453,
+        "traced_current": 0.9090909090909091,
+        "traced_temporal": 0.45454545454545453,
+        "provenance": {
+          "harm": 5,
+          "fix": 0,
+          "harm_anchor_wrong": 5,
+          "harm_no_history": 0,
+          "harm_all_same": 0,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 5,
+          "harm_resolved_correct": 5
+        },
+        "corrected_by_empty_history_fallback": 5,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "scene": "scene-0383",
+    "instance": 2025,
+    "start": 27,
+    "end": 28,
+    "label": "pedestrian",
+    "anchor_never_succeeds": true,
+    "association_resolves": true,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 27,
+        "points": 7,
+        "original_current": 0.8571428571428571,
+        "original_temporal": 0.0,
+        "traced_current": 0.8571428571428571,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 6,
+          "fix": 0,
+          "harm_anchor_wrong": 6,
+          "harm_no_history": 0,
+          "harm_all_same": 0,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 6,
+          "harm_resolved_correct": 6
+        },
+        "corrected_by_empty_history_fallback": 6,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "scene": "scene-0218",
+    "instance": 17019,
+    "start": 6,
+    "end": 8,
+    "label": "car",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 8,
+        "points": 11,
+        "original_current": 0.5454545454545454,
+        "original_temporal": 0.0,
+        "traced_current": 0.5454545454545454,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 6,
+          "fix": 0,
+          "harm_anchor_wrong": 6,
+          "harm_no_history": 0,
+          "harm_all_same": 6,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 6
+        },
+        "corrected_by_empty_history_fallback": 6,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "scene": "scene-0218",
+    "instance": 17019,
+    "start": 38,
+    "end": 39,
+    "label": "car",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": false,
+    "decisive_frames": [
+      {
+        "frame": 39,
+        "points": 12,
+        "original_current": 0.9166666666666666,
+        "original_temporal": 0.0,
+        "traced_current": 0.9166666666666666,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 11,
+          "fix": 0,
+          "harm_anchor_wrong": 11,
+          "harm_no_history": 0,
+          "harm_all_same": 11,
+          "harm_all_correct": 0,
+          "harm_any_correct": 11,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 0
+        },
+        "corrected_by_empty_history_fallback": 0,
+        "correct_candidates_retained": 11,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 11
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "scene": "scene-0347",
+    "instance": 2025,
+    "start": 20,
+    "end": 20,
+    "label": "pedestrian",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 20,
+        "points": 7,
+        "original_current": 0.5714285714285714,
+        "original_temporal": 0.0,
+        "traced_current": 0.5714285714285714,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 4,
+          "fix": 0,
+          "harm_anchor_wrong": 4,
+          "harm_no_history": 0,
+          "harm_all_same": 3,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 4
+        },
+        "corrected_by_empty_history_fallback": 4,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "scene": "scene-0420",
+    "instance": 17036,
+    "start": 0,
+    "end": 1,
+    "label": "car",
+    "anchor_never_succeeds": false,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 1,
+        "points": 10,
+        "original_current": 0.8,
+        "original_temporal": 0.3,
+        "traced_current": 0.8,
+        "traced_temporal": 0.3,
+        "provenance": {
+          "harm": 5,
+          "fix": 0,
+          "harm_anchor_wrong": 2,
+          "harm_no_history": 0,
+          "harm_all_same": 5,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 5
+        },
+        "corrected_by_empty_history_fallback": 5,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "scene": "scene-0420",
+    "instance": 17044,
+    "start": 31,
+    "end": 32,
+    "label": "car",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 32,
+        "points": 6,
+        "original_current": 1.0,
+        "original_temporal": 0.0,
+        "traced_current": 1.0,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 6,
+          "fix": 0,
+          "harm_anchor_wrong": 6,
+          "harm_no_history": 0,
+          "harm_all_same": 6,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 6
+        },
+        "corrected_by_empty_history_fallback": 6,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "scene": "scene-0420",
+    "instance": 17058,
+    "start": 11,
+    "end": 12,
+    "label": "car",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 12,
+        "points": 5,
+        "original_current": 0.6,
+        "original_temporal": 0.0,
+        "traced_current": 0.6,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 3,
+          "fix": 0,
+          "harm_anchor_wrong": 2,
+          "harm_no_history": 0,
+          "harm_all_same": 3,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 3
+        },
+        "corrected_by_empty_history_fallback": 3,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "scene": "scene-0420",
+    "instance": 17075,
+    "start": 27,
+    "end": 28,
+    "label": "car",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 28,
+        "points": 12,
+        "original_current": 0.5,
+        "original_temporal": 0.16666666666666666,
+        "traced_current": 0.5,
+        "traced_temporal": 0.16666666666666666,
+        "provenance": {
+          "harm": 4,
+          "fix": 0,
+          "harm_anchor_wrong": 3,
+          "harm_no_history": 0,
+          "harm_all_same": 4,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 4
+        },
+        "corrected_by_empty_history_fallback": 4,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "scene": "scene-1074",
+    "instance": 2017,
+    "start": 37,
+    "end": 39,
+    "label": "pedestrian",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 38,
+        "points": 5,
+        "original_current": 1.0,
+        "original_temporal": 0.0,
+        "traced_current": 1.0,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 5,
+          "fix": 0,
+          "harm_anchor_wrong": 5,
+          "harm_no_history": 0,
+          "harm_all_same": 0,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 5
+        },
+        "corrected_by_empty_history_fallback": 5,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "scene": "scene-0149",
+    "instance": 17001,
+    "start": 6,
+    "end": 7,
+    "label": "car",
+    "anchor_never_succeeds": false,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 7,
+        "points": 17,
+        "original_current": 1.0,
+        "original_temporal": 0.29411764705882354,
+        "traced_current": 1.0,
+        "traced_temporal": 0.29411764705882354,
+        "provenance": {
+          "harm": 12,
+          "fix": 0,
+          "harm_anchor_wrong": 0,
+          "harm_no_history": 0,
+          "harm_all_same": 12,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 12
+        },
+        "corrected_by_empty_history_fallback": 12,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "scene": "scene-0149",
+    "instance": 17009,
+    "start": 15,
+    "end": 16,
+    "label": "car",
+    "anchor_never_succeeds": false,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 16,
+        "points": 7,
+        "original_current": 1.0,
+        "original_temporal": 0.0,
+        "traced_current": 1.0,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 7,
+          "fix": 0,
+          "harm_anchor_wrong": 3,
+          "harm_no_history": 0,
+          "harm_all_same": 7,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 7
+        },
+        "corrected_by_empty_history_fallback": 7,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "scene": "scene-0149",
+    "instance": 17008,
+    "start": 12,
+    "end": 13,
+    "label": "car",
+    "anchor_never_succeeds": false,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 13,
+        "points": 5,
+        "original_current": 1.0,
+        "original_temporal": 0.2,
+        "traced_current": 1.0,
+        "traced_temporal": 0.2,
+        "provenance": {
+          "harm": 4,
+          "fix": 0,
+          "harm_anchor_wrong": 0,
+          "harm_no_history": 0,
+          "harm_all_same": 4,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 4
+        },
+        "corrected_by_empty_history_fallback": 4,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "scene": "scene-0149",
+    "instance": 17008,
+    "start": 18,
+    "end": 23,
+    "label": "car",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 19,
+        "points": 9,
+        "original_current": 0.5555555555555556,
+        "original_temporal": 0.1111111111111111,
+        "traced_current": 0.5555555555555556,
+        "traced_temporal": 0.1111111111111111,
+        "provenance": {
+          "harm": 4,
+          "fix": 0,
+          "harm_anchor_wrong": 4,
+          "harm_no_history": 0,
+          "harm_all_same": 4,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 4
+        },
+        "corrected_by_empty_history_fallback": 4,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      },
+      {
+        "frame": 23,
+        "points": 10,
+        "original_current": 1.0,
+        "original_temporal": 0.0,
+        "traced_current": 1.0,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 10,
+          "fix": 0,
+          "harm_anchor_wrong": 10,
+          "harm_no_history": 0,
+          "harm_all_same": 6,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 4,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 3,
+          "harm_resolved_correct": 10
+        },
+        "corrected_by_empty_history_fallback": 10,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "scene": "scene-0149",
+    "instance": 17027,
+    "start": 14,
+    "end": 15,
+    "label": "car",
+    "anchor_never_succeeds": false,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 15,
+        "points": 9,
+        "original_current": 0.7777777777777778,
+        "original_temporal": 0.0,
+        "traced_current": 0.7777777777777778,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 7,
+          "fix": 0,
+          "harm_anchor_wrong": 2,
+          "harm_no_history": 0,
+          "harm_all_same": 7,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 7
+        },
+        "corrected_by_empty_history_fallback": 7,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "scene": "scene-0149",
+    "instance": 17050,
+    "start": 27,
+    "end": 28,
+    "label": "car",
+    "anchor_never_succeeds": false,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 28,
+        "points": 26,
+        "original_current": 0.9615384615384616,
+        "original_temporal": 0.0,
+        "traced_current": 0.9615384615384616,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 25,
+          "fix": 0,
+          "harm_anchor_wrong": 0,
+          "harm_no_history": 0,
+          "harm_all_same": 25,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 25
+        },
+        "corrected_by_empty_history_fallback": 25,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "scene": "scene-0149",
+    "instance": 17050,
+    "start": 31,
+    "end": 32,
+    "label": "car",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 32,
+        "points": 10,
+        "original_current": 0.9,
+        "original_temporal": 0.0,
+        "traced_current": 0.9,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 9,
+          "fix": 0,
+          "harm_anchor_wrong": 9,
+          "harm_no_history": 0,
+          "harm_all_same": 9,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 9
+        },
+        "corrected_by_empty_history_fallback": 9,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "scene": "scene-0803",
+    "instance": 2028,
+    "start": 33,
+    "end": 39,
+    "label": "pedestrian",
+    "anchor_never_succeeds": true,
+    "association_resolves": true,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 35,
+        "points": 14,
+        "original_current": 0.5,
+        "original_temporal": 0.42857142857142855,
+        "traced_current": 0.5,
+        "traced_temporal": 0.42857142857142855,
+        "provenance": {
+          "harm": 1,
+          "fix": 0,
+          "harm_anchor_wrong": 1,
+          "harm_no_history": 0,
+          "harm_all_same": 0,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 1
+        },
+        "corrected_by_empty_history_fallback": 1,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "scene": "scene-0868",
+    "instance": 2027,
+    "start": 16,
+    "end": 18,
+    "label": "pedestrian",
+    "anchor_never_succeeds": true,
+    "association_resolves": true,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 17,
+        "points": 17,
+        "original_current": 0.6470588235294118,
+        "original_temporal": 0.0,
+        "traced_current": 0.6470588235294118,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 11,
+          "fix": 0,
+          "harm_anchor_wrong": 11,
+          "harm_no_history": 0,
+          "harm_all_same": 0,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 11,
+          "harm_resolved_correct": 11
+        },
+        "corrected_by_empty_history_fallback": 11,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "scene": "scene-0868",
+    "instance": 2030,
+    "start": 22,
+    "end": 25,
+    "label": "pedestrian",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 23,
+        "points": 27,
+        "original_current": 0.8148148148148148,
+        "original_temporal": 0.1111111111111111,
+        "traced_current": 0.8148148148148148,
+        "traced_temporal": 0.1111111111111111,
+        "provenance": {
+          "harm": 19,
+          "fix": 0,
+          "harm_anchor_wrong": 19,
+          "harm_no_history": 0,
+          "harm_all_same": 17,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 19
+        },
+        "corrected_by_empty_history_fallback": 19,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "scene": "scene-0383",
+    "instance": 2016,
+    "start": 6,
+    "end": 8,
+    "label": "pedestrian",
+    "anchor_never_succeeds": true,
+    "association_resolves": true,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 7,
+        "points": 11,
+        "original_current": 0.9090909090909091,
+        "original_temporal": 0.36363636363636365,
+        "traced_current": 0.9090909090909091,
+        "traced_temporal": 0.36363636363636365,
+        "provenance": {
+          "harm": 6,
+          "fix": 0,
+          "harm_anchor_wrong": 6,
+          "harm_no_history": 0,
+          "harm_all_same": 0,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 6,
+          "harm_resolved_correct": 6
+        },
+        "corrected_by_empty_history_fallback": 6,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "scene": "scene-0218",
+    "instance": 17019,
+    "start": 19,
+    "end": 20,
+    "label": "car",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 20,
+        "points": 9,
+        "original_current": 0.6666666666666666,
+        "original_temporal": 0.0,
+        "traced_current": 0.6666666666666666,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 6,
+          "fix": 0,
+          "harm_anchor_wrong": 6,
+          "harm_no_history": 0,
+          "harm_all_same": 6,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 6
+        },
+        "corrected_by_empty_history_fallback": 6,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "scene": "scene-0218",
+    "instance": 17019,
+    "start": 38,
+    "end": 39,
+    "label": "car",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": false,
+    "decisive_frames": [
+      {
+        "frame": 39,
+        "points": 12,
+        "original_current": 0.9166666666666666,
+        "original_temporal": 0.0,
+        "traced_current": 0.9166666666666666,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 11,
+          "fix": 0,
+          "harm_anchor_wrong": 11,
+          "harm_no_history": 0,
+          "harm_all_same": 11,
+          "harm_all_correct": 0,
+          "harm_any_correct": 11,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 0
+        },
+        "corrected_by_empty_history_fallback": 0,
+        "correct_candidates_retained": 11,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 11
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "scene": "scene-0218",
+    "instance": 2037,
+    "start": 6,
+    "end": 6,
+    "label": "pedestrian",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 6,
+        "points": 5,
+        "original_current": 1.0,
+        "original_temporal": 0.2,
+        "traced_current": 1.0,
+        "traced_temporal": 0.2,
+        "provenance": {
+          "harm": 4,
+          "fix": 0,
+          "harm_anchor_wrong": 4,
+          "harm_no_history": 0,
+          "harm_all_same": 4,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 4
+        },
+        "corrected_by_empty_history_fallback": 4,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "scene": "scene-0347",
+    "instance": 2025,
+    "start": 20,
+    "end": 20,
+    "label": "pedestrian",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 20,
+        "points": 7,
+        "original_current": 0.5714285714285714,
+        "original_temporal": 0.0,
+        "traced_current": 0.5714285714285714,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 4,
+          "fix": 0,
+          "harm_anchor_wrong": 4,
+          "harm_no_history": 0,
+          "harm_all_same": 3,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 4
+        },
+        "corrected_by_empty_history_fallback": 4,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "scene": "scene-0420",
+    "instance": 17036,
+    "start": 0,
+    "end": 1,
+    "label": "car",
+    "anchor_never_succeeds": false,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 1,
+        "points": 10,
+        "original_current": 0.5,
+        "original_temporal": 0.3,
+        "traced_current": 0.5,
+        "traced_temporal": 0.3,
+        "provenance": {
+          "harm": 2,
+          "fix": 0,
+          "harm_anchor_wrong": 0,
+          "harm_no_history": 0,
+          "harm_all_same": 2,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 2
+        },
+        "corrected_by_empty_history_fallback": 2,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "scene": "scene-0420",
+    "instance": 17044,
+    "start": 31,
+    "end": 32,
+    "label": "car",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 32,
+        "points": 6,
+        "original_current": 1.0,
+        "original_temporal": 0.0,
+        "traced_current": 1.0,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 6,
+          "fix": 0,
+          "harm_anchor_wrong": 6,
+          "harm_no_history": 0,
+          "harm_all_same": 6,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 6
+        },
+        "corrected_by_empty_history_fallback": 6,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "scene": "scene-0420",
+    "instance": 17058,
+    "start": 11,
+    "end": 12,
+    "label": "car",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 12,
+        "points": 5,
+        "original_current": 0.6,
+        "original_temporal": 0.0,
+        "traced_current": 0.6,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 3,
+          "fix": 0,
+          "harm_anchor_wrong": 2,
+          "harm_no_history": 0,
+          "harm_all_same": 3,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 0,
+          "harm_resolved_correct": 3
+        },
+        "corrected_by_empty_history_fallback": 3,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  },
+  {
+    "seed": 2,
+    "scene": "scene-1074",
+    "instance": 2017,
+    "start": 37,
+    "end": 39,
+    "label": "pedestrian",
+    "anchor_never_succeeds": true,
+    "association_resolves": false,
+    "correct_prediction_filter_resolves": true,
+    "decisive_frames": [
+      {
+        "frame": 38,
+        "points": 5,
+        "original_current": 1.0,
+        "original_temporal": 0.0,
+        "traced_current": 1.0,
+        "traced_temporal": 0.0,
+        "provenance": {
+          "harm": 5,
+          "fix": 0,
+          "harm_anchor_wrong": 5,
+          "harm_no_history": 0,
+          "harm_all_same": 0,
+          "harm_all_correct": 0,
+          "harm_any_correct": 0,
+          "harm_unknown": 0,
+          "harm_query_majority_mismatch": 0,
+          "harm_resolved_association": 1,
+          "harm_resolved_correct": 5
+        },
+        "corrected_by_empty_history_fallback": 5,
+        "correct_candidates_retained": 0,
+        "corrected_with_nonempty_correct_history": 0,
+        "still_wrong_with_nonempty_correct_history": 0
+      }
+    ]
+  }
+]

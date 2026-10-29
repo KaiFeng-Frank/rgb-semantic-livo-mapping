@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 189, in _run_module_as_main
+  File "<frozen runpy>", line 159, in _get_module_details
+  File "<frozen importlib._bootstrap_external>", line 1074, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1004, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/frank/semantic_livo_instance_memory/tools/semantic_memory/trace_saved_recovery_cases.py", line 112
+    save(out/'report.json',dict(cases=reports,scope='Frozen two-case mechanism trace; diagnostic substitutions and same-object reproduction only. Not a new dataset result or trained fix.')))
+                                                                                                                                                                                             ^
+SyntaxError: unmatched ')'

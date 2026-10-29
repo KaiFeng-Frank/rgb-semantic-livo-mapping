@@ -1,0 +1,46 @@
+{
+  "case": {
+    "scene": "scene-0218",
+    "frame": 39,
+    "instance": 17019,
+    "seeds": [
+      1,
+      2
+    ]
+  },
+  "query_count": 12,
+  "queried_object_points": 12,
+  "object_points": 12,
+  "target_class": 3,
+  "seeds": [
+    {
+      "seed": 1,
+      "object_points": 12,
+      "correct_points": {
+        "native": 0,
+        "current": 11,
+        "correct_candidates": 0,
+        "features_only": 0,
+        "probabilities_only": 11,
+        "geometry_only": 11
+      },
+      "correct_pool_bad_with_good_singleton_points": 0,
+      "correct_pool_bad_all_correct_singletons_fail_points": 11
+    },
+    {
+      "seed": 2,
+      "object_points": 12,
+      "correct_points": {
+        "native": 0,
+        "current": 11,
+        "correct_candidates": 0,
+        "features_only": 0,
+        "probabilities_only": 11,
+        "geometry_only": 11
+      },
+      "correct_pool_bad_with_good_singleton_points": 0,
+      "correct_pool_bad_all_correct_singletons_fail_points": 11
+    }
+  ],
+  "trace_sha256": "e8a8e4b71896df5a3e2822c4de2a30655f9c9dee722f881a71849a1a7f3c504f"
+}

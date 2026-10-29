@@ -1,0 +1,10 @@
+W1029 15:58:58.659000 1731866 site-packages/torch/fx/_symbolic_trace.py:53] is_fx_tracing will return true for both fx.symbolic_trace and torch.export. Please use is_fx_tracing_symbolic_tracing() for specifically fx.symbolic_trace or torch.compiler.is_compiling() for specifically torch.export/compile.
+completed scene-0149 40
+completed scene-0803 80
+completed scene-0868 121
+completed scene-0383 161
+completed scene-0218 201
+completed scene-0347 240
+completed scene-0420 281
+completed scene-1074 321
+RECOVERY {'0': {'lost_episodes': 14, 'association_resolved': 2, 'correct_evidence_resolved': 14, 'anchor_never_succeeds': 12}, '1': {'lost_episodes': 18, 'association_resolved': 3, 'correct_evidence_resolved': 17, 'anchor_never_succeeds': 12}, '2': {'lost_episodes': 19, 'association_resolved': 3, 'correct_evidence_resolved': 18, 'anchor_never_succeeds': 13}} POINTS {'0': {'harm': 23340, 'fix': 27247, 'harm_anchor_wrong': 6068, 'harm_no_history': 0, 'harm_all_same': 14747, 'harm_all_correct': 1547, 'harm_any_correct': 2454, 'harm_unknown': 216, 'harm_query_majority_mismatch': 39, 'harm_resolved_association': 8018, 'harm_resolved_correct': 21526}, '1': {'harm': 23398, 'fix': 27490, 'harm_anchor_wrong': 5359, 'harm_no_history': 0, 'harm_all_same': 14694, 'harm_all_correct': 2005, 'harm_any_correct': 3066, 'harm_unknown': 204, 'harm_query_majority_mismatch': 55, 'harm_resolved_association': 8135, 'harm_resolved_correct': 21015}, '2': {'harm': 21169, 'fix': 26793, 'harm_anchor_wrong': 6089, 'harm_no_history': 0, 'harm_all_same': 12720, 'harm_all_correct': 1172, 'harm_any_correct': 2037, 'harm_unknown': 199, 'harm_query_majority_mismatch': 42, 'harm_resolved_association': 7895, 'harm_resolved_correct': 19733}}

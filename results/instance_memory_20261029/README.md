@@ -23,6 +23,9 @@
 参与权重归一化的问题。随后[固定架构的四臂监督训练](feature-supervision-training/README.md)
 已完成三个种子：历史对匹配当前平均 mIoU +0.267 pp，同权重关闭历史下降 0.366 pp，
 但前景保护和对象错误恢复门槛失败；未追加训练、打开留出或部署。
+对[已保存的恢复失败片段逐层解剖](feature-recovery-dissection/README.md)进一步发现：
+多数伤害并非串 ID；两个汽车病例中历史特征读出破坏当前判别，其中正确候选
+单独输入也失败。旧锚点保留目标与只看 mIoU 的选模存在保护缺口，尚未重训验证修复。
 
 **Result: failed the advancement gates.** The implementation and actual ROS delivery work; the memory has not demonstrated a reliable semantic or identity improvement over the matched controls. It remains opt-in.
 
