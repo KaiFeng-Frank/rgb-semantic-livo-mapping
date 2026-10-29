@@ -188,11 +188,11 @@ def run(args):
             visual_history_packets=sum(r['history_instances']>0 for r in visual_packets.values()),
             visual_max_history=max((r['max_history'] for r in visual_packets.values()),default=0),
             replay_lateness_max_ms=max(late),visual_status=visual_status,semantic_status=status,
-            scope=('Real full-rate camera + original 2Hz raw LiDAR + live PTv3 + ROS instance/map output; supplied ego poses. GT evaluation only in subscriber.' if dense else 'Real camera + raw LiDAR + live PTv3 + ROS instance output at original 2Hz; supplied ego poses. GT evaluation only in subscriber.'),
+            scope=('Real full-rate camera + original 2Hz raw LiDAR + live PTv3 + ROS instance/map output; supplied ego poses. GT evaluation only in subscriber.' if dense and not args.keyframes_only else 'Real camera + raw LiDAR + live PTv3 + ROS instance output at original 2Hz; supplied ego poses. GT evaluation only in subscriber.'),
             time_alignment='Causal camera <= scan, 60ms bound; ego pose interpolated from received graph; no object-motion compensation.')
         (args.out/'report.json').write_text(json.dumps(summary,indent=2)+'\n')
         (args.out/'instances.jsonl').write_text(''.join(json.dumps(dict(stamp_ns=s,**r,info=infos[s]))+'\n' for s,r in sorted(received.items())))
-        print(json.dumps({k:v for k,v in summary.items() if 'status' not in k},indent=2))
+        print(json.dumps({k:v for k,v in summary.items() if 'status' not in k and k!='accuracy'},indent=2))
     finally:
         for p in processes:
             if p.poll() is None:p.terminate()
