@@ -1,0 +1,16 @@
+{
+  "purpose": "Diagnose the frozen supervision experiment's lost object recovery, without retraining, checkpoint reselection or a deployable GT policy.",
+  "selection": "All eight already inspected independent_dev_added logs, all 321 chronological keyframes, all three selected balanced_temporal checkpoints from 558d6e0. New holdout remains closed.",
+  "inference": "Unmodified original CurrentAnchoredRepair queries, retrieval and raw-only writes. Same PTv3 forward and fixed seed-0 current anchor for all heads. Instrumentation must exactly match normal outputs and raw state at every frame. A separate current-only native call verifies the no-history path.",
+  "diagnostic_interventions": {
+    "native": "Original history and selected weights.",
+    "no_history": "Identical selected weights, original current-token encoding.",
+    "oracle_association": "Keep only valid candidates whose offline GT semantic class matches the query GT and, for thing classes, both voxels have the same unambiguous nonzero GT panoptic identity. No candidate is added; remaining candidates are pooled by the unchanged network.",
+    "oracle_correct": "Apply oracle_association and additionally keep only candidates whose original raw predicted class equals the query GT class. No candidate probability or feature is rewritten. Empty sets use the original current-token fallback."
+  },
+  "labels": "Normal native/current predictions and memory writes execute before GT joins. GT interventions only enter diagnostic copies of candidate validity, never the normal memory or a deployable policy. Unknown or mixed voxel identities are reported separately, not classified as proven association errors.",
+  "metrics": "Report all-point native16 confusion, camera foreground counts, identical GT-defined object episodes, and same-head historical fixes/harms. For each lost recovery episode inspect whether harmed points were newly correct beyond the old anchor, whether candidate identity was known and correct, and whether raw historical predictions were correct.",
+  "interpretation": "Filtering is a causal intervention on this frozen network input, not a bound on arbitrary learned memory. Correct association or correct historical argmax does not guarantee calibrated features or successful repair. Fresh backbone numerics may differ from the archived extraction; compare only within this shared-forward replay and keep previous results immutable.",
+  "decision": "If correct-association filtering resolves most harms, investigate association. If it does not but correct-prediction filtering does, investigate stale/wrong semantic evidence. If errors remain even with correct evidence, inspect readout and preservation of newly learned current predictions before considering a new model. No new training or parameter sweep is authorized by this diagnostic itself.",
+  "resources": "One admitted GPU process, bounded streaming state, no persistent feature cache or concurrent training. Existing checkpoints and raw data only. This instrumented oracle replay does not measure online latency."
+}
