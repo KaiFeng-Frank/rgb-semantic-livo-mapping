@@ -7,12 +7,13 @@ from tools.instance_memory.data import read,save
 from tools.semantic_memory.nuscenes_pilot_data import DATA,digest
 
 
-def run(source,weights,yolo,frames,images,out):
+def run(source,weights,yolo,frames,images,out,image_size=1024):
     import cv2,torch
     from .fullrate import FullRateDetector
     from .sam2_memory import SAM2Pair
     from .kalman_cache import gpu_admission
-    protocol_path=Path(__file__).resolve().parents[2]/'config/sam2_memory_probe_20261029.json'
+    filename='sam2_memory_probe_20261029.json' if image_size==1024 else 'sam2_memory_probe_512_20261029.json'
+    protocol_path=Path(__file__).resolve().parents[2]/'config'/filename
     protocol=read(protocol_path)
     commit=subprocess.check_output(['git','-C',str(source),'rev-parse','HEAD'],text=True).strip()
     if commit!=protocol['source_commit'] or digest(weights)!=protocol['checkpoint_sha256']:
@@ -22,7 +23,7 @@ def run(source,weights,yolo,frames,images,out):
     admission=gpu_admission();torch.set_num_threads(1);cv2.setNumThreads(1)
     if out.exists():raise ValueError('Refuse overwrite')
     sequence=read(frames)['scenes']['scene-0218'][:8]
-    start=time.perf_counter();detector=FullRateDetector(yolo);model=SAM2Pair(source,weights);startup=time.perf_counter()-start
+    start=time.perf_counter();detector=FullRateDetector(yolo);model=SAM2Pair(source,weights,image_size=image_size);startup=time.perf_counter()-start
     rows=[];torch.cuda.reset_peak_memory_stats()
     for i,r in enumerate(sequence):
         path=DATA/r['path'] if r['keyframe'] is not None else images/Path(r['path']).name
@@ -45,4 +46,5 @@ def run(source,weights,yolo,frames,images,out):
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     for k in ['source','weights','yolo','frames','images','out']:p.add_argument('--'+k,type=Path,required=True)
-    a=p.parse_args();run(a.source,a.weights,a.yolo,a.frames,a.images,a.out)
+    p.add_argument('--image-size',type=int,choices=[512,1024],default=1024)
+    a=p.parse_args();run(a.source,a.weights,a.yolo,a.frames,a.images,a.out,a.image_size)

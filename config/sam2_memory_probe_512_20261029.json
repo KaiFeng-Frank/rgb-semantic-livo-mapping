@@ -1,0 +1,14 @@
+{
+  "stage": "Single runtime-driven resolution change, before any SAM2 accuracy scoring; the standard 1024 probe failed with SAM-only p95 333.43ms",
+  "source": "https://github.com/facebookresearch/sam2",
+  "source_commit": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+  "checkpoint": "facebook/sam2.1-hiera-tiny@de431c4043854a71d8101e17995dfe596bf101a5/sam2.1_hiera_tiny.pt",
+  "checkpoint_sha256": "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69",
+  "checkpoint_bytes": 156008466,
+  "image_size": 512,
+  "reason": "Quarter as many spatial tokens; spatial attention pair count becomes one sixteenth at unchanged memory length. Actual wall time is measured, not inferred from FLOPs. Native prompt and positional encodings use the changed image size. This is not the pretrained default inference size.",
+  "selection": "The same first eight scene-0218 full-rate development images and all supported current detector instances; no GT boxes/masks",
+  "controls": "Same encoded image, box prompts and weights; clear versus causal native recurrent memory. Capacity, expiry, batch size, source, dtype, no-compilation policy and all other settings unchanged.",
+  "runtime_gate": "Same SAM-only p95 <=50ms excluding frame zero. Passing requires accuracy evaluation and actual ROS delivery; no accuracy claim from changed-mask counts.",
+  "if_failed": "Stop this synchronous SAM2 configuration; no further resolution, model-size or memory-length sweep and no full-scene accuracy launch."
+}
