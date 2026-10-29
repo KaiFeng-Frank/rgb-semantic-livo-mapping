@@ -105,15 +105,20 @@ def run(args):
             rclpy.spin_once(node,timeout_sec=.002)
     def header(ns):return Header(stamp=Time(sec=ns//10**9,nanosec=ns%10**9),frame_id='backend_lidar')
     try:
+        launch_started=time.monotonic()
         start([sys.executable,'-m','tools.visual_instances.node','--worker-python',str(args.runtime/'venv/bin/python'),
             '--weights',str(args.weights),'--out',str(args.out/'vision'),'--image-topic','/visual_pilot/image',
-            '--compressed','--width','1600','--height','900'],'vision.log')
+            '--compressed','--width','1600','--height','900',
+            *(['--feature-embeddings'] if getattr(args,'instance_memory_checkpoint',None) else [])],'vision.log')
         start([sys.executable,'-m','tools.loop_closure.semantic_node','--frontend',str(frontend),'--camera',str(camera),
             '--out',str(args.out/'semantics'),'--visual-instances','--visual-max-dt-ms','60',
             '--instance-semantics',args.instance_semantics,
             *(['--instance-kalman-checkpoint',str(args.instance_kalman_checkpoint)] if getattr(args,'instance_kalman_checkpoint',None) else []),
+            *(['--instance-memory-checkpoint',str(args.instance_memory_checkpoint),'--memory-python',str(args.runtime/'venv/bin/python'),
+               '--memory-mode',args.memory_mode] if getattr(args,'instance_memory_checkpoint',None) else []),
             '--reflectance-divisor','255','--intensity-scale','1','--verify-final'],'semantics.log')
         spin_until(lambda:status.get('ready') and visual_status.get('ready') and image_pub.get_subscription_count()>0 and cloud_pub.get_subscription_count()>0)
+        startup_seconds=time.monotonic()-launch_started
         origin=min(src[rows[0]['sample_data_token']]['camera_timestamp_us'],rows[0]['timestamp_us'])*1000
         base=time.monotonic()+.1;times=[];poses=[];sent={};late=[]
         for row in rows:
@@ -144,6 +149,7 @@ def run(args):
             counts={k:sum(r[k] for r in received.values()) for k in ('changed','rescued','harmed','unified')},
             accuracy={a:scores(m) for a,m in matrices.items()},
             latency_ms=dict(median=float(np.median(lat)),p95=float(np.percentile(lat,95)),max=float(max(lat))),
+            startup_seconds=startup_seconds,first_scan_latency_ms=lat[0],
             replay_lateness_max_ms=max(late),visual_status=visual_status,semantic_status=status,
             scope='Real camera + raw LiDAR + live PTv3 + ROS instance output at original 2Hz; supplied ego poses. GT evaluation only in subscriber.',
             time_alignment='Causal camera <= scan, 60ms bound; ego pose interpolated from received graph; no object-motion compensation.')
@@ -170,4 +176,6 @@ if __name__=='__main__':
     p.add_argument('--scene',default='scene-0519')
     p.add_argument('--instance-semantics',choices=('off','shadow','active'),default='off')
     p.add_argument('--instance-kalman-checkpoint',type=Path)
+    p.add_argument('--instance-memory-checkpoint',type=Path)
+    p.add_argument('--memory-mode',choices=('feature_memory','matched_current','same_memory_head_without_history','uniform_history'),default='feature_memory')
     run(p.parse_args())

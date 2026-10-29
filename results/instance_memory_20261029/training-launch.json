@@ -1,0 +1,22 @@
+{
+  "started_unix": 1793234088.4377937,
+  "runs": [
+    {
+      "seed": 0,
+      "pid": 1293425,
+      "cpu": 12
+    },
+    {
+      "seed": 1,
+      "pid": 1293426,
+      "cpu": 13
+    },
+    {
+      "seed": 2,
+      "pid": 1293427,
+      "cpu": 14
+    }
+  ],
+  "holdout_in_cache": false,
+  "supervision": "official training labels, all backbones frozen"
+}

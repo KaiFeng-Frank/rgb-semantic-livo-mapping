@@ -65,6 +65,8 @@ class InstanceFrame:
     scores: np.ndarray
     appearance: np.ndarray | None = None  # Optional normalized HSV histogram, not learned ReID.
     class_scores: np.ndarray | None = None  # Raw COCO80 sigmoid scores, not normalized probabilities.
+    visual_features: np.ndarray | None = None  # Optional frozen same-forward P3 summaries.
+    visual_feature_valid: np.ndarray | None = None
 
     def __post_init__(self):
         if type(self.stamp_ns) is not int or self.stamp_ns < 0 or not re.fullmatch('[a-f0-9]{32}', self.session):
@@ -90,12 +92,22 @@ class InstanceFrame:
             if (self.class_scores.shape != (n, 80) or not np.isfinite(self.class_scores).all()
                     or np.any((self.class_scores < 0) | (self.class_scores > 1))):
                 raise ValueError('Invalid visual class evidence')
+        if self.visual_features is not None:
+            self.visual_features=np.asarray(self.visual_features,dtype=np.float32)
+            self.visual_feature_valid=np.asarray(self.visual_feature_valid,dtype=bool)
+            if (self.visual_features.shape!=(n,64) or self.visual_feature_valid.shape!=(n,)
+                    or not np.isfinite(self.visual_features).all()):
+                raise ValueError('Invalid visual feature evidence')
+        elif self.visual_feature_valid is not None:
+            raise ValueError('Feature-valid mask without features')
 
     def encode(self):
         return json.dumps(dict(schema=1, stamp_ns=self.stamp_ns, session=self.session,
             shape=list(self.index.shape), ids=self.ids.tolist(), labels=self.labels.tolist(),
             scores=self.scores.tolist(), appearance=self.appearance.tolist() if self.appearance is not None else None,
             class_scores=self.class_scores.tolist() if self.class_scores is not None else None,
+            visual_features=self.visual_features.tolist() if self.visual_features is not None else None,
+            visual_feature_valid=self.visual_feature_valid.tolist() if self.visual_feature_valid is not None else None,
             index=base64.b64encode(zlib.compress(
                 self.index.astype('<u2').tobytes(), 1)).decode()), separators=(',', ':'), allow_nan=False)
 
@@ -117,7 +129,9 @@ class InstanceFrame:
                    np.asarray(d['ids']) if d['ids'] else np.empty(0, np.int64),
                    np.asarray(d['labels']), np.asarray(d['scores']),
                    np.asarray(d['appearance'], dtype=np.float32).reshape(-1, 24) if d.get('appearance') is not None else None,
-                   np.asarray(d['class_scores'], dtype=np.float32).reshape(-1, 80) if d.get('class_scores') is not None else None)
+                   np.asarray(d['class_scores'], dtype=np.float32).reshape(-1, 80) if d.get('class_scores') is not None else None,
+                   np.asarray(d['visual_features'],dtype=np.float32).reshape(-1,64) if d.get('visual_features') is not None else None,
+                   np.asarray(d['visual_feature_valid'],dtype=bool) if d.get('visual_features') is not None else None)
 
 
 class FrameCache:
@@ -252,5 +266,7 @@ def associate(xyz, camera, frame, *, depth_tolerance=.4, cell_pixels=3, min_poin
         info['associated'] = int(np.count_nonzero(ids))
         info['instances'] = int(len(np.unique(ids[ids > 0])))
     return dict(ids=ids, labels=labels, scores=scores, info=info,
+                visual_features={int(t):(frame.visual_features[i],bool(frame.visual_feature_valid[i]))
+                    for i,t in enumerate(frame.ids)} if frame.visual_features is not None else {},
                 class_scores={int(t): frame.class_scores[i] for i,t in enumerate(frame.ids)} if frame.class_scores is not None else {},
                 appearance={int(t): frame.appearance[i] for i,t in enumerate(frame.ids)} if frame.appearance is not None else {})

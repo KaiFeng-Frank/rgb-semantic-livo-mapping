@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "scope": "First frozen-backbone, native16 instance-memory pilot; not a leaderboard submission",
+  "split": "24 previously uninspected collection logs from official training pool: 16 train, 4 development, 4 project holdout. All official validation logs have prior inspection and are excluded.",
+  "selection_salt": "instance-memory-20261029",
+  "backbones": "Frozen B0 PTv3 and existing YOLO11n-seg/BoT-SORT; same forwards and exact shared observations across arms",
+  "inputs": "Current PTv3 pooled decoder features, same-forward YOLO encoder features, raw probabilities, geometry, timestamp, raw visual class scores; causal history only",
+  "supervision": "Official lidarseg and Panoptic nuScenes labels; instance labels available only for training losses and evaluation, never runtime association",
+  "memory": {"max_tracks": 128, "short_records": 4, "long_records": 2, "ttl_s": 8.0},
+  "model": {"width": 64, "heads": 4, "layers": 1},
+  "training": {"seeds": [0, 1, 2], "identity_epochs": 10, "identity": "Train descriptor on training-instance point GT, then freeze encoder and descriptor, shared across all arms; predicted identities during semantic training", "epochs": 30, "lr": 0.001, "threads": 1, "selection": "minimum development point CE on observed instance points; epoch zero eligible; same initialization, capacity, data and steps for current-only and temporal arms"},
+  "controls": ["raw", "existing_instance_pool", "matched_current", "uniform_history", "feature_memory", "same_memory_head_without_history", "short_identity_memory"],
+  "primary": ["full-scan native16 mIoU", "associated foreground point accuracy", "point identity F1 from official panoptic GT", "point association quality including unmatched GT"],
+  "secondary": ["corrections and newly wrong points", "identity switches", "reappearance after observation gaps", "per-class and per-log results", "coverage", "bounded memory size"],
+  "advancement": {"foreground_accuracy_gain_pp": 1.0, "identity_f1_gain_pp": 1.0, "full_scan_miou_max_degradation_pp": 0.1, "positive_gain_required_seeds": 3, "memory_cpu_p95_ms": 10.0, "runtime": "No end-to-end real-time claim from cached timings; require actual populated-instance ROS delivery, report cold start, p95 and backlog"},
+  "limits": {"cache_bytes": 1000000000, "minimum_free_bytes": 4000000000, "training_wall_seconds_per_seed": 1800},
+  "reporting": "Pilot failure remains failure; no architecture changes or tuning on project holdout. Preserve label map, source hashes, paired observations, failures and current-only control. 2Hz annotation gaps are not proof of physical occlusion."
+}

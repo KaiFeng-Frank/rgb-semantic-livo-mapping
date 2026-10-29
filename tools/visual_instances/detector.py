@@ -11,7 +11,7 @@ from .geometry import COCO_TO_NATIVE, InstanceFrame, MAX_INSTANCES, MAX_PIXELS, 
 
 
 class Detector:
-    def __init__(self, weights, device='0', imgsz=640, tracker=None):
+    def __init__(self, weights, device='0', imgsz=640, tracker=None, feature_embeddings=False):
         import cv2
         import torch
         from ultralytics import YOLO
@@ -44,6 +44,11 @@ class Detector:
             classes=list(COCO_TO_NATIVE), retina_masks=True, rect=False, half=device != 'cpu')
         for tracker in self.model.predictor.trackers:
             tracker.reset()
+        self.visual_features=None
+        if feature_embeddings:
+            from tools.instance_memory.data import VisualFeatures
+            self.visual_features=VisualFeatures(self)
+        self.meta['feature_embeddings']=bool(feature_embeddings)
 
     def step(self, image, stamp_ns):
         import cv2
@@ -82,5 +87,9 @@ class Detector:
                                            for c,limit in enumerate([180, 256, 256])]).astype(np.float32)+1e-3
                     descriptors.append(hist/hist.sum())
                 frame.appearance = np.stack(descriptors)
+        if self.visual_features is not None:
+            features=self.visual_features.pool(frame)
+            frame.visual_features=np.asarray([features[int(t)][0] for t in frame.ids],np.float32).reshape(-1,64)
+            frame.visual_feature_valid=np.asarray([features[int(t)][1] for t in frame.ids],bool)
         return frame, dict(elapsed_ms=(time.perf_counter()-start)*1000, instances=len(frame.ids), reset=reset,
                            model_stages_ms=dict(r.speed))

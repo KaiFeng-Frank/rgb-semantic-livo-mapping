@@ -57,6 +57,19 @@ class AssociationTests(unittest.TestCase):
         self.assertIsNotNone(c.get(110_000_000))
         self.assertIsNone(c.get(121_000_000))
 
+    def test_frozen_features_survive_wire_without_changing_association(self):
+        f=self.frame();f.visual_features=np.arange(128,dtype=np.float32).reshape(2,64)
+        f.visual_feature_valid=np.array([True,False])
+        g=InstanceFrame.decode(f.encode())
+        np.testing.assert_array_equal(g.visual_features,f.visual_features)
+        np.testing.assert_array_equal(g.visual_feature_valid,f.visual_feature_valid)
+        xyz=np.array([[5,5,5],[5.05,5,5],[5,5.05,5]])
+        out=associate(xyz,self.camera(),g)
+        np.testing.assert_array_equal(out['ids'],associate(xyz,self.camera(),self.frame())['ids'])
+        np.testing.assert_array_equal(out['visual_features'][12][0],f.visual_features[0])
+        d=json.loads(f.encode());d['visual_features'][0][0]=float('nan')
+        with self.assertRaises(ValueError):InstanceFrame.decode(json.dumps(d))
+
     def test_restart_does_not_reuse_old_identity(self):
         c = FrameCache()
         c.add(self.frame())

@@ -1,0 +1,31 @@
+{
+  "advance": false,
+  "gates": {
+    "foreground_gain_mean_at_least_1pp": false,
+    "identity_gain_mean_at_least_1pp": false,
+    "positive_gain_all_seeds": false,
+    "no_more_than_point1pp_miou_loss": true,
+    "cached_cpu_p95_under_10ms": true
+  },
+  "foreground_gain_pp": [
+    -1.171470039394562,
+    -0.8915612689197605,
+    0.5390835579514808
+  ],
+  "identity_gain_pp": [
+    -0.04869543362498244,
+    0.1146698920846359,
+    0.02277689637297589
+  ],
+  "miou_gain_pp": [
+    -0.03609160390385391,
+    -0.026840960650198475,
+    0.015351350422088128
+  ],
+  "cached_cpu_p95_ms": [
+    4.032280994579196,
+    3.6571529926732183,
+    4.173899011220783
+  ],
+  "reason": "Neither semantic nor identity advancement gate passed. Architecture expansion and default deployment not justified."
+}

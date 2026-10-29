@@ -9,7 +9,7 @@ import time
 
 
 class Client:
-    def __init__(self, python, weights, log, imgsz=640, cancel_event=None):
+    def __init__(self, python, weights, log, imgsz=640, cancel_event=None, feature_embeddings=False):
         from multiprocessing import Pipe
         self.conn, child = Pipe()
         self.cancel_event = cancel_event
@@ -18,7 +18,8 @@ class Client:
                    YOLO_AUTOINSTALL='false')
         env['PYTHONPATH'] = env.get('VISUAL_PYTHONPATH', '')
         self.process = subprocess.Popen([str(python), '-m', 'tools.visual_instances.worker', '--fd', str(child.fileno()),
-            '--weights', str(weights), '--imgsz', str(imgsz)], pass_fds=[child.fileno()],
+            '--weights', str(weights), '--imgsz', str(imgsz),
+            *(['--feature-embeddings'] if feature_embeddings else [])], pass_fds=[child.fileno()],
             cwd=Path(__file__).resolve().parents[2], stdout=self.log, stderr=subprocess.STDOUT,
             env=env)
         child.close()
@@ -65,12 +66,13 @@ def main():
     p.add_argument('--fd', type=int, required=True)
     p.add_argument('--weights', required=True)
     p.add_argument('--imgsz', type=int, default=640)
+    p.add_argument('--feature-embeddings',action='store_true')
     args = p.parse_args()
     os.nice(5)
     conn = Connection(args.fd)
     try:
         from .detector import Detector
-        model = Detector(args.weights, imgsz=args.imgsz)
+        model = Detector(args.weights, imgsz=args.imgsz,feature_embeddings=args.feature_embeddings)
         conn.send(model.meta)
         while True:
             image, stamp = conn.recv()

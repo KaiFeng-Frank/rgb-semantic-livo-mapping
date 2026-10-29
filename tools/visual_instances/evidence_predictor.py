@@ -38,7 +38,15 @@ class EvidencePredictor(SegmentationPredictor):
         for det, idx, original, path, proto, score in zip(
                 detections, indices, orig_imgs, self.batch[0], protos, scores):
             result = super().construct_result(det, img, original, path, proto)
-            selected = score[idx.reshape(-1)]
+            # Ultralytics returns a default-float empty index tensor when NMS
+            # finds no detections (including black-image warmup). Nonempty
+            # indices must remain integers; never round malformed evidence.
+            idx = idx.reshape(-1)
+            if idx.numel() == 0:
+                idx = idx.to(torch.long)
+            elif idx.dtype not in (torch.int32, torch.int64):
+                raise ValueError('Non-integer NMS evidence indices')
+            selected = score[idx]
             if len(result.boxes) != len(det):
                 # construct_result scales det in-place, then may drop empty masks.
                 match = (result.boxes.data[:, None, :6] == det[None, :, :6]).all(-1)

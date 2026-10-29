@@ -8,6 +8,7 @@ mapping (normally 1 Hz), not a claim of 10 Hz full semantic segmentation.
 import argparse
 from collections import OrderedDict
 import json
+import os
 from pathlib import Path
 import signal
 import sys
@@ -92,7 +93,11 @@ def make_node(args):
     visual_enabled = getattr(args, 'visual_instances', False)
     instance_mode = getattr(args, 'instance_semantics', 'off')
     instance_checkpoint = getattr(args, 'instance_kalman_checkpoint', None)
-    if instance_checkpoint and (instance_mode == 'off' or args.predictions_input):
+    memory_checkpoint = getattr(args, 'instance_memory_checkpoint', None)
+    if instance_checkpoint and memory_checkpoint:
+        raise ValueError('Choose one instance model')
+    feature_checkpoint = instance_checkpoint or memory_checkpoint
+    if feature_checkpoint and (instance_mode == 'off' or args.predictions_input):
         raise ValueError('Learned instance semantics requires real PTv3 inference and enabled instance semantics')
     if instance_mode not in ('off', 'shadow', 'active') or instance_mode != 'off' and not visual_enabled:
         raise ValueError('Instance semantics requires visual association and a valid mode')
@@ -107,7 +112,10 @@ def make_node(args):
             from tools.visual_instances.semantics import InstanceSemantics
             if instance_checkpoint:
                 from tools.visual_instances.kalman import KalmanInstanceSemantics
+            if feature_checkpoint:
                 from tools.visual_instances.semantics import instance_groups
+            if memory_checkpoint:
+                from tools.instance_memory.online import OnlineMemory
             # Import sparse geometry before online readiness.
             from scipy.spatial import cKDTree
             from scipy.sparse.csgraph import connected_components
@@ -131,6 +139,10 @@ def make_node(args):
             self.instance_semantics = InstanceSemantics() if instance_mode != 'off' else None
             if instance_checkpoint:
                 self.instance_semantics = KalmanInstanceSemantics(instance_checkpoint)
+            if memory_checkpoint:
+                self.instance_semantics = OnlineMemory(memory_checkpoint,
+                    getattr(args,'memory_python',None) or os.environ['PTV3_PYTHON'],args.out/'memory-worker.log',
+                    mode=getattr(args,'memory_mode','feature_memory'))
             if self.instance_semantics:
                 (args.out/'instance-semantics.json').write_text(json.dumps(self.instance_semantics.configuration(),indent=2)+'\n')
             if consistency_mode != 'off':
@@ -253,7 +265,7 @@ def make_node(args):
                     from ptv3_client import PTv3Client
                     self.client = PTv3Client(half=True, shuffle=False, max_pts=cfg['max_points'],
                         probability_classes=cfg['classes'] if self.consistency or self.instance_semantics else 0,
-                        instance_features=bool(instance_checkpoint),
+                        instance_features=bool(feature_checkpoint),
                         intensity_scale=args.intensity_scale, stderr_path=str(args.out/'inference.log'),
                         startup_timeout_s=120., response_timeout_s=3., cancel_event=self.stop)
                     if self.client.num_classes != cfg['classes']:
@@ -354,7 +366,7 @@ def make_node(args):
                                         visual_result = dict(ids=np.zeros(len(points), np.uint32),
                                             labels=np.full(len(points), 65535, np.uint16), scores=np.zeros(len(points), np.float32),
                                             info=dict(reason='no_causal_camera_or_pose_bracket', session=None, associated=0))
-                                    if instance_checkpoint:
+                                    if feature_checkpoint:
                                         groups, tracks = instance_groups(points[:,:3],visual_result)
                                         pooled = self.client.pool_last_instances(groups,len(tracks))
                                         instance_features = dict(zip(tracks,pooled))
@@ -362,12 +374,14 @@ def make_node(args):
                                     if self.instance_semantics:
                                         enhanced = self.instance_semantics.step(points[:,:3], probabilities, visual_result,
                                             stamp_ns=int(stamp), pose=graph['poses'][index] @ transform,
-                                            **(dict(features=instance_features) if instance_checkpoint else {}))
+                                            **(dict(features=instance_features) if feature_checkpoint else {}))
                                         visual_result['semantics'] = enhanced
                                         visual_result['info'].update(instance_semantics=enhanced['info'],
                                             semantic_update=instance_mode=='active', instance_mode=instance_mode)
                                         if instance_mode == 'active':
                                             scan_labels, scan_confidence = enhanced['labels'], enhanced['confidence']
+                                            if 'ids' in enhanced:
+                                                visual_result['ids']=enhanced['ids']
                                 body = points[:, :3].astype(np.float64) @ transform[:3, :3].T+transform[:3, 3]
                                 self.scan_sequence += 1
                                 with self.lock:
@@ -414,6 +428,8 @@ def make_node(args):
             finally:
                 if self.client:
                     self.client.close()
+                if memory_checkpoint and self.instance_semantics:
+                    self.instance_semantics.close()
                 self.counters['ready'] = False
 
         def close(self):
@@ -457,6 +473,9 @@ def main():
     ap.add_argument('--visual-max-dt-ms', type=float, default=20.)
     ap.add_argument('--instance-semantics',choices=('off','shadow','active'),default='off')
     ap.add_argument('--instance-kalman-checkpoint',type=Path)
+    ap.add_argument('--instance-memory-checkpoint',type=Path)
+    ap.add_argument('--memory-python',type=Path)
+    ap.add_argument('--memory-mode',choices=('feature_memory','matched_current','same_memory_head_without_history','uniform_history'),default='feature_memory')
     args = ap.parse_args()
     if not np.isfinite(args.reflectance_divisor) or args.reflectance_divisor <= 0:
         ap.error('reflectance divisor must be finite and positive')
