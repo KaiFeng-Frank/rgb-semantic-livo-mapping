@@ -1,0 +1,28 @@
+{
+  "scope": "Correctness only: same keyframes supplied to both tracker arms, no intermediate frames and no GT scoring",
+  "scene": "scene-0218",
+  "frames": [
+    0,
+    1,
+    2
+  ],
+  "detected_instances": [
+    11,
+    11,
+    11
+  ],
+  "pixel_index_masks_equal": [
+    true,
+    true,
+    true
+  ],
+  "evaluator_commit": "40a38c4",
+  "range_reader_tests": {
+    "passed": 2,
+    "coverage": [
+      "standard ZIP/CRC with bounded block reads",
+      "refuse full archive response/unbounded read",
+      "reuse resolved endpoint"
+    ]
+  }
+}
