@@ -1,0 +1,15 @@
+{
+  "scope": "Development-only frozen-model experiment following d78ea6d; prior failures remain failures",
+  "hypothesis": "Past trusted instance observations can admit useful fragmented surfaces while rejecting background/mixed groups, improving both current semantics and temporal identity",
+  "data": "The same 12 already inspected development scenes only. Re-export all candidate groups in one shared raw PTv3/YOLO forward; no training or new holdout access.",
+  "models": "All six sealed first-round heads and their shared frozen identity descriptors; no new weights or architecture",
+  "candidate": "Existing largest connected component with at least six points, but without the whole-mask 60% fraction veto. Original min/max point limits and geometry stay fixed.",
+  "confirmation": {"trusted_observations": 2, "same_visual_identity_required": true, "max_age_s": 1.5, "min_cosine_to_both_anchors": 0.8, "motion_slack_m": 0.75, "max_radius_m": 4.0, "acceleration_mps2": 3.0, "max_speed_mps": 35.0, "max_cost": 0.5, "ambiguity_margin": 0.1},
+  "state": "Only original trusted observations create/update/refresh tracks. Read candidate confirmation before processing the current trusted stream. Candidates cannot self-confirm, write semantic feedback, steal a current identity, or use class agreement/GT.",
+  "controls": ["raw", "current_trusted", "current_all_fragments", "current_confirmed", "current_geometry_confirmed", "temporal_trusted", "temporal_confirmed", "temporal_confirmed_without_history", "visual_tracker_trusted", "visual_tracker_all_fragments"],
+  "metrics": "Full-scan native16 mIoU and whole-scan point IDF1 retained. Also fixed candidate-union foreground accuracy and camera-observable IDF1: the domain comes from calibration/depth/image bounds, never detection confidence or GT labels. Report false corrections, coverage and all seeds.",
+  "interpretation": "Any gain from changing geometric coverage is separated from semantic history readout. Current_all_fragments is the control for simply relaxing the veto; same admitted points with current-only readout isolate semantic memory. No improvement claim from development alone.",
+  "continuation_gate": "Before any new holdout, all three seeds must improve fixed-domain semantic accuracy and identity F1 over the strongest current-only geometric control, without full-scan semantic degradation. There must be net semantic corrections on at least five true instances across two logs. Otherwise retain negative result and do not tune thresholds on the same evaluation.",
+  "resources": {"max_new_cache_bytes": 1000000000, "minimum_free_bytes": 4000000000, "memory_cpu_p95_ms": 10.0},
+  "completion": "The full goal still requires independent semantic and identity gains plus actual online operation. Camera-domain diagnostics do not erase whole-scan failures."
+}

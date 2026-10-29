@@ -5,6 +5,7 @@ files are recovered locally. No raw images/scans are copied into this cache.
 """
 import argparse
 from collections import defaultdict
+from dataclasses import replace
 import gzip
 import hashlib
 import json
@@ -131,7 +132,7 @@ class VisualFeatures:
         return result
 
 
-def extract(index_path, out, annotation_root, parts, scene_limit=0):
+def extract(index_path, out, annotation_root, parts, scene_limit=0, candidate_fragments=False):
     from tools.visual_instances.kalman_cache import gpu_admission
     from tools.visual_instances.detector import Detector
     from tools.visual_instances.geometry import Camera, associate
@@ -151,11 +152,12 @@ def extract(index_path, out, annotation_root, parts, scene_limit=0):
         REPO/'tools/visual_instances/evidence_predictor.py',REPO/'tools/visual_instances/geometry.py']}
     protocol = dict(schema=1, index_sha256=digest(index_path), parts=index['parts'], source=source,
         checkpoint_sha256=digest(os.environ['PTV3_CHECKPOINT']), raw_only=True,
+        candidate_fragments=bool(candidate_fragments),
         geometry='raw keyframes with supplied ego poses; not deskewed/live LIVO', admission=admission)
     pp = out/'protocol.json'
     if pp.exists():
         old = read(pp)
-        for key in ('index_sha256','source','checkpoint_sha256'):
+        for key in ('index_sha256','source','checkpoint_sha256','candidate_fragments'):
             if old[key] != protocol[key]: raise ValueError('Incompatible extraction resume: '+key)
     else:
         save(pp, protocol)
@@ -196,10 +198,13 @@ def extract(index_path, out, annotation_root, parts, scene_limit=0):
                 for tid in np.unique(assoc['ids'][assoc['ids']>0]):
                     at = np.flatnonzero(assoc['ids']==tid)
                     c = component(scan[at,:3], cfg)
+                    trusted=c is not None
+                    if c is None and candidate_fragments:
+                        c=component(scan[at,:3],replace(cfg,component_fraction=0.))
                     if c is None: continue
                     at = at[c]
                     groups[at] = len(components)+1
-                    components.append((int(tid), at))
+                    components.append((int(tid), at, trusted))
                 raw = model.segment(scan, return_features=True)
                 with torch.inference_mode():
                     probs = raw['logits'].float().softmax(-1)[raw['inverse']].cpu().numpy()
@@ -207,7 +212,7 @@ def extract(index_path, out, annotation_root, parts, scene_limit=0):
                 single = InstanceSemantics(temporal=False).step(scan[:,:3], probs, assoc,
                                     stamp_ns=int(row['timestamp_us']*1000),pose=pose)
                 observations = []
-                for j,(tid,at) in enumerate(components):
+                for j,(tid,at,trusted) in enumerate(components):
                     xyz = scan[at,:3]
                     center = np.median(xyz,axis=0)
                     extent = np.quantile(xyz,.9,axis=0)-np.quantile(xyz,.1,axis=0)
@@ -220,6 +225,7 @@ def extract(index_path, out, annotation_root, parts, scene_limit=0):
                     x = np.concatenate([feats[j],v,mean,assoc['class_scores'][tid],assoc['appearance'][tid],quality])
                     if len(x) != 320: raise ValueError('Feature contract changed')
                     observations.append(dict(x=x.tolist(), raw_mean=mean.tolist(),raw_probabilities=p.tolist(),
+                        trusted=trusted,
                         indices=at.tolist(), visual_track=tid, visual_session=vf.session,
                         center=(pose[:3,:3]@center+pose[:3,3]).tolist(), extent=extent.tolist(),
                         sensor_center=center.tolist(), pose=pose.tolist(),
@@ -249,6 +255,15 @@ def extract(index_path, out, annotation_root, parts, scene_limit=0):
                     single_confusion=confusion(gt,single['labels']).tolist(),
                     raw_labels=raw_lab.tolist(),panoptic_sha256=digest(panpath),
                     lidarseg_sha256=digest(DATA/row['label_path']))
+                if candidate_fragments:
+                    # Fixed camera-observable evaluation domain, independent of
+                    # detector output, semantic labels and admission decisions.
+                    cam_xyz=scan[:,:3]@camera.T_camera_lidar[:3,:3].T+camera.T_camera_lidar[:3,3]
+                    view=np.flatnonzero((cam_xyz[:,2]>.1)&(cam_xyz[:,2]<80.))
+                    uv,_=cv2.projectPoints(cam_xyz[view],np.zeros(3),np.zeros(3),camera.K,camera.distortion)
+                    uv=uv.reshape(-1,2)
+                    valid=(uv[:,0]>=0)&(uv[:,0]<camera.width-.5)&(uv[:,1]>=0)&(uv[:,1]<camera.height-.5)
+                    target['camera_in_view_indices']=view[valid].tolist()
                 frames.append(dict(frame=i,stamp=int(row['timestamp_us']*1000),observations=observations,
                     points=len(scan), timing_ms=elapsed,visual_ms=vt['elapsed_ms'],
                     scan_sha256=row['scan_sha256'],image_sha256=row['image_sha256']))
@@ -269,6 +284,7 @@ if __name__ == '__main__':
     p.add_argument('--annotations',type=Path,default=RUNTIME/'annotations')
     p.add_argument('--parts',nargs='+',default=['train','dev'])
     p.add_argument('--scene-limit',type=int,default=0)
+    p.add_argument('--candidate-fragments',action='store_true')
     a=p.parse_args()
     if a.action=='prepare': prepare(a.out)
-    else: extract(a.index,a.out,a.annotations,a.parts,a.scene_limit)
+    else: extract(a.index,a.out,a.annotations,a.parts,a.scene_limit,a.candidate_fragments)
