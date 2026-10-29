@@ -1,0 +1,1830 @@
+{
+  "scene": "scene-0347",
+  "log": "ddc03471df3e4c9bb9663629a4097743",
+  "arms": {
+    "raw": {
+      "miou_fixed16": 0.3940101838480825,
+      "miou_present": 0.5253469117974433,
+      "accuracy": 0.9449423153024261,
+      "class_iou": [
+        null,
+        0.0,
+        null,
+        0.9279953498510499,
+        null,
+        0.0,
+        0.5561996779388084,
+        0.0,
+        null,
+        0.0,
+        0.9619765226424856,
+        0.7197148499590579,
+        0.643837960388416,
+        0.8586878496065445,
+        0.9014374795410734,
+        0.7343132516418844
+      ],
+      "labeled_points": 985530,
+      "confusion": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          5,
+          0,
+          28,
+          16
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          25544,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          179,
+          0,
+          0,
+          1,
+          19,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          81,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          77,
+          0,
+          18,
+          1727,
+          0,
+          0,
+          0,
+          96,
+          0,
+          64,
+          4,
+          815,
+          174
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          54,
+          0,
+          0,
+          0,
+          77,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          267,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          18,
+          0,
+          0,
+          0,
+          5,
+          18
+        ],
+        [
+          0,
+          0,
+          0,
+          77,
+          0,
+          0,
+          4,
+          0,
+          0,
+          0,
+          457441,
+          11,
+          276,
+          1090,
+          51,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          19,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          3570,
+          14942,
+          54,
+          872,
+          19,
+          6
+        ],
+        [
+          0,
+          0,
+          0,
+          52,
+          0,
+          2,
+          16,
+          0,
+          0,
+          0,
+          4517,
+          0,
+          30102,
+          548,
+          764,
+          148
+        ],
+        [
+          0,
+          0,
+          0,
+          184,
+          0,
+          0,
+          10,
+          0,
+          0,
+          0,
+          7372,
+          1247,
+          7569,
+          126799,
+          536,
+          801
+        ],
+        [
+          0,
+          0,
+          0,
+          909,
+          0,
+          0,
+          67,
+          0,
+          0,
+          62,
+          698,
+          20,
+          2598,
+          535,
+          223058,
+          10699
+        ],
+        [
+          0,
+          0,
+          0,
+          114,
+          0,
+          0,
+          27,
+          0,
+          0,
+          0,
+          59,
+          0,
+          39,
+          98,
+          6487,
+          51656
+        ]
+      ],
+      "counts": {
+        "camera_foreground_points": 3261,
+        "camera_foreground_correct": 2890,
+        "raw_fixes": 0,
+        "raw_harms": 0,
+        "current_fixes": 0,
+        "current_harms": 16
+      }
+    },
+    "current_image": {
+      "miou_fixed16": 0.394288711587604,
+      "miou_present": 0.5257182821168053,
+      "accuracy": 0.9449585502217082,
+      "class_iou": [
+        null,
+        0.0,
+        null,
+        0.928068008428395,
+        null,
+        0.0,
+        0.5605280103026401,
+        0.0,
+        null,
+        0.0,
+        0.961984614672841,
+        0.7197148499590579,
+        0.643837960388416,
+        0.8586878496065445,
+        0.9014848404018849,
+        0.7343132516418844
+      ],
+      "labeled_points": 985530,
+      "confusion": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          5,
+          0,
+          28,
+          16
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          25546,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          177,
+          0,
+          0,
+          1,
+          19,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          81,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          77,
+          0,
+          18,
+          1741,
+          0,
+          0,
+          0,
+          95,
+          0,
+          64,
+          4,
+          802,
+          174
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          54,
+          0,
+          0,
+          0,
+          77,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          267,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          18,
+          0,
+          0,
+          0,
+          5,
+          18
+        ],
+        [
+          0,
+          0,
+          0,
+          77,
+          0,
+          0,
+          4,
+          0,
+          0,
+          0,
+          457441,
+          11,
+          276,
+          1090,
+          51,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          19,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          3570,
+          14942,
+          54,
+          872,
+          19,
+          6
+        ],
+        [
+          0,
+          0,
+          0,
+          52,
+          0,
+          2,
+          16,
+          0,
+          0,
+          0,
+          4517,
+          0,
+          30102,
+          548,
+          764,
+          148
+        ],
+        [
+          0,
+          0,
+          0,
+          184,
+          0,
+          0,
+          11,
+          0,
+          0,
+          0,
+          7371,
+          1247,
+          7569,
+          126799,
+          536,
+          801
+        ],
+        [
+          0,
+          0,
+          0,
+          909,
+          0,
+          0,
+          67,
+          0,
+          0,
+          62,
+          698,
+          20,
+          2598,
+          535,
+          223058,
+          10699
+        ],
+        [
+          0,
+          0,
+          0,
+          114,
+          0,
+          0,
+          27,
+          0,
+          0,
+          0,
+          59,
+          0,
+          39,
+          98,
+          6487,
+          51656
+        ]
+      ],
+      "counts": {
+        "camera_foreground_points": 3261,
+        "camera_foreground_correct": 2906,
+        "raw_fixes": 16,
+        "raw_harms": 0,
+        "current_fixes": 0,
+        "current_harms": 0
+      }
+    },
+    "visual_memory": {
+      "miou_fixed16": 0.394288711587604,
+      "miou_present": 0.5257182821168053,
+      "accuracy": 0.9449585502217082,
+      "class_iou": [
+        null,
+        0.0,
+        null,
+        0.928068008428395,
+        null,
+        0.0,
+        0.5605280103026401,
+        0.0,
+        null,
+        0.0,
+        0.961984614672841,
+        0.7197148499590579,
+        0.643837960388416,
+        0.8586878496065445,
+        0.9014848404018849,
+        0.7343132516418844
+      ],
+      "labeled_points": 985530,
+      "confusion": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          5,
+          0,
+          28,
+          16
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          25546,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          177,
+          0,
+          0,
+          1,
+          19,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          81,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          77,
+          0,
+          18,
+          1741,
+          0,
+          0,
+          0,
+          95,
+          0,
+          64,
+          4,
+          802,
+          174
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          54,
+          0,
+          0,
+          0,
+          77,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          267,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          18,
+          0,
+          0,
+          0,
+          5,
+          18
+        ],
+        [
+          0,
+          0,
+          0,
+          77,
+          0,
+          0,
+          4,
+          0,
+          0,
+          0,
+          457441,
+          11,
+          276,
+          1090,
+          51,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          19,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          3570,
+          14942,
+          54,
+          872,
+          19,
+          6
+        ],
+        [
+          0,
+          0,
+          0,
+          52,
+          0,
+          2,
+          16,
+          0,
+          0,
+          0,
+          4517,
+          0,
+          30102,
+          548,
+          764,
+          148
+        ],
+        [
+          0,
+          0,
+          0,
+          184,
+          0,
+          0,
+          11,
+          0,
+          0,
+          0,
+          7371,
+          1247,
+          7569,
+          126799,
+          536,
+          801
+        ],
+        [
+          0,
+          0,
+          0,
+          909,
+          0,
+          0,
+          67,
+          0,
+          0,
+          62,
+          698,
+          20,
+          2598,
+          535,
+          223058,
+          10699
+        ],
+        [
+          0,
+          0,
+          0,
+          114,
+          0,
+          0,
+          27,
+          0,
+          0,
+          0,
+          59,
+          0,
+          39,
+          98,
+          6487,
+          51656
+        ]
+      ],
+      "counts": {
+        "camera_foreground_points": 3261,
+        "camera_foreground_correct": 2906,
+        "raw_fixes": 16,
+        "raw_harms": 0,
+        "current_fixes": 0,
+        "current_harms": 0
+      }
+    }
+  },
+  "identity": {
+    "full": {
+      "point_idf1": 0.14695604193489056,
+      "association_quality": 0.011903979942820626,
+      "gt_points": 29029,
+      "pred_points": 3593,
+      "identity_true_positive": 2397,
+      "associated_gt_points": 2757,
+      "gt_instances": 44,
+      "pred_tracks": 9,
+      "id_switches": 0,
+      "supported_transitions": 29,
+      "reappearance_transitions": 1
+    },
+    "camera": {
+      "point_idf1": 0.7047927080270509,
+      "association_quality": 0.12913289542199696,
+      "gt_points": 3209,
+      "pred_points": 3593,
+      "identity_true_positive": 2397,
+      "associated_gt_points": 2757,
+      "gt_instances": 21,
+      "pred_tracks": 9,
+      "id_switches": 1,
+      "supported_transitions": 38,
+      "reappearance_transitions": 2
+    }
+  },
+  "reference_parity_differences": {
+    "full": {},
+    "camera": {}
+  },
+  "net_corrected_objects": {},
+  "availability": {
+    "unique_history_answer_points": 0,
+    "instances": 0
+  },
+  "frames": [
+    {
+      "frame": 0,
+      "visual": {
+        "elapsed_ms": 14.857782982289791,
+        "instances": 3,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.338360016234219,
+          "inference": 3.639879054389894,
+          "postprocess": 1.2886860640719533
+        },
+        "visual_memory": {
+          "tracks": 3,
+          "raw_records": 3,
+          "observations_with_history": 0
+        }
+      },
+      "semantic_ms": 0.06765802390873432,
+      "observations": 0
+    },
+    {
+      "frame": 1,
+      "visual": {
+        "elapsed_ms": 20.426783012226224,
+        "instances": 2,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.067416975274682,
+          "inference": 3.504491993226111,
+          "postprocess": 1.073647988960147
+        },
+        "visual_memory": {
+          "tracks": 3,
+          "raw_records": 10,
+          "observations_with_history": 2
+        }
+      },
+      "semantic_ms": 0.6242450326681137,
+      "observations": 1
+    },
+    {
+      "frame": 2,
+      "visual": {
+        "elapsed_ms": 20.224108011461794,
+        "instances": 2,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.1794189922511578,
+          "inference": 3.6063260631635785,
+          "postprocess": 1.1049769818782806
+        },
+        "visual_memory": {
+          "tracks": 3,
+          "raw_records": 18,
+          "observations_with_history": 2
+        }
+      },
+      "semantic_ms": 0.5979849956929684,
+      "observations": 1
+    },
+    {
+      "frame": 3,
+      "visual": {
+        "elapsed_ms": 20.21661400794983,
+        "instances": 2,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.1071721091866493,
+          "inference": 3.530811984091997,
+          "postprocess": 1.0752408998087049
+        },
+        "visual_memory": {
+          "tracks": 3,
+          "raw_records": 25,
+          "observations_with_history": 2
+        }
+      },
+      "semantic_ms": 0.6397439865395427,
+      "observations": 1
+    },
+    {
+      "frame": 4,
+      "visual": {
+        "elapsed_ms": 20.3742430312559,
+        "instances": 2,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.187603920698166,
+          "inference": 3.578161937184632,
+          "postprocess": 1.1514449724927545
+        },
+        "visual_memory": {
+          "tracks": 3,
+          "raw_records": 25,
+          "observations_with_history": 2
+        }
+      },
+      "semantic_ms": 0.6702130194753408,
+      "observations": 1
+    },
+    {
+      "frame": 5,
+      "visual": {
+        "elapsed_ms": 22.751344949938357,
+        "instances": 3,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.1544710723683238,
+          "inference": 3.5174560034647584,
+          "postprocess": 1.2791178887709975
+        },
+        "visual_memory": {
+          "tracks": 3,
+          "raw_records": 26,
+          "observations_with_history": 3
+        }
+      },
+      "semantic_ms": 0.6857309490442276,
+      "observations": 0
+    },
+    {
+      "frame": 6,
+      "visual": {
+        "elapsed_ms": 25.388229987584054,
+        "instances": 3,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 2.458226983435452,
+          "inference": 3.4079989418387413,
+          "postprocess": 1.1657029390335083
+        },
+        "visual_memory": {
+          "tracks": 3,
+          "raw_records": 30,
+          "observations_with_history": 3
+        }
+      },
+      "semantic_ms": 1.0158279910683632,
+      "observations": 1
+    },
+    {
+      "frame": 7,
+      "visual": {
+        "elapsed_ms": 22.375551983714104,
+        "instances": 3,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.137258019298315,
+          "inference": 3.61370004247874,
+          "postprocess": 1.1984449811279774
+        },
+        "visual_memory": {
+          "tracks": 3,
+          "raw_records": 34,
+          "observations_with_history": 3
+        }
+      },
+      "semantic_ms": 0.9662039810791612,
+      "observations": 1
+    },
+    {
+      "frame": 8,
+      "visual": {
+        "elapsed_ms": 20.92537796124816,
+        "instances": 2,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.2012600200250745,
+          "inference": 3.5445080138742924,
+          "postprocess": 1.0874340077862144
+        },
+        "visual_memory": {
+          "tracks": 3,
+          "raw_records": 36,
+          "observations_with_history": 2
+        }
+      },
+      "semantic_ms": 0.7544719846919179,
+      "observations": 1
+    },
+    {
+      "frame": 9,
+      "visual": {
+        "elapsed_ms": 20.63040796201676,
+        "instances": 0,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.186351990327239,
+          "inference": 3.521303995512426,
+          "postprocess": 1.0582980467006564
+        },
+        "visual_memory": {
+          "tracks": 3,
+          "raw_records": 36,
+          "observations_with_history": 0
+        }
+      },
+      "semantic_ms": 0.03817200195044279,
+      "observations": 0
+    },
+    {
+      "frame": 10,
+      "visual": {
+        "elapsed_ms": 23.056993959471583,
+        "instances": 1,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 4.435007926076651,
+          "inference": 3.502217005006969,
+          "postprocess": 1.0824750643223524
+        },
+        "visual_memory": {
+          "tracks": 3,
+          "raw_records": 36,
+          "observations_with_history": 1
+        }
+      },
+      "semantic_ms": 0.0414079986512661,
+      "observations": 0
+    },
+    {
+      "frame": 11,
+      "visual": {
+        "elapsed_ms": 19.631311995908618,
+        "instances": 1,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.1624159524217248,
+          "inference": 3.5398590844124556,
+          "postprocess": 1.0428589303046465
+        },
+        "visual_memory": {
+          "tracks": 2,
+          "raw_records": 24,
+          "observations_with_history": 1
+        }
+      },
+      "semantic_ms": 0.040557002648711205,
+      "observations": 0
+    },
+    {
+      "frame": 12,
+      "visual": {
+        "elapsed_ms": 21.68594195973128,
+        "instances": 1,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.049923012033105,
+          "inference": 3.5095519851893187,
+          "postprocess": 1.0959410574287176
+        },
+        "visual_memory": {
+          "tracks": 2,
+          "raw_records": 24,
+          "observations_with_history": 1
+        }
+      },
+      "semantic_ms": 0.036428915336728096,
+      "observations": 0
+    },
+    {
+      "frame": 13,
+      "visual": {
+        "elapsed_ms": 18.842265009880066,
+        "instances": 1,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.041086041368544,
+          "inference": 3.6163240438327193,
+          "postprocess": 1.035435008816421
+        },
+        "visual_memory": {
+          "tracks": 1,
+          "raw_records": 12,
+          "observations_with_history": 1
+        }
+      },
+      "semantic_ms": 0.03498594742268324,
+      "observations": 0
+    },
+    {
+      "frame": 14,
+      "visual": {
+        "elapsed_ms": 17.8599200444296,
+        "instances": 0,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.040093949995935,
+          "inference": 3.5480839433148503,
+          "postprocess": 1.086542964912951
+        },
+        "visual_memory": {
+          "tracks": 1,
+          "raw_records": 12,
+          "observations_with_history": 0
+        }
+      },
+      "semantic_ms": 0.03797200042754412,
+      "observations": 0
+    },
+    {
+      "frame": 15,
+      "visual": {
+        "elapsed_ms": 19.552502082660794,
+        "instances": 1,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 0.9958610171452165,
+          "inference": 3.522446029819548,
+          "postprocess": 1.1490009492263198
+        },
+        "visual_memory": {
+          "tracks": 1,
+          "raw_records": 12,
+          "observations_with_history": 1
+        }
+      },
+      "semantic_ms": 0.03914395347237587,
+      "observations": 0
+    },
+    {
+      "frame": 16,
+      "visual": {
+        "elapsed_ms": 19.997416995465755,
+        "instances": 1,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 0.956075033172965,
+          "inference": 3.5256320843473077,
+          "postprocess": 1.5742479590699077
+        },
+        "visual_memory": {
+          "tracks": 1,
+          "raw_records": 12,
+          "observations_with_history": 1
+        }
+      },
+      "semantic_ms": 0.03715103957802057,
+      "observations": 0
+    },
+    {
+      "frame": 17,
+      "visual": {
+        "elapsed_ms": 18.998489947989583,
+        "instances": 1,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.001500990241766,
+          "inference": 3.52822698187083,
+          "postprocess": 1.0992559837177396
+        },
+        "visual_memory": {
+          "tracks": 1,
+          "raw_records": 12,
+          "observations_with_history": 1
+        }
+      },
+      "semantic_ms": 0.03924395423382521,
+      "observations": 0
+    },
+    {
+      "frame": 18,
+      "visual": {
+        "elapsed_ms": 18.596848007291555,
+        "instances": 1,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.0453739669173956,
+          "inference": 3.537414944730699,
+          "postprocess": 1.1659630108624697
+        },
+        "visual_memory": {
+          "tracks": 1,
+          "raw_records": 12,
+          "observations_with_history": 1
+        }
+      },
+      "semantic_ms": 0.036338926292955875,
+      "observations": 0
+    },
+    {
+      "frame": 19,
+      "visual": {
+        "elapsed_ms": 18.83552095387131,
+        "instances": 1,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.0218489915132523,
+          "inference": 3.608540049754083,
+          "postprocess": 1.2248849961906672
+        },
+        "visual_memory": {
+          "tracks": 1,
+          "raw_records": 12,
+          "observations_with_history": 1
+        }
+      },
+      "semantic_ms": 0.037541030906140804,
+      "observations": 0
+    },
+    {
+      "frame": 20,
+      "visual": {
+        "elapsed_ms": 18.532305024564266,
+        "instances": 1,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.0510049760341644,
+          "inference": 3.5395780578255653,
+          "postprocess": 1.1934449430555105
+        },
+        "visual_memory": {
+          "tracks": 2,
+          "raw_records": 13,
+          "observations_with_history": 1
+        }
+      },
+      "semantic_ms": 0.6203170632943511,
+      "observations": 1
+    },
+    {
+      "frame": 21,
+      "visual": {
+        "elapsed_ms": 19.625831046141684,
+        "instances": 1,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.0428900131955743,
+          "inference": 3.5993619821965694,
+          "postprocess": 1.5034130774438381
+        },
+        "visual_memory": {
+          "tracks": 2,
+          "raw_records": 13,
+          "observations_with_history": 1
+        }
+      },
+      "semantic_ms": 0.6090059177950025,
+      "observations": 1
+    },
+    {
+      "frame": 22,
+      "visual": {
+        "elapsed_ms": 19.963643047958612,
+        "instances": 2,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.049783080816269,
+          "inference": 3.5673920065164566,
+          "postprocess": 1.3753200182691216
+        },
+        "visual_memory": {
+          "tracks": 3,
+          "raw_records": 16,
+          "observations_with_history": 2
+        }
+      },
+      "semantic_ms": 0.6383419968187809,
+      "observations": 1
+    },
+    {
+      "frame": 23,
+      "visual": {
+        "elapsed_ms": 20.82923601847142,
+        "instances": 3,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 0.9504340123385191,
+          "inference": 3.4197409404441714,
+          "postprocess": 1.3809810625389218
+        },
+        "visual_memory": {
+          "tracks": 4,
+          "raw_records": 21,
+          "observations_with_history": 3
+        }
+      },
+      "semantic_ms": 0.6507450016215444,
+      "observations": 1
+    },
+    {
+      "frame": 24,
+      "visual": {
+        "elapsed_ms": 19.581066095270216,
+        "instances": 3,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 0.9046670747920871,
+          "inference": 3.577881958335638,
+          "postprocess": 1.402130932547152
+        },
+        "visual_memory": {
+          "tracks": 3,
+          "raw_records": 28,
+          "observations_with_history": 3
+        }
+      },
+      "semantic_ms": 0.8247960358858109,
+      "observations": 1
+    },
+    {
+      "frame": 25,
+      "visual": {
+        "elapsed_ms": 19.560336018912494,
+        "instances": 3,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.073658000677824,
+          "inference": 3.56669002212584,
+          "postprocess": 1.1895480565726757
+        },
+        "visual_memory": {
+          "tracks": 3,
+          "raw_records": 33,
+          "observations_with_history": 3
+        }
+      },
+      "semantic_ms": 0.535515951924026,
+      "observations": 0
+    },
+    {
+      "frame": 26,
+      "visual": {
+        "elapsed_ms": 21.318222978152335,
+        "instances": 3,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.263457932509482,
+          "inference": 3.606806043535471,
+          "postprocess": 1.2781060067936778
+        },
+        "visual_memory": {
+          "tracks": 4,
+          "raw_records": 37,
+          "observations_with_history": 3
+        }
+      },
+      "semantic_ms": 1.1325200321152806,
+      "observations": 2
+    },
+    {
+      "frame": 27,
+      "visual": {
+        "elapsed_ms": 22.976590902544558,
+        "instances": 4,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.051045022904873,
+          "inference": 3.5690150689333677,
+          "postprocess": 1.3481490314006805
+        },
+        "visual_memory": {
+          "tracks": 5,
+          "raw_records": 38,
+          "observations_with_history": 4
+        }
+      },
+      "semantic_ms": 1.4263680204749107,
+      "observations": 1
+    },
+    {
+      "frame": 28,
+      "visual": {
+        "elapsed_ms": 20.590831991285086,
+        "instances": 2,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 0.9986150544136763,
+          "inference": 3.4647559514269233,
+          "postprocess": 1.152878045104444
+        },
+        "visual_memory": {
+          "tracks": 5,
+          "raw_records": 38,
+          "observations_with_history": 2
+        }
+      },
+      "semantic_ms": 1.2855299282819033,
+      "observations": 2
+    },
+    {
+      "frame": 29,
+      "visual": {
+        "elapsed_ms": 20.548071013763547,
+        "instances": 2,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.0213489877060056,
+          "inference": 3.538015065714717,
+          "postprocess": 1.1675659334287047
+        },
+        "visual_memory": {
+          "tracks": 5,
+          "raw_records": 38,
+          "observations_with_history": 2
+        }
+      },
+      "semantic_ms": 1.1849489528685808,
+      "observations": 2
+    },
+    {
+      "frame": 30,
+      "visual": {
+        "elapsed_ms": 20.49239503685385,
+        "instances": 2,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.0069709969684482,
+          "inference": 3.5051529994234443,
+          "postprocess": 1.1627469211816788
+        },
+        "visual_memory": {
+          "tracks": 4,
+          "raw_records": 37,
+          "observations_with_history": 2
+        }
+      },
+      "semantic_ms": 1.0304560419172049,
+      "observations": 1
+    },
+    {
+      "frame": 31,
+      "visual": {
+        "elapsed_ms": 20.261676982045174,
+        "instances": 2,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 0.9447929915040731,
+          "inference": 3.530760994181037,
+          "postprocess": 1.2662640074267983
+        },
+        "visual_memory": {
+          "tracks": 3,
+          "raw_records": 36,
+          "observations_with_history": 2
+        }
+      },
+      "semantic_ms": 0.9759420063346624,
+      "observations": 2
+    },
+    {
+      "frame": 32,
+      "visual": {
+        "elapsed_ms": 18.652973929420114,
+        "instances": 1,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 0.9924739133566618,
+          "inference": 3.4692749613896012,
+          "postprocess": 1.1778350453823805
+        },
+        "visual_memory": {
+          "tracks": 2,
+          "raw_records": 24,
+          "observations_with_history": 1
+        }
+      },
+      "semantic_ms": 0.519045046530664,
+      "observations": 0
+    },
+    {
+      "frame": 33,
+      "visual": {
+        "elapsed_ms": 18.541633035056293,
+        "instances": 1,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 0.9346239967271686,
+          "inference": 3.568583051674068,
+          "postprocess": 1.123533002100885
+        },
+        "visual_memory": {
+          "tracks": 2,
+          "raw_records": 24,
+          "observations_with_history": 1
+        }
+      },
+      "semantic_ms": 0.5311180138960481,
+      "observations": 0
+    },
+    {
+      "frame": 34,
+      "visual": {
+        "elapsed_ms": 19.06128798145801,
+        "instances": 2,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.0130431037396193,
+          "inference": 3.4859059378504753,
+          "postprocess": 1.1518569663167
+        },
+        "visual_memory": {
+          "tracks": 3,
+          "raw_records": 27,
+          "observations_with_history": 2
+        }
+      },
+      "semantic_ms": 0.6063008913770318,
+      "observations": 0
+    },
+    {
+      "frame": 35,
+      "visual": {
+        "elapsed_ms": 19.501934992149472,
+        "instances": 2,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 0.9276398923248053,
+          "inference": 3.5167650785297155,
+          "postprocess": 1.1745590018108487
+        },
+        "visual_memory": {
+          "tracks": 3,
+          "raw_records": 31,
+          "observations_with_history": 2
+        }
+      },
+      "semantic_ms": 0.762777985073626,
+      "observations": 1
+    },
+    {
+      "frame": 36,
+      "visual": {
+        "elapsed_ms": 20.61110094655305,
+        "instances": 3,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 1.019023940898478,
+          "inference": 3.652793006040156,
+          "postprocess": 1.3704210286960006
+        },
+        "visual_memory": {
+          "tracks": 3,
+          "raw_records": 26,
+          "observations_with_history": 3
+        }
+      },
+      "semantic_ms": 1.0525579564273357,
+      "observations": 2
+    },
+    {
+      "frame": 37,
+      "visual": {
+        "elapsed_ms": 21.582273999229074,
+        "instances": 3,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 0.9984649950638413,
+          "inference": 3.570446977391839,
+          "postprocess": 1.6402129549533129
+        },
+        "visual_memory": {
+          "tracks": 3,
+          "raw_records": 31,
+          "observations_with_history": 3
+        }
+      },
+      "semantic_ms": 1.0222310665994883,
+      "observations": 1
+    },
+    {
+      "frame": 38,
+      "visual": {
+        "elapsed_ms": 21.142469020560384,
+        "instances": 3,
+        "reset": false,
+        "expired_tracks": 0,
+        "model_stages_ms": {
+          "preprocess": 0.9892579400911927,
+          "inference": 3.3567409263923764,
+          "postprocess": 1.1860410450026393
+        },
+        "visual_memory": {
+          "tracks": 4,
+          "raw_records": 38,
+          "observations_with_history": 3
+        }
+      },
+      "semantic_ms": 1.4536690432578325,
+      "observations": 3
+    }
+  ]
+}

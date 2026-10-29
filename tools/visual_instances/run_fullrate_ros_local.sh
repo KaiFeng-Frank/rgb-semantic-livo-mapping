@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 set -eo pipefail
+# Keep paired runs sequential on the shared GPU and ROS domain.
+exec 9>/home/frank/semantic_livo_runtime/fullrate-ros-local.lock
+flock -n 9 || { echo 'Another full-rate ROS replay holds the runtime lock' >&2; exit 1; }
 source /opt/ros/jazzy/setup.bash
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp ROS_DOMAIN_ID=96
 export CYCLONEDDS_URI=file:///home/frank/semantic_livo_instance_memory/tools/loop_closure/local_dds.xml

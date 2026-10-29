@@ -1,0 +1,25 @@
+test_initial_feature_and_ema_have_initialized_storage (tools.visual_instances.test_reid.ReIDTests.test_initial_feature_and_ema_have_initialized_storage) ... ok
+test_tracker_indexing_keeps_scores_features_and_masks_aligned (tools.visual_instances.test_reid.ReIDTests.test_tracker_indexing_keeps_scores_features_and_masks_aligned) ... ok
+test_visual_precision_isolation_restores_ptv3_caller (tools.visual_instances.test_reid.ReIDTests.test_visual_precision_isolation_restores_ptv3_caller) ... ok
+test_causality_expiry_identity_and_session_isolation (tools.visual_instances.test_visual_memory.VisualMemoryTests.test_causality_expiry_identity_and_session_isolation) ... ok
+test_read_before_write_raw_only_and_no_confidence_from_repetition (tools.visual_instances.test_visual_memory.VisualMemoryTests.test_read_before_write_raw_only_and_no_confidence_from_repetition) ... ok
+test_track_bound_and_wire_validation (tools.visual_instances.test_visual_memory.VisualMemoryTests.test_track_bound_and_wire_validation) ... ok
+test_calibration_uses_camera_not_lidar_depth (tools.visual_instances.test_association.AssociationTests.test_calibration_uses_camera_not_lidar_depth) ... ok
+test_camera_ego_motion_uses_only_received_pose_bracket (tools.visual_instances.test_association.AssociationTests.test_camera_ego_motion_uses_only_received_pose_bracket) ... ok
+test_empty_detection_is_explicit_unknown (tools.visual_instances.test_association.AssociationTests.test_empty_detection_is_explicit_unknown) ... ok
+test_frozen_features_survive_wire_without_changing_association (tools.visual_instances.test_association.AssociationTests.test_frozen_features_survive_wire_without_changing_association) ... ok
+test_invalid_mask_and_camera (tools.visual_instances.test_association.AssociationTests.test_invalid_mask_and_camera) ... ok
+test_overlaps_with_rejected_foreground_and_boundaries_abstain (tools.visual_instances.test_association.AssociationTests.test_overlaps_with_rejected_foreground_and_boundaries_abstain) ... ok
+test_restart_does_not_reuse_old_identity (tools.visual_instances.test_association.AssociationTests.test_restart_does_not_reuse_old_identity) ... ok
+test_roundtrip_and_corrupt_packet (tools.visual_instances.test_association.AssociationTests.test_roundtrip_and_corrupt_packet) ... ok
+test_sparse_object_abstains (tools.visual_instances.test_association.AssociationTests.test_sparse_object_abstains) ... ok
+test_time_gate_never_uses_future_and_never_waits (tools.visual_instances.test_association.AssociationTests.test_time_gate_never_uses_future_and_never_waits) ... ok
+test_two_adjacent_people_and_occluding_surface (tools.visual_instances.test_association.AssociationTests.test_two_adjacent_people_and_occluding_surface) ... ok
+test_cancel_during_startup_reaps_child (tools.visual_instances.test_lifecycle.LifecycleTests.test_cancel_during_startup_reaps_child) ... ok
+test_raw_only_read_before_write_expiry_epoch_and_causality (tools.semantic_memory.test_point_history.PointHistoryTests.test_raw_only_read_before_write_expiry_epoch_and_causality) ... ok
+test_self_exclusion_duplicates_missing_and_tie (tools.semantic_memory.test_point_history.PointHistoryTests.test_self_exclusion_duplicates_missing_and_tie) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.119s
+
+OK

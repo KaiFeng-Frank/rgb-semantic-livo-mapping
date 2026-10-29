@@ -1,0 +1,39 @@
+{
+  "config": {
+    "purpose": "Bounded point-level check of information lost by object/class pooling; not a new trained architecture",
+    "selection": "All eight independent_dev_added logs, all 321 cached keyframes; no new test access",
+    "inputs": "Previously cached raw PTv3 labels, raw XYZ and supplied ego poses only",
+    "history": "Exactly the preceding raw scan, at most 0.75 seconds old; no corrected-label feedback",
+    "neighbors": 4,
+    "radius_m": 0.25,
+    "controls": [
+      "raw",
+      "current_spatial",
+      "previous_raw"
+    ],
+    "operator": "Current point plus up to four neighboring raw labels, plurality vote; ties keep current label when possible, otherwise choose the lowest label. Current-spatial excludes the query point itself.",
+    "observer_only": "After predictions, count current errors with a correct same-class/same-instance historical neighbor, and whether the matched current neighborhood already contains a correct answer. GT never gates the actual vote.",
+    "continuation_gate": {
+      "miou_vs_raw_pp": 0.05,
+      "miou_vs_current_spatial_pp": 0.05,
+      "positive_logs_vs_current_spatial": 5,
+      "unique_opportunity_classes": 3,
+      "unique_opportunity_logs": 3
+    },
+    "failure_action": "Do not tune radius, neighbor count, train a point-memory network or open holdout on this evidence. Preserve the negative comparison.",
+    "scope": "Development diagnosis with fixed cached backbone outputs; raw 2Hz scans and supplied poses, not live estimated-motion or latency proof"
+  },
+  "config_sha256": "265ac053be84fe55d9a2e1363971de665a8fc7b03c849dffd2254ba248183db0",
+  "source_sha256": "b424a74c6bcbddb842eb31a5b96207c7838a752ff4ebe7ed50b4b08a243a2baa",
+  "index_sha256": "7094a62436c1138bca6a961cb88544e2a80eda1611115d0098379847203b0fe3",
+  "cache_sha256": {
+    "scene-0149": "b6f8d6f9357abb837b40658aa6001f827549d2e13fb0e4a90514c67662849378",
+    "scene-0803": "76f497ac2467f466b253d676aa6dfc5228c628172f28a5fcdcba1363adf064a5",
+    "scene-0868": "a751550926582330fa7b5332a8dd82be6fe89a22e012a09c024a82a0fa2719df",
+    "scene-0383": "f9a336d642b42e5b7f3277385ee03f89c337e5ad38cae49a81e361fba91de3dd",
+    "scene-0218": "f437c8352c7a5ed56c99922dde8ba4769101fabb3c2df1a726f3f69f0819ec9c",
+    "scene-0347": "e555871d9693894c435a50703ff76574b8f3b2aed4a8aed894e000086626e441",
+    "scene-0420": "20597de283135332a15fcfaea37e4db2847803f68bc8fd987ef92af697e67b34",
+    "scene-1074": "9d89302ca68777deb2b3b11939a524e37ab31362b1f27d93d717604e8958f9e1"
+  }
+}

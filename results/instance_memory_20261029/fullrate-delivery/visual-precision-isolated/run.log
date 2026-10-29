@@ -1,0 +1,10 @@
+W1029 11:55:00.319000 1658505 site-packages/torch/fx/_symbolic_trace.py:53] is_fx_tracing will return true for both fx.symbolic_trace and torch.export. Please use is_fx_tracing_symbolic_tracing() for specifically fx.symbolic_trace or torch.compiler.is_compiling() for specifically torch.export/compile.
+scene-0149 {'raw': 38.49129084744026, 'current_image': 38.49451235128763, 'visual_memory': 38.49451235128763} parity {'full': {}, 'camera': {}}
+scene-0803 {'raw': 33.75135300195838, 'current_image': 33.75249203634058, 'visual_memory': 33.75249203634058} parity {'full': {}, 'camera': {}}
+scene-0868 {'raw': 35.17307685154724, 'current_image': 35.17307685154724, 'visual_memory': 35.17307685154724} parity {'full': {}, 'camera': {}}
+scene-0383 {'raw': 33.53385277108993, 'current_image': 33.53385277108993, 'visual_memory': 33.53385277108993} parity {'full': {}, 'camera': {}}
+scene-0218 {'raw': 35.534380204872775, 'current_image': 35.53466581984984, 'visual_memory': 35.535299863189785} parity {'full': {}, 'camera': {}}
+scene-0347 {'raw': 39.40101838480825, 'current_image': 39.4288711587604, 'visual_memory': 39.4288711587604} parity {'full': {}, 'camera': {}}
+scene-0420 {'raw': 39.38236118795624, 'current_image': 39.532093141951165, 'visual_memory': 39.53540207461437} parity {'full': {}, 'camera': {}}
+scene-1074 {'raw': 39.65882941072278, 'current_image': 39.65882941072278, 'visual_memory': 39.65882941072278} parity {'full': {'point_idf1': (0.07714497651034369, 0.09725541910492047), 'association_quality': (0.029761028235981382, 0.03585473230462973), 'identity_true_positive': (468, 590), 'id_switches': (2, 1)}, 'camera': {'point_idf1': (0.43575418994413406, 0.5493482309124768), 'association_quality': (0.13817969672573802, 0.14557919452338242), 'identity_true_positive': (468, 590), 'id_switches': (2, 1)}}
+{'miou_gain_vs_current_pp': 0.0014017059697613021, 'miou_gain_vs_raw_pp': 0.01781254137784849, 'camera_foreground_gain_pp': 0.015460331366434765, 'net_positive_objects': 2, 'object_logs': 2, 'positive_logs': 2, 'passed': False}

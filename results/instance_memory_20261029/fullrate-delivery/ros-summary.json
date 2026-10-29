@@ -1,0 +1,93 @@
+{
+  "runs": [
+    {
+      "run": "keyframe",
+      "camera_frames": 40,
+      "scans": 40,
+      "camera_idf1_pct": 42.94506496466834,
+      "camera_id_switches": 32,
+      "point_latency_ms": {
+        "median": 67.7417924744077,
+        "p95": 92.67038187244907,
+        "max": 96.99478594120592
+      },
+      "startup_s": 14.803043516003527,
+      "camera_receipt_to_publish_ms": {
+        "median": 45.315831957850605,
+        "p95": 54.88281643483787,
+        "max": 60.95693609677255
+      },
+      "history_packets": 39,
+      "max_history": 4,
+      "no_drops": true,
+      "rebuild_parity": true
+    },
+    {
+      "run": "fullrate",
+      "camera_frames": 231,
+      "scans": 40,
+      "camera_idf1_pct": 48.32573006858455,
+      "camera_id_switches": 34,
+      "point_latency_ms": {
+        "median": 66.01455702912062,
+        "p95": 93.48719708505085,
+        "max": 104.07694499008358
+      },
+      "startup_s": 14.797517662984319,
+      "camera_receipt_to_publish_ms": {
+        "median": 48.958597937598825,
+        "p95": 54.5598374446854,
+        "max": 75.43543889187276
+      },
+      "history_packets": 230,
+      "max_history": 12,
+      "no_drops": true,
+      "rebuild_parity": true
+    },
+    {
+      "run": "keyframe-repeat2",
+      "camera_frames": 40,
+      "scans": 40,
+      "camera_idf1_pct": 42.94506496466834,
+      "camera_id_switches": 32,
+      "point_latency_ms": {
+        "median": 67.29425548110157,
+        "p95": 89.36993265524505,
+        "max": 98.29570597503334
+      },
+      "startup_s": 16.298972381977364,
+      "camera_receipt_to_publish_ms": {
+        "median": 45.29237298993394,
+        "p95": 53.832858824171126,
+        "max": 59.74640604108572
+      },
+      "history_packets": 39,
+      "max_history": 4,
+      "no_drops": true,
+      "rebuild_parity": true
+    },
+    {
+      "run": "fullrate-repeat2",
+      "camera_frames": 231,
+      "scans": 40,
+      "camera_idf1_pct": 48.32573006858455,
+      "camera_id_switches": 34,
+      "point_latency_ms": {
+        "median": 63.995820528361946,
+        "p95": 93.0073669354897,
+        "max": 95.63223097939044
+      },
+      "startup_s": 13.297151064965874,
+      "camera_receipt_to_publish_ms": {
+        "median": 45.85196892730892,
+        "p95": 51.592533534858376,
+        "max": 76.2244820361957
+      },
+      "history_packets": 230,
+      "max_history": 12,
+      "no_drops": true,
+      "rebuild_parity": true
+    }
+  ],
+  "scope": "One fixed development clip, two repetitions per arm; supplied ego poses, camera full cadence versus 2Hz, LiDAR remains 2Hz. No identity-label training or semantic changes."
+}

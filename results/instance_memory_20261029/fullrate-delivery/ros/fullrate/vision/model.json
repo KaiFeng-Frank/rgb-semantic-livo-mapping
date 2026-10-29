@@ -1,0 +1,42 @@
+{
+  "weights": "/home/frank/semantic_livo_runtime/visual-weights/yolo11n-seg.pt",
+  "sha256": "55ed65c56c91713d23e8402371c6c49a6fd84f257f7dce452e8d70e41dcbe152",
+  "ultralytics": "8.3.228",
+  "tracking": "fullrate",
+  "tracker": {
+    "tracker_type": "botsort",
+    "track_high_thresh": 0.25,
+    "track_low_thresh": 0.1,
+    "new_track_thresh": 0.25,
+    "track_buffer": 90,
+    "match_thresh": 0.8,
+    "fuse_score": true,
+    "gmc_method": "sparseOptFlow",
+    "proximity_thresh": 0.5,
+    "appearance_thresh": 0.25,
+    "with_reid": false,
+    "model": "auto"
+  },
+  "real_time_expiry_s": 7.5,
+  "gap_reset_s": 0.75,
+  "feature_embeddings": false,
+  "visual_memory": {
+    "max_tracks": 128,
+    "records": 12,
+    "ttl_s": 2.0,
+    "spacing_s": 0.1,
+    "decay_s": 0.75,
+    "evidence": "raw COCO80 sigmoid scores; history total weight <= current weight; no enhanced feedback"
+  },
+  "cpu_affinity": [
+    14
+  ],
+  "training": "none; frozen original YOLO11n-seg",
+  "startup_seconds": 4.462608568952419,
+  "paired_reference": "40a38c4 fullrate arm",
+  "precision": {
+    "matmul_tf32": false,
+    "cudnn_tf32": true,
+    "scope": "isolated native visual-worker policy, restored after each call"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "preregistration": {
+    "scope": "Frozen development-only semantic readout of raw continuous visual evidence; no new model/training, no holdout access",
+    "data": "Exactly the 8 fixed independent development scenes: 1857 real camera images, 321 original LiDAR keyframes. Ground-truth point labels and instance IDs enter only the observer.",
+    "identity": "Production single-stream adapter for the already frozen non-ReID full-rate tracker. Score projected-mask point IDF1 and compare with archived paired full-rate results to check adapter parity.",
+    "memory": {
+      "max_tracks": 128,
+      "records": 12,
+      "ttl_s": 2.0,
+      "spacing_s": 0.1,
+      "decay_s": 0.75,
+      "history_total_weight_at_most": 1.0
+    },
+    "state": "Store only raw COCO80 sigmoid scores on a visual track. Read strictly past samples before writing current raw values. No point-prediction feedback or ground-truth association. Session/reset isolation and real timestamps.",
+    "readout": "Normalize supported COCO scores into native16 six foreground classes. Blend each current point posterior with this distribution using alpha=0.25*current detection confidence (the existing visual-weight constant). Apply only original trusted geometric components; identity output retains projected mask coverage.",
+    "controls": [
+      "raw PTv3",
+      "current image scores with full-rate identities",
+      "current plus raw historical image scores with identical full-rate identities"
+    ],
+    "fairness": "Same PTv3 forward and current point probabilities, exact same IDs/components/current confidence and fusion operation. Only the visual class distribution differs. Current-only fusion is a required comparator, not raw alone.",
+    "primary": "Whole-scan native16 mIoU, foreground accuracy on the fixed camera-observable domain, net fixes/harms vs both raw and current-image fusion, per-log and per-object counts. GT-only availability counts are explicitly separate from actual output gains.",
+    "semantic_continuation_gate": "History must improve full-scan mIoU by >=0.05 pp over BOTH raw and matched current-image fusion; improve camera foreground accuracy by >=0.5 pp over matched current-image fusion; net positive corrections on at least 5 true objects in at least 2 logs; positive full-scan mIoU change in a majority of the 8 logs. Failure remains failure and does not trigger a coefficient sweep.",
+    "runtime": "Record actual feature/readout cost and memory bounds. Offline component timing is not end-to-end ROS latency; actual online delivery remains a separate required verification.",
+    "attribution": "Any identity gain comes from continuous past images supplied to the existing tracker. Any semantic memory gain must exceed the matched current-image fusion. No Transformer novelty or trained-model contribution is claimed."
+  },
+  "index_sha256": "7094a62436c1138bca6a961cb88544e2a80eda1611115d0098379847203b0fe3",
+  "frames_sha256": "5d4668193f5e5e4a6cf4fe2f4cb4297a81ac840426e63f705c50583aaeeceafd",
+  "image_manifest_sha256": "e7f02069588565bd721d94911b567df9753a7bb7df1c0bf53fa88193e46c8369",
+  "ptv3_sha256": "35f5d3aec63ae1c383f4a4146e157aa054860cb12b178d899571287e6f97e5f1",
+  "yolo_sha256": "55ed65c56c91713d23e8402371c6c49a6fd84f257f7dce452e8d70e41dcbe152",
+  "admission": {
+    "time": 1793246094.401386,
+    "pid": 1658505,
+    "compute_processes": []
+  },
+  "source": {
+    "evaluate_visual_memory.py": "259126bdae7d9939ff63351942ae947d5fb800c671bc03f717106c4f311521c1",
+    "fullrate.py": "e715f7fe94982100d7653f227524443a53ea713078e69d21791bf75f057e9119",
+    "visual_memory.py": "3f424bd5d24eeaa3871f30be8e12767bf0d02beb71fa76b9ca6545e90e1a39a4",
+    "visual_semantics.py": "902f184561adc39f8731275a229d3745023a9b9ce1d5f91338e273e8ad841265",
+    "geometry.py": "cf7d1a53fe3c8e2876ced29c8fec7da4f318aa4cc9e52700cbd85c6306d801c0"
+  }
+}
