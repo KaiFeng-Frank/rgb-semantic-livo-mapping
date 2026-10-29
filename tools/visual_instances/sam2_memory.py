@@ -29,6 +29,15 @@ class SAM2Pair:
                           '++model.compile_image_encoder=True']
         self.model=build_sam2('configs/sam2.1/sam2.1_hiera_t.yaml',str(weights),apply_postprocessing=True,
             hydra_overrides_extra=overrides)
+        if official_compile:
+            # On the installed Torch build, a later compiled prompt encoder can
+            # recycle the memory-attention CUDAGraph output before the mask head
+            # reads it. Own this intermediate just as official VOS owns its
+            # image/head/memory outputs. Clone is OUTSIDE the compiled graph.
+            compiled_attention=self.model.memory_attention.forward
+            def owned_attention(*args,**kwargs):
+                return compiled_attention(*args,**kwargs).clone()
+            self.model.memory_attention.forward=owned_attention
         self.transforms=SAM2Transforms(self.model.image_size,mask_threshold=0.)
         self.histories={};self.last_seen={};self.stamp=None;self.session=None;self.frame=0
         self.meta=dict(weights_sha256=hashlib.sha256(Path(weights).read_bytes()).hexdigest(),num_maskmem=self.model.num_maskmem,image_size=image_size,
