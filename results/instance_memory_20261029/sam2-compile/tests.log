@@ -1,0 +1,12 @@
+test_bound_spatial_memory_retain_pointers_and_owned_storage (tools.visual_instances.test_sam2_memory.SAM2StateTests.test_bound_spatial_memory_retain_pointers_and_owned_storage) ... ok
+test_equivalence_to_existing_pixel_scan (tools.visual_instances.test_sam2_layout.LayoutTests.test_equivalence_to_existing_pixel_scan) ... ok
+test_fragmented_empty_and_edge_slots_keep_exact_boxes (tools.visual_instances.test_sam2_layout.LayoutTests.test_fragmented_empty_and_edge_slots_keep_exact_boxes) ... ok
+test_missing_warm_data_and_omitted_layout_cost_cannot_pass (tools.visual_instances.test_sam2_probe.AdmissionTests.test_missing_warm_data_and_omitted_layout_cost_cannot_pass) ... {'pixel_disagreement_fraction': 0.0, 'mean_nonempty_object_iou': 1.0, 'min_nonempty_object_iou': 1.0, 'equivalent': True} warm_runtime_passed False
+{'pixel_disagreement_fraction': 0.0, 'mean_nonempty_object_iou': 1.0, 'min_nonempty_object_iou': 1.0, 'equivalent': True} warm_runtime_passed False
+{'pixel_disagreement_fraction': 0.0, 'mean_nonempty_object_iou': 1.0, 'min_nonempty_object_iou': 1.0, 'equivalent': True} warm_runtime_passed True
+ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.063s
+
+OK

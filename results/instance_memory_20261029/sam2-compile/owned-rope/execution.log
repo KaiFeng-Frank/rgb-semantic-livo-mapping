@@ -1,0 +1,153 @@
+Image encoder compilation is enabled. First forward pass will be slow.
+Compiling all components for VOS setting. First time may be very slow.
+{'frame': 0, 'repeat': 0, 'wall_both_arms_ms': 12785.073418985121, 'objects': 11, 'input_objects': 11, 'encoder_ms': 4205.669404007494, 'current_ms': 4793.455849983729, 'temporal_ms': 3757.982462993823, 'objects_reading_history': 0, 'tracks': 11, 'memory_entries': 11}
+/home/frank/miniconda3/envs/ctvggt/lib/python3.11/site-packages/torch/_inductor/lowering.py:2207: UserWarning: Torchinductor does not support code generation for complex operators. Performance may be worse than eager.
+  warnings.warn(
+W1029 13:14:45.873000 1676968 site-packages/torch/_inductor/utils.py:1687] [4/0_1] Not enough SMs to use max_autotune_gemm mode
+/home/frank/miniconda3/envs/ctvggt/lib/python3.11/site-packages/torch/_inductor/select_algorithm.py:3632: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  current_out_size = out_base.storage().size()
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.007679999805986881}
+AUTOTUNE addmm(9x256, 9x256, 256x256)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0077 ms 100.0% 
+  addmm 0.0101 ms 75.7% 
+SingleProcess AUTOTUNE benchmarking takes 0.0450 seconds and 0.0001 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.007903999648988247}
+AUTOTUNE addmm(9x128, 9x256, 256x128)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0079 ms 100.0% 
+  addmm 0.0082 ms 96.5% 
+SingleProcess AUTOTUNE benchmarking takes 0.0439 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.009664000011980534}
+AUTOTUNE addmm(1024x128, 1024x256, 256x128)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0097 ms 100.0% 
+  addmm 0.0133 ms 72.8% 
+SingleProcess AUTOTUNE benchmarking takes 0.0435 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.006111999973654747}
+AUTOTUNE addmm(1x32, 1x256, 256x32)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0061 ms 100.0% 
+  addmm 0.0080 ms 76.1% 
+SingleProcess AUTOTUNE benchmarking takes 0.0437 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.01196799986064434}
+AUTOTUNE addmm(1024x256, 1024x256, 256x256)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0120 ms 100.0% 
+  addmm 0.0163 ms 73.5% 
+SingleProcess AUTOTUNE benchmarking takes 0.0441 seconds and 0.0001 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.009920000098645687}
+AUTOTUNE addmm(1024x64, 1024x256, 256x64)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0099 ms 100.0% 
+  addmm 0.0120 ms 82.9% 
+SingleProcess AUTOTUNE benchmarking takes 0.0440 seconds and 0.0000 seconds precompiling for 2 choices
+{'frame': 1, 'repeat': 0, 'wall_both_arms_ms': 90307.63769207988, 'objects': 12, 'input_objects': 12, 'encoder_ms': 15019.172567990609, 'current_ms': 9.269459987990558, 'temporal_ms': 75208.05631193798, 'objects_reading_history': 11, 'tracks': 12, 'memory_entries': 23}
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.006047999951988459}
+AUTOTUNE addmm(18x256, 18x256, 256x256)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0060 ms 100.0% 
+  addmm 0.0076 ms 80.1% 
+SingleProcess AUTOTUNE benchmarking takes 0.0394 seconds and 0.0001 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.0058559998869895935}
+AUTOTUNE addmm(18x128, 18x256, 256x128)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0059 ms 100.0% 
+  addmm 0.0079 ms 74.1% 
+SingleProcess AUTOTUNE benchmarking takes 0.0388 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.012000000104308128}
+AUTOTUNE addmm(2048x128, 2048x256, 256x128)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0120 ms 100.0% 
+  addmm 0.0142 ms 84.5% 
+SingleProcess AUTOTUNE benchmarking takes 0.0391 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.003936000168323517}
+AUTOTUNE addmm(2x32, 2x256, 256x32)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0039 ms 100.0% 
+  addmm 0.0059 ms 66.5% 
+SingleProcess AUTOTUNE benchmarking takes 0.0384 seconds and 0.0008 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.014015999622642994}
+AUTOTUNE addmm(2048x256, 2048x256, 256x256)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0140 ms 100.0% 
+  addmm 0.0183 ms 76.6% 
+SingleProcess AUTOTUNE benchmarking takes 0.0399 seconds and 0.0001 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.010239999741315842}
+AUTOTUNE addmm(2048x64, 2048x256, 256x64)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0102 ms 100.0% 
+  addmm 0.0123 ms 83.3% 
+SingleProcess AUTOTUNE benchmarking takes 0.0391 seconds and 0.0000 seconds precompiling for 2 choices
+{'frame': 2, 'repeat': 0, 'wall_both_arms_ms': 30047.79825406149, 'objects': 11, 'input_objects': 12, 'encoder_ms': 28.07643893174827, 'current_ms': 7.431830978021026, 'temporal_ms': 29972.62046695687, 'objects_reading_history': 10, 'tracks': 13, 'memory_entries': 34}
+{'frame': 3, 'repeat': 0, 'wall_both_arms_ms': 17854.983738972805, 'objects': 10, 'input_objects': 11, 'encoder_ms': 17.611099989153445, 'current_ms': 17635.3567520855, 'temporal_ms': 35.769120091572404, 'objects_reading_history': 10, 'tracks': 13, 'memory_entries': 44}
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.012000000104308128}
+AUTOTUNE addmm(4112x256, 4112x64, 64x256)
+strides: [0, 1], [64, 1], [1, 64]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0120 ms 100.0% 
+  addmm 0.0202 ms 59.5% 
+SingleProcess AUTOTUNE benchmarking takes 0.0407 seconds and 0.0001 seconds precompiling for 2 choices
+{'frame': 4, 'repeat': 0, 'wall_both_arms_ms': 20990.04715704359, 'objects': 11, 'input_objects': 11, 'encoder_ms': 16.467908979393542, 'current_ms': 6.131449015811086, 'temporal_ms': 20896.838907036, 'objects_reading_history': 11, 'tracks': 13, 'memory_entries': 55}
+{'frame': 5, 'repeat': 0, 'wall_both_arms_ms': 80.54358803201467, 'objects': 9, 'input_objects': 10, 'encoder_ms': 18.363083014264703, 'current_ms': 7.405982003547251, 'temporal_ms': 27.60504698380828, 'objects_reading_history': 8, 'tracks': 14, 'memory_entries': 64}
+W1029 13:17:03.640000 1676968 site-packages/torch/_inductor/cudagraph_utils.py:343] [__cudagraphs] CUDAGraph supports dynamic shapes by recording a new graph for each distinct input size. Recording too many CUDAGraphs may lead to extra overhead. We have observed 9 distinct sizes. Please consider the following options for better performance: a) padding inputs to a few fixed number of shapes; or b) set torch._inductor.config.triton.cudagraph_skip_dynamic_graphs=True. Set torch._inductor.config.triton.cudagraph_dynamic_shape_warn_limit=None to silence this warning.
+{'frame': 6, 'repeat': 0, 'wall_both_arms_ms': 210.03689500503242, 'objects': 10, 'input_objects': 12, 'encoder_ms': 21.51737397070974, 'current_ms': 17.96872995328158, 'temporal_ms': 50.71939795743674, 'objects_reading_history': 10, 'tracks': 14, 'memory_entries': 74}
+{'frame': 7, 'repeat': 0, 'wall_both_arms_ms': 91.29462600685656, 'objects': 9, 'input_objects': 10, 'encoder_ms': 16.966848052106798, 'current_ms': 6.862342008389533, 'temporal_ms': 43.58264699112624, 'objects_reading_history': 9, 'tracks': 14, 'memory_entries': 83}
+W1029 13:17:03.990000 1676968 site-packages/torch/_inductor/cudagraph_utils.py:343] [__cudagraphs] CUDAGraph supports dynamic shapes by recording a new graph for each distinct input size. Recording too many CUDAGraphs may lead to extra overhead. We have observed 9 distinct sizes. Please consider the following options for better performance: a) padding inputs to a few fixed number of shapes; or b) set torch._inductor.config.triton.cudagraph_skip_dynamic_graphs=True. Set torch._inductor.config.triton.cudagraph_dynamic_shape_warn_limit=None to silence this warning.
+{'frame': 8, 'repeat': 0, 'wall_both_arms_ms': 104.38903991598636, 'objects': 8, 'input_objects': 10, 'encoder_ms': 20.27576696127653, 'current_ms': 5.343229044228792, 'temporal_ms': 39.55471201334149, 'objects_reading_history': 8, 'tracks': 14, 'memory_entries': 91}
+{'frame': 9, 'repeat': 0, 'wall_both_arms_ms': 131.1956059653312, 'objects': 12, 'input_objects': 12, 'encoder_ms': 19.07815202139318, 'current_ms': 8.276851032860577, 'temporal_ms': 63.39298002421856, 'objects_reading_history': 12, 'tracks': 14, 'memory_entries': 103}
+{'frame': 10, 'repeat': 0, 'wall_both_arms_ms': 99.2664530640468, 'objects': 10, 'input_objects': 10, 'encoder_ms': 18.45847105141729, 'current_ms': 7.709106081165373, 'temporal_ms': 44.39737100619823, 'objects_reading_history': 10, 'tracks': 14, 'memory_entries': 113}
+{'frame': 11, 'repeat': 0, 'wall_both_arms_ms': 146.9813500298187, 'objects': 10, 'input_objects': 10, 'encoder_ms': 20.190438954159617, 'current_ms': 7.819470018148422, 'temporal_ms': 54.37704699579626, 'objects_reading_history': 10, 'tracks': 14, 'memory_entries': 123}
+{'frame': 12, 'repeat': 0, 'wall_both_arms_ms': 110.4928650893271, 'objects': 10, 'input_objects': 11, 'encoder_ms': 18.15590902697295, 'current_ms': 7.965923054143786, 'temporal_ms': 51.04287201538682, 'objects_reading_history': 10, 'tracks': 14, 'memory_entries': 133}
+{'frame': 13, 'repeat': 0, 'wall_both_arms_ms': 105.05088197533041, 'objects': 9, 'input_objects': 10, 'encoder_ms': 26.307857013307512, 'current_ms': 7.145928917452693, 'temporal_ms': 37.55924489814788, 'objects_reading_history': 9, 'tracks': 14, 'memory_entries': 142}
+{'frame': 14, 'repeat': 0, 'wall_both_arms_ms': 115.73727102950215, 'objects': 10, 'input_objects': 11, 'encoder_ms': 18.335101078264415, 'current_ms': 7.711459998972714, 'temporal_ms': 50.73886597529054, 'objects_reading_history': 10, 'tracks': 14, 'memory_entries': 152}
+{'frame': 15, 'repeat': 0, 'wall_both_arms_ms': 120.79066096339375, 'objects': 12, 'input_objects': 12, 'encoder_ms': 18.725065980106592, 'current_ms': 7.511427975259721, 'temporal_ms': 55.346729001030326, 'objects_reading_history': 12, 'tracks': 14, 'memory_entries': 164}
+{'frame': 16, 'repeat': 0, 'wall_both_arms_ms': 122.67708999570459, 'objects': 12, 'input_objects': 12, 'encoder_ms': 17.383342958055437, 'current_ms': 6.95687800180167, 'temporal_ms': 61.489125015214086, 'objects_reading_history': 12, 'tracks': 14, 'memory_entries': 176}
+{'frame': 17, 'repeat': 0, 'wall_both_arms_ms': 117.97906004358083, 'objects': 12, 'input_objects': 12, 'encoder_ms': 17.5755200907588, 'current_ms': 6.858134060166776, 'temporal_ms': 59.75802801549435, 'objects_reading_history': 12, 'tracks': 14, 'memory_entries': 179}
+{'frame': 18, 'repeat': 0, 'wall_both_arms_ms': 114.85766910482198, 'objects': 11, 'input_objects': 12, 'encoder_ms': 19.384982995688915, 'current_ms': 6.826195050962269, 'temporal_ms': 43.937659938819706, 'objects_reading_history': 11, 'tracks': 14, 'memory_entries': 182}
+{'frame': 19, 'repeat': 0, 'wall_both_arms_ms': 101.39058402273804, 'objects': 11, 'input_objects': 11, 'encoder_ms': 17.82083697617054, 'current_ms': 6.774859968572855, 'temporal_ms': 45.440491987392306, 'objects_reading_history': 11, 'tracks': 14, 'memory_entries': 185}
+{'frame': 20, 'repeat': 0, 'wall_both_arms_ms': 100.02165997866541, 'objects': 11, 'input_objects': 11, 'encoder_ms': 19.316456047818065, 'current_ms': 6.7774850176647305, 'temporal_ms': 38.18884596694261, 'objects_reading_history': 11, 'tracks': 14, 'memory_entries': 183}
+{'frame': 21, 'repeat': 0, 'wall_both_arms_ms': 85.35784005653113, 'objects': 10, 'input_objects': 12, 'encoder_ms': 17.56458997260779, 'current_ms': 6.475352915003896, 'temporal_ms': 34.09864497371018, 'objects_reading_history': 10, 'tracks': 14, 'memory_entries': 186}
+{'frame': 22, 'repeat': 0, 'wall_both_arms_ms': 124.68253693077713, 'objects': 11, 'input_objects': 12, 'encoder_ms': 17.428357037715614, 'current_ms': 6.69889897108078, 'temporal_ms': 39.80865597259253, 'objects_reading_history': 11, 'tracks': 14, 'memory_entries': 188}
+{'frame': 23, 'repeat': 0, 'wall_both_arms_ms': 110.78028299380094, 'objects': 12, 'input_objects': 12, 'encoder_ms': 19.25726607441902, 'current_ms': 6.875356077216566, 'temporal_ms': 47.019516001455486, 'objects_reading_history': 11, 'tracks': 15, 'memory_entries': 191}
+{'frame': 24, 'repeat': 0, 'wall_both_arms_ms': 76.17692206986248, 'objects': 8, 'input_objects': 11, 'encoder_ms': 17.648095963522792, 'current_ms': 4.820968955755234, 'temporal_ms': 28.82872289046645, 'objects_reading_history': 8, 'tracks': 15, 'memory_entries': 194}
+{'frame': 25, 'repeat': 0, 'wall_both_arms_ms': 72.40902003832161, 'objects': 8, 'input_objects': 9, 'encoder_ms': 19.813820952549577, 'current_ms': 4.86968900077045, 'temporal_ms': 24.80577805545181, 'objects_reading_history': 8, 'tracks': 15, 'memory_entries': 194}
+{'frame': 26, 'repeat': 0, 'wall_both_arms_ms': 68.89496895018965, 'objects': 8, 'input_objects': 10, 'encoder_ms': 17.495092004537582, 'current_ms': 4.850142984651029, 'temporal_ms': 24.418447981588542, 'objects_reading_history': 8, 'tracks': 15, 'memory_entries': 194}
+{'frame': 27, 'repeat': 0, 'wall_both_arms_ms': 89.04215006623417, 'objects': 9, 'input_objects': 11, 'encoder_ms': 17.441251897253096, 'current_ms': 6.001712987199426, 'temporal_ms': 37.31143695767969, 'objects_reading_history': 9, 'tracks': 15, 'memory_entries': 190}
+{'frame': 28, 'repeat': 0, 'wall_both_arms_ms': 79.24005400855094, 'objects': 9, 'input_objects': 11, 'encoder_ms': 17.90728699415922, 'current_ms': 6.0965289594605565, 'temporal_ms': 30.443273950368166, 'objects_reading_history': 9, 'tracks': 14, 'memory_entries': 186}
+{'frame': 29, 'repeat': 0, 'wall_both_arms_ms': 64.34385199099779, 'objects': 7, 'input_objects': 9, 'encoder_ms': 17.41690596099943, 'current_ms': 4.614545963704586, 'temporal_ms': 20.5138010205701, 'objects_reading_history': 7, 'tracks': 14, 'memory_entries': 185}
+{'frame': 30, 'repeat': 0, 'wall_both_arms_ms': 124.59792394656688, 'objects': 10, 'input_objects': 10, 'encoder_ms': 22.815188043750823, 'current_ms': 6.477847928181291, 'temporal_ms': 38.554016035050154, 'objects_reading_history': 10, 'tracks': 14, 'memory_entries': 185}
+{'frame': 31, 'repeat': 0, 'wall_both_arms_ms': 98.25038106646389, 'objects': 11, 'input_objects': 11, 'encoder_ms': 18.010528990998864, 'current_ms': 6.770931999199092, 'temporal_ms': 40.18058907240629, 'objects_reading_history': 11, 'tracks': 14, 'memory_entries': 179}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/frank/semantic_livo_instance_memory/tools/visual_instances/probe_sam2_compile.py", line 178, in <module>
+    {'prepare':prepare, 'evaluate':evaluate, 'compare':compare}[command](**a)
+  File "/home/frank/semantic_livo_instance_memory/tools/visual_instances/probe_sam2_compile.py", line 107, in evaluate
+    raise AssertionError(f'Repeated compiled output changed: {repeat}, {e["frame"]}, {k}')
+AssertionError: Repeated compiled output changed: 1, 0, current

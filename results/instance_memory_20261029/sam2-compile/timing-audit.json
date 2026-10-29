@@ -1,0 +1,20 @@
+{
+  "scope": "32-image eager replay; frame zero separately in original report. No GT, no online deployment claim.",
+  "old_partial_timing": {
+    "median_ms": 59.592350968159735,
+    "p95_ms": 70.17679745331407,
+    "max_ms": 261.9133619591594
+  },
+  "whole_call_less_current_control": {
+    "median_ms": 85.5102160712704,
+    "p95_ms": 101.00830945884809,
+    "max_ms": 293.5284760314971
+  },
+  "previously_unbilled": {
+    "median_ms": 26.54562599491328,
+    "p95_ms": 31.6512260469608,
+    "max_ms": 33.11965602915734
+  },
+  "interpretation": "Whole-call minus timed current arm includes boxes, allocation, prompt transfer and output preparation. It also retains untimed current-arm output assembly, so it is conservative for temporal-only runtime; use it for admission rather than omitting that shared overhead.",
+  "original_50ms_failure_unchanged": true
+}

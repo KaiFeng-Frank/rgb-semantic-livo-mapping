@@ -1,0 +1,21 @@
+{
+  "arms": {
+    "eager": {
+      "median_ms": 85.5102160712704,
+      "p95_ms": 101.00830945884809,
+      "max_ms": 293.5284760314971,
+      "first_frame_ms": 629.2298019398004,
+      "startup_seconds": 1.1415620220359415,
+      "runtime_threshold_passed": false
+    },
+    "eager-layout": {
+      "median_ms": 66.84280897025019,
+      "p95_ms": 82.5961625087075,
+      "max_ms": 260.88101405184716,
+      "first_frame_ms": 641.6850000387058,
+      "startup_seconds": 1.1388074819697067,
+      "runtime_threshold_passed": false
+    }
+  },
+  "scope": "Same32 cached detections and images; row0 separately, rows1..31 for distribution. Whole SAM call less timed current control includes layout and output overhead, conservatively retains untimed current output assembly. Single process per arm, no online or warm-three-repeat admission."
+}

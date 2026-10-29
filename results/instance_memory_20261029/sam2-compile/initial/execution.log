@@ -1,0 +1,295 @@
+W1029 13:08:24.047000 1673508 site-packages/torch/_inductor/utils.py:1687] [0/0] Not enough SMs to use max_autotune_gemm mode
+/home/frank/miniconda3/envs/ctvggt/lib/python3.11/site-packages/torch/_inductor/select_algorithm.py:3632: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  current_out_size = out_base.storage().size()
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.062463998794555664}
+AUTOTUNE addmm(16384x288, 16384x96, 96x288)
+strides: [0, 1], [96, 1], [1, 96]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0625 ms 100.0% 
+  addmm 0.0778 ms 80.3% 
+SingleProcess AUTOTUNE benchmarking takes 0.0537 seconds and 0.0001 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.050303999334573746}
+AUTOTUNE addmm(16384x192, 16384x96, 96x192)
+strides: [0, 1], [96, 1], [1, 96]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0503 ms 100.0% 
+  addmm 0.0612 ms 82.3% 
+SingleProcess AUTOTUNE benchmarking takes 0.0452 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.11468800157308578}
+AUTOTUNE addmm(16384x576, 16384x96, 96x576)
+strides: [0, 1], [96, 1], [1, 96]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.1147 ms 100.0% 
+  addmm 0.1516 ms 75.7% 
+SingleProcess AUTOTUNE benchmarking takes 0.0639 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "addmm", "best_time": 0.06128000095486641}
+AUTOTUNE addmm(4096x576, 4096x192, 192x576)
+strides: [0, 1], [192, 1], [1, 192]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  addmm 0.0613 ms 100.0% 
+  bias_addmm 0.0624 ms 98.2% 
+SingleProcess AUTOTUNE benchmarking takes 0.0456 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.02598400041460991}
+AUTOTUNE addmm(4096x384, 4096x192, 192x384)
+strides: [0, 1], [192, 1], [1, 192]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0260 ms 100.0% 
+  addmm 0.0367 ms 70.8% 
+SingleProcess AUTOTUNE benchmarking takes 0.0382 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.10662399977445602}
+AUTOTUNE addmm(4096x1152, 4096x192, 192x1152)
+strides: [0, 1], [192, 1], [1, 192]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.1066 ms 100.0% 
+  addmm 0.1208 ms 88.3% 
+SingleProcess AUTOTUNE benchmarking takes 0.0563 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.05910399928689003}
+AUTOTUNE addmm(1764x1152, 1764x384, 384x1152)
+strides: [0, 1], [384, 1], [1, 384]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0591 ms 100.0% 
+  addmm 0.0713 ms 82.9% 
+SingleProcess AUTOTUNE benchmarking takes 0.0465 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.03152000159025192}
+AUTOTUNE addmm(1024x1152, 1024x384, 384x1152)
+strides: [0, 1], [384, 1], [1, 384]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0315 ms 100.0% 
+  addmm 0.0489 ms 64.5% 
+SingleProcess AUTOTUNE benchmarking takes 0.0396 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.023552000522613525}
+AUTOTUNE addmm(1024x768, 1024x384, 384x768)
+strides: [0, 1], [384, 1], [1, 384]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0236 ms 100.0% 
+  addmm 0.0410 ms 57.5% 
+SingleProcess AUTOTUNE benchmarking takes 0.0370 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.09212800115346909}
+AUTOTUNE addmm(1764x2304, 1764x384, 384x2304)
+strides: [0, 1], [384, 1], [1, 384]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0921 ms 100.0% 
+  addmm 0.1188 ms 77.6% 
+SingleProcess AUTOTUNE benchmarking takes 0.0519 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.05110400170087814}
+AUTOTUNE addmm(441x2304, 441x768, 768x2304)
+strides: [0, 1], [768, 1], [1, 768]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0511 ms 100.0% 
+  addmm 0.0591 ms 86.5% 
+SingleProcess AUTOTUNE benchmarking takes 0.0410 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.016063999384641647}
+AUTOTUNE addmm(1024x256, 1024x384, 384x256)
+strides: [0, 1], [384, 1], [1, 384]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0161 ms 100.0% 
+  addmm 0.0181 ms 88.5% 
+SingleProcess AUTOTUNE benchmarking takes 0.0347 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.011648000217974186}
+AUTOTUNE addmm(256x256, 256x768, 768x256)
+strides: [0, 1], [768, 1], [1, 768]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0116 ms 100.0% 
+  addmm 0.0133 ms 87.5% 
+SingleProcess AUTOTUNE benchmarking takes 0.0334 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.05711999908089638}
+AUTOTUNE addmm(16384x256, 16384x96, 96x256)
+strides: [0, 1], [96, 1], [1, 96]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0571 ms 100.0% 
+  addmm 0.0778 ms 73.4% 
+SingleProcess AUTOTUNE benchmarking takes 0.0447 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.020447999238967896}
+AUTOTUNE addmm(4096x256, 4096x192, 192x256)
+strides: [0, 1], [192, 1], [1, 192]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0204 ms 100.0% 
+  addmm 0.0284 ms 72.0% 
+SingleProcess AUTOTUNE benchmarking takes 0.0384 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.007935999892652035}
+AUTOTUNE addmm(36x256, 36x256, 256x256)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0079 ms 100.0% 
+  addmm 0.0082 ms 96.9% 
+SingleProcess AUTOTUNE benchmarking takes 0.0397 seconds and 0.0001 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.006144000217318535}
+AUTOTUNE addmm(36x128, 36x256, 256x128)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0061 ms 100.0% 
+  addmm 0.0080 ms 76.8% 
+SingleProcess AUTOTUNE benchmarking takes 0.0390 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.015615999698638916}
+AUTOTUNE addmm(4096x128, 4096x256, 256x128)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0156 ms 100.0% 
+  addmm 0.0201 ms 77.7% 
+SingleProcess AUTOTUNE benchmarking takes 0.0397 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.007584000006318092}
+AUTOTUNE addmm(4x32, 4x256, 256x32)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0076 ms 100.0% 
+  addmm 0.0077 ms 98.8% 
+SingleProcess AUTOTUNE benchmarking takes 0.0390 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.007296000141650438}
+AUTOTUNE addmm(27x256, 27x256, 256x256)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0073 ms 100.0% 
+  addmm 0.0100 ms 73.3% 
+SingleProcess AUTOTUNE benchmarking takes 0.0441 seconds and 0.0001 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.007135999854654074}
+AUTOTUNE addmm(27x128, 27x256, 256x128)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0071 ms 100.0% 
+  addmm 0.0082 ms 87.5% 
+SingleProcess AUTOTUNE benchmarking takes 0.0435 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.020447999238967896}
+AUTOTUNE addmm(3072x128, 3072x256, 256x128)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0204 ms 100.0% 
+  addmm 0.0224 ms 91.4% 
+SingleProcess AUTOTUNE benchmarking takes 0.0439 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.007840000092983246}
+AUTOTUNE addmm(3x32, 3x256, 256x32)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0078 ms 100.0% 
+  addmm 0.0079 ms 99.2% 
+SingleProcess AUTOTUNE benchmarking takes 0.0436 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.018112000077962875}
+AUTOTUNE addmm(4096x256, 4096x256, 256x256)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0181 ms 100.0% 
+  addmm 0.0244 ms 74.4% 
+SingleProcess AUTOTUNE benchmarking takes 0.0297 seconds and 0.0001 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.011807999573647976}
+AUTOTUNE addmm(4096x64, 4096x256, 256x64)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0118 ms 100.0% 
+  addmm 0.0143 ms 82.7% 
+SingleProcess AUTOTUNE benchmarking takes 0.0341 seconds and 0.0000 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.01817600056529045}
+AUTOTUNE addmm(3072x256, 3072x256, 256x256)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0182 ms 100.0% 
+  addmm 0.0243 ms 74.9% 
+SingleProcess AUTOTUNE benchmarking takes 0.0406 seconds and 0.0001 seconds precompiling for 2 choices
+Autotune Choices Stats:
+{"num_choices": 2, "num_triton_choices": 0, "best_kernel": "bias_addmm", "best_time": 0.012032000347971916}
+AUTOTUNE addmm(3072x64, 3072x256, 256x64)
+strides: [0, 1], [256, 1], [1, 256]
+dtypes: torch.bfloat16, torch.bfloat16, torch.bfloat16
+  bias_addmm 0.0120 ms 100.0% 
+  addmm 0.0140 ms 85.6% 
+SingleProcess AUTOTUNE benchmarking takes 0.0390 seconds and 0.0000 seconds precompiling for 2 choices
+Image encoder compilation is enabled. First forward pass will be slow.
+Compiling all components for VOS setting. First time may be very slow.
+{'frame': 0, 'repeat': 0, 'wall_both_arms_ms': 112839.91502493154, 'objects': 11, 'input_objects': 11, 'encoder_ms': 44380.137008964084, 'current_ms': 45599.29465595633, 'temporal_ms': 22830.319763044827, 'objects_reading_history': 0, 'tracks': 11, 'memory_entries': 11}
+/home/frank/miniconda3/envs/ctvggt/lib/python3.11/site-packages/torch/_inductor/lowering.py:2207: UserWarning: Torchinductor does not support code generation for complex operators. Performance may be worse than eager.
+  warnings.warn(
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/frank/semantic_livo_instance_memory/tools/visual_instances/probe_sam2_compile.py", line 178, in <module>
+    {'prepare':prepare, 'evaluate':evaluate, 'compare':compare}[command](**a)
+  File "/home/frank/semantic_livo_instance_memory/tools/visual_instances/probe_sam2_compile.py", line 93, in evaluate
+    masks, timing = model.step(image, frame)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_instance_memory/tools/visual_instances/sam2_memory.py", line 110, in step
+    result=self.model.track_step(frame_idx=self.frame,is_init_cond_frame=signature is None,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_runtime/src/sam2/sam2/modeling/sam2_base.py", line 835, in track_step
+    current_out, sam_outputs, _, _ = self._track_step(
+                                     ^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_runtime/src/sam2/sam2/modeling/sam2_base.py", line 779, in _track_step
+    sam_outputs = self._forward_sam_heads(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_runtime/src/sam2/sam2/sam2_video_predictor.py", line 1099, in _forward_sam_heads
+    ) = self.sam_mask_decoder(
+        ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py", line 992, in compile_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_runtime/src/sam2/sam2/modeling/sam/mask_decoder.py", line 110, in forward
+    def forward(
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py", line 1227, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 1195, in forward
+    return compiled_fn(full_args)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 567, in runtime_wrapper
+    all_outs = call_func_at_runtime_with_args(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/utils.py", line 137, in call_func_at_runtime_with_args
+    out = normalize_as_list(f(args))
+                            ^^^^^^^
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 2222, in __call__
+    return self.compiled_fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 752, in wrapper
+    return compiled_fn(runtime_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 974, in inner_fn
+    outs = compiled_fn(args)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/site-packages/torch/_inductor/output_code.py", line 656, in __call__
+    return self.current_callable(inputs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_runtime/sam2-compile-20261029/inductor/ut/cutsfmamm7cwdo45gq43ddltzbibrwrzutbhbldepltafcx42uhf.py", line 3814, in call
+    (buf193, buf269, buf268, buf280) = self.partitions[0](partition0_args)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/site-packages/torch/_inductor/compile_fx.py", line 1868, in run
+    return compiled_fn(new_inputs)  # type: ignore[arg-type]
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/site-packages/torch/_inductor/cudagraph_trees.py", line 434, in deferred_cudagraphify
+    copy_misaligned_inputs(inputs, check_input_idxs)
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/site-packages/torch/_inductor/utils.py", line 3379, in copy_misaligned_inputs
+    if _inp.data_ptr() % ALIGNMENT:
+       ^^^^^^^^^^^^^^^
+RuntimeError: Error: accessing tensor output of CUDAGraphs that has been overwritten by a subsequent run. Stack trace: File "/home/frank/semantic_livo_runtime/src/sam2/sam2/modeling/memory_attention.py", line 166, in forward
+    normed_output = normed_output.transpose(0, 1). To prevent overwriting, clone the tensor outside of torch.compile() or call torch.compiler.cudagraph_mark_step_begin() before each model invocation.

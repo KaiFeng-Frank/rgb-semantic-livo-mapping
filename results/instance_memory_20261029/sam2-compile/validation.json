@@ -1,0 +1,13 @@
+{
+  "eager_source_and_inputs_exact": true,
+  "eager-layout_source_and_inputs_exact": true,
+  "all_96_mask_caches_intact": true,
+  "all_32_both_arm_layout_masks_exact": true,
+  "complete_call_timing_and_failed_budgets_recomputed": true,
+  "compiled_equivalence_and_missing_repeats_remain_failed": true,
+  "input_scope_review": {
+    "method": "source inspection and input manifest verification; not syscall tracing",
+    "selection": "scene-0218 first32 current camera images",
+    "gt_or_holdout_loader_in_probe": false
+  }
+}

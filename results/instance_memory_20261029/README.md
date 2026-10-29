@@ -6,6 +6,9 @@
 进一步的[概率记忆对照](point-probability/README.md)获得整体 mIoU 收益，但前景
 退化使准入失败；[SAM 2 同步特征记忆](sam2-feasibility/README.md)的两次成本检查
 也未通过，没有启动完整精度回放或默认部署。
+随后[补齐完整调用计时并检查官方编译](sam2-compile/README.md)：等价 CPU 优化使
+32 帧组件中位耗时从 85.51 降至 66.84 ms，但仍超预算；编译的掩码等价性与
+重复输出检查失败。没有新增语义精度声明。
 
 **Result: failed the advancement gates.** The implementation and actual ROS delivery work; the memory has not demonstrated a reliable semantic or identity improvement over the matched controls. It remains opt-in.
 
