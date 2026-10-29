@@ -10,10 +10,11 @@ from ultralytics.utils import nms, ops
 
 
 class EvidenceResults(Results):
-    def __init__(self, *args, class_scores=None, **kwargs):
+    def __init__(self, *args, class_scores=None, feats=None, **kwargs):
         super().__init__(*args, **kwargs)
         self.class_scores = class_scores
-        self._keys = (*self._keys, 'class_scores')
+        self.feats = feats
+        self._keys = (*self._keys, 'class_scores', 'feats')
 
     def new(self):
         return EvidenceResults(orig_img=self.orig_img, path=self.path, names=self.names,
@@ -34,26 +35,35 @@ class EvidencePredictor(SegmentationPredictor):
         if not isinstance(orig_imgs, list):
             orig_imgs = ops.convert_torch2numpy_batch(orig_imgs)
         protos = preds[1][-1] if isinstance(preds[1], tuple) else preds[1]
+        normalized=[]
+        for idx in indices:
+            idx=idx.reshape(-1)
+            if idx.numel()==0:idx=idx.to(torch.long)
+            elif idx.dtype not in (torch.int32,torch.int64):raise ValueError('Non-integer NMS evidence indices')
+            normalized.append(idx)
+        # Follow the pinned official DetectionPredictor.get_obj_feats path.
+        # The segmentation adapter must preserve the SAME NMS/mask row mapping.
+        feature_maps=getattr(self,'_feats',None)
+        object_features=self.get_obj_feats(feature_maps,normalized) if feature_maps is not None else [None]*len(normalized)
         results = []
-        for det, idx, original, path, proto, score in zip(
-                detections, indices, orig_imgs, self.batch[0], protos, scores):
+        for det, idx, original, path, proto, score, features in zip(
+                detections, normalized, orig_imgs, self.batch[0], protos, scores,object_features):
             result = super().construct_result(det, img, original, path, proto)
             # Ultralytics returns a default-float empty index tensor when NMS
             # finds no detections (including black-image warmup). Nonempty
             # indices must remain integers; never round malformed evidence.
-            idx = idx.reshape(-1)
-            if idx.numel() == 0:
-                idx = idx.to(torch.long)
-            elif idx.dtype not in (torch.int32, torch.int64):
-                raise ValueError('Non-integer NMS evidence indices')
             selected = score[idx]
+            if features is not None and not isinstance(features,torch.Tensor):
+                features=score.new_empty((0,min(f.shape[1] for f in feature_maps)))
             if len(result.boxes) != len(det):
                 # construct_result scales det in-place, then may drop empty masks.
                 match = (result.boxes.data[:, None, :6] == det[None, :, :6]).all(-1)
                 if not torch.all(match.sum(1) == 1):
                     raise ValueError('Ambiguous mask-to-class-evidence correspondence')
-                selected = selected[match.to(torch.int64).argmax(1)]
+                keep=match.to(torch.int64).argmax(1)
+                selected = selected[keep]
+                if features is not None:features=features[keep]
             results.append(EvidenceResults(orig_img=original, path=path, names=self.model.names,
                 boxes=result.boxes.data, masks=result.masks.data if result.masks is not None else None,
-                class_scores=selected))
+                class_scores=selected,feats=features))
         return results

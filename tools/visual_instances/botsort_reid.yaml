@@ -1,0 +1,15 @@
+# Same pinned baseline motion/GMC settings; official native-feature ReID enabled.
+# The pinned library's ReID similarity setting is 0.8; the baseline's unused 0.25
+# appearance field is not carried into the enabled experiment.
+tracker_type: botsort
+track_high_thresh: 0.25
+track_low_thresh: 0.1
+new_track_thresh: 0.25
+track_buffer: 15
+match_thresh: 0.8
+fuse_score: true
+gmc_method: sparseOptFlow
+proximity_thresh: 0.5
+appearance_thresh: 0.8
+with_reid: true
+model: auto
