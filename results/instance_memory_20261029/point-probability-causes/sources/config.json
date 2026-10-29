@@ -1,0 +1,21 @@
+{
+  "purpose": "Diagnose foreground harm in the stopped equal-frame probability-memory baseline; this is not a new fusion variant or deployment experiment.",
+  "selection": "The same eight independent_dev_added development logs, 321 keyframes; new holdout remains closed.",
+  "controls": "One fresh PTv3 forward shared by the unchanged raw, current-spatial probability, previous-raw probability and hard-vote controls. Compare all control confusion matrices with the archived run, and explicitly report any non-reproduction.",
+  "privileged_diagnostics": [
+    "Delete only historical neighbors with a different GT semantic class.",
+    "Additionally require the same nonzero GT instance for thing classes; unknown IDs cannot match. Stuff uses the class filter."
+  ],
+  "invariants": "Same preceding raw scan, four neighbors, 0.25 m radius, 0.75 s expiry, supplied ego poses and 50/50 per-frame probability mixture. Never replace historical predictions with GT; never write a corrected output back. No motion correction, parameter search, training, model changes or holdout opening.",
+  "attribution": "Report original fixes/harms, all-neighbors-same-class/instance harms, harms removed and introduced by each GT filter, per-class and per-object counts, for all points and camera foreground separately. Also measure online-only confidence, entropy, disagreement and distance distributions conditioned on evaluation outcomes; these are diagnostics, not chosen gates.",
+  "signal_bins": {
+    "current_confidence": [0, 0.25, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99, 1.000001],
+    "history_confidence": [0, 0.25, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99, 1.000001],
+    "history_minus_current_confidence": [-1.000001, -0.5, -0.2, -0.1, -0.05, 0, 0.05, 0.1, 0.2, 0.5, 1.000001],
+    "current_entropy": [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 1.000001],
+    "history_entropy": [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 1.000001],
+    "mean_distance_m": [0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175, 0.2, 0.225, 0.250001]
+  },
+  "decision": "If harms persist with all neighbors belonging to the right class/instance, correspondence alone is insufficient and evidence quality/readout needs attention. If GT filtering removes foreground damage, association is a plausible next target, not yet a deployable solution. Do not loosen the previous gates or report privileged scores as algorithm gains.",
+  "timing": "Diagnostic observer recomputes neighbors and reads GT. Its wall time is not deployable latency. No probability caches or duplicate dataset are stored."
+}

@@ -1,0 +1,117 @@
+{
+  "config": {
+    "purpose": "Diagnose foreground harm in the stopped equal-frame probability-memory baseline; this is not a new fusion variant or deployment experiment.",
+    "selection": "The same eight independent_dev_added development logs, 321 keyframes; new holdout remains closed.",
+    "controls": "One fresh PTv3 forward shared by the unchanged raw, current-spatial probability, previous-raw probability and hard-vote controls. Compare all control confusion matrices with the archived run, and explicitly report any non-reproduction.",
+    "privileged_diagnostics": [
+      "Delete only historical neighbors with a different GT semantic class.",
+      "Additionally require the same nonzero GT instance for thing classes; unknown IDs cannot match. Stuff uses the class filter."
+    ],
+    "invariants": "Same preceding raw scan, four neighbors, 0.25 m radius, 0.75 s expiry, supplied ego poses and 50/50 per-frame probability mixture. Never replace historical predictions with GT; never write a corrected output back. No motion correction, parameter search, training, model changes or holdout opening.",
+    "attribution": "Report original fixes/harms, all-neighbors-same-class/instance harms, harms removed and introduced by each GT filter, per-class and per-object counts, for all points and camera foreground separately. Also measure online-only confidence, entropy, disagreement and distance distributions conditioned on evaluation outcomes; these are diagnostics, not chosen gates.",
+    "signal_bins": {
+      "current_confidence": [
+        0,
+        0.25,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99,
+        1.000001
+      ],
+      "history_confidence": [
+        0,
+        0.25,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        0.95,
+        0.99,
+        1.000001
+      ],
+      "history_minus_current_confidence": [
+        -1.000001,
+        -0.5,
+        -0.2,
+        -0.1,
+        -0.05,
+        0,
+        0.05,
+        0.1,
+        0.2,
+        0.5,
+        1.000001
+      ],
+      "current_entropy": [
+        0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.8,
+        1.000001
+      ],
+      "history_entropy": [
+        0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.8,
+        1.000001
+      ],
+      "mean_distance_m": [
+        0,
+        0.025,
+        0.05,
+        0.075,
+        0.1,
+        0.125,
+        0.15,
+        0.175,
+        0.2,
+        0.225,
+        0.250001
+      ]
+    },
+    "decision": "If harms persist with all neighbors belonging to the right class/instance, correspondence alone is insufficient and evidence quality/readout needs attention. If GT filtering removes foreground damage, association is a plausible next target, not yet a deployable solution. Do not loosen the previous gates or report privileged scores as algorithm gains.",
+    "timing": "Diagnostic observer recomputes neighbors and reads GT. Its wall time is not deployable latency. No probability caches or duplicate dataset are stored."
+  },
+  "config_sha256": "575d019dbbf967ca52ee602025a854d844b8d8fb24c528a042915ec8a0974bfd",
+  "index_path": "/home/frank/semantic_livo_runtime/instance-independent-dev-20261029/index/index.json",
+  "cache_path": "/home/frank/semantic_livo_runtime/instance-independent-dev-20261029/cache",
+  "reference_path": "/home/frank/semantic_livo_runtime/point-probability-memory-20261029",
+  "index_sha256": "7094a62436c1138bca6a961cb88544e2a80eda1611115d0098379847203b0fe3",
+  "reference_sha256": "f44e169083273cb9df400042e5557c20064f070b14db68a6d8c6ae5508cf5832",
+  "target_sha256": {
+    "scene-0149": "b6f8d6f9357abb837b40658aa6001f827549d2e13fb0e4a90514c67662849378",
+    "scene-0803": "76f497ac2467f466b253d676aa6dfc5228c628172f28a5fcdcba1363adf064a5",
+    "scene-0868": "a751550926582330fa7b5332a8dd82be6fe89a22e012a09c024a82a0fa2719df",
+    "scene-0383": "f9a336d642b42e5b7f3277385ee03f89c337e5ad38cae49a81e361fba91de3dd",
+    "scene-0218": "f437c8352c7a5ed56c99922dde8ba4769101fabb3c2df1a726f3f69f0819ec9c",
+    "scene-0347": "e555871d9693894c435a50703ff76574b8f3b2aed4a8aed894e000086626e441",
+    "scene-0420": "20597de283135332a15fcfaea37e4db2847803f68bc8fd987ef92af697e67b34",
+    "scene-1074": "9d89302ca68777deb2b3b11939a524e37ab31362b1f27d93d717604e8958f9e1"
+  },
+  "sources": {
+    "point_probability_causes.py": "567b991566d8c6418b656da2f1cb053260456ad978123541609a31b9cfaa3274",
+    "point_probability_memory.py": "fc16bc7e428777f82ded14e8b61b986e5dd73f70218850fe765cdd89fa67f371",
+    "point_history_audit.py": "b424a74c6bcbddb842eb31a5b96207c7838a752ff4ebe7ed50b4b08a243a2baa",
+    "point_history_causes.py": "470c6ae2cc7aa0ed42c5a5e89a267c12532725209ffd86672ef79101ddcc8691"
+  },
+  "checkpoint_sha256": "35f5d3aec63ae1c383f4a4146e157aa054860cb12b178d899571287e6f97e5f1",
+  "admission": {
+    "time": 1793254547.5254252,
+    "pid": 1690746,
+    "compute_processes": []
+  }
+}

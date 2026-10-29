@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "frames": 321,
+  "independent_logs": 8,
+  "source_and_input_hashes_verified": true,
+  "shared_forward_control_observer_assertions_completed": true,
+  "raw_and_hard_vote_exact_to_older_hard_vote_run": true,
+  "exact_to_previous_probability_run": false,
+  "aggregate_matrix_l1_difference_vs_previous_probability": {
+    "raw": 178,
+    "current_spatial_probability": 180,
+    "previous_raw_probability": 134,
+    "previous_hard_vote": 182
+  },
+  "unchanged_deployment_gate": {
+    "raw_gain_pp": 0.6139811929693595,
+    "current_gain_pp": 0.6379412795012307,
+    "foreground_gain_pp": -0.2757092427014385,
+    "positive_logs_vs_both": 6,
+    "passed": false
+  },
+  "privileged_results_are_not_algorithms": true,
+  "holdout_closed": true,
+  "foreground_objects": 182,
+  "object_observation_points": 37165,
+  "tests": {
+    "command": "bash tools/visual_instances/run_kalman_local.sh -m unittest tools.semantic_memory.test_point_probability_causes tools.semantic_memory.test_point_probability tools.semantic_memory.test_point_history_causes -v",
+    "passed": 6,
+    "failed": 0,
+    "record": "Executed before preregistration commit 3463bdc; no inference code changed afterwards."
+  },
+  "preregistration_commit": "3463bdc",
+  "deployment_enabled": false
+}

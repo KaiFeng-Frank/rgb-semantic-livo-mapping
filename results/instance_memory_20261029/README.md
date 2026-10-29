@@ -12,6 +12,9 @@
 另一项[DEVA 原生在线记忆检查](deva-feasibility/README.md)完成四次同输入回放，
 输出一致但组件中位耗时约 275–280 ms；分阶段确认主要成本在多目标神经网络。
 该同步配置停止，没有启动完整精度评价。
+随后完成[概率记忆的前景伤害诊断](point-probability-causes/README.md)：真值实例过滤
+可避免 120/278 个前景改错，但 153 个改错的全部邻居原本就属于正确实例；仅修
+关联不足。GT 过滤后的前景净收益仅 5 点，未记为可部署算法成绩。
 
 **Result: failed the advancement gates.** The implementation and actual ROS delivery work; the memory has not demonstrated a reliable semantic or identity improvement over the matched controls. It remains opt-in.
 
