@@ -1,0 +1,15 @@
+{
+  "stage": "Feasibility only, before inspecting SAM2 semantic scores",
+  "source": "https://github.com/facebookresearch/sam2",
+  "source_commit": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+  "checkpoint": "facebook/sam2.1-hiera-tiny@de431c4043854a71d8101e17995dfe596bf101a5/sam2.1_hiera_tiny.pt",
+  "checkpoint_sha256": "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69",
+  "checkpoint_bytes": 156008466,
+  "scene": "scene-0218",
+  "selection": "First eight images of the already fixed full-rate development index, all currently supported detector instances; no GT masks or boxes",
+  "controls": "Same SAM2 encoded image, same current detector-mask bounding boxes, same pretrained weights. Current arm clears memory every frame; temporal arm reads strictly previous native recurrent mask features and object pointers.",
+  "bounds": "128 tracks, 2s absent-track expiry, six recent spatial memories plus initial conditioning memory, original bounded object-pointer history, batch at most four. Reset on camera gap >0.75s or visual session change.",
+  "scope": "No GT or future image input; no semantic or identity accuracy claim from this probe. Native SAM2 mask-feedback is intentional, unlike the older raw-only semantic probability bank.",
+  "runtime_gate": "SAM-only image encoder + temporal readout/memory update/postprocessing p95 <=50ms excluding frame zero. First-frame, paired-control cost, startup and peak allocation separately reported. Passing still requires full ROS latency and data accuracy checks.",
+  "if_failed": "Do not launch the full 1857-image semantic comparison or enable default deployment. Preserve measured failure rather than claim the official A100 FPS applies locally."
+}
