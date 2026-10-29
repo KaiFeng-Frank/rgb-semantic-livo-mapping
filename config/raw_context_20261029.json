@@ -1,0 +1,13 @@
+{
+  "scope": "Frozen PTv3 information-availability experiment, development only; not a new model training run",
+  "motivation": "Late pooled-feature memory and track-confirmed admission did not produce reliable semantic gains. Check whether aligned raw historical geometry supplies useful information before changing learned architecture.",
+  "data": "All 12 already inspected development scenes (483 frames), same calibrated raw scans and causal cached visual associations. New holdout remains unopened.",
+  "network": "Original frozen B0 PTv3 weights and preprocessing, half precision and serialization shuffle disabled; no learned instance head",
+  "memory": {"raw_scans": 1, "ttl_s": 1.0, "maximum_history_points": 12000, "maximum_fraction_of_current_points": 0.5, "support_voxel_m": 0.4, "history_voxel_m": 0.1},
+  "controls": ["current_only", "unwarped_history", "ego_aligned_history", "instance_translation_aligned_history"],
+  "geometry": "Supplied ego poses as in the existing semantic pilot. Same visual-track IDs and raw 3D component centers estimate translation, with 35 m/s bound; no GT instance IDs, semantic labels or ground-truth object motion. Historical object components without a current visual counterpart are excluded in all history arms. Unknown moving points remain a stated limitation.",
+  "invariants": "Current input rows remain first and bit-identical. Historical points stay within current bounds, pass current 40 cm voxel support, and cannot replace existing current 5 cm voxel representatives. Store only raw scans and visual association geometry; no fused predictions or future frames. Memory is reset between scenes.",
+  "scores": "Full-scan native16 mIoU, per-class/scene counts, temporal label agreement on official instances as a diagnostic, corrections and newly wrong points, actual per-forward and context-preparation timing. Semantic label agreement is not identity tracking accuracy.",
+  "gate": "Continue toward independent validation only if aligned history improves full-scan mIoU by at least 0.5 pp overall and improves a majority of development logs, with no more than 0.1 pp worst-log loss. This is only a semantic evidence gate; the full goal also requires independent instance-identity gains and online runtime validation.",
+  "resources": "No new training. One local GPU job, one CPU core at low priority. Log cold start and p95; do not add the four experimental forwards together and call that deployment cost, nor hide preparation/association cost."
+}
