@@ -1,0 +1,241 @@
+{
+  "identity": {
+    "full": {
+      "keyframe/projected_mask": {
+        "gt_points": 488398,
+        "pred_points": 31054,
+        "identity_true_positive": 18921,
+        "associated_gt_points": 24330,
+        "gt_instances": 400,
+        "pred_tracks": 77,
+        "id_switches": 44,
+        "supported_transitions": 387,
+        "reappearance_transitions": 55,
+        "aq_numerator": 4.046041112723471,
+        "point_idf1": 0.07284984945673517,
+        "association_quality": 0.010115102781808678
+      },
+      "keyframe/trusted_component": {
+        "gt_points": 488398,
+        "pred_points": 15387,
+        "identity_true_positive": 12648,
+        "associated_gt_points": 15226,
+        "gt_instances": 400,
+        "pred_tracks": 55,
+        "id_switches": 16,
+        "supported_transitions": 183,
+        "reappearance_transitions": 42,
+        "aq_numerator": 1.633040683092296,
+        "point_idf1": 0.05021189594767609,
+        "association_quality": 0.00408260170773074
+      },
+      "keyframe/largest_component": {
+        "gt_points": 488398,
+        "pred_points": 20358,
+        "identity_true_positive": 16166,
+        "associated_gt_points": 20005,
+        "gt_instances": 400,
+        "pred_tracks": 66,
+        "id_switches": 28,
+        "supported_transitions": 269,
+        "reappearance_transitions": 49,
+        "aq_numerator": 2.7563198589835443,
+        "point_idf1": 0.06355109325491984,
+        "association_quality": 0.00689079964745886
+      },
+      "fullrate/projected_mask": {
+        "gt_points": 488398,
+        "pred_points": 34170,
+        "identity_true_positive": 21594,
+        "associated_gt_points": 26295,
+        "gt_instances": 400,
+        "pred_tracks": 108,
+        "id_switches": 32,
+        "supported_transitions": 432,
+        "reappearance_transitions": 64,
+        "aq_numerator": 6.680038872730671,
+        "point_idf1": 0.08264570352566555,
+        "association_quality": 0.01670009718182668
+      },
+      "fullrate/trusted_component": {
+        "gt_points": 488398,
+        "pred_points": 16106,
+        "identity_true_positive": 13214,
+        "associated_gt_points": 15875,
+        "gt_instances": 400,
+        "pred_tracks": 70,
+        "id_switches": 10,
+        "supported_transitions": 197,
+        "reappearance_transitions": 56,
+        "aq_numerator": 2.1261943231396723,
+        "point_idf1": 0.05238412381269524,
+        "association_quality": 0.005315485807849181
+      },
+      "fullrate/largest_component": {
+        "gt_points": 488398,
+        "pred_points": 21733,
+        "identity_true_positive": 18132,
+        "associated_gt_points": 21324,
+        "gt_instances": 400,
+        "pred_tracks": 84,
+        "id_switches": 13,
+        "supported_transitions": 293,
+        "reappearance_transitions": 61,
+        "aq_numerator": 3.821283917195042,
+        "point_idf1": 0.07108762259105994,
+        "association_quality": 0.009553209792987604
+      }
+    },
+    "camera": {
+      "keyframe/projected_mask": {
+        "gt_points": 37165,
+        "pred_points": 31054,
+        "identity_true_positive": 18921,
+        "associated_gt_points": 24330,
+        "gt_instances": 182,
+        "pred_tracks": 77,
+        "id_switches": 49,
+        "supported_transitions": 479,
+        "reappearance_transitions": 63,
+        "aq_numerator": 15.36794138632268,
+        "point_idf1": 0.5547134962400504,
+        "association_quality": 0.08443923838638835
+      },
+      "keyframe/trusted_component": {
+        "gt_points": 37165,
+        "pred_points": 15387,
+        "identity_true_positive": 12648,
+        "associated_gt_points": 15226,
+        "gt_instances": 182,
+        "pred_tracks": 55,
+        "id_switches": 18,
+        "supported_transitions": 241,
+        "reappearance_transitions": 49,
+        "aq_numerator": 8.60235480258541,
+        "point_idf1": 0.48135180392753846,
+        "association_quality": 0.04726568572849126
+      },
+      "keyframe/largest_component": {
+        "gt_points": 37165,
+        "pred_points": 20358,
+        "identity_true_positive": 16166,
+        "associated_gt_points": 20005,
+        "gt_instances": 182,
+        "pred_tracks": 66,
+        "id_switches": 29,
+        "supported_transitions": 339,
+        "reappearance_transitions": 57,
+        "aq_numerator": 11.993072113217279,
+        "point_idf1": 0.5620708238443753,
+        "association_quality": 0.06589600062207296
+      },
+      "fullrate/projected_mask": {
+        "gt_points": 37165,
+        "pred_points": 34170,
+        "identity_true_positive": 21594,
+        "associated_gt_points": 26295,
+        "gt_instances": 182,
+        "pred_tracks": 108,
+        "id_switches": 42,
+        "supported_transitions": 537,
+        "reappearance_transitions": 71,
+        "aq_numerator": 27.004765960863686,
+        "point_idf1": 0.6054251068900259,
+        "association_quality": 0.14837783494980047
+      },
+      "fullrate/trusted_component": {
+        "gt_points": 37165,
+        "pred_points": 16106,
+        "identity_true_positive": 13214,
+        "associated_gt_points": 15875,
+        "gt_instances": 182,
+        "pred_tracks": 70,
+        "id_switches": 14,
+        "supported_transitions": 260,
+        "reappearance_transitions": 63,
+        "aq_numerator": 11.646128919094545,
+        "point_idf1": 0.4961048225113101,
+        "association_quality": 0.06398971933568431
+      },
+      "fullrate/largest_component": {
+        "gt_points": 37165,
+        "pred_points": 21733,
+        "identity_true_positive": 18132,
+        "associated_gt_points": 21324,
+        "gt_instances": 182,
+        "pred_tracks": 84,
+        "id_switches": 17,
+        "supported_transitions": 369,
+        "reappearance_transitions": 70,
+        "aq_numerator": 17.746889756756808,
+        "point_idf1": 0.6157085130225135,
+        "association_quality": 0.09751038327888356
+      }
+    }
+  },
+  "gates": {
+    "projected_mask": {
+      "camera_gain_pp": 5.071161064997554,
+      "full_scan_gain_pp": 0.9795854068930382,
+      "positive_logs": 5,
+      "passed": true
+    },
+    "trusted_component": {
+      "camera_gain_pp": 1.4753018583771649,
+      "full_scan_gain_pp": 0.21722278650191523,
+      "positive_logs": 4,
+      "passed": false
+    },
+    "largest_component": {
+      "camera_gain_pp": 5.363768917813816,
+      "full_scan_gain_pp": 0.7536529336140102,
+      "positive_logs": 4,
+      "passed": false
+    }
+  },
+  "scenes": [
+    "scene-0149",
+    "scene-0803",
+    "scene-0868",
+    "scene-0383",
+    "scene-0218",
+    "scene-0347",
+    "scene-0420",
+    "scene-1074"
+  ],
+  "startup_ms": [
+    1825.5598129471764,
+    51.34117405395955,
+    48.582007992081344,
+    65.15139003749937,
+    50.61232903972268,
+    126.11942598596215,
+    50.737233948893845,
+    50.062188995070755
+  ],
+  "timing": {
+    "keyframe": {
+      "frames": 321,
+      "median_ms": 15.080409008078277,
+      "p95_ms": 22.093422012403607,
+      "max_ms": 26.503867004066706
+    },
+    "fullrate": {
+      "frames": 1857,
+      "median_ms": 9.774456033483148,
+      "p95_ms": 14.240308525040733,
+      "max_ms": 20.45921899843961
+    },
+    "shared_detector": {
+      "frames": 1857,
+      "median_ms": 7.171091972850263,
+      "p95_ms": 10.087436391040683,
+      "max_ms": 22.1718909451738
+    }
+  },
+  "cached_keyframe_coverage_symmetric_difference": {
+    "trusted_component": 24,
+    "largest_component": 24
+  },
+  "scope": "Extra causal image evidence for existing tracker. Identity only, no semantic/novel-network gain; shared keyframe detections; supplied poses; component timing excludes PTv3/IPC/map. Eight fixed development logs; holdout unopened."
+}

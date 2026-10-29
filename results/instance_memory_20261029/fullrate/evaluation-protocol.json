@@ -1,0 +1,39 @@
+{
+  "index_sha256": "7094a62436c1138bca6a961cb88544e2a80eda1611115d0098379847203b0fe3",
+  "frames_sha256": "5d4668193f5e5e4a6cf4fe2f4cb4297a81ac840426e63f705c50583aaeeceafd",
+  "image_manifest_sha256": "e7f02069588565bd721d94911b567df9753a7bb7df1c0bf53fa88193e46c8369",
+  "weights_sha256": "55ed65c56c91713d23e8402371c6c49a6fd84f257f7dce452e8d70e41dcbe152",
+  "admission": {
+    "time": 1793243640.8090093,
+    "pid": 1650749,
+    "compute_processes": []
+  },
+  "sources": {
+    "evaluate_cadence.py": "b8b7b12e8ad8b1abb4d04e419e1c6e2c7f546c958ae2b92bc196f838f988ee1d",
+    "cadence.py": "49afe0016a49a9836ac32455069a5ec3897edc22304df947bcf0d8a8fac9af64",
+    "reid.py": "f351d8020057c163c6c92d627aa55c108ada2bfb374ed3c927f39edbf7725dee",
+    "evidence_predictor.py": "587cefc04da3cbe4173bf8a721d1664b6fe953741f42012029c7f08d23430820"
+  },
+  "preregistration": {
+    "source_index_sha256": "7094a62436c1138bca6a961cb88544e2a80eda1611115d0098379847203b0fe3",
+    "frames_sha256": "5d4668193f5e5e4a6cf4fe2f4cb4297a81ac840426e63f705c50583aaeeceafd",
+    "data": "Only past/intervening CAM_FRONT images. The original 2Hz LiDAR keyframes, point GT and scoring domains remain unchanged. New holdout stays closed.",
+    "hypothesis": "Feeding real intervening images to the existing tracker improves identity continuity compared with subsampled tracking. This is extra temporal evidence, not a new network contribution.",
+    "controls": [
+      "Original keyframe-only BoT-SORT",
+      "Same BoT-SORT with all intervening causal camera frames"
+    ],
+    "detection": "One frozen YOLO forward per image. Keyframe detections are shared exactly across arms. Neither arm uses ReID or a new detector.",
+    "tracking": "Separate causal GMC histories; identical matching settings, nominal lost-frame buffers 15 keyframes/90 images with an additional strict 7.5s real-timestamp expiry in both arms. Refuse gaps over 750ms; each scene starts fresh.",
+    "scores": "Full/camera point IDF1/AQ, coverage and switches at identical original keyframes; all logs, detector/GMC/tracker wall times and cold start. No semantic improvement claimed from identity alone.",
+    "gate": "At least +1 pp camera point IDF1, no full-scan point IDF1 loss, positive majority of eight logs; otherwise preserve failure without threshold tuning.",
+    "limits": {
+      "max_new_image_bytes": 700000000,
+      "max_network_bytes": 1000000000,
+      "minimum_free_bytes": 4000000000
+    },
+    "source": "https://huggingface.co/datasets/Xiaodong/Nuscenes-v1.0-trainval-CAM_FRONT_Sweeps/tree/11f15b33699f8a5fc8ad7ed042a715d17df146d6",
+    "frozen_evaluator_commit": "40a38c4",
+    "clarification": "Timestamp cap clarified before any full-rate evaluation; selection and metrics unchanged."
+  }
+}

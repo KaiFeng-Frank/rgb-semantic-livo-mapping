@@ -1,0 +1,3780 @@
+{
+  "scene": "scene-0420",
+  "log": "75f5ca2350b346d19a39aa7439f61755",
+  "scored_keyframes": 41,
+  "identity": {
+    "full": {
+      "keyframe/projected_mask": {
+        "point_idf1": 0.07709087478923228,
+        "association_quality": 0.004313192918887678,
+        "gt_points": 80738,
+        "pred_points": 4071,
+        "identity_true_positive": 3269,
+        "associated_gt_points": 3459,
+        "gt_instances": 83,
+        "pred_tracks": 21,
+        "id_switches": 6,
+        "supported_transitions": 68,
+        "reappearance_transitions": 8
+      },
+      "keyframe/trusted_component": {
+        "point_idf1": 0.05605542991868354,
+        "association_quality": 0.001988996460369292,
+        "gt_points": 80738,
+        "pred_points": 2394,
+        "identity_true_positive": 2330,
+        "associated_gt_points": 2338,
+        "gt_instances": 83,
+        "pred_tracks": 16,
+        "id_switches": 1,
+        "supported_transitions": 38,
+        "reappearance_transitions": 7
+      },
+      "keyframe/largest_component": {
+        "point_idf1": 0.06293647656352942,
+        "association_quality": 0.0025164124426720973,
+        "gt_points": 80738,
+        "pred_points": 2743,
+        "identity_true_positive": 2627,
+        "associated_gt_points": 2640,
+        "gt_instances": 83,
+        "pred_tracks": 19,
+        "id_switches": 1,
+        "supported_transitions": 48,
+        "reappearance_transitions": 10
+      },
+      "fullrate/projected_mask": {
+        "point_idf1": 0.07655479823589066,
+        "association_quality": 0.010426560307841379,
+        "gt_points": 80738,
+        "pred_points": 4064,
+        "identity_true_positive": 3246,
+        "associated_gt_points": 3408,
+        "gt_instances": 83,
+        "pred_tracks": 25,
+        "id_switches": 4,
+        "supported_transitions": 72,
+        "reappearance_transitions": 13
+      },
+      "fullrate/trusted_component": {
+        "point_idf1": 0.05344734148250738,
+        "association_quality": 0.0029662073822165004,
+        "gt_points": 80738,
+        "pred_points": 2297,
+        "identity_true_positive": 2219,
+        "associated_gt_points": 2224,
+        "gt_instances": 83,
+        "pred_tracks": 19,
+        "id_switches": 1,
+        "supported_transitions": 37,
+        "reappearance_transitions": 12
+      },
+      "fullrate/largest_component": {
+        "point_idf1": 0.06081316019807441,
+        "association_quality": 0.004507350047804698,
+        "gt_points": 80738,
+        "pred_points": 2665,
+        "identity_true_positive": 2536,
+        "associated_gt_points": 2547,
+        "gt_instances": 83,
+        "pred_tracks": 21,
+        "id_switches": 1,
+        "supported_transitions": 49,
+        "reappearance_transitions": 14
+      }
+    },
+    "camera": {
+      "keyframe/projected_mask": {
+        "point_idf1": 0.7597908192911098,
+        "association_quality": 0.21784303317125225,
+        "gt_points": 4534,
+        "pred_points": 4071,
+        "identity_true_positive": 3269,
+        "associated_gt_points": 3459,
+        "gt_instances": 28,
+        "pred_tracks": 21,
+        "id_switches": 6,
+        "supported_transitions": 74,
+        "reappearance_transitions": 8
+      },
+      "keyframe/trusted_component": {
+        "point_idf1": 0.6726327944572749,
+        "association_quality": 0.13882265463414947,
+        "gt_points": 4534,
+        "pred_points": 2394,
+        "identity_true_positive": 2330,
+        "associated_gt_points": 2338,
+        "gt_instances": 28,
+        "pred_tracks": 16,
+        "id_switches": 1,
+        "supported_transitions": 44,
+        "reappearance_transitions": 8
+      },
+      "keyframe/largest_component": {
+        "point_idf1": 0.7220008245155971,
+        "association_quality": 0.16257520237056597,
+        "gt_points": 4534,
+        "pred_points": 2743,
+        "identity_true_positive": 2627,
+        "associated_gt_points": 2640,
+        "gt_instances": 28,
+        "pred_tracks": 19,
+        "id_switches": 1,
+        "supported_transitions": 56,
+        "reappearance_transitions": 10
+      },
+      "fullrate/projected_mask": {
+        "point_idf1": 0.755059316120028,
+        "association_quality": 0.2667606913773325,
+        "gt_points": 4534,
+        "pred_points": 4064,
+        "identity_true_positive": 3246,
+        "associated_gt_points": 3408,
+        "gt_instances": 28,
+        "pred_tracks": 25,
+        "id_switches": 4,
+        "supported_transitions": 79,
+        "reappearance_transitions": 13
+      },
+      "fullrate/trusted_component": {
+        "point_idf1": 0.6496852583809105,
+        "association_quality": 0.12930835884229855,
+        "gt_points": 4534,
+        "pred_points": 2297,
+        "identity_true_positive": 2219,
+        "associated_gt_points": 2224,
+        "gt_instances": 28,
+        "pred_tracks": 19,
+        "id_switches": 1,
+        "supported_transitions": 43,
+        "reappearance_transitions": 12
+      },
+      "fullrate/largest_component": {
+        "point_idf1": 0.7045422975413251,
+        "association_quality": 0.1648435606643173,
+        "gt_points": 4534,
+        "pred_points": 2665,
+        "identity_true_positive": 2536,
+        "associated_gt_points": 2547,
+        "gt_instances": 28,
+        "pred_tracks": 21,
+        "id_switches": 1,
+        "supported_transitions": 58,
+        "reappearance_transitions": 14
+      }
+    }
+  },
+  "cached_keyframe_coverage_symmetric_difference": {
+    "trusted_component": 0,
+    "largest_component": 0
+  },
+  "frames": [
+    {
+      "timestamp_us": 1538985150262460,
+      "keyframe": 0,
+      "timing": {
+        "forward_ms": 10.324977920390666,
+        "tracking_including_gmc_ms": {
+          "keyframe": 3.833821974694729,
+          "fullrate": 3.4059889148920774
+        },
+        "raw_detections": 17,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985150362460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 10.087121976539493,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.4207779513672
+        },
+        "raw_detections": 16,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985150412460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 8.678519050590694,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.188742075115442
+        },
+        "raw_detections": 15,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985150512460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.484301088377833,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.798599989153445
+        },
+        "raw_detections": 15,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985150612460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 12.497994001023471,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.333813959732652
+        },
+        "raw_detections": 16,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985150662460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.985110955312848,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.611048037186265
+        },
+        "raw_detections": 19,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985150762460,
+      "keyframe": 1,
+      "timing": {
+        "forward_ms": 8.31773306708783,
+        "tracking_including_gmc_ms": {
+          "keyframe": 12.46216706931591,
+          "fullrate": 10.413232957944274
+        },
+        "raw_detections": 14,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985150862460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 10.45316900126636,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.452362989075482
+        },
+        "raw_detections": 14,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985150912460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.72086493857205,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.165588930249214
+        },
+        "raw_detections": 18,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985151012460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 8.936193073168397,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.907074039801955
+        },
+        "raw_detections": 14,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985151112460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 10.088694049045444,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.945536963641644
+        },
+        "raw_detections": 19,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985151162460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.638239978812635,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.692732011899352
+        },
+        "raw_detections": 17,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985151262460,
+      "keyframe": 2,
+      "timing": {
+        "forward_ms": 9.810382965952158,
+        "tracking_including_gmc_ms": {
+          "keyframe": 14.43373505026102,
+          "fullrate": 10.842268005944788
+        },
+        "raw_detections": 17,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985151362460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 12.340107932686806,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.351687902584672
+        },
+        "raw_detections": 18,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985151412460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.286970016546547,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.208179010078311
+        },
+        "raw_detections": 17,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985151512460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.9936070619151,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.187880019657314
+        },
+        "raw_detections": 18,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985151612460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 12.245510006323457,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.242984048090875
+        },
+        "raw_detections": 22,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985151662460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.78284003213048,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.881907026283443
+        },
+        "raw_detections": 17,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985151762460,
+      "keyframe": 3,
+      "timing": {
+        "forward_ms": 14.026851975359023,
+        "tracking_including_gmc_ms": {
+          "keyframe": 15.816519036889076,
+          "fullrate": 10.631543002091348
+        },
+        "raw_detections": 21,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985151862460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 11.774807004258037,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.437449091114104
+        },
+        "raw_detections": 18,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985151912460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 10.093744029290974,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.983025956898928
+        },
+        "raw_detections": 19,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985152012460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 14.781457022763789,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.95332095772028
+        },
+        "raw_detections": 17,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985152112460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.39399201888591,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.171068948693573
+        },
+        "raw_detections": 16,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985152162460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.676452027633786,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.100195999257267
+        },
+        "raw_detections": 16,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985152262460,
+      "keyframe": 4,
+      "timing": {
+        "forward_ms": 11.220649001188576,
+        "tracking_including_gmc_ms": {
+          "keyframe": 14.369583921507001,
+          "fullrate": 10.745216044597328
+        },
+        "raw_detections": 17,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985152362460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 11.779165943153203,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.349864955060184
+        },
+        "raw_detections": 17,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985152412460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.221447980962694,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.178964002989233
+        },
+        "raw_detections": 17,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985152512460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.75021906197071,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.043750051409006
+        },
+        "raw_detections": 18,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985152612460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 10.634507983922958,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.152484057471156
+        },
+        "raw_detections": 13,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985152662460,
+      "keyframe": 5,
+      "timing": {
+        "forward_ms": 9.947038954123855,
+        "tracking_including_gmc_ms": {
+          "keyframe": 12.507871957495809,
+          "fullrate": 10.039541986770928
+        },
+        "raw_detections": 18,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985152762460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.858862962573767,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.000585975125432
+        },
+        "raw_detections": 16,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985152862460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.040347998961806,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.297636967152357
+        },
+        "raw_detections": 14,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985152912460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.2049470404163,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.243094060570002
+        },
+        "raw_detections": 15,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985153012460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 11.728800949640572,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.320650064386427
+        },
+        "raw_detections": 15,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985153112460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.88601497374475,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.444993036799133
+        },
+        "raw_detections": 18,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985153162460,
+      "keyframe": 6,
+      "timing": {
+        "forward_ms": 9.58664296194911,
+        "tracking_including_gmc_ms": {
+          "keyframe": 16.098498017527163,
+          "fullrate": 10.626022005453706
+        },
+        "raw_detections": 18,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985153262460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 10.102950967848301,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.057771975174546
+        },
+        "raw_detections": 17,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985153362666,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.775657090358436,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.500658070668578
+        },
+        "raw_detections": 17,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985153412460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.81618301011622,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.136854951269925
+        },
+        "raw_detections": 17,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985153512460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.340993012301624,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.287538054399192
+        },
+        "raw_detections": 16,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985153612460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 12.872615945525467,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.499755968339741
+        },
+        "raw_detections": 16,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985153662460,
+      "keyframe": 7,
+      "timing": {
+        "forward_ms": 9.016874013468623,
+        "tracking_including_gmc_ms": {
+          "keyframe": 16.23482396826148,
+          "fullrate": 10.568664991296828
+        },
+        "raw_detections": 15,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985153762460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 13.406228041276336,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.61368505563587
+        },
+        "raw_detections": 15,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985153862460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.160493034869432,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.62421896494925
+        },
+        "raw_detections": 15,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985153912460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 8.451353991404176,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.919808013364673
+        },
+        "raw_detections": 12,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985154012460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.1552339727059,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.327212046831846
+        },
+        "raw_detections": 15,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985154112460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.138301946222782,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.595716070383787
+        },
+        "raw_detections": 15,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985154162608,
+      "keyframe": 8,
+      "timing": {
+        "forward_ms": 8.431717054918408,
+        "tracking_including_gmc_ms": {
+          "keyframe": 18.721248023211956,
+          "fullrate": 10.25928498711437
+        },
+        "raw_detections": 13,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985154262465,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 11.627651983872056,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.237640050239861
+        },
+        "raw_detections": 14,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985154362460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.044265025295317,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.847909026779234
+        },
+        "raw_detections": 14,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985154412460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.386677062138915,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.235409950837493
+        },
+        "raw_detections": 13,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985154512460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.944623918272555,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.775333037599921
+        },
+        "raw_detections": 18,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985154612460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 10.647964081726968,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.44537394773215
+        },
+        "raw_detections": 15,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985154662651,
+      "keyframe": 9,
+      "timing": {
+        "forward_ms": 9.083078010007739,
+        "tracking_including_gmc_ms": {
+          "keyframe": 17.52370095346123,
+          "fullrate": 10.326981893740594
+        },
+        "raw_detections": 15,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985154762460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.512393036857247,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.287954985164106
+        },
+        "raw_detections": 15,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985154862460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 10.040655033662915,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.621163062751293
+        },
+        "raw_detections": 18,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985154912460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.335892042145133,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.845147957094014
+        },
+        "raw_detections": 15,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985155012460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.035238064825535,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.445964988321066
+        },
+        "raw_detections": 14,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985155112460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.399471106007695,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.385390953160822
+        },
+        "raw_detections": 16,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985155163231,
+      "keyframe": 10,
+      "timing": {
+        "forward_ms": 12.629901990294456,
+        "tracking_including_gmc_ms": {
+          "keyframe": 15.569355920888484,
+          "fullrate": 10.427300003357232
+        },
+        "raw_detections": 14,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985155262460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.720604051835835,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.000765953212976
+        },
+        "raw_detections": 15,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985155362460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 11.655333917587996,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.301264002919197
+        },
+        "raw_detections": 16,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985155412468,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.144042967818677,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.014766012318432
+        },
+        "raw_detections": 15,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985155512460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.339128970168531,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.550050064921379
+        },
+        "raw_detections": 14,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985155612460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 8.28607298899442,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.472654947079718
+        },
+        "raw_detections": 13,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985155662911,
+      "keyframe": 11,
+      "timing": {
+        "forward_ms": 9.064303012564778,
+        "tracking_including_gmc_ms": {
+          "keyframe": 17.042087973095477,
+          "fullrate": 10.52493299357593
+        },
+        "raw_detections": 16,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985155762460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.609565953724086,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.372613022103906
+        },
+        "raw_detections": 15,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985155862460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.819498984143138,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.896730003878474
+        },
+        "raw_detections": 17,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985155912460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.51016996987164,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.214430978521705
+        },
+        "raw_detections": 16,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985156012460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.254770004190505,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.097708018496633
+        },
+        "raw_detections": 15,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985156112460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 11.17308798711747,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.47621201723814
+        },
+        "raw_detections": 14,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985156162460,
+      "keyframe": 12,
+      "timing": {
+        "forward_ms": 8.35916108917445,
+        "tracking_including_gmc_ms": {
+          "keyframe": 13.72570707462728,
+          "fullrate": 10.536854970268905
+        },
+        "raw_detections": 12,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985156262460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 8.65494494792074,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.125909979455173
+        },
+        "raw_detections": 11,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985156362460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.033294976688921,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.359812993556261
+        },
+        "raw_detections": 13,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985156412460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 11.427827063016593,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.986863937228918
+        },
+        "raw_detections": 15,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985156512460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.934513967484236,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.13615999929607
+        },
+        "raw_detections": 10,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985156612460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 8.283076924271882,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.379238985478878
+        },
+        "raw_detections": 12,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985156662460,
+      "keyframe": 13,
+      "timing": {
+        "forward_ms": 8.05851595941931,
+        "tracking_including_gmc_ms": {
+          "keyframe": 14.605727978050709,
+          "fullrate": 10.640699998475611
+        },
+        "raw_detections": 12,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985156762460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 12.473969021812081,
+        "tracking_including_gmc_ms": {
+          "fullrate": 12.057889020070434
+        },
+        "raw_detections": 11,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985156862460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.945243967697024,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.77715598512441
+        },
+        "raw_detections": 10,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985156912460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 8.41281097382307,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.090928990393877
+        },
+        "raw_detections": 11,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985157012460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.914336048997939,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.884532985277474
+        },
+        "raw_detections": 10,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985157112460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.817373960278928,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.31748000625521
+        },
+        "raw_detections": 9,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985157162460,
+      "keyframe": 14,
+      "timing": {
+        "forward_ms": 7.888246909715235,
+        "tracking_including_gmc_ms": {
+          "keyframe": 16.20341499801725,
+          "fullrate": 10.70863800123334
+        },
+        "raw_detections": 11,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985157262460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 8.464118000119925,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.69832400046289
+        },
+        "raw_detections": 10,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985157362460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 8.37371707893908,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.216629995033145
+        },
+        "raw_detections": 11,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985157412460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 8.17156897392124,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.040884953923523
+        },
+        "raw_detections": 11,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985157512460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 8.42428207397461,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.616705054417253
+        },
+        "raw_detections": 12,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985157612460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 8.547523058950901,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.325093917548656
+        },
+        "raw_detections": 12,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985157662460,
+      "keyframe": 15,
+      "timing": {
+        "forward_ms": 7.517029996961355,
+        "tracking_including_gmc_ms": {
+          "keyframe": 20.67735802847892,
+          "fullrate": 9.936168091371655
+        },
+        "raw_detections": 9,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985157762460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 8.475107955746353,
+        "tracking_including_gmc_ms": {
+          "fullrate": 12.123661930672824
+        },
+        "raw_detections": 10,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985157862460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.823185063898563,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.107315891422331
+        },
+        "raw_detections": 10,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985157912460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.992433034814894,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.069809039123356
+        },
+        "raw_detections": 10,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985158012460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 8.045982918702066,
+        "tracking_including_gmc_ms": {
+          "fullrate": 12.074560043402016
+        },
+        "raw_detections": 10,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985158112460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 8.570406935177743,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.522455024532974
+        },
+        "raw_detections": 7,
+        "time_expired_tracks": {
+          "fullrate": 1
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985158163017,
+      "keyframe": 16,
+      "timing": {
+        "forward_ms": 7.35926500055939,
+        "tracking_including_gmc_ms": {
+          "keyframe": 23.248269921168685,
+          "fullrate": 10.186819010414183
+        },
+        "raw_detections": 7,
+        "time_expired_tracks": {
+          "keyframe": 2,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985158262460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.923326989635825,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.734160943888128
+        },
+        "raw_detections": 5,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985158362460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.414198014885187,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.860161972232163
+        },
+        "raw_detections": 7,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985158412460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.861656951718032,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.908557054586709
+        },
+        "raw_detections": 6,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985158512460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.610359996557236,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.046411003917456
+        },
+        "raw_detections": 5,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985158612460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.255780044943094,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.18539203889668
+        },
+        "raw_detections": 6,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985158662460,
+      "keyframe": 17,
+      "timing": {
+        "forward_ms": 6.240435992367566,
+        "tracking_including_gmc_ms": {
+          "keyframe": 21.680459030903876,
+          "fullrate": 9.996221051551402
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "keyframe": 1,
+          "fullrate": 1
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985158762460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.5766359912231565,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.484241927973926
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985158862568,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.3413860043510795,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.85994194727391
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985158912460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.2777959974482656,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.224569006823003
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985159012460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.4280079677701,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.63936809077859
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985159112460,
+      "keyframe": 18,
+      "timing": {
+        "forward_ms": 6.513918982818723,
+        "tracking_including_gmc_ms": {
+          "keyframe": 24.653356056660414,
+          "fullrate": 10.512178996577859
+        },
+        "raw_detections": 5,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985159162460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.993417977355421,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.194594040513039
+        },
+        "raw_detections": 5,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985159262460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.368607049807906,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.025783023796976
+        },
+        "raw_detections": 5,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985159362460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.411967915482819,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.927086928859353
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 2
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985159412460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.216531037352979,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.002042050473392
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985159512460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.9992329915985465,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.582691989839077
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "fullrate": 1
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985159612460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.822302075102925,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.732972994446754
+        },
+        "raw_detections": 1,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985159662460,
+      "keyframe": 19,
+      "timing": {
+        "forward_ms": 6.117225042544305,
+        "tracking_including_gmc_ms": {
+          "keyframe": 21.047941991128027,
+          "fullrate": 9.923105011694133
+        },
+        "raw_detections": 2,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985159762460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.087179062888026,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.555429966188967
+        },
+        "raw_detections": 1,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985159862460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.178134983405471,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.714829084463418
+        },
+        "raw_detections": 1,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985159912460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.701085996814072,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.728939970955253
+        },
+        "raw_detections": 1,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985160012460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.680837996304035,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.106027009896934
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985160162460,
+      "keyframe": 20,
+      "timing": {
+        "forward_ms": 5.953897954896092,
+        "tracking_including_gmc_ms": {
+          "keyframe": 18.068013014271855,
+          "fullrate": 12.139552040025592
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985160262460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 10.753521928563714,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.946284048259258
+        },
+        "raw_detections": 1,
+        "time_expired_tracks": {
+          "fullrate": 1
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985160362460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.05899905692786,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.954181965440512
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985160412478,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.236061988398433,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.08485206309706
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985160512460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.1734939916059375,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.578248020261526
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985160612460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.793488002382219,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.39787901006639
+        },
+        "raw_detections": 1,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985160662460,
+      "keyframe": 21,
+      "timing": {
+        "forward_ms": 5.785393062978983,
+        "tracking_including_gmc_ms": {
+          "keyframe": 21.475965972058475,
+          "fullrate": 8.719166042283177
+        },
+        "raw_detections": 1,
+        "time_expired_tracks": {
+          "keyframe": 1,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985160762460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.166446954011917,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.984198957681656
+        },
+        "raw_detections": 1,
+        "time_expired_tracks": {
+          "fullrate": 2
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985160862460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.912781925871968,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.27609100472182
+        },
+        "raw_detections": 1,
+        "time_expired_tracks": {
+          "fullrate": 1
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985160912460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.068297032266855,
+        "tracking_including_gmc_ms": {
+          "fullrate": 8.861192036420107
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985161012460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 4.93752199690789,
+        "tracking_including_gmc_ms": {
+          "fullrate": 8.982961066067219
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985161112460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 4.871779005043209,
+        "tracking_including_gmc_ms": {
+          "fullrate": 8.863064926117659
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 1
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985161162460,
+      "keyframe": 22,
+      "timing": {
+        "forward_ms": 4.689836991019547,
+        "tracking_including_gmc_ms": {
+          "keyframe": 13.764781062491238,
+          "fullrate": 8.487732033245265
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "keyframe": 2,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985161262460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.412622937001288,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.801796986721456
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985161362460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.063949036411941,
+        "tracking_including_gmc_ms": {
+          "fullrate": 8.95539892371744
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 1
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985161412460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.76799104642123,
+        "tracking_including_gmc_ms": {
+          "fullrate": 8.736137067899108
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985161512460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 8.433058974333107,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.011673973873258
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985161612460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.916039088740945,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.24593408126384
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985161662460,
+      "keyframe": 23,
+      "timing": {
+        "forward_ms": 8.208016981370747,
+        "tracking_including_gmc_ms": {
+          "keyframe": 11.118476977571845,
+          "fullrate": 8.63359507638961
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "keyframe": 1,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985161762460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.691783084534109,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.5936160068959
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985161862460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.356961024925113,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.277623961679637
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985161912460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.8418710036203265,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.018967975862324
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985162012460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 8.04668408818543,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.57903906237334
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985162112460,
+      "keyframe": 24,
+      "timing": {
+        "forward_ms": 6.5366619965061545,
+        "tracking_including_gmc_ms": {
+          "keyframe": 14.91960696876049,
+          "fullrate": 9.260680992156267
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985162163235,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.408786004409194,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.885913925245404
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985162262460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.388197954744101,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.774456033483148
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985162362460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.232737960293889,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.804853005334735
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985162412471,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.243592011742294,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.340702090412378
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985162512460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 8.80940502975136,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.660311043262482
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985162612460,
+      "keyframe": 25,
+      "timing": {
+        "forward_ms": 7.385925040580332,
+        "tracking_including_gmc_ms": {
+          "keyframe": 20.465289009734988,
+          "fullrate": 10.006019962020218
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "keyframe": 1,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985162662460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.523045944049954,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.004426934756339
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985162762460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 4.77968598715961,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.208489024080336
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 1
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985162862460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.3210819605737925,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.98566101770848
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985162912460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 4.9748619785532355,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.84376494307071
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985163012460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.200847030617297,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.935046080499887
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985163112469,
+      "keyframe": 26,
+      "timing": {
+        "forward_ms": 5.917891045100987,
+        "tracking_including_gmc_ms": {
+          "keyframe": 21.925798966549337,
+          "fullrate": 9.809430921450257
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985163162460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.316389073617756,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.40146208833903
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985163263158,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.290925037115812,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.847698082216084
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985163362460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.226233974099159,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.07901702541858
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985163412460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.210645031183958,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.978797985240817
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985163512460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 4.952169954776764,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.95422892831266
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985163612460,
+      "keyframe": 27,
+      "timing": {
+        "forward_ms": 5.07351802662015,
+        "tracking_including_gmc_ms": {
+          "keyframe": 25.484054000116885,
+          "fullrate": 10.025486000813544
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "keyframe": 1,
+          "fullrate": 1
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985163662460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.020403001457453,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.054140002466738
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 1
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985163762460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.522071013227105,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.845634038560092
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985163862460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.5066600907593966,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.231954045593739
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 1
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985163912460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.451201974414289,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.716387023217976
+        },
+        "raw_detections": 0,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985164012460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.669274018146098,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.564116993919015
+        },
+        "raw_detections": 1,
+        "time_expired_tracks": {
+          "fullrate": 1
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985164112460,
+      "keyframe": 28,
+      "timing": {
+        "forward_ms": 7.943690987303853,
+        "tracking_including_gmc_ms": {
+          "keyframe": 24.20114807318896,
+          "fullrate": 10.346910101361573
+        },
+        "raw_detections": 2,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985164162460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.440962082706392,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.750717017799616
+        },
+        "raw_detections": 2,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985164262460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.9538380010053515,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.164803057909012
+        },
+        "raw_detections": 2,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985164362460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.713162991218269,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.984675027430058
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985164412460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.291551981121302,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.540141956880689
+        },
+        "raw_detections": 2,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985164512460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.710226996801794,
+        "tracking_including_gmc_ms": {
+          "fullrate": 11.477258987724781
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985164612460,
+      "keyframe": 29,
+      "timing": {
+        "forward_ms": 10.068436968140304,
+        "tracking_including_gmc_ms": {
+          "keyframe": 24.300373042933643,
+          "fullrate": 10.749464039690793
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "keyframe": 1,
+          "fullrate": 1
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985164662460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.580203073099256,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.324797010980546
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985164762460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.818366051651537,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.709109017625451
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985164862460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.206372054293752,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.253444081172347
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985164912460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.524660042487085,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.025526047684252
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985165012460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.277255015447736,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.481461067683995
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985165112460,
+      "keyframe": 30,
+      "timing": {
+        "forward_ms": 6.901866057887673,
+        "tracking_including_gmc_ms": {
+          "keyframe": 19.68837296590209,
+          "fullrate": 10.196616989560425
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "keyframe": 1,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985165362460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.626198999583721,
+        "tracking_including_gmc_ms": {
+          "fullrate": 14.085381990298629
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 1
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985165412460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.362976040691137,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.552985011599958
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 1
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985165512460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.123877014033496,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.312495054677129
+        },
+        "raw_detections": 2,
+        "time_expired_tracks": {
+          "fullrate": 1
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985165612460,
+      "keyframe": 31,
+      "timing": {
+        "forward_ms": 5.986741045489907,
+        "tracking_including_gmc_ms": {
+          "keyframe": 15.73355298023671,
+          "fullrate": 9.925598977133632
+        },
+        "raw_detections": 2,
+        "time_expired_tracks": {
+          "keyframe": 3,
+          "fullrate": 2
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985165662460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.8155149929225445,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.95259010232985
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985165762460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.156448042020202,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.56814391631633
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 1
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985165862460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.190541898831725,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.085439076647162
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985165912460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.950542050413787,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.461718960665166
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985166012460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.400145939551294,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.05384000018239
+        },
+        "raw_detections": 5,
+        "time_expired_tracks": {
+          "fullrate": 1
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985166112460,
+      "keyframe": 32,
+      "timing": {
+        "forward_ms": 5.78883895650506,
+        "tracking_including_gmc_ms": {
+          "keyframe": 14.558069058693945,
+          "fullrate": 10.155890951864421
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985166162460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.716247997246683,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.745341027155519
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985166262460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.208386039361358,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.468838037922978
+        },
+        "raw_detections": 5,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985166362460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.385126966051757,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.072884964756668
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985166412460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.111523951403797,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.544885018840432
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985166512460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.545479060150683,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.825080051086843
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985166612460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.30233802460134,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.677323047071695
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985166662460,
+      "keyframe": 33,
+      "timing": {
+        "forward_ms": 6.890174932777882,
+        "tracking_including_gmc_ms": {
+          "keyframe": 13.429561979137361,
+          "fullrate": 8.904543006792665
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "keyframe": 2,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985166762460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 10.967322974465787,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.324276983737946
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985166862460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.453576032072306,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.881827048957348
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985166912469,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.164563936181366,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.299024008214474
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985167012460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.712701986543834,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.82807599939406
+        },
+        "raw_detections": 5,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985167112460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.132644019089639,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.67147306073457
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "fullrate": 1
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985167162460,
+      "keyframe": 34,
+      "timing": {
+        "forward_ms": 6.879074033349752,
+        "tracking_including_gmc_ms": {
+          "keyframe": 12.512902030721307,
+          "fullrate": 9.54654801171273
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985167262460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 9.381829062476754,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.54131390992552
+        },
+        "raw_detections": 5,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985167362460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.780819967389107,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.987906087189913
+        },
+        "raw_detections": 5,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985167412460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.27297698520124,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.6163289854303
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985167512460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.123603019863367,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.618963929824531
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985167612460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.450275938026607,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.842864004895091
+        },
+        "raw_detections": 5,
+        "time_expired_tracks": {
+          "fullrate": 1
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985167662460,
+      "keyframe": 35,
+      "timing": {
+        "forward_ms": 6.759369047358632,
+        "tracking_including_gmc_ms": {
+          "keyframe": 15.080409008078277,
+          "fullrate": 9.607571992091835
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985167762460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.065723999403417,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.345116024836898
+        },
+        "raw_detections": 5,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985167862460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.546018994413316,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.936599992215633
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985167912460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.4296809723600745,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.574830997735262
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985168012460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.577919004485011,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.824619046412408
+        },
+        "raw_detections": 5,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985168112460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.390747963450849,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.87417297437787
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985168162460,
+      "keyframe": 36,
+      "timing": {
+        "forward_ms": 6.236479035578668,
+        "tracking_including_gmc_ms": {
+          "keyframe": 16.59084192942828,
+          "fullrate": 9.616077993996441
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985168262460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.293752045370638,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.706253000535071
+        },
+        "raw_detections": 6,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985168362460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.4548380905762315,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.881856967695057
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985168412460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.848967983387411,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.54247999470681
+        },
+        "raw_detections": 5,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985168512460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.838447996415198,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.906091960147023
+        },
+        "raw_detections": 6,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985168612460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.631840020418167,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.811745025217533
+        },
+        "raw_detections": 5,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985168662460,
+      "keyframe": 37,
+      "timing": {
+        "forward_ms": 6.58998207654804,
+        "tracking_including_gmc_ms": {
+          "keyframe": 16.56615501269698,
+          "fullrate": 9.720614063553512
+        },
+        "raw_detections": 5,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985168762460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 7.33434793073684,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.66345302388072
+        },
+        "raw_detections": 6,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985168862460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.764759891666472,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.497111012227833
+        },
+        "raw_detections": 5,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985168912460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.845211028121412,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.060642031021416
+        },
+        "raw_detections": 5,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985169012460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.358107086271048,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.149588924832642
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985169112460,
+      "keyframe": 38,
+      "timing": {
+        "forward_ms": 6.538384011946619,
+        "tracking_including_gmc_ms": {
+          "keyframe": 16.36582997161895,
+          "fullrate": 9.981633978895843
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985169262460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.732287933118641,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.96095098182559
+        },
+        "raw_detections": 4,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985169362460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.3542400021106005,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.832985000684857
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985169412460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.1812750063836575,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.417225024662912
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985169512460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.93444802891463,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.635054040700197
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985169612460,
+      "keyframe": 39,
+      "timing": {
+        "forward_ms": 7.405281066894531,
+        "tracking_including_gmc_ms": {
+          "keyframe": 13.929068925790489,
+          "fullrate": 9.582223952747881
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    },
+    {
+      "timestamp_us": 1538985169662460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.5633009653538465,
+        "tracking_including_gmc_ms": {
+          "fullrate": 10.10075700469315
+        },
+        "raw_detections": 2,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985169763107,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 6.210218998603523,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.365719044581056
+        },
+        "raw_detections": 3,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985169862460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.751810036599636,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.443073999136686
+        },
+        "raw_detections": 1,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985169912460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.695683998055756,
+        "tracking_including_gmc_ms": {
+          "fullrate": 8.843890042044222
+        },
+        "raw_detections": 1,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985170012460,
+      "keyframe": null,
+      "timing": {
+        "forward_ms": 5.68326108623296,
+        "tracking_including_gmc_ms": {
+          "fullrate": 9.275248972699046
+        },
+        "raw_detections": 2,
+        "time_expired_tracks": {
+          "fullrate": 0
+        },
+        "is_keyframe": false
+      }
+    },
+    {
+      "timestamp_us": 1538985170112460,
+      "keyframe": 40,
+      "timing": {
+        "forward_ms": 5.442559951916337,
+        "tracking_including_gmc_ms": {
+          "keyframe": 10.771285044029355,
+          "fullrate": 9.261012077331543
+        },
+        "raw_detections": 1,
+        "time_expired_tracks": {
+          "keyframe": 0,
+          "fullrate": 0
+        },
+        "is_keyframe": true
+      }
+    }
+  ]
+}
