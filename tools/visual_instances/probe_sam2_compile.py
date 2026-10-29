@@ -49,7 +49,7 @@ def prepare(frames, images, yolo, out):
                                   frames_index_sha256=digest(frames), protocol_sha256=digest(PROTOCOL)))
 
 
-def evaluate(cache, source, weights, out, compiled):
+def evaluate(cache, source, weights, out, compiled, fast_layout=False):
     import cv2
     import torch
     from .geometry import InstanceFrame
@@ -70,7 +70,7 @@ def evaluate(cache, source, weights, out, compiled):
     torch.set_num_threads(1)
     cv2.setNumThreads(1)
     start = time.perf_counter()
-    model = SAM2Pair(source, weights, image_size=512, official_compile=compiled)
+    model = SAM2Pair(source, weights, image_size=512, official_compile=compiled,fast_layout=fast_layout)
     init_seconds = time.perf_counter()-start
     torch.cuda.reset_peak_memory_stats()
     passes = []
@@ -170,6 +170,7 @@ if __name__ == '__main__':
     for k in ('cache', 'source', 'weights', 'out'):
         q.add_argument('--'+k, type=Path, required=True)
     q.add_argument('--compiled', action='store_true')
+    q.add_argument('--fast-layout', action='store_true', help='Exact one-pass boxes and batched CPU copies; no model changes')
     q = sp.add_parser('compare')
     for k in ('eager', 'compiled', 'out'):
         q.add_argument('--'+k, type=Path, required=True)

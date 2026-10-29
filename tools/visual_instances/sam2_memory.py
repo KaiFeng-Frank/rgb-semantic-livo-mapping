@@ -14,7 +14,7 @@ import torch
 
 
 class SAM2Pair:
-    def __init__(self,source,weights,image_size=1024,official_compile=False):
+    def __init__(self,source,weights,image_size=1024,official_compile=False,fast_layout=False):
         if image_size not in (512,1024):raise ValueError('Only the two explicitly recorded inference sizes are supported')
         sys.path.insert(0,str(source))
         from sam2.build_sam import build_sam2
@@ -48,11 +48,13 @@ class SAM2Pair:
                 return compiled_attention(*args,**kwargs).clone()
             self.model.memory_attention.forward=owned_attention
         self.transforms=SAM2Transforms(self.model.image_size,mask_threshold=0.)
+        self.fast_layout=bool(fast_layout)
         self.histories={};self.last_seen={};self.stamp=None;self.session=None;self.frame=0
         self.meta=dict(weights_sha256=hashlib.sha256(Path(weights).read_bytes()).hexdigest(),num_maskmem=self.model.num_maskmem,image_size=image_size,
             max_tracks=128,absent_ttl_s=2.,max_batch=4,object_pointer_history=self.model.max_obj_ptrs_in_encoder,
             prompts='same current detector-mask boxes for both arms',history='official recurrent mask features; no semantic-logit feedback',
             model='official SAM2.1 Hiera Tiny, pretrained, no fine tuning',
+            fast_layout=self.fast_layout,
             precision='bfloat16 autocast, official VOS compilation' if official_compile else 'bfloat16 autocast, uncompiled')
 
     def _batched_history(self,keys):
@@ -90,7 +92,12 @@ class SAM2Pair:
         self.session=instances.session;self.stamp=instances.stamp_ns
         for key in list(self.histories):
             if self.stamp-self.last_seen[key]>2000000000:del self.histories[key];del self.last_seen[key]
-        supported=[s for s in range(len(instances.ids)) if np.any(instances.index==s+1)]
+        if self.fast_layout:
+            from .sam2_layout import detector_boxes
+            supported,boxes=detector_boxes(instances.index,len(instances.ids))
+        else:
+            supported=[s for s in range(len(instances.ids)) if np.any(instances.index==s+1)]
+            boxes=None
         keys=[int(instances.ids[s]) for s in supported]
         for key in keys:self.last_seen[key]=self.stamp
         # Current detections have priority; evict least recently observed others.
@@ -99,11 +106,12 @@ class SAM2Pair:
             if key not in keys:del self.histories[key];del self.last_seen[key]
         empty=np.zeros((len(instances.ids),*image.shape[:2]),bool)
         if not keys:self.frame+=1;return dict(current=empty,temporal=empty),dict(objects=0,encoder_ms=0.,current_ms=0.,temporal_ms=0.)
-        boxes=[]
-        for slot in supported:
-            y,x=np.nonzero(instances.index==slot+1)
-            if not len(x):raise ValueError('Empty detector instance')
-            boxes.append([x.min(),y.min(),x.max()+1,y.max()+1])
+        if boxes is None:
+            boxes=[]
+            for slot in supported:
+                y,x=np.nonzero(instances.index==slot+1)
+                if not len(x):raise ValueError('Empty detector instance')
+                boxes.append([x.min(),y.min(),x.max()+1,y.max()+1])
         box=torch.as_tensor(np.asarray(boxes),dtype=torch.float32,device='cuda')
         prompts=self.transforms.transform_boxes(box,normalize=True,orig_hw=image.shape[:2])
         torch.cuda.synchronize();start=time.perf_counter()
@@ -112,7 +120,7 @@ class SAM2Pair:
             backbone=self.model.forward_image(tensor)
             _,features,positions,sizes=self.model._prepare_backbone_features(backbone)
         torch.cuda.synchronize();encoder_ms=(time.perf_counter()-start)*1000
-        masks={a:[None]*len(keys) for a in ['current','temporal']};cost={};read_objects=0
+        masks={a:empty.copy() if self.fast_layout else [None]*len(keys) for a in ['current','temporal']};cost={};read_objects=0
         for arm in masks:
             torch.cuda.synchronize();start=time.perf_counter();groups=defaultdict(list)
             for slot,key in enumerate(keys):
@@ -130,13 +138,19 @@ class SAM2Pair:
                             feat_sizes=sizes,point_inputs=dict(point_coords=prompts[chosen],point_labels=torch.tensor([[2,3]],device='cuda').expand(n,-1)),
                             mask_inputs=None,output_dict=state,num_frames=self.frame+1,run_mem_encoder=arm=='temporal')
                     full=torch.nn.functional.interpolate(result['pred_masks_high_res'].float(),image.shape[:2],mode='bilinear',align_corners=False)[:,0]>0
-                    for b,slot in enumerate(chosen):masks[arm][slot]=full[b].cpu().numpy()
+                    if self.fast_layout:
+                        masks[arm][[supported[s] for s in chosen]]=full.cpu().numpy()
+                    else:
+                        for b,slot in enumerate(chosen):masks[arm][slot]=full[b].cpu().numpy()
                     if arm=='temporal':
                         read_objects+=n if signature is not None else 0
                         for b,key in enumerate(batch_keys):self._retain(key,result,b,signature is None)
             torch.cuda.synchronize();cost[arm]=(time.perf_counter()-start)*1000
         self.frame+=1
-        outputs={a:empty.copy() for a in masks}
-        for a,v in masks.items():outputs[a][supported]=np.stack(v)
+        if self.fast_layout:
+            outputs=masks
+        else:
+            outputs={a:empty.copy() for a in masks}
+            for a,v in masks.items():outputs[a][supported]=np.stack(v)
         return outputs,dict(objects=len(keys),input_objects=len(instances.ids),encoder_ms=encoder_ms,current_ms=cost['current'],temporal_ms=cost['temporal'],
             objects_reading_history=read_objects,tracks=len(self.histories),memory_entries=sum(sum(len(d) for d in s.values()) for s in self.histories.values()))
