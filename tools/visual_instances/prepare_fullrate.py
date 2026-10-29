@@ -34,7 +34,7 @@ def prepare(index_path,out):
         hypothesis='Feeding real intervening images to the existing tracker improves identity continuity compared with subsampled tracking. This is extra temporal evidence, not a new network contribution.',
         controls=['Original keyframe-only BoT-SORT','Same BoT-SORT with all intervening causal camera frames'],
         detection='One frozen YOLO forward per image. Keyframe detections are shared exactly across arms. Neither arm uses ReID or a new detector.',
-        tracking='Separate causal GMC histories; identical matching settings and 7.5s lost-track budget, converted from 15 keyframes to 90 images. Gap resets use real timestamps.',
+        tracking='Separate causal GMC histories; identical matching settings, nominal lost-frame buffers 15 keyframes/90 images with an additional strict 7.5s real-timestamp expiry in both arms. Refuse gaps over 750ms; each scene starts fresh.',
         scores='Full/camera point IDF1/AQ, coverage and switches at identical original keyframes; all logs, detector/GMC/tracker wall times and cold start. No semantic improvement claimed from identity alone.',
         gate='At least +1 pp camera point IDF1, no full-scan point IDF1 loss, positive majority of eight logs; otherwise preserve failure without threshold tuning.',
         limits=dict(max_new_image_bytes=700000000,max_network_bytes=1000000000,minimum_free_bytes=4000000000),
