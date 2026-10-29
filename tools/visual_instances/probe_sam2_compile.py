@@ -153,10 +153,21 @@ def compare(eager, compiled, out):
     s['equivalent'] = (s['pixel_disagreement_fraction'] <= gate['max_pixel_disagreement_fraction'] and
                       s['mean_nonempty_object_iou'] >= gate['min_mean_nonempty_object_iou'] and
                       s['min_nonempty_object_iou'] >= gate['min_nonempty_object_iou'])
-    c = read(compiled/'report.json')
-    runtime = all(p['sam_only_ms']['p95'] <= protocol['runtime_gate_ms'] for p in c['passes'][1:])
-    save(out, dict(summary=s, warm_runtime_passed=runtime, eligible_for_further_validation=runtime and s['equivalent'],
-                   rows=rows, eager_sha256=digest(eager/'report.json'), compiled_sha256=digest(compiled/'report.json')))
+    # Failed compilation may still have produced the complete first pass.
+    # Missing warm repeats cannot pass via all([]). Bill the whole call minus
+    # the timed current-only control, not just selected GPU/readout phases.
+    report = compiled/'report.json'
+    c = read(report) if report.exists() else None
+    warm = c['passes'][1:] if c else []
+    warm_timing = [dict(repeat=p['repeat'],p95_ms=float(np.percentile(
+        [r['wall_both_arms_ms']-r['current_ms'] for r in p['frames']],95))) for p in warm]
+    complete_warm = len(warm)==3 and all([r['frame'] for r in p['frames']]==list(range(32)) for p in warm)
+    runtime = complete_warm and all(p['p95_ms']<=protocol['runtime_gate_ms'] for p in warm_timing)
+    save(out, dict(summary=s, warm_runtime_passed=runtime, complete_warm_repeats=len(warm),
+                   warm_whole_call_less_control=warm_timing,
+                   eligible_for_further_validation=runtime and s['equivalent'],
+                   rows=rows, eager_sha256=digest(eager/'report.json'),
+                   compiled_sha256=digest(report) if report.exists() else None))
     print(s, 'warm_runtime_passed', runtime, flush=True)
 
 
