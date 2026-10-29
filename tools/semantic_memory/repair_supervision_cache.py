@@ -94,7 +94,12 @@ def extract(train_index,dev_index,train_targets,dev_targets,visual,anchors,model
                     group=supervision_groups(qa,y,candidate['probabilities'].argmax(-1),candidate['valid'])
                     if part=='train' and k:groups_count+=np.bincount(group[group>=0].cpu().numpy(),minlength=3)
                     base=r['logits'].argmax(1).cpu().numpy().astype(np.int8);anchor_labels=a.argmax(1).cpu().numpy().astype(np.int8)
-                    camera=np.zeros(len(gt),bool);camera[target['camera_in_view_indices']]=True
+                    # The training target cache has no camera projection. This
+                    # field is evaluation-only; an empty array marks unavailable
+                    # rather than inventing an all-outside-camera training mask.
+                    camera=np.empty(0,bool)
+                    if part=='dev':
+                        camera=np.zeros(len(gt),bool);camera[target['camera_in_view_indices']]=True
                     image=base[inverse].copy()
                     if observations is not None:
                         vf=observations[k]
