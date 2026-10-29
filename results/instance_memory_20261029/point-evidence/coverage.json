@@ -1,0 +1,1946 @@
+{
+  "scope": "Post-result privileged correspondence coverage only, no new semantic policy or accuracy arm.",
+  "source_sha256": "fbd3f5e66bde5f3ab1d56a70609df955d09a41d2ada18e550464a27a3e57d34d",
+  "protocol_sha256": "c5ab20fbed87e89398443f31c637bb466d45d7ac1b941d7f918ee287fe37e0b0",
+  "report_sha256": "60a8a02e675b737d8d7f3d8d8371bdfdfcc98d2abd82dc8fc64db4b225f2bd74",
+  "counts": {
+    "foreground_queries": 38809,
+    "foreground_with_visual_component": 16304,
+    "foreground_with_any_history": 24629,
+    "foreground_with_visual_and_any_history": 10982,
+    "foreground_with_same_positive_visual_id_history": 7428,
+    "history_pairs": 79007,
+    "positive_same_id_pairs": 25938,
+    "positive_same_id_and_same_gt_instance_pairs": 25770,
+    "positive_same_id_with_known_gt_pairs": 25770,
+    "rejected_pairs": 20993,
+    "rejected_but_same_gt_instance_pairs": 19943,
+    "rejected_current_only_known": 12457,
+    "rejected_history_only_known": 8356,
+    "rejected_both_known_different": 180
+  },
+  "scenes": [
+    {
+      "scene": "scene-0149",
+      "counts": {
+        "foreground_queries": 853,
+        "foreground_with_visual_component": 166,
+        "foreground_with_any_history": 139,
+        "foreground_with_visual_and_any_history": 12,
+        "foreground_with_same_positive_visual_id_history": 0,
+        "history_pairs": 168,
+        "positive_same_id_pairs": 0,
+        "positive_same_id_and_same_gt_instance_pairs": 0,
+        "positive_same_id_with_known_gt_pairs": 0,
+        "rejected_pairs": 20,
+        "rejected_but_same_gt_instance_pairs": 20,
+        "rejected_current_only_known": 12,
+        "rejected_history_only_known": 8,
+        "rejected_both_known_different": 0
+      },
+      "objects": {
+        "2004": {
+          "points": 25,
+          "current_visual_classes": {
+            "-1": 25
+          },
+          "memory_visual_classes": {
+            "-1": 25
+          }
+        },
+        "17001": {
+          "points": 25,
+          "current_visual_classes": {
+            "-1": 25
+          },
+          "memory_visual_classes": {
+            "-1": 25
+          }
+        },
+        "17008": {
+          "points": 6,
+          "current_visual_classes": {
+            "-1": 6
+          },
+          "memory_visual_classes": {
+            "-1": 6
+          }
+        },
+        "17009": {
+          "points": 18,
+          "current_visual_classes": {
+            "-1": 18
+          },
+          "memory_visual_classes": {
+            "-1": 18
+          }
+        },
+        "17015": {
+          "points": 5,
+          "current_visual_classes": {
+            "-1": 5
+          },
+          "memory_visual_classes": {
+            "-1": 5
+          }
+        },
+        "2016": {
+          "points": 20,
+          "current_visual_classes": {
+            "-1": 20
+          },
+          "memory_visual_classes": {
+            "-1": 20
+          }
+        },
+        "23019": {
+          "points": 3,
+          "current_visual_classes": {
+            "-1": 3
+          },
+          "memory_visual_classes": {
+            "-1": 3
+          }
+        },
+        "17018": {
+          "points": 1,
+          "current_visual_classes": {
+            "-1": 1
+          },
+          "memory_visual_classes": {
+            "-1": 1
+          }
+        },
+        "17020": {
+          "points": 152,
+          "current_visual_classes": {
+            "-1": 146,
+            "3": 6
+          },
+          "memory_visual_classes": {
+            "-1": 146,
+            "3": 6
+          }
+        },
+        "2012": {
+          "points": 60,
+          "current_visual_classes": {
+            "-1": 33,
+            "6": 27
+          },
+          "memory_visual_classes": {
+            "-1": 33,
+            "6": 27
+          }
+        },
+        "2014": {
+          "points": 14,
+          "current_visual_classes": {
+            "-1": 14
+          },
+          "memory_visual_classes": {
+            "-1": 14
+          }
+        },
+        "2017": {
+          "points": 4,
+          "current_visual_classes": {
+            "-1": 4
+          },
+          "memory_visual_classes": {
+            "-1": 4
+          }
+        },
+        "2024": {
+          "points": 1,
+          "current_visual_classes": {
+            "-1": 1
+          },
+          "memory_visual_classes": {
+            "-1": 1
+          }
+        },
+        "17025": {
+          "points": 4,
+          "current_visual_classes": {
+            "-1": 4
+          },
+          "memory_visual_classes": {
+            "-1": 4
+          }
+        },
+        "2026": {
+          "points": 2,
+          "current_visual_classes": {
+            "-1": 2
+          },
+          "memory_visual_classes": {
+            "-1": 2
+          }
+        },
+        "17027": {
+          "points": 7,
+          "current_visual_classes": {
+            "-1": 7
+          },
+          "memory_visual_classes": {
+            "-1": 7
+          }
+        },
+        "17028": {
+          "points": 3,
+          "current_visual_classes": {
+            "-1": 3
+          },
+          "memory_visual_classes": {
+            "-1": 3
+          }
+        },
+        "17029": {
+          "points": 6,
+          "current_visual_classes": {
+            "-1": 6
+          },
+          "memory_visual_classes": {
+            "-1": 6
+          }
+        },
+        "17032": {
+          "points": 9,
+          "current_visual_classes": {
+            "-1": 9
+          },
+          "memory_visual_classes": {
+            "-1": 9
+          }
+        },
+        "17033": {
+          "points": 3,
+          "current_visual_classes": {
+            "-1": 3
+          },
+          "memory_visual_classes": {
+            "-1": 3
+          }
+        },
+        "17034": {
+          "points": 25,
+          "current_visual_classes": {
+            "-1": 15,
+            "3": 10
+          },
+          "memory_visual_classes": {
+            "-1": 15,
+            "3": 10
+          }
+        },
+        "17037": {
+          "points": 5,
+          "current_visual_classes": {
+            "-1": 5
+          },
+          "memory_visual_classes": {
+            "-1": 5
+          }
+        },
+        "2041": {
+          "points": 10,
+          "current_visual_classes": {
+            "-1": 10
+          },
+          "memory_visual_classes": {
+            "-1": 10
+          }
+        },
+        "23038": {
+          "points": 11,
+          "current_visual_classes": {
+            "-1": 11
+          },
+          "memory_visual_classes": {
+            "-1": 11
+          }
+        },
+        "17042": {
+          "points": 3,
+          "current_visual_classes": {
+            "-1": 3
+          },
+          "memory_visual_classes": {
+            "-1": 3
+          }
+        },
+        "2046": {
+          "points": 38,
+          "current_visual_classes": {
+            "-1": 27,
+            "6": 11
+          },
+          "memory_visual_classes": {
+            "-1": 27,
+            "6": 11
+          }
+        },
+        "17043": {
+          "points": 3,
+          "current_visual_classes": {
+            "-1": 3
+          },
+          "memory_visual_classes": {
+            "-1": 3
+          }
+        },
+        "17044": {
+          "points": 1,
+          "current_visual_classes": {
+            "-1": 1
+          },
+          "memory_visual_classes": {
+            "-1": 1
+          }
+        },
+        "17049": {
+          "points": 1,
+          "current_visual_classes": {
+            "-1": 1
+          },
+          "memory_visual_classes": {
+            "-1": 1
+          }
+        },
+        "17056": {
+          "points": 1,
+          "current_visual_classes": {
+            "-1": 1
+          },
+          "memory_visual_classes": {
+            "-1": 1
+          }
+        },
+        "23058": {
+          "points": 4,
+          "current_visual_classes": {
+            "-1": 4
+          },
+          "memory_visual_classes": {
+            "-1": 4
+          }
+        },
+        "17062": {
+          "points": 12,
+          "current_visual_classes": {
+            "-1": 12
+          },
+          "memory_visual_classes": {
+            "-1": 12
+          }
+        },
+        "17064": {
+          "points": 107,
+          "current_visual_classes": {
+            "-1": 21,
+            "3": 86
+          },
+          "memory_visual_classes": {
+            "-1": 21,
+            "3": 86
+          }
+        },
+        "2061": {
+          "points": 9,
+          "current_visual_classes": {
+            "-1": 9
+          },
+          "memory_visual_classes": {
+            "-1": 9
+          }
+        },
+        "17079": {
+          "points": 37,
+          "current_visual_classes": {
+            "-1": 18,
+            "3": 19
+          },
+          "memory_visual_classes": {
+            "-1": 18,
+            "3": 19
+          }
+        },
+        "2081": {
+          "points": 1,
+          "current_visual_classes": {
+            "-1": 1
+          },
+          "memory_visual_classes": {
+            "-1": 1
+          }
+        },
+        "17082": {
+          "points": 1,
+          "current_visual_classes": {
+            "-1": 1
+          },
+          "memory_visual_classes": {
+            "-1": 1
+          }
+        },
+        "17083": {
+          "points": 5,
+          "current_visual_classes": {
+            "-1": 5
+          },
+          "memory_visual_classes": {
+            "-1": 5
+          }
+        },
+        "17084": {
+          "points": 6,
+          "current_visual_classes": {
+            "-1": 6
+          },
+          "memory_visual_classes": {
+            "-1": 6
+          }
+        },
+        "23085": {
+          "points": 27,
+          "current_visual_classes": {
+            "-1": 21,
+            "3": 6
+          },
+          "memory_visual_classes": {
+            "-1": 21,
+            "3": 6
+          }
+        },
+        "2091": {
+          "points": 2,
+          "current_visual_classes": {
+            "-1": 2
+          },
+          "memory_visual_classes": {
+            "-1": 2
+          }
+        },
+        "16089": {
+          "points": 1,
+          "current_visual_classes": {
+            "-1": 1
+          },
+          "memory_visual_classes": {
+            "-1": 1
+          }
+        },
+        "17087": {
+          "points": 4,
+          "current_visual_classes": {
+            "-1": 4
+          },
+          "memory_visual_classes": {
+            "-1": 4
+          }
+        },
+        "17088": {
+          "points": 4,
+          "current_visual_classes": {
+            "-1": 4
+          },
+          "memory_visual_classes": {
+            "-1": 4
+          }
+        },
+        "17090": {
+          "points": 2,
+          "current_visual_classes": {
+            "-1": 2
+          },
+          "memory_visual_classes": {
+            "-1": 2
+          }
+        },
+        "17092": {
+          "points": 2,
+          "current_visual_classes": {
+            "-1": 2
+          },
+          "memory_visual_classes": {
+            "-1": 2
+          }
+        },
+        "12086": {
+          "points": 1,
+          "current_visual_classes": {
+            "-1": 1
+          },
+          "memory_visual_classes": {
+            "-1": 1
+          }
+        }
+      }
+    },
+    {
+      "scene": "scene-0803",
+      "counts": {
+        "foreground_queries": 7527,
+        "foreground_with_visual_component": 3668,
+        "foreground_with_any_history": 6469,
+        "foreground_with_visual_and_any_history": 3395,
+        "foreground_with_same_positive_visual_id_history": 2116,
+        "history_pairs": 22755,
+        "positive_same_id_pairs": 8325,
+        "positive_same_id_and_same_gt_instance_pairs": 8289,
+        "positive_same_id_with_known_gt_pairs": 8289,
+        "rejected_pairs": 9385,
+        "rejected_but_same_gt_instance_pairs": 9287,
+        "rejected_current_only_known": 4703,
+        "rejected_history_only_known": 4682,
+        "rejected_both_known_different": 0
+      },
+      "objects": {
+        "14018": {
+          "points": 422,
+          "current_visual_classes": {
+            "-1": 422
+          },
+          "memory_visual_classes": {
+            "-1": 422
+          }
+        },
+        "17015": {
+          "points": 847,
+          "current_visual_classes": {
+            "-1": 817,
+            "3": 30
+          },
+          "memory_visual_classes": {
+            "-1": 817,
+            "3": 30
+          }
+        },
+        "17021": {
+          "points": 4786,
+          "current_visual_classes": {
+            "-1": 1528,
+            "3": 3258
+          },
+          "memory_visual_classes": {
+            "-1": 1528,
+            "3": 3258
+          }
+        },
+        "2019": {
+          "points": 33,
+          "current_visual_classes": {
+            "-1": 33
+          },
+          "memory_visual_classes": {
+            "-1": 33
+          }
+        },
+        "2025": {
+          "points": 27,
+          "current_visual_classes": {
+            "-1": 27
+          },
+          "memory_visual_classes": {
+            "-1": 27
+          }
+        },
+        "17004": {
+          "points": 120,
+          "current_visual_classes": {
+            "-1": 79,
+            "3": 41
+          },
+          "memory_visual_classes": {
+            "-1": 79,
+            "3": 41
+          }
+        },
+        "2028": {
+          "points": 13,
+          "current_visual_classes": {
+            "-1": 13
+          },
+          "memory_visual_classes": {
+            "-1": 13
+          }
+        },
+        "17003": {
+          "points": 61,
+          "current_visual_classes": {
+            "-1": 49,
+            "3": 12
+          },
+          "memory_visual_classes": {
+            "-1": 49,
+            "3": 12
+          }
+        },
+        "14034": {
+          "points": 11,
+          "current_visual_classes": {
+            "-1": 11
+          },
+          "memory_visual_classes": {
+            "-1": 11
+          }
+        },
+        "2035": {
+          "points": 4,
+          "current_visual_classes": {
+            "-1": 4
+          },
+          "memory_visual_classes": {
+            "-1": 4
+          }
+        },
+        "14030": {
+          "points": 39,
+          "current_visual_classes": {
+            "-1": 39
+          },
+          "memory_visual_classes": {
+            "-1": 39
+          }
+        },
+        "17031": {
+          "points": 453,
+          "current_visual_classes": {
+            "-1": 321,
+            "3": 132
+          },
+          "memory_visual_classes": {
+            "-1": 321,
+            "3": 132
+          }
+        },
+        "17032": {
+          "points": 342,
+          "current_visual_classes": {
+            "-1": 198,
+            "3": 144
+          },
+          "memory_visual_classes": {
+            "-1": 198,
+            "3": 144
+          }
+        },
+        "17001": {
+          "points": 22,
+          "current_visual_classes": {
+            "-1": 8,
+            "3": 14
+          },
+          "memory_visual_classes": {
+            "-1": 8,
+            "3": 14
+          }
+        },
+        "17011": {
+          "points": 85,
+          "current_visual_classes": {
+            "-1": 65,
+            "3": 20
+          },
+          "memory_visual_classes": {
+            "-1": 65,
+            "3": 20
+          }
+        },
+        "17033": {
+          "points": 12,
+          "current_visual_classes": {
+            "-1": 12
+          },
+          "memory_visual_classes": {
+            "-1": 12
+          }
+        },
+        "17013": {
+          "points": 2,
+          "current_visual_classes": {
+            "-1": 2
+          },
+          "memory_visual_classes": {
+            "-1": 2
+          }
+        },
+        "17023": {
+          "points": 9,
+          "current_visual_classes": {
+            "-1": 9
+          },
+          "memory_visual_classes": {
+            "-1": 9
+          }
+        },
+        "17007": {
+          "points": 4,
+          "current_visual_classes": {
+            "-1": 4
+          },
+          "memory_visual_classes": {
+            "-1": 4
+          }
+        }
+      }
+    },
+    {
+      "scene": "scene-0868",
+      "counts": {
+        "foreground_queries": 3304,
+        "foreground_with_visual_component": 1255,
+        "foreground_with_any_history": 1147,
+        "foreground_with_visual_and_any_history": 798,
+        "foreground_with_same_positive_visual_id_history": 469,
+        "history_pairs": 3813,
+        "positive_same_id_pairs": 1694,
+        "positive_same_id_and_same_gt_instance_pairs": 1694,
+        "positive_same_id_with_known_gt_pairs": 1694,
+        "rejected_pairs": 1286,
+        "rejected_but_same_gt_instance_pairs": 1254,
+        "rejected_current_only_known": 1198,
+        "rejected_history_only_known": 88,
+        "rejected_both_known_different": 0
+      },
+      "objects": {
+        "17002": {
+          "points": 1114,
+          "current_visual_classes": {
+            "-1": 430,
+            "3": 684
+          },
+          "memory_visual_classes": {
+            "-1": 430,
+            "3": 684
+          }
+        },
+        "17011": {
+          "points": 350,
+          "current_visual_classes": {
+            "-1": 99,
+            "3": 251
+          },
+          "memory_visual_classes": {
+            "-1": 99,
+            "3": 251
+          }
+        },
+        "2020": {
+          "points": 44,
+          "current_visual_classes": {
+            "-1": 44
+          },
+          "memory_visual_classes": {
+            "-1": 44
+          }
+        },
+        "2022": {
+          "points": 38,
+          "current_visual_classes": {
+            "-1": 38
+          },
+          "memory_visual_classes": {
+            "-1": 38
+          }
+        },
+        "2024": {
+          "points": 23,
+          "current_visual_classes": {
+            "-1": 23
+          },
+          "memory_visual_classes": {
+            "-1": 23
+          }
+        },
+        "17031": {
+          "points": 180,
+          "current_visual_classes": {
+            "-1": 97,
+            "3": 83
+          },
+          "memory_visual_classes": {
+            "-1": 97,
+            "3": 83
+          }
+        },
+        "17034": {
+          "points": 123,
+          "current_visual_classes": {
+            "-1": 123
+          },
+          "memory_visual_classes": {
+            "-1": 123
+          }
+        },
+        "17026": {
+          "points": 25,
+          "current_visual_classes": {
+            "-1": 25
+          },
+          "memory_visual_classes": {
+            "-1": 25
+          }
+        },
+        "17033": {
+          "points": 392,
+          "current_visual_classes": {
+            "-1": 374,
+            "3": 18
+          },
+          "memory_visual_classes": {
+            "-1": 374,
+            "3": 18
+          }
+        },
+        "2036": {
+          "points": 24,
+          "current_visual_classes": {
+            "-1": 24
+          },
+          "memory_visual_classes": {
+            "-1": 24
+          }
+        },
+        "2037": {
+          "points": 85,
+          "current_visual_classes": {
+            "-1": 85
+          },
+          "memory_visual_classes": {
+            "-1": 85
+          }
+        },
+        "17032": {
+          "points": 126,
+          "current_visual_classes": {
+            "-1": 126
+          },
+          "memory_visual_classes": {
+            "-1": 126
+          }
+        },
+        "17035": {
+          "points": 178,
+          "current_visual_classes": {
+            "-1": 89,
+            "3": 89
+          },
+          "memory_visual_classes": {
+            "-1": 89,
+            "3": 89
+          }
+        },
+        "17038": {
+          "points": 14,
+          "current_visual_classes": {
+            "-1": 14
+          },
+          "memory_visual_classes": {
+            "-1": 14
+          }
+        },
+        "17041": {
+          "points": 10,
+          "current_visual_classes": {
+            "-1": 10
+          },
+          "memory_visual_classes": {
+            "-1": 10
+          }
+        },
+        "17039": {
+          "points": 293,
+          "current_visual_classes": {
+            "-1": 293
+          },
+          "memory_visual_classes": {
+            "-1": 293
+          }
+        },
+        "2042": {
+          "points": 10,
+          "current_visual_classes": {
+            "-1": 10
+          },
+          "memory_visual_classes": {
+            "-1": 10
+          }
+        },
+        "17040": {
+          "points": 3,
+          "current_visual_classes": {
+            "-1": 3
+          },
+          "memory_visual_classes": {
+            "-1": 3
+          }
+        },
+        "17043": {
+          "points": 7,
+          "current_visual_classes": {
+            "-1": 7
+          },
+          "memory_visual_classes": {
+            "-1": 7
+          }
+        },
+        "2044": {
+          "points": 4,
+          "current_visual_classes": {
+            "-1": 4
+          },
+          "memory_visual_classes": {
+            "-1": 4
+          }
+        },
+        "2045": {
+          "points": 12,
+          "current_visual_classes": {
+            "-1": 12
+          },
+          "memory_visual_classes": {
+            "-1": 12
+          }
+        },
+        "2046": {
+          "points": 12,
+          "current_visual_classes": {
+            "-1": 12
+          },
+          "memory_visual_classes": {
+            "-1": 12
+          }
+        },
+        "2047": {
+          "points": 12,
+          "current_visual_classes": {
+            "-1": 12
+          },
+          "memory_visual_classes": {
+            "-1": 12
+          }
+        },
+        "17049": {
+          "points": 5,
+          "current_visual_classes": {
+            "-1": 5
+          },
+          "memory_visual_classes": {
+            "-1": 5
+          }
+        }
+      }
+    },
+    {
+      "scene": "scene-0383",
+      "counts": {
+        "foreground_queries": 225,
+        "foreground_with_visual_component": 16,
+        "foreground_with_any_history": 69,
+        "foreground_with_visual_and_any_history": 0,
+        "foreground_with_same_positive_visual_id_history": 0,
+        "history_pairs": 150,
+        "positive_same_id_pairs": 0,
+        "positive_same_id_and_same_gt_instance_pairs": 0,
+        "positive_same_id_with_known_gt_pairs": 0,
+        "rejected_pairs": 0,
+        "rejected_but_same_gt_instance_pairs": 0,
+        "rejected_current_only_known": 0,
+        "rejected_history_only_known": 0,
+        "rejected_both_known_different": 0
+      },
+      "objects": {
+        "2005": {
+          "points": 38,
+          "current_visual_classes": {
+            "-1": 38
+          },
+          "memory_visual_classes": {
+            "-1": 38
+          }
+        },
+        "2009": {
+          "points": 36,
+          "current_visual_classes": {
+            "-1": 36
+          },
+          "memory_visual_classes": {
+            "-1": 36
+          }
+        },
+        "2029": {
+          "points": 43,
+          "current_visual_classes": {
+            "-1": 43
+          },
+          "memory_visual_classes": {
+            "-1": 43
+          }
+        },
+        "17030": {
+          "points": 101,
+          "current_visual_classes": {
+            "-1": 85,
+            "3": 16
+          },
+          "memory_visual_classes": {
+            "-1": 85,
+            "3": 16
+          }
+        }
+      }
+    },
+    {
+      "scene": "scene-0218",
+      "counts": {
+        "foreground_queries": 17579,
+        "foreground_with_visual_component": 6676,
+        "foreground_with_any_history": 11111,
+        "foreground_with_visual_and_any_history": 3324,
+        "foreground_with_same_positive_visual_id_history": 2661,
+        "history_pairs": 35192,
+        "positive_same_id_pairs": 8700,
+        "positive_same_id_and_same_gt_instance_pairs": 8692,
+        "positive_same_id_with_known_gt_pairs": 8692,
+        "rejected_pairs": 4407,
+        "rejected_but_same_gt_instance_pairs": 3755,
+        "rejected_current_only_known": 2487,
+        "rejected_history_only_known": 1740,
+        "rejected_both_known_different": 180
+      },
+      "objects": {
+        "2002": {
+          "points": 221,
+          "current_visual_classes": {
+            "-1": 221
+          },
+          "memory_visual_classes": {
+            "-1": 221
+          }
+        },
+        "2004": {
+          "points": 358,
+          "current_visual_classes": {
+            "-1": 221,
+            "6": 137
+          },
+          "memory_visual_classes": {
+            "-1": 221,
+            "6": 137
+          }
+        },
+        "2012": {
+          "points": 1074,
+          "current_visual_classes": {
+            "-1": 1074
+          },
+          "memory_visual_classes": {
+            "-1": 1074
+          }
+        },
+        "2018": {
+          "points": 319,
+          "current_visual_classes": {
+            "-1": 106,
+            "6": 213
+          },
+          "memory_visual_classes": {
+            "-1": 106,
+            "6": 213
+          }
+        },
+        "2022": {
+          "points": 2993,
+          "current_visual_classes": {
+            "-1": 1258,
+            "6": 1735
+          },
+          "memory_visual_classes": {
+            "-1": 1258,
+            "6": 1735
+          }
+        },
+        "2027": {
+          "points": 1987,
+          "current_visual_classes": {
+            "-1": 771,
+            "6": 1216
+          },
+          "memory_visual_classes": {
+            "-1": 771,
+            "6": 1216
+          }
+        },
+        "2030": {
+          "points": 41,
+          "current_visual_classes": {
+            "-1": 41
+          },
+          "memory_visual_classes": {
+            "-1": 41
+          }
+        },
+        "2037": {
+          "points": 190,
+          "current_visual_classes": {
+            "-1": 190
+          },
+          "memory_visual_classes": {
+            "-1": 190
+          }
+        },
+        "2043": {
+          "points": 186,
+          "current_visual_classes": {
+            "-1": 186
+          },
+          "memory_visual_classes": {
+            "-1": 186
+          }
+        },
+        "2044": {
+          "points": 1,
+          "current_visual_classes": {
+            "-1": 1
+          },
+          "memory_visual_classes": {
+            "-1": 1
+          }
+        },
+        "17008": {
+          "points": 234,
+          "current_visual_classes": {
+            "-1": 234
+          },
+          "memory_visual_classes": {
+            "-1": 234
+          }
+        },
+        "17017": {
+          "points": 1709,
+          "current_visual_classes": {
+            "-1": 889,
+            "9": 25,
+            "3": 795
+          },
+          "memory_visual_classes": {
+            "-1": 889,
+            "9": 25,
+            "3": 795
+          }
+        },
+        "17021": {
+          "points": 40,
+          "current_visual_classes": {
+            "-1": 40
+          },
+          "memory_visual_classes": {
+            "-1": 40
+          }
+        },
+        "17029": {
+          "points": 1097,
+          "current_visual_classes": {
+            "3": 1049,
+            "-1": 48
+          },
+          "memory_visual_classes": {
+            "3": 1049,
+            "-1": 48
+          }
+        },
+        "17038": {
+          "points": 1548,
+          "current_visual_classes": {
+            "-1": 1531,
+            "3": 17
+          },
+          "memory_visual_classes": {
+            "-1": 1531,
+            "3": 17
+          }
+        },
+        "17042": {
+          "points": 2261,
+          "current_visual_classes": {
+            "-1": 1095,
+            "3": 1166
+          },
+          "memory_visual_classes": {
+            "-1": 1095,
+            "3": 1166
+          }
+        },
+        "17048": {
+          "points": 1744,
+          "current_visual_classes": {
+            "-1": 1744
+          },
+          "memory_visual_classes": {
+            "-1": 1744
+          }
+        },
+        "23033": {
+          "points": 639,
+          "current_visual_classes": {
+            "-1": 565,
+            "3": 74
+          },
+          "memory_visual_classes": {
+            "-1": 565,
+            "3": 74
+          }
+        },
+        "17051": {
+          "points": 9,
+          "current_visual_classes": {
+            "-1": 9
+          },
+          "memory_visual_classes": {
+            "-1": 9
+          }
+        },
+        "17050": {
+          "points": 14,
+          "current_visual_classes": {
+            "-1": 6,
+            "3": 8
+          },
+          "memory_visual_classes": {
+            "-1": 6,
+            "3": 8
+          }
+        },
+        "2010": {
+          "points": 28,
+          "current_visual_classes": {
+            "-1": 28
+          },
+          "memory_visual_classes": {
+            "-1": 28
+          }
+        },
+        "17054": {
+          "points": 71,
+          "current_visual_classes": {
+            "-1": 71
+          },
+          "memory_visual_classes": {
+            "-1": 71
+          }
+        },
+        "17053": {
+          "points": 2,
+          "current_visual_classes": {
+            "-1": 2
+          },
+          "memory_visual_classes": {
+            "-1": 2
+          }
+        },
+        "17055": {
+          "points": 4,
+          "current_visual_classes": {
+            "-1": 4
+          },
+          "memory_visual_classes": {
+            "-1": 4
+          }
+        },
+        "17056": {
+          "points": 1,
+          "current_visual_classes": {
+            "-1": 1
+          },
+          "memory_visual_classes": {
+            "-1": 1
+          }
+        }
+      }
+    },
+    {
+      "scene": "scene-0347",
+      "counts": {
+        "foreground_queries": 3261,
+        "foreground_with_visual_component": 1913,
+        "foreground_with_any_history": 2456,
+        "foreground_with_visual_and_any_history": 1632,
+        "foreground_with_same_positive_visual_id_history": 901,
+        "history_pairs": 7948,
+        "positive_same_id_pairs": 3078,
+        "positive_same_id_and_same_gt_instance_pairs": 3062,
+        "positive_same_id_with_known_gt_pairs": 3062,
+        "rejected_pairs": 3297,
+        "rejected_but_same_gt_instance_pairs": 3183,
+        "rejected_current_only_known": 2388,
+        "rejected_history_only_known": 909,
+        "rejected_both_known_different": 0
+      },
+      "objects": {
+        "2005": {
+          "points": 17,
+          "current_visual_classes": {
+            "-1": 17
+          },
+          "memory_visual_classes": {
+            "-1": 17
+          }
+        },
+        "17007": {
+          "points": 395,
+          "current_visual_classes": {
+            "-1": 129,
+            "3": 266
+          },
+          "memory_visual_classes": {
+            "-1": 129,
+            "3": 266
+          }
+        },
+        "17010": {
+          "points": 1586,
+          "current_visual_classes": {
+            "-1": 371,
+            "3": 1215
+          },
+          "memory_visual_classes": {
+            "-1": 371,
+            "3": 1215
+          }
+        },
+        "17013": {
+          "points": 239,
+          "current_visual_classes": {
+            "-1": 135,
+            "3": 104
+          },
+          "memory_visual_classes": {
+            "-1": 135,
+            "3": 104
+          }
+        },
+        "2014": {
+          "points": 3,
+          "current_visual_classes": {
+            "-1": 3
+          },
+          "memory_visual_classes": {
+            "-1": 3
+          }
+        },
+        "2015": {
+          "points": 10,
+          "current_visual_classes": {
+            "-1": 10
+          },
+          "memory_visual_classes": {
+            "-1": 10
+          }
+        },
+        "2017": {
+          "points": 12,
+          "current_visual_classes": {
+            "-1": 12
+          },
+          "memory_visual_classes": {
+            "-1": 12
+          }
+        },
+        "2025": {
+          "points": 3,
+          "current_visual_classes": {
+            "-1": 3
+          },
+          "memory_visual_classes": {
+            "-1": 3
+          }
+        },
+        "2021": {
+          "points": 8,
+          "current_visual_classes": {
+            "-1": 8
+          },
+          "memory_visual_classes": {
+            "-1": 8
+          }
+        },
+        "2022": {
+          "points": 24,
+          "current_visual_classes": {
+            "-1": 24
+          },
+          "memory_visual_classes": {
+            "-1": 24
+          }
+        },
+        "2024": {
+          "points": 21,
+          "current_visual_classes": {
+            "-1": 21
+          },
+          "memory_visual_classes": {
+            "-1": 21
+          }
+        },
+        "2026": {
+          "points": 30,
+          "current_visual_classes": {
+            "-1": 30
+          },
+          "memory_visual_classes": {
+            "-1": 30
+          }
+        },
+        "2028": {
+          "points": 678,
+          "current_visual_classes": {
+            "-1": 377,
+            "6": 301
+          },
+          "memory_visual_classes": {
+            "-1": 377,
+            "6": 301
+          }
+        },
+        "2030": {
+          "points": 18,
+          "current_visual_classes": {
+            "-1": 18
+          },
+          "memory_visual_classes": {
+            "-1": 18
+          }
+        },
+        "23033": {
+          "points": 29,
+          "current_visual_classes": {
+            "-1": 29
+          },
+          "memory_visual_classes": {
+            "-1": 29
+          }
+        },
+        "2035": {
+          "points": 16,
+          "current_visual_classes": {
+            "-1": 16
+          },
+          "memory_visual_classes": {
+            "-1": 16
+          }
+        },
+        "2037": {
+          "points": 4,
+          "current_visual_classes": {
+            "-1": 4
+          },
+          "memory_visual_classes": {
+            "-1": 4
+          }
+        },
+        "2038": {
+          "points": 9,
+          "current_visual_classes": {
+            "-1": 9
+          },
+          "memory_visual_classes": {
+            "-1": 9
+          }
+        },
+        "17039": {
+          "points": 22,
+          "current_visual_classes": {
+            "-1": 15,
+            "3": 7
+          },
+          "memory_visual_classes": {
+            "-1": 15,
+            "3": 7
+          }
+        },
+        "14042": {
+          "points": 11,
+          "current_visual_classes": {
+            "-1": 11
+          },
+          "memory_visual_classes": {
+            "-1": 11
+          }
+        },
+        "17041": {
+          "points": 74,
+          "current_visual_classes": {
+            "-1": 62,
+            "3": 12
+          },
+          "memory_visual_classes": {
+            "-1": 62,
+            "3": 12
+          }
+        }
+      }
+    },
+    {
+      "scene": "scene-0420",
+      "counts": {
+        "foreground_queries": 4669,
+        "foreground_with_visual_component": 2256,
+        "foreground_with_any_history": 3221,
+        "foreground_with_visual_and_any_history": 1821,
+        "foreground_with_same_positive_visual_id_history": 1281,
+        "history_pairs": 8949,
+        "positive_same_id_pairs": 4141,
+        "positive_same_id_and_same_gt_instance_pairs": 4033,
+        "positive_same_id_with_known_gt_pairs": 4033,
+        "rejected_pairs": 2598,
+        "rejected_but_same_gt_instance_pairs": 2444,
+        "rejected_current_only_known": 1669,
+        "rejected_history_only_known": 929,
+        "rejected_both_known_different": 0
+      },
+      "objects": {
+        "17002": {
+          "points": 155,
+          "current_visual_classes": {
+            "-1": 125,
+            "3": 30
+          },
+          "memory_visual_classes": {
+            "-1": 125,
+            "3": 30
+          }
+        },
+        "17004": {
+          "points": 36,
+          "current_visual_classes": {
+            "-1": 36
+          },
+          "memory_visual_classes": {
+            "-1": 36
+          }
+        },
+        "17005": {
+          "points": 44,
+          "current_visual_classes": {
+            "-1": 44
+          },
+          "memory_visual_classes": {
+            "-1": 44
+          }
+        },
+        "17008": {
+          "points": 152,
+          "current_visual_classes": {
+            "-1": 91,
+            "3": 61
+          },
+          "memory_visual_classes": {
+            "-1": 91,
+            "3": 61
+          }
+        },
+        "17012": {
+          "points": 61,
+          "current_visual_classes": {
+            "-1": 61
+          },
+          "memory_visual_classes": {
+            "-1": 61
+          }
+        },
+        "17016": {
+          "points": 31,
+          "current_visual_classes": {
+            "-1": 6,
+            "3": 25
+          },
+          "memory_visual_classes": {
+            "-1": 6,
+            "3": 25
+          }
+        },
+        "17018": {
+          "points": 104,
+          "current_visual_classes": {
+            "-1": 46,
+            "3": 58
+          },
+          "memory_visual_classes": {
+            "-1": 46,
+            "3": 58
+          }
+        },
+        "17023": {
+          "points": 856,
+          "current_visual_classes": {
+            "-1": 274,
+            "3": 582
+          },
+          "memory_visual_classes": {
+            "-1": 274,
+            "3": 582
+          }
+        },
+        "17025": {
+          "points": 677,
+          "current_visual_classes": {
+            "-1": 294,
+            "3": 383
+          },
+          "memory_visual_classes": {
+            "-1": 294,
+            "3": 383
+          }
+        },
+        "17026": {
+          "points": 564,
+          "current_visual_classes": {
+            "-1": 317,
+            "3": 247
+          },
+          "memory_visual_classes": {
+            "-1": 317,
+            "3": 247
+          }
+        },
+        "17031": {
+          "points": 86,
+          "current_visual_classes": {
+            "-1": 40,
+            "3": 46
+          },
+          "memory_visual_classes": {
+            "-1": 40,
+            "3": 46
+          }
+        },
+        "17032": {
+          "points": 62,
+          "current_visual_classes": {
+            "-1": 51,
+            "3": 11
+          },
+          "memory_visual_classes": {
+            "-1": 51,
+            "3": 11
+          }
+        },
+        "17043": {
+          "points": 43,
+          "current_visual_classes": {
+            "-1": 43
+          },
+          "memory_visual_classes": {
+            "-1": 43
+          }
+        },
+        "17044": {
+          "points": 36,
+          "current_visual_classes": {
+            "-1": 24,
+            "3": 12
+          },
+          "memory_visual_classes": {
+            "-1": 24,
+            "3": 12
+          }
+        },
+        "23020": {
+          "points": 656,
+          "current_visual_classes": {
+            "-1": 219,
+            "9": 437
+          },
+          "memory_visual_classes": {
+            "-1": 219,
+            "9": 437
+          }
+        },
+        "17052": {
+          "points": 5,
+          "current_visual_classes": {
+            "-1": 5
+          },
+          "memory_visual_classes": {
+            "-1": 5
+          }
+        },
+        "17036": {
+          "points": 1,
+          "current_visual_classes": {
+            "-1": 1
+          },
+          "memory_visual_classes": {
+            "-1": 1
+          }
+        },
+        "17054": {
+          "points": 499,
+          "current_visual_classes": {
+            "-1": 251,
+            "3": 248
+          },
+          "memory_visual_classes": {
+            "-1": 251,
+            "3": 248
+          }
+        },
+        "17058": {
+          "points": 128,
+          "current_visual_classes": {
+            "-1": 128
+          },
+          "memory_visual_classes": {
+            "-1": 128
+          }
+        },
+        "17063": {
+          "points": 29,
+          "current_visual_classes": {
+            "-1": 29
+          },
+          "memory_visual_classes": {
+            "-1": 29
+          }
+        },
+        "17064": {
+          "points": 9,
+          "current_visual_classes": {
+            "-1": 9
+          },
+          "memory_visual_classes": {
+            "-1": 9
+          }
+        },
+        "17065": {
+          "points": 14,
+          "current_visual_classes": {
+            "-1": 14
+          },
+          "memory_visual_classes": {
+            "-1": 14
+          }
+        },
+        "17070": {
+          "points": 1,
+          "current_visual_classes": {
+            "-1": 1
+          },
+          "memory_visual_classes": {
+            "-1": 1
+          }
+        },
+        "2078": {
+          "points": 7,
+          "current_visual_classes": {
+            "-1": 7
+          },
+          "memory_visual_classes": {
+            "-1": 7
+          }
+        },
+        "2072": {
+          "points": 71,
+          "current_visual_classes": {
+            "-1": 54,
+            "6": 17
+          },
+          "memory_visual_classes": {
+            "-1": 54,
+            "6": 17
+          }
+        },
+        "2073": {
+          "points": 54,
+          "current_visual_classes": {
+            "-1": 44,
+            "6": 10
+          },
+          "memory_visual_classes": {
+            "-1": 44,
+            "6": 10
+          }
+        },
+        "2077": {
+          "points": 62,
+          "current_visual_classes": {
+            "-1": 33,
+            "6": 29
+          },
+          "memory_visual_classes": {
+            "-1": 33,
+            "6": 29
+          }
+        },
+        "2080": {
+          "points": 91,
+          "current_visual_classes": {
+            "-1": 63,
+            "6": 28
+          },
+          "memory_visual_classes": {
+            "-1": 63,
+            "6": 28
+          }
+        }
+      }
+    },
+    {
+      "scene": "scene-1074",
+      "counts": {
+        "foreground_queries": 1391,
+        "foreground_with_visual_component": 354,
+        "foreground_with_any_history": 17,
+        "foreground_with_visual_and_any_history": 0,
+        "foreground_with_same_positive_visual_id_history": 0,
+        "history_pairs": 32,
+        "positive_same_id_pairs": 0,
+        "positive_same_id_and_same_gt_instance_pairs": 0,
+        "positive_same_id_with_known_gt_pairs": 0,
+        "rejected_pairs": 0,
+        "rejected_but_same_gt_instance_pairs": 0,
+        "rejected_current_only_known": 0,
+        "rejected_history_only_known": 0,
+        "rejected_both_known_different": 0
+      },
+      "objects": {
+        "17002": {
+          "points": 589,
+          "current_visual_classes": {
+            "-1": 332,
+            "9": 161,
+            "3": 96
+          },
+          "memory_visual_classes": {
+            "-1": 332,
+            "9": 153,
+            "3": 104
+          }
+        },
+        "17003": {
+          "points": 123,
+          "current_visual_classes": {
+            "-1": 40,
+            "3": 83
+          },
+          "memory_visual_classes": {
+            "-1": 40,
+            "3": 83
+          }
+        },
+        "17004": {
+          "points": 67,
+          "current_visual_classes": {
+            "-1": 67
+          },
+          "memory_visual_classes": {
+            "-1": 67
+          }
+        },
+        "2005": {
+          "points": 23,
+          "current_visual_classes": {
+            "-1": 23
+          },
+          "memory_visual_classes": {
+            "-1": 23
+          }
+        },
+        "17006": {
+          "points": 104,
+          "current_visual_classes": {
+            "-1": 104
+          },
+          "memory_visual_classes": {
+            "-1": 104
+          }
+        },
+        "17007": {
+          "points": 55,
+          "current_visual_classes": {
+            "-1": 55
+          },
+          "memory_visual_classes": {
+            "-1": 55
+          }
+        },
+        "17008": {
+          "points": 40,
+          "current_visual_classes": {
+            "-1": 40
+          },
+          "memory_visual_classes": {
+            "-1": 40
+          }
+        },
+        "17009": {
+          "points": 100,
+          "current_visual_classes": {
+            "-1": 100
+          },
+          "memory_visual_classes": {
+            "-1": 100
+          }
+        },
+        "23010": {
+          "points": 23,
+          "current_visual_classes": {
+            "-1": 23
+          },
+          "memory_visual_classes": {
+            "-1": 23
+          }
+        },
+        "23011": {
+          "points": 16,
+          "current_visual_classes": {
+            "-1": 16
+          },
+          "memory_visual_classes": {
+            "-1": 16
+          }
+        },
+        "17012": {
+          "points": 113,
+          "current_visual_classes": {
+            "-1": 99,
+            "3": 14
+          },
+          "memory_visual_classes": {
+            "-1": 99,
+            "3": 14
+          }
+        },
+        "2017": {
+          "points": 14,
+          "current_visual_classes": {
+            "-1": 14
+          },
+          "memory_visual_classes": {
+            "-1": 14
+          }
+        },
+        "14015": {
+          "points": 6,
+          "current_visual_classes": {
+            "-1": 6
+          },
+          "memory_visual_classes": {
+            "-1": 6
+          }
+        },
+        "16016": {
+          "points": 93,
+          "current_visual_classes": {
+            "-1": 93
+          },
+          "memory_visual_classes": {
+            "-1": 93
+          }
+        }
+      }
+    }
+  ]
+}

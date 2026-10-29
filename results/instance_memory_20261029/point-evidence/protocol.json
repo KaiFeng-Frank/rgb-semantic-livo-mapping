@@ -1,0 +1,71 @@
+{
+  "config": {
+    "hypothesis": "Existing online instance ownership and visual evidence can reject harmful point-history transfers without discarding the useful raw probability memory. Same ID is not a guarantee of correct semantics.",
+    "selection": "Exactly the same eight development logs / 321 LiDAR keyframes. Reuse immutable causal full-rate visual inputs; no new holdout and no new detector run.",
+    "point_memory": "Unchanged previous raw scan, four neighbors within 0.25 m, 0.75 s expiry, supplied ego pose, fixed equal-per-frame 50/50 probability mixture, raw-only writeback and current-label tie handling.",
+    "ownership": "Retain a candidate neighbor only when its trusted-component visual track ID equals the query ID. Both IDs zero means unknown/uncovered and retains the original neighbor; exactly one zero rejects. IDs are scoped to one scene. No motion compensation or GT correspondence.",
+    "guard": "Veto a proposed class change only when the visual class equals the CURRENT raw PTv3 class. The current-image guard uses current raw COCO scores. The memory guard uses the existing frozen causal raw visual-score memory. Unknown visual classes never veto. No confidence threshold or coefficient search.",
+    "candidate": "previous_same_id_memory_guard",
+    "arms": [
+      "raw",
+      "current_image",
+      "current_spatial_probability",
+      "current_spatial_same_id_memory_guard",
+      "previous_raw_probability",
+      "previous_same_id",
+      "previous_same_id_current_guard",
+      "previous_same_id_memory_guard"
+    ],
+    "fairness": "All arms share one new PTv3 forward, the exact same cached current/historical visual inputs, trusted components and IDs. Matched current-spatial uses the same neighbor budget, ownership rule and guard, excluding the query. Compare memory-visual guard against current-visual guard separately; equal results mean no extra semantic contribution from visual history.",
+    "gate": {
+      "miou_vs_every_current_control_pp": 0.05,
+      "positive_logs_vs_every_current_control": 5,
+      "camera_foreground_accuracy_loss_max_pp": 0.1,
+      "candidate_component_p95_max_ms": 50
+    },
+    "report": "All-arm confusion matrices, camera foreground counts, per-log/per-object changes, vetoes that prevent harm vs vetoes that block a correction, semantic coverage of cached observations, separate incremental benefit of visual history, candidate-only measured CPU cost. Cached identity output is unchanged; do not claim a new IDF1 result.",
+    "failure_action": "No threshold/alpha/radius search, extra arms, or new holdout after seeing outcomes. Leave the candidate disabled if any gate fails. If it passes development, require fresh joint replay and real ROS latency before any deployment/holdout claim.",
+    "limitations": "Cached visual projections cover trusted geometric components only. Unknown IDs do not establish physical identity. A wrong visual class can veto a useful correction; report this rather than assuming protection is safe. Cached-visual component timing excludes YOLO/projection and is not end-to-end latency."
+  },
+  "config_sha256": "f76192b61df0545474f520880909277fc9332d9fa2818685839011a5175b2f0f",
+  "index_path": "/home/frank/semantic_livo_runtime/instance-independent-dev-20261029/index/index.json",
+  "index_sha256": "7094a62436c1138bca6a961cb88544e2a80eda1611115d0098379847203b0fe3",
+  "target_path": "/home/frank/semantic_livo_runtime/instance-independent-dev-20261029/cache",
+  "visual_input_path": "/home/frank/semantic_livo_runtime/fullrate-visual-memory-20261029-corrected",
+  "reference_path": "/home/frank/semantic_livo_runtime/point-probability-causes-20261029",
+  "reference_sha256": "b660ec92f17bb0f25ee2c28b13df466744a718578c6c012009e20e3eecc7de05",
+  "visual_protocol_sha256": "394319dda87264a07296254c5a15e73e9c86cba7d0fb89895a21bef5c82d8ae8",
+  "input_sha256": {
+    "scene-0149": "08b5a43081547c96d981c0c2e07410a132d0ebfe1d7d4ed6d3d47d0e10d98733",
+    "scene-0803": "4f72cd07e9abdfb8ba528e455aa765ec4867ace089c3a171dd1078d4a86cd239",
+    "scene-0868": "a431e77392ac05d572ea48c1f333c98855eeb1e330964cf587ae708393a674ce",
+    "scene-0383": "c4d07cc56e97ea31212c395865228c34d0972d4fd29a60f1c45e6d615a78f0c8",
+    "scene-0218": "eb3505b953c313bc75c2676fd835a85c9e9c0780108ec26faf36ffef7fe14c93",
+    "scene-0347": "edab11a8896ba8e007e803e3786e5a3faea3d0e045b4a2a323dacb8f19a1ff17",
+    "scene-0420": "47faa40a3714f2c67b501b9be7a00944aaf33cb8ebe586a0cb442eef6611389e",
+    "scene-1074": "cfa773828f1899760ce89a7d9c1b236aefde0dc8f3651d190f8941ac08da90a2"
+  },
+  "target_sha256": {
+    "scene-0149": "b6f8d6f9357abb837b40658aa6001f827549d2e13fb0e4a90514c67662849378",
+    "scene-0803": "76f497ac2467f466b253d676aa6dfc5228c628172f28a5fcdcba1363adf064a5",
+    "scene-0868": "a751550926582330fa7b5332a8dd82be6fe89a22e012a09c024a82a0fa2719df",
+    "scene-0383": "f9a336d642b42e5b7f3277385ee03f89c337e5ad38cae49a81e361fba91de3dd",
+    "scene-0218": "f437c8352c7a5ed56c99922dde8ba4769101fabb3c2df1a726f3f69f0819ec9c",
+    "scene-0347": "e555871d9693894c435a50703ff76574b8f3b2aed4a8aed894e000086626e441",
+    "scene-0420": "20597de283135332a15fcfaea37e4db2847803f68bc8fd987ef92af697e67b34",
+    "scene-1074": "9d89302ca68777deb2b3b11939a524e37ab31362b1f27d93d717604e8958f9e1"
+  },
+  "sources": {
+    "tools/semantic_memory/evaluate_point_evidence.py": "27b120e0751b6fba43f4ee6c6043cd290589728b84be2c986544d137da35de75",
+    "tools/semantic_memory/point_evidence_memory.py": "105dd87113998d6f9bfcd72c609d4d86770550f6918b28406cf963c506f78015",
+    "tools/semantic_memory/point_probability_memory.py": "fc16bc7e428777f82ded14e8b61b986e5dd73f70218850fe765cdd89fa67f371",
+    "tools/semantic_memory/point_history_audit.py": "b424a74c6bcbddb842eb31a5b96207c7838a752ff4ebe7ed50b4b08a243a2baa",
+    "tools/visual_instances/visual_semantics.py": "902f184561adc39f8731275a229d3745023a9b9ce1d5f91338e273e8ad841265"
+  },
+  "checkpoint_sha256": "35f5d3aec63ae1c383f4a4146e157aa054860cb12b178d899571287e6f97e5f1",
+  "admission": {
+    "time": 1793255416.3849046,
+    "pid": 1693822,
+    "compute_processes": []
+  }
+}

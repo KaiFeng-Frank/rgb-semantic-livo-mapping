@@ -15,6 +15,9 @@
 随后完成[概率记忆的前景伤害诊断](point-probability-causes/README.md)：真值实例过滤
 可避免 120/278 个前景改错，但 153 个改错的全部邻居原本就属于正确实例；仅修
 关联不足。GT 过滤后的前景净收益仅 5 点，未记为可部署算法成绩。
+再用[已有在线视觉证据实际过滤与否决](point-evidence/README.md)，仍未过关：前景
+比当前图像融合低 0.644 pp，组件 p95 79.42 ms。审计定位到未知投影误拒和覆盖不足；
+仅在现有覆盖域做完美的“保留/回退”也无法满足前景门槛，停止该读出候选。
 
 **Result: failed the advancement gates.** The implementation and actual ROS delivery work; the memory has not demonstrated a reliable semantic or identity improvement over the matched controls. It remains opt-in.
 

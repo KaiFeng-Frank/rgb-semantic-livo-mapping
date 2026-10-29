@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "preregistration_commit": "31bfd6d",
+  "frames": 321,
+  "logs": 8,
+  "all_inputs_and_sources_verified": true,
+  "holdout_closed": true,
+  "same_forward_candidate_control_assertions_completed": true,
+  "all_reference_confusions_exact": false,
+  "visual_component_raw_label_differences": 0,
+  "visual_point_observations": 16535,
+  "visual_current_vs_memory_class_differences": 1,
+  "gate": {
+    "miou_gain_vs_best_current_pp": 0.5935475952888569,
+    "foreground_gain_vs_best_current_pp": -0.6441804736014856,
+    "positive_logs_vs_every_current": 6,
+    "candidate_component_p95_ms": 79.42481304053217,
+    "passed": false
+  },
+  "deployment_enabled": false,
+  "tests": {
+    "passed": 6,
+    "failed": 0,
+    "command": "bash tools/visual_instances/run_kalman_local.sh -m unittest tools.semantic_memory.test_point_evidence_memory tools.semantic_memory.test_point_probability -v",
+    "when": "Before preregistration commit 31bfd6d"
+  },
+  "observer_coverage_source_sha256": "fbd3f5e66bde5f3ab1d56a70609df955d09a41d2ada18e550464a27a3e57d34d"
+}
