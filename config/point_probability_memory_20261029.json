@@ -1,0 +1,12 @@
+{
+  "hypothesis": "The failed four-neighbor hard vote discarded predictive confidence and gave one historical scan up to four times the current-point mass. Test the existing equal-per-frame probability-mixture baseline, without training or parameter search.",
+  "selection": "All eight independent_dev_added scenes / 321 keyframes. Development only; new holdout stays closed.",
+  "backbone": "Frozen existing PTv3 B0, one forward per scan shared by every arm; original current point ordering",
+  "geometry": "Unchanged four nearest neighbors within 0.25m, preceding raw scan only, 0.75s expiry, supplied ego poses; no motion or GT correction",
+  "arms": ["raw", "current_spatial_probability", "previous_raw_probability", "previous_hard_vote"],
+  "operator": "0.5 * current point probability + 0.5 * mean of available neighbor raw probabilities; absent history returns current exactly. The 0.5 coefficient is inherited from the existing UniformFusion baseline in tools/semantic_memory/nuscenes_pilot.py, not selected from this evaluation.",
+  "controls": "Current-spatial uses the identical probability operator and neighbor budget, excluding the query itself. Exact posterior ties preserve the current prediction. Hard-history vote reproduces the previous policy on the same new forward. History never stores corrected predictions.",
+  "gate": {"miou_vs_raw_pp": 0.05, "miou_vs_current_spatial_pp": 0.05, "positive_logs_vs_both": 5, "camera_foreground_accuracy_loss_max_pp": 0.1},
+  "failure_action": "No alpha/radius/neighbor sweep, no training or new holdout access. Archive result and stop this probability readout variant.",
+  "timing": "Record component CPU retrieval and readout plus synchronized backbone, not full ROS latency. Additional online deployment requires separate verification."
+}
