@@ -1,0 +1,30 @@
+{
+  "added": [
+    "scene-0149",
+    "scene-0803",
+    "scene-0868",
+    "scene-0383",
+    "scene-0218",
+    "scene-0347",
+    "scene-0420",
+    "scene-1074"
+  ],
+  "logs": {
+    "scene-0149": "da04ae0b72024818a6219d8dd138ea4b",
+    "scene-0803": "246e7da6bb344941bac92be421a545e2",
+    "scene-0868": "65629cfc47fe489fabc497ead466a313",
+    "scene-0383": "1c9b302455ff44a9a290c372b31aa3ce",
+    "scene-0218": "3313a6a85b264e4c86ee44d6e6329cf3",
+    "scene-0347": "ddc03471df3e4c9bb9663629a4097743",
+    "scene-0420": "75f5ca2350b346d19a39aa7439f61755",
+    "scene-1074": "8fefc430cbfa4c2191978c0df302eb98"
+  },
+  "frames": 321,
+  "remaining_unselected_logs": 6,
+  "parent_index_sha256": "33f15006ea3e6ab513a3472769e0a7e250ea1f74ee880d131b9ad66ffa6da42e",
+  "index_sha256": "7094a62436c1138bca6a961cb88544e2a80eda1611115d0098379847203b0fe3",
+  "selection": "Fixed salt SHA256 ordering of unused logs, lexicographically first scene; no label, description, prediction or score used",
+  "exclusions": "All previous/excluded collection logs and both old/new holdout logs",
+  "next_step": "Same frozen extractor and raw-evidence audit only. Report all eight logs separately from original dev. No further scene reselection after scores.",
+  "training_admission": "At least 30 GT-sidecar recoverable points beyond current pooling on at least five instances and two new dev logs, plus positive net corrections of the frozen 50/50 control in a majority of new logs with any predictions. This admits only a separately frozen training protocol, not an improvement claim."
+}
