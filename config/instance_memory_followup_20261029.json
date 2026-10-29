@@ -1,0 +1,13 @@
+{
+  "scope": "Coverage diagnosis after failed frozen pilot; not a new successful method claim",
+  "parent_result_commit": "4082440",
+  "architecture": "Keep the existing 49,264-parameter model, frozen backbones, same input/association interface; no head/layer additions",
+  "selection": "Keep previous training/development collection logs. Metadata-only farthest-in-time selection adds one scene per training log and two per development log. Previously inspected holdout logs are excluded. Four fresh head-level test logs are preselected without opening annotations.",
+  "first_stage": "Extract only the eight added development scenes with the original frozen extractor. Audit fixed seed-0 current/temporal heads. No new training or test evaluation before coverage diagnosis.",
+  "opportunity_diagnostic": "Using only past records actually retrieved by the frozen association, count current foreground errors for which at least one same-GT-instance historical observation has a correct class prediction from the frozen single-frame head. GT filters/counts evidence only after prediction; this is a privileged availability diagnostic, not deployable accuracy.",
+  "data_gate": {"correctable_foreground_points": 30, "distinct_gt_instances": 5, "distinct_collection_logs": 2},
+  "if_gate_passes": "Extract only the 16 added training scenes; retrain the SAME matched pair with the SAME schedule and three seeds. Require the original advancement gates on expanded development before unsealing a new holdout. No gain may be attributed to memory relative to raw alone.",
+  "if_gate_fails": "Do not launch more training. Investigate perception/association coverage and where historical evidence is actually available.",
+  "budgets": {"extra_dev_scenes": 8, "extra_train_scenes_if_admitted": 16, "cache_bytes": 1000000000, "minimum_free_bytes": 4000000000, "per_seed_training_seconds": 1800},
+  "reporting": "Old failure remains failure. New development is not blind evidence. New holdout is head-level only because the backbone saw official nuScenes training data. No default deployment before semantic, identity and online gates pass."
+}
