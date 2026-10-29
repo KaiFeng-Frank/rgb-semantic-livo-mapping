@@ -6,6 +6,20 @@ from .evidence_predictor import EvidenceResults
 
 
 class ReIDTests(unittest.TestCase):
+    def test_visual_precision_isolation_restores_ptv3_caller(self):
+        from .fullrate import native_visual_precision
+        old=(torch.backends.cuda.matmul.allow_tf32,torch.backends.cudnn.allow_tf32)
+        try:
+            torch.backends.cuda.matmul.allow_tf32=True;torch.backends.cudnn.allow_tf32=False
+            with self.assertRaisesRegex(RuntimeError,'test'):
+                with native_visual_precision():
+                    self.assertFalse(torch.backends.cuda.matmul.allow_tf32)
+                    self.assertTrue(torch.backends.cudnn.allow_tf32)
+                    raise RuntimeError('test')
+            self.assertTrue(torch.backends.cuda.matmul.allow_tf32)
+            self.assertFalse(torch.backends.cudnn.allow_tf32)
+        finally:torch.backends.cuda.matmul.allow_tf32,torch.backends.cudnn.allow_tf32=old
+
     def test_initial_feature_and_ema_have_initialized_storage(self):
         f=np.array([3.,4.],np.float32);before=f.copy()
         track=InitializedBOTrack(np.array([10,10,4,4,0]),.9,2,f)

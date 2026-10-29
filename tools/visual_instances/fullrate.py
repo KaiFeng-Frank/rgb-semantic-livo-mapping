@@ -1,5 +1,6 @@
 """Single-stream deployment of the frozen full-rate tracking policy."""
 import hashlib
+from contextlib import contextmanager
 import os
 from pathlib import Path
 from types import SimpleNamespace
@@ -11,7 +12,25 @@ from .geometry import InstanceFrame,mask_frame,MAX_PIXELS
 from .visual_memory import VisualMemory
 
 
+@contextmanager
+def native_visual_precision():
+    """Match the isolated visual worker even beside PTv3 in offline evaluation.
+
+PTv3 explicitly enables global TF32 matmul. YOLO's native mask construction
+contains FP32 operations, so sharing that flag can change masks/tracking. Keep
+the isolated visual-worker policy and restore the caller's flags afterwards.
+"""
+    import torch
+    old=(torch.backends.cuda.matmul.allow_tf32,torch.backends.cudnn.allow_tf32)
+    try:
+        torch.backends.cuda.matmul.allow_tf32=False;torch.backends.cudnn.allow_tf32=True
+        yield
+    finally:
+        torch.backends.cuda.matmul.allow_tf32,torch.backends.cudnn.allow_tf32=old
+
+
 class FullRateDetector(PairedNativeTrackers):
+    @native_visual_precision()
     def __init__(self,weights,imgsz=640,feature_embeddings=False,visual_history=False,keyframe_reference=False):
         import yaml,ultralytics
         if imgsz!=640:raise ValueError('Frozen full-rate policy uses imgsz=640')
@@ -30,7 +49,9 @@ class FullRateDetector(PairedNativeTrackers):
             feature_embeddings=feature_embeddings,visual_memory=self.visual_memory.configuration() if self.visual_memory else None,
             cpu_affinity=sorted(os.sched_getaffinity(0)),training='none; frozen original YOLO11n-seg',
             startup_seconds=time.perf_counter()-start,paired_reference='40a38c4 fullrate arm')
+        self.meta['precision']=dict(matmul_tf32=False,cudnn_tf32=True,scope='isolated native visual-worker policy, restored after each call')
 
+    @native_visual_precision()
     def step(self,image,stamp_ns):
         import cv2
         if (type(stamp_ns) is not int or stamp_ns<0 or self.last_stamp is not None and stamp_ns<=self.last_stamp
