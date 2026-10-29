@@ -1,0 +1,63 @@
+{
+  "config": {
+    "purpose": "Measure usable semantic-repair supervision in the already selected 16-log training pool, before designing another training intervention. Do not repeat the old six-log audit or add architecture.",
+    "selection": "Exactly the original instance-memory-20261029 train partition: 16 collection logs / 642 frames, selected before this audit. No development or new holdout inference.",
+    "models": "Frozen existing seed-0 current-only anchor and current-anchored-repair-v2 temporal head. Current loader uses fully disabled PTv3 serialization shuffling. These older heads were trained with the legacy pooling policy: this is a declared feature-policy/coverage diagnostic, not a new generalization or deployment result.",
+    "controls": "Same backbone forward, same frozen anchor, same repair weights; normal temporal and same-head current-token output. Traced temporal core must match the uninstrumented temporal core on all logits/query indices and raw memory state for every frame.",
+    "supervision": "GT enters only the observer. Report query coverage, anchor errors with a correct predicted historical class, stricter correct same-instance (or same-stuff-class) evidence, preservation conflicts, and unique physical instances. Compute class-weighted loss mass for the existing repair objective without backpropagation; it is not a gradient attribution or proof of optimization failure.",
+    "objects": "GT panoptic IDs, at least 5 valid points per current/previous object observation, at least half correct means success. Opportunity: current anchor or same-head no-history fails and immediately previous raw B0 succeeds for the same ID within 0.75 s. Panoptic grouping differs from the old box-based audit; counts are not a direct before/after improvement.",
+    "implementation": "Retain the original query selection, 4096 budget, radii, cosine gate, raw-memory writes, residual bound and network. No training, threshold search, saved full feature cache, model download, or remote job.",
+    "followup": "Use the observed failure stage to specify a supervised test with matched current-only controls. Any later retrained anchor changes the queries and requires measuring its own coverage. Audit success never grants deployment admission."
+  },
+  "config_sha256": "6dc576b87cb338e4b83a73727b1814b9ea5a3c0cdfcf1c5e4ad63d6b20eafa53",
+  "index_path": "/home/frank/semantic_livo_runtime/instance-memory-20261029/index/index.json",
+  "index_sha256": "11ff93b4e9e4a962b41f5fca228869221f89d8df6574c3af98399068a157bc51",
+  "sealed_index_path": "/home/frank/semantic_livo_runtime/instance-independent-dev-20261029/index/index.json",
+  "sealed_index_sha256": "7094a62436c1138bca6a961cb88544e2a80eda1611115d0098379847203b0fe3",
+  "target_path": "/home/frank/semantic_livo_runtime/instance-memory-followup-20261029/cache",
+  "targets_sha256": {
+    "scene-0328": "1c14b20a28ddba6f2c6ecc5f3b9ac62800ea91226e535c7e25f5ef3b6ac8e8d1",
+    "scene-0254": "cc230dc86319d1d3bfe24c84a8f68c981358d8ed139628f1000b310d0989f997",
+    "scene-0321": "b99946e04483b51f19677054b326bcaae1f79e3db376133991bfe2661d0a1216",
+    "scene-0045": "7a18a568e17e86be7b564fcf1f51bd860bfbac7ad030bd85a63d593638973400",
+    "scene-1044": "b10f70340b414cf183295d3ab839118b2c5cbefd299e9412162e09644033de69",
+    "scene-0639": "b4ebe00ad5c39e0a521a17bf9f69ee4bbdcf7e01b91a9e373448951dbd5cda0a",
+    "scene-0161": "eae3d77bc217943e21a78f88710ae6f0aa2bd65e9ec0741bc3c7baa4011e7abf",
+    "scene-0283": "964ea4ede41459208603102f4e6066ecb31bab7452214d929c7a1abc3098a7c3",
+    "scene-0975": "a6b2eba250d938ff7f56901785b12d6d74cc8a850a5a55926664b1949fbba32c",
+    "scene-0155": "b97e15d1e0ae8ff88b52b427e6113f84e7b873a28eb9511f05e5a45795470e11",
+    "scene-0739": "f6e9439d2d4208d4acafa8b9df018074d5a7d9fdc28779c3484be05917aa9dd4",
+    "scene-0786": "3343458b9056546b9b58344ab88eeee5812686f0137790f5caec740ff06b3859",
+    "scene-0847": "1e46e5169a0e82dde1ef9e37b9b154a393cea68fc75a48d56cd282c88569ceb2",
+    "scene-0457": "628a54ae2ab0394ae6512c24dc6ca09d2e7391d75bc66ff1bb4250c9fe247fad",
+    "scene-0376": "a836f6d9ac8123dfdd48143cabf6a1b8a9322d3180ebe0556c010693e6680593",
+    "scene-0499": "4b463ea20f6abd2a719eae9f6c0fbe916a68f388e4b37daa3b8638fb09cf7a68"
+  },
+  "anchor_path": "results/semantic_memory_20261025/real_pilot/run/seed-0/current_only.pt",
+  "anchor_sha256": "c5f908f88d595dea521a817a03c5df13282843b2a9d03662a941ea7fddc80e7a",
+  "repair_path": "results/semantic_memory_20261025/repair_revision/run/seed-0/temporal.pt",
+  "repair_sha256": "20c4ff73a719e6d7ed3162594a96faaeff6c42c9eb18f3a34df4897059377aa2",
+  "backbone_sha256": "35f5d3aec63ae1c383f4a4146e157aa054860cb12b178d899571287e6f97e5f1",
+  "serialization": {
+    "backbone": false,
+    "backbone.enc.enc1.down": false,
+    "backbone.enc.enc2.down": false,
+    "backbone.enc.enc3.down": false,
+    "backbone.enc.enc4.down": false
+  },
+  "sources": {
+    "tools/semantic_memory/feature_supervision_audit.py": "b05c335866e87e52b4b717f4de06731e696ab5d44b9d4eeaef261f84e908a1dd",
+    "src/semantic_repair.py": "349bfb920933b63a4d61b96faffb58a2e5e8452c001a244c39d8eab063a09a90",
+    "src/semantic_memory.py": "1750963a421c263e3b3bb37a95e6bf32b140cfa143babde90f2681f5d79a025b",
+    "tools/semantic_memory/chain_trace.py": "c3b30d893f6af7b715d1b46e145b542f9aa41f99cf04a61fcbc5c47eb3b13e7d",
+    "tools/semantic_memory/repair_pilot.py": "89db68ec9a52190ad2bb3231f7057503df2ee5745e3fc0bb8955ffc622ec70c1",
+    "tools/semantic_memory/nuscenes_pilot.py": "1bcac977aea7ac1d59ea7e81c95a6904b7a2b0a7d2213bf405093ddbd2c742db",
+    "src/ptv3_loader_verified.py": "f00fec63ef983fe7d033910f82360d95fbe10b2853f3ef9bb61417fee33845b3",
+    "src/ptv3_worker.py": "a4016e92a2c92f7dfe73968545a57a9638fb730e92fe84901b63480b319a5d85"
+  },
+  "admission": {
+    "time": 1793256945.0192323,
+    "pid": 1699266,
+    "compute_processes": []
+  }
+}
