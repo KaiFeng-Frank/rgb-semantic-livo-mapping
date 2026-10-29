@@ -1,0 +1,16 @@
+seed 0 epoch 1 dev miou {'standard_current': 55.93013, 'standard_temporal': 56.06791, 'balanced_current': 56.60834, 'balanced_temporal': 56.93912}
+seed 0 epoch 2 dev miou {'standard_current': 55.19032, 'standard_temporal': 55.47208, 'balanced_current': 56.49467, 'balanced_temporal': 56.88726}
+seed 0 epoch 3 dev miou {'standard_current': 55.17396, 'standard_temporal': 55.66901, 'balanced_current': 56.65987, 'balanced_temporal': 57.24212}
+seed 0 epoch 4 dev miou {'standard_current': 55.36739, 'standard_temporal': 55.4407, 'balanced_current': 56.71166, 'balanced_temporal': 56.85728}
+seed 0 epoch 5 dev miou {'standard_current': 55.47708, 'standard_temporal': 55.90957, 'balanced_current': 57.03953, 'balanced_temporal': 57.25707}
+seed 1 epoch 1 dev miou {'standard_current': 54.91575, 'standard_temporal': 54.92877, 'balanced_current': 56.58585, 'balanced_temporal': 56.57191}
+seed 1 epoch 2 dev miou {'standard_current': 54.54252, 'standard_temporal': 54.97065, 'balanced_current': 56.00274, 'balanced_temporal': 56.53574}
+seed 1 epoch 3 dev miou {'standard_current': 55.31863, 'standard_temporal': 55.2469, 'balanced_current': 56.72234, 'balanced_temporal': 56.84191}
+seed 1 epoch 4 dev miou {'standard_current': 56.03145, 'standard_temporal': 56.20583, 'balanced_current': 56.5135, 'balanced_temporal': 56.80989}
+seed 1 epoch 5 dev miou {'standard_current': 56.5968, 'standard_temporal': 56.543, 'balanced_current': 56.61341, 'balanced_temporal': 56.73119}
+seed 2 epoch 1 dev miou {'standard_current': 55.6276, 'standard_temporal': 55.76988, 'balanced_current': 56.76568, 'balanced_temporal': 56.99924}
+seed 2 epoch 2 dev miou {'standard_current': 55.36668, 'standard_temporal': 55.72995, 'balanced_current': 56.55267, 'balanced_temporal': 56.60841}
+seed 2 epoch 3 dev miou {'standard_current': 55.2912, 'standard_temporal': 55.90406, 'balanced_current': 56.7289, 'balanced_temporal': 57.1372}
+seed 2 epoch 4 dev miou {'standard_current': 55.55554, 'standard_temporal': 56.00852, 'balanced_current': 56.36925, 'balanced_temporal': 57.08185}
+seed 2 epoch 5 dev miou {'standard_current': 55.50044, 'standard_temporal': 55.69071, 'balanced_current': 56.81318, 'balanced_temporal': 57.27698}
+FINAL {'miou_gain_vs_best_current_pp_by_seed': [0.21753930672452348, 0.11957525399456381, 0.4637969955217258], 'mean_miou_gain_pp': 0.2669705187469377, 'foreground_gain_vs_best_current_pp_by_seed': [0.16748692313638402, -1.0074982607127136, -0.9430802133525762], 'positive_logs_by_seed': [3, 1, 2], 'mean_recovery_success': 0.5, 'best_current_mean_recovery_success': 0.554773082942097, 'passed': False}

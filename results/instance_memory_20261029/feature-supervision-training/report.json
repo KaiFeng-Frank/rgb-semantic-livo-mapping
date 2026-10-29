@@ -1,0 +1,162 @@
+{
+  "arms": {
+    "baseline": {
+      "miou_percent_by_seed": [
+        53.074923871003975,
+        53.074923871003975,
+        53.074923871003975
+      ],
+      "mean_miou_percent": 53.07492387100397,
+      "foreground_accuracy_percent_by_seed": [
+        84.48555747378185,
+        84.48555747378185,
+        84.48555747378185
+      ],
+      "mean_recovery_success": 0.41784037558685444
+    },
+    "anchor": {
+      "miou_percent_by_seed": [
+        54.85115425979588,
+        54.85115425979588,
+        54.85115425979588
+      ],
+      "mean_miou_percent": 54.851154259795884,
+      "foreground_accuracy_percent_by_seed": [
+        85.37710324924632,
+        85.37710324924632,
+        85.37710324924632
+      ],
+      "mean_recovery_success": 0.3427230046948357
+    },
+    "current_image": {
+      "miou_percent_by_seed": [
+        53.09066803144917,
+        53.09066803144917,
+        53.09066803144917
+      ],
+      "mean_miou_percent": 53.09066803144916,
+      "foreground_accuracy_percent_by_seed": [
+        84.79734082300497,
+        84.79734082300497,
+        84.79734082300497
+      ],
+      "mean_recovery_success": 0.4225352112676057
+    },
+    "standard_current": {
+      "miou_percent_by_seed": [
+        55.93013118290858,
+        56.59680071098382,
+        55.62760160609502
+      ],
+      "mean_miou_percent": 56.05151116666247,
+      "foreground_accuracy_percent_by_seed": [
+        87.21688268185216,
+        87.53381947486409,
+        87.75541755778299
+      ],
+      "mean_recovery_success": 0.5422535211267605
+    },
+    "standard_temporal": {
+      "miou_percent_by_seed": [
+        56.06791039556855,
+        56.542998031945444,
+        56.00852277440299
+      ],
+      "mean_miou_percent": 56.20647706730566,
+      "foreground_accuracy_percent_by_seed": [
+        87.40240665824938,
+        87.86621659924243,
+        87.61112113169625
+      ],
+      "mean_recovery_success": 0.5250391236306728
+    },
+    "balanced_current": {
+      "miou_percent_by_seed": [
+        57.03952649095609,
+        56.72233804699074,
+        56.813181372713316
+      ],
+      "mean_miou_percent": 56.85834863688672,
+      "foreground_accuracy_percent_by_seed": [
+        87.0236285397717,
+        86.98240098946121,
+        86.69638485918215
+      ],
+      "mean_recovery_success": 0.5289514866979657
+    },
+    "balanced_temporal": {
+      "miou_percent_by_seed": [
+        57.25706579768062,
+        56.841913300985304,
+        57.27697836823504
+      ],
+      "mean_miou_percent": 57.125319155633655,
+      "foreground_accuracy_percent_by_seed": [
+        87.6343116287459,
+        86.93859671725632,
+        86.81233734443042
+      ],
+      "mean_recovery_success": 0.5
+    },
+    "standard_temporal_no_history": {
+      "miou_percent_by_seed": [
+        55.9081100426873,
+        55.936835716580305,
+        55.57985500449389
+      ],
+      "mean_miou_percent": 55.808266921253825,
+      "foreground_accuracy_percent_by_seed": [
+        87.30191450436755,
+        87.94609497796903,
+        87.59566080032982
+      ],
+      "mean_recovery_success": 0.554773082942097
+    },
+    "balanced_temporal_no_history": {
+      "miou_percent_by_seed": [
+        56.86680422145466,
+        56.62123377898871,
+        56.78964378196236
+      ],
+      "mean_miou_percent": 56.75922726080191,
+      "foreground_accuracy_percent_by_seed": [
+        87.46682470560953,
+        86.78141668169755,
+        86.6783478059213
+      ],
+      "mean_recovery_success": 0.5234741784037559
+    }
+  },
+  "gate": {
+    "miou_gain_vs_best_current_pp_by_seed": [
+      0.21753930672452348,
+      0.11957525399456381,
+      0.4637969955217258
+    ],
+    "mean_miou_gain_pp": 0.2669705187469377,
+    "foreground_gain_vs_best_current_pp_by_seed": [
+      0.16748692313638402,
+      -1.0074982607127136,
+      -0.9430802133525762
+    ],
+    "positive_logs_by_seed": [
+      3,
+      1,
+      2
+    ],
+    "mean_recovery_success": 0.5,
+    "best_current_mean_recovery_success": 0.554773082942097,
+    "passed": false
+  },
+  "current_controls": [
+    "baseline",
+    "anchor",
+    "current_image",
+    "standard_current",
+    "balanced_current",
+    "standard_temporal_no_history",
+    "balanced_temporal_no_history"
+  ],
+  "scope": "Three fixed seeds, development only. Candidate chosen before training. Cached-head computation is not end-to-end latency. No new instance identity output or holdout score.",
+  "deployable": false
+}

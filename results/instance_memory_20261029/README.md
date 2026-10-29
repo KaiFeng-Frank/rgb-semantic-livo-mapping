@@ -20,7 +20,9 @@
 仅在现有覆盖域做完美的“保留/回退”也无法满足前景门槛，停止该读出候选。
 随后完成[三维特征记忆的 16 日志训练监督审计](feature-supervision/README.md)：
 642 帧插桩等价通过，发现 96,002 个有严格正确历史的互补查询，并修正缺失类别
-参与权重归一化的问题。下一项固定为同架构、同预算的四臂监督对照；尚未训练。
+参与权重归一化的问题。随后[固定架构的四臂监督训练](feature-supervision-training/README.md)
+已完成三个种子：历史对匹配当前平均 mIoU +0.267 pp，同权重关闭历史下降 0.366 pp，
+但前景保护和对象错误恢复门槛失败；未追加训练、打开留出或部署。
 
 **Result: failed the advancement gates.** The implementation and actual ROS delivery work; the memory has not demonstrated a reliable semantic or identity improvement over the matched controls. It remains opt-in.
 

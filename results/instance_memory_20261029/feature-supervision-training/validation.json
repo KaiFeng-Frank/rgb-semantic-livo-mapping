@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "seeds": [
+    {
+      "seed": 0,
+      "frames_per_epoch": 626,
+      "steps_per_epoch": 160,
+      "queries_per_epoch": 1879891,
+      "development_frames": 321,
+      "checkpoint_hashes": {
+        "standard_current": "94fd1408dbe844ae6e99be0004d62abd52591934e80771ffaae869b9df2c4d4e",
+        "standard_temporal": "07ff9d3ae20b486f1e966b1e2a04f2ae921475dabe676ff326a2a9d7704538bb",
+        "balanced_current": "7fff22e57b3e126ac93d49e5eb926a1bffd7b2ea894e782f932432cae1cc49d6",
+        "balanced_temporal": "118b5a2d6632af0c49351e215a4abd90247e70e916fedc6b8c3108961bd25ff0"
+      }
+    },
+    {
+      "seed": 1,
+      "frames_per_epoch": 626,
+      "steps_per_epoch": 160,
+      "queries_per_epoch": 1879891,
+      "development_frames": 321,
+      "checkpoint_hashes": {
+        "standard_current": "c24c710cfc7e3580aff80c0af81948bfbf8e739c07618998a435b6659acee235",
+        "standard_temporal": "082bb46dae15b2c9db965a34b26497118d90b3cda04678479cb1cb89991ae1dd",
+        "balanced_current": "c507a825299d0cfee70e7e512a20b726869c4428baf72fbacf5b7536d77be743",
+        "balanced_temporal": "bc7a75dca35d2ff41eb7bca306b1009983c9477aebc9a0e4f9d683d42b26b679"
+      }
+    },
+    {
+      "seed": 2,
+      "frames_per_epoch": 626,
+      "steps_per_epoch": 160,
+      "queries_per_epoch": 1879891,
+      "development_frames": 321,
+      "checkpoint_hashes": {
+        "standard_current": "3fb4f000d2def4370bdc8e8e088c6fc9af8420bc363034a78cdab43db81a4b78",
+        "standard_temporal": "e75b1e4d0a96a0bda6bbfe9338d9083fbbf703af1652c1b2cd4e596943873ddc",
+        "balanced_current": "07233b7319c0aa5a2bb2f82c977323d55d88262af02ce1b3b376e2870f933eaf",
+        "balanced_temporal": "4f3153cae276c3b6e3f259ac1c8708c996a71896672884d122d17628cbdc2d69"
+      }
+    }
+  ],
+  "cache_parity_frames": 963,
+  "real_output_checks": 144,
+  "source": "Saved epoch reports, selected checkpoints, per-scene confusion and per-frame foreground counts.",
+  "caveat": "This checks internal result consistency, not new generalization or online delivery."
+}

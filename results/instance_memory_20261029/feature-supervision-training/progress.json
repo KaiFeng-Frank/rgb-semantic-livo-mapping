@@ -1,0 +1,26 @@
+{
+  "stage": "training_complete",
+  "seeds": 3,
+  "epochs_per_arm": 5,
+  "gate": {
+    "miou_gain_vs_best_current_pp_by_seed": [
+      0.21753930672452348,
+      0.11957525399456381,
+      0.4637969955217258
+    ],
+    "mean_miou_gain_pp": 0.2669705187469377,
+    "foreground_gain_vs_best_current_pp_by_seed": [
+      0.16748692313638402,
+      -1.0074982607127136,
+      -0.9430802133525762
+    ],
+    "positive_logs_by_seed": [
+      3,
+      1,
+      2
+    ],
+    "mean_recovery_success": 0.5,
+    "best_current_mean_recovery_success": 0.554773082942097,
+    "passed": false
+  }
+}

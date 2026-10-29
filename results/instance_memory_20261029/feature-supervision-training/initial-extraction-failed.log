@@ -1,0 +1,11 @@
+W1029 15:28:14.337000 1706452 site-packages/torch/fx/_symbolic_trace.py:53] is_fx_tracing will return true for both fx.symbolic_trace and torch.export. Please use is_fx_tracing_symbolic_tracing() for specifically fx.symbolic_trace or torch.compiler.is_compiling() for specifically torch.export/compile.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/frank/semantic_livo_instance_memory/tools/semantic_memory/repair_supervision_cache.py", line 126, in <module>
+    a=p.parse_args();extract(a.train_index,a.dev_index,a.train_targets,a.dev_targets,a.visual,a.anchors,a.models,a.cache,a.out)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/semantic_livo_instance_memory/tools/semantic_memory/repair_supervision_cache.py", line 97, in extract
+    camera=np.zeros(len(gt),bool);camera[target['camera_in_view_indices']]=True
+                                         ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'camera_in_view_indices'

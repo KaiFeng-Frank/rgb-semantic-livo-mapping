@@ -1,0 +1,33 @@
+{
+  "extraction_protocol_sha256": "441cd2e780280424809f8ef1d7c4a1c49a1159c380df02f22cd113b6c0fb56b7",
+  "feature_manifest_sha256": "a74b1267546878152620b0e25792febb8ec221ea13887e3f052900d0fead35c4",
+  "admission": {
+    "time": 1793259619.9750786,
+    "pid": 1709407,
+    "compute_processes": []
+  },
+  "implementation_sha256": "7fd1cb60f8a21e6a3ce8344c1b4a5ed9a68ccd8502888e52f426a6c1f7967f87",
+  "objective_source_sha256": "cb77b9e7457c8429cfda99aae901bb0e76b895c2e3850fc33f82e7873b43ab9d",
+  "resolved_current_controls": [
+    "baseline",
+    "anchor",
+    "current_image",
+    "standard_current",
+    "balanced_current",
+    "standard_temporal_no_history",
+    "balanced_temporal_no_history"
+  ],
+  "params": {
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "epochs": 5,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "clip_frames": 4,
+    "gradient_norm_max": 5
+  },
+  "selection": "Development mIoU, no output-policy or threshold selection; same-head current-token ablations are included among current controls."
+}

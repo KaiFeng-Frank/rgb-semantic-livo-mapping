@@ -1,0 +1,2020 @@
+{
+  "scope": "Descriptive analysis of already evaluated development outputs. No checkpoint reselection, new thresholds or deployment claim.",
+  "aggregate_comparisons": {
+    "standard_current": {
+      "mean_miou_gain_pp": 1.0738079889711798,
+      "mean_camera_foreground_gain_pp": -0.37362467468886235
+    },
+    "balanced_current": {
+      "mean_miou_gain_pp": 0.2669705187469377,
+      "mean_camera_foreground_gain_pp": 0.22761043400585748
+    },
+    "balanced_temporal_no_history": {
+      "mean_miou_gain_pp": 0.36609189483174376,
+      "mean_camera_foreground_gain_pp": 0.15288549906808577
+    }
+  },
+  "seeds": [
+    {
+      "seed": 0,
+      "comparisons": {
+        "standard_current": {
+          "miou_gain_pp": 1.3269346147720351,
+          "camera_foreground_gain_pp": 0.41742894689376087,
+          "positive_logs": 7,
+          "class_iou_gain_pp": {
+            "barrier": 0,
+            "bicycle": 1.1134418573864935,
+            "bus": 0.9920563199234289,
+            "car": 0.3931322515236757,
+            "construction_vehicle": 0,
+            "motorcycle": 2.945736434108527,
+            "pedestrian": 1.2362428813795567,
+            "traffic_cone": 5.027176334313466,
+            "trailer": 0,
+            "truck": 4.761665614671628,
+            "driveable_surface": 0.11133913058326561,
+            "other_flat": 1.4432146353841713,
+            "sidewalk": 1.0537322397766835,
+            "terrain": 0.37310748433880825,
+            "manmade": 1.023997884484651,
+            "vegetation": 0.7561107684783575
+          }
+        },
+        "balanced_current": {
+          "miou_gain_pp": 0.21753930672452348,
+          "camera_foreground_gain_pp": 0.6106830889742065,
+          "positive_logs": 6,
+          "class_iou_gain_pp": {
+            "barrier": 0,
+            "bicycle": 0.3512226743584257,
+            "bus": 0.7706770815550268,
+            "car": 0.33069347775105395,
+            "construction_vehicle": 0,
+            "motorcycle": -3.037508255987764,
+            "pedestrian": 0.24634154048890355,
+            "traffic_cone": 0.28292787482585013,
+            "trailer": 0,
+            "truck": 2.014996830082405,
+            "driveable_surface": 0.06836814492140464,
+            "other_flat": 0.585064763437837,
+            "sidewalk": 0.9879930661129244,
+            "terrain": 0.4421504776869978,
+            "manmade": 0.22613846509134117,
+            "vegetation": 0.21156276726789214
+          }
+        },
+        "balanced_temporal_no_history": {
+          "miou_gain_pp": 0.3902615762259587,
+          "camera_foreground_gain_pp": 0.16748692313638402,
+          "positive_logs": 6,
+          "class_iou_gain_pp": {
+            "barrier": 0,
+            "bicycle": 1.0785195769715872,
+            "bus": 1.683397176775503,
+            "car": 0.27223412994751284,
+            "construction_vehicle": 0,
+            "motorcycle": 0.843641761504206,
+            "pedestrian": 0.4028239173318071,
+            "traffic_cone": 0.28292787482585013,
+            "trailer": 0,
+            "truck": 1.3567761291519043,
+            "driveable_surface": -0.0015418610764816876,
+            "other_flat": 0.005419036736054039,
+            "sidewalk": -0.00145475009390994,
+            "terrain": 0.013631382974965689,
+            "manmade": 0.1541957036403585,
+            "vegetation": 0.15361514092606665
+          }
+        }
+      },
+      "error_recovery_same_head": {
+        "both_failed": 180,
+        "both_success": 227,
+        "history_harmed": 14,
+        "history_rescued": 5
+      },
+      "error_recovery_by_class": {
+        "car": {
+          "episodes": 145,
+          "both_success": 55,
+          "history_rescued": 4,
+          "history_harmed": 9,
+          "both_failed": 77
+        },
+        "pedestrian": {
+          "episodes": 214,
+          "both_success": 140,
+          "history_rescued": 1,
+          "history_harmed": 5,
+          "both_failed": 68
+        },
+        "truck": {
+          "episodes": 33,
+          "both_success": 14,
+          "history_rescued": 0,
+          "history_harmed": 0,
+          "both_failed": 19
+        },
+        "bicycle": {
+          "episodes": 17,
+          "both_success": 8,
+          "history_rescued": 0,
+          "history_harmed": 0,
+          "both_failed": 9
+        },
+        "bus": {
+          "episodes": 4,
+          "both_success": 3,
+          "history_rescued": 0,
+          "history_harmed": 0,
+          "both_failed": 1
+        },
+        "traffic_cone": {
+          "episodes": 5,
+          "both_success": 5,
+          "history_rescued": 0,
+          "history_harmed": 0,
+          "both_failed": 0
+        },
+        "motorcycle": {
+          "episodes": 8,
+          "both_success": 2,
+          "history_rescued": 0,
+          "history_harmed": 0,
+          "both_failed": 6
+        }
+      },
+      "lost_recovery_events": [
+        {
+          "scene": "scene-0149",
+          "instance": 17009,
+          "label": "car",
+          "start_frame": 15,
+          "end_frame": 16,
+          "frames": [
+            {
+              "frame": 15,
+              "points": 11,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 16,
+              "points": 7,
+              "history": 0.0,
+              "same_head_current": 1.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0149",
+          "instance": 17030,
+          "label": "car",
+          "start_frame": 14,
+          "end_frame": 17,
+          "frames": [
+            {
+              "frame": 14,
+              "points": 15,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 15,
+              "points": 16,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 16,
+              "points": 14,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 17,
+              "points": 11,
+              "history": 0.0,
+              "same_head_current": 1.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0149",
+          "instance": 17029,
+          "label": "car",
+          "start_frame": 24,
+          "end_frame": 26,
+          "frames": [
+            {
+              "frame": 24,
+              "points": 5,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 25,
+              "points": 8,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 26,
+              "points": 18,
+              "history": 0.16666666666666666,
+              "same_head_current": 0.6666666666666666
+            }
+          ]
+        },
+        {
+          "scene": "scene-0149",
+          "instance": 17044,
+          "label": "car",
+          "start_frame": 25,
+          "end_frame": 26,
+          "frames": [
+            {
+              "frame": 25,
+              "points": 9,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 26,
+              "points": 13,
+              "history": 0.0,
+              "same_head_current": 1.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0149",
+          "instance": 17050,
+          "label": "car",
+          "start_frame": 27,
+          "end_frame": 28,
+          "frames": [
+            {
+              "frame": 27,
+              "points": 15,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 28,
+              "points": 26,
+              "history": 0.15384615384615385,
+              "same_head_current": 0.9615384615384616
+            }
+          ]
+        },
+        {
+          "scene": "scene-0149",
+          "instance": 17050,
+          "label": "car",
+          "start_frame": 31,
+          "end_frame": 32,
+          "frames": [
+            {
+              "frame": 31,
+              "points": 5,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 32,
+              "points": 10,
+              "history": 0.0,
+              "same_head_current": 0.9
+            }
+          ]
+        },
+        {
+          "scene": "scene-0803",
+          "instance": 2028,
+          "label": "pedestrian",
+          "start_frame": 33,
+          "end_frame": 39,
+          "frames": [
+            {
+              "frame": 33,
+              "points": 8,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 34,
+              "points": 14,
+              "history": 0.42857142857142855,
+              "same_head_current": 0.42857142857142855
+            },
+            {
+              "frame": 35,
+              "points": 14,
+              "history": 0.42857142857142855,
+              "same_head_current": 0.5
+            },
+            {
+              "frame": 36,
+              "points": 12,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 37,
+              "points": 14,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 38,
+              "points": 11,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 39,
+              "points": 7,
+              "history": 0.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0868",
+          "instance": 2027,
+          "label": "pedestrian",
+          "start_frame": 16,
+          "end_frame": 18,
+          "frames": [
+            {
+              "frame": 16,
+              "points": 7,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 17,
+              "points": 17,
+              "history": 0.11764705882352941,
+              "same_head_current": 0.6470588235294118
+            },
+            {
+              "frame": 18,
+              "points": 16,
+              "history": 0.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0383",
+          "instance": 2016,
+          "label": "pedestrian",
+          "start_frame": 6,
+          "end_frame": 8,
+          "frames": [
+            {
+              "frame": 6,
+              "points": 23,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 7,
+              "points": 11,
+              "history": 0.36363636363636365,
+              "same_head_current": 0.9090909090909091
+            },
+            {
+              "frame": 8,
+              "points": 9,
+              "history": 0.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0383",
+          "instance": 3028,
+          "label": "pedestrian",
+          "start_frame": 18,
+          "end_frame": 18,
+          "frames": [
+            {
+              "frame": 18,
+              "points": 5,
+              "history": 0.4,
+              "same_head_current": 1.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0347",
+          "instance": 2025,
+          "label": "pedestrian",
+          "start_frame": 20,
+          "end_frame": 20,
+          "frames": [
+            {
+              "frame": 20,
+              "points": 7,
+              "history": 0.0,
+              "same_head_current": 0.5714285714285714
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17044,
+          "label": "car",
+          "start_frame": 31,
+          "end_frame": 32,
+          "frames": [
+            {
+              "frame": 31,
+              "points": 7,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 32,
+              "points": 6,
+              "history": 0.16666666666666666,
+              "same_head_current": 1.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17058,
+          "label": "car",
+          "start_frame": 11,
+          "end_frame": 12,
+          "frames": [
+            {
+              "frame": 11,
+              "points": 5,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 12,
+              "points": 5,
+              "history": 0.0,
+              "same_head_current": 0.6
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17075,
+          "label": "car",
+          "start_frame": 27,
+          "end_frame": 28,
+          "frames": [
+            {
+              "frame": 27,
+              "points": 11,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 28,
+              "points": 12,
+              "history": 0.4166666666666667,
+              "same_head_current": 0.75
+            }
+          ]
+        }
+      ],
+      "rescued_recovery_events": [
+        {
+          "scene": "scene-0347",
+          "instance": 2030,
+          "label": "pedestrian",
+          "start_frame": 24,
+          "end_frame": 24,
+          "frames": [
+            {
+              "frame": 24,
+              "points": 5,
+              "history": 0.8,
+              "same_head_current": 0.4
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17044,
+          "label": "car",
+          "start_frame": 33,
+          "end_frame": 33,
+          "frames": [
+            {
+              "frame": 33,
+              "points": 6,
+              "history": 1.0,
+              "same_head_current": 0.16666666666666666
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17045,
+          "label": "car",
+          "start_frame": 33,
+          "end_frame": 33,
+          "frames": [
+            {
+              "frame": 33,
+              "points": 6,
+              "history": 1.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17012,
+          "label": "car",
+          "start_frame": 21,
+          "end_frame": 21,
+          "frames": [
+            {
+              "frame": 21,
+              "points": 11,
+              "history": 0.6363636363636364,
+              "same_head_current": 0.18181818181818182
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17063,
+          "label": "car",
+          "start_frame": 15,
+          "end_frame": 15,
+          "frames": [
+            {
+              "frame": 15,
+              "points": 5,
+              "history": 0.6,
+              "same_head_current": 0.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 1,
+      "comparisons": {
+        "standard_current": {
+          "miou_gain_pp": 0.2451125900014839,
+          "camera_foreground_gain_pp": -0.5952227576077718,
+          "positive_logs": 3,
+          "class_iou_gain_pp": {
+            "barrier": 0,
+            "bicycle": -5.684514458240747,
+            "bus": 2.4045958968864634,
+            "car": 0.4978357164331815,
+            "construction_vehicle": 0,
+            "motorcycle": 3.7173793570095635,
+            "pedestrian": 0.030315465729835456,
+            "traffic_cone": 0.13928147146777814,
+            "trailer": 0,
+            "truck": 1.388845922114601,
+            "driveable_surface": 0.006557834951614883,
+            "other_flat": 0.4282932778695403,
+            "sidewalk": 1.9418362813071965,
+            "terrain": 0.6399367470176553,
+            "manmade": -0.38644964217422473,
+            "vegetation": -1.202112430348734
+          }
+        },
+        "balanced_current": {
+          "miou_gain_pp": 0.11957525399456381,
+          "camera_foreground_gain_pp": -0.0438042722048948,
+          "positive_logs": 6,
+          "class_iou_gain_pp": {
+            "barrier": 0,
+            "bicycle": 0.038157393226695424,
+            "bus": 0.703890946918817,
+            "car": 0.20396273418429312,
+            "construction_vehicle": 0,
+            "motorcycle": -0.3018768867305413,
+            "pedestrian": 0.02248252988711341,
+            "traffic_cone": 0.28939507094846717,
+            "trailer": 0,
+            "truck": 0.8654260961291627,
+            "driveable_surface": -0.03093224561733221,
+            "other_flat": -0.47362086527956704,
+            "sidewalk": 0.28487049406985543,
+            "terrain": -0.018908300623832197,
+            "manmade": 0.16135256512249674,
+            "vegetation": 0.16900453167739693
+          }
+        },
+        "balanced_temporal_no_history": {
+          "miou_gain_pp": 0.2206795219965918,
+          "camera_foreground_gain_pp": 0.15718003555876825,
+          "positive_logs": 5,
+          "class_iou_gain_pp": {
+            "barrier": 0,
+            "bicycle": 0.4302617190825142,
+            "bus": 0.8273633481646447,
+            "car": 0.19913853160103967,
+            "construction_vehicle": 0,
+            "motorcycle": -0.5831620473756225,
+            "pedestrian": 0.13851631833387001,
+            "traffic_cone": 0.43201560830584684,
+            "trailer": 0,
+            "truck": 1.379225795986072,
+            "driveable_surface": -0.01694137547636476,
+            "other_flat": 0.3665005637003338,
+            "sidewalk": -0.06828476289935104,
+            "terrain": 0.0028386875276509294,
+            "manmade": 0.17209197530506648,
+            "vegetation": 0.25130798968966417
+          }
+        }
+      },
+      "error_recovery_same_head": {
+        "both_failed": 205,
+        "history_harmed": 18,
+        "both_success": 195,
+        "history_rescued": 8
+      },
+      "error_recovery_by_class": {
+        "car": {
+          "episodes": 145,
+          "both_success": 36,
+          "history_rescued": 5,
+          "history_harmed": 12,
+          "both_failed": 92
+        },
+        "pedestrian": {
+          "episodes": 214,
+          "both_success": 127,
+          "history_rescued": 3,
+          "history_harmed": 6,
+          "both_failed": 78
+        },
+        "truck": {
+          "episodes": 33,
+          "both_success": 14,
+          "history_rescued": 0,
+          "history_harmed": 0,
+          "both_failed": 19
+        },
+        "bicycle": {
+          "episodes": 17,
+          "both_success": 8,
+          "history_rescued": 0,
+          "history_harmed": 0,
+          "both_failed": 9
+        },
+        "bus": {
+          "episodes": 4,
+          "both_success": 3,
+          "history_rescued": 0,
+          "history_harmed": 0,
+          "both_failed": 1
+        },
+        "traffic_cone": {
+          "episodes": 5,
+          "both_success": 5,
+          "history_rescued": 0,
+          "history_harmed": 0,
+          "both_failed": 0
+        },
+        "motorcycle": {
+          "episodes": 8,
+          "both_success": 2,
+          "history_rescued": 0,
+          "history_harmed": 0,
+          "both_failed": 6
+        }
+      },
+      "lost_recovery_events": [
+        {
+          "scene": "scene-0149",
+          "instance": 17001,
+          "label": "car",
+          "start_frame": 6,
+          "end_frame": 7,
+          "frames": [
+            {
+              "frame": 6,
+              "points": 12,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 7,
+              "points": 17,
+              "history": 0.0,
+              "same_head_current": 1.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0149",
+          "instance": 17009,
+          "label": "car",
+          "start_frame": 15,
+          "end_frame": 16,
+          "frames": [
+            {
+              "frame": 15,
+              "points": 11,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 16,
+              "points": 7,
+              "history": 0.0,
+              "same_head_current": 1.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0149",
+          "instance": 17008,
+          "label": "car",
+          "start_frame": 12,
+          "end_frame": 13,
+          "frames": [
+            {
+              "frame": 12,
+              "points": 5,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 13,
+              "points": 5,
+              "history": 0.2,
+              "same_head_current": 1.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0149",
+          "instance": 17008,
+          "label": "car",
+          "start_frame": 18,
+          "end_frame": 23,
+          "frames": [
+            {
+              "frame": 18,
+              "points": 7,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 19,
+              "points": 9,
+              "history": 0.0,
+              "same_head_current": 0.3333333333333333
+            },
+            {
+              "frame": 20,
+              "points": 6,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 21,
+              "points": 12,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 22,
+              "points": 13,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 23,
+              "points": 10,
+              "history": 0.0,
+              "same_head_current": 1.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0149",
+          "instance": 17027,
+          "label": "car",
+          "start_frame": 14,
+          "end_frame": 15,
+          "frames": [
+            {
+              "frame": 14,
+              "points": 8,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 15,
+              "points": 9,
+              "history": 0.0,
+              "same_head_current": 0.7777777777777778
+            }
+          ]
+        },
+        {
+          "scene": "scene-0149",
+          "instance": 17050,
+          "label": "car",
+          "start_frame": 27,
+          "end_frame": 28,
+          "frames": [
+            {
+              "frame": 27,
+              "points": 15,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 28,
+              "points": 26,
+              "history": 0.0,
+              "same_head_current": 0.6923076923076923
+            }
+          ]
+        },
+        {
+          "scene": "scene-0868",
+          "instance": 2024,
+          "label": "pedestrian",
+          "start_frame": 23,
+          "end_frame": 24,
+          "frames": [
+            {
+              "frame": 23,
+              "points": 22,
+              "history": 0.36363636363636365,
+              "same_head_current": 1.0
+            },
+            {
+              "frame": 24,
+              "points": 13,
+              "history": 0.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0868",
+          "instance": 2030,
+          "label": "pedestrian",
+          "start_frame": 22,
+          "end_frame": 25,
+          "frames": [
+            {
+              "frame": 22,
+              "points": 20,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 23,
+              "points": 27,
+              "history": 0.0,
+              "same_head_current": 0.7037037037037037
+            },
+            {
+              "frame": 24,
+              "points": 19,
+              "history": 0.05263157894736842,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 25,
+              "points": 13,
+              "history": 0.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0383",
+          "instance": 2016,
+          "label": "pedestrian",
+          "start_frame": 6,
+          "end_frame": 8,
+          "frames": [
+            {
+              "frame": 6,
+              "points": 23,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 7,
+              "points": 11,
+              "history": 0.45454545454545453,
+              "same_head_current": 0.9090909090909091
+            },
+            {
+              "frame": 8,
+              "points": 9,
+              "history": 0.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0383",
+          "instance": 2025,
+          "label": "pedestrian",
+          "start_frame": 27,
+          "end_frame": 28,
+          "frames": [
+            {
+              "frame": 27,
+              "points": 7,
+              "history": 0.0,
+              "same_head_current": 0.8571428571428571
+            },
+            {
+              "frame": 28,
+              "points": 5,
+              "history": 0.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0218",
+          "instance": 17019,
+          "label": "car",
+          "start_frame": 6,
+          "end_frame": 8,
+          "frames": [
+            {
+              "frame": 6,
+              "points": 9,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 7,
+              "points": 9,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 8,
+              "points": 11,
+              "history": 0.0,
+              "same_head_current": 0.5454545454545454
+            }
+          ]
+        },
+        {
+          "scene": "scene-0218",
+          "instance": 17019,
+          "label": "car",
+          "start_frame": 38,
+          "end_frame": 39,
+          "frames": [
+            {
+              "frame": 38,
+              "points": 9,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 39,
+              "points": 12,
+              "history": 0.0,
+              "same_head_current": 0.9166666666666666
+            }
+          ]
+        },
+        {
+          "scene": "scene-0347",
+          "instance": 2025,
+          "label": "pedestrian",
+          "start_frame": 20,
+          "end_frame": 20,
+          "frames": [
+            {
+              "frame": 20,
+              "points": 7,
+              "history": 0.0,
+              "same_head_current": 0.5714285714285714
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17036,
+          "label": "car",
+          "start_frame": 0,
+          "end_frame": 1,
+          "frames": [
+            {
+              "frame": 0,
+              "points": 10,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 1,
+              "points": 10,
+              "history": 0.3,
+              "same_head_current": 0.8
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17044,
+          "label": "car",
+          "start_frame": 31,
+          "end_frame": 32,
+          "frames": [
+            {
+              "frame": 31,
+              "points": 7,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 32,
+              "points": 6,
+              "history": 0.0,
+              "same_head_current": 1.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17058,
+          "label": "car",
+          "start_frame": 11,
+          "end_frame": 12,
+          "frames": [
+            {
+              "frame": 11,
+              "points": 5,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 12,
+              "points": 5,
+              "history": 0.0,
+              "same_head_current": 0.6
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17075,
+          "label": "car",
+          "start_frame": 27,
+          "end_frame": 28,
+          "frames": [
+            {
+              "frame": 27,
+              "points": 11,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 28,
+              "points": 12,
+              "history": 0.16666666666666666,
+              "same_head_current": 0.5
+            }
+          ]
+        },
+        {
+          "scene": "scene-1074",
+          "instance": 2017,
+          "label": "pedestrian",
+          "start_frame": 37,
+          "end_frame": 39,
+          "frames": [
+            {
+              "frame": 37,
+              "points": 23,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 38,
+              "points": 5,
+              "history": 0.0,
+              "same_head_current": 1.0
+            },
+            {
+              "frame": 39,
+              "points": 5,
+              "history": 0.0,
+              "same_head_current": 0.0
+            }
+          ]
+        }
+      ],
+      "rescued_recovery_events": [
+        {
+          "scene": "scene-0383",
+          "instance": 2011,
+          "label": "pedestrian",
+          "start_frame": 28,
+          "end_frame": 28,
+          "frames": [
+            {
+              "frame": 28,
+              "points": 6,
+              "history": 0.6666666666666666,
+              "same_head_current": 0.3333333333333333
+            }
+          ]
+        },
+        {
+          "scene": "scene-0218",
+          "instance": 4032,
+          "label": "pedestrian",
+          "start_frame": 13,
+          "end_frame": 14,
+          "frames": [
+            {
+              "frame": 13,
+              "points": 6,
+              "history": 0.5,
+              "same_head_current": 0.3333333333333333
+            },
+            {
+              "frame": 14,
+              "points": 6,
+              "history": 0.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0218",
+          "instance": 17019,
+          "label": "car",
+          "start_frame": 9,
+          "end_frame": 10,
+          "frames": [
+            {
+              "frame": 9,
+              "points": 11,
+              "history": 0.8181818181818182,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 10,
+              "points": 11,
+              "history": 0.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0218",
+          "instance": 17019,
+          "label": "car",
+          "start_frame": 32,
+          "end_frame": 33,
+          "frames": [
+            {
+              "frame": 32,
+              "points": 9,
+              "history": 0.8888888888888888,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 33,
+              "points": 11,
+              "history": 0.18181818181818182,
+              "same_head_current": 0.18181818181818182
+            }
+          ]
+        },
+        {
+          "scene": "scene-0347",
+          "instance": 6006,
+          "label": "pedestrian",
+          "start_frame": 7,
+          "end_frame": 7,
+          "frames": [
+            {
+              "frame": 7,
+              "points": 5,
+              "history": 1.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17044,
+          "label": "car",
+          "start_frame": 33,
+          "end_frame": 33,
+          "frames": [
+            {
+              "frame": 33,
+              "points": 6,
+              "history": 1.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17045,
+          "label": "car",
+          "start_frame": 33,
+          "end_frame": 33,
+          "frames": [
+            {
+              "frame": 33,
+              "points": 6,
+              "history": 1.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17012,
+          "label": "car",
+          "start_frame": 21,
+          "end_frame": 21,
+          "frames": [
+            {
+              "frame": 21,
+              "points": 11,
+              "history": 0.6363636363636364,
+              "same_head_current": 0.18181818181818182
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 2,
+      "comparisons": {
+        "standard_current": {
+          "miou_gain_pp": 1.6493767621400202,
+          "camera_foreground_gain_pp": -0.9430802133525762,
+          "positive_logs": 7,
+          "class_iou_gain_pp": {
+            "barrier": 0,
+            "bicycle": 4.4090470128616,
+            "bus": 1.3479366033686047,
+            "car": 0.230686770197297,
+            "construction_vehicle": 0,
+            "motorcycle": 7.27335484595996,
+            "pedestrian": 0.950963587097664,
+            "traffic_cone": 7.761545385307761,
+            "trailer": 0,
+            "truck": 2.4186522851337267,
+            "driveable_surface": 0.04747761772412318,
+            "other_flat": 1.0326990445865714,
+            "sidewalk": -0.5731186933512822,
+            "terrain": 0.059090477519230244,
+            "manmade": 0.6407703654234043,
+            "vegetation": 0.7909228924117828
+          }
+        },
+        "balanced_current": {
+          "miou_gain_pp": 0.4637969955217258,
+          "camera_foreground_gain_pp": 0.11595248524826074,
+          "positive_logs": 6,
+          "class_iou_gain_pp": {
+            "barrier": 0,
+            "bicycle": 3.6748438983335463,
+            "bus": 0.3054125673943475,
+            "car": 0.23526646492311176,
+            "construction_vehicle": 0,
+            "motorcycle": 1.1247308993453706,
+            "pedestrian": 0.08039013533723827,
+            "traffic_cone": 0.15363605326049745,
+            "trailer": 0,
+            "truck": 1.5842046258148001,
+            "driveable_surface": -0.015655662473534893,
+            "other_flat": 0.4821763301045445,
+            "sidewalk": 0.01274676107373418,
+            "terrain": -0.5717007072610247,
+            "manmade": 0.33447419413036306,
+            "vegetation": 0.02022636836479519
+          }
+        },
+        "balanced_temporal_no_history": {
+          "miou_gain_pp": 0.4873345862726808,
+          "camera_foreground_gain_pp": 0.133989538509105,
+          "positive_logs": 7,
+          "class_iou_gain_pp": {
+            "barrier": 0,
+            "bicycle": 0.9340323730021416,
+            "bus": 1.2393777213083434,
+            "car": 0.25865040161109354,
+            "construction_vehicle": 0,
+            "motorcycle": 2.138599316326241,
+            "pedestrian": 0.1844294117623213,
+            "traffic_cone": 0.4564114948080178,
+            "trailer": 0,
+            "truck": 1.5537260024859667,
+            "driveable_surface": -0.0073944263512371045,
+            "other_flat": 0.3689280974065623,
+            "sidewalk": 0.20300151842096437,
+            "terrain": 0.15855678157339348,
+            "manmade": 0.16443851193590486,
+            "vegetation": 0.14459617607326392
+          }
+        }
+      },
+      "error_recovery_same_head": {
+        "both_failed": 203,
+        "history_harmed": 19,
+        "both_success": 196,
+        "history_rescued": 8
+      },
+      "error_recovery_by_class": {
+        "car": {
+          "episodes": 145,
+          "both_success": 34,
+          "history_rescued": 6,
+          "history_harmed": 12,
+          "both_failed": 93
+        },
+        "pedestrian": {
+          "episodes": 214,
+          "both_success": 128,
+          "history_rescued": 2,
+          "history_harmed": 7,
+          "both_failed": 77
+        },
+        "truck": {
+          "episodes": 33,
+          "both_success": 16,
+          "history_rescued": 0,
+          "history_harmed": 0,
+          "both_failed": 17
+        },
+        "bicycle": {
+          "episodes": 17,
+          "both_success": 8,
+          "history_rescued": 0,
+          "history_harmed": 0,
+          "both_failed": 9
+        },
+        "bus": {
+          "episodes": 4,
+          "both_success": 3,
+          "history_rescued": 0,
+          "history_harmed": 0,
+          "both_failed": 1
+        },
+        "traffic_cone": {
+          "episodes": 5,
+          "both_success": 5,
+          "history_rescued": 0,
+          "history_harmed": 0,
+          "both_failed": 0
+        },
+        "motorcycle": {
+          "episodes": 8,
+          "both_success": 2,
+          "history_rescued": 0,
+          "history_harmed": 0,
+          "both_failed": 6
+        }
+      },
+      "lost_recovery_events": [
+        {
+          "scene": "scene-0149",
+          "instance": 17001,
+          "label": "car",
+          "start_frame": 6,
+          "end_frame": 7,
+          "frames": [
+            {
+              "frame": 6,
+              "points": 12,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 7,
+              "points": 17,
+              "history": 0.29411764705882354,
+              "same_head_current": 1.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0149",
+          "instance": 17009,
+          "label": "car",
+          "start_frame": 15,
+          "end_frame": 16,
+          "frames": [
+            {
+              "frame": 15,
+              "points": 11,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 16,
+              "points": 7,
+              "history": 0.0,
+              "same_head_current": 1.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0149",
+          "instance": 17008,
+          "label": "car",
+          "start_frame": 12,
+          "end_frame": 13,
+          "frames": [
+            {
+              "frame": 12,
+              "points": 5,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 13,
+              "points": 5,
+              "history": 0.2,
+              "same_head_current": 1.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0149",
+          "instance": 17008,
+          "label": "car",
+          "start_frame": 18,
+          "end_frame": 23,
+          "frames": [
+            {
+              "frame": 18,
+              "points": 7,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 19,
+              "points": 9,
+              "history": 0.1111111111111111,
+              "same_head_current": 0.5555555555555556
+            },
+            {
+              "frame": 20,
+              "points": 6,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 21,
+              "points": 12,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 22,
+              "points": 13,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 23,
+              "points": 10,
+              "history": 0.0,
+              "same_head_current": 1.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0149",
+          "instance": 17027,
+          "label": "car",
+          "start_frame": 14,
+          "end_frame": 15,
+          "frames": [
+            {
+              "frame": 14,
+              "points": 8,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 15,
+              "points": 9,
+              "history": 0.0,
+              "same_head_current": 0.7777777777777778
+            }
+          ]
+        },
+        {
+          "scene": "scene-0149",
+          "instance": 17050,
+          "label": "car",
+          "start_frame": 27,
+          "end_frame": 28,
+          "frames": [
+            {
+              "frame": 27,
+              "points": 15,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 28,
+              "points": 26,
+              "history": 0.0,
+              "same_head_current": 0.9615384615384616
+            }
+          ]
+        },
+        {
+          "scene": "scene-0149",
+          "instance": 17050,
+          "label": "car",
+          "start_frame": 31,
+          "end_frame": 32,
+          "frames": [
+            {
+              "frame": 31,
+              "points": 5,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 32,
+              "points": 10,
+              "history": 0.0,
+              "same_head_current": 0.9
+            }
+          ]
+        },
+        {
+          "scene": "scene-0803",
+          "instance": 2028,
+          "label": "pedestrian",
+          "start_frame": 33,
+          "end_frame": 39,
+          "frames": [
+            {
+              "frame": 33,
+              "points": 8,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 34,
+              "points": 14,
+              "history": 0.35714285714285715,
+              "same_head_current": 0.35714285714285715
+            },
+            {
+              "frame": 35,
+              "points": 14,
+              "history": 0.42857142857142855,
+              "same_head_current": 0.5
+            },
+            {
+              "frame": 36,
+              "points": 12,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 37,
+              "points": 14,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 38,
+              "points": 11,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 39,
+              "points": 7,
+              "history": 0.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0868",
+          "instance": 2027,
+          "label": "pedestrian",
+          "start_frame": 16,
+          "end_frame": 18,
+          "frames": [
+            {
+              "frame": 16,
+              "points": 7,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 17,
+              "points": 17,
+              "history": 0.0,
+              "same_head_current": 0.6470588235294118
+            },
+            {
+              "frame": 18,
+              "points": 16,
+              "history": 0.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0868",
+          "instance": 2030,
+          "label": "pedestrian",
+          "start_frame": 22,
+          "end_frame": 25,
+          "frames": [
+            {
+              "frame": 22,
+              "points": 20,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 23,
+              "points": 27,
+              "history": 0.1111111111111111,
+              "same_head_current": 0.8148148148148148
+            },
+            {
+              "frame": 24,
+              "points": 19,
+              "history": 0.10526315789473684,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 25,
+              "points": 13,
+              "history": 0.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0383",
+          "instance": 2016,
+          "label": "pedestrian",
+          "start_frame": 6,
+          "end_frame": 8,
+          "frames": [
+            {
+              "frame": 6,
+              "points": 23,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 7,
+              "points": 11,
+              "history": 0.36363636363636365,
+              "same_head_current": 0.9090909090909091
+            },
+            {
+              "frame": 8,
+              "points": 9,
+              "history": 0.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0218",
+          "instance": 17019,
+          "label": "car",
+          "start_frame": 19,
+          "end_frame": 20,
+          "frames": [
+            {
+              "frame": 19,
+              "points": 10,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 20,
+              "points": 9,
+              "history": 0.0,
+              "same_head_current": 0.6666666666666666
+            }
+          ]
+        },
+        {
+          "scene": "scene-0218",
+          "instance": 17019,
+          "label": "car",
+          "start_frame": 38,
+          "end_frame": 39,
+          "frames": [
+            {
+              "frame": 38,
+              "points": 9,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 39,
+              "points": 12,
+              "history": 0.0,
+              "same_head_current": 0.9166666666666666
+            }
+          ]
+        },
+        {
+          "scene": "scene-0218",
+          "instance": 2037,
+          "label": "pedestrian",
+          "start_frame": 6,
+          "end_frame": 6,
+          "frames": [
+            {
+              "frame": 6,
+              "points": 5,
+              "history": 0.2,
+              "same_head_current": 1.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0347",
+          "instance": 2025,
+          "label": "pedestrian",
+          "start_frame": 20,
+          "end_frame": 20,
+          "frames": [
+            {
+              "frame": 20,
+              "points": 7,
+              "history": 0.0,
+              "same_head_current": 0.5714285714285714
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17036,
+          "label": "car",
+          "start_frame": 0,
+          "end_frame": 1,
+          "frames": [
+            {
+              "frame": 0,
+              "points": 10,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 1,
+              "points": 10,
+              "history": 0.3,
+              "same_head_current": 0.5
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17044,
+          "label": "car",
+          "start_frame": 31,
+          "end_frame": 32,
+          "frames": [
+            {
+              "frame": 31,
+              "points": 7,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 32,
+              "points": 6,
+              "history": 0.0,
+              "same_head_current": 1.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17058,
+          "label": "car",
+          "start_frame": 11,
+          "end_frame": 12,
+          "frames": [
+            {
+              "frame": 11,
+              "points": 5,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 12,
+              "points": 5,
+              "history": 0.0,
+              "same_head_current": 0.6
+            }
+          ]
+        },
+        {
+          "scene": "scene-1074",
+          "instance": 2017,
+          "label": "pedestrian",
+          "start_frame": 37,
+          "end_frame": 39,
+          "frames": [
+            {
+              "frame": 37,
+              "points": 23,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 38,
+              "points": 5,
+              "history": 0.0,
+              "same_head_current": 1.0
+            },
+            {
+              "frame": 39,
+              "points": 5,
+              "history": 0.0,
+              "same_head_current": 0.0
+            }
+          ]
+        }
+      ],
+      "rescued_recovery_events": [
+        {
+          "scene": "scene-0218",
+          "instance": 4032,
+          "label": "pedestrian",
+          "start_frame": 13,
+          "end_frame": 14,
+          "frames": [
+            {
+              "frame": 13,
+              "points": 6,
+              "history": 0.5,
+              "same_head_current": 0.3333333333333333
+            },
+            {
+              "frame": 14,
+              "points": 6,
+              "history": 0.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0218",
+          "instance": 17019,
+          "label": "car",
+          "start_frame": 9,
+          "end_frame": 10,
+          "frames": [
+            {
+              "frame": 9,
+              "points": 11,
+              "history": 0.8181818181818182,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 10,
+              "points": 11,
+              "history": 0.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0218",
+          "instance": 17019,
+          "label": "car",
+          "start_frame": 32,
+          "end_frame": 33,
+          "frames": [
+            {
+              "frame": 32,
+              "points": 9,
+              "history": 0.8888888888888888,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 33,
+              "points": 11,
+              "history": 0.18181818181818182,
+              "same_head_current": 0.18181818181818182
+            }
+          ]
+        },
+        {
+          "scene": "scene-0347",
+          "instance": 6006,
+          "label": "pedestrian",
+          "start_frame": 7,
+          "end_frame": 7,
+          "frames": [
+            {
+              "frame": 7,
+              "points": 5,
+              "history": 1.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17036,
+          "label": "car",
+          "start_frame": 2,
+          "end_frame": 3,
+          "frames": [
+            {
+              "frame": 2,
+              "points": 10,
+              "history": 0.0,
+              "same_head_current": 0.0
+            },
+            {
+              "frame": 3,
+              "points": 9,
+              "history": 0.5555555555555556,
+              "same_head_current": 0.3333333333333333
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17044,
+          "label": "car",
+          "start_frame": 33,
+          "end_frame": 33,
+          "frames": [
+            {
+              "frame": 33,
+              "points": 6,
+              "history": 1.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17045,
+          "label": "car",
+          "start_frame": 33,
+          "end_frame": 33,
+          "frames": [
+            {
+              "frame": 33,
+              "points": 6,
+              "history": 1.0,
+              "same_head_current": 0.0
+            }
+          ]
+        },
+        {
+          "scene": "scene-0420",
+          "instance": 17012,
+          "label": "car",
+          "start_frame": 21,
+          "end_frame": 21,
+          "frames": [
+            {
+              "frame": 21,
+              "points": 11,
+              "history": 0.6363636363636364,
+              "same_head_current": 0.0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
