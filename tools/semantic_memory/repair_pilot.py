@@ -24,6 +24,7 @@ from semantic_repair import CurrentAnchoredRepair, RepairConfig, repair_memory_c
 from .nuscenes_pilot import load, save, announce, current_output
 from .nuscenes_pilot_data import digest
 from .pilot_metrics import confusion, scores, events, paired_summary
+from .repair_supervision import present_class_weights
 
 ARMS = ('baseline', 'anchor', 'current_extra', 'temporal', 'no_history', 'shuffled_history', 'narrow_history')
 
@@ -51,9 +52,9 @@ def class_weights(index, cache):
                 labels = f['label']
             counts += np.bincount(labels[labels >= 0], minlength=16)
     # Counts from training voxels only. No heldout priors/class frequencies.
-    inverse = np.sqrt(counts.sum()/np.maximum(counts, 1))
-    inverse /= inverse.mean()
-    weights = np.clip(inverse, .25, 4.)
+    # Missing classes have no training loss; they must not dominate the mean
+    # and force observed minority classes down into the clipping floor.
+    weights = present_class_weights(counts)
     return counts.tolist(), torch.tensor(weights, dtype=torch.float32, device='cuda')
 
 
@@ -263,7 +264,8 @@ def main():
         timing='synchronized GPU module, report anchor+repair together; excludes backbone/transport',
         source_sha256={str(f.relative_to(REPO)):digest(f) for f in
             (REPO/'src/semantic_repair.py', REPO/'src/semantic_memory.py', Path(__file__),
-             REPO/'tools/semantic_memory/nuscenes_pilot.py', REPO/'tools/semantic_memory/pilot_metrics.py')})
+             REPO/'tools/semantic_memory/nuscenes_pilot.py', REPO/'tools/semantic_memory/pilot_metrics.py',
+             REPO/'tools/semantic_memory/repair_supervision.py')})
     save(args.out/'protocol.json', protocol)
     for seed in protocol['seeds']:
         train(seed, index, args.cache, args.out, args.anchors, protocol, weights)
