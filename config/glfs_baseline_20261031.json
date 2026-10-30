@@ -57,7 +57,8 @@
   "diagnostics": [
     "glfs_no_history_same_parameters",
     "raw_backbone",
-    "released_initialization_evaluated_only_after_selection"
+    "released_initialization_evaluated_only_after_selection",
+    "official_default_lr_separately_after_selection"
   ],
   "adaptations": {
     "classes": "16 actual nuScenes classes, ignore=-1; class0 barrier is retained",
@@ -82,7 +83,12 @@
     "initial_lookup": 1,
     "mDECE_weight": 0.5,
     "L": 0,
-    "epsilon": 0
+    "epsilon": 0,
+    "learning_rates": [
+      1e-05,
+      0.001
+    ],
+    "rate_selection": "Added before any real fitting: choose by the same four selection logs, ties favor official 1e-5. This is an optimization sufficiency check, not another fusion method. No additional search after development scoring."
   },
   "selection": "Best fixed16 full-point mIoU on four prehashed training logs; remaining12 fit. Eight previously inspected logs are development only. Earlier frozen heads used the original train/dev pipeline; the new split controls fusion fitting only, not independence of pretrained head selection. Four sealed logs remain unopened.",
   "metrics": [
@@ -138,7 +144,7 @@
   "source_hashes": {
     "tools/semantic_memory/test_glfs_author_parity.py": "85ee27a518b92ceb8c1b9906a0b0b98769b454b54a88333deaf5829e2b42bf62",
     "tools/semantic_memory/glfs_baseline.py": "b5a522ffcedc3ba394e8985591a87e9be887022e8a0e7fba9f385642b468e99c",
-    "tools/semantic_memory/glfs_experiment.py": "99762e5dd779801a7c8d2755c4a551c1c0babcd96069bdc98274d56ac81aa390",
+    "tools/semantic_memory/glfs_experiment.py": "6304817959a6ba67199dba187444e40dba72c891103e55430813beabc0bf8b83",
     "tools/semantic_memory/glfs_extract.py": "4dcdd319de8c2e8a01346f493d2e4a778fad9c853b745542e5196668e206c565",
     "tools/semantic_memory/glfs_prepare_geometry.py": "6d8edd32d7f47ab4f8446cee4da5761905705499f842fc14f97031c69f0d325c"
   },
@@ -147,6 +153,7 @@
     "backend": "remote CPU for GLFS fitting",
     "parallel_seeds": 3,
     "torch_threads_per_seed": 2,
-    "local_gpu_allowed": false
+    "local_gpu_allowed": false,
+    "parallel_workers": 6
   }
 }

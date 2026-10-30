@@ -75,9 +75,16 @@ this new split controls **fusion fitting**, not the independence of those existi
 classifiers. No development result is called a project-level blind test.
 
 Optimizer, initialization, loss weights, batch size, maximum epochs and early
-stopping follow the released training defaults. Three seeds accompany the three
-already-frozen current classifiers. No architecture or hyperparameter search is
-triggered by a disappointing score.
+stopping follow the released training defaults. Before any actual fitting, the
+protocol adds one explicit optimization check: the released LR `1e-5` and `1e-3`
+are both fitted, and the four selection logs choose between them. The concern is
+that a much smaller number of optimizer steps on this dataset could leave the
+released initialization nearly unchanged; optimizer underfitting must not be
+mistaken for a failed fusion method. Both remain the same 400-parameter GLFS.
+The default-rate result is reported separately after selection. The two-rate
+limit is fixed before scores exist; no further rate or architecture search is
+triggered by a disappointing development score. Three seeds accompany the three
+already-frozen current classifiers; six independent CPU workers use two threads each.
 
 Report full-point mIoU, per-log/class outcomes, fixes and harms relative to current,
 object recovery using both fixed raw-baseline and current-defined episodes,

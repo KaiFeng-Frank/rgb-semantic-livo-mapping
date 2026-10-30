@@ -114,7 +114,7 @@ def evaluate(model, frames, seed, detailed=False):
     return report
 
 
-def train_seed(root, fit_frames, selection_frames, dev_frames, seed, cfg, out):
+def train_seed(root, fit_frames, selection_frames, seed, cfg, out):
     torch.manual_seed(seed)
     rng = np.random.default_rng(seed)
     model = GLFS()
@@ -137,8 +137,8 @@ def train_seed(root, fit_frames, selection_frames, dev_frames, seed, cfg, out):
     weights = -torch.log(frequencies.clamp_min(1e-30))
     weights[frequencies == 0] = 0
     classification_loss = nn.NLLLoss(weight=weights)
-    folder = out/f'seed-{seed}'
-    folder.mkdir(exist_ok=False)
+    folder = out/f'seed-{seed}'/f"lr-{cfg['lr']:.0e}"
+    folder.mkdir(parents=True, exist_ok=False)
     save(folder/'initial-selection.json', evaluate(model, selection_frames, seed))
     save(folder/'fit-statistics.json', dict(queries=len(y), class_counts=torch.bincount(y, minlength=16).tolist(),
         class_weights=weights.tolist(), parameters=sum(p.numel() for p in model.parameters())))
@@ -170,12 +170,15 @@ def train_seed(root, fit_frames, selection_frames, dev_frames, seed, cfg, out):
                 improved = score > best
                 if improved:
                     best, stale = score, 0
-                    torch.save(dict(state_dict=model.state_dict(), seed=seed, epoch=epoch, step=step, check=check,
+                    torch.save(dict(state_dict=model.state_dict(), seed=seed, learning_rate=cfg['lr'], epoch=epoch, step=step, check=check,
                                     selection_miou=score, protocol_sha256=digest(root/'protocol.json'), deployable=False), folder/'best.pt')
                 else:
                     stale += 1
                 row = dict(epoch=epoch, step=step, check=check, loss=float(np.mean(epoch_losses)),
-                    selection_miou=score, best=best, stale=stale, elapsed_s=time.perf_counter()-started)
+                    selection_miou=score, best=best, stale=stale, elapsed_s=time.perf_counter()-started,
+                    temperature_min=float(model.log_temperature.exp().detach().min()),
+                    temperature_max=float(model.log_temperature.exp().detach().max()),
+                    max_lookup_change=float((model.weights.detach()-1).abs().max()))
                 history.append(row)
                 save(folder/'training.json', history)
                 print('glfs', seed, row, flush=True)
@@ -185,21 +188,13 @@ def train_seed(root, fit_frames, selection_frames, dev_frames, seed, cfg, out):
         if stop:
             break
     selected = torch.load(folder/'best.pt', map_location='cpu', weights_only=True)
-    model.load_state_dict(selected['state_dict'], strict=True)
-    result = evaluate(model, dev_frames, seed, detailed=True)
-    # Inspect the released initialization only after fitting/selection is frozen;
-    # a benefit of the fixed initial rule must not be credited to learning.
-    initial_dev = evaluate(GLFS(), dev_frames, seed)
-    save(folder/'object-observations.json', result.pop('object_observations'))
-    result.update(seed=seed, selected={k:v for k,v in selected.items() if k != 'state_dict'},
-                  initial_glfs_development=initial_dev['arms']['glfs'],
+    result = dict(seed=seed, selected={k:v for k,v in selected.items() if k != 'state_dict'},
                   stopped_for='official early stopping' if stop else '300 epoch cap', elapsed_s=time.perf_counter()-started)
-    save(folder/'evaluation.json', result)
-    print('development', seed, {k:100*v['miou_fixed16'] for k,v in result['arms'].items()}, flush=True)
+    save(folder/'fit-result.json', result)
     return result
 
 
-def run(root, only_seed=None):
+def run(root, only_seed=None, learning_rate=None):
     torch.set_num_threads(2)
     torch.set_num_interop_threads(1)
     protocol = read(root/'protocol.json')
@@ -209,26 +204,52 @@ def run(root, only_seed=None):
         raise ValueError('Incomplete or different experiment')
     out = root/'run'
     if only_seed is not None:
-        if only_seed not in protocol['seeds'] or not out.is_dir():
+        if only_seed not in protocol['seeds'] or learning_rate not in protocol['training']['learning_rates'] or not out.is_dir():
             raise ValueError('Unregistered worker')
-        all_frames = read_frames(root, manifest['files'])
+        all_frames = read_frames(root, [r for r in manifest['files'] if r['part'] != 'dev'])
         parts = {part:[x for x in all_frames if x[0]['part'] == part] for part in protocol['parts']}
-        train_seed(root, parts['fit'], parts['selection'], parts['dev'], only_seed, protocol['training'], out)
+        train_seed(root, parts['fit'], parts['selection'], only_seed, {**protocol['training'], 'lr':learning_rate}, out)
         return
     out.mkdir(exist_ok=False)
     # Independent CPU processes, each with two threads. No shared optimizer,
     # checkpoint or RNG; the existing remote GPU training continues separately.
     jobs = {}
     for seed in protocol['seeds']:
-        with (out/f'worker-{seed}.log').open('w') as log:
-            jobs[seed] = subprocess.Popen([sys.executable, '-m', 'tools.semantic_memory.glfs_experiment',
-                '--root', str(root.resolve()), '--seed', str(seed)], stdout=log, stderr=subprocess.STDOUT)
+        for lr in protocol['training']['learning_rates']:
+            name = f'{seed}-lr-{lr:.0e}'
+            with (out/f'worker-{name}.log').open('w') as log:
+                jobs[name] = subprocess.Popen([sys.executable, '-m', 'tools.semantic_memory.glfs_experiment',
+                    '--root', str(root.resolve()), '--seed', str(seed), '--learning-rate', str(lr)], stdout=log, stderr=subprocess.STDOUT)
     while any(job.poll() is None for job in jobs.values()):
         save(out/'progress.json', {str(seed):dict(pid=job.pid, returncode=job.poll()) for seed,job in jobs.items()})
         time.sleep(5)
     if any(job.returncode != 0 for job in jobs.values()):
         raise RuntimeError('A GLFS seed failed; inspect the preserved worker logs')
-    reports = [read(out/f'seed-{seed}/evaluation.json') for seed in protocol['seeds']]
+    # Only now open development arrays. Every candidate/seed completed selection
+    # independently; a tie favors the released default LR, first in the list.
+    dev_frames = read_frames(root, [r for r in manifest['files'] if r['part'] == 'dev'])
+    reports = []
+    for seed in protocol['seeds']:
+        folder = out/f'seed-{seed}'
+        trials = [read(folder/f'lr-{lr:.0e}/fit-result.json') for lr in protocol['training']['learning_rates']]
+        chosen = max(trials, key=lambda t:t['selected']['selection_miou'])
+        lr = chosen['selected']['learning_rate']
+        selected = torch.load(folder/f'lr-{lr:.0e}/best.pt', map_location='cpu', weights_only=True)
+        torch.save(selected, folder/'best.pt')
+        model = GLFS()
+        model.load_state_dict(selected['state_dict'], strict=True)
+        result = evaluate(model, dev_frames, seed, detailed=True)
+        initial_dev = evaluate(GLFS(), dev_frames, seed)
+        default = torch.load(folder/'lr-1e-05/best.pt', map_location='cpu', weights_only=True)
+        model.load_state_dict(default['state_dict'], strict=True)
+        default_dev = evaluate(model, dev_frames, seed)
+        save(folder/'object-observations.json', result.pop('object_observations'))
+        result.update(seed=seed, selected=chosen['selected'], fit_trials=trials,
+            initial_glfs_development=initial_dev['arms']['glfs'],
+            official_default_lr_development=default_dev['arms']['glfs'])
+        save(folder/'evaluation.json', result)
+        reports.append(result)
+        print('development', seed, 'selected lr', lr, {k:100*v['miou_fixed16'] for k,v in result['arms'].items()}, flush=True)
     names = ('current', 'probability_average', 'glfs', 'glfs_no_history')
     summary = dict(arms={k:dict(miou_percent_by_seed=[100*r['arms'][k]['miou_fixed16'] for r in reports],
         mean_miou_percent=float(np.mean([100*r['arms'][k]['miou_fixed16'] for r in reports])),
@@ -248,6 +269,8 @@ def run(root, only_seed=None):
     summary['attribution'] = dict(
         history_gain_vs_same_parameters_current_only_pp=[100*(r['arms']['glfs']['miou_fixed16']-r['arms']['glfs_no_history']['miou_fixed16']) for r in reports],
         learning_gain_vs_official_initialization_pp=[100*(r['arms']['glfs']['miou_fixed16']-r['initial_glfs_development']['miou_fixed16']) for r in reports])
+    summary['optimization_check'] = dict(selected_learning_rates=[r['selected']['learning_rate'] for r in reports],
+        official_default_lr_miou_percent=[100*r['official_default_lr_development']['miou_fixed16'] for r in reports])
     save(out/'summary.json', summary)
     print('GLFS complete', summary['gate'], flush=True)
 
@@ -256,5 +279,6 @@ if __name__ == '__main__':
     p = argparse.ArgumentParser()
     p.add_argument('--root', type=Path, required=True)
     p.add_argument('--seed', type=int)
+    p.add_argument('--learning-rate', type=float)
     a = p.parse_args()
-    run(a.root, a.seed)
+    run(a.root, a.seed, a.learning_rate)
