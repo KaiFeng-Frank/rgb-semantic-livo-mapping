@@ -1,0 +1,15 @@
+{
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "packages": {
+    "torch": "2.11.0+cu128",
+    "torchvision": "0.26.0+cu128",
+    "spconv-cu126": "2.3.8",
+    "flash-attn": "2.8.3",
+    "torch-scatter": "2.1.2+pt211cu128",
+    "numpy": "1.26.4",
+    "scipy": "1.17.0",
+    "timm": "1.0.22"
+  },
+  "initial_free_gpu_mib": 12285,
+  "extractor_gpu_memory_fraction": 0.18
+}

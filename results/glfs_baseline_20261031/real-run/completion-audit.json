@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "current_forward_parity_checks": 216,
+  "complete_frames": 963,
+  "parts": {
+    "fit": {
+      "frames": 480,
+      "logs": 12,
+      "queries": 1665391,
+      "with_history": 703278
+    },
+    "selection": {
+      "frames": 162,
+      "logs": 4,
+      "queries": 548141,
+      "with_history": 272479
+    },
+    "dev": {
+      "frames": 321,
+      "logs": 8,
+      "queries": 1053108,
+      "with_history": 431541
+    }
+  },
+  "input_cache_bytes": 3359566147,
+  "extract_elapsed_s": 265.35806756899547,
+  "selection_checks": 6,
+  "real_run_total_s": 405.95974588394165,
+  "note": "Run progress.json is a periodic snapshot; execution-state.json and six fit-result.json files establish completion."
+}

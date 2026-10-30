@@ -1,0 +1,80 @@
+[
+  {
+    "epoch": 1,
+    "step": 14,
+    "check": 1,
+    "loss": 1.2838822943823678,
+    "selection_miou": 0.6167982230591553,
+    "best": 0.6167982230591553,
+    "stale": 0,
+    "elapsed_s": 5.520507776003797,
+    "temperature_min": 0.3999451696872711,
+    "temperature_max": 0.40005630254745483,
+    "max_lookup_change": 0.00014025336898837448
+  },
+  {
+    "epoch": 1,
+    "step": 27,
+    "check": 2,
+    "loss": 1.286680124424122,
+    "selection_miou": 0.6167859675431561,
+    "best": 0.6167982230591553,
+    "stale": 1,
+    "elapsed_s": 10.661677503005194,
+    "temperature_min": 0.3998948037624359,
+    "temperature_max": 0.40010935068130493,
+    "max_lookup_change": 0.0002707414640614747
+  },
+  {
+    "epoch": 1,
+    "step": 40,
+    "check": 3,
+    "loss": 1.2848886907100678,
+    "selection_miou": 0.616753154149562,
+    "best": 0.6167982230591553,
+    "stale": 2,
+    "elapsed_s": 15.472502374999749,
+    "temperature_min": 0.399845689535141,
+    "temperature_max": 0.4001605808734894,
+    "max_lookup_change": 0.0003970608110714924
+  },
+  {
+    "epoch": 2,
+    "step": 54,
+    "check": 4,
+    "loss": 1.2837406396865845,
+    "selection_miou": 0.6167533254070853,
+    "best": 0.6167982230591553,
+    "stale": 3,
+    "elapsed_s": 20.330130008005654,
+    "temperature_min": 0.3997913599014282,
+    "temperature_max": 0.4002159833908081,
+    "max_lookup_change": 0.0005344961534876624
+  },
+  {
+    "epoch": 2,
+    "step": 67,
+    "check": 5,
+    "loss": 1.285794487705937,
+    "selection_miou": 0.6167659209138162,
+    "best": 0.6167982230591553,
+    "stale": 4,
+    "elapsed_s": 25.390684168000007,
+    "temperature_min": 0.39973896741867065,
+    "temperature_max": 0.40026745200157166,
+    "max_lookup_change": 0.0006547340526652512
+  },
+  {
+    "epoch": 2,
+    "step": 80,
+    "check": 6,
+    "loss": 1.2846393585205078,
+    "selection_miou": 0.6167703584058115,
+    "best": 0.6167982230591553,
+    "stale": 5,
+    "elapsed_s": 30.077924476005137,
+    "temperature_min": 0.399687796831131,
+    "temperature_max": 0.4003186523914337,
+    "max_lookup_change": 0.0007807731876656732
+  }
+]

@@ -1,0 +1,45 @@
+{
+  "supervisor_pid": 72587,
+  "started": 1793394301.6453257,
+  "source_commit": "a226472",
+  "protocol_sha256": "330d483282be1394d91a6b57c31e4b2e58e3e2b69673f400dd38233ceb0360a1",
+  "status": "complete",
+  "stages": [
+    {
+      "name": "extraction",
+      "started": 1793394301.6821852,
+      "command": [
+        "/home/wuyou/glfs_reference/venv/bin/python",
+        "-u",
+        "-m",
+        "tools.semantic_memory.glfs_extract",
+        "--root",
+        "/home/wuyou/glfs_reference",
+        "--data",
+        "/home/wuyou/taseg_reference/data/nuscenes"
+      ],
+      "pid": 72590,
+      "proc_start_ticks": "3344766",
+      "returncode": 0,
+      "finished": 1793394578.7973304
+    },
+    {
+      "name": "fitting",
+      "started": 1793394578.7979078,
+      "command": [
+        "/home/wuyou/glfs_reference/venv/bin/python",
+        "-u",
+        "-m",
+        "tools.semantic_memory.glfs_experiment",
+        "--root",
+        "/home/wuyou/glfs_reference"
+      ],
+      "pid": 72678,
+      "proc_start_ticks": "3372477",
+      "returncode": 0,
+      "finished": 1793394707.604491
+    }
+  ],
+  "stage": "fitting",
+  "finished": 1793394707.6050715
+}

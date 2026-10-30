@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "seeds": 3,
+  "checks": [
+    "partial query set",
+    "unmodified nonquery predictions",
+    "multiple original points per voxel",
+    "mixed semantic voxel",
+    "ignored point target",
+    "nonuniform GLFS temperatures and weights"
+  ],
+  "scope": "Synthetic evaluator correctness, not an accuracy result"
+}

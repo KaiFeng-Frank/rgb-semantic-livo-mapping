@@ -1,5 +1,9 @@
 # Official GLFS on the existing causal evidence
 
+Completed results: [GLFS same-input evaluation](../results/glfs_baseline_20261031/README.md).
+The predeclared joint gate failed: mean mIoU improved over current-only, but not
+over uniform averaging, and object recovery and foreground accuracy regressed.
+
 This experiment tests the released GLFS fusion/calibration implementation before
 considering another custom memory head. It is an outdoor LiDAR adapter, not a
 replication of the paper's ScanNet scores and not a replacement for its own

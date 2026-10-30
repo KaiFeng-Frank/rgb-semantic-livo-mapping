@@ -1,0 +1,159 @@
+{
+  "schema": "GLFS-same-input-v1",
+  "date": "2026-10-31",
+  "official_repository": "https://github.com/joaomcm/Semantic-3D-Mapping-Uncertainty-Calibration",
+  "official_commit": "ed5c59facbed7d05a90a3ed20e952b9dbba97bd6",
+  "loss_commit": "a0baa1738be91cdf42dd23a7f38f399bab2dc480",
+  "parts": {
+    "fit": [
+      "scene-0254",
+      "scene-0321",
+      "scene-0045",
+      "scene-0639",
+      "scene-0161",
+      "scene-0283",
+      "scene-0155",
+      "scene-0786",
+      "scene-0847",
+      "scene-0457",
+      "scene-0376",
+      "scene-0499"
+    ],
+    "selection": [
+      "scene-0328",
+      "scene-1044",
+      "scene-0739",
+      "scene-0975"
+    ],
+    "dev": [
+      "scene-0149",
+      "scene-0803",
+      "scene-0868",
+      "scene-0383",
+      "scene-0218",
+      "scene-0347",
+      "scene-0420",
+      "scene-1074"
+    ]
+  },
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "current_checkpoints": {
+    "0": "7fff22e57b3e126ac93d49e5eb926a1bffd7b2ea894e782f932432cae1cc49d6",
+    "1": "c507a825299d0cfee70e7e512a20b726869c4428baf72fbacf5b7536d77be743",
+    "2": "07233b7319c0aa5a2bb2f82c977323d55d88262af02ce1b3b376e2870f933eaf"
+  },
+  "backbone_sha256": "35f5d3aec63ae1c383f4a4146e157aa054860cb12b178d899571287e6f97e5f1",
+  "current": "Frozen independently trained balanced_current per original seed; old seed-0 anchor selects identical <=4096 queries. Outside those queries the same old anchor is retained by every arm.",
+  "history": "Exact unmodified previous-frame raw B0 retrieval, max4 candidates; no GT association; no fused feedback. Preserve source logits before softmax, no pooled-probability inversion.",
+  "arms": [
+    "current",
+    "probability_average",
+    "glfs"
+  ],
+  "diagnostics": [
+    "glfs_no_history_same_parameters",
+    "raw_backbone",
+    "released_initialization_evaluated_only_after_selection",
+    "official_default_lr_separately_after_selection"
+  ],
+  "adaptations": {
+    "classes": "16 actual nuScenes classes, ignore=-1; class0 barrier is retained",
+    "distance": "radial source-LiDAR range, edges [0,10,20,30,40,50] m, clipping exactly as official bucketize",
+    "angle": "PCA normal over 16 nearest raw voxel representatives in the source scan, acute ray-normal angle; edges [0,30,60,90] degrees; no truth normals",
+    "padding": "explicit observation mask instead of all-zero-logit sentinel",
+    "loss": "same author mDECE+NLL, mDECE device fixed and no class0 ignore",
+    "class_weights": "-log(frequency) from fit-query targets only; matches official log weights reconstructed as 2*log(sqrt-inverse-frequency weights), verified for all 21 released values before any fitting. Absent fit classes get zero NLL weight.",
+    "precision": "float32 logits and temperatures; float64 lookup parameters as released; no Lightning/W&B services",
+    "scope": "GLFS formula/lookup/calibration adaptation to fixed outdoor retrieval, not replication of original ScanNet numbers",
+    "geometry_cache": "CPU precomputation is permitted only with exact source xyz and inverse-index hashes verified against actual encoder input on every frame. Its measured compute cost remains reported."
+  },
+  "training": {
+    "optimizer": "Adam",
+    "lr": 1e-05,
+    "batch_size": 36000,
+    "max_epochs": 300,
+    "validate_every_epoch_fraction": 0.3333333333333333,
+    "patience_validation_checks": 5,
+    "gradient_clip": 1,
+    "initial_temperature": 0.4,
+    "initial_lookup": 1,
+    "mDECE_weight": 0.5,
+    "L": 0,
+    "epsilon": 0,
+    "learning_rates": [
+      1e-05,
+      0.001
+    ],
+    "rate_selection": "Added before any real fitting: choose by the same four selection logs, ties favor official 1e-5. This is an optimization sufficiency check, not another fusion method. No additional search after development scoring."
+  },
+  "selection": "Best fixed16 full-point mIoU on four prehashed training logs; remaining12 fit. Eight previously inspected logs are development only. Earlier frozen heads used the original train/dev pipeline; the new split controls fusion fitting only, not independence of pretrained head selection. Four sealed logs remain unopened.",
+  "metrics": [
+    "native16 full-point mIoU",
+    "point rescues/harms vs current",
+    "GT-object recovery using fixed raw-baseline episodes plus current-defined episodes",
+    "camera foreground accuracy",
+    "full-point ECE NLL Brier",
+    "per-log results",
+    "fusion-only latency and separately normal estimation/retrieval costs"
+  ],
+  "decision": "No new self-designed method before this baseline result. Reuse if mean mIoU improves >=0.05pp vs current, every seed improves, >=5/8 logs per seed improve, foreground regression <=0.1pp, recovery does not decline. Same-parameter no-history diagnoses whether gain comes from history. Failure identifies limits of this adaptation/input, not all GLFS or memory methods. Existing 5ms module target remains; cached fusion timing alone cannot satisfy online end-to-end timing.",
+  "deployable": false,
+  "input_hashes": {
+    "current-2.pt": "07233b7319c0aa5a2bb2f82c977323d55d88262af02ce1b3b376e2870f933eaf",
+    "index.json": "538f6f7b6ca249c6f40b95625e8e530e41100a218b83ab9e079382dcd7589505",
+    "current-0.pt": "7fff22e57b3e126ac93d49e5eb926a1bffd7b2ea894e782f932432cae1cc49d6",
+    "anchor.pt": "c5f908f88d595dea521a817a03c5df13282843b2a9d03662a941ea7fddc80e7a",
+    "current-1.pt": "c507a825299d0cfee70e7e512a20b726869c4428baf72fbacf5b7536d77be743",
+    "repair-reference.pt": "20c4ff73a719e6d7ed3162594a96faaeff6c42c9eb18f3a34df4897059377aa2",
+    "ptv3-config.py": "e76714dbd93b7eed2e436df0cc2041072d17b1225ef0fd9897283d47edb68804",
+    "targets/scene-0639.targets.json.gz": "b4ebe00ad5c39e0a521a17bf9f69ee4bbdcf7e01b91a9e373448951dbd5cda0a",
+    "targets/scene-0499.targets.json.gz": "4b463ea20f6abd2a719eae9f6c0fbe916a68f388e4b37daa3b8638fb09cf7a68",
+    "targets/scene-0420.targets.json.gz": "20597de283135332a15fcfaea37e4db2847803f68bc8fd987ef92af697e67b34",
+    "targets/scene-0161.targets.json.gz": "eae3d77bc217943e21a78f88710ae6f0aa2bd65e9ec0741bc3c7baa4011e7abf",
+    "targets/scene-0218.targets.json.gz": "f437c8352c7a5ed56c99922dde8ba4769101fabb3c2df1a726f3f69f0819ec9c",
+    "targets/scene-0254.targets.json.gz": "cc230dc86319d1d3bfe24c84a8f68c981358d8ed139628f1000b310d0989f997",
+    "targets/scene-0045.targets.json.gz": "7a18a568e17e86be7b564fcf1f51bd860bfbac7ad030bd85a63d593638973400",
+    "targets/scene-1044.targets.json.gz": "b10f70340b414cf183295d3ab839118b2c5cbefd299e9412162e09644033de69",
+    "targets/scene-0457.targets.json.gz": "628a54ae2ab0394ae6512c24dc6ca09d2e7391d75bc66ff1bb4250c9fe247fad",
+    "targets/scene-0868.targets.json.gz": "a751550926582330fa7b5332a8dd82be6fe89a22e012a09c024a82a0fa2719df",
+    "targets/scene-0383.targets.json.gz": "f9a336d642b42e5b7f3277385ee03f89c337e5ad38cae49a81e361fba91de3dd",
+    "targets/scene-0155.targets.json.gz": "b97e15d1e0ae8ff88b52b427e6113f84e7b873a28eb9511f05e5a45795470e11",
+    "targets/scene-0347.targets.json.gz": "e555871d9693894c435a50703ff76574b8f3b2aed4a8aed894e000086626e441",
+    "targets/scene-0847.targets.json.gz": "1e46e5169a0e82dde1ef9e37b9b154a393cea68fc75a48d56cd282c88569ceb2",
+    "targets/scene-0149.targets.json.gz": "b6f8d6f9357abb837b40658aa6001f827549d2e13fb0e4a90514c67662849378",
+    "targets/scene-0786.targets.json.gz": "3343458b9056546b9b58344ab88eeee5812686f0137790f5caec740ff06b3859",
+    "targets/scene-0803.targets.json.gz": "76f497ac2467f466b253d676aa6dfc5228c628172f28a5fcdcba1363adf064a5",
+    "targets/scene-1074.targets.json.gz": "9d89302ca68777deb2b3b11939a524e37ab31362b1f27d93d717604e8958f9e1",
+    "targets/scene-0975.targets.json.gz": "a6b2eba250d938ff7f56901785b12d6d74cc8a850a5a55926664b1949fbba32c",
+    "targets/scene-0283.targets.json.gz": "964ea4ede41459208603102f4e6066ecb31bab7452214d929c7a1abc3098a7c3",
+    "targets/scene-0321.targets.json.gz": "b99946e04483b51f19677054b326bcaae1f79e3db376133991bfe2661d0a1216",
+    "targets/scene-0739.targets.json.gz": "f6e9439d2d4208d4acafa8b9df018074d5a7d9fdc28779c3484be05917aa9dd4",
+    "targets/scene-0376.targets.json.gz": "a836f6d9ac8123dfdd48143cabf6a1b8a9322d3180ebe0556c010693e6680593",
+    "targets/scene-0328.targets.json.gz": "1c14b20a28ddba6f2c6ecc5f3b9ac62800ea91226e535c7e25f5ef3b6ac8e8d1"
+  },
+  "reference_hashes": {
+    "dece.py": "9df32add24af786842637d01c6c91a9d72fdb4e6d0e9de449afa31464dbdb6ad",
+    "upstream/LICENSE": "f88f0ca60e1cde862a325c28b9309050f0814af1bda901086dde9d19c9c8d9e5",
+    "upstream/calibration_experiments/train_combined_model.py": "fd475a78aa92d9a69dd88b4ecce17b7c03684496a8df88f8c4ed660775b30ca8",
+    "upstream/calibration_experiments/learned_calibrators.py": "fc246f3ca0b1e3dc94e5116552bd8480e600c50d2cd9b492be878d2b0bb07932"
+  },
+  "source_hashes": {
+    "tools/semantic_memory/test_glfs_author_parity.py": "85ee27a518b92ceb8c1b9906a0b0b98769b454b54a88333deaf5829e2b42bf62",
+    "tools/semantic_memory/glfs_baseline.py": "b5a522ffcedc3ba394e8985591a87e9be887022e8a0e7fba9f385642b468e99c",
+    "tools/semantic_memory/glfs_experiment.py": "af7c976c989d34f6eede07a63973069c58e0b4e98c438a14a2cbb89149164145",
+    "tools/semantic_memory/glfs_extract.py": "4dcdd319de8c2e8a01346f493d2e4a778fad9c853b745542e5196668e206c565",
+    "tools/semantic_memory/glfs_prepare_geometry.py": "6d8edd32d7f47ab4f8446cee4da5761905705499f842fc14f97031c69f0d325c"
+  },
+  "source_commit_before_adapter": "5d99db6",
+  "execution": {
+    "backend": "remote CPU for GLFS fitting",
+    "parallel_seeds": 3,
+    "torch_threads_per_seed": 2,
+    "local_gpu_allowed": false,
+    "parallel_workers": 6
+  }
+}

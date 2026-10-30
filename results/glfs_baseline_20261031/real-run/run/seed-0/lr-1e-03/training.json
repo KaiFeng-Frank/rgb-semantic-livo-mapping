@@ -1,0 +1,93 @@
+[
+  {
+    "epoch": 1,
+    "step": 14,
+    "check": 1,
+    "loss": 1.277848677975791,
+    "selection_miou": 0.6170342017205354,
+    "best": 0.6170342017205354,
+    "stale": 0,
+    "elapsed_s": 4.754352406001999,
+    "temperature_min": 0.39456915855407715,
+    "temperature_max": 0.40565919876098633,
+    "max_lookup_change": 0.01396606465454553
+  },
+  {
+    "epoch": 1,
+    "step": 27,
+    "check": 2,
+    "loss": 1.275112469991048,
+    "selection_miou": 0.6170602914024237,
+    "best": 0.6170602914024237,
+    "stale": 0,
+    "elapsed_s": 9.17036263999762,
+    "temperature_min": 0.3895224332809448,
+    "temperature_max": 0.41098907589912415,
+    "max_lookup_change": 0.02700855375209077
+  },
+  {
+    "epoch": 1,
+    "step": 40,
+    "check": 3,
+    "loss": 1.2678684055805207,
+    "selection_miou": 0.6163331330968146,
+    "best": 0.6170602914024237,
+    "stale": 1,
+    "elapsed_s": 13.066535044003103,
+    "temperature_min": 0.38448622822761536,
+    "temperature_max": 0.4163779318332672,
+    "max_lookup_change": 0.039167502350462735
+  },
+  {
+    "epoch": 2,
+    "step": 54,
+    "check": 4,
+    "loss": 1.246088547366006,
+    "selection_miou": 0.6162549942904965,
+    "best": 0.6170602914024237,
+    "stale": 2,
+    "elapsed_s": 17.6180363520034,
+    "temperature_min": 0.3792201280593872,
+    "temperature_max": 0.4222862720489502,
+    "max_lookup_change": 0.05151724973148608
+  },
+  {
+    "epoch": 2,
+    "step": 67,
+    "check": 5,
+    "loss": 1.2432643837398953,
+    "selection_miou": 0.6160362570282671,
+    "best": 0.6170602914024237,
+    "stale": 3,
+    "elapsed_s": 21.906301196999266,
+    "temperature_min": 0.37469878792762756,
+    "temperature_max": 0.42768338322639465,
+    "max_lookup_change": 0.0633042811149015
+  },
+  {
+    "epoch": 2,
+    "step": 80,
+    "check": 6,
+    "loss": 1.2378971576690674,
+    "selection_miou": 0.6157404081915397,
+    "best": 0.6170602914024237,
+    "stale": 4,
+    "elapsed_s": 26.284247944000526,
+    "temperature_min": 0.3710572123527527,
+    "temperature_max": 0.4320462644100189,
+    "max_lookup_change": 0.07443375135237373
+  },
+  {
+    "epoch": 3,
+    "step": 94,
+    "check": 7,
+    "loss": 1.2170775277273995,
+    "selection_miou": 0.6156764377780704,
+    "best": 0.6170602914024237,
+    "stale": 5,
+    "elapsed_s": 30.87531263800338,
+    "temperature_min": 0.3678194582462311,
+    "temperature_max": 0.43777790665626526,
+    "max_lookup_change": 0.08702085357654954
+  }
+]

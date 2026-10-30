@@ -1,0 +1,84 @@
+{
+  "protocol_sha256": "330d483282be1394d91a6b57c31e4b2e58e3e2b69673f400dd38233ceb0360a1",
+  "files": [
+    {
+      "part": "fit",
+      "scene": "scene-0254",
+      "log": "cb3e914a6f0b4deea0efc8521ca1e671",
+      "frame": 0,
+      "stamp": 1533582454.198461,
+      "path": "scene-0254/000.npz",
+      "sha256": "2af012c8534bda11d67655dcd42378eb43858dd2346224e54f0e1eb12739bc7d",
+      "queries": 1973,
+      "with_history": 0
+    },
+    {
+      "part": "fit",
+      "scene": "scene-0254",
+      "log": "cb3e914a6f0b4deea0efc8521ca1e671",
+      "frame": 1,
+      "stamp": 1533582454.698893,
+      "path": "scene-0254/001.npz",
+      "sha256": "cbcc616aafc133b2bca4093f2cff1630b45a216e700bf44631b1cc7e3099d880",
+      "queries": 2014,
+      "with_history": 613
+    },
+    {
+      "part": "fit",
+      "scene": "scene-0254",
+      "log": "cb3e914a6f0b4deea0efc8521ca1e671",
+      "frame": 2,
+      "stamp": 1533582455.198758,
+      "path": "scene-0254/002.npz",
+      "sha256": "dd0d0e6bb944758404cd9abe2d918777cb41a88546065a80bf04f353cda9f3d7",
+      "queries": 2444,
+      "with_history": 726
+    }
+  ],
+  "geometry": [
+    {
+      "scene": "scene-0254",
+      "frame": 0,
+      "seconds": 0.2879618519982614,
+      "points": 24910,
+      "range_over_50": 849,
+      "neighbor16_over_2m": 1780,
+      "normal_degenerate": 0
+    },
+    {
+      "scene": "scene-0254",
+      "frame": 1,
+      "seconds": 0.12151230699964799,
+      "points": 24764,
+      "range_over_50": 807,
+      "neighbor16_over_2m": 1745,
+      "normal_degenerate": 0
+    },
+    {
+      "scene": "scene-0254",
+      "frame": 2,
+      "seconds": 0.12254141900120885,
+      "points": 24851,
+      "range_over_50": 703,
+      "neighbor16_over_2m": 1759,
+      "normal_degenerate": 0
+    }
+  ],
+  "serialization": {
+    "backbone": false,
+    "backbone.enc.enc1.down": false,
+    "backbone.enc.enc2.down": false,
+    "backbone.enc.enc3.down": false,
+    "backbone.enc.enc4.down": false
+  },
+  "runtime": {
+    "torch": "2.11.0+cu128",
+    "numpy": "1.26.4"
+  },
+  "total_bytes": 9201971,
+  "elapsed_s": 3.7087632730035693,
+  "normal_geometry_s": 0.5320155779991182,
+  "current_path_parity_checks": 3,
+  "deployable": false,
+  "latency_scope": "Extraction includes trace instrumentation and concurrent TASeg; not an online latency measurement"
+}
