@@ -134,6 +134,11 @@ rounded official results. It does not independently recompute mSTCV.
   bookkeeping. The source's `self.gt_flow` name is misleading: inference
   overwrites it with the model's **predicted** flow. Verify this boundary in the
   running label-control check; never feed training GT flow at test time.
+- The shared test pipeline also loads LiDAR points. The released configuration
+  has no `pts_voxel_encoder`, and `extract_feat` only uses points when that
+  component exists. Image depth is predicted by `depth_net`; test inputs contain
+  no GT depth or GT flow. These are source/config checks, not a claim that all
+  possible leakage has been ruled out by the five-frame intervention.
 - mSTCV subtracts GT class-change counts from predicted class-change counts at
   aligned world voxels, excludes moving voxels using the official GT-speed
   mask, and normalizes by non-free voxels. It is not an instance
