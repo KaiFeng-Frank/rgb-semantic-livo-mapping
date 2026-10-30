@@ -1,0 +1,54 @@
+{
+  "reason": "Fixed 16-class denominator for paired per-log and bootstrap mIoU comparisons; prediction-dependent present-class denominators differed in 8 logs.",
+  "unchanged_fields": [
+    "protocol_sha256",
+    "point_metrics",
+    "paired",
+    "per_class_paired",
+    "events",
+    "subgroups",
+    "object_semantic_stability",
+    "occupancy_metrics",
+    "timing"
+  ],
+  "model_rerun": false,
+  "cpu_analysis_only": true,
+  "old_source_sha256": "9b4bef148c8f0ddfa45328350e1c052c78cd0bc36670fd4e8248d81f7b18c69c",
+  "new_source_sha256": "3e28e706deee72b3b5f16ed87c0745f0d14915cf07fba10200656aee7925c449",
+  "old_report_sha256": "cd1b2dfeb6cb479020e2d74c80b35e7e06603629be2e78d1bebbcd8f06c9758f",
+  "new_report_sha256": "466fcf7341db8e1cc9016a712fa055fcd77ee4a5a5373271b15eb7f346783cdc",
+  "old_bootstrap": {
+    "draws": 2000,
+    "seed": 20261031,
+    "mIoU_delta_pp_95percent": [
+      1.8166488099645544,
+      5.665603118585932
+    ],
+    "recovery_success_delta_pp_95percent": [
+      9.786114221724524,
+      16.424459986383606
+    ],
+    "reappearance_success_delta_pp_95percent": [
+      -1.4229094076655053,
+      7.854943351713161
+    ]
+  },
+  "new_bootstrap": {
+    "draws": 2000,
+    "seed": 20261031,
+    "class_support_policy": "Fixed 16 classes in both arms; zero IoU for zero-union classes.",
+    "mIoU_delta_pp_95percent": [
+      1.8157613119881162,
+      5.665603118585932
+    ],
+    "recovery_success_delta_pp_95percent": [
+      9.786114221724524,
+      16.424459986383606
+    ],
+    "reappearance_success_delta_pp_95percent": [
+      -1.4229094076655053,
+      7.854943351713161
+    ]
+  },
+  "completed": 1793403075.083789
+}

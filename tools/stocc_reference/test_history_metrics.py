@@ -46,5 +46,13 @@ class EventContract(unittest.TestCase):
         self.assertEqual(scores['mIoU16_present_percent'],50.)
         self.assertEqual(scores['accuracy_percent'],50.)
 
+    def test_rare_prediction_does_not_change_fixed_class_denominator(self):
+        cold=np.zeros((18,18),np.int64);cold[4,4]=9;cold[4,5]=1
+        native=np.zeros((18,18),np.int64);native[4,4]=10
+        a,b=point_scores(cold),point_scores(native)
+        self.assertEqual((a['represented_classes'],b['represented_classes']),(2,1))
+        self.assertAlmostEqual(b['mIoU16_zero_for_absent_percent']-
+                               a['mIoU16_zero_for_absent_percent'],10/16)
+
 
 if __name__=='__main__':unittest.main()

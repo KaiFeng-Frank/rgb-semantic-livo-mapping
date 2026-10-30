@@ -1,0 +1,21 @@
+{
+  "frames": 642,
+  "counts": {
+    "raw_points": 22289664,
+    "semantic_valid_points": 16141089,
+    "semantic_valid_in_grid_points": 14720788,
+    "eligible_points": 11265273,
+    "voxel_gt_agrees_with_point_gt": 10743158,
+    "panoptic_semantic_checked_points": 22213549,
+    "panoptic_zero_points": 76115
+  },
+  "protocol_sha256": "230821633df50c0e6c1310066c10602b18cfa6200d577391d3be6304769c26ae",
+  "subset_metadata_sha256": "2b744038a231a484bf33efe7c32a1cee2bcce1461f181df9e666f3d54253d899",
+  "manifest_sha256": "a787b125fdb6a64a8b7d9d2f6df4e4a3c60bf3bb98b6e8ca8ef53889cfd609d0",
+  "projection": "LiDAR-to-ego calibration; floor((ego_xyz - [-40,-40,-1])/0.4); half-open [200,200,16] grid, then official camera mask.",
+  "panoptic_lidarseg_semantics_match": true,
+  "point_counts_match": true,
+  "voxel_point_gt_agreement": 0.9536526988737867,
+  "no_filter_on_voxel_point_gt_agreement": true,
+  "completed": 1793401134.0940602
+}

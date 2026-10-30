@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "frames": 642,
+  "object_frames": 7318,
+  "events": 1915,
+  "checks": [
+    "query coverage",
+    "confusion matrices and mIoU",
+    "point correction/harm accounting",
+    "log aggregation",
+    "event and subgroup paired denominators",
+    "fixed recovery horizon"
+  ],
+  "report_sha256": "466fcf7341db8e1cc9016a712fa055fcd77ee4a5a5373271b15eb7f346783cdc"
+}

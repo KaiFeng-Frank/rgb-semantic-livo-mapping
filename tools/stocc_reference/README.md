@@ -152,3 +152,52 @@ The first deliverable is an evidence-backed official-system validation, with
 any incomplete coverage or numerical discrepancies stated explicitly. Data and
 large model files stay outside Git; scripts, provenance, logs and aggregate
 results belong in the existing semantic research branch.
+
+## Completed same-weight history diagnostic
+
+The paired 16-log / 642-frame experiment is complete. See
+[results and limitations](../../results/stocc_history_diagnostic_20261031/README.md).
+This is a native-history versus cold-history input intervention using the same
+released weights, not an independently trained single-frame baseline.
+
+`prepare_history_diagnostic.py` freezes metadata-only scene selection and the
+evaluation contract. `acquire_panoptic.py` obtains the pinned public-mirror
+panoptic archive directly on the remote host; `history_metrics.py prepare`
+checks point counts and panoptic/lidarseg semantics before creating the shared
+evaluation queries. No GT identity is passed to the model.
+
+On the prepared remote host, source `env.sh` and use the official upstream
+working directory for inference:
+
+```bash
+cd /home/wuyou/stocc_reference/upstream
+python /home/wuyou/stocc_reference/evaluate.py \
+  --ann-file /home/wuyou/stocc_reference/history-diagnostic/subset.pkl \
+  --history-mode native --workers 8 --memory-fraction .75 \
+  --out /home/wuyou/stocc_reference/history-diagnostic/native_history
+python /home/wuyou/stocc_reference/evaluate.py \
+  --ann-file /home/wuyou/stocc_reference/history-diagnostic/subset.pkl \
+  --history-mode cold --workers 8 --memory-fraction .75 \
+  --out /home/wuyou/stocc_reference/history-diagnostic/cold_history
+python /home/wuyou/stocc_reference/history_metrics.py evaluate
+python /home/wuyou/stocc_reference/verify_history_report.py
+```
+
+Preserve completed run directories before intentionally repeating an experiment.
+The cold intervention in `history_control.py` retains metric histories and the
+native current-feature attention path while resetting inference memory and
+previous predicted motion. Assertions check the actual attention input, absence
+of previous motion and untouched metric state on every evaluated frame.
+
+The CPU analysis validates prediction hashes against the earlier full reference,
+scene-first parity, query hashes and scene coverage. It produces point confusion
+matrices, paired corrections/harms, GT-associated object episodes and paired
+collection-log bootstrap intervals. Per-log and resampled mIoU use a shared
+fixed 16-class denominator (zero for zero-union classes). The original analysis
+and this audit correction are preserved separately in the results.
+
+`archive_history_diagnostic.py` exports only small reproducibility artifacts,
+with per-file SHA-256. Full predictions, images, labels and weights stay remote.
+After checkout, `verify_history_report.py --root
+results/stocc_history_diagnostic_20261031` checks the exported point/object
+accounting using CPU and NumPy alone. It accepts the compressed event export.

@@ -1,28 +1,110 @@
-# ST-Occ paired history diagnostic — protocol frozen, results pending
+# ST-Occ 同权重历史对照：完成，有净收益，也有行人首次观测退化
 
-The official pretrained full-validation reproduction is complete. This next
-experiment compares native memory with the same weights receiving native
-cold-history inputs on every frame. It is an input intervention, not an
-independently trained single-frame baseline, and does not establish a PTv3 gain.
+**在预先选定的 16 个采集日志、16 个完整场景、642 帧上，官方 ST-Occ 权重使用原生历史后，当前可评价点的 mIoU 从 53.7240% 提高到 57.9510%；以冷历史分支出错为起点的对象恢复成功率从 39.16% 提高到 52.58%。** 这建立了一个有实际时序收益的成熟系统参照。但首次可评价的行人片段中，成功数从 63/99 降至 57/99；不能将平均提升解释为历史不会伤害新目标。
 
-[protocol.json](protocol.json) fixes 16 complete scenes / 642 frames from 16
-collection logs, selected by metadata hash before evaluating this contrast.
-The pool is the previously evaluated official validation set, not a fresh blind
-test. No training, checkpoint selection or output policy fitting is performed.
+这是**同一已训练模型的历史输入干预**，不是独立训练的单帧模型与时序模型比较。未训练、微调或挑选权重，没有接入 PTv3。ST-Occ 发布配置以六路相机预测占据；本次 LiDAR 点和 panoptic 身份仅用于评价，不是新增的模型输入。
 
-Only inference histories are reset. The native attention and uncertainty heads
-remain, and official mSTCV bookkeeping continues across frames. Real inference
-must verify current-feature attention, absent previous predicted motion,
-unchanged metric state, matching scene-first predictions, and native rerun
-parity with the earlier full validation.
+运行与归档日期：2026-10-31。总表见 [report.json](report.json)，计数复核见 [report-verification.json](report-verification.json)。此前完整 150 场景 / 6,019 帧官方指标复现见 [完整复现记录](../stocc_reference_20261031/README.md)。
 
-Point evaluation uses the same current LiDAR queries inside the ego grid and
-camera mask for both arms. Panoptic GT identities are evaluation-only. Report
-point mIoU, corrections and harms, first observation/reappearance/error-recovery
-events, car/pedestrian subgroups, temporal class changes, and measured cost.
-A missing observation is not automatically an occlusion, and an object recovery
-delay at labeled keyframes is not network inference latency.
+## 同输入、同权重的配对结果
 
-Bulk data acquisition and inference stay on the remote host. The local GPU is
-not used. Raw panoptic targets must pass per-file checks and semantic/point-count
-agreement with the separately downloaded lidarseg labels before object scoring.
+| 指标 | 每帧清空推理历史 | 原生历史 | 差值或配对计数 |
+|---|---:|---:|---:|
+| 当前点 mIoU，16 类，% | 53.7240 | **57.9510** | +4.2269 个百分点 |
+| 当前点准确率，% | 80.7476 | **82.6787** | +1.9311 个百分点 |
+| 前景点准确率，% | 81.2936 | **86.0806** | +4.7870 个百分点 |
+| 错误起点后的对象恢复，932 个片段 | 365/932，39.16% | **490/932，52.58%** | 新增成功 163，失去成功 38，净 +125 |
+| 观测间断后重现，487 个片段 | 310/487，63.66% | **328/487，67.35%** | 新增 47，失去 29，净 +18 |
+| 首次可评价，496 个片段 | **317/496，63.91%** | 316/496，63.71% | 新增 13，失去 14，净 −1 |
+| 相邻对象观测的多数类别变化次数，越低越好 | 1,141 | **668** | 6,151 次可比较转移 |
+| 同一 642 帧子集的官方占据 mIoU，17 类，% | 31.27 | **36.90** | 体素指标，不能与点指标混用 |
+| 同一子集的官方 mSTCV，%，越低越好 | 31.7480 | **9.4924** | 保持原生评价记忆连续 |
+
+11,265,273 个共同评价点中，历史**纠正 559,970 点，改错 342,423 点，净纠正 217,547 点**。汽车纠正 13,908、改错 6,044；行人纠正 1,497、改错 756。construction_vehicle 和 other_flat 的正确点净数下降；逐类 IoU、混淆矩阵和纠错/误改计数均保存在总表中，没有仅报告获益类别。
+
+按采集日志配对重采样 2,000 次、固定种子 20261031：
+
+| 差值（原生历史减冷历史） | 95% 配对日志 bootstrap 区间，百分点 |
+|---|---:|
+| 点 mIoU | [1.8158, 5.6656] |
+| 错误起点后恢复成功率 | [9.7861, 16.4245] |
+| 重现后成功率 | **[−1.4229, 7.8549]，跨零** |
+
+16 个日志中有 15 个固定 16 类点 mIoU 提高。日志是重采样单位；642 帧、1,915 个事件不能被当作互相独立的采集样本。候选池是已经用过的官方验证集，并非新的项目级盲测集。重现后的点估计有利，区间尚不支持稳定提升的结论。
+
+## 行人退化与恢复不能混为一谈
+
+| 群体 / 事件 | 冷历史成功 | 原生历史成功 | 新增 / 失去 |
+|---|---:|---:|---:|
+| 汽车首次可评价，226 个 | 166 | 170 | 7 / 3 |
+| 汽车重现，252 个 | 187 | 201 | 26 / 12 |
+| 汽车错误起点恢复，384 个 | 167 | 232 | 76 / 11 |
+| **行人首次可评价，99 个** | **63** | **57** | **2 / 8** |
+| 行人重现，111 个 | 67 | 70 | 11 / 8 |
+| 行人错误起点恢复，189 个 | 65 | 89 | 32 / 8 |
+
+8 个首次行人失去成功的片段全部保存为 [pedestrian-first-observation-harms.json](pedestrian-first-observation-harms.json)，包含场景、对象身份、帧区间、点数、两组正确比例与多数预测。这些输出定位了退化病例，**尚未证明具体原因发生在运动补偿、检索、注意力或训练目标**。不能仅凭错误类别把病因归为旧背景污染。
+
+类别变化次数减少衡量的是 **GT 身份关联后的语义稳定性**。模型没有输出或评价实例身份关联；本次没有 ID switch、重识别或实例追踪能力提升的证据。
+
+## 对象评价的严格含义
+
+对象每帧至少有 5 个共同可评价点；其中至少 50% 分类正确即达到本次成功阈值。时间窗固定 2 秒，只在连续合格观测内计分，GT panoptic 身份只用于配对。
+
+- “首次可评价”指场景开始后第一次达到上述点数门槛，排除首帧已经合格的对象；不等于物体刚进入物理视野或真实世界第一次出现。
+- “重现”指合格观测曾有间断，不能自动认定间断是遮挡造成。
+- “错误起点”由冷历史分支的错误定义，评价的是这个条件群体，不是所有对象的无条件恢复概率。两组使用完全相同的事件起点与观察窗口。
+- 首次 / 重现 / 错误起点事件分别有 285/496、346/487、578/932 个观察期不足完整 2 秒；行人首次事件中为 73/99。未观察到成功仍计入分母，没有删掉失败短轨迹。截短诊断采用 0.1 秒采样容差；实际成功判定窗口仍不超过 2 秒。
+- 未成功的延迟赋予 2 秒惩罚，错误起点群体的平均惩罚延迟为 1.5048→1.1049 秒。这不是实际恢复时延的无偏估计，也不是网络推理耗时。两组成功子集不同，不能把各自成功子集的平均延迟直接当作同一批对象的恢复加速。
+
+## 冻结协议与运行核验
+
+[protocol.json](protocol.json) 在本次对照前提交于 `7be27b0`。从官方验证集 18 个采集日志中，按固定 salt 的元数据哈希选 16 个，再取各日志字典序首个完整场景。选择不读取标签或本次模型分数。共 642 帧，未因结果好坏换场景。
+
+原生权重 SHA-256：`68491f55a2208fad884e3b664d0e34b8311688376380f7722e30cac6bde5ffa0`。官方源码：`1633f62e2e6677a5fa474905977acfeca4e7819e`。两组均保留已核验的整数形状兼容修复和 metadata 适配。
+
+冷历史干预清空推理特征、有效性、访问计数、历史类别分布与上一帧预测运动，重置不确定性及历史帧计数；**保留原生注意力、不确定性头、分类头和评价记忆**。原生冷启动路径用当前特征作为注意力输入，不使用另一套分类器。单改配置开关不足以实现该干预，故在运行时验证实际 attention 输入。
+
+- 两组各 642 个唯一预测，输入覆盖与共同点查询一致。
+- 原生历史的 **642/642** 预测哈希与之前完整验证逐帧一致。
+- 16 个场景的首帧，两组预测哈希 **16/16** 一致。
+- 冷历史的实际当前特征 attention、历史预测运动清除、评价状态不变，**642/642** 帧断言通过；另保存真实四帧冷历史 smoke。
+- CPU 复核混淆矩阵、逐点纠错/误改、日志加总、对象事件与子组公共分母，全部通过。六项边界测试涵盖固定时间窗、场景边界、类别分母与 free 预测错误计分。
+
+点查询由当前 LiDAR 坐标经官方标定变换到 ego，占据格分辨率 0.4 米，范围为 `[-40,-40,-1]` 起点的 `[200,200,16]` 半开网格，再使用官方 camera mask。仅统计 16 类合法 lidarseg 真值；预测 others/free 均作为相应语义点错误。没有按模型分数或点/体素真值是否一致筛选。点真值与体素真值在该查询集上约 95.37% 一致，所以点指标必须与官方占据指标分开。
+
+Panoptic 文件经远端固定版本公共镜像获得，来源和档案哈希见 [panoptic-acquisition.json](panoptic-acquisition.json)。该副本未与官方原始档案独立认证。642 份点数均与 LiDAR/lidarseg 一致；所有非零 panoptic 类别与独立 lidarseg 标签逐点一致。镜像档案里 41 份 mini/trainval 重复副本均核验字节相同。
+
+复核发现部分日志两组非空类别数不同，因此将**逐日志与 bootstrap 比较**统一为固定 16 类，零 union 类计零。总体已有全部 16 类，主指标、对象计数、推理输出完全不变。修正只重跑 CPU 统计，原始结果和源码均保留，前后哈希及区间见 [analysis-correction.json](analysis-correction.json)。未修改协议、阈值或选择数据。
+
+## 实测开销与本次结论
+
+单台远端 RTX 4090，FP16、batch 1、8 个加载 worker，无其他 GPU 任务，每组只测一次。CUDA 同步的模型调用包含官方时序指标记账，排除数据加载。
+
+| 开销 | 冷历史 | 原生历史 |
+|---|---:|---:|
+| 模型调用 p50 | 144.02 ms | 143.55 ms |
+| 模型调用 p95 | 151.45 ms | 152.03 ms |
+| 推理、预测保存及最终官方评价阶段 | 129.33 s | 129.80 s |
+
+冷历史额外执行清空与相等性断言，因此不能用两个近似耗时推导“记忆零开销”。不是重复测量的部署延迟，也不支持 5 ms 模块或完整在线 SLAM 的实时结论。官方 ego 位姿和全场景记忆边界保留，未验证估计位姿与未知未来场景范围。本机 GPU 未使用，TASeg 未恢复训练。
+
+预登记的总体机制门槛均通过：点净纠错为正、错误起点恢复净增、重现成功净数不下降，且恢复事件数及采集日志覆盖达到门槛。**正对照提供了“成熟时序系统能获得净收益”的证据，同时暴露了首次行人误改；它没有证明我们的 PTv3 方法已获益。** 本轮到此收尾，没有启动新训练或新架构分支。后续迁移前应先利用已保存的行人失效片段明确保护目标，再决定迁移机制与配对基线。
+
+## 保存与复跑
+
+原始数据、权重、完整体素预测和点标签缓存留在远端 `/home/wuyou/stocc_reference/history-diagnostic` 及其父目录。Git 保存协议、代码、配置、逐帧哈希、混淆矩阵、事件、失败片段、日志和来源记录：
+
+- [逐帧点效果](frame-point-effects.json)、[对象观测](object-frames.json.gz)、[全部事件](events.json.gz)、[共同点目标审计](target-audit.json)。
+- [原生历史运行](native_history/)、[冷历史运行](cold_history/)、[smoke](smoke-cold/)。
+- [运行源码及最终分析源码](sources-as-run/)、[运行日志](logs/)、[逐文件 SHA-256 清单](artifact-manifest.json)。
+- [执行说明与可运行工具](../../tools/stocc_reference/README.md)。
+
+压缩事件与对象观测足以在无 GPU、无原始数据的机器上复核已导出结果的计数：
+
+```bash
+python tools/stocc_reference/verify_history_report.py \
+  --root results/stocc_history_diagnostic_20261031
+```
+
+该复核不取代对原始传感器输入及预测数组重新推理；完整重跑仍需远端环境与数据。

@@ -1,0 +1,626 @@
+[
+  {
+    "event": {
+      "kind": "first_observed",
+      "scene": "scene-0003",
+      "log": "92af2609d31445e5a71b2d895376fed6",
+      "instance": 2038,
+      "label": 7,
+      "start_frame": 5,
+      "end_frame": 7,
+      "available_observation_span_s": 1.0008599758148193,
+      "followup_truncated": true,
+      "outcomes": {
+        "cold_history": {
+          "success": true,
+          "delay_s": 1.0008599758148193,
+          "delay_capped_s": 1.0008599758148193
+        },
+        "native_history": {
+          "success": false,
+          "delay_s": null,
+          "delay_capped_s": 2.0
+        }
+      }
+    },
+    "object_frames": [
+      {
+        "scene": "scene-0003",
+        "log": "92af2609d31445e5a71b2d895376fed6",
+        "frame": 5,
+        "stamp": 1533201472.8988678,
+        "instance": 2038,
+        "label": 7,
+        "points": 8,
+        "correct_fraction": {
+          "cold_history": 0.0,
+          "native_history": 0.0
+        },
+        "majority_prediction": {
+          "cold_history": 17,
+          "native_history": 17
+        }
+      },
+      {
+        "scene": "scene-0003",
+        "log": "92af2609d31445e5a71b2d895376fed6",
+        "frame": 6,
+        "stamp": 1533201473.399299,
+        "instance": 2038,
+        "label": 7,
+        "points": 9,
+        "correct_fraction": {
+          "cold_history": 0.0,
+          "native_history": 0.0
+        },
+        "majority_prediction": {
+          "cold_history": 17,
+          "native_history": 17
+        }
+      },
+      {
+        "scene": "scene-0003",
+        "log": "92af2609d31445e5a71b2d895376fed6",
+        "frame": 7,
+        "stamp": 1533201473.8997278,
+        "instance": 2038,
+        "label": 7,
+        "points": 7,
+        "correct_fraction": {
+          "cold_history": 1.0,
+          "native_history": 0.2857142857142857
+        },
+        "majority_prediction": {
+          "cold_history": 7,
+          "native_history": 17
+        }
+      }
+    ]
+  },
+  {
+    "event": {
+      "kind": "first_observed",
+      "scene": "scene-0092",
+      "log": "53cf9c55dd8644bea67b9f009fc1ee38",
+      "instance": 2015,
+      "label": 7,
+      "start_frame": 1,
+      "end_frame": 5,
+      "available_observation_span_s": 1.9005239009857178,
+      "followup_truncated": false,
+      "outcomes": {
+        "cold_history": {
+          "success": true,
+          "delay_s": 0.4998750686645508,
+          "delay_capped_s": 0.4998750686645508
+        },
+        "native_history": {
+          "success": false,
+          "delay_s": null,
+          "delay_capped_s": 2.0
+        }
+      }
+    },
+    "object_frames": [
+      {
+        "scene": "scene-0092",
+        "log": "53cf9c55dd8644bea67b9f009fc1ee38",
+        "frame": 1,
+        "stamp": 1533151062.047298,
+        "instance": 2015,
+        "label": 7,
+        "points": 10,
+        "correct_fraction": {
+          "cold_history": 0.0,
+          "native_history": 0.0
+        },
+        "majority_prediction": {
+          "cold_history": 4,
+          "native_history": 4
+        }
+      },
+      {
+        "scene": "scene-0092",
+        "log": "53cf9c55dd8644bea67b9f009fc1ee38",
+        "frame": 2,
+        "stamp": 1533151062.547173,
+        "instance": 2015,
+        "label": 7,
+        "points": 29,
+        "correct_fraction": {
+          "cold_history": 0.7241379310344828,
+          "native_history": 0.0
+        },
+        "majority_prediction": {
+          "cold_history": 7,
+          "native_history": 4
+        }
+      },
+      {
+        "scene": "scene-0092",
+        "log": "53cf9c55dd8644bea67b9f009fc1ee38",
+        "frame": 3,
+        "stamp": 1533151062.947543,
+        "instance": 2015,
+        "label": 7,
+        "points": 27,
+        "correct_fraction": {
+          "cold_history": 0.0,
+          "native_history": 0.0
+        },
+        "majority_prediction": {
+          "cold_history": 4,
+          "native_history": 4
+        }
+      },
+      {
+        "scene": "scene-0092",
+        "log": "53cf9c55dd8644bea67b9f009fc1ee38",
+        "frame": 4,
+        "stamp": 1533151063.447397,
+        "instance": 2015,
+        "label": 7,
+        "points": 24,
+        "correct_fraction": {
+          "cold_history": 0.0,
+          "native_history": 0.0
+        },
+        "majority_prediction": {
+          "cold_history": 4,
+          "native_history": 4
+        }
+      },
+      {
+        "scene": "scene-0092",
+        "log": "53cf9c55dd8644bea67b9f009fc1ee38",
+        "frame": 5,
+        "stamp": 1533151063.9478219,
+        "instance": 2015,
+        "label": 7,
+        "points": 18,
+        "correct_fraction": {
+          "cold_history": 0.2777777777777778,
+          "native_history": 0.0
+        },
+        "majority_prediction": {
+          "cold_history": 4,
+          "native_history": 4
+        }
+      }
+    ]
+  },
+  {
+    "event": {
+      "kind": "first_observed",
+      "scene": "scene-0329",
+      "log": "485a0831e0964529b0b45d476139c68b",
+      "instance": 2012,
+      "label": 7,
+      "start_frame": 8,
+      "end_frame": 9,
+      "available_observation_span_s": 0.49987101554870605,
+      "followup_truncated": true,
+      "outcomes": {
+        "cold_history": {
+          "success": true,
+          "delay_s": 0.49987101554870605,
+          "delay_capped_s": 0.49987101554870605
+        },
+        "native_history": {
+          "success": false,
+          "delay_s": null,
+          "delay_capped_s": 2.0
+        }
+      }
+    },
+    "object_frames": [
+      {
+        "scene": "scene-0329",
+        "log": "485a0831e0964529b0b45d476139c68b",
+        "frame": 8,
+        "stamp": 1534967836.397248,
+        "instance": 2012,
+        "label": 7,
+        "points": 5,
+        "correct_fraction": {
+          "cold_history": 0.0,
+          "native_history": 0.0
+        },
+        "majority_prediction": {
+          "cold_history": 17,
+          "native_history": 17
+        }
+      },
+      {
+        "scene": "scene-0329",
+        "log": "485a0831e0964529b0b45d476139c68b",
+        "frame": 9,
+        "stamp": 1534967836.897119,
+        "instance": 2012,
+        "label": 7,
+        "points": 5,
+        "correct_fraction": {
+          "cold_history": 0.8,
+          "native_history": 0.0
+        },
+        "majority_prediction": {
+          "cold_history": 7,
+          "native_history": 17
+        }
+      }
+    ]
+  },
+  {
+    "event": {
+      "kind": "first_observed",
+      "scene": "scene-0519",
+      "log": "ca6d14b008ed4e0bb6b1eaaedadbd6c1",
+      "instance": 2088,
+      "label": 7,
+      "start_frame": 20,
+      "end_frame": 20,
+      "available_observation_span_s": 0.0,
+      "followup_truncated": true,
+      "outcomes": {
+        "cold_history": {
+          "success": true,
+          "delay_s": 0.0,
+          "delay_capped_s": 0.0
+        },
+        "native_history": {
+          "success": false,
+          "delay_s": null,
+          "delay_capped_s": 2.0
+        }
+      }
+    },
+    "object_frames": [
+      {
+        "scene": "scene-0519",
+        "log": "ca6d14b008ed4e0bb6b1eaaedadbd6c1",
+        "frame": 20,
+        "stamp": 1535639646.6998699,
+        "instance": 2088,
+        "label": 7,
+        "points": 6,
+        "correct_fraction": {
+          "cold_history": 0.8333333333333334,
+          "native_history": 0.16666666666666666
+        },
+        "majority_prediction": {
+          "cold_history": 7,
+          "native_history": 15
+        }
+      }
+    ]
+  },
+  {
+    "event": {
+      "kind": "first_observed",
+      "scene": "scene-0519",
+      "log": "ca6d14b008ed4e0bb6b1eaaedadbd6c1",
+      "instance": 2092,
+      "label": 7,
+      "start_frame": 23,
+      "end_frame": 25,
+      "available_observation_span_s": 0.9510681629180908,
+      "followup_truncated": true,
+      "outcomes": {
+        "cold_history": {
+          "success": true,
+          "delay_s": 0.9510681629180908,
+          "delay_capped_s": 0.9510681629180908
+        },
+        "native_history": {
+          "success": false,
+          "delay_s": null,
+          "delay_capped_s": 2.0
+        }
+      }
+    },
+    "object_frames": [
+      {
+        "scene": "scene-0519",
+        "log": "ca6d14b008ed4e0bb6b1eaaedadbd6c1",
+        "frame": 23,
+        "stamp": 1535639648.2017229,
+        "instance": 2092,
+        "label": 7,
+        "points": 8,
+        "correct_fraction": {
+          "cold_history": 0.0,
+          "native_history": 0.0
+        },
+        "majority_prediction": {
+          "cold_history": 17,
+          "native_history": 17
+        }
+      },
+      {
+        "scene": "scene-0519",
+        "log": "ca6d14b008ed4e0bb6b1eaaedadbd6c1",
+        "frame": 24,
+        "stamp": 1535639648.702139,
+        "instance": 2092,
+        "label": 7,
+        "points": 32,
+        "correct_fraction": {
+          "cold_history": 0.0,
+          "native_history": 0.0
+        },
+        "majority_prediction": {
+          "cold_history": 17,
+          "native_history": 17
+        }
+      },
+      {
+        "scene": "scene-0519",
+        "log": "ca6d14b008ed4e0bb6b1eaaedadbd6c1",
+        "frame": 25,
+        "stamp": 1535639649.152791,
+        "instance": 2092,
+        "label": 7,
+        "points": 27,
+        "correct_fraction": {
+          "cold_history": 0.6666666666666666,
+          "native_history": 0.0
+        },
+        "majority_prediction": {
+          "cold_history": 7,
+          "native_history": 17
+        }
+      }
+    ]
+  },
+  {
+    "event": {
+      "kind": "first_observed",
+      "scene": "scene-0625",
+      "log": "01ebe4444f624b4699ec6bf58837b153",
+      "instance": 2019,
+      "label": 7,
+      "start_frame": 21,
+      "end_frame": 24,
+      "available_observation_span_s": 1.500182867050171,
+      "followup_truncated": false,
+      "outcomes": {
+        "cold_history": {
+          "success": true,
+          "delay_s": 0.999748945236206,
+          "delay_capped_s": 0.999748945236206
+        },
+        "native_history": {
+          "success": false,
+          "delay_s": null,
+          "delay_capped_s": 2.0
+        }
+      }
+    },
+    "object_frames": [
+      {
+        "scene": "scene-0625",
+        "log": "01ebe4444f624b4699ec6bf58837b153",
+        "frame": 21,
+        "stamp": 1537295824.450372,
+        "instance": 2019,
+        "label": 7,
+        "points": 8,
+        "correct_fraction": {
+          "cold_history": 0.0,
+          "native_history": 0.0
+        },
+        "majority_prediction": {
+          "cold_history": 15,
+          "native_history": 15
+        }
+      },
+      {
+        "scene": "scene-0625",
+        "log": "01ebe4444f624b4699ec6bf58837b153",
+        "frame": 22,
+        "stamp": 1537295824.950242,
+        "instance": 2019,
+        "label": 7,
+        "points": 10,
+        "correct_fraction": {
+          "cold_history": 0.1,
+          "native_history": 0.0
+        },
+        "majority_prediction": {
+          "cold_history": 15,
+          "native_history": 15
+        }
+      },
+      {
+        "scene": "scene-0625",
+        "log": "01ebe4444f624b4699ec6bf58837b153",
+        "frame": 23,
+        "stamp": 1537295825.450121,
+        "instance": 2019,
+        "label": 7,
+        "points": 12,
+        "correct_fraction": {
+          "cold_history": 0.75,
+          "native_history": 0.0
+        },
+        "majority_prediction": {
+          "cold_history": 7,
+          "native_history": 15
+        }
+      },
+      {
+        "scene": "scene-0625",
+        "log": "01ebe4444f624b4699ec6bf58837b153",
+        "frame": 24,
+        "stamp": 1537295825.9505548,
+        "instance": 2019,
+        "label": 7,
+        "points": 16,
+        "correct_fraction": {
+          "cold_history": 0.625,
+          "native_history": 0.0
+        },
+        "majority_prediction": {
+          "cold_history": 7,
+          "native_history": 15
+        }
+      }
+    ]
+  },
+  {
+    "event": {
+      "kind": "first_observed",
+      "scene": "scene-0916",
+      "log": "5bd40b613ac740cd9dbacdfbc3d68201",
+      "instance": 2024,
+      "label": 7,
+      "start_frame": 2,
+      "end_frame": 3,
+      "available_observation_span_s": 0.40035295486450195,
+      "followup_truncated": true,
+      "outcomes": {
+        "cold_history": {
+          "success": true,
+          "delay_s": 0.40035295486450195,
+          "delay_capped_s": 0.40035295486450195
+        },
+        "native_history": {
+          "success": false,
+          "delay_s": null,
+          "delay_capped_s": 2.0
+        }
+      }
+    },
+    "object_frames": [
+      {
+        "scene": "scene-0916",
+        "log": "5bd40b613ac740cd9dbacdfbc3d68201",
+        "frame": 2,
+        "stamp": 1538984234.547551,
+        "instance": 2024,
+        "label": 7,
+        "points": 5,
+        "correct_fraction": {
+          "cold_history": 0.0,
+          "native_history": 0.0
+        },
+        "majority_prediction": {
+          "cold_history": 17,
+          "native_history": 15
+        }
+      },
+      {
+        "scene": "scene-0916",
+        "log": "5bd40b613ac740cd9dbacdfbc3d68201",
+        "frame": 3,
+        "stamp": 1538984234.9479039,
+        "instance": 2024,
+        "label": 7,
+        "points": 8,
+        "correct_fraction": {
+          "cold_history": 0.625,
+          "native_history": 0.375
+        },
+        "majority_prediction": {
+          "cold_history": 7,
+          "native_history": 7
+        }
+      }
+    ]
+  },
+  {
+    "event": {
+      "kind": "first_observed",
+      "scene": "scene-0916",
+      "log": "5bd40b613ac740cd9dbacdfbc3d68201",
+      "instance": 2027,
+      "label": 7,
+      "start_frame": 5,
+      "end_frame": 8,
+      "available_observation_span_s": 1.4996559619903564,
+      "followup_truncated": false,
+      "outcomes": {
+        "cold_history": {
+          "success": true,
+          "delay_s": 1.4996559619903564,
+          "delay_capped_s": 1.4996559619903564
+        },
+        "native_history": {
+          "success": false,
+          "delay_s": null,
+          "delay_capped_s": 2.0
+        }
+      }
+    },
+    "object_frames": [
+      {
+        "scene": "scene-0916",
+        "log": "5bd40b613ac740cd9dbacdfbc3d68201",
+        "frame": 5,
+        "stamp": 1538984235.9470809,
+        "instance": 2027,
+        "label": 7,
+        "points": 7,
+        "correct_fraction": {
+          "cold_history": 0.0,
+          "native_history": 0.0
+        },
+        "majority_prediction": {
+          "cold_history": 17,
+          "native_history": 17
+        }
+      },
+      {
+        "scene": "scene-0916",
+        "log": "5bd40b613ac740cd9dbacdfbc3d68201",
+        "frame": 6,
+        "stamp": 1538984236.44697,
+        "instance": 2027,
+        "label": 7,
+        "points": 8,
+        "correct_fraction": {
+          "cold_history": 0.0,
+          "native_history": 0.0
+        },
+        "majority_prediction": {
+          "cold_history": 17,
+          "native_history": 17
+        }
+      },
+      {
+        "scene": "scene-0916",
+        "log": "5bd40b613ac740cd9dbacdfbc3d68201",
+        "frame": 7,
+        "stamp": 1538984236.9462888,
+        "instance": 2027,
+        "label": 7,
+        "points": 17,
+        "correct_fraction": {
+          "cold_history": 0.058823529411764705,
+          "native_history": 0.17647058823529413
+        },
+        "majority_prediction": {
+          "cold_history": 17,
+          "native_history": 17
+        }
+      },
+      {
+        "scene": "scene-0916",
+        "log": "5bd40b613ac740cd9dbacdfbc3d68201",
+        "frame": 8,
+        "stamp": 1538984237.4467368,
+        "instance": 2027,
+        "label": 7,
+        "points": 12,
+        "correct_fraction": {
+          "cold_history": 1.0,
+          "native_history": 0.4166666666666667
+        },
+        "majority_prediction": {
+          "cold_history": 7,
+          "native_history": 17
+        }
+      }
+    ]
+  }
+]

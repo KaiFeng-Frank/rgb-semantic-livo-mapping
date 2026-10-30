@@ -238,7 +238,9 @@ def evaluate():
     arrays={arm:np.stack([per_log[log][arm] for log in logs]) for arm in ARMS}
     event_by_log={log:event_summary([e for e in episodes if e['log']==log]) for log in logs}
     for indices in rng.integers(0,len(logs),size=(2000,len(logs))):
-        delta_iou.append(point_scores(arrays['native_history'][indices].sum(0))['mIoU16_present_percent']-point_scores(arrays['cold_history'][indices].sum(0))['mIoU16_present_percent'])
+        # A resampled log set may omit rare classes. Keep the same 16-class
+        # denominator in both arms even when their predicted support differs.
+        delta_iou.append(point_scores(arrays['native_history'][indices].sum(0))['mIoU16_zero_for_absent_percent']-point_scores(arrays['cold_history'][indices].sum(0))['mIoU16_zero_for_absent_percent'])
         for kind,output in [('cold_history_error_onset',recovery_deltas),('reappearance_after_observation_gap',reappearance_deltas)]:
             total=sum(event_by_log[logs[i]][kind]['episodes'] for i in indices)
             if total:output.append(100*sum(event_by_log[logs[i]][kind]['net_successes'] for i in indices)/total)
@@ -260,8 +262,10 @@ def evaluate():
         subgroups={CLASSES[label]:dict(events=event_summary([e for e in episodes if e['label']==label]),
                                     stability=class_stability([r for r in objects if r['label']==label])) for label in [4,7]},
         per_log_point_metrics=per_log_scores,
-        positive_log_point_mIoU_count=sum(per_log_scores[log]['native_history']['mIoU16_present_percent']>per_log_scores[log]['cold_history']['mIoU16_present_percent'] for log in logs),
+        positive_log_point_mIoU_count=sum(per_log_scores[log]['native_history']['mIoU16_zero_for_absent_percent']>per_log_scores[log]['cold_history']['mIoU16_zero_for_absent_percent'] for log in logs),
+        log_comparison_metric='mIoU16_zero_for_absent_percent',
         paired_collection_log_bootstrap=dict(draws=2000,seed=20261031,
+             class_support_policy='Fixed 16 classes in both arms; zero IoU for zero-union classes.',
              mIoU_delta_pp_95percent=ci(delta_iou),recovery_success_delta_pp_95percent=ci(recovery_deltas),
              reappearance_success_delta_pp_95percent=ci(reappearance_deltas)),
         mechanism_criteria=gates,all_recorded_criteria_met=all(gates.values()),
