@@ -1,0 +1,53 @@
+{
+  "status": "remote_shutdown_before_inference",
+  "record_kind": "summary_of_observed_remote_command_outputs_not_original_raw_manifests",
+  "date_local": "2026-10-31",
+  "source_commit": "1633f62e2e6677a5fa474905977acfeca4e7819e",
+  "source_archive_sha256": "385a2d1d656804f5354b8d200a8f1230e84d3155bda9b2f3966d1b6227344ce9",
+  "checkpoint": {
+    "url": "https://github.com/matthew-leng/ST-Occ/releases/download/v1.0/stocc-r50-256x704.pth",
+    "bytes": 275743785,
+    "sha256": "68491f55a2208fad884e3b664d0e34b8311688376380f7722e30cac6bde5ffa0",
+    "release_digest_matched": true,
+    "strict_load_passed": true,
+    "parameters": 68794628
+  },
+  "runtime": {
+    "python": "3.8.20",
+    "torch": "1.12.1+cu113",
+    "torchvision": "0.13.1+cu113",
+    "mmcv_full": "1.6.0",
+    "mmdet": "2.24.0",
+    "mmsegmentation": "0.24.0",
+    "cuda_compiler": "11.3.122",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "gpu_nms_passed": true,
+    "official_bev_pool_extension_install_passed": true,
+    "mmcv_exception": "1.6.0 wheel within repository accepted range, instead of install guide's 1.5.2 source build"
+  },
+  "labels": {
+    "mirror": "RoyYao233/occ3d-nuscenes-transfer",
+    "revision": "b679e0ace1dc03d0a86737cb73fa790df03a0ad5",
+    "gts_archive_sha256": "0635d1383d8b99cce26a0344ec3ca3c4346f53907a06e82ea525acf7b1abba53",
+    "annotations_sha256": "87cc81f04ef1cd82bd72647c32110b84de8e5620652ecb2b5beae83ee65a1ba2",
+    "mirror_digests_verified": true,
+    "author_archive_independently_compared": false,
+    "extracted_validation_files": 6019,
+    "validation_scenes": 150,
+    "sampled_grid_shape": [200, 200, 16],
+    "full_token_and_shape_audit_completed": false
+  },
+  "cameras": {
+    "expected_validation_images": 36114,
+    "last_observed_completed_archives": [1, 2],
+    "last_observed_verified_extracted_images": 7386,
+    "full_coverage_verified": false
+  },
+  "inference": {
+    "verified_frames": 0,
+    "metrics": null,
+    "wrapper_smoke_test_completed": false,
+    "local_gpu_used": false
+  },
+  "remote_disk_state_after_shutdown": "not_yet_verified"
+}
