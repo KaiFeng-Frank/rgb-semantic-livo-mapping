@@ -2,6 +2,8 @@
 import argparse
 from collections import Counter
 from pathlib import Path
+import subprocess
+import sys
 import time
 import numpy as np
 import torch
@@ -197,7 +199,7 @@ def train_seed(root, fit_frames, selection_frames, dev_frames, seed, cfg, out):
     return result
 
 
-def run(root):
+def run(root, only_seed=None):
     torch.set_num_threads(2)
     torch.set_num_interop_threads(1)
     protocol = read(root/'protocol.json')
@@ -206,11 +208,27 @@ def run(root):
     if manifest['protocol_sha256'] != digest(root/'protocol.json') or len(manifest['files']) != 963:
         raise ValueError('Incomplete or different experiment')
     out = root/'run'
+    if only_seed is not None:
+        if only_seed not in protocol['seeds'] or not out.is_dir():
+            raise ValueError('Unregistered worker')
+        all_frames = read_frames(root, manifest['files'])
+        parts = {part:[x for x in all_frames if x[0]['part'] == part] for part in protocol['parts']}
+        train_seed(root, parts['fit'], parts['selection'], parts['dev'], only_seed, protocol['training'], out)
+        return
     out.mkdir(exist_ok=False)
-    all_frames = read_frames(root, manifest['files'])
-    parts = {part:[x for x in all_frames if x[0]['part'] == part] for part in protocol['parts']}
-    reports = [train_seed(root, parts['fit'], parts['selection'], parts['dev'], seed, protocol['training'], out)
-               for seed in protocol['seeds']]
+    # Independent CPU processes, each with two threads. No shared optimizer,
+    # checkpoint or RNG; the existing remote GPU training continues separately.
+    jobs = {}
+    for seed in protocol['seeds']:
+        with (out/f'worker-{seed}.log').open('w') as log:
+            jobs[seed] = subprocess.Popen([sys.executable, '-m', 'tools.semantic_memory.glfs_experiment',
+                '--root', str(root.resolve()), '--seed', str(seed)], stdout=log, stderr=subprocess.STDOUT)
+    while any(job.poll() is None for job in jobs.values()):
+        save(out/'progress.json', {str(seed):dict(pid=job.pid, returncode=job.poll()) for seed,job in jobs.items()})
+        time.sleep(5)
+    if any(job.returncode != 0 for job in jobs.values()):
+        raise RuntimeError('A GLFS seed failed; inspect the preserved worker logs')
+    reports = [read(out/f'seed-{seed}/evaluation.json') for seed in protocol['seeds']]
     names = ('current', 'probability_average', 'glfs', 'glfs_no_history')
     summary = dict(arms={k:dict(miou_percent_by_seed=[100*r['arms'][k]['miou_fixed16'] for r in reports],
         mean_miou_percent=float(np.mean([100*r['arms'][k]['miou_fixed16'] for r in reports])),
@@ -237,4 +255,6 @@ def run(root):
 if __name__ == '__main__':
     p = argparse.ArgumentParser()
     p.add_argument('--root', type=Path, required=True)
-    run(p.parse_args().root)
+    p.add_argument('--seed', type=int)
+    a = p.parse_args()
+    run(a.root, a.seed)

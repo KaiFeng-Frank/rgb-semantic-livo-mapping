@@ -11,6 +11,7 @@ from tools.instance_memory.metrics import identity_truth
 from .nuscenes_pilot_data import digest, LABEL_MAP
 from .feature_supervision_audit import voxel_truth
 from .glfs_baseline import observation_geometry, verify_sources
+from .glfs_prepare_geometry import array_hash
 
 
 def extract(root, data, limit=None):
@@ -56,6 +57,8 @@ def extract(root, data, limit=None):
         heads.append(head)
     backbone = Segmenter(half=True, shuffle=False, intensity_scale=1.)
     index = read(root/'inputs/index.json')
+    geometry_manifest = root/'geometry/manifest.json'
+    geometry_rows = {(r['scene'], r['frame']):r for r in read(geometry_manifest)['frames']} if geometry_manifest.exists() else {}
     manifest = dict(protocol_sha256=digest(root/'protocol.json'), files=[], geometry=[],
                     serialization=serialization_policy(backbone.model), runtime=dict(torch=torch.__version__, numpy=np.__version__),
                     total_bytes=0, elapsed_s=0, normal_geometry_s=0, current_path_parity_checks=0, deployable=False,
@@ -101,9 +104,23 @@ def extract(root, data, limit=None):
                     historical = np.zeros((n, 4, 16), np.float32)
                     depth, angle, valid = np.zeros((n, 5), np.float32), np.zeros((n, 5), np.float32), np.zeros((n, 5), bool)
                     source_index = np.full((n, 4), -1, np.int32)
-                    tq = time.perf_counter()
-                    dep, ang, stats = observation_geometry(r['xyz'].cpu().numpy())
-                    geometry_s = time.perf_counter()-tq
+                    if geometry_rows:
+                        grow = geometry_rows[(scene, k)]
+                        gpath = root/'geometry'/scene/f'{k:03d}.npz'
+                        if digest(gpath) != grow['sha256']:
+                            raise ValueError('Geometry cache changed')
+                        with np.load(gpath, allow_pickle=False) as g:
+                            if (str(g['xyz_sha256']) != array_hash(r['xyz'].cpu().numpy()) or
+                                str(g['inverse_sha256']) != array_hash(r['inverse'].cpu().numpy().astype(np.int32)) or
+                                str(g['source_sha256']) != row['scan_sha256']):
+                                raise AssertionError('CPU geometry differs from actual encoder input')
+                            dep, ang = g['depth'], g['angle']
+                        geometry_s = grow['seconds']
+                        stats = {key:grow[key] for key in ('points', 'range_over_50', 'neighbor16_over_2m', 'normal_degenerate')}
+                    else:
+                        tq = time.perf_counter()
+                        dep, ang, stats = observation_geometry(r['xyz'].cpu().numpy())
+                        geometry_s = time.perf_counter()-tq
                     manifest['normal_geometry_s'] += geometry_s
                     qi = query.cpu().numpy()
                     depth[:, 0], angle[:, 0], valid[:, 0] = dep[qi], ang[qi], True

@@ -67,7 +67,8 @@
     "loss": "same author mDECE+NLL, mDECE device fixed and no class0 ignore",
     "class_weights": "-log(frequency) from fit-query targets only; matches official log weights reconstructed as 2*log(sqrt-inverse-frequency weights), verified for all 21 released values before any fitting. Absent fit classes get zero NLL weight.",
     "precision": "float32 logits and temperatures; float64 lookup parameters as released; no Lightning/W&B services",
-    "scope": "GLFS formula/lookup/calibration adaptation to fixed outdoor retrieval, not replication of original ScanNet numbers"
+    "scope": "GLFS formula/lookup/calibration adaptation to fixed outdoor retrieval, not replication of original ScanNet numbers",
+    "geometry_cache": "CPU precomputation is permitted only with exact source xyz and inverse-index hashes verified against actual encoder input on every frame. Its measured compute cost remains reported."
   },
   "training": {
     "optimizer": "Adam",
@@ -137,8 +138,15 @@
   "source_hashes": {
     "tools/semantic_memory/test_glfs_author_parity.py": "85ee27a518b92ceb8c1b9906a0b0b98769b454b54a88333deaf5829e2b42bf62",
     "tools/semantic_memory/glfs_baseline.py": "b5a522ffcedc3ba394e8985591a87e9be887022e8a0e7fba9f385642b468e99c",
-    "tools/semantic_memory/glfs_experiment.py": "71a6595989a7eb1a053152af1019926c1ccaf33a4e78d798a7d0306c3bf332e6",
-    "tools/semantic_memory/glfs_extract.py": "5b110b0f8f59c2b9e0f1cafc0f84072fe4c751c2c8e931cf0c98fe34e41e0a6e"
+    "tools/semantic_memory/glfs_experiment.py": "99762e5dd779801a7c8d2755c4a551c1c0babcd96069bdc98274d56ac81aa390",
+    "tools/semantic_memory/glfs_extract.py": "4dcdd319de8c2e8a01346f493d2e4a778fad9c853b745542e5196668e206c565",
+    "tools/semantic_memory/glfs_prepare_geometry.py": "6d8edd32d7f47ab4f8446cee4da5761905705499f842fc14f97031c69f0d325c"
   },
-  "source_commit_before_adapter": "5d99db6"
+  "source_commit_before_adapter": "5d99db6",
+  "execution": {
+    "backend": "remote CPU for GLFS fitting",
+    "parallel_seeds": 3,
+    "torch_threads_per_seed": 2,
+    "local_gpu_allowed": false
+  }
 }

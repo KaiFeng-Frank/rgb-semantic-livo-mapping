@@ -11,6 +11,8 @@ The official repository is
 commit `ed5c59facbed7d05a90a3ed20e952b9dbba97bd6` (MIT).
 Its pinned calibration-loss submodule is `joaomcm/meta-calibration`,
 commit `a0baa1738be91cdf42dd23a7f38f399bab2dc480`.
+The GLFS copyright and permission notice is preserved in
+[third_party/glfs/LICENSE](../third_party/glfs/LICENSE).
 
 ## What stays fixed
 
@@ -98,6 +100,12 @@ Local project: `/home/frank/semantic_livo_instance_memory`, branch
 `feat/instance-memory-20261029`. The local GPU is reserved for the user.
 
 ```bash
+source /home/wuyou/taseg_reference/runtime/env.sh
+source /home/wuyou/glfs_reference/venv/bin/activate
+cd /home/wuyou/glfs_reference/project
+export PTV3_POINTCEPT=/home/wuyou/glfs_reference/Pointcept_v151
+export PTV3_CONFIG=/home/wuyou/glfs_reference/inputs/ptv3-config.py
+export PTV3_CHECKPOINT=/home/wuyou/glfs_reference/backbone.pth
 python -m tools.semantic_memory.test_glfs_author_parity --upstream ../upstream --loss ../dece.py
 python -m tools.semantic_memory.glfs_extract --root .. --data /home/wuyou/taseg_reference/data/nuscenes --limit 3
 python -m tools.semantic_memory.glfs_extract --root .. --data /home/wuyou/taseg_reference/data/nuscenes
