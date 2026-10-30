@@ -76,6 +76,7 @@ def main():
     parser.add_argument('--max-frames', type=int)
     parser.add_argument('--memory-fraction', type=float, default=.40)
     parser.add_argument('--workers', type=int, default=2)
+    parser.add_argument('--history-mode', choices=['native', 'cold'], default='native')
     parser.add_argument('--label-control', action='store_true', help='Replace evaluation occupancy by a constant and GT speed by zero; tests prediction independence, not metric quality.')
     args = parser.parse_args()
     os.chdir(ROOT/'upstream')
@@ -126,6 +127,13 @@ def main():
         state.update(strict_load=True, dataset_frames=len(dataset),
                      dataset_scenes=len(set(i['scene_name'] for i in dataset.data_infos)),
                      parameters=sum(p.numel() for p in model.parameters()))
+        history_control = None
+        if args.history_mode == 'cold':
+            from history_control import ColdHistory
+            control_source = Path(__file__).with_name('history_control.py').read_bytes()
+            (args.out/'history-control-as-run.py').write_bytes(control_source)
+            state['history_control_sha256'] = hashlib.sha256(control_source).hexdigest()
+            history_control = ColdHistory(model)
         model=OfficialInputParallel(model.cuda(),device_ids=[0]);model.eval()
         results=[];rows=[];seen=set();last={}
         torch.cuda.reset_peak_memory_stats()
@@ -167,6 +175,9 @@ def main():
                      predicted_flow_shape=list(model.module.gt_flow.shape),
                      peak_allocated_bytes=torch.cuda.max_memory_allocated(),
                      peak_reserved_bytes=torch.cuda.max_memory_reserved())
+            if history_control is not None:
+                assert history_control.calls == history_control.attention_calls == len(rows)+1
+                row['history_control'] = dict(history_control.last)
             rows.append(row)
             with (args.out/'frames.jsonl').open('a') as stream: stream.write(json.dumps(row)+'\n')
             state.update(frames=len(seen),last_frame=row,elapsed_seconds=time.perf_counter()-run_start)
