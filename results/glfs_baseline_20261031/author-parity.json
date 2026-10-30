@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "forward_max_abs": 2.9802322387695312e-08,
+  "checks": [
+    "author forward",
+    "temperature gradient",
+    "lookup-weight gradient",
+    "bin boundaries",
+    "explicit zero-logit mask",
+    "author mDECE value and gradient",
+    "released log-frequency class weights"
+  ]
+}
