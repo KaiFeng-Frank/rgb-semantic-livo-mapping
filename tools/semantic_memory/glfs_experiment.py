@@ -56,6 +56,24 @@ class Calibration:
                     ece=float(np.abs(self.bin_correct-self.bin_confidence).sum()/self.n))
 
 
+def prepare_selection(frames, seed):
+    # Only predictions outside the query set are cached. Every GLFS prediction
+    # and every original point is still scored on each selection check.
+    return [(observations(d, seed), torch.from_numpy(d['anchor']).softmax(-1).argmax(-1).numpy(),
+             d['query'], d['inverse'], d['point_label'].astype(np.int64)) for _, d in frames]
+
+
+@torch.no_grad()
+def selection_confusion(model, prepared):
+    model.eval()
+    total = np.zeros((16, 16), np.int64)
+    for args, fixed, query, inverse, target in prepared:
+        labels = fixed.copy()
+        labels[query] = model(*args).argmax(-1).numpy()
+        total += confusion(target, labels[inverse])
+    return total
+
+
 @torch.no_grad()
 def evaluate(model, frames, seed, detailed=False):
     names = ('baseline', 'current', 'probability_average', 'glfs', 'glfs_no_history')
@@ -139,7 +157,12 @@ def train_seed(root, fit_frames, selection_frames, seed, cfg, out):
     classification_loss = nn.NLLLoss(weight=weights)
     folder = out/f'seed-{seed}'/f"lr-{cfg['lr']:.0e}"
     folder.mkdir(parents=True, exist_ok=False)
-    save(folder/'initial-selection.json', evaluate(model, selection_frames, seed))
+    initial_selection = evaluate(model, selection_frames, seed)
+    save(folder/'initial-selection.json', initial_selection)
+    selection = prepare_selection(selection_frames, seed)
+    np.testing.assert_array_equal(selection_confusion(model, selection), initial_selection['arms']['glfs']['confusion'])
+    save(folder/'selection-parity.json', dict(passed=True, frames=len(selection_frames),
+        check='Exact confusion matrix vs complete generic evaluator on all selection frames, before fitting'))
     save(folder/'fit-statistics.json', dict(queries=len(y), class_counts=torch.bincount(y, minlength=16).tolist(),
         class_weights=weights.tolist(), parameters=sum(p.numel() for p in model.parameters())))
     best, stale, step, check, started = -float('inf'), 0, 0, 0, time.perf_counter()
@@ -165,8 +188,7 @@ def train_seed(root, fit_frames, selection_frames, seed, cfg, out):
             step += 1
             if batch in check_steps:
                 check += 1
-                evaluation = evaluate(model, selection_frames, seed)
-                score = evaluation['arms']['glfs']['miou_fixed16']
+                score = scores(selection_confusion(model, selection))['miou_fixed16']
                 improved = score > best
                 if improved:
                     best, stale = score, 0
