@@ -1,0 +1,33 @@
+{
+  "index": 5,
+  "status": "complete",
+  "started": 1793397618.1633449,
+  "source": "https://d36yt3mvayqw5m.cloudfront.net/public/v1.0/v1.0-trainval05_keyframes.tgz",
+  "etag": "000e9d84159b01b86ade6f4a1f4b9093-472",
+  "size": 3957488692,
+  "attempt": 2,
+  "engine": "aria2",
+  "aria2_pid": 3675,
+  "mirror_sources": [
+    "https://motional-nuscenes.s3.ap-northeast-1.amazonaws.com/public/v1.0/v1.0-trainval05_keyframes.tgz",
+    "https://d36yt3mvayqw5m.cloudfront.net/public/v1.0/v1.0-trainval05_keyframes.tgz"
+  ],
+  "aria2_log": "/home/wuyou/stocc_reference/camera-acquisition/05/aria2.log",
+  "updated": 1793397707.2857978,
+  "bytes": 3957488692,
+  "progress_source": "aria2-completed-bytes",
+  "aria2_exit_code": 0,
+  "error": "OSError('aria2 did not finish: exit 0; see /home/wuyou/stocc_reference/camera-acquisition/05/aria2.log')",
+  "hashes": {
+    "md5": "6e08e65c3a39922d68f75f6c1af8ea39",
+    "sha256": "fe1dcdf1acf15691692952f7afc8691f034efa52ce61c49abb235a5f6db5d941",
+    "multipart_etag_8MiB": "000e9d84159b01b86ade6f4a1f4b9093-472"
+  },
+  "published_md5": null,
+  "published_md5_match": null,
+  "current_s3_etag_match": true,
+  "integrity_basis": "current-official-s3-etag",
+  "files": 1458,
+  "bytes_extracted": 201878947,
+  "finished": 1793397747.0641005
+}

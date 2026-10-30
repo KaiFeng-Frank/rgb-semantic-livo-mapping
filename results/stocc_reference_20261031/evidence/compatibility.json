@@ -1,0 +1,9 @@
+{
+  "file": "mmdet3d/models/stocc/view_transformation/backward_projection/bevformer_utils/bevformer.py",
+  "before_sha256": "820df3c6a782af18b19c512e5d0d321d9afc8a126da9b566095d0285a26e64c3",
+  "after_sha256": "3eea46bcecc6004a6cc4f987cd00ca918b654890c78e42eafa27a8fdc75a151f",
+  "change": "exact two-dimensional integer H*W instead of NVRTC-JIT prod",
+  "integer_cuda_parity_rows": 10003,
+  "parity_passed": true,
+  "upstream_issue": "https://github.com/pytorch/pytorch/issues/87595"
+}

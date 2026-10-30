@@ -1,0 +1,33 @@
+{
+  "index": 3,
+  "status": "complete",
+  "started": 1793397617.7463622,
+  "source": "https://motional-nuscenes.s3.ap-northeast-1.amazonaws.com/public/v1.0/v1.0-trainval03_keyframes.tgz",
+  "etag": "87e3993f9e2bfec2c8a5ee90939517af-507",
+  "size": 4249901872,
+  "attempt": 1,
+  "bytes": 4249901872,
+  "updated": 1793397837.20353,
+  "hashes": {
+    "md5": "0d68ea18afbf4b4480863b8d58f7ea21",
+    "sha256": "caa143a4895a540ae54f0b2a4c1b7b5defa1f641962aa2e6ebc87f45aea40227",
+    "multipart_etag_8MiB": "87e3993f9e2bfec2c8a5ee90939517af-507"
+  },
+  "published_md5": null,
+  "published_md5_match": null,
+  "current_s3_etag_match": true,
+  "resumed": 1793397779.6825414,
+  "engine": "aria2",
+  "aria2_pid": 3787,
+  "mirror_sources": [
+    "https://motional-nuscenes.s3.ap-northeast-1.amazonaws.com/public/v1.0/v1.0-trainval03_keyframes.tgz",
+    "https://d36yt3mvayqw5m.cloudfront.net/public/v1.0/v1.0-trainval03_keyframes.tgz"
+  ],
+  "aria2_log": "/home/wuyou/stocc_reference/camera-acquisition/03/aria2.log",
+  "progress_source": "aria2-completed-bytes",
+  "aria2_exit_code": 0,
+  "integrity_basis": "current-official-s3-etag",
+  "files": 2850,
+  "bytes_extracted": 434692302,
+  "finished": 1793397881.7244737
+}

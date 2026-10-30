@@ -54,7 +54,8 @@ def main():
         state_path = directory/'state.json'
         if state_path.exists() and json.loads(state_path.read_text()).get('status') == 'complete':
             return json.loads(state_path.read_text())
-        state = dict(index=index, status='starting', started=time.time())
+        state = json.loads(state_path.read_text()) if state_path.exists() else dict(index=index, started=time.time())
+        state.update(status='starting', resumed=time.time())
         download.save(state_path,state)
         try:
             archive = download.acquire(f'public/v1.0/v1.0-trainval{index:02d}_keyframes.tgz', None, state, state_path)
@@ -80,6 +81,7 @@ def main():
                     records.append(dict(path=name, bytes=member.size, sha256=sha))
             download.save(directory/'files.json',records)
             state.update(status='complete',files=len(records),bytes_extracted=sum(x['bytes'] for x in records),finished=time.time())
+            state.pop('error', None)
             download.save(state_path,state)
             archive.unlink()
             print('completed_camera_archive',index,len(records),flush=True)

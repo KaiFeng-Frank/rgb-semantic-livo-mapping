@@ -1,0 +1,33 @@
+{
+  "index": 7,
+  "started": 1793397877.1775026,
+  "status": "complete",
+  "resumed": 1793397877.1775043,
+  "source": "https://motional-nuscenes.s3.ap-northeast-1.amazonaws.com/public/v1.0/v1.0-trainval07_keyframes.tgz",
+  "etag": "9c3a8f5460768ce0cb14d7e3b6c84b92-499",
+  "size": 4177675764,
+  "attempt": 1,
+  "engine": "aria2",
+  "aria2_pid": 3913,
+  "mirror_sources": [
+    "https://motional-nuscenes.s3.ap-northeast-1.amazonaws.com/public/v1.0/v1.0-trainval07_keyframes.tgz",
+    "https://d36yt3mvayqw5m.cloudfront.net/public/v1.0/v1.0-trainval07_keyframes.tgz"
+  ],
+  "aria2_log": "/home/wuyou/stocc_reference/camera-acquisition/07/aria2.log",
+  "updated": 1793397971.9289756,
+  "bytes": 4177675764,
+  "progress_source": "aria2-completed-bytes",
+  "aria2_exit_code": 0,
+  "hashes": {
+    "md5": "1aa4ba3a79c00230f96861dac8431595",
+    "sha256": "5b93fb90fcb87c14648e9b2a100cc32e17c0c1a00d322b14ee812d54118a48d5",
+    "multipart_etag_8MiB": "9c3a8f5460768ce0cb14d7e3b6c84b92-499"
+  },
+  "published_md5": null,
+  "published_md5_match": null,
+  "current_s3_etag_match": true,
+  "integrity_basis": "current-official-s3-etag",
+  "files": 0,
+  "bytes_extracted": 0,
+  "finished": 1793398015.4238386
+}

@@ -1,0 +1,11 @@
+{
+  "reason": "Increase CPU data workers from 2 to 8 after TASeg shutdown; weights/config/memory and metrics unchanged.",
+  "stopped_pid": 4301,
+  "frames": 522,
+  "elapsed_seconds": 242.0228551030001,
+  "timestamp": 1793398483.498146,
+  "replacement": "runs/full-validation-workers8",
+  "confirmed_preserved_frames": 564,
+  "termination": "SIGTERM after inherited ignored SIGINT",
+  "confirmed": 1793398688.4650228
+}

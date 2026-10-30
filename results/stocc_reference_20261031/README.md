@@ -1,76 +1,80 @@
-# ST-Occ first-step status: preflight passed, inference not yet run
+# ST-Occ official pretrained validation
 
-**No ST-Occ accuracy or temporal-consistency result has been obtained.** The
-server was shut down by the user during preparation and is expected to be
-restarted later. Do not treat installation or strict weight loading as model
-reproduction success.
+**The 40-frame smoke test and input-isolation checks pass. Full 6,019-frame
+validation is running; no full-set accuracy claim is made yet.** This uses the
+authors' six-camera occupancy model, not PTv3 or our semantic repair head. No
+model training or validation-driven parameter tuning is performed.
 
-## Verified before loss of SSH
-
-| Item | Observed result |
+| Check | Observed evidence |
 |---|---|
-| Official source | Pinned at `1633f62e2e6677a5fa474905977acfeca4e7819e` |
-| Official checkpoint | 275,743,785 bytes; SHA-256 matches the release digest |
-| Strict checkpoint load | Passed, 68,794,628 parameters, no missing/unexpected keys |
-| Dedicated runtime | Python 3.8.20, PyTorch 1.12.1+cu113, torchvision 0.13.1+cu113 |
-| Compiled dependency | Official MMCV 1.6.0 CUDA wheel; GPU NMS executed successfully |
-| ST-Occ custom extension | Official source installed successfully with CUDA 11.3/GCC 9 |
-| Occupancy archive | Pinned public mirror archive and annotations verified by LFS SHA-256 |
-| Extracted labels | 6,019 label files from 150 validation scenes; one inspected file had the expected `(200,200,16)` arrays and class range 0–17 |
-| Camera files | First two official archives verified/extracted: 5,484 + 1,902 = 7,386 validation JPEGs; later downloads had started |
-| Metadata generation | Initial missing `lidarseg` symlink corrected; original generator restarted, completion not yet observed |
-| Actual inference | **0 verified frames** |
-| Local GPU | Not used |
+| Official source | `1633f62e2e6677a5fa474905977acfeca4e7819e` |
+| Released R50 weight | SHA-256 `68491f55a2208fad884e3b664d0e34b8311688376380f7722e30cac6bde5ffa0` |
+| Strict loading | All keys match; 68,794,628 parameters |
+| Validation data | 150 scenes, 6,019 labels, 36,114 six-camera JPEGs; complete hash/shape/token audit |
+| Metadata | Original transformation functions; all scene indices contiguous and all tokens unique |
+| Smoke | Complete scene-0003, 40 frames; mIoU 29.066489%, mSTCV 6.650970% |
+| Independent smoke mIoU | Exported prediction hashes verified; CPU confusion-matrix result matches official evaluator |
+| GT isolation | First 5 predictions unchanged when evaluation occupancy is constant and GT velocity is zero |
+| Full evaluation | Active remote run `runs/full-validation-workers8` |
+| Training | None; TASeg stopped during the user's shutdown, epoch-33 checkpoint preserved |
+| Local GPU | Unused |
 
-These are observations captured from command output before disconnection,
-summarized here; the original raw manifests/logs remain on the remote disk and
-have **not** all been copied back. The final post-shutdown disk contents and
-background-job state must be checked after restart. TASeg was running when
-preparation began; the agent did not stop it. Its survival/resumption after the
-user's shutdown is not known.
+The smoke scene is not representative of the full validation set. Its scores
+must not be compared with the authors' full-set **42.13% mIoU / 8.68% mSTCV**.
+The published reference and metric configuration are in the
+[official model zoo](https://github.com/matthew-leng/ST-Occ/tree/1633f62e2e6677a5fa474905977acfeca4e7819e).
 
-The Occ3D transfer mirror is not an independently authenticated copy of the
-author's Google Drive archive. Integrity checks establish identity with the
-pinned mirror objects. Full token/shape/coverage validation remains required.
+## Runtime and data qualifications
 
-## Saved locations
+Python 3.8.20, torch 1.12.1+cu113 and the released weights run on the remote
+RTX 4090. MMCV 1.6.0 replaces the documented 1.5.2; the input wrapper preserves
+the CPU metadata container expected by the original inference code. One exact
+integer-shape operation is patched from `prod` to height × width to avoid the
+old NVRTC/Ada failure; equality passed on 10,003 integer pairs. The complete
+[patch](evidence/compatibility.patch), [digest record](evidence/compatibility.json)
+and [environment](evidence/runtime-versions.txt) are saved. Learned arithmetic,
+weights, geometry, memory and class mapping are unchanged.
 
-- Remote root: `/home/wuyou/stocc_reference`.
-- Original source: `upstream/`.
-- Weight: `downloads/stocc-r50-256x704.pth`.
-- Runtime: `env/`; matching CUDA compiler/runtime: `cuda113/`; `env.sh`.
-- Camera manifests: `camera-acquisition/*/{state.json,files.json}`;
-  `camera-plan.json`; overall completion marker `camera-acquisition/complete.json`.
-- Occupancy provenance: `occ3d-acquisition.json`, `occ3d-label-manifest.json`.
-- Metadata log: `metadata.log`.
-- Strict-load record: `strict-checkpoint.json`.
-- Local source archive:
-  `/home/frank/semantic_livo_runtime/stocc-reference-20261031/source.tar.gz`.
-- Reproduction tooling/protocol: [../../tools/stocc_reference](../../tools/stocc_reference).
+Original nuScenes camera archives were authenticated against current official
+S3 ETags. The Occ3D labels came from a pinned public transfer mirror, with
+archive SHA-256 and complete local label audits; the mirror was **not separately
+matched against the authors' inaccessible Google Drive archive**. Source URLs,
+archive and per-file manifests are retained in [evidence/](evidence/).
 
-Large images, label archives and model weights are not added to Git. The official
-checkpoint is recoverable from its public release URL with the saved digest.
+The first full run used two CPU loading workers, originally selected to share
+resources with TASeg. After reboot, TASeg was no longer running. The run was
+superseded after 564 frames to use eight CPU workers on the otherwise idle
+machine; partial evidence is preserved in [full-validation/](full-validation/).
+This is a loader-throughput adjustment, not a model or metric change. All
+564 overlapping frames have identical tokens and prediction hashes
+([parity record](evidence/loader-parity.json)).
 
-## Resume sequence
+## What this step establishes
 
-1. Reconnect to the existing server and inspect GPU, RAM, disk and TASeg state.
-   Do not start a second training run. No local-GPU fallback is authorized.
-2. Confirm which files survived shutdown and whether any acquisition process
-   still exists. Sync the latest tools from this branch: the local evaluator was
-   refined after SSH disconnected, so the remote copy may be older.
-3. Resume missing camera archives only. Retain the completed manifests and
-   verify all 36,114 validation images and 6,019 label tokens. Reuse cached
-   weights and environment after checking their digests/versions.
-4. Inspect `metadata.log` and the original generated
-   `bevdetv4-nuscenes_infos_global_val.pkl`; complete the original generator if
-   needed. Keep its original scene bounds and pose protocol.
-5. Run a complete available scene with the official `_flicker_eval.py` config.
-   Confirm the runtime metadata-container adapter, sequence order, memory
-   population, predicted flow, class mapping, memory use and finite outputs.
-   The custom evaluation wrapper has only passed syntax checks so far.
-6. Run the short evaluation-label intervention and compare prediction hashes;
-   then run all 150 scenes with official metrics. Report actual scores and any
-   discrepancy with the published 42.13% mIoU / 8.68% mSTCV.
+Full-set success requires 6,019 unique saved predictions in 150 complete scenes,
+official occupancy mIoU and mSTCV, independent exported-prediction/mIoU checks,
+and measured runtime. The full evaluation remains incomplete until those
+artifacts exist.
 
-The full task remains incomplete until actual inference/evaluation succeeds.
-No result is attributed to our memory mechanism, PTv3 or instance association.
+Even a successful official-system validation is not an ablation proving the
+memory contribution, an instance-tracking result, or an improvement to our
+PTv3 pipeline. mSTCV is the official aligned-voxel variability measure, with
+GT-speed exclusion and GT-change correction; it is not object identity or
+object recovery. Official supplied poses and full-scene memory bounds are
+retained. Model-call timing includes official metric bookkeeping and excludes
+data loading; total throughput also includes prediction export and evaluation.
+
+## Reproducibility and saved evidence
+
+- [Protocol and tools](../../tools/stocc_reference/README.md).
+- [Smoke outputs and evaluator snapshot](smoke-0003/).
+- [Evaluation-label intervention](label-control-0003/) and
+  [label-plus-speed intervention](label-and-speed-control-0003/).
+- [Data audit](evidence/data-audit.json), [metadata audit](evidence/metadata-audit.json),
+  [source provenance](evidence/source.json), and [checkpoint provenance](evidence/model-download.json).
+- [Pre-shutdown observations](observed_preflight.json) are historical, superseded
+  by the post-restart audits above.
+
+Remote working root: `/home/wuyou/stocc_reference`. Images, labels, weights and
+full voxel prediction files stay on the remote disk. Git contains tooling,
+configuration, digests, controls and aggregate evidence only.

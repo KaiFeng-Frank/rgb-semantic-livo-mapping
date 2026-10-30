@@ -43,7 +43,9 @@ def aria2_transfer(key, part, size, etag, record, state_path):
     if not mirrors:
         raise OSError('No mirror has the expected official object identity')
     inputs = state_path.parent/'aria2-sources.txt'
-    inputs.write_text('\t'.join(mirrors)+'\n')
+    # aria2 input-file entries need per-entry output options; global --out is
+    # not applied to these entries. Keep the partial name/control bitmap paired.
+    inputs.write_text('\t'.join(mirrors)+'\n  out='+part.name+'\n  dir='+str(DOWNLOADS)+'\n')
     command = ['aria2c', '--no-conf=true', '--continue=true', '--always-resume=true',
                '--auto-file-renaming=false', '--allow-overwrite=false', '--file-allocation=none',
                '--split=8', '--max-connection-per-server=8', '--min-split-size=16M',
@@ -102,6 +104,15 @@ def checksum_file(path):
 def acquire(key, expected_md5, record, state_path):
     name = PurePosixPath(key).name
     final, part = DOWNLOADS / name, DOWNLOADS / (name + '.part')
+    final_control = Path(str(final)+'.aria2')
+    if final_control.exists():
+        # An interrupted legacy transfer may have the final name and full
+        # apparent size while still sparse. The aria2 bitmap is authoritative.
+        if part.exists() or Path(str(part)+'.aria2').exists():
+            raise RuntimeError('Ambiguous partial archives; inspect before resuming')
+        if final.exists():
+            final.replace(part)
+        final_control.replace(Path(str(part)+'.aria2'))
     previous_etag = record.get('etag')
     for attempt in range(1, 31):
         url = BASES[(attempt - 1) % len(BASES)] + key

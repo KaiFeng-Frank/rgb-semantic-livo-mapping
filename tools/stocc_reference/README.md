@@ -24,7 +24,13 @@ point-semantic/instance-memory pipeline.
 All bulk downloads and inference run directly on the remote host at
 `/home/wuyou/stocc_reference`. The local GPU remains unused. Existing TASeg
 training is not stopped or modified. The inference CUDA allocator is initially
-capped at 40% of GPU memory; timing while sharing the GPU is not isolated latency.
+capped at 40% of GPU memory when sharing with TASeg. After the user shut down and
+restarted the host, TASeg was no longer running (checkpoint epoch 33 survives).
+ST-Occ's resumed validation uses a 75% allocator cap on the idle GPU. The final
+full run uses eight CPU loader workers (the initial shared-resource setting of
+two workers was CPU-bound); overlapping predictions are checked for equality.
+No training
+job is automatically restarted as part of this inference task.
 
 `acquire_cameras.py` obtains the original nuScenes keyframe archives from
 Motional S3/CloudFront, verifies the S3 multipart ETag and records SHA-256,
@@ -54,23 +60,36 @@ that index. This is recorded explicitly, not counted as a method change.
 The evaluation wrapper preserves the original CPU metadata `DataContainer`
 expected by ST-Occ's `forward_test`; MMCV 1.6 would otherwise unwrap it during
 single-GPU scatter. Measurement tensors still use ordinary MMCV CUDA transfer.
-This compatibility adapter remains subject to the real inference smoke test.
+This compatibility adapter passed the real 40-frame inference smoke test.
 
-`env.sh` selects only the dedicated environment and matching user-space NVIDIA
-driver library. No system driver, local VPN, or running TASeg environment is
-changed. The official BEV pooling extension is compiled for sm_86, supported by
+One source-level runtime compatibility patch is needed on the 4090:
+`spatial_shapes.prod(1)` triggers the known torch 1.12/cu113 NVRTC architecture
+failure ([PyTorch issue 87595](https://github.com/pytorch/pytorch/issues/87595)).
+`apply_compat.py` replaces this two-integer product by explicit height × width,
+checks exact CPU/CUDA equality on 10,003 pairs, and saves the source diff and
+before/after digests. No learned arithmetic or weights are changed.
+
+`env.sh` selects only the dedicated environment and matching NVIDIA driver
+library. After reboot, the host's kernel and system libraries both report
+595.99.02; the old 595.84 user-space workaround is no longer used. No system
+driver, local VPN, or running TASeg environment is changed. The official BEV
+pooling extension is compiled for sm_86, supported by
 the 4090, because CUDA 11.3 predates sm_89.
 
 ## Execution and acceptance
 
-1. Run the original `tools/create_data_bevdet.py`, with `max_sweeps=0` as in its
-   entry point, to produce the official global validation metadata.
+1. Run `prepare_validation.py`: it calls the original converter,
+   `add_ann_adj_info` and `add_global_info`, with `max_sweeps=0`. It selects only
+   the 6,019 validation frames and reuses one full SDK instance; transforms,
+   annotations and scene bounds use the original source functions. A proxy
+   limits iteration without changing the SDK's full token lookup tables.
+   It emits an early complete-scene smoke subset, then full validation metadata.
 2. Strictly load every checkpoint key; no missing/unexpected keys are accepted.
 3. Use a complete available scene for the smoke test. Check six-camera input,
    increasing frame indices, memory population, predicted-flow production,
    finite class IDs, resource use and official metrics.
 4. On a short fixed sequence, repeat with evaluation labels replaced by a
-   constant. Prediction hashes should remain unchanged. This diagnoses the
+   constant and GT speed replaced by zero. Prediction hashes should remain unchanged. This diagnoses the
    boundary between ground-truth metric bookkeeping and inference, not accuracy.
 5. Run the full 150-scene validation with the official sampler, pipeline, model
    and metrics. Require exactly 6,019 unique frames in scene order. Report mIoU,
@@ -81,17 +100,30 @@ Example, after sourcing `env.sh`:
 
 ```bash
 cd /home/wuyou/stocc_reference/upstream
+python /home/wuyou/stocc_reference/apply_compat.py
+python /home/wuyou/stocc_reference/prepare_validation.py
+python /home/wuyou/stocc_reference/verify_data.py
 python /home/wuyou/stocc_reference/evaluate.py \
-  --scenes scene-0003 --out /home/wuyou/stocc_reference/runs/smoke
+  --ann-file data/nuscenes/stocc-smoke-nuscenes_infos_global_val.pkl \
+  --memory-fraction .75 --out /home/wuyou/stocc_reference/runs/smoke
 python /home/wuyou/stocc_reference/evaluate.py \
-  --out /home/wuyou/stocc_reference/runs/full-validation
+  --memory-fraction .75 --workers 8 \
+  --out /home/wuyou/stocc_reference/runs/full-validation-workers8
+python /home/wuyou/stocc_reference/audit_results.py \
+  --run /home/wuyou/stocc_reference/runs/full-validation-workers8 \
+  --data-root /home/wuyou/stocc_reference/data/nuscenes \
+  --metadata /home/wuyou/stocc_reference/data/nuscenes/bevdetv4-nuscenes_infos_global_val.pkl
 ```
 
-The wrapper enables the official `flickering_cnt` metric bookkeeping, preserves
-the source model, and saves each uint8 prediction separately. It records
+The wrapper uses official flicker bookkeeping, the source model plus the exact
+integer-shape compatibility patch, and saves each uint8 prediction separately. It records
 CUDA-synchronized model-call time and data-loading time separately. No training,
 architecture adaptation, additional initialization weights or GT flow inputs
 are used. Enabling metric bookkeeping is included in the measured call cost.
+The CPU audit reloads exported predictions, verifies every prediction digest and
+scene/index boundary, and recomputes the camera-masked confusion matrix without
+calling the official evaluator. Its class IoUs and 17-class mean must match the
+rounded official results. It does not independently recompute mSTCV.
 
 ## Interpretation boundaries
 

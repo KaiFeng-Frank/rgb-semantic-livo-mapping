@@ -1,13 +1,14 @@
 """Instrument the pinned official ST-Occ model, pipeline, sampler and metrics.
 
 No training or prediction-layer changes. Batch size one preserves scene memory.
-The CUDA allocator cap protects the existing TASeg run; concurrent latency is
-reported as such and is not a claim of isolated real-time performance.
+The CUDA allocator cap and loader count are explicit runtime settings. Timing
+includes official metric bookkeeping and is not pure deployment latency.
 """
 import argparse
 import hashlib
 import json
 import logging
+import math
 import os
 from pathlib import Path
 import pickle
@@ -55,17 +56,27 @@ def plain(value):
 
 def save(path, value):
     temp = path.with_suffix('.tmp')
-    temp.write_text(json.dumps(value, indent=2, default=plain))
+    temp.write_text(json.dumps(json_safe(value), indent=2, allow_nan=False))
     temp.replace(path)
+
+
+def json_safe(value):
+    if isinstance(value, dict): return {k:json_safe(v) for k,v in value.items()}
+    if isinstance(value, (list,tuple)): return [json_safe(v) for v in value]
+    if isinstance(value, (np.ndarray,np.generic,Path)): return json_safe(plain(value))
+    if isinstance(value,float) and not math.isfinite(value): return None
+    return value
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--out', required=True, type=Path)
     parser.add_argument('--scenes', nargs='*')
+    parser.add_argument('--ann-file', help='Optional official-format metadata subset for an early smoke test.')
     parser.add_argument('--max-frames', type=int)
     parser.add_argument('--memory-fraction', type=float, default=.40)
-    parser.add_argument('--label-control', action='store_true', help='Replace evaluation labels by a constant, testing prediction independence; scores are invalid in this diagnostic.')
+    parser.add_argument('--workers', type=int, default=2)
+    parser.add_argument('--label-control', action='store_true', help='Replace evaluation occupancy by a constant and GT speed by zero; tests prediction independence, not metric quality.')
     args = parser.parse_args()
     os.chdir(ROOT/'upstream')
     args.out = args.out.resolve()
@@ -73,11 +84,15 @@ def main():
     (args.out/'predictions').mkdir(exist_ok=True)
     if (args.out/'progress.json').exists():
         raise RuntimeError('Use a fresh output directory, preserving previous evidence.')
+    source=Path(__file__).read_bytes()
+    (args.out/'evaluate-as-run.py').write_bytes(source)
     state = dict(status='starting', started=time.time(), arguments=vars(args),
                  source_commit='1633f62e2e6677a5fa474905977acfeca4e7819e',
                  checkpoint_sha256='68491f55a2208fad884e3b664d0e34b8311688376380f7722e30cac6bde5ffa0',
-                 timing_scope='CUDA-synchronized model call; includes official metric bookkeeping, excludes data load. GPU shared with TASeg if still running.',
+                 timing_scope='CUDA-synchronized model call; includes official metric bookkeeping, excludes data load. Resource concurrency is recorded separately.',
                  label_control=args.label_control)
+    state['evaluator_sha256']=hashlib.sha256(source).hexdigest()
+    state['compatibility']=json.loads((ROOT/'compatibility.json').read_text())
     save(args.out/'progress.json',state)
     try:
         torch.set_num_threads(2)
@@ -89,6 +104,8 @@ def main():
         cfg.model.train_cfg=None
         cfg.model.flickering_cnt=True
         cfg.data.test.test_mode=True
+        if args.ann_file:
+            cfg.data.test.ann_file=args.ann_file
         if args.scenes:
             with open(cfg.data.test.ann_file, 'rb') as stream:
                 infos=pickle.load(stream)
@@ -99,7 +116,7 @@ def main():
             cfg.data.test.ann_file=str(subset)
         cfg.dump(str(args.out/'effective-config.py'))
         dataset=build_dataset(cfg.data.test)
-        loader=build_dataloader(dataset, samples_per_gpu=1,workers_per_gpu=2,
+        loader=build_dataloader(dataset, samples_per_gpu=1,workers_per_gpu=args.workers,
                                 dist=False,shuffle=False,seed=0,
                                 runner_type=cfg.data.test_dataloader.runner_type)
         model=build_model(cfg.model,test_cfg=cfg.get('test_cfg'))
@@ -124,6 +141,8 @@ def main():
                 # Evaluation-only label branch; changing it must not change predictions.
                 for tensor in data['gt_occupancy']:
                     tensor.fill_(1)
+                for tensor in data.get('gt_speed_map',[]):
+                    tensor.zero_()
             torch.cuda.synchronize();t0=time.perf_counter()
             with torch.no_grad(): output=model(return_loss=False,rescale=True,**data)
             torch.cuda.synchronize();model_ms=(time.perf_counter()-t0)*1000
