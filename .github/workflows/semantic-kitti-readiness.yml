@@ -3,7 +3,7 @@ name: SemanticKITTI full-taxonomy readiness diagnostic
 on:
   workflow_dispatch:
   push:
-    branches: [codex/semantickitti-19]
+    branches: [semantickitti-19]
     paths:
       - tools/semantic_kitti/**
       - .github/workflows/semantic-kitti-readiness.yml
