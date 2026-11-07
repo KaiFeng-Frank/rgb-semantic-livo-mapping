@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "sequence": "07",
+  "frames": 1101,
+  "prediction_arm": "armB0_s1_07_r1",
+  "geometry_source": "results/loop_closure_seq07_20261024",
+  "corrected_trajectory_sha256": "6e88ab4b6a4e854c9f7af18e40ba22d5976c2040c58bae4cbd048a83737d2f81",
+  "voxel_m": 0.2,
+  "confidence_gate": 0.5,
+  "visit_half_window_frames": 100,
+  "minimum_visit_gap_frames": 300,
+  "roi_radius_m": 35.0,
+  "vote_group_frames": 5,
+  "range_scale_m": 20.0,
+  "minimum_groups_per_visit": 2,
+  "maximum_centroid_distance_m": 0.2,
+  "minimum_winner_share": 0.65,
+  "minimum_winner_margin": 0.2,
+  "protected_source_classes": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "heldout_stride": 10,
+  "heldout_remainder": 5,
+  "arms": [
+    "ordinary",
+    "group_balanced",
+    "revisit_balanced"
+  ],
+  "primary_endpoint": "heldout_roi, full common-9 mean IoU, abstentions counted as wrong",
+  "selection": "Freeze before scoring. One sequence, one parameter set, no GT selection. Same corrected geometry and prediction files in every arm.",
+  "semantics": "Top-1 confidence evidence, not reconstructed full softmax probabilities. One mean vote per scan/voxel, one per five-frame group, then one per visit with range reliability.",
+  "causality": "Offline semantic mapping with future revisits; not single-scan or causal online inference.",
+  "training": "No training, no pseudo-label feedback from evaluated sequence, no changes to B0 weights."
+}
