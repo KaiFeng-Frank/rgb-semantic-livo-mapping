@@ -1,0 +1,22 @@
+Starting >>> livox_ros_driver2
+Finished <<< livox_ros_driver2 [0.21s]
+Starting >>> sophus
+Finished <<< sophus [0.03s]
+Starting >>> vikit_common
+Finished <<< vikit_common [0.06s]
+Starting >>> vikit_ros
+Finished <<< vikit_ros [0.05s]
+Starting >>> fast_livo
+--- stderr: fast_livo
+In file included from /home/frank/semantic_livo_backend_ws/install/vikit_ros/include/vikit/camera_loader.h:20,
+                 from /home/frank/semantic_livo_backend_ws/src/fast_livo/include/LIVMapper.h:28,
+                 from /home/frank/semantic_livo_backend_ws/src/fast_livo/src/LIVMapper.cpp:13:
+/home/frank/semantic_livo_backend_ws/install/vikit_ros/include/vikit/params_helper.h: In function ‘T vk::getParam(const std::string&, const std::string&, const T&)’:
+/home/frank/semantic_livo_backend_ws/install/vikit_ros/include/vikit/params_helper.h:35:48: warning: ignoring attributes on template argument ‘int (*)(FILE*)’ [-Wignored-attributes]
+   35 |         std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(command.c_str(), "r"), pclose);
+      |                                                ^
+---
+Finished <<< fast_livo [28.7s]
+
+Summary: 5 packages finished [29.1s]
+  1 package had stderr output: fast_livo

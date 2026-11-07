@@ -37,6 +37,13 @@ official KITTI ATE falls **0.837 → 0.557 m** and out-of-frustum map mIoU-9 ris
 [Paired results and revisit figures](results/loop_closure_seq07_20261024/README.md)
 · [backend and protocol](docs/offline_loop_closure.md).
 
+**Online geometric backend:** the same geometric loop model now has an isolated
+iSAM2 worker, sensor-time LIVO keyframes, bounded queues, corrected live poses
+and a rebuilt geometric keyframe map. The frozen semantic frontend is retained
+separately. [Build, launch and scope](docs/online_loop_backend.md)
+· [interface and optimizer checks](results/online_backend_20261025/README.md).
+This is not yet a joint visual/IMU graph or sustained driving realtime result.
+
 The [revisit semantic-refinement experiment](docs/revisit_semantics.md) keeps that
 geometry fixed and compares ordinary fusion, temporal-group balancing and
 per-visit balancing, including held-out semantic observations.

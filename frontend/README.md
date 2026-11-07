@@ -16,6 +16,14 @@ offline LiDAR/visual refinement; [OKVIS2-X](https://github.com/ethz-mrl/OKVIS2-X
 is a candidate for joint visual/inertial/LiDAR optimization. Neither has been
 integrated or validated in this repository.
 
+An optional [online geometric backend](../docs/online_loop_backend.md) now wraps
+this Pose3 model in a separate process with iSAM2, bounded keyframe queues,
+sensor-time frontend exports, corrected poses and a rebuilt geometric keyframe
+map. It remains a geometric graph driven by LIVO odometry; it does not add joint
+visual/IMU graph factors or automatically correct the dense semantic map. Build
+in a separate workspace with `bootstrap.py --online-backend`. The frozen failed
+semantic estimator and its original patch are retained unchanged.
+
 The enhanced profile is `frontend/enhanced.yaml`. It adds three independently
 switchable paths: ego-compensated motion decisions in geometric residuals and map
 admission, image-space motion masks in the actual photometric update, and a
