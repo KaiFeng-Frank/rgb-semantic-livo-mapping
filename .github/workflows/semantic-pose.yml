@@ -2,7 +2,7 @@ name: Controlled semantic contribution to pose
 
 on:
   push:
-    branches: [codex/semantic-pose]
+    branches: [semantic-pose]
     paths: ['tools/semantic_pose/**', '.github/workflows/semantic-pose.yml']
   workflow_dispatch:
 

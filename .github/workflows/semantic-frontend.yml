@@ -2,7 +2,7 @@ name: Semantic frontend integration
 
 on:
   push:
-    branches: [codex/semantic-frontend]
+    branches: [semantic-frontend]
     paths: ['frontend/**', '.github/workflows/semantic-frontend.yml', 'src/ptv3_loader_verified.py']
   workflow_dispatch:
     inputs:
