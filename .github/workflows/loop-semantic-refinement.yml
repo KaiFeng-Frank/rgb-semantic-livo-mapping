@@ -2,7 +2,7 @@ name: Fixed-geometry revisit semantic refinement
 
 on:
   push:
-    branches: [codex/loop-semantic-refinement]
+    branches: [loop-semantic-refinement]
     paths: ['tools/loop_semantics/**', '.github/workflows/loop-semantic-refinement.yml']
   workflow_dispatch:
 
