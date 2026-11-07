@@ -1,0 +1,5243 @@
+{
+  "unit": "object-frame observations; seeds reuse the same scans and are not independent samples",
+  "policies": {
+    "legacy": {
+      "train": {
+        "counts": {
+          "all_object_harms": [
+            8,
+            8,
+            12
+          ],
+          "all_object_repairs": [
+            5,
+            18,
+            8
+          ],
+          "anchor_current_wrong": [
+            467,
+            473,
+            475
+          ],
+          "anchor_opportunities": [
+            90,
+            96,
+            94
+          ],
+          "bounded_reachable_error_points_enough_for_recognition": [
+            69,
+            94,
+            65
+          ],
+          "clean_existing_gt_repairs": [
+            4,
+            16,
+            7
+          ],
+          "confidence_error_points_enough_for_recognition": [
+            74,
+            99,
+            72
+          ],
+          "current_wrong": [
+            456,
+            479,
+            438
+          ],
+          "no_error_query_due_budget": [
+            0,
+            0,
+            0
+          ],
+          "no_error_query_due_confidence": [
+            3,
+            4,
+            4
+          ],
+          "observations": [
+            2424,
+            2424,
+            2424
+          ],
+          "opportunities": [
+            89,
+            116,
+            84
+          ],
+          "opportunity_anchor_already_correct": [
+            2,
+            23,
+            2
+          ],
+          "queried_error_points_enough_for_recognition": [
+            74,
+            99,
+            72
+          ],
+          "retrieved_any_but_not_repaired": [
+            44,
+            47,
+            38
+          ],
+          "retrieved_enough_but_not_repaired": [
+            22,
+            26,
+            15
+          ],
+          "retrieved_good_error_points_enough_for_recognition": [
+            26,
+            42,
+            22
+          ],
+          "supplied_enough_but_not_repaired": [
+            32,
+            34,
+            24
+          ],
+          "supplied_good_error_points_enough_for_recognition": [
+            37,
+            52,
+            35
+          ],
+          "supply_raw_gt_repairs": [
+            5,
+            18,
+            11
+          ],
+          "temporal_repairs": [
+            4,
+            16,
+            7
+          ]
+        },
+        "funnel": {
+          "raw_identity": [
+            89,
+            116,
+            84
+          ],
+          "stored": [
+            89,
+            116,
+            84
+          ],
+          "readable": [
+            88,
+            115,
+            83
+          ],
+          "queried": [
+            85,
+            111,
+            79
+          ],
+          "local": [
+            56,
+            72,
+            55
+          ],
+          "shortlist": [
+            56,
+            72,
+            55
+          ],
+          "retrieved": [
+            48,
+            63,
+            45
+          ],
+          "repaired": [
+            4,
+            16,
+            7
+          ]
+        },
+        "mean_miou": {
+          "baseline": 70.76319867917051,
+          "anchor": 73.76984785684438,
+          "current_extra": 75.33848721778973,
+          "no_history": 75.32223367469241,
+          "temporal": 75.46885752531048
+        },
+        "seed_details": [
+          {
+            "seed": 0,
+            "distinct_opportunity_instances": 50,
+            "by_class": {
+              "0": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              },
+              "3": {
+                "object_frames": 63,
+                "distinct_instances": 34
+              },
+              "5": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              },
+              "6": {
+                "object_frames": 5,
+                "distinct_instances": 4
+              },
+              "8": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              },
+              "9": {
+                "object_frames": 18,
+                "distinct_instances": 9
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0062",
+                "frame": 6,
+                "stamp": 1533153248.297555,
+                "instance": "296e7cae172b412a8759854d1fd8569a",
+                "label": 3,
+                "points": 13,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 7,
+                "raw_good_voxels": 11,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 11,
+                "queried_error_points": 11,
+                "bounded_reachable_error_points": 10,
+                "local_good_error_points": 11,
+                "shortlist_good_error_points": 11,
+                "retrieved_good_error_points": 11,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 11,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0177",
+                "frame": 18,
+                "stamp": 1532662678.048929,
+                "instance": "6d7956f0f9df4eb39ad6a2f5508785ee",
+                "label": 6,
+                "points": 19,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 10,
+                "raw_good_voxels": 16,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 19,
+                "queried_error_points": 19,
+                "bounded_reachable_error_points": 18,
+                "local_good_error_points": 12,
+                "shortlist_good_error_points": 12,
+                "retrieved_good_error_points": 12,
+                "correct_history_attention_mass_mean": 0.8576411604881287,
+                "supplied_good_error_points": 12,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0242",
+                "frame": 16,
+                "stamp": 1534867040.898205,
+                "instance": "24bff2d1a0d14ce683f9d47808218974",
+                "label": 9,
+                "points": 28,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.39285714285714285,
+                  "current_extra": 0.35714285714285715,
+                  "no_history": 0.39285714285714285,
+                  "temporal": 0.39285714285714285,
+                  "clean_existing_gt": 0.39285714285714285,
+                  "supply_raw_gt": 0.39285714285714285
+                },
+                "previous_raw_correct_fraction": 0.9387755102040817,
+                "points_needed": 3,
+                "raw_good_voxels": 46,
+                "stored_good_voxels": 10,
+                "readable_good_voxels": 10,
+                "confidence_error_points": 17,
+                "queried_error_points": 17,
+                "bounded_reachable_error_points": 17,
+                "local_good_error_points": 5,
+                "shortlist_good_error_points": 5,
+                "retrieved_good_error_points": 4,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 9,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9142666067928076
+          },
+          {
+            "seed": 1,
+            "distinct_opportunity_instances": 56,
+            "by_class": {
+              "0": {
+                "object_frames": 3,
+                "distinct_instances": 1
+              },
+              "3": {
+                "object_frames": 87,
+                "distinct_instances": 40
+              },
+              "5": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              },
+              "6": {
+                "object_frames": 5,
+                "distinct_instances": 4
+              },
+              "9": {
+                "object_frames": 20,
+                "distinct_instances": 10
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0242",
+                "frame": 5,
+                "stamp": 1534867035.448746,
+                "instance": "3b3d505130b4436dbfc8d25cba79add1",
+                "label": 0,
+                "points": 6,
+                "correct_fraction": {
+                  "baseline": 0.3333333333333333,
+                  "anchor": 0.6666666666666666,
+                  "current_extra": 0.3333333333333333,
+                  "no_history": 0.3333333333333333,
+                  "temporal": 0.3333333333333333,
+                  "clean_existing_gt": 0.3333333333333333,
+                  "supply_raw_gt": 0.3333333333333333
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 1,
+                "raw_good_voxels": 5,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 4,
+                "queried_error_points": 4,
+                "bounded_reachable_error_points": 4,
+                "local_good_error_points": 2,
+                "shortlist_good_error_points": 2,
+                "retrieved_good_error_points": 2,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 3,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0062",
+                "frame": 5,
+                "stamp": 1533153247.797689,
+                "instance": "296e7cae172b412a8759854d1fd8569a",
+                "label": 3,
+                "points": 11,
+                "correct_fraction": {
+                  "baseline": 1.0,
+                  "anchor": 1.0,
+                  "current_extra": 1.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.5,
+                "points_needed": 6,
+                "raw_good_voxels": 5,
+                "stored_good_voxels": 4,
+                "readable_good_voxels": 4,
+                "confidence_error_points": 11,
+                "queried_error_points": 11,
+                "bounded_reachable_error_points": 11,
+                "local_good_error_points": 11,
+                "shortlist_good_error_points": 11,
+                "retrieved_good_error_points": 11,
+                "correct_history_attention_mass_mean": 0.46904146671295166,
+                "supplied_good_error_points": 11,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0177",
+                "frame": 18,
+                "stamp": 1532662678.048929,
+                "instance": "6d7956f0f9df4eb39ad6a2f5508785ee",
+                "label": 6,
+                "points": 19,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 10,
+                "raw_good_voxels": 16,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 19,
+                "queried_error_points": 19,
+                "bounded_reachable_error_points": 18,
+                "local_good_error_points": 12,
+                "shortlist_good_error_points": 12,
+                "retrieved_good_error_points": 12,
+                "correct_history_attention_mass_mean": 0.8576411604881287,
+                "supplied_good_error_points": 12,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9310294593137408
+          },
+          {
+            "seed": 2,
+            "distinct_opportunity_instances": 48,
+            "by_class": {
+              "0": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              },
+              "3": {
+                "object_frames": 61,
+                "distinct_instances": 33
+              },
+              "5": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              },
+              "6": {
+                "object_frames": 5,
+                "distinct_instances": 4
+              },
+              "9": {
+                "object_frames": 16,
+                "distinct_instances": 9
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0062",
+                "frame": 8,
+                "stamp": 1533153249.29786,
+                "instance": "296e7cae172b412a8759854d1fd8569a",
+                "label": 3,
+                "points": 19,
+                "correct_fraction": {
+                  "baseline": 1.0,
+                  "anchor": 0.2631578947368421,
+                  "current_extra": 0.3157894736842105,
+                  "no_history": 0.3157894736842105,
+                  "temporal": 0.3157894736842105,
+                  "clean_existing_gt": 0.3157894736842105,
+                  "supply_raw_gt": 0.3157894736842105
+                },
+                "previous_raw_correct_fraction": 0.6,
+                "points_needed": 4,
+                "raw_good_voxels": 9,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 13,
+                "queried_error_points": 13,
+                "bounded_reachable_error_points": 13,
+                "local_good_error_points": 10,
+                "shortlist_good_error_points": 10,
+                "retrieved_good_error_points": 10,
+                "correct_history_attention_mass_mean": 0.578708291053772,
+                "supplied_good_error_points": 13,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0177",
+                "frame": 18,
+                "stamp": 1532662678.048929,
+                "instance": "6d7956f0f9df4eb39ad6a2f5508785ee",
+                "label": 6,
+                "points": 19,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.15789473684210525,
+                  "temporal": 0.2631578947368421,
+                  "clean_existing_gt": 0.42105263157894735,
+                  "supply_raw_gt": 0.3684210526315789
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 7,
+                "raw_good_voxels": 16,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 16,
+                "queried_error_points": 16,
+                "bounded_reachable_error_points": 15,
+                "local_good_error_points": 10,
+                "shortlist_good_error_points": 10,
+                "retrieved_good_error_points": 10,
+                "correct_history_attention_mass_mean": 0.7733731269836426,
+                "supplied_good_error_points": 10,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9600939194361369
+          }
+        ]
+      },
+      "dev": {
+        "counts": {
+          "all_object_harms": [
+            30,
+            21,
+            46
+          ],
+          "all_object_repairs": [
+            15,
+            31,
+            36
+          ],
+          "anchor_current_wrong": [
+            606,
+            642,
+            634
+          ],
+          "anchor_opportunities": [
+            154,
+            169,
+            168
+          ],
+          "bounded_reachable_error_points_enough_for_recognition": [
+            145,
+            186,
+            154
+          ],
+          "clean_existing_gt_repairs": [
+            9,
+            26,
+            29
+          ],
+          "confidence_error_points_enough_for_recognition": [
+            148,
+            190,
+            157
+          ],
+          "current_wrong": [
+            420,
+            463,
+            417
+          ],
+          "no_error_query_due_budget": [
+            0,
+            0,
+            0
+          ],
+          "no_error_query_due_confidence": [
+            0,
+            3,
+            3
+          ],
+          "observations": [
+            2003,
+            2003,
+            2003
+          ],
+          "opportunities": [
+            158,
+            202,
+            166
+          ],
+          "opportunity_anchor_already_correct": [
+            15,
+            48,
+            20
+          ],
+          "queried_error_points_enough_for_recognition": [
+            148,
+            190,
+            157
+          ],
+          "retrieved_any_but_not_repaired": [
+            134,
+            160,
+            124
+          ],
+          "retrieved_enough_but_not_repaired": [
+            112,
+            136,
+            100
+          ],
+          "retrieved_good_error_points_enough_for_recognition": [
+            121,
+            162,
+            128
+          ],
+          "supplied_enough_but_not_repaired": [
+            129,
+            153,
+            118
+          ],
+          "supplied_good_error_points_enough_for_recognition": [
+            139,
+            179,
+            145
+          ],
+          "supply_raw_gt_repairs": [
+            10,
+            26,
+            27
+          ],
+          "temporal_repairs": [
+            9,
+            26,
+            28
+          ]
+        },
+        "funnel": {
+          "raw_identity": [
+            158,
+            202,
+            166
+          ],
+          "stored": [
+            158,
+            202,
+            166
+          ],
+          "readable": [
+            158,
+            202,
+            166
+          ],
+          "queried": [
+            158,
+            199,
+            163
+          ],
+          "local": [
+            148,
+            191,
+            157
+          ],
+          "shortlist": [
+            148,
+            191,
+            157
+          ],
+          "retrieved": [
+            143,
+            186,
+            152
+          ],
+          "repaired": [
+            9,
+            26,
+            28
+          ]
+        },
+        "mean_miou": {
+          "baseline": 48.38222917516013,
+          "anchor": 49.397841275858354,
+          "current_extra": 53.670299958625456,
+          "no_history": 53.52408430878187,
+          "temporal": 53.68836513097358
+        },
+        "seed_details": [
+          {
+            "seed": 0,
+            "distinct_opportunity_instances": 50,
+            "by_class": {
+              "0": {
+                "object_frames": 26,
+                "distinct_instances": 8
+              },
+              "3": {
+                "object_frames": 121,
+                "distinct_instances": 37
+              },
+              "4": {
+                "object_frames": 4,
+                "distinct_instances": 1
+              },
+              "6": {
+                "object_frames": 5,
+                "distinct_instances": 2
+              },
+              "9": {
+                "object_frames": 2,
+                "distinct_instances": 2
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0514",
+                "frame": 8,
+                "stamp": 1535489905.696695,
+                "instance": "6c2ebb34bfc148f4a2e5f84439582096",
+                "label": 0,
+                "points": 12,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.75,
+                  "current_extra": 0.3333333333333333,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 6,
+                "raw_good_voxels": 12,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 12,
+                "queried_error_points": 12,
+                "bounded_reachable_error_points": 12,
+                "local_good_error_points": 9,
+                "shortlist_good_error_points": 9,
+                "retrieved_good_error_points": 9,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 12,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0440",
+                "frame": 1,
+                "stamp": 1537286907.949127,
+                "instance": "625ca0fcac29466cbe8940be9bf827ac",
+                "label": 3,
+                "points": 16,
+                "correct_fraction": {
+                  "baseline": 0.5625,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.125,
+                  "clean_existing_gt": 0.125,
+                  "supply_raw_gt": 0.0625
+                },
+                "previous_raw_correct_fraction": 0.9473684210526315,
+                "points_needed": 8,
+                "raw_good_voxels": 18,
+                "stored_good_voxels": 8,
+                "readable_good_voxels": 8,
+                "confidence_error_points": 16,
+                "queried_error_points": 16,
+                "bounded_reachable_error_points": 16,
+                "local_good_error_points": 14,
+                "shortlist_good_error_points": 14,
+                "retrieved_good_error_points": 14,
+                "correct_history_attention_mass_mean": 0.869057834148407,
+                "supplied_good_error_points": 16,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0440",
+                "frame": 3,
+                "stamp": 1537286908.94943,
+                "instance": "77e0eb250a08480fb1734c80cea479c0",
+                "label": 4,
+                "points": 522,
+                "correct_fraction": {
+                  "baseline": 0.41762452107279696,
+                  "anchor": 0.1839080459770115,
+                  "current_extra": 0.17624521072796934,
+                  "no_history": 0.17624521072796934,
+                  "temporal": 0.17624521072796934,
+                  "clean_existing_gt": 0.17624521072796934,
+                  "supply_raw_gt": 0.17624521072796934
+                },
+                "previous_raw_correct_fraction": 0.9897750511247444,
+                "points_needed": 169,
+                "raw_good_voxels": 484,
+                "stored_good_voxels": 22,
+                "readable_good_voxels": 22,
+                "confidence_error_points": 430,
+                "queried_error_points": 430,
+                "bounded_reachable_error_points": 430,
+                "local_good_error_points": 430,
+                "shortlist_good_error_points": 430,
+                "retrieved_good_error_points": 175,
+                "correct_history_attention_mass_mean": 0.9930636286735535,
+                "supplied_good_error_points": 407,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0514",
+                "frame": 20,
+                "stamp": 1535489911.796425,
+                "instance": "e25f1fe87c284c84ad0e6b50a4021978",
+                "label": 6,
+                "points": 5,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 3,
+                "raw_good_voxels": 5,
+                "stored_good_voxels": 1,
+                "readable_good_voxels": 1,
+                "confidence_error_points": 5,
+                "queried_error_points": 5,
+                "bounded_reachable_error_points": 5,
+                "local_good_error_points": 5,
+                "shortlist_good_error_points": 5,
+                "retrieved_good_error_points": 5,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 5,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9477619711127314
+          },
+          {
+            "seed": 1,
+            "distinct_opportunity_instances": 52,
+            "by_class": {
+              "0": {
+                "object_frames": 26,
+                "distinct_instances": 8
+              },
+              "3": {
+                "object_frames": 167,
+                "distinct_instances": 40
+              },
+              "4": {
+                "object_frames": 5,
+                "distinct_instances": 1
+              },
+              "6": {
+                "object_frames": 3,
+                "distinct_instances": 2
+              },
+              "9": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0514",
+                "frame": 6,
+                "stamp": 1535489904.796471,
+                "instance": "6c2ebb34bfc148f4a2e5f84439582096",
+                "label": 0,
+                "points": 12,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.75,
+                  "current_extra": 0.0,
+                  "no_history": 0.16666666666666666,
+                  "temporal": 0.16666666666666666,
+                  "clean_existing_gt": 0.16666666666666666,
+                  "supply_raw_gt": 0.16666666666666666
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 4,
+                "raw_good_voxels": 11,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 10,
+                "queried_error_points": 10,
+                "bounded_reachable_error_points": 10,
+                "local_good_error_points": 9,
+                "shortlist_good_error_points": 9,
+                "retrieved_good_error_points": 9,
+                "correct_history_attention_mass_mean": 0.8871926069259644,
+                "supplied_good_error_points": 10,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0440",
+                "frame": 1,
+                "stamp": 1537286907.949127,
+                "instance": "625ca0fcac29466cbe8940be9bf827ac",
+                "label": 3,
+                "points": 16,
+                "correct_fraction": {
+                  "baseline": 0.5625,
+                  "anchor": 0.0,
+                  "current_extra": 0.0625,
+                  "no_history": 0.0,
+                  "temporal": 0.125,
+                  "clean_existing_gt": 0.25,
+                  "supply_raw_gt": 0.0625
+                },
+                "previous_raw_correct_fraction": 0.9473684210526315,
+                "points_needed": 8,
+                "raw_good_voxels": 18,
+                "stored_good_voxels": 8,
+                "readable_good_voxels": 8,
+                "confidence_error_points": 16,
+                "queried_error_points": 16,
+                "bounded_reachable_error_points": 16,
+                "local_good_error_points": 14,
+                "shortlist_good_error_points": 14,
+                "retrieved_good_error_points": 14,
+                "correct_history_attention_mass_mean": 0.869057834148407,
+                "supplied_good_error_points": 16,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0440",
+                "frame": 1,
+                "stamp": 1537286907.949127,
+                "instance": "77e0eb250a08480fb1734c80cea479c0",
+                "label": 4,
+                "points": 419,
+                "correct_fraction": {
+                  "baseline": 0.9809069212410502,
+                  "anchor": 0.7136038186157518,
+                  "current_extra": 0.4486873508353222,
+                  "no_history": 0.4486873508353222,
+                  "temporal": 0.4486873508353222,
+                  "clean_existing_gt": 0.4486873508353222,
+                  "supply_raw_gt": 0.4486873508353222
+                },
+                "previous_raw_correct_fraction": 0.9787234042553191,
+                "points_needed": 22,
+                "raw_good_voxels": 322,
+                "stored_good_voxels": 23,
+                "readable_good_voxels": 23,
+                "confidence_error_points": 231,
+                "queried_error_points": 231,
+                "bounded_reachable_error_points": 228,
+                "local_good_error_points": 228,
+                "shortlist_good_error_points": 228,
+                "retrieved_good_error_points": 228,
+                "correct_history_attention_mass_mean": 0.8943679332733154,
+                "supplied_good_error_points": 231,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9482032538101237
+          },
+          {
+            "seed": 2,
+            "distinct_opportunity_instances": 51,
+            "by_class": {
+              "0": {
+                "object_frames": 17,
+                "distinct_instances": 8
+              },
+              "3": {
+                "object_frames": 140,
+                "distinct_instances": 39
+              },
+              "4": {
+                "object_frames": 5,
+                "distinct_instances": 1
+              },
+              "6": {
+                "object_frames": 3,
+                "distinct_instances": 2
+              },
+              "9": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0514",
+                "frame": 12,
+                "stamp": 1535489907.796845,
+                "instance": "836915b4bab54b6caad4d631f36c1fed",
+                "label": 0,
+                "points": 16,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 8,
+                "raw_good_voxels": 15,
+                "stored_good_voxels": 5,
+                "readable_good_voxels": 5,
+                "confidence_error_points": 16,
+                "queried_error_points": 16,
+                "bounded_reachable_error_points": 16,
+                "local_good_error_points": 11,
+                "shortlist_good_error_points": 11,
+                "retrieved_good_error_points": 11,
+                "correct_history_attention_mass_mean": 0.9085106253623962,
+                "supplied_good_error_points": 16,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0440",
+                "frame": 1,
+                "stamp": 1537286907.949127,
+                "instance": "a143b88d952c474dbbcb8af6529bbe2e",
+                "label": 3,
+                "points": 49,
+                "correct_fraction": {
+                  "baseline": 1.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.02040816326530612,
+                  "clean_existing_gt": 0.02040816326530612,
+                  "supply_raw_gt": 0.02040816326530612
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 25,
+                "raw_good_voxels": 43,
+                "stored_good_voxels": 9,
+                "readable_good_voxels": 9,
+                "confidence_error_points": 49,
+                "queried_error_points": 49,
+                "bounded_reachable_error_points": 49,
+                "local_good_error_points": 49,
+                "shortlist_good_error_points": 49,
+                "retrieved_good_error_points": 49,
+                "correct_history_attention_mass_mean": 0.9810711741447449,
+                "supplied_good_error_points": 49,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0440",
+                "frame": 1,
+                "stamp": 1537286907.949127,
+                "instance": "77e0eb250a08480fb1734c80cea479c0",
+                "label": 4,
+                "points": 419,
+                "correct_fraction": {
+                  "baseline": 0.9809069212410502,
+                  "anchor": 0.954653937947494,
+                  "current_extra": 0.45346062052505964,
+                  "no_history": 0.45346062052505964,
+                  "temporal": 0.45346062052505964,
+                  "clean_existing_gt": 0.45346062052505964,
+                  "supply_raw_gt": 0.45346062052505964
+                },
+                "previous_raw_correct_fraction": 0.9787234042553191,
+                "points_needed": 20,
+                "raw_good_voxels": 322,
+                "stored_good_voxels": 23,
+                "readable_good_voxels": 23,
+                "confidence_error_points": 229,
+                "queried_error_points": 229,
+                "bounded_reachable_error_points": 228,
+                "local_good_error_points": 229,
+                "shortlist_good_error_points": 229,
+                "retrieved_good_error_points": 229,
+                "correct_history_attention_mass_mean": 0.8844814300537109,
+                "supplied_good_error_points": 229,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9478683354038941
+          }
+        ]
+      },
+      "regression": {
+        "counts": {
+          "all_object_harms": [
+            19,
+            18,
+            15
+          ],
+          "all_object_repairs": [
+            16,
+            21,
+            30
+          ],
+          "anchor_current_wrong": [
+            857,
+            885,
+            895
+          ],
+          "anchor_opportunities": [
+            131,
+            137,
+            144
+          ],
+          "bounded_reachable_error_points_enough_for_recognition": [
+            116,
+            124,
+            110
+          ],
+          "clean_existing_gt_repairs": [
+            12,
+            19,
+            22
+          ],
+          "confidence_error_points_enough_for_recognition": [
+            131,
+            139,
+            124
+          ],
+          "current_wrong": [
+            867,
+            878,
+            859
+          ],
+          "no_error_query_due_budget": [
+            2,
+            3,
+            2
+          ],
+          "no_error_query_due_confidence": [
+            4,
+            8,
+            5
+          ],
+          "observations": [
+            3021,
+            3021,
+            3021
+          ],
+          "opportunities": [
+            144,
+            154,
+            136
+          ],
+          "opportunity_anchor_already_correct": [
+            16,
+            27,
+            8
+          ],
+          "queried_error_points_enough_for_recognition": [
+            129,
+            136,
+            123
+          ],
+          "retrieved_any_but_not_repaired": [
+            70,
+            73,
+            53
+          ],
+          "retrieved_enough_but_not_repaired": [
+            46,
+            50,
+            32
+          ],
+          "retrieved_good_error_points_enough_for_recognition": [
+            57,
+            67,
+            55
+          ],
+          "supplied_enough_but_not_repaired": [
+            57,
+            58,
+            45
+          ],
+          "supplied_good_error_points_enough_for_recognition": [
+            69,
+            79,
+            68
+          ],
+          "supply_raw_gt_repairs": [
+            12,
+            21,
+            23
+          ],
+          "temporal_repairs": [
+            11,
+            17,
+            23
+          ]
+        },
+        "funnel": {
+          "raw_identity": [
+            144,
+            154,
+            136
+          ],
+          "stored": [
+            143,
+            153,
+            135
+          ],
+          "readable": [
+            143,
+            153,
+            135
+          ],
+          "queried": [
+            137,
+            142,
+            128
+          ],
+          "local": [
+            109,
+            115,
+            104
+          ],
+          "shortlist": [
+            109,
+            115,
+            104
+          ],
+          "retrieved": [
+            81,
+            90,
+            76
+          ],
+          "repaired": [
+            11,
+            17,
+            23
+          ]
+        },
+        "mean_miou": {
+          "baseline": 48.234809834333184,
+          "anchor": 49.87016633057663,
+          "current_extra": 51.76949130982178,
+          "no_history": 51.77667682322842,
+          "temporal": 51.86872797172125
+        },
+        "seed_details": [
+          {
+            "seed": 0,
+            "distinct_opportunity_instances": 80,
+            "by_class": {
+              "0": {
+                "object_frames": 13,
+                "distinct_instances": 11
+              },
+              "2": {
+                "object_frames": 5,
+                "distinct_instances": 3
+              },
+              "3": {
+                "object_frames": 85,
+                "distinct_instances": 42
+              },
+              "5": {
+                "object_frames": 2,
+                "distinct_instances": 1
+              },
+              "6": {
+                "object_frames": 30,
+                "distinct_instances": 18
+              },
+              "9": {
+                "object_frames": 9,
+                "distinct_instances": 5
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0904",
+                "frame": 22,
+                "stamp": 1537297956.648926,
+                "instance": "2bc988e4fc2c45cfbf6ef727a6fb5a72",
+                "label": 0,
+                "points": 9,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.1111111111111111,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 5,
+                "raw_good_voxels": 34,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 9,
+                "queried_error_points": 9,
+                "bounded_reachable_error_points": 9,
+                "local_good_error_points": 6,
+                "shortlist_good_error_points": 6,
+                "retrieved_good_error_points": 5,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 9,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0556",
+                "frame": 27,
+                "stamp": 1535729913.398471,
+                "instance": "50a0c3f07a7c4484877d1f74954f9b0d",
+                "label": 2,
+                "points": 202,
+                "correct_fraction": {
+                  "baseline": 0.3564356435643564,
+                  "anchor": 0.3564356435643564,
+                  "current_extra": 0.3564356435643564,
+                  "no_history": 0.3564356435643564,
+                  "temporal": 0.3564356435643564,
+                  "clean_existing_gt": 0.3564356435643564,
+                  "supply_raw_gt": 0.3564356435643564
+                },
+                "previous_raw_correct_fraction": 0.8202247191011236,
+                "points_needed": 29,
+                "raw_good_voxels": 146,
+                "stored_good_voxels": 27,
+                "readable_good_voxels": 27,
+                "confidence_error_points": 64,
+                "queried_error_points": 64,
+                "bounded_reachable_error_points": 64,
+                "local_good_error_points": 64,
+                "shortlist_good_error_points": 64,
+                "retrieved_good_error_points": 64,
+                "correct_history_attention_mass_mean": 0.9817548990249634,
+                "supplied_good_error_points": 64,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0268",
+                "frame": 28,
+                "stamp": 1531281453.899931,
+                "instance": "1688a1c375974adba7a4f4124d7b14f5",
+                "label": 3,
+                "points": 7,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.7777777777777778,
+                "points_needed": 4,
+                "raw_good_voxels": 7,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 7,
+                "queried_error_points": 7,
+                "bounded_reachable_error_points": 7,
+                "local_good_error_points": 4,
+                "shortlist_good_error_points": 4,
+                "retrieved_good_error_points": 4,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 6,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0268",
+                "frame": 8,
+                "stamp": 1531281443.900217,
+                "instance": "d0675246bf354b14a6618086c2968d73",
+                "label": 6,
+                "points": 11,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 6,
+                "raw_good_voxels": 15,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 11,
+                "queried_error_points": 11,
+                "bounded_reachable_error_points": 10,
+                "local_good_error_points": 9,
+                "shortlist_good_error_points": 9,
+                "retrieved_good_error_points": 9,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 9,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0794",
+                "frame": 38,
+                "stamp": 1538448723.197909,
+                "instance": "6dbe1febbb52476fa4879745ce84cf40",
+                "label": 9,
+                "points": 75,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.8350515463917526,
+                "points_needed": 38,
+                "raw_good_voxels": 81,
+                "stored_good_voxels": 15,
+                "readable_good_voxels": 15,
+                "confidence_error_points": 75,
+                "queried_error_points": 75,
+                "bounded_reachable_error_points": 75,
+                "local_good_error_points": 58,
+                "shortlist_good_error_points": 58,
+                "retrieved_good_error_points": 58,
+                "correct_history_attention_mass_mean": 0.8792634010314941,
+                "supplied_good_error_points": 66,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9162071174309577
+          },
+          {
+            "seed": 1,
+            "distinct_opportunity_instances": 82,
+            "by_class": {
+              "0": {
+                "object_frames": 11,
+                "distinct_instances": 9
+              },
+              "2": {
+                "object_frames": 5,
+                "distinct_instances": 3
+              },
+              "3": {
+                "object_frames": 102,
+                "distinct_instances": 47
+              },
+              "5": {
+                "object_frames": 2,
+                "distinct_instances": 1
+              },
+              "6": {
+                "object_frames": 27,
+                "distinct_instances": 17
+              },
+              "9": {
+                "object_frames": 7,
+                "distinct_instances": 5
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0904",
+                "frame": 14,
+                "stamp": 1537297952.648775,
+                "instance": "ccd9d826370348c386535d89f7d29a7a",
+                "label": 0,
+                "points": 10,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.1,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 5,
+                "raw_good_voxels": 30,
+                "stored_good_voxels": 4,
+                "readable_good_voxels": 4,
+                "confidence_error_points": 10,
+                "queried_error_points": 10,
+                "bounded_reachable_error_points": 10,
+                "local_good_error_points": 7,
+                "shortlist_good_error_points": 7,
+                "retrieved_good_error_points": 7,
+                "correct_history_attention_mass_mean": 0.8979274034500122,
+                "supplied_good_error_points": 10,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0556",
+                "frame": 27,
+                "stamp": 1535729913.398471,
+                "instance": "50a0c3f07a7c4484877d1f74954f9b0d",
+                "label": 2,
+                "points": 202,
+                "correct_fraction": {
+                  "baseline": 0.3564356435643564,
+                  "anchor": 0.3564356435643564,
+                  "current_extra": 0.3564356435643564,
+                  "no_history": 0.3564356435643564,
+                  "temporal": 0.3564356435643564,
+                  "clean_existing_gt": 0.3564356435643564,
+                  "supply_raw_gt": 0.3564356435643564
+                },
+                "previous_raw_correct_fraction": 0.8202247191011236,
+                "points_needed": 29,
+                "raw_good_voxels": 146,
+                "stored_good_voxels": 27,
+                "readable_good_voxels": 27,
+                "confidence_error_points": 64,
+                "queried_error_points": 64,
+                "bounded_reachable_error_points": 64,
+                "local_good_error_points": 64,
+                "shortlist_good_error_points": 64,
+                "retrieved_good_error_points": 64,
+                "correct_history_attention_mass_mean": 0.9817548990249634,
+                "supplied_good_error_points": 64,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0268",
+                "frame": 13,
+                "stamp": 1531281446.448802,
+                "instance": "365c72b0746443808c14c343fec412f2",
+                "label": 3,
+                "points": 11,
+                "correct_fraction": {
+                  "baseline": 0.8181818181818182,
+                  "anchor": 0.7272727272727273,
+                  "current_extra": 0.5454545454545454,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 6,
+                "raw_good_voxels": 15,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 11,
+                "queried_error_points": 11,
+                "bounded_reachable_error_points": 11,
+                "local_good_error_points": 10,
+                "shortlist_good_error_points": 10,
+                "retrieved_good_error_points": 10,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 11,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0625",
+                "frame": 14,
+                "stamp": 1537295820.899801,
+                "instance": "bc2db9f65b3949faa3d8f62507978b9b",
+                "label": 6,
+                "points": 5,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.2,
+                  "no_history": 0.4,
+                  "temporal": 0.4,
+                  "clean_existing_gt": 0.4,
+                  "supply_raw_gt": 0.4
+                },
+                "previous_raw_correct_fraction": 0.6,
+                "points_needed": 1,
+                "raw_good_voxels": 3,
+                "stored_good_voxels": 1,
+                "readable_good_voxels": 1,
+                "confidence_error_points": 2,
+                "queried_error_points": 2,
+                "bounded_reachable_error_points": 2,
+                "local_good_error_points": 2,
+                "shortlist_good_error_points": 2,
+                "retrieved_good_error_points": 2,
+                "correct_history_attention_mass_mean": 0.3318980634212494,
+                "supplied_good_error_points": 2,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.934699637360043
+          },
+          {
+            "seed": 2,
+            "distinct_opportunity_instances": 81,
+            "by_class": {
+              "0": {
+                "object_frames": 12,
+                "distinct_instances": 10
+              },
+              "2": {
+                "object_frames": 5,
+                "distinct_instances": 3
+              },
+              "3": {
+                "object_frames": 84,
+                "distinct_instances": 46
+              },
+              "5": {
+                "object_frames": 2,
+                "distinct_instances": 1
+              },
+              "6": {
+                "object_frames": 24,
+                "distinct_instances": 16
+              },
+              "9": {
+                "object_frames": 9,
+                "distinct_instances": 5
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0904",
+                "frame": 22,
+                "stamp": 1537297956.648926,
+                "instance": "2bc988e4fc2c45cfbf6ef727a6fb5a72",
+                "label": 0,
+                "points": 9,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.1111111111111111
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 5,
+                "raw_good_voxels": 34,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 9,
+                "queried_error_points": 9,
+                "bounded_reachable_error_points": 9,
+                "local_good_error_points": 6,
+                "shortlist_good_error_points": 6,
+                "retrieved_good_error_points": 5,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 9,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0556",
+                "frame": 27,
+                "stamp": 1535729913.398471,
+                "instance": "50a0c3f07a7c4484877d1f74954f9b0d",
+                "label": 2,
+                "points": 202,
+                "correct_fraction": {
+                  "baseline": 0.3564356435643564,
+                  "anchor": 0.3564356435643564,
+                  "current_extra": 0.3564356435643564,
+                  "no_history": 0.3564356435643564,
+                  "temporal": 0.3564356435643564,
+                  "clean_existing_gt": 0.3564356435643564,
+                  "supply_raw_gt": 0.3564356435643564
+                },
+                "previous_raw_correct_fraction": 0.8202247191011236,
+                "points_needed": 29,
+                "raw_good_voxels": 146,
+                "stored_good_voxels": 27,
+                "readable_good_voxels": 27,
+                "confidence_error_points": 64,
+                "queried_error_points": 64,
+                "bounded_reachable_error_points": 64,
+                "local_good_error_points": 64,
+                "shortlist_good_error_points": 64,
+                "retrieved_good_error_points": 64,
+                "correct_history_attention_mass_mean": 0.9817548990249634,
+                "supplied_good_error_points": 64,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0268",
+                "frame": 28,
+                "stamp": 1531281453.899931,
+                "instance": "1688a1c375974adba7a4f4124d7b14f5",
+                "label": 3,
+                "points": 7,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.7777777777777778,
+                "points_needed": 4,
+                "raw_good_voxels": 7,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 7,
+                "queried_error_points": 7,
+                "bounded_reachable_error_points": 4,
+                "local_good_error_points": 4,
+                "shortlist_good_error_points": 4,
+                "retrieved_good_error_points": 4,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 6,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0268",
+                "frame": 30,
+                "stamp": 1531281454.900814,
+                "instance": "a4b431d8f7df43348a02712cb2920be8",
+                "label": 6,
+                "points": 16,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.7333333333333333,
+                "points_needed": 8,
+                "raw_good_voxels": 11,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 16,
+                "queried_error_points": 15,
+                "bounded_reachable_error_points": 10,
+                "local_good_error_points": 8,
+                "shortlist_good_error_points": 8,
+                "retrieved_good_error_points": 8,
+                "correct_history_attention_mass_mean": 0.6053729057312012,
+                "supplied_good_error_points": 11,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0794",
+                "frame": 38,
+                "stamp": 1538448723.197909,
+                "instance": "6dbe1febbb52476fa4879745ce84cf40",
+                "label": 9,
+                "points": 75,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.8350515463917526,
+                "points_needed": 38,
+                "raw_good_voxels": 81,
+                "stored_good_voxels": 15,
+                "readable_good_voxels": 15,
+                "confidence_error_points": 75,
+                "queried_error_points": 75,
+                "bounded_reachable_error_points": 75,
+                "local_good_error_points": 58,
+                "shortlist_good_error_points": 58,
+                "retrieved_good_error_points": 58,
+                "correct_history_attention_mass_mean": 0.8792634010314941,
+                "supplied_good_error_points": 66,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9073476097301433
+          }
+        ]
+      },
+      "confirmation": {
+        "counts": {
+          "all_object_harms": [
+            34,
+            35,
+            41
+          ],
+          "all_object_repairs": [
+            30,
+            54,
+            49
+          ],
+          "anchor_current_wrong": [
+            1285,
+            1336,
+            1353
+          ],
+          "anchor_opportunities": [
+            288,
+            295,
+            321
+          ],
+          "bounded_reachable_error_points_enough_for_recognition": [
+            231,
+            284,
+            238
+          ],
+          "clean_existing_gt_repairs": [
+            27,
+            53,
+            44
+          ],
+          "confidence_error_points_enough_for_recognition": [
+            254,
+            309,
+            270
+          ],
+          "current_wrong": [
+            1284,
+            1369,
+            1278
+          ],
+          "no_error_query_due_budget": [
+            3,
+            4,
+            4
+          ],
+          "no_error_query_due_confidence": [
+            6,
+            10,
+            6
+          ],
+          "observations": [
+            3891,
+            3891,
+            3891
+          ],
+          "opportunities": [
+            287,
+            349,
+            295
+          ],
+          "opportunity_anchor_already_correct": [
+            10,
+            68,
+            25
+          ],
+          "queried_error_points_enough_for_recognition": [
+            246,
+            301,
+            261
+          ],
+          "retrieved_any_but_not_repaired": [
+            188,
+            229,
+            181
+          ],
+          "retrieved_enough_but_not_repaired": [
+            140,
+            185,
+            138
+          ],
+          "retrieved_good_error_points_enough_for_recognition": [
+            166,
+            235,
+            180
+          ],
+          "supplied_enough_but_not_repaired": [
+            170,
+            203,
+            163
+          ],
+          "supplied_good_error_points_enough_for_recognition": [
+            198,
+            258,
+            207
+          ],
+          "supply_raw_gt_repairs": [
+            28,
+            55,
+            44
+          ],
+          "temporal_repairs": [
+            26,
+            50,
+            42
+          ]
+        },
+        "funnel": {
+          "raw_identity": [
+            287,
+            349,
+            295
+          ],
+          "stored": [
+            276,
+            340,
+            286
+          ],
+          "readable": [
+            276,
+            340,
+            286
+          ],
+          "queried": [
+            269,
+            329,
+            279
+          ],
+          "local": [
+            253,
+            316,
+            262
+          ],
+          "shortlist": [
+            253,
+            316,
+            262
+          ],
+          "retrieved": [
+            214,
+            279,
+            223
+          ],
+          "repaired": [
+            26,
+            50,
+            42
+          ]
+        },
+        "mean_miou": {
+          "baseline": 54.328799242159356,
+          "anchor": 54.908227055452166,
+          "current_extra": 56.92895565035741,
+          "no_history": 56.740559508775846,
+          "temporal": 56.87023295828637
+        },
+        "seed_details": [
+          {
+            "seed": 0,
+            "distinct_opportunity_instances": 106,
+            "by_class": {
+              "2": {
+                "object_frames": 15,
+                "distinct_instances": 5
+              },
+              "3": {
+                "object_frames": 185,
+                "distinct_instances": 54
+              },
+              "5": {
+                "object_frames": 10,
+                "distinct_instances": 5
+              },
+              "6": {
+                "object_frames": 58,
+                "distinct_instances": 28
+              },
+              "8": {
+                "object_frames": 7,
+                "distinct_instances": 4
+              },
+              "9": {
+                "object_frames": 12,
+                "distinct_instances": 10
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0221",
+                "frame": 4,
+                "stamp": 1531713371.399951,
+                "instance": "339dc1ff75964fc98e74c3af906cec7e",
+                "label": 2,
+                "points": 245,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.02040816326530612,
+                  "current_extra": 0.02040816326530612,
+                  "no_history": 0.00816326530612245,
+                  "temporal": 0.02040816326530612,
+                  "clean_existing_gt": 0.02040816326530612,
+                  "supply_raw_gt": 0.02040816326530612
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 121,
+                "raw_good_voxels": 205,
+                "stored_good_voxels": 27,
+                "readable_good_voxels": 27,
+                "confidence_error_points": 222,
+                "queried_error_points": 222,
+                "bounded_reachable_error_points": 212,
+                "local_good_error_points": 210,
+                "shortlist_good_error_points": 210,
+                "retrieved_good_error_points": 147,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 164,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0221",
+                "frame": 37,
+                "stamp": 1531713387.898389,
+                "instance": "1a3d437369e6465ab8dabcf11d94e0a1",
+                "label": 3,
+                "points": 6,
+                "correct_fraction": {
+                  "baseline": 0.8333333333333334,
+                  "anchor": 0.3333333333333333,
+                  "current_extra": 0.3333333333333333,
+                  "no_history": 0.3333333333333333,
+                  "temporal": 0.3333333333333333,
+                  "clean_existing_gt": 0.3333333333333333,
+                  "supply_raw_gt": 0.3333333333333333
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 1,
+                "raw_good_voxels": 9,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 4,
+                "queried_error_points": 4,
+                "bounded_reachable_error_points": 4,
+                "local_good_error_points": 3,
+                "shortlist_good_error_points": 3,
+                "retrieved_good_error_points": 3,
+                "correct_history_attention_mass_mean": 0.5089187622070312,
+                "supplied_good_error_points": 3,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0916",
+                "frame": 12,
+                "stamp": 1538984239.448435,
+                "instance": "6b7d108921ef4e87a46443fbc7f8f59e",
+                "label": 5,
+                "points": 29,
+                "correct_fraction": {
+                  "baseline": 0.6551724137931034,
+                  "anchor": 0.10344827586206896,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.8181818181818182,
+                "points_needed": 15,
+                "raw_good_voxels": 27,
+                "stored_good_voxels": 4,
+                "readable_good_voxels": 4,
+                "confidence_error_points": 29,
+                "queried_error_points": 29,
+                "bounded_reachable_error_points": 29,
+                "local_good_error_points": 29,
+                "shortlist_good_error_points": 29,
+                "retrieved_good_error_points": 29,
+                "correct_history_attention_mass_mean": 0.88730388879776,
+                "supplied_good_error_points": 29,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0552",
+                "frame": 35,
+                "stamp": 1535489153.448816,
+                "instance": "6f9092db8d0d4dd4a1b3b8135c91e182",
+                "label": 6,
+                "points": 6,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.75,
+                "points_needed": 3,
+                "raw_good_voxels": 6,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 6,
+                "queried_error_points": 6,
+                "bounded_reachable_error_points": 6,
+                "local_good_error_points": 4,
+                "shortlist_good_error_points": 4,
+                "retrieved_good_error_points": 3,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 3,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0329",
+                "frame": 1,
+                "stamp": 1534967832.897561,
+                "instance": "dea249c1678e4a3f932d17a3a40ea37c",
+                "label": 8,
+                "points": 16,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.25,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 8,
+                "raw_good_voxels": 28,
+                "stored_good_voxels": 8,
+                "readable_good_voxels": 8,
+                "confidence_error_points": 16,
+                "queried_error_points": 16,
+                "bounded_reachable_error_points": 16,
+                "local_good_error_points": 16,
+                "shortlist_good_error_points": 16,
+                "retrieved_good_error_points": 16,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 16,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0329",
+                "frame": 23,
+                "stamp": 1534967843.947373,
+                "instance": "4ff747dd2564439e8feea384de576cf2",
+                "label": 9,
+                "points": 23,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.8571428571428571,
+                "points_needed": 12,
+                "raw_good_voxels": 48,
+                "stored_good_voxels": 7,
+                "readable_good_voxels": 7,
+                "confidence_error_points": 23,
+                "queried_error_points": 23,
+                "bounded_reachable_error_points": 23,
+                "local_good_error_points": 23,
+                "shortlist_good_error_points": 23,
+                "retrieved_good_error_points": 21,
+                "correct_history_attention_mass_mean": 0.8281418681144714,
+                "supplied_good_error_points": 23,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9101725572319789
+          },
+          {
+            "seed": 1,
+            "distinct_opportunity_instances": 114,
+            "by_class": {
+              "2": {
+                "object_frames": 15,
+                "distinct_instances": 5
+              },
+              "3": {
+                "object_frames": 253,
+                "distinct_instances": 62
+              },
+              "5": {
+                "object_frames": 10,
+                "distinct_instances": 5
+              },
+              "6": {
+                "object_frames": 50,
+                "distinct_instances": 27
+              },
+              "8": {
+                "object_frames": 7,
+                "distinct_instances": 4
+              },
+              "9": {
+                "object_frames": 14,
+                "distinct_instances": 11
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0221",
+                "frame": 4,
+                "stamp": 1531713371.399951,
+                "instance": "339dc1ff75964fc98e74c3af906cec7e",
+                "label": 2,
+                "points": 245,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.02040816326530612,
+                  "no_history": 0.024489795918367346,
+                  "temporal": 0.024489795918367346,
+                  "clean_existing_gt": 0.024489795918367346,
+                  "supply_raw_gt": 0.024489795918367346
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 117,
+                "raw_good_voxels": 205,
+                "stored_good_voxels": 27,
+                "readable_good_voxels": 27,
+                "confidence_error_points": 219,
+                "queried_error_points": 219,
+                "bounded_reachable_error_points": 207,
+                "local_good_error_points": 207,
+                "shortlist_good_error_points": 207,
+                "retrieved_good_error_points": 143,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 160,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0329",
+                "frame": 1,
+                "stamp": 1534967832.897561,
+                "instance": "f3b4b3f0f07d41e1879b80cee1dc418e",
+                "label": 3,
+                "points": 28,
+                "correct_fraction": {
+                  "baseline": 1.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 14,
+                "raw_good_voxels": 26,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 26,
+                "queried_error_points": 26,
+                "bounded_reachable_error_points": 26,
+                "local_good_error_points": 26,
+                "shortlist_good_error_points": 26,
+                "retrieved_good_error_points": 26,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 26,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0916",
+                "frame": 12,
+                "stamp": 1538984239.448435,
+                "instance": "6b7d108921ef4e87a46443fbc7f8f59e",
+                "label": 5,
+                "points": 29,
+                "correct_fraction": {
+                  "baseline": 0.6551724137931034,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.8181818181818182,
+                "points_needed": 15,
+                "raw_good_voxels": 27,
+                "stored_good_voxels": 4,
+                "readable_good_voxels": 4,
+                "confidence_error_points": 29,
+                "queried_error_points": 29,
+                "bounded_reachable_error_points": 29,
+                "local_good_error_points": 29,
+                "shortlist_good_error_points": 29,
+                "retrieved_good_error_points": 29,
+                "correct_history_attention_mass_mean": 0.8994945287704468,
+                "supplied_good_error_points": 29,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0552",
+                "frame": 35,
+                "stamp": 1535489153.448816,
+                "instance": "6f9092db8d0d4dd4a1b3b8135c91e182",
+                "label": 6,
+                "points": 6,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.75,
+                "points_needed": 3,
+                "raw_good_voxels": 6,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 6,
+                "queried_error_points": 6,
+                "bounded_reachable_error_points": 6,
+                "local_good_error_points": 6,
+                "shortlist_good_error_points": 6,
+                "retrieved_good_error_points": 3,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 4,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0329",
+                "frame": 15,
+                "stamp": 1534967839.947284,
+                "instance": "27c01c1955f4425684ab4d68f3c32faf",
+                "label": 9,
+                "points": 167,
+                "correct_fraction": {
+                  "baseline": 0.011976047904191617,
+                  "anchor": 0.07784431137724551,
+                  "current_extra": 0.19161676646706588,
+                  "no_history": 0.2634730538922156,
+                  "temporal": 0.2754491017964072,
+                  "clean_existing_gt": 0.281437125748503,
+                  "supply_raw_gt": 0.2634730538922156
+                },
+                "previous_raw_correct_fraction": 0.5157894736842106,
+                "points_needed": 40,
+                "raw_good_voxels": 98,
+                "stored_good_voxels": 9,
+                "readable_good_voxels": 9,
+                "confidence_error_points": 123,
+                "queried_error_points": 123,
+                "bounded_reachable_error_points": 123,
+                "local_good_error_points": 48,
+                "shortlist_good_error_points": 48,
+                "retrieved_good_error_points": 48,
+                "correct_history_attention_mass_mean": 0.8262577056884766,
+                "supplied_good_error_points": 61,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9312954831294261
+          },
+          {
+            "seed": 2,
+            "distinct_opportunity_instances": 104,
+            "by_class": {
+              "2": {
+                "object_frames": 15,
+                "distinct_instances": 5
+              },
+              "3": {
+                "object_frames": 202,
+                "distinct_instances": 54
+              },
+              "5": {
+                "object_frames": 10,
+                "distinct_instances": 5
+              },
+              "6": {
+                "object_frames": 48,
+                "distinct_instances": 26
+              },
+              "8": {
+                "object_frames": 6,
+                "distinct_instances": 3
+              },
+              "9": {
+                "object_frames": 14,
+                "distinct_instances": 11
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0221",
+                "frame": 4,
+                "stamp": 1531713371.399951,
+                "instance": "339dc1ff75964fc98e74c3af906cec7e",
+                "label": 2,
+                "points": 245,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 123,
+                "raw_good_voxels": 205,
+                "stored_good_voxels": 27,
+                "readable_good_voxels": 27,
+                "confidence_error_points": 221,
+                "queried_error_points": 221,
+                "bounded_reachable_error_points": 205,
+                "local_good_error_points": 209,
+                "shortlist_good_error_points": 209,
+                "retrieved_good_error_points": 149,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 166,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0221",
+                "frame": 37,
+                "stamp": 1531713387.898389,
+                "instance": "1a3d437369e6465ab8dabcf11d94e0a1",
+                "label": 3,
+                "points": 6,
+                "correct_fraction": {
+                  "baseline": 0.8333333333333334,
+                  "anchor": 0.3333333333333333,
+                  "current_extra": 0.3333333333333333,
+                  "no_history": 0.3333333333333333,
+                  "temporal": 0.3333333333333333,
+                  "clean_existing_gt": 0.3333333333333333,
+                  "supply_raw_gt": 0.3333333333333333
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 1,
+                "raw_good_voxels": 9,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 4,
+                "queried_error_points": 4,
+                "bounded_reachable_error_points": 4,
+                "local_good_error_points": 3,
+                "shortlist_good_error_points": 3,
+                "retrieved_good_error_points": 3,
+                "correct_history_attention_mass_mean": 0.5089187622070312,
+                "supplied_good_error_points": 3,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0916",
+                "frame": 12,
+                "stamp": 1538984239.448435,
+                "instance": "6b7d108921ef4e87a46443fbc7f8f59e",
+                "label": 5,
+                "points": 29,
+                "correct_fraction": {
+                  "baseline": 0.6551724137931034,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.8181818181818182,
+                "points_needed": 15,
+                "raw_good_voxels": 27,
+                "stored_good_voxels": 4,
+                "readable_good_voxels": 4,
+                "confidence_error_points": 29,
+                "queried_error_points": 29,
+                "bounded_reachable_error_points": 29,
+                "local_good_error_points": 29,
+                "shortlist_good_error_points": 29,
+                "retrieved_good_error_points": 29,
+                "correct_history_attention_mass_mean": 0.9177907705307007,
+                "supplied_good_error_points": 29,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0552",
+                "frame": 35,
+                "stamp": 1535489153.448816,
+                "instance": "6f9092db8d0d4dd4a1b3b8135c91e182",
+                "label": 6,
+                "points": 6,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.75,
+                "points_needed": 3,
+                "raw_good_voxels": 6,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 6,
+                "queried_error_points": 6,
+                "bounded_reachable_error_points": 6,
+                "local_good_error_points": 6,
+                "shortlist_good_error_points": 6,
+                "retrieved_good_error_points": 3,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 4,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0329",
+                "frame": 15,
+                "stamp": 1534967839.947284,
+                "instance": "27c01c1955f4425684ab4d68f3c32faf",
+                "label": 9,
+                "points": 167,
+                "correct_fraction": {
+                  "baseline": 0.011976047904191617,
+                  "anchor": 0.20359281437125748,
+                  "current_extra": 0.2155688622754491,
+                  "no_history": 0.46706586826347307,
+                  "temporal": 0.47305389221556887,
+                  "clean_existing_gt": 0.5209580838323353,
+                  "supply_raw_gt": 0.49101796407185627
+                },
+                "previous_raw_correct_fraction": 0.5157894736842106,
+                "points_needed": 6,
+                "raw_good_voxels": 98,
+                "stored_good_voxels": 9,
+                "readable_good_voxels": 9,
+                "confidence_error_points": 89,
+                "queried_error_points": 89,
+                "bounded_reachable_error_points": 89,
+                "local_good_error_points": 17,
+                "shortlist_good_error_points": 17,
+                "retrieved_good_error_points": 17,
+                "correct_history_attention_mass_mean": 0.6032776832580566,
+                "supplied_good_error_points": 27,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9270866433734851
+          }
+        ]
+      }
+    },
+    "all_off": {
+      "train": {
+        "counts": {
+          "all_object_harms": [
+            8,
+            12,
+            10
+          ],
+          "all_object_repairs": [
+            8,
+            27,
+            19
+          ],
+          "anchor_current_wrong": [
+            469,
+            486,
+            499
+          ],
+          "anchor_opportunities": [
+            96,
+            99,
+            112
+          ],
+          "bounded_reachable_error_points_enough_for_recognition": [
+            83,
+            101,
+            79
+          ],
+          "clean_existing_gt_repairs": [
+            6,
+            19,
+            15
+          ],
+          "confidence_error_points_enough_for_recognition": [
+            89,
+            106,
+            86
+          ],
+          "current_wrong": [
+            461,
+            495,
+            451
+          ],
+          "no_error_query_due_budget": [
+            0,
+            0,
+            0
+          ],
+          "no_error_query_due_confidence": [
+            4,
+            9,
+            6
+          ],
+          "observations": [
+            2424,
+            2424,
+            2424
+          ],
+          "opportunities": [
+            100,
+            121,
+            97
+          ],
+          "opportunity_anchor_already_correct": [
+            7,
+            25,
+            6
+          ],
+          "queried_error_points_enough_for_recognition": [
+            89,
+            106,
+            85
+          ],
+          "retrieved_any_but_not_repaired": [
+            51,
+            46,
+            39
+          ],
+          "retrieved_enough_but_not_repaired": [
+            30,
+            30,
+            20
+          ],
+          "retrieved_good_error_points_enough_for_recognition": [
+            36,
+            49,
+            35
+          ],
+          "supplied_enough_but_not_repaired": [
+            33,
+            34,
+            24
+          ],
+          "supplied_good_error_points_enough_for_recognition": [
+            39,
+            53,
+            41
+          ],
+          "supply_raw_gt_repairs": [
+            6,
+            19,
+            17
+          ],
+          "temporal_repairs": [
+            6,
+            19,
+            15
+          ]
+        },
+        "funnel": {
+          "raw_identity": [
+            100,
+            121,
+            97
+          ],
+          "stored": [
+            100,
+            121,
+            97
+          ],
+          "readable": [
+            100,
+            121,
+            97
+          ],
+          "queried": [
+            96,
+            112,
+            91
+          ],
+          "local": [
+            67,
+            76,
+            67
+          ],
+          "shortlist": [
+            67,
+            76,
+            67
+          ],
+          "retrieved": [
+            57,
+            65,
+            54
+          ],
+          "repaired": [
+            6,
+            19,
+            15
+          ]
+        },
+        "mean_miou": {
+          "baseline": 68.99320041188321,
+          "anchor": 72.16538989660637,
+          "current_extra": 73.68765322776834,
+          "no_history": 73.72874085890744,
+          "temporal": 73.88713169515438
+        },
+        "seed_details": [
+          {
+            "seed": 0,
+            "distinct_opportunity_instances": 54,
+            "by_class": {
+              "0": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              },
+              "2": {
+                "object_frames": 2,
+                "distinct_instances": 1
+              },
+              "3": {
+                "object_frames": 75,
+                "distinct_instances": 37
+              },
+              "5": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              },
+              "6": {
+                "object_frames": 5,
+                "distinct_instances": 4
+              },
+              "8": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              },
+              "9": {
+                "object_frames": 15,
+                "distinct_instances": 9
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0242",
+                "frame": 21,
+                "stamp": 1534867043.398635,
+                "instance": "3b3d505130b4436dbfc8d25cba79add1",
+                "label": 0,
+                "points": 6,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.6666666666666666,
+                  "current_extra": 0.3333333333333333,
+                  "no_history": 0.0,
+                  "temporal": 0.16666666666666666,
+                  "clean_existing_gt": 0.16666666666666666,
+                  "supply_raw_gt": 0.3333333333333333
+                },
+                "previous_raw_correct_fraction": 0.8571428571428571,
+                "points_needed": 3,
+                "raw_good_voxels": 6,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 6,
+                "queried_error_points": 6,
+                "bounded_reachable_error_points": 6,
+                "local_good_error_points": 3,
+                "shortlist_good_error_points": 3,
+                "retrieved_good_error_points": 3,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 4,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0062",
+                "frame": 5,
+                "stamp": 1533153247.797689,
+                "instance": "1ff902dcf7ed4ef1952ef98ffe54d109",
+                "label": 3,
+                "points": 17,
+                "correct_fraction": {
+                  "baseline": 0.17647058823529413,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 9,
+                "raw_good_voxels": 17,
+                "stored_good_voxels": 6,
+                "readable_good_voxels": 6,
+                "confidence_error_points": 17,
+                "queried_error_points": 17,
+                "bounded_reachable_error_points": 17,
+                "local_good_error_points": 10,
+                "shortlist_good_error_points": 10,
+                "retrieved_good_error_points": 9,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 12,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0177",
+                "frame": 17,
+                "stamp": 1532662677.549072,
+                "instance": "6d7956f0f9df4eb39ad6a2f5508785ee",
+                "label": 6,
+                "points": 16,
+                "correct_fraction": {
+                  "baseline": 0.75,
+                  "anchor": 0.0,
+                  "current_extra": 0.0625,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 8,
+                "raw_good_voxels": 14,
+                "stored_good_voxels": 5,
+                "readable_good_voxels": 5,
+                "confidence_error_points": 16,
+                "queried_error_points": 16,
+                "bounded_reachable_error_points": 16,
+                "local_good_error_points": 16,
+                "shortlist_good_error_points": 16,
+                "retrieved_good_error_points": 16,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 16,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0242",
+                "frame": 14,
+                "stamp": 1534867039.897864,
+                "instance": "40f087d8d9d74c10ae7dc8a2f34e0df5",
+                "label": 8,
+                "points": 101,
+                "correct_fraction": {
+                  "baseline": 0.0594059405940594,
+                  "anchor": 0.27722772277227725,
+                  "current_extra": 0.297029702970297,
+                  "no_history": 0.27722772277227725,
+                  "temporal": 0.27722772277227725,
+                  "clean_existing_gt": 0.27722772277227725,
+                  "supply_raw_gt": 0.27722772277227725
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 23,
+                "raw_good_voxels": 129,
+                "stored_good_voxels": 24,
+                "readable_good_voxels": 24,
+                "confidence_error_points": 73,
+                "queried_error_points": 73,
+                "bounded_reachable_error_points": 73,
+                "local_good_error_points": 49,
+                "shortlist_good_error_points": 49,
+                "retrieved_good_error_points": 47,
+                "correct_history_attention_mass_mean": 0.975059986114502,
+                "supplied_good_error_points": 50,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9419684451923036
+          },
+          {
+            "seed": 1,
+            "distinct_opportunity_instances": 58,
+            "by_class": {
+              "0": {
+                "object_frames": 2,
+                "distinct_instances": 1
+              },
+              "2": {
+                "object_frames": 2,
+                "distinct_instances": 1
+              },
+              "3": {
+                "object_frames": 95,
+                "distinct_instances": 41
+              },
+              "5": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              },
+              "6": {
+                "object_frames": 4,
+                "distinct_instances": 4
+              },
+              "8": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              },
+              "9": {
+                "object_frames": 16,
+                "distinct_instances": 9
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0242",
+                "frame": 21,
+                "stamp": 1534867043.398635,
+                "instance": "3b3d505130b4436dbfc8d25cba79add1",
+                "label": 0,
+                "points": 6,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.8571428571428571,
+                "points_needed": 3,
+                "raw_good_voxels": 6,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 6,
+                "queried_error_points": 6,
+                "bounded_reachable_error_points": 6,
+                "local_good_error_points": 3,
+                "shortlist_good_error_points": 3,
+                "retrieved_good_error_points": 3,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 4,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0062",
+                "frame": 5,
+                "stamp": 1533153247.797689,
+                "instance": "1ff902dcf7ed4ef1952ef98ffe54d109",
+                "label": 3,
+                "points": 17,
+                "correct_fraction": {
+                  "baseline": 0.17647058823529413,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 9,
+                "raw_good_voxels": 17,
+                "stored_good_voxels": 6,
+                "readable_good_voxels": 6,
+                "confidence_error_points": 17,
+                "queried_error_points": 17,
+                "bounded_reachable_error_points": 17,
+                "local_good_error_points": 10,
+                "shortlist_good_error_points": 10,
+                "retrieved_good_error_points": 9,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 12,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0177",
+                "frame": 18,
+                "stamp": 1532662678.048929,
+                "instance": "6d7956f0f9df4eb39ad6a2f5508785ee",
+                "label": 6,
+                "points": 19,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.75,
+                "points_needed": 10,
+                "raw_good_voxels": 12,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 16,
+                "queried_error_points": 16,
+                "bounded_reachable_error_points": 14,
+                "local_good_error_points": 11,
+                "shortlist_good_error_points": 11,
+                "retrieved_good_error_points": 11,
+                "correct_history_attention_mass_mean": 0.9821459054946899,
+                "supplied_good_error_points": 11,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.934612783560386
+          },
+          {
+            "seed": 2,
+            "distinct_opportunity_instances": 53,
+            "by_class": {
+              "0": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              },
+              "2": {
+                "object_frames": 2,
+                "distinct_instances": 1
+              },
+              "3": {
+                "object_frames": 74,
+                "distinct_instances": 36
+              },
+              "5": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              },
+              "6": {
+                "object_frames": 4,
+                "distinct_instances": 4
+              },
+              "8": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              },
+              "9": {
+                "object_frames": 14,
+                "distinct_instances": 9
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0242",
+                "frame": 21,
+                "stamp": 1534867043.398635,
+                "instance": "3b3d505130b4436dbfc8d25cba79add1",
+                "label": 0,
+                "points": 6,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.16666666666666666,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.16666666666666666,
+                  "clean_existing_gt": 0.16666666666666666,
+                  "supply_raw_gt": 0.3333333333333333
+                },
+                "previous_raw_correct_fraction": 0.8571428571428571,
+                "points_needed": 3,
+                "raw_good_voxels": 6,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 6,
+                "queried_error_points": 6,
+                "bounded_reachable_error_points": 6,
+                "local_good_error_points": 3,
+                "shortlist_good_error_points": 3,
+                "retrieved_good_error_points": 3,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 4,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0062",
+                "frame": 5,
+                "stamp": 1533153247.797689,
+                "instance": "1ff902dcf7ed4ef1952ef98ffe54d109",
+                "label": 3,
+                "points": 17,
+                "correct_fraction": {
+                  "baseline": 0.17647058823529413,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 9,
+                "raw_good_voxels": 17,
+                "stored_good_voxels": 6,
+                "readable_good_voxels": 6,
+                "confidence_error_points": 17,
+                "queried_error_points": 17,
+                "bounded_reachable_error_points": 17,
+                "local_good_error_points": 10,
+                "shortlist_good_error_points": 10,
+                "retrieved_good_error_points": 9,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 12,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0177",
+                "frame": 18,
+                "stamp": 1532662678.048929,
+                "instance": "6d7956f0f9df4eb39ad6a2f5508785ee",
+                "label": 6,
+                "points": 19,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.75,
+                "points_needed": 10,
+                "raw_good_voxels": 12,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 18,
+                "queried_error_points": 18,
+                "bounded_reachable_error_points": 15,
+                "local_good_error_points": 11,
+                "shortlist_good_error_points": 11,
+                "retrieved_good_error_points": 11,
+                "correct_history_attention_mass_mean": 0.9821459054946899,
+                "supplied_good_error_points": 11,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9428795377413431
+          }
+        ]
+      },
+      "dev": {
+        "counts": {
+          "all_object_harms": [
+            23,
+            28,
+            47
+          ],
+          "all_object_repairs": [
+            18,
+            34,
+            31
+          ],
+          "anchor_current_wrong": [
+            593,
+            616,
+            619
+          ],
+          "anchor_opportunities": [
+            149,
+            159,
+            166
+          ],
+          "bounded_reachable_error_points_enough_for_recognition": [
+            136,
+            176,
+            151
+          ],
+          "clean_existing_gt_repairs": [
+            12,
+            27,
+            28
+          ],
+          "confidence_error_points_enough_for_recognition": [
+            139,
+            179,
+            154
+          ],
+          "current_wrong": [
+            396,
+            434,
+            401
+          ],
+          "no_error_query_due_budget": [
+            0,
+            0,
+            0
+          ],
+          "no_error_query_due_confidence": [
+            2,
+            5,
+            5
+          ],
+          "observations": [
+            2003,
+            2003,
+            2003
+          ],
+          "opportunities": [
+            149,
+            195,
+            167
+          ],
+          "opportunity_anchor_already_correct": [
+            14,
+            51,
+            24
+          ],
+          "queried_error_points_enough_for_recognition": [
+            139,
+            179,
+            154
+          ],
+          "retrieved_any_but_not_repaired": [
+            122,
+            150,
+            121
+          ],
+          "retrieved_enough_but_not_repaired": [
+            103,
+            129,
+            102
+          ],
+          "retrieved_good_error_points_enough_for_recognition": [
+            115,
+            156,
+            129
+          ],
+          "supplied_enough_but_not_repaired": [
+            115,
+            140,
+            113
+          ],
+          "supplied_good_error_points_enough_for_recognition": [
+            127,
+            170,
+            142
+          ],
+          "supply_raw_gt_repairs": [
+            12,
+            30,
+            29
+          ],
+          "temporal_repairs": [
+            12,
+            27,
+            27
+          ]
+        },
+        "funnel": {
+          "raw_identity": [
+            149,
+            195,
+            167
+          ],
+          "stored": [
+            149,
+            195,
+            167
+          ],
+          "readable": [
+            149,
+            195,
+            167
+          ],
+          "queried": [
+            147,
+            190,
+            162
+          ],
+          "local": [
+            140,
+            181,
+            152
+          ],
+          "shortlist": [
+            139,
+            181,
+            152
+          ],
+          "retrieved": [
+            134,
+            177,
+            148
+          ],
+          "repaired": [
+            12,
+            27,
+            27
+          ]
+        },
+        "mean_miou": {
+          "baseline": 48.62644043281276,
+          "anchor": 49.941112961598456,
+          "current_extra": 54.4802617131846,
+          "no_history": 54.277659353496496,
+          "temporal": 54.42881397689465
+        },
+        "seed_details": [
+          {
+            "seed": 0,
+            "distinct_opportunity_instances": 50,
+            "by_class": {
+              "0": {
+                "object_frames": 19,
+                "distinct_instances": 6
+              },
+              "3": {
+                "object_frames": 119,
+                "distinct_instances": 40
+              },
+              "4": {
+                "object_frames": 4,
+                "distinct_instances": 1
+              },
+              "6": {
+                "object_frames": 6,
+                "distinct_instances": 2
+              },
+              "9": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0514",
+                "frame": 8,
+                "stamp": 1535489905.696695,
+                "instance": "836915b4bab54b6caad4d631f36c1fed",
+                "label": 0,
+                "points": 18,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 1.0,
+                  "current_extra": 0.6111111111111112,
+                  "no_history": 0.05555555555555555,
+                  "temporal": 0.3333333333333333,
+                  "clean_existing_gt": 0.3333333333333333,
+                  "supply_raw_gt": 0.3888888888888889
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 8,
+                "raw_good_voxels": 15,
+                "stored_good_voxels": 5,
+                "readable_good_voxels": 5,
+                "confidence_error_points": 17,
+                "queried_error_points": 17,
+                "bounded_reachable_error_points": 17,
+                "local_good_error_points": 12,
+                "shortlist_good_error_points": 12,
+                "retrieved_good_error_points": 12,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 15,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0440",
+                "frame": 1,
+                "stamp": 1537286907.949127,
+                "instance": "625ca0fcac29466cbe8940be9bf827ac",
+                "label": 3,
+                "points": 16,
+                "correct_fraction": {
+                  "baseline": 0.5625,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.9473684210526315,
+                "points_needed": 8,
+                "raw_good_voxels": 18,
+                "stored_good_voxels": 8,
+                "readable_good_voxels": 8,
+                "confidence_error_points": 16,
+                "queried_error_points": 16,
+                "bounded_reachable_error_points": 16,
+                "local_good_error_points": 16,
+                "shortlist_good_error_points": 16,
+                "retrieved_good_error_points": 16,
+                "correct_history_attention_mass_mean": 0.88688725233078,
+                "supplied_good_error_points": 16,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0440",
+                "frame": 3,
+                "stamp": 1537286908.94943,
+                "instance": "77e0eb250a08480fb1734c80cea479c0",
+                "label": 4,
+                "points": 522,
+                "correct_fraction": {
+                  "baseline": 0.867816091954023,
+                  "anchor": 0.3716475095785441,
+                  "current_extra": 0.3333333333333333,
+                  "no_history": 0.3333333333333333,
+                  "temporal": 0.3333333333333333,
+                  "clean_existing_gt": 0.3333333333333333,
+                  "supply_raw_gt": 0.3333333333333333
+                },
+                "previous_raw_correct_fraction": 0.9918200408997955,
+                "points_needed": 87,
+                "raw_good_voxels": 485,
+                "stored_good_voxels": 23,
+                "readable_good_voxels": 23,
+                "confidence_error_points": 348,
+                "queried_error_points": 348,
+                "bounded_reachable_error_points": 348,
+                "local_good_error_points": 347,
+                "shortlist_good_error_points": 347,
+                "retrieved_good_error_points": 336,
+                "correct_history_attention_mass_mean": 0.989963710308075,
+                "supplied_good_error_points": 348,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0514",
+                "frame": 5,
+                "stamp": 1535489904.297155,
+                "instance": "c0bce1d996424e1588f293beaae75a9a",
+                "label": 6,
+                "points": 6,
+                "correct_fraction": {
+                  "baseline": 0.6666666666666666,
+                  "anchor": 0.0,
+                  "current_extra": 0.3333333333333333,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 3,
+                "raw_good_voxels": 8,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 6,
+                "queried_error_points": 6,
+                "bounded_reachable_error_points": 6,
+                "local_good_error_points": 5,
+                "shortlist_good_error_points": 5,
+                "retrieved_good_error_points": 5,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 5,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9319911601383295
+          },
+          {
+            "seed": 1,
+            "distinct_opportunity_instances": 52,
+            "by_class": {
+              "0": {
+                "object_frames": 17,
+                "distinct_instances": 6
+              },
+              "3": {
+                "object_frames": 168,
+                "distinct_instances": 41
+              },
+              "4": {
+                "object_frames": 4,
+                "distinct_instances": 1
+              },
+              "6": {
+                "object_frames": 4,
+                "distinct_instances": 2
+              },
+              "9": {
+                "object_frames": 2,
+                "distinct_instances": 2
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0514",
+                "frame": 23,
+                "stamp": 1535489913.447003,
+                "instance": "059c55c42d0f44f09d7636c066386e7f",
+                "label": 0,
+                "points": 7,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 4,
+                "raw_good_voxels": 7,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 7,
+                "queried_error_points": 7,
+                "bounded_reachable_error_points": 7,
+                "local_good_error_points": 6,
+                "shortlist_good_error_points": 6,
+                "retrieved_good_error_points": 5,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 7,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0440",
+                "frame": 1,
+                "stamp": 1537286907.949127,
+                "instance": "625ca0fcac29466cbe8940be9bf827ac",
+                "label": 3,
+                "points": 16,
+                "correct_fraction": {
+                  "baseline": 0.5625,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.125,
+                  "clean_existing_gt": 0.4375,
+                  "supply_raw_gt": 0.4375
+                },
+                "previous_raw_correct_fraction": 0.9473684210526315,
+                "points_needed": 8,
+                "raw_good_voxels": 18,
+                "stored_good_voxels": 8,
+                "readable_good_voxels": 8,
+                "confidence_error_points": 16,
+                "queried_error_points": 16,
+                "bounded_reachable_error_points": 16,
+                "local_good_error_points": 16,
+                "shortlist_good_error_points": 16,
+                "retrieved_good_error_points": 16,
+                "correct_history_attention_mass_mean": 0.88688725233078,
+                "supplied_good_error_points": 16,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0440",
+                "frame": 3,
+                "stamp": 1537286908.94943,
+                "instance": "77e0eb250a08480fb1734c80cea479c0",
+                "label": 4,
+                "points": 522,
+                "correct_fraction": {
+                  "baseline": 0.867816091954023,
+                  "anchor": 0.3103448275862069,
+                  "current_extra": 0.3007662835249042,
+                  "no_history": 0.3007662835249042,
+                  "temporal": 0.3007662835249042,
+                  "clean_existing_gt": 0.3007662835249042,
+                  "supply_raw_gt": 0.3007662835249042
+                },
+                "previous_raw_correct_fraction": 0.9918200408997955,
+                "points_needed": 104,
+                "raw_good_voxels": 485,
+                "stored_good_voxels": 23,
+                "readable_good_voxels": 23,
+                "confidence_error_points": 365,
+                "queried_error_points": 365,
+                "bounded_reachable_error_points": 362,
+                "local_good_error_points": 363,
+                "shortlist_good_error_points": 363,
+                "retrieved_good_error_points": 352,
+                "correct_history_attention_mass_mean": 0.9912768006324768,
+                "supplied_good_error_points": 365,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9240115067716372
+          },
+          {
+            "seed": 2,
+            "distinct_opportunity_instances": 49,
+            "by_class": {
+              "0": {
+                "object_frames": 15,
+                "distinct_instances": 6
+              },
+              "3": {
+                "object_frames": 142,
+                "distinct_instances": 39
+              },
+              "4": {
+                "object_frames": 5,
+                "distinct_instances": 1
+              },
+              "6": {
+                "object_frames": 4,
+                "distinct_instances": 2
+              },
+              "9": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0514",
+                "frame": 23,
+                "stamp": 1535489913.447003,
+                "instance": "059c55c42d0f44f09d7636c066386e7f",
+                "label": 0,
+                "points": 7,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 4,
+                "raw_good_voxels": 7,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 7,
+                "queried_error_points": 7,
+                "bounded_reachable_error_points": 7,
+                "local_good_error_points": 6,
+                "shortlist_good_error_points": 6,
+                "retrieved_good_error_points": 5,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 7,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0440",
+                "frame": 2,
+                "stamp": 1537286908.449001,
+                "instance": "d6c09f47d7f14c33b08a926f5a404000",
+                "label": 3,
+                "points": 7,
+                "correct_fraction": {
+                  "baseline": 1.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 4,
+                "raw_good_voxels": 11,
+                "stored_good_voxels": 4,
+                "readable_good_voxels": 4,
+                "confidence_error_points": 7,
+                "queried_error_points": 7,
+                "bounded_reachable_error_points": 7,
+                "local_good_error_points": 7,
+                "shortlist_good_error_points": 7,
+                "retrieved_good_error_points": 7,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 7,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0440",
+                "frame": 3,
+                "stamp": 1537286908.94943,
+                "instance": "77e0eb250a08480fb1734c80cea479c0",
+                "label": 4,
+                "points": 522,
+                "correct_fraction": {
+                  "baseline": 0.867816091954023,
+                  "anchor": 0.36590038314176243,
+                  "current_extra": 0.31992337164750956,
+                  "no_history": 0.31992337164750956,
+                  "temporal": 0.31992337164750956,
+                  "clean_existing_gt": 0.31992337164750956,
+                  "supply_raw_gt": 0.31992337164750956
+                },
+                "previous_raw_correct_fraction": 0.9918200408997955,
+                "points_needed": 94,
+                "raw_good_voxels": 485,
+                "stored_good_voxels": 23,
+                "readable_good_voxels": 23,
+                "confidence_error_points": 355,
+                "queried_error_points": 355,
+                "bounded_reachable_error_points": 355,
+                "local_good_error_points": 354,
+                "shortlist_good_error_points": 354,
+                "retrieved_good_error_points": 343,
+                "correct_history_attention_mass_mean": 0.9901685118675232,
+                "supplied_good_error_points": 355,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9196111020204183
+          }
+        ]
+      },
+      "regression": {
+        "counts": {
+          "all_object_harms": [
+            21,
+            19,
+            22
+          ],
+          "all_object_repairs": [
+            15,
+            29,
+            30
+          ],
+          "anchor_current_wrong": [
+            883,
+            911,
+            906
+          ],
+          "anchor_opportunities": [
+            140,
+            152,
+            150
+          ],
+          "bounded_reachable_error_points_enough_for_recognition": [
+            125,
+            139,
+            121
+          ],
+          "clean_existing_gt_repairs": [
+            14,
+            24,
+            23
+          ],
+          "confidence_error_points_enough_for_recognition": [
+            138,
+            156,
+            136
+          ],
+          "current_wrong": [
+            892,
+            909,
+            882
+          ],
+          "no_error_query_due_budget": [
+            2,
+            5,
+            3
+          ],
+          "no_error_query_due_confidence": [
+            5,
+            7,
+            5
+          ],
+          "observations": [
+            3021,
+            3021,
+            3021
+          ],
+          "opportunities": [
+            150,
+            172,
+            152
+          ],
+          "opportunity_anchor_already_correct": [
+            14,
+            29,
+            16
+          ],
+          "queried_error_points_enough_for_recognition": [
+            137,
+            151,
+            136
+          ],
+          "retrieved_any_but_not_repaired": [
+            78,
+            85,
+            68
+          ],
+          "retrieved_enough_but_not_repaired": [
+            51,
+            57,
+            43
+          ],
+          "retrieved_good_error_points_enough_for_recognition": [
+            65,
+            81,
+            65
+          ],
+          "supplied_enough_but_not_repaired": [
+            59,
+            63,
+            45
+          ],
+          "supplied_good_error_points_enough_for_recognition": [
+            73,
+            90,
+            71
+          ],
+          "supply_raw_gt_repairs": [
+            14,
+            27,
+            26
+          ],
+          "temporal_repairs": [
+            14,
+            24,
+            22
+          ]
+        },
+        "funnel": {
+          "raw_identity": [
+            150,
+            172,
+            152
+          ],
+          "stored": [
+            150,
+            172,
+            152
+          ],
+          "readable": [
+            150,
+            172,
+            152
+          ],
+          "queried": [
+            143,
+            160,
+            144
+          ],
+          "local": [
+            115,
+            129,
+            114
+          ],
+          "shortlist": [
+            115,
+            129,
+            114
+          ],
+          "retrieved": [
+            92,
+            109,
+            90
+          ],
+          "repaired": [
+            14,
+            24,
+            22
+          ]
+        },
+        "mean_miou": {
+          "baseline": 48.233073734657324,
+          "anchor": 49.525343748101385,
+          "current_extra": 51.096748580562526,
+          "no_history": 50.9467003689785,
+          "temporal": 51.05122948483264
+        },
+        "seed_details": [
+          {
+            "seed": 0,
+            "distinct_opportunity_instances": 86,
+            "by_class": {
+              "0": {
+                "object_frames": 18,
+                "distinct_instances": 13
+              },
+              "2": {
+                "object_frames": 5,
+                "distinct_instances": 4
+              },
+              "3": {
+                "object_frames": 89,
+                "distinct_instances": 46
+              },
+              "5": {
+                "object_frames": 2,
+                "distinct_instances": 1
+              },
+              "6": {
+                "object_frames": 28,
+                "distinct_instances": 17
+              },
+              "7": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              },
+              "9": {
+                "object_frames": 7,
+                "distinct_instances": 4
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0625",
+                "frame": 30,
+                "stamp": 1537295828.949806,
+                "instance": "47b4986d81a14eef9c2c4e0a149b45a7",
+                "label": 0,
+                "points": 11,
+                "correct_fraction": {
+                  "baseline": 1.0,
+                  "anchor": 1.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 6,
+                "raw_good_voxels": 7,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 11,
+                "queried_error_points": 11,
+                "bounded_reachable_error_points": 11,
+                "local_good_error_points": 8,
+                "shortlist_good_error_points": 8,
+                "retrieved_good_error_points": 8,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 11,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0556",
+                "frame": 29,
+                "stamp": 1535729914.398752,
+                "instance": "50a0c3f07a7c4484877d1f74954f9b0d",
+                "label": 2,
+                "points": 302,
+                "correct_fraction": {
+                  "baseline": 0.0695364238410596,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.8870967741935484,
+                "points_needed": 151,
+                "raw_good_voxels": 275,
+                "stored_good_voxels": 30,
+                "readable_good_voxels": 30,
+                "confidence_error_points": 302,
+                "queried_error_points": 302,
+                "bounded_reachable_error_points": 240,
+                "local_good_error_points": 301,
+                "shortlist_good_error_points": 301,
+                "retrieved_good_error_points": 160,
+                "correct_history_attention_mass_mean": 0.9845317006111145,
+                "supplied_good_error_points": 210,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0268",
+                "frame": 27,
+                "stamp": 1531281453.399502,
+                "instance": "3afb3002dd9741a894f99c5bba8c303b",
+                "label": 3,
+                "points": 5,
+                "correct_fraction": {
+                  "baseline": 1.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.8,
+                "points_needed": 3,
+                "raw_good_voxels": 4,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 5,
+                "queried_error_points": 3,
+                "bounded_reachable_error_points": 3,
+                "local_good_error_points": 3,
+                "shortlist_good_error_points": 3,
+                "retrieved_good_error_points": 3,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 3,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0268",
+                "frame": 6,
+                "stamp": 1531281442.89989,
+                "instance": "d0675246bf354b14a6618086c2968d73",
+                "label": 6,
+                "points": 10,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 5,
+                "raw_good_voxels": 8,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 10,
+                "queried_error_points": 10,
+                "bounded_reachable_error_points": 10,
+                "local_good_error_points": 7,
+                "shortlist_good_error_points": 7,
+                "retrieved_good_error_points": 7,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 7,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0904",
+                "frame": 21,
+                "stamp": 1537297956.149027,
+                "instance": "d814577f96ba43ae98f21498f74b2bbf",
+                "label": 7,
+                "points": 13,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.5,
+                "points_needed": 7,
+                "raw_good_voxels": 6,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 13,
+                "queried_error_points": 13,
+                "bounded_reachable_error_points": 13,
+                "local_good_error_points": 13,
+                "shortlist_good_error_points": 13,
+                "retrieved_good_error_points": 10,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 11,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0794",
+                "frame": 28,
+                "stamp": 1538448718.198044,
+                "instance": "81c059f6eb7f40ef906dc8f1ca5a2529",
+                "label": 9,
+                "points": 88,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.9767441860465116,
+                "points_needed": 44,
+                "raw_good_voxels": 126,
+                "stored_good_voxels": 11,
+                "readable_good_voxels": 11,
+                "confidence_error_points": 88,
+                "queried_error_points": 88,
+                "bounded_reachable_error_points": 88,
+                "local_good_error_points": 56,
+                "shortlist_good_error_points": 56,
+                "retrieved_good_error_points": 52,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 62,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9568287127691767
+          },
+          {
+            "seed": 1,
+            "distinct_opportunity_instances": 93,
+            "by_class": {
+              "0": {
+                "object_frames": 17,
+                "distinct_instances": 13
+              },
+              "2": {
+                "object_frames": 5,
+                "distinct_instances": 4
+              },
+              "3": {
+                "object_frames": 112,
+                "distinct_instances": 53
+              },
+              "5": {
+                "object_frames": 2,
+                "distinct_instances": 1
+              },
+              "6": {
+                "object_frames": 27,
+                "distinct_instances": 17
+              },
+              "7": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              },
+              "9": {
+                "object_frames": 8,
+                "distinct_instances": 4
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0625",
+                "frame": 30,
+                "stamp": 1537295828.949806,
+                "instance": "47b4986d81a14eef9c2c4e0a149b45a7",
+                "label": 0,
+                "points": 11,
+                "correct_fraction": {
+                  "baseline": 1.0,
+                  "anchor": 1.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 6,
+                "raw_good_voxels": 7,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 11,
+                "queried_error_points": 11,
+                "bounded_reachable_error_points": 11,
+                "local_good_error_points": 8,
+                "shortlist_good_error_points": 8,
+                "retrieved_good_error_points": 8,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 11,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0556",
+                "frame": 29,
+                "stamp": 1535729914.398752,
+                "instance": "50a0c3f07a7c4484877d1f74954f9b0d",
+                "label": 2,
+                "points": 302,
+                "correct_fraction": {
+                  "baseline": 0.0695364238410596,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.8870967741935484,
+                "points_needed": 151,
+                "raw_good_voxels": 275,
+                "stored_good_voxels": 30,
+                "readable_good_voxels": 30,
+                "confidence_error_points": 302,
+                "queried_error_points": 302,
+                "bounded_reachable_error_points": 246,
+                "local_good_error_points": 301,
+                "shortlist_good_error_points": 301,
+                "retrieved_good_error_points": 160,
+                "correct_history_attention_mass_mean": 0.9845317006111145,
+                "supplied_good_error_points": 210,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0268",
+                "frame": 13,
+                "stamp": 1531281446.448802,
+                "instance": "365c72b0746443808c14c343fec412f2",
+                "label": 3,
+                "points": 11,
+                "correct_fraction": {
+                  "baseline": 0.8181818181818182,
+                  "anchor": 0.36363636363636365,
+                  "current_extra": 0.09090909090909091,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 6,
+                "raw_good_voxels": 15,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 11,
+                "queried_error_points": 11,
+                "bounded_reachable_error_points": 11,
+                "local_good_error_points": 11,
+                "shortlist_good_error_points": 11,
+                "retrieved_good_error_points": 11,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 11,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0268",
+                "frame": 6,
+                "stamp": 1531281442.89989,
+                "instance": "d0675246bf354b14a6618086c2968d73",
+                "label": 6,
+                "points": 10,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.3,
+                  "clean_existing_gt": 0.3,
+                  "supply_raw_gt": 0.3
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 5,
+                "raw_good_voxels": 8,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 10,
+                "queried_error_points": 10,
+                "bounded_reachable_error_points": 10,
+                "local_good_error_points": 7,
+                "shortlist_good_error_points": 7,
+                "retrieved_good_error_points": 7,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 7,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0794",
+                "frame": 13,
+                "stamp": 1538448710.646825,
+                "instance": "6dbe1febbb52476fa4879745ce84cf40",
+                "label": 9,
+                "points": 37,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.1891891891891892,
+                  "no_history": 0.2702702702702703,
+                  "temporal": 0.40540540540540543,
+                  "clean_existing_gt": 0.40540540540540543,
+                  "supply_raw_gt": 0.3783783783783784
+                },
+                "previous_raw_correct_fraction": 0.8611111111111112,
+                "points_needed": 9,
+                "raw_good_voxels": 31,
+                "stored_good_voxels": 6,
+                "readable_good_voxels": 6,
+                "confidence_error_points": 27,
+                "queried_error_points": 27,
+                "bounded_reachable_error_points": 27,
+                "local_good_error_points": 15,
+                "shortlist_good_error_points": 15,
+                "retrieved_good_error_points": 11,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 14,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9446704450550429
+          },
+          {
+            "seed": 2,
+            "distinct_opportunity_instances": 85,
+            "by_class": {
+              "0": {
+                "object_frames": 14,
+                "distinct_instances": 11
+              },
+              "2": {
+                "object_frames": 5,
+                "distinct_instances": 4
+              },
+              "3": {
+                "object_frames": 93,
+                "distinct_instances": 48
+              },
+              "5": {
+                "object_frames": 2,
+                "distinct_instances": 1
+              },
+              "6": {
+                "object_frames": 25,
+                "distinct_instances": 16
+              },
+              "7": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              },
+              "9": {
+                "object_frames": 12,
+                "distinct_instances": 4
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0625",
+                "frame": 30,
+                "stamp": 1537295828.949806,
+                "instance": "47b4986d81a14eef9c2c4e0a149b45a7",
+                "label": 0,
+                "points": 11,
+                "correct_fraction": {
+                  "baseline": 1.0,
+                  "anchor": 1.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 6,
+                "raw_good_voxels": 7,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 11,
+                "queried_error_points": 11,
+                "bounded_reachable_error_points": 11,
+                "local_good_error_points": 8,
+                "shortlist_good_error_points": 8,
+                "retrieved_good_error_points": 8,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 11,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0556",
+                "frame": 29,
+                "stamp": 1535729914.398752,
+                "instance": "50a0c3f07a7c4484877d1f74954f9b0d",
+                "label": 2,
+                "points": 302,
+                "correct_fraction": {
+                  "baseline": 0.0695364238410596,
+                  "anchor": 0.046357615894039736,
+                  "current_extra": 0.07947019867549669,
+                  "no_history": 0.016556291390728478,
+                  "temporal": 0.076158940397351,
+                  "clean_existing_gt": 0.076158940397351,
+                  "supply_raw_gt": 0.08278145695364239
+                },
+                "previous_raw_correct_fraction": 0.8870967741935484,
+                "points_needed": 146,
+                "raw_good_voxels": 275,
+                "stored_good_voxels": 30,
+                "readable_good_voxels": 30,
+                "confidence_error_points": 297,
+                "queried_error_points": 297,
+                "bounded_reachable_error_points": 237,
+                "local_good_error_points": 296,
+                "shortlist_good_error_points": 296,
+                "retrieved_good_error_points": 155,
+                "correct_history_attention_mass_mean": 0.9840326905250549,
+                "supplied_good_error_points": 205,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0268",
+                "frame": 27,
+                "stamp": 1531281453.399502,
+                "instance": "3afb3002dd9741a894f99c5bba8c303b",
+                "label": 3,
+                "points": 5,
+                "correct_fraction": {
+                  "baseline": 1.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.8,
+                "points_needed": 3,
+                "raw_good_voxels": 4,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 5,
+                "queried_error_points": 5,
+                "bounded_reachable_error_points": 5,
+                "local_good_error_points": 5,
+                "shortlist_good_error_points": 5,
+                "retrieved_good_error_points": 5,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 5,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0268",
+                "frame": 6,
+                "stamp": 1531281442.89989,
+                "instance": "d0675246bf354b14a6618086c2968d73",
+                "label": 6,
+                "points": 10,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.1,
+                  "temporal": 0.1,
+                  "clean_existing_gt": 0.1,
+                  "supply_raw_gt": 0.1
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 4,
+                "raw_good_voxels": 8,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 9,
+                "queried_error_points": 9,
+                "bounded_reachable_error_points": 9,
+                "local_good_error_points": 6,
+                "shortlist_good_error_points": 6,
+                "retrieved_good_error_points": 6,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 6,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0904",
+                "frame": 21,
+                "stamp": 1537297956.149027,
+                "instance": "d814577f96ba43ae98f21498f74b2bbf",
+                "label": 7,
+                "points": 13,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.5,
+                "points_needed": 7,
+                "raw_good_voxels": 6,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 12,
+                "queried_error_points": 12,
+                "bounded_reachable_error_points": 12,
+                "local_good_error_points": 12,
+                "shortlist_good_error_points": 12,
+                "retrieved_good_error_points": 10,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 10,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.944419609175788
+          }
+        ]
+      },
+      "confirmation": {
+        "counts": {
+          "all_object_harms": [
+            33,
+            24,
+            36
+          ],
+          "all_object_repairs": [
+            34,
+            55,
+            50
+          ],
+          "anchor_current_wrong": [
+            1280,
+            1333,
+            1345
+          ],
+          "anchor_opportunities": [
+            283,
+            302,
+            326
+          ],
+          "bounded_reachable_error_points_enough_for_recognition": [
+            237,
+            284,
+            246
+          ],
+          "clean_existing_gt_repairs": [
+            31,
+            50,
+            43
+          ],
+          "confidence_error_points_enough_for_recognition": [
+            264,
+            309,
+            276
+          ],
+          "current_wrong": [
+            1294,
+            1372,
+            1282
+          ],
+          "no_error_query_due_budget": [
+            1,
+            5,
+            3
+          ],
+          "no_error_query_due_confidence": [
+            6,
+            13,
+            8
+          ],
+          "observations": [
+            3891,
+            3891,
+            3891
+          ],
+          "opportunities": [
+            299,
+            353,
+            309
+          ],
+          "opportunity_anchor_already_correct": [
+            19,
+            69,
+            27
+          ],
+          "queried_error_points_enough_for_recognition": [
+            257,
+            301,
+            272
+          ],
+          "retrieved_any_but_not_repaired": [
+            201,
+            231,
+            196
+          ],
+          "retrieved_enough_but_not_repaired": [
+            144,
+            183,
+            144
+          ],
+          "retrieved_good_error_points_enough_for_recognition": [
+            175,
+            229,
+            187
+          ],
+          "supplied_enough_but_not_repaired": [
+            170,
+            200,
+            165
+          ],
+          "supplied_good_error_points_enough_for_recognition": [
+            202,
+            248,
+            211
+          ],
+          "supply_raw_gt_repairs": [
+            32,
+            48,
+            46
+          ],
+          "temporal_repairs": [
+            31,
+            47,
+            44
+          ]
+        },
+        "funnel": {
+          "raw_identity": [
+            299,
+            353,
+            309
+          ],
+          "stored": [
+            292,
+            347,
+            303
+          ],
+          "readable": [
+            292,
+            347,
+            303
+          ],
+          "queried": [
+            285,
+            330,
+            292
+          ],
+          "local": [
+            264,
+            310,
+            270
+          ],
+          "shortlist": [
+            264,
+            310,
+            270
+          ],
+          "retrieved": [
+            232,
+            277,
+            239
+          ],
+          "repaired": [
+            31,
+            46,
+            43
+          ]
+        },
+        "mean_miou": {
+          "baseline": 54.480834712676206,
+          "anchor": 55.11553981090835,
+          "current_extra": 57.065847178452806,
+          "no_history": 56.922834588737835,
+          "temporal": 57.00523392154264
+        },
+        "seed_details": [
+          {
+            "seed": 0,
+            "distinct_opportunity_instances": 116,
+            "by_class": {
+              "0": {
+                "object_frames": 2,
+                "distinct_instances": 2
+              },
+              "2": {
+                "object_frames": 15,
+                "distinct_instances": 6
+              },
+              "3": {
+                "object_frames": 191,
+                "distinct_instances": 58
+              },
+              "5": {
+                "object_frames": 9,
+                "distinct_instances": 5
+              },
+              "6": {
+                "object_frames": 56,
+                "distinct_instances": 28
+              },
+              "8": {
+                "object_frames": 10,
+                "distinct_instances": 6
+              },
+              "9": {
+                "object_frames": 16,
+                "distinct_instances": 11
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0329",
+                "frame": 38,
+                "stamp": 1534967851.447168,
+                "instance": "03bfbd6899b74fc590b78ea0a8e7b324",
+                "label": 0,
+                "points": 10,
+                "correct_fraction": {
+                  "baseline": 1.0,
+                  "anchor": 1.0,
+                  "current_extra": 0.9,
+                  "no_history": 0.4,
+                  "temporal": 0.2,
+                  "clean_existing_gt": 0.4,
+                  "supply_raw_gt": 0.1
+                },
+                "previous_raw_correct_fraction": 0.6666666666666666,
+                "points_needed": 1,
+                "raw_good_voxels": 6,
+                "stored_good_voxels": 2,
+                "readable_good_voxels": 2,
+                "confidence_error_points": 6,
+                "queried_error_points": 6,
+                "bounded_reachable_error_points": 6,
+                "local_good_error_points": 4,
+                "shortlist_good_error_points": 4,
+                "retrieved_good_error_points": 4,
+                "correct_history_attention_mass_mean": 0.8786085844039917,
+                "supplied_good_error_points": 6,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0552",
+                "frame": 32,
+                "stamp": 1535489151.948654,
+                "instance": "8109784ca0a84c8d9726c18818b2a1e1",
+                "label": 2,
+                "points": 175,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.9941176470588236,
+                "points_needed": 88,
+                "raw_good_voxels": 169,
+                "stored_good_voxels": 19,
+                "readable_good_voxels": 19,
+                "confidence_error_points": 157,
+                "queried_error_points": 157,
+                "bounded_reachable_error_points": 41,
+                "local_good_error_points": 154,
+                "shortlist_good_error_points": 154,
+                "retrieved_good_error_points": 108,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 123,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0329",
+                "frame": 1,
+                "stamp": 1534967832.897561,
+                "instance": "eb5384c43f344e68975a84262dc2bc66",
+                "label": 3,
+                "points": 13,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 7,
+                "raw_good_voxels": 8,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 13,
+                "queried_error_points": 13,
+                "bounded_reachable_error_points": 13,
+                "local_good_error_points": 9,
+                "shortlist_good_error_points": 9,
+                "retrieved_good_error_points": 9,
+                "correct_history_attention_mass_mean": 0.8940089344978333,
+                "supplied_good_error_points": 10,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0770",
+                "frame": 7,
+                "stamp": 1535657534.54975,
+                "instance": "84ce5eac9438493ca0835d51712fbc59",
+                "label": 6,
+                "points": 38,
+                "correct_fraction": {
+                  "baseline": 0.02631578947368421,
+                  "anchor": 0.34210526315789475,
+                  "current_extra": 0.4473684210526316,
+                  "no_history": 0.39473684210526316,
+                  "temporal": 0.47368421052631576,
+                  "clean_existing_gt": 0.47368421052631576,
+                  "supply_raw_gt": 0.5
+                },
+                "previous_raw_correct_fraction": 0.868421052631579,
+                "points_needed": 4,
+                "raw_good_voxels": 27,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 17,
+                "queried_error_points": 17,
+                "bounded_reachable_error_points": 17,
+                "local_good_error_points": 17,
+                "shortlist_good_error_points": 17,
+                "retrieved_good_error_points": 15,
+                "correct_history_attention_mass_mean": 0.822005033493042,
+                "supplied_good_error_points": 16,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0329",
+                "frame": 1,
+                "stamp": 1534967832.897561,
+                "instance": "dea249c1678e4a3f932d17a3a40ea37c",
+                "label": 8,
+                "points": 16,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.9642857142857143,
+                "points_needed": 8,
+                "raw_good_voxels": 27,
+                "stored_good_voxels": 8,
+                "readable_good_voxels": 8,
+                "confidence_error_points": 16,
+                "queried_error_points": 16,
+                "bounded_reachable_error_points": 16,
+                "local_good_error_points": 16,
+                "shortlist_good_error_points": 16,
+                "retrieved_good_error_points": 16,
+                "correct_history_attention_mass_mean": 0.9439188838005066,
+                "supplied_good_error_points": 16,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0329",
+                "frame": 12,
+                "stamp": 1534967838.447128,
+                "instance": "10cd45225b794aa4810332382e43a90e",
+                "label": 9,
+                "points": 246,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0040650406504065045,
+                  "current_extra": 0.0040650406504065045,
+                  "no_history": 0.0,
+                  "temporal": 0.0040650406504065045,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0040650406504065045
+                },
+                "previous_raw_correct_fraction": 0.5545454545454546,
+                "points_needed": 123,
+                "raw_good_voxels": 122,
+                "stored_good_voxels": 7,
+                "readable_good_voxels": 7,
+                "confidence_error_points": 246,
+                "queried_error_points": 246,
+                "bounded_reachable_error_points": 246,
+                "local_good_error_points": 234,
+                "shortlist_good_error_points": 228,
+                "retrieved_good_error_points": 228,
+                "correct_history_attention_mass_mean": 0.5344758629798889,
+                "supplied_good_error_points": 246,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9041960308135584
+          },
+          {
+            "seed": 1,
+            "distinct_opportunity_instances": 122,
+            "by_class": {
+              "0": {
+                "object_frames": 1,
+                "distinct_instances": 1
+              },
+              "2": {
+                "object_frames": 14,
+                "distinct_instances": 5
+              },
+              "3": {
+                "object_frames": 257,
+                "distinct_instances": 66
+              },
+              "5": {
+                "object_frames": 10,
+                "distinct_instances": 5
+              },
+              "6": {
+                "object_frames": 46,
+                "distinct_instances": 28
+              },
+              "8": {
+                "object_frames": 8,
+                "distinct_instances": 6
+              },
+              "9": {
+                "object_frames": 17,
+                "distinct_instances": 11
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0329",
+                "frame": 38,
+                "stamp": 1534967851.447168,
+                "instance": "f7cfd99babd04faa9c05a63d9eb107d1",
+                "label": 0,
+                "points": 27,
+                "correct_fraction": {
+                  "baseline": 0.37037037037037035,
+                  "anchor": 0.9259259259259259,
+                  "current_extra": 0.7407407407407407,
+                  "no_history": 0.4074074074074074,
+                  "temporal": 0.4074074074074074,
+                  "clean_existing_gt": 0.4074074074074074,
+                  "supply_raw_gt": 0.37037037037037035
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 3,
+                "raw_good_voxels": 16,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 16,
+                "queried_error_points": 16,
+                "bounded_reachable_error_points": 16,
+                "local_good_error_points": 6,
+                "shortlist_good_error_points": 6,
+                "retrieved_good_error_points": 6,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 6,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0552",
+                "frame": 32,
+                "stamp": 1535489151.948654,
+                "instance": "8109784ca0a84c8d9726c18818b2a1e1",
+                "label": 2,
+                "points": 175,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.9941176470588236,
+                "points_needed": 88,
+                "raw_good_voxels": 169,
+                "stored_good_voxels": 19,
+                "readable_good_voxels": 19,
+                "confidence_error_points": 155,
+                "queried_error_points": 155,
+                "bounded_reachable_error_points": 42,
+                "local_good_error_points": 152,
+                "shortlist_good_error_points": 152,
+                "retrieved_good_error_points": 106,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 121,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0329",
+                "frame": 1,
+                "stamp": 1534967832.897561,
+                "instance": "296d4172372c406d80af8e5f47599b58",
+                "label": 3,
+                "points": 6,
+                "correct_fraction": {
+                  "baseline": 0.3333333333333333,
+                  "anchor": 0.3333333333333333,
+                  "current_extra": 0.5,
+                  "no_history": 0.16666666666666666,
+                  "temporal": 0.16666666666666666,
+                  "clean_existing_gt": 0.16666666666666666,
+                  "supply_raw_gt": 0.16666666666666666
+                },
+                "previous_raw_correct_fraction": 0.6153846153846154,
+                "points_needed": 2,
+                "raw_good_voxels": 8,
+                "stored_good_voxels": 6,
+                "readable_good_voxels": 6,
+                "confidence_error_points": 5,
+                "queried_error_points": 5,
+                "bounded_reachable_error_points": 5,
+                "local_good_error_points": 3,
+                "shortlist_good_error_points": 3,
+                "retrieved_good_error_points": 3,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 3,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0916",
+                "frame": 15,
+                "stamp": 1538984240.947518,
+                "instance": "6b7d108921ef4e87a46443fbc7f8f59e",
+                "label": 5,
+                "points": 85,
+                "correct_fraction": {
+                  "baseline": 0.7647058823529411,
+                  "anchor": 0.6,
+                  "current_extra": 0.3764705882352941,
+                  "no_history": 0.3176470588235294,
+                  "temporal": 0.24705882352941178,
+                  "clean_existing_gt": 0.24705882352941178,
+                  "supply_raw_gt": 0.24705882352941178
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 16,
+                "raw_good_voxels": 69,
+                "stored_good_voxels": 6,
+                "readable_good_voxels": 6,
+                "confidence_error_points": 58,
+                "queried_error_points": 58,
+                "bounded_reachable_error_points": 43,
+                "local_good_error_points": 58,
+                "shortlist_good_error_points": 58,
+                "retrieved_good_error_points": 39,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 41,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0916",
+                "frame": 3,
+                "stamp": 1538984234.947904,
+                "instance": "cb5fdffa966345cdb9c7c186143b7857",
+                "label": 6,
+                "points": 11,
+                "correct_fraction": {
+                  "baseline": 0.36363636363636365,
+                  "anchor": 0.36363636363636365,
+                  "current_extra": 0.36363636363636365,
+                  "no_history": 0.45454545454545453,
+                  "temporal": 0.45454545454545453,
+                  "clean_existing_gt": 0.45454545454545453,
+                  "supply_raw_gt": 0.45454545454545453
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 1,
+                "raw_good_voxels": 5,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 6,
+                "queried_error_points": 6,
+                "bounded_reachable_error_points": 5,
+                "local_good_error_points": 6,
+                "shortlist_good_error_points": 6,
+                "retrieved_good_error_points": 2,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 2,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0329",
+                "frame": 12,
+                "stamp": 1534967838.447128,
+                "instance": "10cd45225b794aa4810332382e43a90e",
+                "label": 9,
+                "points": 246,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.5545454545454546,
+                "points_needed": 123,
+                "raw_good_voxels": 122,
+                "stored_good_voxels": 7,
+                "readable_good_voxels": 7,
+                "confidence_error_points": 246,
+                "queried_error_points": 246,
+                "bounded_reachable_error_points": 246,
+                "local_good_error_points": 234,
+                "shortlist_good_error_points": 228,
+                "retrieved_good_error_points": 228,
+                "correct_history_attention_mass_mean": 0.5344758629798889,
+                "supplied_good_error_points": 246,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9274580167734235
+          },
+          {
+            "seed": 2,
+            "distinct_opportunity_instances": 113,
+            "by_class": {
+              "2": {
+                "object_frames": 16,
+                "distinct_instances": 6
+              },
+              "3": {
+                "object_frames": 215,
+                "distinct_instances": 59
+              },
+              "5": {
+                "object_frames": 10,
+                "distinct_instances": 5
+              },
+              "6": {
+                "object_frames": 45,
+                "distinct_instances": 28
+              },
+              "8": {
+                "object_frames": 6,
+                "distinct_instances": 4
+              },
+              "9": {
+                "object_frames": 17,
+                "distinct_instances": 11
+              }
+            },
+            "examples": [
+              {
+                "scene": "scene-0552",
+                "frame": 32,
+                "stamp": 1535489151.948654,
+                "instance": "8109784ca0a84c8d9726c18818b2a1e1",
+                "label": 2,
+                "points": 175,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.9941176470588236,
+                "points_needed": 88,
+                "raw_good_voxels": 169,
+                "stored_good_voxels": 19,
+                "readable_good_voxels": 19,
+                "confidence_error_points": 163,
+                "queried_error_points": 163,
+                "bounded_reachable_error_points": 36,
+                "local_good_error_points": 159,
+                "shortlist_good_error_points": 159,
+                "retrieved_good_error_points": 109,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 128,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0329",
+                "frame": 1,
+                "stamp": 1534967832.897561,
+                "instance": "eb5384c43f344e68975a84262dc2bc66",
+                "label": 3,
+                "points": 13,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 7,
+                "raw_good_voxels": 8,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 13,
+                "queried_error_points": 13,
+                "bounded_reachable_error_points": 13,
+                "local_good_error_points": 9,
+                "shortlist_good_error_points": 9,
+                "retrieved_good_error_points": 9,
+                "correct_history_attention_mass_mean": 0.8940089344978333,
+                "supplied_good_error_points": 10,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0916",
+                "frame": 18,
+                "stamp": 1538984242.44773,
+                "instance": "c5640d5eaa7d42cbbebe7c9bef889b88",
+                "label": 5,
+                "points": 85,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0,
+                  "clean_existing_gt": 0.0,
+                  "supply_raw_gt": 0.0
+                },
+                "previous_raw_correct_fraction": 0.9761904761904762,
+                "points_needed": 43,
+                "raw_good_voxels": 82,
+                "stored_good_voxels": 5,
+                "readable_good_voxels": 5,
+                "confidence_error_points": 69,
+                "queried_error_points": 66,
+                "bounded_reachable_error_points": 6,
+                "local_good_error_points": 66,
+                "shortlist_good_error_points": 66,
+                "retrieved_good_error_points": 51,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 51,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0916",
+                "frame": 3,
+                "stamp": 1538984234.947904,
+                "instance": "cb5fdffa966345cdb9c7c186143b7857",
+                "label": 6,
+                "points": 11,
+                "correct_fraction": {
+                  "baseline": 0.36363636363636365,
+                  "anchor": 0.36363636363636365,
+                  "current_extra": 0.45454545454545453,
+                  "no_history": 0.45454545454545453,
+                  "temporal": 0.45454545454545453,
+                  "clean_existing_gt": 0.45454545454545453,
+                  "supply_raw_gt": 0.45454545454545453
+                },
+                "previous_raw_correct_fraction": 1.0,
+                "points_needed": 1,
+                "raw_good_voxels": 5,
+                "stored_good_voxels": 3,
+                "readable_good_voxels": 3,
+                "confidence_error_points": 6,
+                "queried_error_points": 6,
+                "bounded_reachable_error_points": 2,
+                "local_good_error_points": 6,
+                "shortlist_good_error_points": 6,
+                "retrieved_good_error_points": 2,
+                "correct_history_attention_mass_mean": 1.0,
+                "supplied_good_error_points": 2,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0329",
+                "frame": 18,
+                "stamp": 1534967841.449103,
+                "instance": "2afc2ab465fd4b9186dd00bd54ba08b8",
+                "label": 8,
+                "points": 84,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.35714285714285715,
+                  "clean_existing_gt": 0.35714285714285715,
+                  "supply_raw_gt": 0.32142857142857145
+                },
+                "previous_raw_correct_fraction": 0.9571428571428572,
+                "points_needed": 42,
+                "raw_good_voxels": 67,
+                "stored_good_voxels": 8,
+                "readable_good_voxels": 8,
+                "confidence_error_points": 43,
+                "queried_error_points": 43,
+                "bounded_reachable_error_points": 43,
+                "local_good_error_points": 43,
+                "shortlist_good_error_points": 43,
+                "retrieved_good_error_points": 43,
+                "correct_history_attention_mass_mean": 0.9625652432441711,
+                "supplied_good_error_points": 43,
+                "ambiguous_voxel_object_points": 0
+              },
+              {
+                "scene": "scene-0329",
+                "frame": 12,
+                "stamp": 1534967838.447128,
+                "instance": "10cd45225b794aa4810332382e43a90e",
+                "label": 9,
+                "points": 246,
+                "correct_fraction": {
+                  "baseline": 0.0,
+                  "anchor": 0.0,
+                  "current_extra": 0.0,
+                  "no_history": 0.0,
+                  "temporal": 0.0040650406504065045,
+                  "clean_existing_gt": 0.0040650406504065045,
+                  "supply_raw_gt": 0.0040650406504065045
+                },
+                "previous_raw_correct_fraction": 0.5545454545454546,
+                "points_needed": 123,
+                "raw_good_voxels": 122,
+                "stored_good_voxels": 7,
+                "readable_good_voxels": 7,
+                "confidence_error_points": 246,
+                "queried_error_points": 246,
+                "bounded_reachable_error_points": 246,
+                "local_good_error_points": 234,
+                "shortlist_good_error_points": 228,
+                "retrieved_good_error_points": 228,
+                "correct_history_attention_mass_mean": 0.5344758629798889,
+                "supplied_good_error_points": 246,
+                "ambiguous_voxel_object_points": 0
+              }
+            ],
+            "attention_mass_mean_over_opportunity_objects_with_positive_hits": 0.9208396991177084
+          }
+        ]
+      }
+    }
+  }
+}

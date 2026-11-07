@@ -1,0 +1,287 @@
+{
+  "passed": true,
+  "scope": "fixed_real_scan_identity_odometry_synthetic_times_engineering_only",
+  "driving_accuracy_evaluated": false,
+  "deskew_validated": false,
+  "training": false,
+  "scan": "/media/frank/Extreme SSD/rgb_lidar_shared_backbone/remote_snapshot/rgb_lidar_shared_backbone/datasets/nuscenes/s0_trainval/samples/LIDAR_TOP/n015-2018-07-18-11-07-57+0800__LIDAR_TOP__1531883530449377.pcd.bin",
+  "source_sha256": "75fc6b347ff4e9f6ad77da0eed4fbcece03bf6801a85364333355bec8d8d1a21",
+  "points": 34720,
+  "intensity": "Source column 3 unchanged; adapter client intensity_scale=0.2",
+  "environment": {
+    "PTV3_PYTHON": "/home/frank/semantic_livo_runtime/venv/bin/python",
+    "PTV3_POINTCEPT": "/home/frank/semantic_livo_runtime/src/Pointcept_v151",
+    "PTV3_CONFIG": "/home/frank/semantic_livo_runtime/weights/nuscenes-semseg-pt-v3m1-0-base/config.py",
+    "PTV3_CHECKPOINT": "/home/frank/semantic_livo_runtime/v06-armB0_s1-student.pth",
+    "RMW_IMPLEMENTATION": "rmw_cyclonedds_cpp",
+    "ROS_DOMAIN_ID": "65",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "queue_policy": {
+    "harness_outstanding_pairs": 1,
+    "publisher_depth": 1,
+    "subscriber_depth": 2,
+    "adapter_job_capacity": 2,
+    "adapter_matching_cache_entries_each": 32,
+    "shm_slots": 4,
+    "client_max_inflight": 2,
+    "adapter_max_age_s": 0.3,
+    "stress_tested": false
+  },
+  "source_code_sha256": {
+    "tools/semantic_memory/ros_node.py": "43d39fbe274ce4ce92dd7f6b076bc824c27d8000a28a09154befc607de421e69",
+    "src/ptv3_client.py": "aa547f101a45bf3a8598ea173cbed66d976a940dec930af47b380dfeca556a71",
+    "src/ptv3_worker.py": "4b346d4f091f4c524e6a5ca6827ed63fb2b751c72316f4ff9a50d9f0f169e6f8",
+    "src/semantic_memory.py": "1750963a421c263e3b3bb37a95e6bf32b140cfa143babde90f2681f5d79a025b"
+  },
+  "attempts": [
+    {
+      "stamp_ns": 1700000000223456796,
+      "worker_frame": 0,
+      "warmup": true,
+      "published": true,
+      "dropped_late": 0,
+      "dropped_stale": 0
+    },
+    {
+      "stamp_ns": 1700000000323456803,
+      "worker_frame": 1,
+      "warmup": false,
+      "published": true,
+      "dropped_late": 0,
+      "dropped_stale": 0
+    },
+    {
+      "stamp_ns": 1700000000423456810,
+      "worker_frame": 2,
+      "warmup": false,
+      "published": true,
+      "dropped_late": 0,
+      "dropped_stale": 0
+    },
+    {
+      "stamp_ns": 1700000000523456817,
+      "worker_frame": 3,
+      "warmup": false,
+      "published": true,
+      "dropped_late": 0,
+      "dropped_stale": 0
+    }
+  ],
+  "outputs": [
+    {
+      "stamp_ns": 1700000000223456796,
+      "frame_id": "memory_ros_check_lidar",
+      "worker_frame": 0,
+      "points": 34720,
+      "label_dtype": "uint16",
+      "confidence_dtype": "float32",
+      "label_min": 3,
+      "label_max": 15,
+      "confidence_min": 0.28218168020248413,
+      "confidence_max": 0.9989542961120605,
+      "payload_sha256": "c3046a82f6b6d2cb5da2c88199d4bee5e2888b91e945eaf4edebba858897e4e5",
+      "exact_source_header": true,
+      "exact_xyzi": true
+    },
+    {
+      "stamp_ns": 1700000000323456803,
+      "frame_id": "memory_ros_check_lidar",
+      "worker_frame": 1,
+      "points": 34720,
+      "label_dtype": "uint16",
+      "confidence_dtype": "float32",
+      "label_min": 3,
+      "label_max": 15,
+      "confidence_min": 0.2718161344528198,
+      "confidence_max": 0.9990153312683105,
+      "payload_sha256": "95511dc0f6c74d844265de78b8116e9e592b6dbd898952378f5b08c8e0e5459b",
+      "exact_source_header": true,
+      "exact_xyzi": true
+    },
+    {
+      "stamp_ns": 1700000000423456810,
+      "frame_id": "memory_ros_check_lidar",
+      "worker_frame": 2,
+      "points": 34720,
+      "label_dtype": "uint16",
+      "confidence_dtype": "float32",
+      "label_min": 3,
+      "label_max": 15,
+      "confidence_min": 0.2615154981613159,
+      "confidence_max": 0.9990434050559998,
+      "payload_sha256": "f69dccffa46a08652e796c35ac56f15e140e680848607216f590537d0103712d",
+      "exact_source_header": true,
+      "exact_xyzi": true
+    },
+    {
+      "stamp_ns": 1700000000523456817,
+      "frame_id": "memory_ros_check_lidar",
+      "worker_frame": 3,
+      "points": 34720,
+      "label_dtype": "uint16",
+      "confidence_dtype": "float32",
+      "label_min": 3,
+      "label_max": 15,
+      "confidence_min": 0.25349369645118713,
+      "confidence_max": 0.9990150928497314,
+      "payload_sha256": "675f2816cebefda3b6363959ec4bceacfa917707637b246e6b88e16f157941d7",
+      "exact_source_header": true,
+      "exact_xyzi": true
+    }
+  ],
+  "negative_checks": [
+    {
+      "name": "cloud_odometry_frame_mismatch",
+      "stamp_ns": 1700000000473456813,
+      "diagnostic": "invalid",
+      "increment": 1,
+      "no_publication": true
+    },
+    {
+      "name": "duplicate_source_timestamp",
+      "stamp_ns": 1700000000423456810,
+      "diagnostic": "dropped_order",
+      "increment": 2,
+      "no_publication": true
+    }
+  ],
+  "adapter_records": [
+    {
+      "frame": 0,
+      "stamp_ns": 1700000000223456796,
+      "points": 34720,
+      "shadow": true,
+      "worker_ms": 98.16220693755895,
+      "process_ms": 100.46219592913985,
+      "receipt_to_publish_ms": 101.83444293215871
+    },
+    {
+      "frame": 1,
+      "stamp_ns": 1700000000323456803,
+      "points": 34720,
+      "shadow": true,
+      "worker_ms": 139.23724798951298,
+      "process_ms": 141.50589797645807,
+      "receipt_to_publish_ms": 141.88607991673052
+    },
+    {
+      "frame": 2,
+      "stamp_ns": 1700000000423456810,
+      "points": 34720,
+      "shadow": true,
+      "worker_ms": 37.216861033812165,
+      "process_ms": 38.62966503947973,
+      "receipt_to_publish_ms": 39.107272983528674
+    },
+    {
+      "frame": 3,
+      "stamp_ns": 1700000000523456817,
+      "points": 34720,
+      "shadow": true,
+      "worker_ms": 37.117041065357625,
+      "process_ms": 38.292232900857925,
+      "receipt_to_publish_ms": 38.594126934185624
+    }
+  ],
+  "worker_memory_records": [
+    {
+      "expired": 0,
+      "revoked_free_space": 0,
+      "occluded": 0,
+      "records": 6168,
+      "epoch": 0,
+      "epoch_reset": false,
+      "frame": 0,
+      "stamp": 1700000000.2234569,
+      "shadow": true,
+      "history_points": 0
+    },
+    {
+      "expired": 0,
+      "revoked_free_space": 0,
+      "occluded": 8,
+      "records": 12336,
+      "epoch": 0,
+      "epoch_reset": false,
+      "frame": 1,
+      "stamp": 1700000000.3234568,
+      "shadow": true,
+      "history_points": 21876
+    },
+    {
+      "expired": 0,
+      "revoked_free_space": 0,
+      "occluded": 16,
+      "records": 12336,
+      "epoch": 0,
+      "epoch_reset": false,
+      "frame": 2,
+      "stamp": 1700000000.4234567,
+      "shadow": true,
+      "history_points": 21877
+    },
+    {
+      "expired": 0,
+      "revoked_free_space": 0,
+      "occluded": 16,
+      "records": 12336,
+      "epoch": 0,
+      "epoch_reset": false,
+      "frame": 3,
+      "stamp": 1700000000.5234568,
+      "shadow": true,
+      "history_points": 21876
+    }
+  ],
+  "final_status": {
+    "queued": 4,
+    "output": 4,
+    "dropped_full": 0,
+    "dropped_stale": 0,
+    "dropped_order": 2,
+    "dropped_late": 0,
+    "unmatched": 0,
+    "invalid": 1,
+    "failed": false,
+    "shadow": true,
+    "queue": 0
+  },
+  "shutdown": {
+    "returncode": 0,
+    "forced": false
+  },
+  "logs_directory": "/home/frank/semantic_livo_runtime/memory-ros-check-20261025",
+  "executed_command_before_log_relocation": [
+    "/usr/bin/python3",
+    "-B",
+    "-u",
+    "-m",
+    "tools.semantic_memory.ros_node",
+    "--shadow",
+    "--input-is-deskewed",
+    "--epoch",
+    "0",
+    "--input-cloud",
+    "/memory_ros_check_20261025_3348244/cloud",
+    "--input-odometry",
+    "/memory_ros_check_20261025_3348244/odom",
+    "--output",
+    "/memory_ros_check_20261025_3348244/output",
+    "--out",
+    "/home/frank/\u684c\u9762/rgb-semantic-livo-mapping/runtime/memory-ros-check-20261025/node"
+  ],
+  "checks": {
+    "exact_source_stamp_and_frame": true,
+    "exact_xyzi_and_count": true,
+    "uint16_native16_labels": true,
+    "float32_finite_bounded_confidence": true,
+    "frame_mismatch_rejected": true,
+    "duplicate_timestamp_rejected": true,
+    "rejected_pairs_not_sent_to_worker": true,
+    "post_rejection_valid_scan_succeeded": true,
+    "all_publications_younger_than_300_ms": true,
+    "history_retrieval_exercised": true,
+    "clean_worker_shutdown": true
+  }
+}

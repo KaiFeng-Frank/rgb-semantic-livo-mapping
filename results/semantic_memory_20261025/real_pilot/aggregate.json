@@ -1,0 +1,292 @@
+{
+  "class_names": [
+    "barrier",
+    "bicycle",
+    "bus",
+    "car",
+    "construction",
+    "motorcycle",
+    "pedestrian",
+    "cone",
+    "trailer",
+    "truck",
+    "road",
+    "other flat",
+    "sidewalk",
+    "terrain",
+    "manmade",
+    "vegetation"
+  ],
+  "class_iou_mean_percent": {
+    "baseline": [
+      86.41774428363449,
+      0.8108108108108109,
+      85.19640003364455,
+      88.0054377035187,
+      0.29534307262275195,
+      12.78600269179004,
+      53.71112646855564,
+      3.6781609195402303,
+      0.0,
+      11.831478655699877,
+      96.31788721575238,
+      53.26974640276726,
+      61.244095137900445,
+      47.720096476478155,
+      88.84034388431174,
+      81.5972470349936
+    ],
+    "uniform_history": [
+      87.8431163855037,
+      1.0852713178294573,
+      85.99048060317595,
+      88.23363911949438,
+      0.015821950319075996,
+      13.139695712309821,
+      54.664461898856274,
+      0.8045977011494253,
+      0.0,
+      11.294188136608748,
+      96.33772724308972,
+      53.79744886964196,
+      61.473654620466135,
+      47.4211859802692,
+      89.49913249746243,
+      82.48481804483814
+    ],
+    "current_only": [
+      87.93885574314542,
+      0.9734157184980149,
+      85.45073452615088,
+      91.88987592458858,
+      0.021095933758767994,
+      12.995944607449212,
+      53.77056651220206,
+      3.863715625100666,
+      0.0,
+      20.93841148103527,
+      96.96044678361733,
+      56.71660451830118,
+      63.29660191482185,
+      50.83787528448314,
+      89.71618651127865,
+      82.54438985970673
+    ],
+    "temporal": [
+      88.5217677519699,
+      0.9740060830320377,
+      85.38633376859133,
+      90.11347550851553,
+      0.10372167431394264,
+      13.067745745949457,
+      53.77760689610843,
+      5.42822715838748,
+      0.0,
+      12.65971568529084,
+      96.87574908380056,
+      55.98994006738615,
+      63.55987558300634,
+      51.593279397909576,
+      89.67740433137992,
+      82.63105391566819
+    ],
+    "ungated_temporal": [
+      88.44974047574897,
+      1.036640277506081,
+      86.00546802895366,
+      90.51674175275872,
+      0.015821950319075996,
+      13.109613991356731,
+      53.954126411757706,
+      13.820281682226998,
+      0.0,
+      13.529252260747958,
+      97.03344844693879,
+      55.764126776227414,
+      64.62480276357537,
+      53.00926428586624,
+      89.53732778022847,
+      82.35767725279528
+    ]
+  },
+  "events": {
+    "first_observed": {
+      "baseline": {
+        "success_rate_percent": 76.53631284916202,
+        "successes_by_seed": [
+          137,
+          137,
+          137
+        ],
+        "episodes": 179,
+        "mean_delay_with_censored_at_common_horizon_s": 0.388794093158658
+      },
+      "uniform_history": {
+        "success_rate_percent": 74.30167597765363,
+        "successes_by_seed": [
+          133,
+          133,
+          133
+        ],
+        "episodes": 179,
+        "mean_delay_with_censored_at_common_horizon_s": 0.461979255995937
+      },
+      "current_only": {
+        "success_rate_percent": 70.2048417132216,
+        "successes_by_seed": [
+          126,
+          127,
+          124
+        ],
+        "episodes": 179,
+        "mean_delay_with_censored_at_common_horizon_s": 0.4578823630370241
+      },
+      "temporal": {
+        "success_rate_percent": 74.30167597765363,
+        "successes_by_seed": [
+          133,
+          133,
+          133
+        ],
+        "episodes": 179,
+        "mean_delay_with_censored_at_common_horizon_s": 0.4442938177723237
+      },
+      "ungated_temporal": {
+        "success_rate_percent": 74.30167597765363,
+        "successes_by_seed": [
+          133,
+          133,
+          133
+        ],
+        "episodes": 179,
+        "mean_delay_with_censored_at_common_horizon_s": 0.44345994812594225
+      }
+    },
+    "reappearance_after_observation_gap": {
+      "baseline": {
+        "success_rate_percent": 69.23076923076921,
+        "successes_by_seed": [
+          135,
+          135,
+          135
+        ],
+        "episodes": 195,
+        "mean_delay_with_censored_at_common_horizon_s": 0.7730495758545705
+      },
+      "uniform_history": {
+        "success_rate_percent": 69.74358974358972,
+        "successes_by_seed": [
+          136,
+          136,
+          136
+        ],
+        "episodes": 195,
+        "mean_delay_with_censored_at_common_horizon_s": 0.7781756046490792
+      },
+      "current_only": {
+        "success_rate_percent": 68.20512820512819,
+        "successes_by_seed": [
+          133,
+          132,
+          134
+        ],
+        "episodes": 195,
+        "mean_delay_with_censored_at_common_horizon_s": 0.7103881799257717
+      },
+      "temporal": {
+        "success_rate_percent": 67.69230769230768,
+        "successes_by_seed": [
+          131,
+          132,
+          133
+        ],
+        "episodes": 195,
+        "mean_delay_with_censored_at_common_horizon_s": 0.7956039591732189
+      },
+      "ungated_temporal": {
+        "success_rate_percent": 67.86324786324785,
+        "successes_by_seed": [
+          131,
+          133,
+          133
+        ],
+        "episodes": 195,
+        "mean_delay_with_censored_at_common_horizon_s": 0.7923561255137126
+      }
+    },
+    "baseline_error_recovery": {
+      "baseline": {
+        "success_rate_percent": 38.98916967509025,
+        "successes_by_seed": [
+          108,
+          108,
+          108
+        ],
+        "episodes": 277,
+        "mean_delay_with_censored_at_common_horizon_s": 1.531517838743189
+      },
+      "uniform_history": {
+        "success_rate_percent": 41.15523465703971,
+        "successes_by_seed": [
+          114,
+          114,
+          114
+        ],
+        "episodes": 277,
+        "mean_delay_with_censored_at_common_horizon_s": 1.4642047486150307
+      },
+      "current_only": {
+        "success_rate_percent": 40.19253910950662,
+        "successes_by_seed": [
+          113,
+          110,
+          111
+        ],
+        "episodes": 277,
+        "mean_delay_with_censored_at_common_horizon_s": 1.2388685865666176
+      },
+      "temporal": {
+        "success_rate_percent": 37.06377858002407,
+        "successes_by_seed": [
+          100,
+          103,
+          105
+        ],
+        "episodes": 277,
+        "mean_delay_with_censored_at_common_horizon_s": 1.5008433886526868
+      },
+      "ungated_temporal": {
+        "success_rate_percent": 37.06377858002407,
+        "successes_by_seed": [
+          101,
+          104,
+          103
+        ],
+        "episodes": 277,
+        "mean_delay_with_censored_at_common_horizon_s": 1.479663201044039
+      }
+    }
+  },
+  "accuracy_mean_percent": {
+    "baseline": 91.63285774392294,
+    "uniform_history": 91.83643730071175,
+    "current_only": 92.31883747320495,
+    "temporal": 92.32816049612772,
+    "ungated_temporal": 92.42576413351262
+  },
+  "rescue_mean": {
+    "baseline": 0.0,
+    "uniform_history": 47890.0,
+    "current_only": 77138.33333333333,
+    "temporal": 72482.33333333333,
+    "ungated_temporal": 91910.33333333333
+  },
+  "harm_mean": {
+    "baseline": 0.0,
+    "uniform_history": 36113.0,
+    "current_only": 37454.666666666664,
+    "temporal": 32259.333333333332,
+    "ungated_temporal": 46041.0
+  },
+  "labeled_points": 5784962
+}

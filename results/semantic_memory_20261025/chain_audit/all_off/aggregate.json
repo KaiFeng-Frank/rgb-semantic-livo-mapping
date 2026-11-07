@@ -1,0 +1,2401 @@
+{
+  "train": {
+    "opportunities": [
+      100,
+      121,
+      97
+    ],
+    "anchor_opportunities": [
+      96,
+      99,
+      112
+    ],
+    "funnel": {
+      "raw_identity": [
+        100,
+        121,
+        97
+      ],
+      "stored": [
+        100,
+        121,
+        97
+      ],
+      "readable": [
+        100,
+        121,
+        97
+      ],
+      "queried": [
+        96,
+        112,
+        91
+      ],
+      "local": [
+        67,
+        76,
+        67
+      ],
+      "shortlist": [
+        67,
+        76,
+        67
+      ],
+      "retrieved": [
+        57,
+        65,
+        54
+      ],
+      "repaired": [
+        6,
+        19,
+        15
+      ]
+    },
+    "totals": {
+      "all_object_harms": [
+        8,
+        12,
+        10
+      ],
+      "all_object_repairs": [
+        8,
+        27,
+        19
+      ],
+      "anchor_current_wrong": [
+        469,
+        486,
+        499
+      ],
+      "anchor_opportunities": [
+        96,
+        99,
+        112
+      ],
+      "bounded_reachable_error_points_enough_for_recognition": [
+        83,
+        101,
+        79
+      ],
+      "clean_existing_gt_repairs": [
+        6,
+        19,
+        15
+      ],
+      "confidence_error_points_enough_for_recognition": [
+        89,
+        106,
+        86
+      ],
+      "current_wrong": [
+        461,
+        495,
+        451
+      ],
+      "no_error_query_due_budget": [
+        0,
+        0,
+        0
+      ],
+      "no_error_query_due_confidence": [
+        4,
+        9,
+        6
+      ],
+      "observations": [
+        2424,
+        2424,
+        2424
+      ],
+      "opportunities": [
+        100,
+        121,
+        97
+      ],
+      "opportunity_anchor_already_correct": [
+        7,
+        25,
+        6
+      ],
+      "queried_error_points_enough_for_recognition": [
+        89,
+        106,
+        85
+      ],
+      "retrieved_any_but_not_repaired": [
+        51,
+        46,
+        39
+      ],
+      "retrieved_enough_but_not_repaired": [
+        30,
+        30,
+        20
+      ],
+      "retrieved_good_error_points_enough_for_recognition": [
+        36,
+        49,
+        35
+      ],
+      "supplied_enough_but_not_repaired": [
+        33,
+        34,
+        24
+      ],
+      "supplied_good_error_points_enough_for_recognition": [
+        39,
+        53,
+        41
+      ],
+      "supply_raw_gt_repairs": [
+        6,
+        19,
+        17
+      ],
+      "temporal_repairs": [
+        6,
+        19,
+        15
+      ]
+    },
+    "per_class": {
+      "0": [
+        {
+          "opportunities": 1,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 1,
+            "stored": 1,
+            "readable": 1,
+            "queried": 1,
+            "local": 1,
+            "shortlist": 1,
+            "retrieved": 1,
+            "repaired": 0
+          },
+          "query_enough": 1,
+          "bounded_enough": 1,
+          "retrieved_enough": 1,
+          "supplied_enough": 1
+        },
+        {
+          "opportunities": 2,
+          "repairs": {
+            "temporal": 1,
+            "clean_existing_gt": 1,
+            "supply_raw_gt": 1
+          },
+          "funnel": {
+            "raw_identity": 2,
+            "stored": 2,
+            "readable": 2,
+            "queried": 2,
+            "local": 2,
+            "shortlist": 2,
+            "retrieved": 2,
+            "repaired": 1
+          },
+          "query_enough": 2,
+          "bounded_enough": 2,
+          "retrieved_enough": 2,
+          "supplied_enough": 2
+        },
+        {
+          "opportunities": 1,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 1,
+            "stored": 1,
+            "readable": 1,
+            "queried": 1,
+            "local": 1,
+            "shortlist": 1,
+            "retrieved": 1,
+            "repaired": 0
+          },
+          "query_enough": 1,
+          "bounded_enough": 1,
+          "retrieved_enough": 1,
+          "supplied_enough": 1
+        }
+      ],
+      "2": [
+        {
+          "opportunities": 2,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 2,
+            "stored": 2,
+            "readable": 2,
+            "queried": 2,
+            "local": 2,
+            "shortlist": 2,
+            "retrieved": 1,
+            "repaired": 0
+          },
+          "query_enough": 2,
+          "bounded_enough": 2,
+          "retrieved_enough": 0,
+          "supplied_enough": 0
+        },
+        {
+          "opportunities": 2,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 2,
+            "stored": 2,
+            "readable": 2,
+            "queried": 2,
+            "local": 2,
+            "shortlist": 2,
+            "retrieved": 0,
+            "repaired": 0
+          },
+          "query_enough": 2,
+          "bounded_enough": 1,
+          "retrieved_enough": 0,
+          "supplied_enough": 0
+        },
+        {
+          "opportunities": 2,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 2,
+            "stored": 2,
+            "readable": 2,
+            "queried": 2,
+            "local": 2,
+            "shortlist": 2,
+            "retrieved": 0,
+            "repaired": 0
+          },
+          "query_enough": 2,
+          "bounded_enough": 1,
+          "retrieved_enough": 0,
+          "supplied_enough": 0
+        }
+      ],
+      "3": [
+        {
+          "opportunities": 75,
+          "repairs": {
+            "temporal": 6,
+            "clean_existing_gt": 6,
+            "supply_raw_gt": 6
+          },
+          "funnel": {
+            "raw_identity": 75,
+            "stored": 75,
+            "readable": 75,
+            "queried": 72,
+            "local": 50,
+            "shortlist": 50,
+            "retrieved": 48,
+            "repaired": 6
+          },
+          "query_enough": 69,
+          "bounded_enough": 64,
+          "retrieved_enough": 32,
+          "supplied_enough": 35
+        },
+        {
+          "opportunities": 95,
+          "repairs": {
+            "temporal": 17,
+            "clean_existing_gt": 17,
+            "supply_raw_gt": 17
+          },
+          "funnel": {
+            "raw_identity": 95,
+            "stored": 95,
+            "readable": 95,
+            "queried": 91,
+            "local": 61,
+            "shortlist": 61,
+            "retrieved": 59,
+            "repaired": 17
+          },
+          "query_enough": 88,
+          "bounded_enough": 84,
+          "retrieved_enough": 44,
+          "supplied_enough": 47
+        },
+        {
+          "opportunities": 74,
+          "repairs": {
+            "temporal": 14,
+            "clean_existing_gt": 14,
+            "supply_raw_gt": 16
+          },
+          "funnel": {
+            "raw_identity": 74,
+            "stored": 74,
+            "readable": 74,
+            "queried": 70,
+            "local": 52,
+            "shortlist": 52,
+            "retrieved": 49,
+            "repaired": 14
+          },
+          "query_enough": 67,
+          "bounded_enough": 62,
+          "retrieved_enough": 31,
+          "supplied_enough": 36
+        }
+      ],
+      "5": [
+        {
+          "opportunities": 1,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 1,
+            "stored": 1,
+            "readable": 1,
+            "queried": 0,
+            "local": 0,
+            "shortlist": 0,
+            "retrieved": 0,
+            "repaired": 0
+          },
+          "query_enough": 0,
+          "bounded_enough": 0,
+          "retrieved_enough": 0,
+          "supplied_enough": 0
+        },
+        {
+          "opportunities": 1,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 1,
+            "stored": 1,
+            "readable": 1,
+            "queried": 0,
+            "local": 0,
+            "shortlist": 0,
+            "retrieved": 0,
+            "repaired": 0
+          },
+          "query_enough": 0,
+          "bounded_enough": 0,
+          "retrieved_enough": 0,
+          "supplied_enough": 0
+        },
+        {
+          "opportunities": 1,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 1,
+            "stored": 1,
+            "readable": 1,
+            "queried": 0,
+            "local": 0,
+            "shortlist": 0,
+            "retrieved": 0,
+            "repaired": 0
+          },
+          "query_enough": 0,
+          "bounded_enough": 0,
+          "retrieved_enough": 0,
+          "supplied_enough": 0
+        }
+      ],
+      "6": [
+        {
+          "opportunities": 5,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 5,
+            "stored": 5,
+            "readable": 5,
+            "queried": 5,
+            "local": 4,
+            "shortlist": 4,
+            "retrieved": 3,
+            "repaired": 0
+          },
+          "query_enough": 5,
+          "bounded_enough": 4,
+          "retrieved_enough": 2,
+          "supplied_enough": 2
+        },
+        {
+          "opportunities": 4,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 4,
+            "stored": 4,
+            "readable": 4,
+            "queried": 4,
+            "local": 3,
+            "shortlist": 3,
+            "retrieved": 2,
+            "repaired": 0
+          },
+          "query_enough": 4,
+          "bounded_enough": 4,
+          "retrieved_enough": 2,
+          "supplied_enough": 2
+        },
+        {
+          "opportunities": 4,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 4,
+            "stored": 4,
+            "readable": 4,
+            "queried": 4,
+            "local": 3,
+            "shortlist": 3,
+            "retrieved": 2,
+            "repaired": 0
+          },
+          "query_enough": 4,
+          "bounded_enough": 4,
+          "retrieved_enough": 2,
+          "supplied_enough": 2
+        }
+      ],
+      "8": [
+        {
+          "opportunities": 1,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 1,
+            "stored": 1,
+            "readable": 1,
+            "queried": 1,
+            "local": 1,
+            "shortlist": 1,
+            "retrieved": 1,
+            "repaired": 0
+          },
+          "query_enough": 1,
+          "bounded_enough": 1,
+          "retrieved_enough": 1,
+          "supplied_enough": 1
+        },
+        {
+          "opportunities": 1,
+          "repairs": {
+            "temporal": 1,
+            "clean_existing_gt": 1,
+            "supply_raw_gt": 1
+          },
+          "funnel": {
+            "raw_identity": 1,
+            "stored": 1,
+            "readable": 1,
+            "queried": 1,
+            "local": 1,
+            "shortlist": 1,
+            "retrieved": 1,
+            "repaired": 1
+          },
+          "query_enough": 1,
+          "bounded_enough": 1,
+          "retrieved_enough": 1,
+          "supplied_enough": 1
+        },
+        {
+          "opportunities": 1,
+          "repairs": {
+            "temporal": 1,
+            "clean_existing_gt": 1,
+            "supply_raw_gt": 1
+          },
+          "funnel": {
+            "raw_identity": 1,
+            "stored": 1,
+            "readable": 1,
+            "queried": 1,
+            "local": 1,
+            "shortlist": 1,
+            "retrieved": 1,
+            "repaired": 1
+          },
+          "query_enough": 1,
+          "bounded_enough": 1,
+          "retrieved_enough": 1,
+          "supplied_enough": 1
+        }
+      ],
+      "9": [
+        {
+          "opportunities": 15,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 15,
+            "stored": 15,
+            "readable": 15,
+            "queried": 15,
+            "local": 9,
+            "shortlist": 9,
+            "retrieved": 3,
+            "repaired": 0
+          },
+          "query_enough": 11,
+          "bounded_enough": 11,
+          "retrieved_enough": 0,
+          "supplied_enough": 0
+        },
+        {
+          "opportunities": 16,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 16,
+            "stored": 16,
+            "readable": 16,
+            "queried": 12,
+            "local": 7,
+            "shortlist": 7,
+            "retrieved": 1,
+            "repaired": 0
+          },
+          "query_enough": 9,
+          "bounded_enough": 9,
+          "retrieved_enough": 0,
+          "supplied_enough": 1
+        },
+        {
+          "opportunities": 14,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 14,
+            "stored": 14,
+            "readable": 14,
+            "queried": 13,
+            "local": 8,
+            "shortlist": 8,
+            "retrieved": 1,
+            "repaired": 0
+          },
+          "query_enough": 10,
+          "bounded_enough": 10,
+          "retrieved_enough": 0,
+          "supplied_enough": 1
+        }
+      ]
+    }
+  },
+  "dev": {
+    "opportunities": [
+      149,
+      195,
+      167
+    ],
+    "anchor_opportunities": [
+      149,
+      159,
+      166
+    ],
+    "funnel": {
+      "raw_identity": [
+        149,
+        195,
+        167
+      ],
+      "stored": [
+        149,
+        195,
+        167
+      ],
+      "readable": [
+        149,
+        195,
+        167
+      ],
+      "queried": [
+        147,
+        190,
+        162
+      ],
+      "local": [
+        140,
+        181,
+        152
+      ],
+      "shortlist": [
+        139,
+        181,
+        152
+      ],
+      "retrieved": [
+        134,
+        177,
+        148
+      ],
+      "repaired": [
+        12,
+        27,
+        27
+      ]
+    },
+    "totals": {
+      "all_object_harms": [
+        23,
+        28,
+        47
+      ],
+      "all_object_repairs": [
+        18,
+        34,
+        31
+      ],
+      "anchor_current_wrong": [
+        593,
+        616,
+        619
+      ],
+      "anchor_opportunities": [
+        149,
+        159,
+        166
+      ],
+      "bounded_reachable_error_points_enough_for_recognition": [
+        136,
+        176,
+        151
+      ],
+      "clean_existing_gt_repairs": [
+        12,
+        27,
+        28
+      ],
+      "confidence_error_points_enough_for_recognition": [
+        139,
+        179,
+        154
+      ],
+      "current_wrong": [
+        396,
+        434,
+        401
+      ],
+      "no_error_query_due_budget": [
+        0,
+        0,
+        0
+      ],
+      "no_error_query_due_confidence": [
+        2,
+        5,
+        5
+      ],
+      "observations": [
+        2003,
+        2003,
+        2003
+      ],
+      "opportunities": [
+        149,
+        195,
+        167
+      ],
+      "opportunity_anchor_already_correct": [
+        14,
+        51,
+        24
+      ],
+      "queried_error_points_enough_for_recognition": [
+        139,
+        179,
+        154
+      ],
+      "retrieved_any_but_not_repaired": [
+        122,
+        150,
+        121
+      ],
+      "retrieved_enough_but_not_repaired": [
+        103,
+        129,
+        102
+      ],
+      "retrieved_good_error_points_enough_for_recognition": [
+        115,
+        156,
+        129
+      ],
+      "supplied_enough_but_not_repaired": [
+        115,
+        140,
+        113
+      ],
+      "supplied_good_error_points_enough_for_recognition": [
+        127,
+        170,
+        142
+      ],
+      "supply_raw_gt_repairs": [
+        12,
+        30,
+        29
+      ],
+      "temporal_repairs": [
+        12,
+        27,
+        27
+      ]
+    },
+    "per_class": {
+      "0": [
+        {
+          "opportunities": 19,
+          "repairs": {
+            "temporal": 3,
+            "clean_existing_gt": 3,
+            "supply_raw_gt": 3
+          },
+          "funnel": {
+            "raw_identity": 19,
+            "stored": 19,
+            "readable": 19,
+            "queried": 18,
+            "local": 15,
+            "shortlist": 15,
+            "retrieved": 13,
+            "repaired": 3
+          },
+          "query_enough": 13,
+          "bounded_enough": 13,
+          "retrieved_enough": 9,
+          "supplied_enough": 12
+        },
+        {
+          "opportunities": 17,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 17,
+            "stored": 17,
+            "readable": 17,
+            "queried": 16,
+            "local": 11,
+            "shortlist": 11,
+            "retrieved": 9,
+            "repaired": 0
+          },
+          "query_enough": 10,
+          "bounded_enough": 10,
+          "retrieved_enough": 6,
+          "supplied_enough": 10
+        },
+        {
+          "opportunities": 15,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 15,
+            "stored": 15,
+            "readable": 15,
+            "queried": 13,
+            "local": 9,
+            "shortlist": 9,
+            "retrieved": 8,
+            "repaired": 0
+          },
+          "query_enough": 8,
+          "bounded_enough": 8,
+          "retrieved_enough": 4,
+          "supplied_enough": 8
+        }
+      ],
+      "3": [
+        {
+          "opportunities": 119,
+          "repairs": {
+            "temporal": 9,
+            "clean_existing_gt": 9,
+            "supply_raw_gt": 9
+          },
+          "funnel": {
+            "raw_identity": 119,
+            "stored": 119,
+            "readable": 119,
+            "queried": 118,
+            "local": 115,
+            "shortlist": 115,
+            "retrieved": 114,
+            "repaired": 9
+          },
+          "query_enough": 117,
+          "bounded_enough": 114,
+          "retrieved_enough": 101,
+          "supplied_enough": 110
+        },
+        {
+          "opportunities": 168,
+          "repairs": {
+            "temporal": 26,
+            "clean_existing_gt": 26,
+            "supply_raw_gt": 29
+          },
+          "funnel": {
+            "raw_identity": 168,
+            "stored": 168,
+            "readable": 168,
+            "queried": 166,
+            "local": 162,
+            "shortlist": 162,
+            "retrieved": 161,
+            "repaired": 26
+          },
+          "query_enough": 164,
+          "bounded_enough": 162,
+          "retrieved_enough": 148,
+          "supplied_enough": 157
+        },
+        {
+          "opportunities": 142,
+          "repairs": {
+            "temporal": 27,
+            "clean_existing_gt": 28,
+            "supply_raw_gt": 29
+          },
+          "funnel": {
+            "raw_identity": 142,
+            "stored": 142,
+            "readable": 142,
+            "queried": 139,
+            "local": 134,
+            "shortlist": 134,
+            "retrieved": 133,
+            "repaired": 27
+          },
+          "query_enough": 137,
+          "bounded_enough": 136,
+          "retrieved_enough": 121,
+          "supplied_enough": 129
+        }
+      ],
+      "4": [
+        {
+          "opportunities": 4,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 4,
+            "stored": 4,
+            "readable": 4,
+            "queried": 4,
+            "local": 4,
+            "shortlist": 4,
+            "retrieved": 4,
+            "repaired": 0
+          },
+          "query_enough": 4,
+          "bounded_enough": 4,
+          "retrieved_enough": 3,
+          "supplied_enough": 3
+        },
+        {
+          "opportunities": 4,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 4,
+            "stored": 4,
+            "readable": 4,
+            "queried": 4,
+            "local": 4,
+            "shortlist": 4,
+            "retrieved": 4,
+            "repaired": 0
+          },
+          "query_enough": 2,
+          "bounded_enough": 1,
+          "retrieved_enough": 1,
+          "supplied_enough": 1
+        },
+        {
+          "opportunities": 5,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 5,
+            "stored": 5,
+            "readable": 5,
+            "queried": 5,
+            "local": 5,
+            "shortlist": 5,
+            "retrieved": 5,
+            "repaired": 0
+          },
+          "query_enough": 5,
+          "bounded_enough": 4,
+          "retrieved_enough": 4,
+          "supplied_enough": 4
+        }
+      ],
+      "6": [
+        {
+          "opportunities": 6,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 6,
+            "stored": 6,
+            "readable": 6,
+            "queried": 6,
+            "local": 5,
+            "shortlist": 4,
+            "retrieved": 2,
+            "repaired": 0
+          },
+          "query_enough": 5,
+          "bounded_enough": 5,
+          "retrieved_enough": 2,
+          "supplied_enough": 2
+        },
+        {
+          "opportunities": 4,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 4,
+            "stored": 4,
+            "readable": 4,
+            "queried": 2,
+            "local": 2,
+            "shortlist": 2,
+            "retrieved": 1,
+            "repaired": 0
+          },
+          "query_enough": 2,
+          "bounded_enough": 2,
+          "retrieved_enough": 0,
+          "supplied_enough": 1
+        },
+        {
+          "opportunities": 4,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 4,
+            "stored": 4,
+            "readable": 4,
+            "queried": 4,
+            "local": 3,
+            "shortlist": 3,
+            "retrieved": 1,
+            "repaired": 0
+          },
+          "query_enough": 4,
+          "bounded_enough": 3,
+          "retrieved_enough": 0,
+          "supplied_enough": 1
+        }
+      ],
+      "9": [
+        {
+          "opportunities": 1,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 1,
+            "stored": 1,
+            "readable": 1,
+            "queried": 1,
+            "local": 1,
+            "shortlist": 1,
+            "retrieved": 1,
+            "repaired": 0
+          },
+          "query_enough": 0,
+          "bounded_enough": 0,
+          "retrieved_enough": 0,
+          "supplied_enough": 0
+        },
+        {
+          "opportunities": 2,
+          "repairs": {
+            "temporal": 1,
+            "clean_existing_gt": 1,
+            "supply_raw_gt": 1
+          },
+          "funnel": {
+            "raw_identity": 2,
+            "stored": 2,
+            "readable": 2,
+            "queried": 2,
+            "local": 2,
+            "shortlist": 2,
+            "retrieved": 2,
+            "repaired": 1
+          },
+          "query_enough": 1,
+          "bounded_enough": 1,
+          "retrieved_enough": 1,
+          "supplied_enough": 1
+        },
+        {
+          "opportunities": 1,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 1,
+            "stored": 1,
+            "readable": 1,
+            "queried": 1,
+            "local": 1,
+            "shortlist": 1,
+            "retrieved": 1,
+            "repaired": 0
+          },
+          "query_enough": 0,
+          "bounded_enough": 0,
+          "retrieved_enough": 0,
+          "supplied_enough": 0
+        }
+      ]
+    }
+  },
+  "regression": {
+    "opportunities": [
+      150,
+      172,
+      152
+    ],
+    "anchor_opportunities": [
+      140,
+      152,
+      150
+    ],
+    "funnel": {
+      "raw_identity": [
+        150,
+        172,
+        152
+      ],
+      "stored": [
+        150,
+        172,
+        152
+      ],
+      "readable": [
+        150,
+        172,
+        152
+      ],
+      "queried": [
+        143,
+        160,
+        144
+      ],
+      "local": [
+        115,
+        129,
+        114
+      ],
+      "shortlist": [
+        115,
+        129,
+        114
+      ],
+      "retrieved": [
+        92,
+        109,
+        90
+      ],
+      "repaired": [
+        14,
+        24,
+        22
+      ]
+    },
+    "totals": {
+      "all_object_harms": [
+        21,
+        19,
+        22
+      ],
+      "all_object_repairs": [
+        15,
+        29,
+        30
+      ],
+      "anchor_current_wrong": [
+        883,
+        911,
+        906
+      ],
+      "anchor_opportunities": [
+        140,
+        152,
+        150
+      ],
+      "bounded_reachable_error_points_enough_for_recognition": [
+        125,
+        139,
+        121
+      ],
+      "clean_existing_gt_repairs": [
+        14,
+        24,
+        23
+      ],
+      "confidence_error_points_enough_for_recognition": [
+        138,
+        156,
+        136
+      ],
+      "current_wrong": [
+        892,
+        909,
+        882
+      ],
+      "no_error_query_due_budget": [
+        2,
+        5,
+        3
+      ],
+      "no_error_query_due_confidence": [
+        5,
+        7,
+        5
+      ],
+      "observations": [
+        3021,
+        3021,
+        3021
+      ],
+      "opportunities": [
+        150,
+        172,
+        152
+      ],
+      "opportunity_anchor_already_correct": [
+        14,
+        29,
+        16
+      ],
+      "queried_error_points_enough_for_recognition": [
+        137,
+        151,
+        136
+      ],
+      "retrieved_any_but_not_repaired": [
+        78,
+        85,
+        68
+      ],
+      "retrieved_enough_but_not_repaired": [
+        51,
+        57,
+        43
+      ],
+      "retrieved_good_error_points_enough_for_recognition": [
+        65,
+        81,
+        65
+      ],
+      "supplied_enough_but_not_repaired": [
+        59,
+        63,
+        45
+      ],
+      "supplied_good_error_points_enough_for_recognition": [
+        73,
+        90,
+        71
+      ],
+      "supply_raw_gt_repairs": [
+        14,
+        27,
+        26
+      ],
+      "temporal_repairs": [
+        14,
+        24,
+        22
+      ]
+    },
+    "per_class": {
+      "0": [
+        {
+          "opportunities": 18,
+          "repairs": {
+            "temporal": 5,
+            "clean_existing_gt": 5,
+            "supply_raw_gt": 4
+          },
+          "funnel": {
+            "raw_identity": 18,
+            "stored": 18,
+            "readable": 18,
+            "queried": 17,
+            "local": 15,
+            "shortlist": 15,
+            "retrieved": 14,
+            "repaired": 5
+          },
+          "query_enough": 16,
+          "bounded_enough": 16,
+          "retrieved_enough": 13,
+          "supplied_enough": 14
+        },
+        {
+          "opportunities": 17,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 1
+          },
+          "funnel": {
+            "raw_identity": 17,
+            "stored": 17,
+            "readable": 17,
+            "queried": 16,
+            "local": 14,
+            "shortlist": 14,
+            "retrieved": 13,
+            "repaired": 0
+          },
+          "query_enough": 15,
+          "bounded_enough": 15,
+          "retrieved_enough": 12,
+          "supplied_enough": 13
+        },
+        {
+          "opportunities": 14,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 2
+          },
+          "funnel": {
+            "raw_identity": 14,
+            "stored": 14,
+            "readable": 14,
+            "queried": 13,
+            "local": 12,
+            "shortlist": 12,
+            "retrieved": 11,
+            "repaired": 0
+          },
+          "query_enough": 12,
+          "bounded_enough": 12,
+          "retrieved_enough": 10,
+          "supplied_enough": 11
+        }
+      ],
+      "2": [
+        {
+          "opportunities": 5,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 5,
+            "stored": 5,
+            "readable": 5,
+            "queried": 5,
+            "local": 5,
+            "shortlist": 5,
+            "retrieved": 5,
+            "repaired": 0
+          },
+          "query_enough": 5,
+          "bounded_enough": 3,
+          "retrieved_enough": 4,
+          "supplied_enough": 4
+        },
+        {
+          "opportunities": 5,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 5,
+            "stored": 5,
+            "readable": 5,
+            "queried": 5,
+            "local": 5,
+            "shortlist": 5,
+            "retrieved": 5,
+            "repaired": 0
+          },
+          "query_enough": 5,
+          "bounded_enough": 3,
+          "retrieved_enough": 4,
+          "supplied_enough": 4
+        },
+        {
+          "opportunities": 5,
+          "repairs": {
+            "temporal": 1,
+            "clean_existing_gt": 1,
+            "supply_raw_gt": 1
+          },
+          "funnel": {
+            "raw_identity": 5,
+            "stored": 5,
+            "readable": 5,
+            "queried": 5,
+            "local": 5,
+            "shortlist": 5,
+            "retrieved": 5,
+            "repaired": 1
+          },
+          "query_enough": 5,
+          "bounded_enough": 3,
+          "retrieved_enough": 4,
+          "supplied_enough": 4
+        }
+      ],
+      "3": [
+        {
+          "opportunities": 89,
+          "repairs": {
+            "temporal": 9,
+            "clean_existing_gt": 9,
+            "supply_raw_gt": 10
+          },
+          "funnel": {
+            "raw_identity": 89,
+            "stored": 89,
+            "readable": 89,
+            "queried": 87,
+            "local": 67,
+            "shortlist": 67,
+            "retrieved": 59,
+            "repaired": 9
+          },
+          "query_enough": 85,
+          "bounded_enough": 77,
+          "retrieved_enough": 40,
+          "supplied_enough": 44
+        },
+        {
+          "opportunities": 112,
+          "repairs": {
+            "temporal": 21,
+            "clean_existing_gt": 21,
+            "supply_raw_gt": 23
+          },
+          "funnel": {
+            "raw_identity": 112,
+            "stored": 112,
+            "readable": 112,
+            "queried": 108,
+            "local": 87,
+            "shortlist": 87,
+            "retrieved": 79,
+            "repaired": 21
+          },
+          "query_enough": 105,
+          "bounded_enough": 96,
+          "retrieved_enough": 56,
+          "supplied_enough": 64
+        },
+        {
+          "opportunities": 93,
+          "repairs": {
+            "temporal": 19,
+            "clean_existing_gt": 19,
+            "supply_raw_gt": 19
+          },
+          "funnel": {
+            "raw_identity": 93,
+            "stored": 93,
+            "readable": 93,
+            "queried": 91,
+            "local": 69,
+            "shortlist": 69,
+            "retrieved": 62,
+            "repaired": 19
+          },
+          "query_enough": 88,
+          "bounded_enough": 76,
+          "retrieved_enough": 44,
+          "supplied_enough": 48
+        }
+      ],
+      "5": [
+        {
+          "opportunities": 2,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 2,
+            "stored": 2,
+            "readable": 2,
+            "queried": 2,
+            "local": 0,
+            "shortlist": 0,
+            "retrieved": 0,
+            "repaired": 0
+          },
+          "query_enough": 2,
+          "bounded_enough": 1,
+          "retrieved_enough": 0,
+          "supplied_enough": 0
+        },
+        {
+          "opportunities": 2,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 2,
+            "stored": 2,
+            "readable": 2,
+            "queried": 2,
+            "local": 0,
+            "shortlist": 0,
+            "retrieved": 0,
+            "repaired": 0
+          },
+          "query_enough": 2,
+          "bounded_enough": 1,
+          "retrieved_enough": 0,
+          "supplied_enough": 0
+        },
+        {
+          "opportunities": 2,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 2,
+            "stored": 2,
+            "readable": 2,
+            "queried": 2,
+            "local": 0,
+            "shortlist": 0,
+            "retrieved": 0,
+            "repaired": 0
+          },
+          "query_enough": 2,
+          "bounded_enough": 1,
+          "retrieved_enough": 0,
+          "supplied_enough": 0
+        }
+      ],
+      "6": [
+        {
+          "opportunities": 28,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 28,
+            "stored": 28,
+            "readable": 28,
+            "queried": 26,
+            "local": 23,
+            "shortlist": 23,
+            "retrieved": 11,
+            "repaired": 0
+          },
+          "query_enough": 23,
+          "bounded_enough": 22,
+          "retrieved_enough": 6,
+          "supplied_enough": 9
+        },
+        {
+          "opportunities": 27,
+          "repairs": {
+            "temporal": 1,
+            "clean_existing_gt": 1,
+            "supply_raw_gt": 1
+          },
+          "funnel": {
+            "raw_identity": 27,
+            "stored": 27,
+            "readable": 27,
+            "queried": 23,
+            "local": 19,
+            "shortlist": 19,
+            "retrieved": 8,
+            "repaired": 1
+          },
+          "query_enough": 18,
+          "bounded_enough": 18,
+          "retrieved_enough": 5,
+          "supplied_enough": 5
+        },
+        {
+          "opportunities": 25,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 1,
+            "supply_raw_gt": 1
+          },
+          "funnel": {
+            "raw_identity": 25,
+            "stored": 25,
+            "readable": 25,
+            "queried": 22,
+            "local": 19,
+            "shortlist": 19,
+            "retrieved": 7,
+            "repaired": 0
+          },
+          "query_enough": 18,
+          "bounded_enough": 18,
+          "retrieved_enough": 4,
+          "supplied_enough": 4
+        }
+      ],
+      "7": [
+        {
+          "opportunities": 1,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 1,
+            "stored": 1,
+            "readable": 1,
+            "queried": 1,
+            "local": 1,
+            "shortlist": 1,
+            "retrieved": 1,
+            "repaired": 0
+          },
+          "query_enough": 1,
+          "bounded_enough": 1,
+          "retrieved_enough": 1,
+          "supplied_enough": 1
+        },
+        {
+          "opportunities": 1,
+          "repairs": {
+            "temporal": 1,
+            "clean_existing_gt": 1,
+            "supply_raw_gt": 1
+          },
+          "funnel": {
+            "raw_identity": 1,
+            "stored": 1,
+            "readable": 1,
+            "queried": 1,
+            "local": 1,
+            "shortlist": 1,
+            "retrieved": 1,
+            "repaired": 1
+          },
+          "query_enough": 1,
+          "bounded_enough": 1,
+          "retrieved_enough": 1,
+          "supplied_enough": 1
+        },
+        {
+          "opportunities": 1,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 1,
+            "stored": 1,
+            "readable": 1,
+            "queried": 1,
+            "local": 1,
+            "shortlist": 1,
+            "retrieved": 1,
+            "repaired": 0
+          },
+          "query_enough": 1,
+          "bounded_enough": 1,
+          "retrieved_enough": 1,
+          "supplied_enough": 1
+        }
+      ],
+      "9": [
+        {
+          "opportunities": 7,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 7,
+            "stored": 7,
+            "readable": 7,
+            "queried": 5,
+            "local": 4,
+            "shortlist": 4,
+            "retrieved": 2,
+            "repaired": 0
+          },
+          "query_enough": 5,
+          "bounded_enough": 5,
+          "retrieved_enough": 1,
+          "supplied_enough": 1
+        },
+        {
+          "opportunities": 8,
+          "repairs": {
+            "temporal": 1,
+            "clean_existing_gt": 1,
+            "supply_raw_gt": 1
+          },
+          "funnel": {
+            "raw_identity": 8,
+            "stored": 8,
+            "readable": 8,
+            "queried": 5,
+            "local": 3,
+            "shortlist": 3,
+            "retrieved": 3,
+            "repaired": 1
+          },
+          "query_enough": 5,
+          "bounded_enough": 5,
+          "retrieved_enough": 3,
+          "supplied_enough": 3
+        },
+        {
+          "opportunities": 12,
+          "repairs": {
+            "temporal": 2,
+            "clean_existing_gt": 2,
+            "supply_raw_gt": 3
+          },
+          "funnel": {
+            "raw_identity": 12,
+            "stored": 12,
+            "readable": 12,
+            "queried": 10,
+            "local": 8,
+            "shortlist": 8,
+            "retrieved": 4,
+            "repaired": 2
+          },
+          "query_enough": 10,
+          "bounded_enough": 10,
+          "retrieved_enough": 2,
+          "supplied_enough": 3
+        }
+      ]
+    }
+  },
+  "confirmation": {
+    "opportunities": [
+      299,
+      353,
+      309
+    ],
+    "anchor_opportunities": [
+      283,
+      302,
+      326
+    ],
+    "funnel": {
+      "raw_identity": [
+        299,
+        353,
+        309
+      ],
+      "stored": [
+        292,
+        347,
+        303
+      ],
+      "readable": [
+        292,
+        347,
+        303
+      ],
+      "queried": [
+        285,
+        330,
+        292
+      ],
+      "local": [
+        264,
+        310,
+        270
+      ],
+      "shortlist": [
+        264,
+        310,
+        270
+      ],
+      "retrieved": [
+        232,
+        277,
+        239
+      ],
+      "repaired": [
+        31,
+        46,
+        43
+      ]
+    },
+    "totals": {
+      "all_object_harms": [
+        33,
+        24,
+        36
+      ],
+      "all_object_repairs": [
+        34,
+        55,
+        50
+      ],
+      "anchor_current_wrong": [
+        1280,
+        1333,
+        1345
+      ],
+      "anchor_opportunities": [
+        283,
+        302,
+        326
+      ],
+      "bounded_reachable_error_points_enough_for_recognition": [
+        237,
+        284,
+        246
+      ],
+      "clean_existing_gt_repairs": [
+        31,
+        50,
+        43
+      ],
+      "confidence_error_points_enough_for_recognition": [
+        264,
+        309,
+        276
+      ],
+      "current_wrong": [
+        1294,
+        1372,
+        1282
+      ],
+      "no_error_query_due_budget": [
+        1,
+        5,
+        3
+      ],
+      "no_error_query_due_confidence": [
+        6,
+        13,
+        8
+      ],
+      "observations": [
+        3891,
+        3891,
+        3891
+      ],
+      "opportunities": [
+        299,
+        353,
+        309
+      ],
+      "opportunity_anchor_already_correct": [
+        19,
+        69,
+        27
+      ],
+      "queried_error_points_enough_for_recognition": [
+        257,
+        301,
+        272
+      ],
+      "retrieved_any_but_not_repaired": [
+        201,
+        231,
+        196
+      ],
+      "retrieved_enough_but_not_repaired": [
+        144,
+        183,
+        144
+      ],
+      "retrieved_good_error_points_enough_for_recognition": [
+        175,
+        229,
+        187
+      ],
+      "supplied_enough_but_not_repaired": [
+        170,
+        200,
+        165
+      ],
+      "supplied_good_error_points_enough_for_recognition": [
+        202,
+        248,
+        211
+      ],
+      "supply_raw_gt_repairs": [
+        32,
+        48,
+        46
+      ],
+      "temporal_repairs": [
+        31,
+        47,
+        44
+      ]
+    },
+    "per_class": {
+      "0": [
+        {
+          "opportunities": 2,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 2,
+            "stored": 2,
+            "readable": 2,
+            "queried": 2,
+            "local": 2,
+            "shortlist": 2,
+            "retrieved": 2,
+            "repaired": 0
+          },
+          "query_enough": 2,
+          "bounded_enough": 2,
+          "retrieved_enough": 2,
+          "supplied_enough": 2
+        },
+        {
+          "opportunities": 1,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 1,
+            "stored": 1,
+            "readable": 1,
+            "queried": 1,
+            "local": 1,
+            "shortlist": 1,
+            "retrieved": 1,
+            "repaired": 0
+          },
+          "query_enough": 1,
+          "bounded_enough": 1,
+          "retrieved_enough": 1,
+          "supplied_enough": 1
+        },
+        null
+      ],
+      "2": [
+        {
+          "opportunities": 15,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 15,
+            "stored": 15,
+            "readable": 15,
+            "queried": 15,
+            "local": 13,
+            "shortlist": 13,
+            "retrieved": 9,
+            "repaired": 0
+          },
+          "query_enough": 14,
+          "bounded_enough": 5,
+          "retrieved_enough": 4,
+          "supplied_enough": 6
+        },
+        {
+          "opportunities": 14,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 14,
+            "stored": 14,
+            "readable": 14,
+            "queried": 14,
+            "local": 13,
+            "shortlist": 13,
+            "retrieved": 9,
+            "repaired": 0
+          },
+          "query_enough": 13,
+          "bounded_enough": 5,
+          "retrieved_enough": 3,
+          "supplied_enough": 5
+        },
+        {
+          "opportunities": 16,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 16,
+            "stored": 16,
+            "readable": 16,
+            "queried": 16,
+            "local": 14,
+            "shortlist": 14,
+            "retrieved": 10,
+            "repaired": 0
+          },
+          "query_enough": 15,
+          "bounded_enough": 7,
+          "retrieved_enough": 5,
+          "supplied_enough": 7
+        }
+      ],
+      "3": [
+        {
+          "opportunities": 191,
+          "repairs": {
+            "temporal": 29,
+            "clean_existing_gt": 29,
+            "supply_raw_gt": 28
+          },
+          "funnel": {
+            "raw_identity": 191,
+            "stored": 191,
+            "readable": 191,
+            "queried": 187,
+            "local": 177,
+            "shortlist": 177,
+            "retrieved": 171,
+            "repaired": 29
+          },
+          "query_enough": 178,
+          "bounded_enough": 170,
+          "retrieved_enough": 140,
+          "supplied_enough": 153
+        },
+        {
+          "opportunities": 257,
+          "repairs": {
+            "temporal": 41,
+            "clean_existing_gt": 45,
+            "supply_raw_gt": 42
+          },
+          "funnel": {
+            "raw_identity": 257,
+            "stored": 257,
+            "readable": 257,
+            "queried": 251,
+            "local": 237,
+            "shortlist": 237,
+            "retrieved": 232,
+            "repaired": 41
+          },
+          "query_enough": 244,
+          "bounded_enough": 236,
+          "retrieved_enough": 206,
+          "supplied_enough": 217
+        },
+        {
+          "opportunities": 215,
+          "repairs": {
+            "temporal": 40,
+            "clean_existing_gt": 40,
+            "supply_raw_gt": 41
+          },
+          "funnel": {
+            "raw_identity": 215,
+            "stored": 215,
+            "readable": 215,
+            "queried": 210,
+            "local": 196,
+            "shortlist": 196,
+            "retrieved": 190,
+            "repaired": 40
+          },
+          "query_enough": 204,
+          "bounded_enough": 194,
+          "retrieved_enough": 161,
+          "supplied_enough": 173
+        }
+      ],
+      "5": [
+        {
+          "opportunities": 9,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 9,
+            "stored": 9,
+            "readable": 9,
+            "queried": 9,
+            "local": 9,
+            "shortlist": 9,
+            "retrieved": 4,
+            "repaired": 0
+          },
+          "query_enough": 2,
+          "bounded_enough": 2,
+          "retrieved_enough": 0,
+          "supplied_enough": 0
+        },
+        {
+          "opportunities": 10,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 10,
+            "stored": 10,
+            "readable": 10,
+            "queried": 10,
+            "local": 10,
+            "shortlist": 10,
+            "retrieved": 5,
+            "repaired": 0
+          },
+          "query_enough": 3,
+          "bounded_enough": 3,
+          "retrieved_enough": 1,
+          "supplied_enough": 1
+        },
+        {
+          "opportunities": 10,
+          "repairs": {
+            "temporal": 1,
+            "clean_existing_gt": 1,
+            "supply_raw_gt": 1
+          },
+          "funnel": {
+            "raw_identity": 10,
+            "stored": 10,
+            "readable": 10,
+            "queried": 10,
+            "local": 10,
+            "shortlist": 10,
+            "retrieved": 5,
+            "repaired": 1
+          },
+          "query_enough": 6,
+          "bounded_enough": 2,
+          "retrieved_enough": 2,
+          "supplied_enough": 3
+        }
+      ],
+      "6": [
+        {
+          "opportunities": 56,
+          "repairs": {
+            "temporal": 2,
+            "clean_existing_gt": 2,
+            "supply_raw_gt": 4
+          },
+          "funnel": {
+            "raw_identity": 56,
+            "stored": 49,
+            "readable": 49,
+            "queried": 46,
+            "local": 38,
+            "shortlist": 38,
+            "retrieved": 27,
+            "repaired": 2
+          },
+          "query_enough": 37,
+          "bounded_enough": 34,
+          "retrieved_enough": 15,
+          "supplied_enough": 24
+        },
+        {
+          "opportunities": 46,
+          "repairs": {
+            "temporal": 4,
+            "clean_existing_gt": 3,
+            "supply_raw_gt": 4
+          },
+          "funnel": {
+            "raw_identity": 46,
+            "stored": 40,
+            "readable": 40,
+            "queried": 31,
+            "local": 27,
+            "shortlist": 27,
+            "retrieved": 15,
+            "repaired": 3
+          },
+          "query_enough": 20,
+          "bounded_enough": 19,
+          "retrieved_enough": 7,
+          "supplied_enough": 12
+        },
+        {
+          "opportunities": 45,
+          "repairs": {
+            "temporal": 3,
+            "clean_existing_gt": 2,
+            "supply_raw_gt": 4
+          },
+          "funnel": {
+            "raw_identity": 45,
+            "stored": 39,
+            "readable": 39,
+            "queried": 33,
+            "local": 28,
+            "shortlist": 28,
+            "retrieved": 18,
+            "repaired": 2
+          },
+          "query_enough": 26,
+          "bounded_enough": 22,
+          "retrieved_enough": 6,
+          "supplied_enough": 14
+        }
+      ],
+      "8": [
+        {
+          "opportunities": 10,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 10,
+            "stored": 10,
+            "readable": 10,
+            "queried": 10,
+            "local": 10,
+            "shortlist": 10,
+            "retrieved": 5,
+            "repaired": 0
+          },
+          "query_enough": 9,
+          "bounded_enough": 9,
+          "retrieved_enough": 3,
+          "supplied_enough": 5
+        },
+        {
+          "opportunities": 8,
+          "repairs": {
+            "temporal": 1,
+            "clean_existing_gt": 1,
+            "supply_raw_gt": 1
+          },
+          "funnel": {
+            "raw_identity": 8,
+            "stored": 8,
+            "readable": 8,
+            "queried": 8,
+            "local": 8,
+            "shortlist": 8,
+            "retrieved": 3,
+            "repaired": 1
+          },
+          "query_enough": 6,
+          "bounded_enough": 6,
+          "retrieved_enough": 1,
+          "supplied_enough": 2
+        },
+        {
+          "opportunities": 6,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 6,
+            "stored": 6,
+            "readable": 6,
+            "queried": 6,
+            "local": 6,
+            "shortlist": 6,
+            "retrieved": 1,
+            "repaired": 0
+          },
+          "query_enough": 5,
+          "bounded_enough": 5,
+          "retrieved_enough": 1,
+          "supplied_enough": 1
+        }
+      ],
+      "9": [
+        {
+          "opportunities": 16,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 16,
+            "stored": 16,
+            "readable": 16,
+            "queried": 16,
+            "local": 15,
+            "shortlist": 15,
+            "retrieved": 14,
+            "repaired": 0
+          },
+          "query_enough": 15,
+          "bounded_enough": 15,
+          "retrieved_enough": 11,
+          "supplied_enough": 12
+        },
+        {
+          "opportunities": 17,
+          "repairs": {
+            "temporal": 1,
+            "clean_existing_gt": 1,
+            "supply_raw_gt": 1
+          },
+          "funnel": {
+            "raw_identity": 17,
+            "stored": 17,
+            "readable": 17,
+            "queried": 15,
+            "local": 14,
+            "shortlist": 14,
+            "retrieved": 12,
+            "repaired": 1
+          },
+          "query_enough": 14,
+          "bounded_enough": 14,
+          "retrieved_enough": 10,
+          "supplied_enough": 10
+        },
+        {
+          "opportunities": 17,
+          "repairs": {
+            "temporal": 0,
+            "clean_existing_gt": 0,
+            "supply_raw_gt": 0
+          },
+          "funnel": {
+            "raw_identity": 17,
+            "stored": 17,
+            "readable": 17,
+            "queried": 17,
+            "local": 16,
+            "shortlist": 16,
+            "retrieved": 15,
+            "repaired": 0
+          },
+          "query_enough": 16,
+          "bounded_enough": 16,
+          "retrieved_enough": 12,
+          "supplied_enough": 13
+        }
+      ]
+    }
+  }
+}
