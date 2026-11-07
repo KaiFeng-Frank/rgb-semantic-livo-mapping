@@ -2,7 +2,7 @@ name: Offline seq07 loop closure and semantic replay
 
 on:
   push:
-    branches: [codex/seq07-loop-closure]
+    branches: [seq07-loop-closure]
     paths: ['tools/loop_closure/**', '.github/workflows/seq07-loop-closure.yml']
   workflow_dispatch:
 

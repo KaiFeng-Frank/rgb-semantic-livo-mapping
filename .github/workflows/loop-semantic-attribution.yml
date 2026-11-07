@@ -2,7 +2,7 @@ name: Revisit semantic contribution attribution
 
 on:
   push:
-    branches: [codex/loop-semantic-refinement]
+    branches: [loop-semantic-refinement]
     paths: ['tools/loop_semantics/attribution.py', '.github/workflows/loop-semantic-attribution.yml']
   workflow_dispatch:
 
