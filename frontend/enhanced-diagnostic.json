@@ -1,0 +1,98 @@
+{
+  "version": 2,
+  "purpose": "Bounded development mechanism check for causal motion, visual masking and categorical state coupling; no accuracy scoring",
+  "short_sequence": {
+    "sequence": "07",
+    "first_frame": 730,
+    "end_exclusive": 826
+  },
+  "selection": "Fixed around previously documented moving-car frames 755..787, before enhanced estimator replay; this is development data, not holdout",
+  "taxonomy": "native nuScenes16, archived top1 label/confidence; field values are historical class-vote frequencies, not recovered logits",
+  "arms": [
+    "geometry",
+    "motion_B0",
+    "visual_B0",
+    "likelihood_B0",
+    "enhanced_B0"
+  ],
+  "arm_settings": {
+    "geometry": {
+      "enabled": false,
+      "association": false,
+      "boundaries": false,
+      "dynamics": false,
+      "visual_mask": false,
+      "likelihood": false,
+      "adaptive_boundary_noise": false
+    },
+    "motion_B0": {
+      "enabled": true,
+      "association": false,
+      "boundaries": false,
+      "dynamics": true,
+      "visual_mask": false,
+      "likelihood": false,
+      "adaptive_boundary_noise": false
+    },
+    "visual_B0": {
+      "enabled": true,
+      "association": false,
+      "boundaries": false,
+      "dynamics": false,
+      "visual_mask": true,
+      "likelihood": false,
+      "adaptive_boundary_noise": false
+    },
+    "likelihood_B0": {
+      "enabled": true,
+      "association": false,
+      "boundaries": false,
+      "dynamics": false,
+      "visual_mask": false,
+      "likelihood": true,
+      "adaptive_boundary_noise": false
+    },
+    "enhanced_B0": {
+      "enabled": true,
+      "association": true,
+      "boundaries": false,
+      "dynamics": true,
+      "visual_mask": true,
+      "likelihood": true,
+      "adaptive_boundary_noise": false
+    }
+  },
+  "repetitions": 1,
+  "minimum_poses": 80,
+  "diagnostic": true,
+  "playback_rate": 0.125,
+  "middleware": "rmw_cyclonedds_cpp",
+  "training": false,
+  "loop_closure": false,
+  "parameter_search": false,
+  "online_validated": false,
+  "scope": "Cached semantic labels with original point identity/IMU/image timestamps. A single five-arm replay checks execution and activation, not statistical benefit.",
+  "gate": {
+    "coverage": "all arms have identical finite pose timestamps",
+    "motion": "report confirmed moving and uncertain points separately",
+    "visual": "report moving/uncertain mask activation and accepted photometric rows",
+    "likelihood": "must enter actual IEKF with boundary switch off",
+    "decision": "do not infer that semantic tight coupling is ineffective from an incomplete/failed implementation; no larger experiment is automatically admitted"
+  },
+  "frozen_sources": {
+    "frontend/include/semantic_frontend.hpp": "360ca3dc6a8087356568b6fd408a07b24a8bb0d9ae24641a801527e9c05cc25d",
+    "frontend/include/semantic_likelihood.hpp": "855aa7e5e9a00e29f42bdb1aa1e607f0862b4f14e881ff9644dc4b18f9a1cbd2",
+    "frontend/include/semantic_motion.hpp": "39df5e2172e9726e3da29d5654d7a3ccb0913c09f95a662402d284f009ef71a9",
+    "frontend/include/semantic_pcl.hpp": "ab5fd64cc5cd7fd0dfd6fc92e26bf27a97ac6e5da958593d4f317b890e6749db",
+    "frontend/include/semantic_visual.hpp": "fd7c95bb8ffac79bf270adc9a873f7679a0d86e69e4a678e05a7f7a208fa99ca",
+    "frontend/patches/fastlivo2-semantic.patch": "e7db1e0d3aa980d6f0583d03da5312662fb7d154ec61b751fb4c8e115358c026",
+    "frontend/bootstrap.py": "8bc51048bc9f9471584352c2be4c10025634083a51b64d12aaf3ca58aa95578a",
+    "frontend/replay_smoke.py": "ae9bd63ac64bb3da71435676e53b1ed2fd8764f7f0cf69915b552a3db7e67a64",
+    "frontend/input_bridge.py": "650fecfc0e86fa831eec6639c0a973e37c27b1dbaf1bc08534d72dac173f69f4",
+    "src/kitti_scan.py": "5fa4b91431450773684b8bfb76a3b697c94af5187ebb117d8755bf79984f7d03",
+    "src/kitti_to_ros2bag.py": "bdc8ce38da77549a08df0187916dbb43dc1313a93e1cf647db757c1e59bb2784",
+    "config/kitti_velodyne64.yaml": "b868c5a7a0986e8448800d3ef6b9238e1bcde0ccac9dccfa5b0b32c1bc8ddebb",
+    "config/camera_kitti_cam2.yaml": "5748d60a5a867998c55b1cef1e1279199b3ec70945016ac3dc9f2ad7ee97e90f"
+  },
+  "shared_input_fix": "Initialize/recompute upstream blind_sqr from blind in all arms; an uninitialized threshold was exposed by the integration fixture. This is a new shared baseline, not a replay of the old estimator."
+}

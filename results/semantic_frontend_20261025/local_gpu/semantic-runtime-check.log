@@ -1,0 +1,46 @@
+Processing /home/frank/semantic_livo_runtime/wheels/flash_attn-2.8.3-cp311-cp311-linux_x86_64.whl
+Installing collected packages: flash-attn
+  Attempting uninstall: flash-attn
+    Found existing installation: flash_attn 2.8.3
+    Uninstalling flash_attn-2.8.3:
+      Successfully uninstalled flash_attn-2.8.3
+Successfully installed flash-attn-2.8.3
+
+[notice] A new release of pip is available: 24.0 -> 26.2.2
+[notice] To update, run: /home/frank/semantic_livo_runtime/venv/bin/python -m pip install --upgrade pip
+W1025 11:44:23.383000 3211403 site-packages/torch/fx/_symbolic_trace.py:53] is_fx_tracing will return true for both fx.symbolic_trace and torch.export. Please use is_fx_tracing_symbolic_tracing() for specifically fx.symbolic_trace or torch.compiler.is_compiling() for specifically torch.export/compile.
+/home/frank/semantic_livo_runtime/venv/lib/python3.11/site-packages/spconv/pytorch/core.py:127: UserWarning: Using a non-tuple sequence for multidimensional indexing is deprecated and will be changed in pytorch 2.9; use x[tuple(seq)] instead of x[seq]. In pytorch 2.9 this will be interpreted as tensor index, x[torch.tensor(seq)], which will result either in an error or a different result (Triggered internally at /pytorch/torch/csrc/autograd/python_variable_indexing.cpp:347.)
+  ret[slices] = updates.view(*output_shape)
+{
+  "gpu": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+  "capability": [
+    12,
+    0
+  ],
+  "torch": "2.11.0.dev20260201+cu128",
+  "cuda": "12.8",
+  "packages": {
+    "spconv-cu126": "2.3.8",
+    "cumm-cu126": "0.7.11",
+    "torch-scatter": "2.1.2",
+    "flash-attn": "2.8.3"
+  },
+  "checks": {
+    "scatter_max_abs": 2.86102294921875e-06,
+    "spconv_max_abs": 0.0004843473434448242,
+    "flash_max_abs": [
+      0.00031447410583496094,
+      0.0004132986068725586
+    ]
+  },
+  "model": {
+    "strict_load": true,
+    "state_tensors": 488,
+    "parameters": 46159312,
+    "classes": 16,
+    "checkpoint_sha256": "35f5d3aec63ae1c383f4a4146e157aa054860cb12b178d899571287e6f97e5f1",
+    "config_sha256": "e76714dbd93b7eed2e436df0cc2041072d17b1225ef0fd9897283d47edb68804",
+    "source_root": "/home/frank/semantic_livo_runtime/src/Pointcept_v151"
+  }
+}
+RUNTIME_VERIFIED

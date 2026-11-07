@@ -1,0 +1,146 @@
+{
+  "conclusion": "success",
+  "createdAt": "2026-10-25T05:24:10Z",
+  "headSha": "fe7389e3c5a8671f7e876aeb3b97d148eb9f7a76",
+  "jobs": [
+    {
+      "completedAt": "2026-10-25T05:25:24Z",
+      "conclusion": "success",
+      "databaseId": 121085311978,
+      "name": "contracts",
+      "startedAt": "2026-10-25T05:24:14Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Check out exact commit",
+          "number": 2,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Build geometry and causal-input contracts",
+          "number": 3,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 4,
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/actions/runs/40165404469/job/121085311978"
+    },
+    {
+      "completedAt": "2026-10-25T06:14:07Z",
+      "conclusion": "success",
+      "databaseId": 121085312232,
+      "name": "integration",
+      "startedAt": "2026-10-25T05:24:14Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Initialize containers",
+          "number": 2,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Install ROS build and validation dependencies",
+          "number": 3,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Check out exact commit",
+          "number": 4,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Restore pinned frontend and build all sensor paths",
+          "number": 5,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Validate frozen experiment sources",
+          "number": 6,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Exercise the actual state estimator and original point transport",
+          "number": 7,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Recover only the admitted short sequence",
+          "number": 8,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Freeze paired frontend trajectories before reading GT",
+          "number": 9,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Score frozen trajectories",
+          "number": 10,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Assess enhanced accuracy against frozen decision rules",
+          "number": 11,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Preserve evidence without raw data or model archives",
+          "number": 12,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Upload evidence independently of release permissions",
+          "number": 13,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Stop containers",
+          "number": 26,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 27,
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/actions/runs/40165404469/job/121085312232"
+    }
+  ],
+  "status": "completed",
+  "updatedAt": "2026-10-25T06:14:07Z",
+  "url": "https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/actions/runs/40165404469"
+}

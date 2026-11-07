@@ -1,0 +1,44 @@
+{
+  "purpose": "Boundary source diagnostic only; no accuracy scoring",
+  "upstream_commit": "837b7bbc1431cb04cf936528e52c83c835efba8e",
+  "taxonomy": "native nuScenes 16, archived top1 label and confidence",
+  "loop_closure": false,
+  "training": false,
+  "parameter_search": false,
+  "short_sequence": {
+    "sequence": "07",
+    "first_frame": 0,
+    "end_exclusive": 120
+  },
+  "arms": [
+    "geometry",
+    "full_B0",
+    "full_ZS"
+  ],
+  "repetitions": 1,
+  "cache_interpretation": "zero-inference-latency mechanism control only; not online performance",
+  "online_wait_ms": 80,
+  "input_queue_capacity": 4,
+  "boundary_classes": [
+    10,
+    11,
+    12,
+    13
+  ],
+  "boundary_max_information_per_class_pair": 25,
+  "boundary_max_information_per_frame": 100,
+  "boundary_sigma_m": 0.2,
+  "boundary_min_history_updates": 2,
+  "history_updates": 12,
+  "gate": {
+    "off_path": "same inputs must preserve geometry/covariance in controlled integration tests",
+    "state_coupling": "semantic rows must update pose and cross-correlated velocity, and be included in covariance",
+    "causality": "old map frozen during all current-state iterations; no current/future observations",
+    "data": "raw point index carried through exact scan timing/sorting; identical IMU/images/geometry in all arms",
+    "dataset": "all arms retain all supported pose timestamps; report short-sequence errors without selecting a winner",
+    "expansion": "require stable boundary support, reduced local error beyond repeat spread, and no failures before longer runs"
+  },
+  "diagnostic": true,
+  "reference_run": 40125959560,
+  "change": "extract from deskewed pre-voxel cloud; same gates and information caps"
+}

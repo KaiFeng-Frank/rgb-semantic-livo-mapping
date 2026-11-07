@@ -1,0 +1,24 @@
+{
+  "scope": "local synthetic estimator and ROS startup verification; not driving performance",
+  "commit": "b06090e2a1f4810a3272394e76714e12cc97be16",
+  "upstream": "837b7bbc1431cb04cf936528e52c83c835efba8e",
+  "state_update": {
+    "off_y": 0.2,
+    "on_y": 0.0571592,
+    "coupled_vy": -0.0285682,
+    "boundary_rows": 25.0,
+    "off_variance": 0.1,
+    "on_variance": 0.0285796
+  },
+  "startup_modes": [
+    "geometry",
+    "semantic"
+  ],
+  "input_tests": 6,
+  "raw_data_downloaded_locally": false,
+  "implementation_sha256": {
+    "frontend/include/semantic_frontend.hpp": "3356a962ed44371a73672bb49eba049066419077459ecfce1917ef74220052cc",
+    "frontend/include/semantic_pcl.hpp": "ab5fd64cc5cd7fd0dfd6fc92e26bf27a97ac6e5da958593d4f317b890e6749db",
+    "frontend/patches/fastlivo2-semantic.patch": "64293b4893e57c34bb4c7b8f748e76ccf8e79ae15d6077ebda7d61bc5bbd694c"
+  }
+}

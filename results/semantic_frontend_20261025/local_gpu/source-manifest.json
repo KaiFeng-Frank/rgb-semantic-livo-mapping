@@ -1,0 +1,1682 @@
+[
+  {
+    "path": "src/Pointcept_v151/.github/workflows/formatter.yml",
+    "bytes": 386,
+    "sha256": "8b3f4266ba51f1107d070f89ba625e6bdd6e3ff34b32a795f270d82075833d6d"
+  },
+  {
+    "path": "src/Pointcept_v151/LICENSE",
+    "bytes": 1066,
+    "sha256": "33287c1b71d0ce42d2a9d96e4451ef7668362733dc72c11973c3de1181b18153"
+  },
+  {
+    "path": "src/Pointcept_v151/README.md",
+    "bytes": 44014,
+    "sha256": "bfe16b521187422727d5af5df4b67942bbc2e4d8c001a94c0b1a214cefdb1907"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/_base_/default_runtime.py",
+    "bytes": 1161,
+    "sha256": "a17717980ba4086eb40a714dc5f60325cd6a87f483c2232743727f83373f4037"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/modelnet40/cls-spunet-v1m1-0-base.py",
+    "bytes": 4653,
+    "sha256": "15d541c9e22795ef2a247be6bb3bb0f687081958227801b1edd50f85e3a04323"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/nuscenes/semseg-ppt-v1m1-0-nu-sk-wa-spunet.py",
+    "bytes": 13090,
+    "sha256": "9fada266a0cfdc3d64d227fc8ecaab2866040f6ec4501fcb4237a3efd1a04059"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/nuscenes/semseg-ppt-v1m2-0-nu-sk-wa-spunet.py",
+    "bytes": 11801,
+    "sha256": "a47606fee9b954522c61f458c72c6129075d1b8b86f459e6b515b3a7563ebfbe"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/nuscenes/semseg-ppt-v1m2-1-nu-sk-wa-spunet-submit.py",
+    "bytes": 11030,
+    "sha256": "f5d089eb21cd2d10f542aa831cf51a700469467919c9674c64beac89f2466ea0"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/nuscenes/semseg-pt-v2m2-0-base.py",
+    "bytes": 5619,
+    "sha256": "8ce2ecc30a7bd057785df0784cd16eaf92011a275c45b14ee5d72bfd285bcd31"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/nuscenes/semseg-pt-v2m2-1-benchmark-submit.py",
+    "bytes": 5004,
+    "sha256": "02cf31af5d12dc05a8158f52f0f3d45866f85b2898dd7347d73d1618bbf4282d"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/nuscenes/semseg-pt-v3m1-0-base.py",
+    "bytes": 6794,
+    "sha256": "da9c54895df9af887efcf4495dd4f32e0ec8605f6383290a5e0bc404212c591e"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/nuscenes/semseg-spunet-v1m1-0-base.py",
+    "bytes": 5757,
+    "sha256": "9db4d04b11dd63de46fba942e8787f5a3ad4e64a4b4cce9a12fef1981536ac19"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/s3dis/insseg-pointgroup-v1m1-0-spunet-base-vs0p02-sc-aug.py",
+    "bytes": 5706,
+    "sha256": "c40e39d2c3ab47c734afe131b00756281161432615bba32756a4f580c740c7df"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/s3dis/insseg-pointgroup-v1m1-0-spunet-base-vs0p02.py",
+    "bytes": 5708,
+    "sha256": "a4177d9ed6ee566abbe628d2ab583d378789f02c3818643fe5e3a7abdbaed6a9"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/s3dis/insseg-pointgroup-v1m1-0-spunet-base.py",
+    "bytes": 5729,
+    "sha256": "7bcd961404ac890f1c9ad61f0aa990781dfd7b42d427961c98887d9e2798daf4"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/s3dis/insseg-ppt-v1m1-0-pointgroup-spunet-ft-vs0p05.py",
+    "bytes": 8161,
+    "sha256": "62b5d76212f53b931c305edc7b8219a45bc12d13967f374048856c80fbed29d2"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/s3dis/insseg-ppt-v1m1-0-pointgroup-spunet-ft.py",
+    "bytes": 8161,
+    "sha256": "a31e7acfd28d12f8ca0332b0ffca724a45d25fcebdf71ad8e94bf5d067dca31c"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/s3dis/semseg-minkunet34c-0-base.py",
+    "bytes": 6014,
+    "sha256": "2b2d9b95043ea5ee025b98508779087a7ba7367f2d3324bd9d40951e805c5c9d"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/s3dis/semseg-ppt-v1m1-0-s3-sc-st-spunet.py",
+    "bytes": 17177,
+    "sha256": "af21ab79216db47c61d1cf5ac47d58a2eaaf0489c7f0c0153664aad90a97572c"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/s3dis/semseg-pt-v1-0-base.py",
+    "bytes": 5866,
+    "sha256": "2a66edd26afc3d2ba919d2903a1c1c111e9d05026789d4a9691916eaf3dc5e35"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/s3dis/semseg-pt-v2m1-0-base.py",
+    "bytes": 6501,
+    "sha256": "d87fa61a359bc3869d49712346013253c7819e33d269404709e3712aa7964cf6"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/s3dis/semseg-pt-v2m2-0-base.py",
+    "bytes": 6501,
+    "sha256": "eb4e64c58124e0979a8215fe6d126a28ae853dab3922f096cd718561fac4e717"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/s3dis/semseg-pt-v2m2-0-lovasz.py",
+    "bytes": 6602,
+    "sha256": "b777e7a341340c52038ec34704f90dc86dda499a475d38d7bfa9f2c8c55897d5"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/s3dis/semseg-pt-v2m2-1-one-cycle.py",
+    "bytes": 6598,
+    "sha256": "1979feca77aacebe4ab2bb19e1c3b749baf394359e18ef0beb6f4d15b57ba974"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/s3dis/semseg-pt-v3m1-0-rpe.py",
+    "bytes": 7363,
+    "sha256": "42e21e13d04e69ca15ba1d00fd87e7b8387747f9bfbff2905c2f903225a151c0"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/s3dis/semseg-pt-v3m1-1-ppt-extreme.py",
+    "bytes": 18420,
+    "sha256": "db50f0ace28f54ced325ee13c1515fdf421c0b03085b412cef869ab96e3b87b8"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/s3dis/semseg-spunet-v1m1-0-base.py",
+    "bytes": 5757,
+    "sha256": "de8c9e4777ceae7da02a0761c44c6e08515d2d1311044481f510f8be67cc6fd9"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/s3dis/semseg-spunet-v1m1-0-cn-base.py",
+    "bytes": 6138,
+    "sha256": "81039f397980f48e76fc7e9bb799c41ebd5d480a9b653cccefa3ae7d09435708"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/s3dis/semseg-spunet-v1m2-0-base.py",
+    "bytes": 6236,
+    "sha256": "a962b376ed334d0877cab87f6067db99340bd2b6ade710de79edca0c11197ee1"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/s3dis/semseg-swin3d-v1m1-0-small.py",
+    "bytes": 6368,
+    "sha256": "91f014b66930289dc304709ec2967c6d6d7fcf307b109de26d02f1bc2fdbbc82"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/s3dis/semseg-swin3d-v1m1-1-large.py",
+    "bytes": 6468,
+    "sha256": "acab29e17a7d2a4b659871d7f7361604cdc448da798cdd218dbf58c4bc143b7a"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/insseg-pointgroup-v1m1-0-spunet-base.py",
+    "bytes": 5783,
+    "sha256": "aba5cd93cb6362bdaf6722b2738583e118287320deb98b494ecca69f452cd3ef"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/insseg-ppt-v1m1-0-pointgroup-spunet-ft.py",
+    "bytes": 8221,
+    "sha256": "ef6e65db0b1a2d74131297b293ff51e8adbfb72d22dc29339eab5a076723f31a"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/objdet-cagroup3d-v1m1-0-base.py",
+    "bytes": 5776,
+    "sha256": "9215f9e3c38bfe7f5a44e231b73d36c4e222bd72af1e9eb5c9f2790df0d7737c"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/pretrain-msc-v1m1-0-spunet-base.py",
+    "bytes": 4572,
+    "sha256": "1e2ac677f76cfdf5197045d47031b3e58c608b1cfe49b249c15e971301e092ba"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/pretrain-msc-v1m1-1-spunet-pointcontrast.py",
+    "bytes": 4773,
+    "sha256": "00205672f50921a4263757911c6101a57e60c29425cc0ba7ecda325790bf4e6e"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/pretrain-msc-v1m2-0-spunet-csc.py",
+    "bytes": 4811,
+    "sha256": "f4b2fe0dafa20d16bb1d5e5ab456ba2ed9f97f6600e4268028ac8d01063e8113"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-cac-v1m1-0-spunet-base.py",
+    "bytes": 9276,
+    "sha256": "ae08d9d52771a80c31ed2100b40aba5e942b6e4b6d5020423aa9048656e3fb6c"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-cac-v1m1-1-spunet-lovasz.py",
+    "bytes": 9276,
+    "sha256": "ae08d9d52771a80c31ed2100b40aba5e942b6e4b6d5020423aa9048656e3fb6c"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-cac-v1m1-2-ptv2-lovasz.py",
+    "bytes": 9806,
+    "sha256": "80bf419b7cf69db9311440e35f9b68082db9b96432c5e686d222a49deecd3ebd"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-minkunet34c-0-base.py",
+    "bytes": 6045,
+    "sha256": "b287d69ef4541f203efce168326f64196de3830cdb1b52397cf8d841d3c003f4"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-octformer-v1m1-0-base.py",
+    "bytes": 9553,
+    "sha256": "189f8afc3121f894fe188f1f6763d2cbca1112ff137038bfd43513ea1b648d57"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-ppt-v1m1-0-sc-st-spunet.py",
+    "bytes": 14035,
+    "sha256": "88abe5425fc727d4c34fadd97cb586563fe49b7699867c9d062a19dfa66d462c"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-ppt-v1m1-1-sc-st-spunet-submit.py",
+    "bytes": 13203,
+    "sha256": "c831e667fb6a69994f1c704ab3bfbf0bc2c3d2cd5a12bd8f6942287e5a844c82"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-pt-v1-0-base.py",
+    "bytes": 8819,
+    "sha256": "5af025d37212d2c0d7982fa0b0bf932f4076216f0a809561c49308cd27394927"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-pt-v2m1-0-origin.py",
+    "bytes": 9520,
+    "sha256": "6a8bf0ba96c3f70a3ae4b9d8240fe72ff42930ac2a838bca112646937ca1dcaf"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-pt-v2m2-0-base.py",
+    "bytes": 9520,
+    "sha256": "08be8ea6a9830877eb8365b6457ffa55266d7c0284dc7ad89f0fe7f181add6e0"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-pt-v2m2-1-benchmark-submit.py",
+    "bytes": 8773,
+    "sha256": "6fd5b668c43e1b61418fa5231bdc7c1237209210197e893f29e140efc28b5d4e"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-pt-v2m2-2-precise-evaluate.py",
+    "bytes": 9939,
+    "sha256": "354556e8d4fb2edc9fee50053ca1f91984f4c7cb1dc983614641213bdb44c008"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-pt-v2m2-3-lovasz.py",
+    "bytes": 9621,
+    "sha256": "9694e90ecaffa7dd90f474af97d48a3ca83b6cad74223ec08f8cf20b6d0e625b"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-pt-v3m1-0-base.py",
+    "bytes": 9939,
+    "sha256": "8873e8adcccf996c5272742b862d65c32c6e04f547368959e11107addf3ca7a8"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-pt-v3m1-1-ppt-extreme.py",
+    "bytes": 18272,
+    "sha256": "af6c04f35160751b5dc8f0f4854aaef37eb650b6127c83517ea6df57070d99c8"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-spunet-v1m1-0-base.py",
+    "bytes": 8990,
+    "sha256": "2c64e71e028e3d1ac2f0ea341daf60cd2b35f5868af7362b06968d35560708de"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-spunet-v1m1-1-interp-eval.py",
+    "bytes": 9219,
+    "sha256": "2699e1d5ac825a6ec154e2b1c7fdd2957777068fa02a0d7a2d912a3d7ca50f43"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-spunet-v1m1-1-precise-eval.py",
+    "bytes": 9258,
+    "sha256": "26f458d1ef96ce8ae273ac10a989a48639b8d7b7de664de0bae350a7bfe031d3"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-spunet-v1m1-2-efficient-la100.py",
+    "bytes": 9070,
+    "sha256": "90d0cc725ffdd3536024d98df9b2ea7482f74d00fe34b72d2f1729cc65630609"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-spunet-v1m1-2-efficient-la20.py",
+    "bytes": 9069,
+    "sha256": "924bec477c08e1b358461ae6ba63ec6252370e6b85ec76a992edd22fc1a46d8d"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-spunet-v1m1-2-efficient-la200.py",
+    "bytes": 9070,
+    "sha256": "f24e20aefb773f3c7f6668daf55f069047344151201da610d5caa528567481e3"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-spunet-v1m1-2-efficient-la50.py",
+    "bytes": 9069,
+    "sha256": "8156b01eb2976a0a959945377494a6c352c04229e6c3aed4c0876b809ba21a85"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-spunet-v1m1-2-efficient-lr1.py",
+    "bytes": 9041,
+    "sha256": "14ec7c369aeffb9b4d2acda417062e09df73354fc6f719f40303d321a5d0e244"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-spunet-v1m1-2-efficient-lr10.py",
+    "bytes": 9042,
+    "sha256": "36771c34059f3de48a6002e464107f2a35c7b37687287e6a839fa4414aa05758"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-spunet-v1m1-2-efficient-lr20.py",
+    "bytes": 9042,
+    "sha256": "a4aa71583b49619a3c3242128da9ec486a6330b692eb264758e1a6fe2a58fb1a"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-spunet-v1m1-2-efficient-lr5.py",
+    "bytes": 9041,
+    "sha256": "f189927392fd6267bc9589c156fe7a098169d65615cdf5a7f27b171c562be449"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-spunet-v1m1-3-enable-profiler.py",
+    "bytes": 9366,
+    "sha256": "c79aa220ce895e813ed4010fa8c3827a81fd2cc40fe2b8692968b74b68134cd3"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-spunet-v1m1-4-ft.py",
+    "bytes": 8990,
+    "sha256": "10e089486076b3960ce6a40fe4f36c93ca55bc8b372d677717e4dad314d58299"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-spunet-v1m1-5-lovasz.py",
+    "bytes": 9091,
+    "sha256": "4c026492b4989a67f0bc657e9461d45aa6f5cc168915a711db9a9c7767187c88"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-spunet-v1m3-0-pdnorm-base.py",
+    "bytes": 9479,
+    "sha256": "737cd366179785ad1eeba9a6f55d24294c5f594feabf7bbae60ef8b32be0dc90"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-st-v1m1-0-origin.py",
+    "bytes": 9163,
+    "sha256": "458337d7abb08961a97a695364e76cf48a93e8ac83b05b94af2d5af907fb0f95"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-st-v1m2-0-refined.py",
+    "bytes": 9190,
+    "sha256": "7d662a456d4cbec0f5048d1e047a70edbc2e57605b8bcf5d17a29b5f55c981f9"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-swin3d-v1m1-0-small.py",
+    "bytes": 6828,
+    "sha256": "f5749b07bee2dafb45b77fdb652df68310ac934d84769aa958765239c87dac2a"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet/semseg-swin3d-v1m1-1-large.py",
+    "bytes": 6831,
+    "sha256": "8041bb3a0fcc438193b7c69f5d11f589c4beee24645add87b62b59de203d790f"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet200/insseg-pointgroup-spunet-0-base.py",
+    "bytes": 5616,
+    "sha256": "ca9214690a7655860e0cebf90950d66524d8f1edf3df35c21c0dad0fc5ee94ae"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet200/semseg-cac-v1m1-0-spunet-base.py",
+    "bytes": 6104,
+    "sha256": "35f2b38f940d1749730864f42430b1ebdc5267a7c74b6f3b5f53283b5f0de489"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet200/semseg-cac-v1m1-1-spunet-lovasz.py",
+    "bytes": 6205,
+    "sha256": "1e5653d5f30a612cabf5d2b6001b7f16a188d6ec0f7522f640df7f5340846d4d"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet200/semseg-cac-v1m1-2-ptv2-lovasz.py",
+    "bytes": 9553,
+    "sha256": "56316606f0d82442ca3054974f980cd50862961b757b2005e4c1f8c10ccb07b0"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet200/semseg-minkunet34c-0-base.py",
+    "bytes": 5796,
+    "sha256": "88e82cd998b46ab3174854d09450bb6242452624f4e29dd27cc771e5438046de"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet200/semseg-pt-v1-0-base.py",
+    "bytes": 8569,
+    "sha256": "5072d6b10fe0c9e64311f919275730e0d3236ae123608b89054a235a02716094"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet200/semseg-pt-v2m1-0-base.py",
+    "bytes": 9270,
+    "sha256": "29d157c27274317e1e582c25f938b387bce45b958c7ef7908b674a0d1fce6eec"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet200/semseg-pt-v2m2-0-base.py",
+    "bytes": 9270,
+    "sha256": "b60419419755cd55dc1a71d02ebd3b9890e782ee895002e78dabff50b28b7fe4"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet200/semseg-pt-v2m2-1-benchmark-submit.py",
+    "bytes": 8523,
+    "sha256": "865ab5e5868eedc800e11d733017556912e047576d5c72dfaca66e11a5f48080"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet200/semseg-pt-v2m2-2-lovasz.py",
+    "bytes": 9371,
+    "sha256": "d4e08c281ade5426a3c12adbe72766cc057138b6d62239897dbdf08a11179b13"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet200/semseg-pt-v3m1-0-base.py",
+    "bytes": 9689,
+    "sha256": "6156e5fb4afd6166fa82b0ee405974d79fc623867fdc9517ca4f577cf6798895"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet200/semseg-spunet-v1m1-0-base.py",
+    "bytes": 5921,
+    "sha256": "7cfb0f6c3fd0642d2d6b900c0c53863286cb6b51208a2507793e24c0743135f3"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet200/semseg-spunet-v1m1-1-lovasz.py",
+    "bytes": 6022,
+    "sha256": "86690e71907bf0244fb1d6e646a4dcfda0102e6521e13c694eb43dde216c36bb"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/scannet200/semseg-st-v1m2-0-refined.py",
+    "bytes": 8940,
+    "sha256": "812fe57228d8bf2231deaab8817bfe2d49af203e3bf6e1ea84702f5771f328aa"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/arm_B0.py",
+    "bytes": 668,
+    "sha256": "ca8aac4754a7aea4f718400ed26c5ef079a9603497017b3dafd76138a68d7b7e"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/arm_B0_noKL_v2_s1.py",
+    "bytes": 986,
+    "sha256": "235f78f44cbd43a0a2f859cce395c863e179c060a1e261896b3cc67516a5f25c"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/arm_B0_noKL_v2_s2.py",
+    "bytes": 986,
+    "sha256": "b0a4d824e14d42cf27ae63bf54df8311e1e212275d0c30572d7a77e5950fa617"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/arm_B0_noKL_v2_s3.py",
+    "bytes": 986,
+    "sha256": "b9226e73831e2001f25fc161ab5635103e2cc51e0f409eafaf7c84b7899c3810"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/arm_B0_v2_s1.py",
+    "bytes": 717,
+    "sha256": "ce8c037e03a5ad92d16521b7f5a161e95e15a7ea3b649224eed38b6f33a581b3"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/arm_B0_v2_s2.py",
+    "bytes": 717,
+    "sha256": "59a2d7ea4177b38a721d5ec905007343264667b793ddb2fc8e4f1e5ba4310427"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/arm_B0_v2_s3.py",
+    "bytes": 717,
+    "sha256": "441a684f61ae1d7faa6a340af71bd4a96789588ae88cea4096ecc2722329e301"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/arm_B1.py",
+    "bytes": 746,
+    "sha256": "b54123c58215b216641140a016e9bdb1e9fd74cefc4c694b4112bdd62fcfcf99"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/arm_C.py",
+    "bytes": 628,
+    "sha256": "c65e6a4b3276d7779e010e14c2e22564fa32581b21b1f7d7b0fad9ff55edcb4b"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/arm_D.py",
+    "bytes": 649,
+    "sha256": "bdbb3a877251ca40edbd7037ca2b0dd8933343013c7d70326426823712393290"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/arm_D_noKL.py",
+    "bytes": 5796,
+    "sha256": "002858cc702049a2eaa1073289ab7a5143538167fb72ac1f52234d8e595ce63f"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/arm_R.py",
+    "bytes": 1551,
+    "sha256": "9068da8590ab5c29ecb076dbb19bb9bb031c37809457fc1e26e8e13d0e7f9752"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/arm_Rprime.py",
+    "bytes": 4265,
+    "sha256": "99e3553c13cd16b9bfc99f696507549647211c032a014521560d45b4d8746ba4"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/arm_Rprime_noKL.py",
+    "bytes": 6046,
+    "sha256": "3636789b50691ad2b54e81e0848215b004d1f9512f28c011998e5db731ae7303"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/arm_Rprime_noKL_v2_s1.py",
+    "bytes": 641,
+    "sha256": "536e3506fe87763588e4c3cf420e2e7141e12e792fc407f76d58195a6c614541"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/semseg-minkunet34c-0-base.py",
+    "bytes": 6122,
+    "sha256": "2a603288882ffa3af9cbec3d49cb9cc2bb50fb029065cf4359cd32eca595dbd0"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/semseg-ppt-v1m1-0-sk-nu-wa-spunet.py",
+    "bytes": 13049,
+    "sha256": "7fdacdd522a1713bbefebb214dd945cc0b678004c1c17640d2396c7b5e11014c"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/semseg-ppt-v1m2-0-sk-nu-wa-spunet-submit.py",
+    "bytes": 10973,
+    "sha256": "1b3cba08302b6f47780a9438c96d1c46b48d1aeb3f1ae115ecb3a9e37628c3f3"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/semseg-ppt-v1m2-0-sk-nu-wa-spunet.py",
+    "bytes": 11760,
+    "sha256": "eff172fe2e6db1a6d5b76777f875f7562bbd0dd5a7751337ab0aa1ac0849191a"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/semseg-pt-v2m2-0-base.py",
+    "bytes": 7076,
+    "sha256": "03c602e9291fa973d20306ce7446e34ff9bbf4e0b42121e759612e4f429dc97c"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/semseg-pt-v2m2-1-benchmark-submit.py",
+    "bytes": 6361,
+    "sha256": "06f260f8851a131886d2a6bc6c9de279896e011a43decfe1d5bc5291ce41197c"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/semseg-pt-v3m1-0-common9.py",
+    "bytes": 7692,
+    "sha256": "714f66a060a0bc9af753d296feedf2a551b0ac404e75f886db8a1b565f14a06b"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/semseg-pt-v3m1-distil-common9.py",
+    "bytes": 6949,
+    "sha256": "2fb3249d95aecccef248aa4187445a7aeff37e50a723cf10041a3ab96887c20c"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/semseg-spunet-v1m1-0-base.py",
+    "bytes": 6251,
+    "sha256": "6db1058c2f5d192d1ec76b4e8f9b1d093d257ca51b98b6c27d21b46819f1196e"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/semantic_kitti/semseg-spvcnn-v1m1-0-base.py",
+    "bytes": 6244,
+    "sha256": "dc57fa2aabaa09f294ff189f8335fed40a97c718f5988f71aba172bd7b99fea3"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/structured3d/semseg-pt-v2m2-0-base.py",
+    "bytes": 9808,
+    "sha256": "510000e671f1347a4ef499df5587e2531fc159ea1a93dd59aca0796f29007736"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/structured3d/semseg-spunet-v1m1-0-base.py",
+    "bytes": 9095,
+    "sha256": "0065cd04bb228feaa00a1fb5db5a4a9ea5df0ff9010945d3eef91bbc35463720"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/structured3d/semseg-swin3d-v1m1-0-small.py",
+    "bytes": 9853,
+    "sha256": "96c05d2ec534f62e5f4cbb4fbfb561100b74376d2e1fccd83796ce3340f9e003"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/structured3d/semseg-swin3d-v1m1-1-large.py",
+    "bytes": 9856,
+    "sha256": "63ee41600d16fd26353c935e05137c53df03b26cfa62b84484b1f9ce49e413dc"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/waymo/semseg-pt-v3m1-0-base.py",
+    "bytes": 7958,
+    "sha256": "07bd81a7bb42696770db138df8ca57aed393b8591bfdbeeaf9ca0124cf4c765e"
+  },
+  {
+    "path": "src/Pointcept_v151/configs/waymo/semseg-spunet-v1m1-0-base.py",
+    "bytes": 6696,
+    "sha256": "d592086534efde39590131135311851a2d6232fa3929a33bef59c56ddc820c38"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointgroup_ops/functions/__init__.py",
+    "bytes": 66,
+    "sha256": "63449aca7ccc6ae9d450d2d4054ab092b236bbfe05df60547fa42407ffd41c63"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointgroup_ops/functions/functions.py",
+    "bytes": 5785,
+    "sha256": "adaa3a9f84dc115d3d5841cdcb6a3b4b2496b5f29cfaf89d27537dc0e6d1abae"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointgroup_ops/setup.py",
+    "bytes": 1834,
+    "sha256": "af4997077032cafeaed18ad911c0fd30130cb150a2c138ca51f830eb98aecc41"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointgroup_ops/src/bfs_cluster.cpp",
+    "bytes": 5173,
+    "sha256": "8e8d3824120329a06fe6cb554e9927d643a5282a01a3256495706971d70c4702"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointgroup_ops/src/bfs_cluster_kernel.cu",
+    "bytes": 2739,
+    "sha256": "1de69fc33009b189dc4d32b1514840613dcf704fa25e0ecfa555c4e4d480e599"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/__init__.py",
+    "bytes": 25,
+    "sha256": "c63e9dd04181b2544cab07a0a26cc3fde82cfc922250082a50b72add95bbb752"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/functions/__init__.py",
+    "bytes": 480,
+    "sha256": "e53c712563d6d7a0c871efe78ed26b45622d0ba6eb5be896e8e5358d33752c0a"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/functions/aggregation.py",
+    "bytes": 1757,
+    "sha256": "178c8f1fb0f4bfb51863bcd6433f217775ddfaf9aa169d92a38d2356fb3afcef"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/functions/attention.py",
+    "bytes": 3758,
+    "sha256": "181fd0a4c3e6ab01904045dede5af8855461d2b84dc119f90b082b0236e4a1f1"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/functions/grouping.py",
+    "bytes": 2027,
+    "sha256": "b4f98623a7bbf52b5ba6baf393004b9723bdabfc6ac3347ccb7197ebb1f2f7c1"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/functions/interpolation.py",
+    "bytes": 2257,
+    "sha256": "7d14b2617d14fbb2cdcc3aa8e03ddbb80321acb64b696c28e7a3dc6820b02cd6"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/functions/query.py",
+    "bytes": 3398,
+    "sha256": "f1bb567c33b09b5731036d9c2da5b022a15813cd41b1b9e30d3d65ab2e4e54ae"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/functions/sampling.py",
+    "bytes": 832,
+    "sha256": "1890deb9def3e84ee3dc0022d03429088d696369fb426dc678b403f4d9a11ad2"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/functions/subtraction.py",
+    "bytes": 1229,
+    "sha256": "f9dab674f461f1f196ef78e9126c6186b2291e018a0976e00fcf966009a43fdc"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/functions/utils.py",
+    "bytes": 3493,
+    "sha256": "d3b1f8c3fdf7b4132293c47f341c7f8c59f1e7fb813ae11c5393e400b34e7e22"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/setup.py",
+    "bytes": 848,
+    "sha256": "7791b9f3045cae584a4d47bf1339369343d7f3e15bc2df92f32f1e1d417e0329"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/__init__.py",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/aggregation/aggregation_cuda.cpp",
+    "bytes": 1631,
+    "sha256": "01e671863145fb0fcbf30e38ac5a92cbadfec20ce90b62f3431f8d502d21e04f"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/aggregation/aggregation_cuda_kernel.cu",
+    "bytes": 3296,
+    "sha256": "c10500f39f0937684ed6b031bdfa9db1a32f8b21030b7c1878f39ec21faedc78"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/aggregation/aggregation_cuda_kernel.h",
+    "bytes": 1138,
+    "sha256": "7e0b0af26ae73f2659858a3ab3854fc079d7843c366e38312f6d8d077d02634b"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/attention/attention_cuda.cpp",
+    "bytes": 4304,
+    "sha256": "c7052fc83d42db93bc67807bab9d6f1c08e00c37691d350083c458e42f489980"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/attention/attention_cuda_kernel.cu",
+    "bytes": 7166,
+    "sha256": "3c8f37dc2157053495b727fc23da0547426061ac930de133a2a86cee959cae1e"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/attention/attention_cuda_kernel.h",
+    "bytes": 3497,
+    "sha256": "13196980c8271172997b0ac24cd3b6ae3bc3e29a500cf71a4136e2a66fe75fab"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/ball_query/ball_query_cuda.cpp",
+    "bytes": 884,
+    "sha256": "5df3656fecc985a8a4355feebd8d3883ffbc23362be826d4715fb455ef631659"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/ball_query/ball_query_cuda_kernel.cu",
+    "bytes": 5989,
+    "sha256": "30afa898c77f539ea5e230ac1fabf3cf2bb020e071a2779d54f01ab0487f167d"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/ball_query/ball_query_cuda_kernel.h",
+    "bytes": 860,
+    "sha256": "759cf2280de6d976b5ec35c115b72b2cddf9a2292d99c1a52d9017e695c7c776"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/cuda_utils.h",
+    "bytes": 644,
+    "sha256": "0243c0e5ed3b68e18a2c3ff681d88af255594a4cd1988a32594f7da4b621549c"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/grouping/grouping_cuda.cpp",
+    "bytes": 892,
+    "sha256": "d6312a02489f82801963a64f9bc6e6c83df2d68aa36548f0ed73b446a43ff819"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/grouping/grouping_cuda_kernel.cu",
+    "bytes": 2066,
+    "sha256": "d8dedca5a5e9baf252860d2c3f1e0d23bfd388240840edb0beb6acd9d6e0f601"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/grouping/grouping_cuda_kernel.h",
+    "bytes": 737,
+    "sha256": "dadcdccf6582ed45f9ffd8fe0d17ddc5bd4fe2078c5e84643a0ac53a2f977b5b"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/interpolation/interpolation_cuda.cpp",
+    "bytes": 1079,
+    "sha256": "2c5a8b5538281e7717548773227cbd3cbfb288ec1a1c1c2f63198c210a600365"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/interpolation/interpolation_cuda_kernel.cu",
+    "bytes": 2074,
+    "sha256": "ab7f2d860ed0a65da94e91778baac22151e63e7d8d6881187074a90d6f84f7f2"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/interpolation/interpolation_cuda_kernel.h",
+    "bytes": 837,
+    "sha256": "9f926b78dfffe53e87d6fdfbfa87177396b97ca584fb40a925b84cc8212e8ec1"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/knn_query/knn_query_cuda.cpp",
+    "bytes": 737,
+    "sha256": "50821bf1f3b509799aa6abf53e5d3ae4ab207c26a3b576f335c71b9fedbaa7a3"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/knn_query/knn_query_cuda_kernel.cu",
+    "bytes": 3029,
+    "sha256": "199669e92a0be996b38549b280e5d71096dd6c91156f7ce67f4c491262c52e0f"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/knn_query/knn_query_cuda_kernel.h",
+    "bytes": 580,
+    "sha256": "90b50ea512850e2dca779ffe4b6bd844915015351aec65a99ab9f7b20673c82a"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/pointops_api.cpp",
+    "bytes": 2145,
+    "sha256": "a324852ffc735bf4e72664c1bfdd1a83b894b8a15be601ba75201b4980d43eb0"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/random_ball_query/random_ball_query_cuda.cpp",
+    "bytes": 1018,
+    "sha256": "50ca6ee133f670297a52bde2589292a77b359feb30d9bb0eaa952cb0c85a0026"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/random_ball_query/random_ball_query_cuda_kernel.cu",
+    "bytes": 3784,
+    "sha256": "417e349c53d2c8b2bc559dcf752677de2dcad1fcaec2bdc4e9c8fe1555913323"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/random_ball_query/random_ball_query_cuda_kernel.h",
+    "bytes": 984,
+    "sha256": "4aa5d1d69e0429202a198422171180cf0f037fb8ae889f20470651c1a2559d33"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/sampling/sampling_cuda.cpp",
+    "bytes": 647,
+    "sha256": "bfe1bd8de42d6fa06e6f9f58a75fe53b17785744e1bf01619b5b9ab5ea5b2274"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/sampling/sampling_cuda_kernel.cu",
+    "bytes": 5574,
+    "sha256": "d4d530bb3e2c146c9afbe9ed5026d24230f91e9258f89775d134d18965533bd1"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/sampling/sampling_cuda_kernel.h",
+    "bytes": 541,
+    "sha256": "07228d61e68509dec2e5d2132804ea3713db8b721b139efd9e1a6d3f7ac07a09"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/subtraction/subtraction_cuda.cpp",
+    "bytes": 1115,
+    "sha256": "5cd0535811e194e22b80967c99a0b14e67bb4db4c3d9192aa4920831c0ab22dc"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/subtraction/subtraction_cuda_kernel.cu",
+    "bytes": 2405,
+    "sha256": "531cba1ca2dc061212cb0b44defaff117da8ca8fa21924d7b5a72e3f57566a4d"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops/src/subtraction/subtraction_cuda_kernel.h",
+    "bytes": 857,
+    "sha256": "5ad49f5fd7435906164a79139744c26fdd4f204203e74efd32656d89fbbefa37"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/__init__.py",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/functions/__init__.py",
+    "bytes": 24,
+    "sha256": "fde18fa716e1ef7de0a239e4f0bc102918449ba5084043e6e83e2fd4af2688de"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/functions/pointops.py",
+    "bytes": 37447,
+    "sha256": "1e0fd4237909cec48eef1e44703b4710de29c3b9f6063e9727cce332aff52cf0"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/functions/pointops2.py",
+    "bytes": 8540,
+    "sha256": "c017c1ad99c8f958806e3a4e2769e194c113af672dd90f165003e1b309a1a4e9"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/functions/pointops_ablation.py",
+    "bytes": 8582,
+    "sha256": "d974e4565536110c3b19a30676d7762cd27744cef37cf24000e0514c8e1273df"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/functions/test_attention_op_step1.py",
+    "bytes": 2734,
+    "sha256": "d53856297eafd1bc9681ef76d321256be0843821997194a6f8a7d746c82aa586"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/functions/test_attention_op_step1_v2.py",
+    "bytes": 3369,
+    "sha256": "5c231fb97db6aa448a168b32d37a86e1c4e7013a151250b4153dfff98538344f"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/functions/test_attention_op_step2.py",
+    "bytes": 1754,
+    "sha256": "ac848208299b621e2a7007096a99f4f388a4f2fdb265e69b412763e1b93d8f17"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/functions/test_relative_pos_encoding_op_step1.py",
+    "bytes": 1963,
+    "sha256": "a047831ffa6735a3411ae5bfef0906add37327a09c15fbd82887e8904202d4a6"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/functions/test_relative_pos_encoding_op_step1_v2.py",
+    "bytes": 2222,
+    "sha256": "6c6b8ba611df96218daa9ddb03bf109d0978636e290fcd300cde580b6db25225"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/functions/test_relative_pos_encoding_op_step1_v3.py",
+    "bytes": 2993,
+    "sha256": "53452efd511a67d00930d6a3b3f96e4ef34042ca9d8146061a952816b8f3517d"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/functions/test_relative_pos_encoding_op_step2.py",
+    "bytes": 2414,
+    "sha256": "6a45a22f36430014dfe5d529ef97fbaf272170c34ef87f806bde903d03d33fff"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/functions/test_relative_pos_encoding_op_step2_v2.py",
+    "bytes": 2876,
+    "sha256": "a39d1b0f972ce68bf18322ec54cdbbd22b0aa82eff809c68b69f9c6657d30267"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/setup.py",
+    "bytes": 854,
+    "sha256": "b0c1e368277523de2d6f093d6fa791f6b7f5b0d31453088f64f8ff7ac811f8b2"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/__init__.py",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/aggregation/aggregation_cuda.cpp",
+    "bytes": 1631,
+    "sha256": "01e671863145fb0fcbf30e38ac5a92cbadfec20ce90b62f3431f8d502d21e04f"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/aggregation/aggregation_cuda_kernel.cu",
+    "bytes": 3296,
+    "sha256": "c10500f39f0937684ed6b031bdfa9db1a32f8b21030b7c1878f39ec21faedc78"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/aggregation/aggregation_cuda_kernel.h",
+    "bytes": 1138,
+    "sha256": "7e0b0af26ae73f2659858a3ab3854fc079d7843c366e38312f6d8d077d02634b"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/attention/attention_cuda.cpp",
+    "bytes": 2695,
+    "sha256": "96ab7e1f9a9d0ec7e3fe23b3680321b0360cf0ff263f65095c4feaafd6b687e0"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/attention/attention_cuda_kernel.cu",
+    "bytes": 4765,
+    "sha256": "57ce94ae7081945d11c06a761fa59d76faeff8989b091c952c244661c969f2cc"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/attention/attention_cuda_kernel.h",
+    "bytes": 1793,
+    "sha256": "511b873e4d847eb128c4119f6bcaec41706f63303eb3cef85b67024d8d08c098"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/attention_v2/attention_cuda_kernel_v2.cu",
+    "bytes": 7541,
+    "sha256": "4a9b8b64beccdc758ffbb644207d23b2bc04e612b30a428c5c0f0594836c58d4"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/attention_v2/attention_cuda_kernel_v2.h",
+    "bytes": 1959,
+    "sha256": "d4f1f197e1f75f6e58821915c2e7170d3ac741b092daf2a4789a10e1b431e974"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/attention_v2/attention_cuda_v2.cpp",
+    "bytes": 2852,
+    "sha256": "173310c77c82c511f881ac5eea5acc22766b257fb3dfb73a49e7257f14591ab3"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/cuda_utils.h",
+    "bytes": 644,
+    "sha256": "98bee32f25de63f31ae77339ac95368bcbdf3cb24d4f266dee5e7c55bb68cce3"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/grouping/grouping_cuda.cpp",
+    "bytes": 892,
+    "sha256": "d6312a02489f82801963a64f9bc6e6c83df2d68aa36548f0ed73b446a43ff819"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/grouping/grouping_cuda_kernel.cu",
+    "bytes": 2066,
+    "sha256": "d8dedca5a5e9baf252860d2c3f1e0d23bfd388240840edb0beb6acd9d6e0f601"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/grouping/grouping_cuda_kernel.h",
+    "bytes": 737,
+    "sha256": "dadcdccf6582ed45f9ffd8fe0d17ddc5bd4fe2078c5e84643a0ac53a2f977b5b"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/interpolation/interpolation_cuda.cpp",
+    "bytes": 1079,
+    "sha256": "2c5a8b5538281e7717548773227cbd3cbfb288ec1a1c1c2f63198c210a600365"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/interpolation/interpolation_cuda_kernel.cu",
+    "bytes": 2074,
+    "sha256": "ab7f2d860ed0a65da94e91778baac22151e63e7d8d6881187074a90d6f84f7f2"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/interpolation/interpolation_cuda_kernel.h",
+    "bytes": 837,
+    "sha256": "9f926b78dfffe53e87d6fdfbfa87177396b97ca584fb40a925b84cc8212e8ec1"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/knnquery/knnquery_cuda.cpp",
+    "bytes": 734,
+    "sha256": "79e3f1f5ec7b6f79bbe3270d02e241e0195638b5179e6bde439e642b719d44e5"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/knnquery/knnquery_cuda_kernel.cu",
+    "bytes": 2985,
+    "sha256": "86759f1152fc0f148819f52de407b16d209745526655e6fc3729b76de1aaf258"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/knnquery/knnquery_cuda_kernel.h",
+    "bytes": 576,
+    "sha256": "cfe97d73cc4207e5c1d840a2828336c3dd12682592aec49e70a7114b94e17cac"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/pointops_api.cpp",
+    "bytes": 3794,
+    "sha256": "2f717bfafd646b9c6dc8a7f60124be6382d47c7ad8964bf0a5c49bba71f973b1"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/rpe/relative_pos_encoding_cuda.cpp",
+    "bytes": 3336,
+    "sha256": "54dc5af51073fda44b3237562fbcffbd685cdf7f8e7ebfd7ae5099ed0f01364e"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/rpe/relative_pos_encoding_cuda_kernel.cu",
+    "bytes": 6634,
+    "sha256": "78852f88fbcaaba9b9e88af7474bd460899ea28cedc153f4516c571587d30dfd"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/rpe/relative_pos_encoding_cuda_kernel.h",
+    "bytes": 2150,
+    "sha256": "2c45c9a1813d2f26ac8dd53683b85add50f17222d5f670f857c94ab824a88211"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/rpe_v2/relative_pos_encoding_cuda_kernel_v2.cu",
+    "bytes": 21888,
+    "sha256": "01821704e5c6907412031c03b8f8a40726b7d6ce15bc60be29e2b33888e21ccb"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/rpe_v2/relative_pos_encoding_cuda_kernel_v2.h",
+    "bytes": 4236,
+    "sha256": "5aed2ab63f243f31b8a9f4fdfff212da265711882153ed8d42fe6e3d949ffc1f"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/rpe_v2/relative_pos_encoding_cuda_v2.cpp",
+    "bytes": 6996,
+    "sha256": "3d66a5ec2f15a4012ecb08c39283c3963cf83f5c799c9e8df4d3d84cfbdd373e"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/sampling/sampling_cuda.cpp",
+    "bytes": 633,
+    "sha256": "54a6fb996ff079c757dad071ebfe2d7fac8a70d378b6134c7bde0aab68c91497"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/sampling/sampling_cuda_kernel.cu",
+    "bytes": 5477,
+    "sha256": "67fbf4b7a75451d2c163441e89ead518254112ed647aa2b57bea6ed6369eb005"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/sampling/sampling_cuda_kernel.h",
+    "bytes": 527,
+    "sha256": "5e651d12975fc92514d3fcf6542255ed127f3b19805335907dd52fe2cddafe09"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/subtraction/subtraction_cuda.cpp",
+    "bytes": 1115,
+    "sha256": "5cd0535811e194e22b80967c99a0b14e67bb4db4c3d9192aa4920831c0ab22dc"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/subtraction/subtraction_cuda_kernel.cu",
+    "bytes": 2405,
+    "sha256": "531cba1ca2dc061212cb0b44defaff117da8ca8fa21924d7b5a72e3f57566a4d"
+  },
+  {
+    "path": "src/Pointcept_v151/libs/pointops2/src/subtraction/subtraction_cuda_kernel.h",
+    "bytes": 857,
+    "sha256": "5ad49f5fd7435906164a79139744c26fdd4f204203e74efd32656d89fbbefa37"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/__init__.py",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/__init__.py",
+    "bytes": 664,
+    "sha256": "f749588471b696567b2a896e20095ceefccfa8f2f8e05c5483db9173deedec1c"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/arkitscenes.py",
+    "bytes": 3784,
+    "sha256": "a609deb904ab2f84e1702b581eafa33c8dad95a5b182bd80b2216b25deb4ea51"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/builder.py",
+    "bytes": 287,
+    "sha256": "3de5afe9977cc93b7cf80766516512df00e56d2c2f411a6b9441dc3e1442c4cc"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/dataloader.py",
+    "bytes": 3891,
+    "sha256": "9c610357de83ac57ffcc7c4879e10bdf66176924db718dd9cc27a994109b4a34"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/defaults.py",
+    "bytes": 5827,
+    "sha256": "cc07af8df1d2d568512fcbf35ca2f8df93d3a9d225f49daa5b64b2ad0918710d"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/modelnet.py",
+    "bytes": 3329,
+    "sha256": "11adfd78545edc25e3078567807f3ecd94c2a4459b7114b9f30bef77a4c1957d"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/nuscenes.py",
+    "bytes": 4124,
+    "sha256": "9ef46ee5da26f3e3c76457a2a2e9c3a1a7fa2a044d516bbf13680337dc9d791f"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/arkitscenes/preprocess_arkitscenes_mesh.py",
+    "bytes": 2738,
+    "sha256": "548ddeba939aa3ee2b569914145233fdf8a3c663fdf489e25b9b2a48bfcfa4ff"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/nuscenes/preprocess_nuscenes_info.py",
+    "bytes": 21723,
+    "sha256": "645f0b597f7df059821a592d7e872c7a69af6129a5924f611a17a79c21d46048"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/s3dis/preprocess_s3dis.py",
+    "bytes": 7634,
+    "sha256": "ee559301409404739d07df70604d593e2ce73592de2c5884aeb5a959dddabc8e"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/s3dis/preprocess_s3dis_voxelized.py",
+    "bytes": 1844,
+    "sha256": "a5d172b3f758e196364bbf8eb060d2df69f02a8181f2247148a1ab59c18d35a8"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/scannet/meta_data/classes_ObjClassification-ShapeNetCore55.txt",
+    "bytes": 158,
+    "sha256": "b6dac09cde2c3e72bb3d50eef2efbf8f58b54fefd46de93b5b4543ff94d113bf"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/scannet/meta_data/classes_SemVoxLabel-nyu40id.txt",
+    "bytes": 314,
+    "sha256": "91b628a200e73550cb442971127fa98892faeedb2cdf25c6b18cc31ad38a606f"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/scannet/meta_data/scannet200_constants.py",
+    "bytes": 13157,
+    "sha256": "a81f103046a98a609341b7b4585eac7cb4f8075f44eeed6ab05a635ac58a2a4f"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/scannet/meta_data/scannet200_splits.py",
+    "bytes": 9130,
+    "sha256": "986f3838166fe6fd3a8e1561583a03dc080a3aee9a42cb7b93c78b7a2ef36024"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/scannet/meta_data/scannetv1_test.txt",
+    "bytes": 4056,
+    "sha256": "d75d4971c3fa7128c643695840e279042c212ef904fe933bd00cf9918c61b083"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/scannet/meta_data/scannetv1_train.txt",
+    "bytes": 13585,
+    "sha256": "0666b420f0e3339fdddb3ff9b780fe8be7edf7c1cc1ada24c3e9ad29384407a0"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/scannet/meta_data/scannetv1_val.txt",
+    "bytes": 2028,
+    "sha256": "3b980d2e5e58fa5bb6eb688f66e815f9028c47f753190cc18bb60da53fe4cdb1"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/scannet/meta_data/scannetv2_test.txt",
+    "bytes": 1300,
+    "sha256": "0214c6a3b1ee516ad653393b0321e7c0394c7662a4b3702eac1ddd7fbc00f7e0"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/scannet/meta_data/scannetv2_train.txt",
+    "bytes": 15613,
+    "sha256": "96acca299b7855f02824c496b19077904d80996e7ced1bb9f0dac98f7dd4d0c8"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/scannet/meta_data/scannetv2_val.txt",
+    "bytes": 4056,
+    "sha256": "d75d4971c3fa7128c643695840e279042c212ef904fe933bd00cf9918c61b083"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/scannet/preprocess_scannet.py",
+    "bytes": 8117,
+    "sha256": "7a0425b3ac9247e15ecc1d117686ea9716adc398dd703e036a2ff652e98308cb"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/scannet/scannet_pair/SensorData.py",
+    "bytes": 7101,
+    "sha256": "09af4308de9bf279606787d90d15c639345b4ea3d634886147beafb04ea044fd"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/scannet/scannet_pair/compute_full_overlapping.py",
+    "bytes": 3230,
+    "sha256": "d36ac788e9829163d8af9c30cd587ccf732252564ca9adb0a4e2914c00b0d403"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/scannet/scannet_pair/generage_list.py",
+    "bytes": 871,
+    "sha256": "da6d9a9fd1402953993bdc811f12bf17c6bb689e6a593582c1719e79dd281c86"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/scannet/scannet_pair/plyfile.py",
+    "bytes": 25589,
+    "sha256": "b6fa09dbdfa4ddb9b00d0673852dc6b7291fbe8f1f1189e4f6e5329528a08094"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/scannet/scannet_pair/point_cloud_extractor.py",
+    "bytes": 3640,
+    "sha256": "c6a50965d6d000778d50e41b0f6a094230e2b361b8219b1ea741750a4e724743"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/scannet/scannet_pair/preprocess.py",
+    "bytes": 1541,
+    "sha256": "6d9e42369cf2f6177aa59e18c41f0c5e2c4ad4a262406189d954229be9555b3d"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/scannet/scannet_pair/reader.py",
+    "bytes": 885,
+    "sha256": "b824ffd1d8e1a3e9cd65d706bf1b30c43ed97477394be36eab2ba4e4220dcc47"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/structured3d/preprocess_structured3d.py",
+    "bytes": 14347,
+    "sha256": "1ae1c3bb1a03064013da090a435dadc689b1c7be94e00e10510d729de98c310d"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/preprocessing/waymo/preprocess_waymo.py",
+    "bytes": 6584,
+    "sha256": "0379823a2c23e248018495a610566fbec0c9e5d70e1d60343277b7871d6acae5"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/s3dis.py",
+    "bytes": 4974,
+    "sha256": "781d000e4de7fd2a2440a9c1fd3a79a273e6a4b829f900990f7c770d4645143c"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/scannet.py",
+    "bytes": 6782,
+    "sha256": "7cb93e5bcae1ccfcdedb983201d8b9a043d76f213b7c5abd1251fd6266b7957b"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/scannet_pair.py",
+    "bytes": 2766,
+    "sha256": "f8329ce86fa3dcbb4bc57bc95a9ad4414927ed72af9c70d7da2faff113b5ec01"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/semantic_kitti.py",
+    "bytes": 5860,
+    "sha256": "d6fafc0f31b25d2406d87bc80e03bf6484b989356b64ccc244c696df1076ce40"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/shapenet_part.py",
+    "bytes": 5508,
+    "sha256": "22b99d971a8c33e7735f750a5f625f45b0368b0bed4dd364634f52425c2fa037"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/structure3d.py",
+    "bytes": 1086,
+    "sha256": "d3a63ff8e5bf0c42459742d716a095b07f204e791125031313ae2c71d33589e9"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/transform.py",
+    "bytes": 44499,
+    "sha256": "08e9bb9f9960f9264b8f570fbbd164953f64766e419969c0ed14219acb11eec9"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/utils.py",
+    "bytes": 1916,
+    "sha256": "414bea44dacd61d1a1cfe6af21b8171583a05f639c1b22c928978cfb49c16fcf"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/datasets/waymo.py",
+    "bytes": 2210,
+    "sha256": "a466f4a59b77e520efad83eeea4d253fd53e43fa87ab60e4b05e1cf7c618c999"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/engines/__init__.py",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/engines/defaults.py",
+    "bytes": 5496,
+    "sha256": "64a9153fa08dfad57ae39336273d1e91b3f818486b1d563fdc8c2f6d8a0895a3"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/engines/hooks/__init__.py",
+    "bytes": 109,
+    "sha256": "0a183e747f7830541d9a81ebe56b4d8eb9ce2e0e32bf71ddd27b79bbe54ab092"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/engines/hooks/builder.py",
+    "bytes": 321,
+    "sha256": "7ab0ea2225d64819eb1d26fadc9b157ac202a21258e7249903de0edae91dfab2"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/engines/hooks/default.py",
+    "bytes": 540,
+    "sha256": "6baf7bf58b81121803618363940d256c75e7f34c231045c37a0d14870a5c77f9"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/engines/hooks/evaluator.py",
+    "bytes": 27260,
+    "sha256": "17ebd35af8a53396d96643c2005a2353cd90de810aa7b7489e32009759ecff30"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/engines/hooks/misc.py",
+    "bytes": 18003,
+    "sha256": "dc12a69d734ecdaba8fb1e323020b5b7cd4b9ce3764bd1d249fa0f36dd3da41f"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/engines/launch.py",
+    "bytes": 4204,
+    "sha256": "62cdf1a0f99d20f22e8ec6d9e097b1f5f72bbc40c84b01a1fc36539bde574a58"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/engines/test.py",
+    "bytes": 20170,
+    "sha256": "5a4bd44baacffee878923b8ac8128ed8ed0fa62f0588d1cd1030dcd9727ddb7a"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/engines/train.py",
+    "bytes": 10625,
+    "sha256": "9932a8051cf08f5a15f74d0f5d87e1de8433c83d7657a344298e8372a2bff41b"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/__init__.py",
+    "bytes": 551,
+    "sha256": "a3ece586ca52e7a8d3c0c748714a72469906d3fc33a3069468bceaeddce23003"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/builder.py",
+    "bytes": 305,
+    "sha256": "b8be4c25fb03dbd06c802810d82e62bb2ca4b674041328289fdab66fdf4cf3a7"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/context_aware_classifier/__init__.py",
+    "bytes": 61,
+    "sha256": "c5729b91f9824a8ee1aa80d8851ceaee644edd17c88133b9c26265af4d73718c"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/context_aware_classifier/context_aware_classifier_v1m1_base.py",
+    "bytes": 9824,
+    "sha256": "13ed292c3caf4389dc6651ecd93123c327e1f129990c96df464c6909c5c32e1c"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/default.py",
+    "bytes": 3431,
+    "sha256": "2745c8b1c168f88cfe7733af1acce631d6d4ae16e78c9fb94fd4975c393c592d"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/losses/__init__.py",
+    "bytes": 155,
+    "sha256": "38b8126868a604039512614e8d2cf8e4987cb1d3c139b52021e7bf25057a7810"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/losses/builder.py",
+    "bytes": 735,
+    "sha256": "1224a83306037a148703a70d675a0c3f22176a699be1c3856526dcf8cbd5f4f3"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/losses/lovasz.py",
+    "bytes": 8775,
+    "sha256": "157eb32e50a1dbc1d7320e3f2754332fb2c62a43356f06ecfb924940c4919a07"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/losses/misc.py",
+    "bytes": 7930,
+    "sha256": "3d9a84fdd060a83ef463c7a84454d79cf1fbe4f7f43ecfb2274248109dd72fb6"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/masked_scene_contrast/__init__.py",
+    "bytes": 129,
+    "sha256": "79277c4a780af9429045cfa56f5c4a48810695836aea0f65f4836aa7923a3079"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/masked_scene_contrast/masked_scene_contrast_v1m1_base.py",
+    "bytes": 12284,
+    "sha256": "9f893f6a8202f6f14aa5b6ee732f1c73419a83852235c34d6b6436727bd7295a"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/masked_scene_contrast/masked_scene_contrast_v1m2_csc.py",
+    "bytes": 14468,
+    "sha256": "71a97435423b9c3a65d751ff95506c64ab9601e2cfce6e24c093c035722bf915"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/modules.py",
+    "bytes": 2994,
+    "sha256": "b50f5713b2a4a10af225bafdbace8a32c74821e6820fc545fb28ba6d0d16a1ed"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/octformer/__init__.py",
+    "bytes": 43,
+    "sha256": "74881516fd01f0afd1c433dc10d1d2ac032fe2c4bbc01bf4533544cad585efb0"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/octformer/octformer_v1m1_base.py",
+    "bytes": 20997,
+    "sha256": "d5f97884ad8f9e31419195a243fc0d1e83105b03f13162fa11e3b8053c45abf6"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/point_group/__init__.py",
+    "bytes": 46,
+    "sha256": "a257489b7181b1a5b3be0bf43d8cacd770e69fda1c988a59f08432dd5d721da3"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/point_group/point_group_v1m1_base.py",
+    "bytes": 6473,
+    "sha256": "b8b83ab66d7e9d5536da026d9a3013546b41c6926f006db6f520f7f4f1390223"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/point_group/utils.py",
+    "bytes": 5770,
+    "sha256": "136a5e8b045998891dbebf77d6aed169c9bb003bc765400fe48c5cede9ffb13b"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/point_prompt_training/__init__.py",
+    "bytes": 159,
+    "sha256": "fd043dc2aeb65a8572a6036623874b1f157ea4fbfc68f4c53cdb2c675117b6e7"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/point_prompt_training/point_prompt_training_v1m1_language_guided.py",
+    "bytes": 4614,
+    "sha256": "2ee4ded7c65f2426bb56e49b312cbdd4c1c20ae1b199610bac00ecf64009d281"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/point_prompt_training/point_prompt_training_v1m2_decoupled.py",
+    "bytes": 2865,
+    "sha256": "42bf79ea03f7f684ee6577d5da9993b7265bde082523865d804da8999aaac9f5"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/point_prompt_training/prompt_driven_normalization.py",
+    "bytes": 1542,
+    "sha256": "3b9180c8dc4820e62f3e159839666c5a304438f6d4b5f0dc69941ca684aec041"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/point_transformer/__init__.py",
+    "bytes": 115,
+    "sha256": "9e100a31fcc475754e7b800f6ccd6699119da730f93abe36fc473984da2fbc0c"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/point_transformer/point_transformer_cls.py",
+    "bytes": 4093,
+    "sha256": "935a1b781f11c744833bf1eb79793d3d5159af0792ad3c6b4eac90e015084c9a"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/point_transformer/point_transformer_partseg.py",
+    "bytes": 12992,
+    "sha256": "83f4bfe73cbd59953e12b38f8d8719480149963f6eafaf334af8af92ec2363dd"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/point_transformer/point_transformer_seg.py",
+    "bytes": 11432,
+    "sha256": "c953202cec9d04479934bd4d34eec387951a954ded55a7e6a67b9f2a4d7e4efc"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/point_transformer/utils.py",
+    "bytes": 311,
+    "sha256": "686353bc243c4ccce3f6d76510a7302356189b085051038c633e978088401c12"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/point_transformer_v2/__init__.py",
+    "bytes": 295,
+    "sha256": "a2df5346b45a7c0203a6c96bfe5bf8616f12f2ce32a15274ce84f389bd9f5097"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/point_transformer_v2/point_transformer_v2m1_origin.py",
+    "bytes": 20542,
+    "sha256": "8c240bcad4eadc1db7883005d65d3123ec72f8aafa46e744efca043b95e8e3a1"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/point_transformer_v2/point_transformer_v2m2_base.py",
+    "bytes": 19178,
+    "sha256": "fbf75127b229889ae70852256ac395e67da07809f4a8e89ad0ba0a6f98ace21a"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/point_transformer_v2/point_transformer_v2m3_pdnorm.py",
+    "bytes": 22148,
+    "sha256": "e991145cc1e24ebb61e45547342249f9b78e1c7cb9c5f00a10da9b502bfac6c0"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/point_transformer_v3/__init__.py",
+    "bytes": 43,
+    "sha256": "b7b0ed4bc43543238858a2660f6923339206106ce3d17a40ae3e056825b94a60"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/point_transformer_v3/point_transformer_v3m1_base.py",
+    "bytes": 24987,
+    "sha256": "9855aac05ee9093f8c6a2ccc6740044fdc5cd624292abce7489adf247c007c7c"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/sparse_unet/__init__.py",
+    "bytes": 145,
+    "sha256": "a836b8adc833f69a37882d3f94527c31c4da16d8f97dcc8c0ab4e7f8398cc09f"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/sparse_unet/mink_unet.py",
+    "bytes": 12531,
+    "sha256": "03ddf1f158cf9cc3a362bc7869f0662ea211bff338f069c1c1fdfb502c58945e"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/sparse_unet/spconv_unet_v1m1_base.py",
+    "bytes": 15525,
+    "sha256": "02ca26281f687b4dd01cc75727a1a8a761b9b010d1b2f00cb9ea3a1905811e11"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/sparse_unet/spconv_unet_v1m2_bn_momentum.py",
+    "bytes": 9042,
+    "sha256": "40cea37bb13ba0a5c6c14134af2c137945c50bde478ce73ddae69b3926d1cc6a"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/sparse_unet/spconv_unet_v1m3_pdnorm.py",
+    "bytes": 13857,
+    "sha256": "5c7a30a17668ff74c4bfa9a5633917326879230ec32089ca8c84837c4d28f05e"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/spvcnn/__init__.py",
+    "bytes": 25,
+    "sha256": "c85532366d9433de5de7dffee2c706bec00686254ceeb342adc1068489d94146"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/spvcnn/ts_spvcnn.py",
+    "bytes": 14078,
+    "sha256": "3b3e4e471479b037f757fea21a3156a2b6319f54547cb592f43a6055113a481b"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/stratified_transformer/__init__.py",
+    "bytes": 140,
+    "sha256": "4405d9ab399599d61594598b349e858d6986ae5db92bf120516384ab5b3c35f4"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/stratified_transformer/stratified_transformer_v1m1_origin.py",
+    "bytes": 26395,
+    "sha256": "21812657d5b98366b425ff19c2aa2c5470a8e532285a8fd39d7563e59a691865"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/stratified_transformer/stratified_transformer_v1m2_refine.py",
+    "bytes": 25786,
+    "sha256": "32903eb9dcbe0e81ff89dd25eeb760ae8792270f090e23acf5e1827fc510fcfa"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/swin3d/__init__.py",
+    "bytes": 41,
+    "sha256": "d996feb12912363f6cc794e4c472f201c82a3e2d90c6a282e86f623d8b137390"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/swin3d/mink_layers.py",
+    "bytes": 6794,
+    "sha256": "6964fdc238f7e731c4450c7bf765fda3e8c9d92b14852df0f2b0e77a9ab79f00"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/swin3d/swin3d_layers.py",
+    "bytes": 30324,
+    "sha256": "78e98037a186f85dc9aad2a14e56ada74cac04bc2ff3a7d8ea35275d77a17a4d"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/swin3d/swin3d_v1m1_base.py",
+    "bytes": 6391,
+    "sha256": "63e95e091b8ce4a60e8bc82a122e61fad4e9c0c2e192907462da84c079fa2df7"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/utils/__init__.py",
+    "bytes": 182,
+    "sha256": "0ad96d4ee47bae83b87962e2195e3354c0d6cd4ef1c83de48d750bad668b51a2"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/utils/checkpoint.py",
+    "bytes": 1999,
+    "sha256": "f19130e46b3b9ba8f0512ac2fc76fd8aa27bb57f5b9291c8126e759e1a13a65d"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/utils/misc.py",
+    "bytes": 834,
+    "sha256": "23bc152bd98c7a02c8ad16906c17a93f2f0d0f334863f2b803fa19d1938d7605"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/utils/serialization/__init__.py",
+    "bytes": 129,
+    "sha256": "e6461b37ccb5dcb24725943271259c4f74dac89d27b22becb97e48ce04c8a9b1"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/utils/serialization/default.py",
+    "bytes": 2006,
+    "sha256": "886b8f3f0bbfaccb96b629fe2021d0bc9a700887c2ff8ec13b347f62ae60d964"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/utils/serialization/hilbert.py",
+    "bytes": 9964,
+    "sha256": "b6c4e6c763d0d1e1583448d0cfe9c1c2ff5600e4535799beed9af80b48179f9e"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/utils/serialization/z_order.py",
+    "bytes": 4135,
+    "sha256": "8a3b1f516c35e03ca15cb53b10c09b8b9cbe75289ac58650b6489212e9252c21"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/models/utils/structure.py",
+    "bytes": 7273,
+    "sha256": "cebe08382e12a3f4f82d4e6fc0f3ccb0f500b782b6316a417766703f484ab429"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/utils/__init__.py",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/utils/cache.py",
+    "bytes": 1601,
+    "sha256": "c320f94ca818eeef1d0757a1c998af5753c22d89d879de64ffc98191e21f227b"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/utils/comm.py",
+    "bytes": 5830,
+    "sha256": "67b626983ff57946d89f4a87870b31192b6ab2f3d26ae79354f37352067dbd0c"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/utils/config.py",
+    "bytes": 26068,
+    "sha256": "618e79e5256dc05209f1cb74650c921d3312a97c38948114a1e1845fe36aa81c"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/utils/env.py",
+    "bytes": 755,
+    "sha256": "69b90f07d78a5ea08233b136d4956b912399128a8ab14d12ad6c32880a42eb0d"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/utils/events.py",
+    "bytes": 20379,
+    "sha256": "8face4d897f869c6e8ddb96ae701b654332f14b2543373257d367016096fbd7a"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/utils/logger.py",
+    "bytes": 5771,
+    "sha256": "ce02bab027d453b74846bcbee5aa37b969ec9f010f4e870b7936d340c5675399"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/utils/misc.py",
+    "bytes": 5029,
+    "sha256": "d09b5692ef3755a76813ead2f37d1c69e3eb21d7caa3b89ea59640d378d2f079"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/utils/optimizer.py",
+    "bytes": 2020,
+    "sha256": "48362cd7ea166923ab23c1113b9630f161853c5e43c64232a649ea9a372daf99"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/utils/path.py",
+    "bytes": 3412,
+    "sha256": "3d57045279660dc0bc62a10f1cd48c8061bea5cec4af07a27fbd673e3abf8db1"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/utils/registry.py",
+    "bytes": 10951,
+    "sha256": "ed38b85057632145f4b7269f40321688ccf80edd8528314712c01b78832c6e4e"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/utils/scheduler.py",
+    "bytes": 3967,
+    "sha256": "c671d696749f35635a04a824ef0b14e85f0098cf9c8a1e3744985d5da2750397"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/utils/timer.py",
+    "bytes": 2019,
+    "sha256": "24f617298b5e7949696ee347135a83d93b80eedebf461ce8e185d13996ab543d"
+  },
+  {
+    "path": "src/Pointcept_v151/pointcept/utils/visualization.py",
+    "bytes": 2516,
+    "sha256": "44bba5ce3954a87fd9cb3a3217c5eff8c81e0c5f3db34a16d68614dd66f2c639"
+  },
+  {
+    "path": "src/Pointcept_v151/scripts/build_image.sh",
+    "bytes": 2388,
+    "sha256": "2511cf3b22d41ec616e6742d02d77d114f9f71f01ae078a71296b3a6f0d3582e"
+  },
+  {
+    "path": "src/Pointcept_v151/scripts/test.sh",
+    "bytes": 1337,
+    "sha256": "7d76a1c52be2ba1792882a9403efffef8fa6883f427a16827142e6d8cc312054"
+  },
+  {
+    "path": "src/Pointcept_v151/scripts/train.sh",
+    "bytes": 1705,
+    "sha256": "8688aa93ee5c4c16b26e67ddb965e710c73618c03a7f379eddee8eaf3ee248d6"
+  },
+  {
+    "path": "src/Pointcept_v151/tools/test.py",
+    "bytes": 851,
+    "sha256": "c59ceb817b7db737fe7718d6a2a291f05caa49f4e0ae7b8dc2c9a5bfb57bdb78"
+  },
+  {
+    "path": "src/Pointcept_v151/tools/test_s3dis_6fold.py",
+    "bytes": 2712,
+    "sha256": "8efbc99f93892d85bb44a819bf044bfa7bcff9cd133859ecf0d1f4f245a240f7"
+  },
+  {
+    "path": "src/Pointcept_v151/tools/train.py",
+    "bytes": 859,
+    "sha256": "324ad831ff3d78f0e912cd7513a1e25df144afd24130d9a17bf221d0e5fd479b"
+  },
+  {
+    "path": "weights/nuscenes-semseg-pt-v3m1-0-base/config.py",
+    "bytes": 7497,
+    "sha256": "e76714dbd93b7eed2e436df0cc2041072d17b1225ef0fd9897283d47edb68804"
+  }
+]

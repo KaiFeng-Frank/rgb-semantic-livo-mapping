@@ -1,0 +1,173 @@
+{
+  "geometry_r1": {
+    "LIO ICP": {
+      "n": 114,
+      "mean_ms": 9.373008771929824,
+      "median_ms": 8.8565,
+      "p95_ms": 13.88755
+    },
+    "LIO Current Total Time": {
+      "n": 114,
+      "mean_ms": 14.093833333333336,
+      "median_ms": 13.2885,
+      "p95_ms": 20.63175
+    },
+    "VIO computeJacobianAndUpdateEKF": {
+      "n": 113,
+      "mean_ms": 1.298221238938053,
+      "median_ms": 1.276,
+      "p95_ms": 1.7376
+    },
+    "VIO Current Total Time": {
+      "n": 113,
+      "mean_ms": 3.996150442477876,
+      "median_ms": 3.9830000000000005,
+      "p95_ms": 5.111
+    }
+  },
+  "online_r1": {
+    "LIO ICP": {
+      "n": 114,
+      "mean_ms": 86.7652192982456,
+      "median_ms": 107.68299999999999,
+      "p95_ms": 120.7229
+    },
+    "LIO Current Total Time": {
+      "n": 114,
+      "mean_ms": 100.91248245614037,
+      "median_ms": 122.9775,
+      "p95_ms": 138.58655000000002
+    },
+    "VIO computeJacobianAndUpdateEKF": {
+      "n": 113,
+      "mean_ms": 1.1595132743362833,
+      "median_ms": 1.064,
+      "p95_ms": 2.291999999999999
+    },
+    "VIO Current Total Time": {
+      "n": 113,
+      "mean_ms": 3.4520088495575223,
+      "median_ms": 3.232,
+      "p95_ms": 5.509399999999999
+    },
+    "unused_boundary_extraction": {
+      "n": 114,
+      "mean_ms": 12.639829535964914,
+      "median_ms": 14.936
+    }
+  },
+  "online_r2": {
+    "LIO ICP": {
+      "n": 114,
+      "mean_ms": 85.41620175438595,
+      "median_ms": 108.35050000000001,
+      "p95_ms": 120.0469
+    },
+    "LIO Current Total Time": {
+      "n": 114,
+      "mean_ms": 99.67275438596491,
+      "median_ms": 123.352,
+      "p95_ms": 136.1736
+    },
+    "VIO computeJacobianAndUpdateEKF": {
+      "n": 113,
+      "mean_ms": 1.11141592920354,
+      "median_ms": 1.028,
+      "p95_ms": 1.9504
+    },
+    "VIO Current Total Time": {
+      "n": 113,
+      "mean_ms": 3.5052389380530977,
+      "median_ms": 3.192,
+      "p95_ms": 5.770799999999999
+    },
+    "unused_boundary_extraction": {
+      "n": 114,
+      "mean_ms": 12.710513360526317,
+      "median_ms": 14.82535
+    }
+  },
+  "geometry_r2": {
+    "LIO ICP": {
+      "n": 114,
+      "mean_ms": 9.076596491228072,
+      "median_ms": 8.58,
+      "p95_ms": 13.296299999999999
+    },
+    "LIO Current Total Time": {
+      "n": 114,
+      "mean_ms": 13.723964912280703,
+      "median_ms": 13.2125,
+      "p95_ms": 18.416349999999998
+    },
+    "VIO computeJacobianAndUpdateEKF": {
+      "n": 113,
+      "mean_ms": 1.2755840707964603,
+      "median_ms": 1.2899999999999998,
+      "p95_ms": 1.7209999999999996
+    },
+    "VIO Current Total Time": {
+      "n": 113,
+      "mean_ms": 4.410150442477876,
+      "median_ms": 4.351,
+      "p95_ms": 5.948799999999998
+    }
+  },
+  "geometry_r3": {
+    "LIO ICP": {
+      "n": 114,
+      "mean_ms": 8.918570175438596,
+      "median_ms": 8.715,
+      "p95_ms": 12.1921
+    },
+    "LIO Current Total Time": {
+      "n": 114,
+      "mean_ms": 13.496070175438597,
+      "median_ms": 12.901,
+      "p95_ms": 18.0221
+    },
+    "VIO computeJacobianAndUpdateEKF": {
+      "n": 113,
+      "mean_ms": 1.2630176991150441,
+      "median_ms": 1.258,
+      "p95_ms": 1.6758
+    },
+    "VIO Current Total Time": {
+      "n": 113,
+      "mean_ms": 4.247929203539823,
+      "median_ms": 4.146999999999999,
+      "p95_ms": 5.5527999999999995
+    }
+  },
+  "online_r3": {
+    "LIO ICP": {
+      "n": 114,
+      "mean_ms": 86.19769298245615,
+      "median_ms": 107.8535,
+      "p95_ms": 120.3356
+    },
+    "LIO Current Total Time": {
+      "n": 114,
+      "mean_ms": 100.79104385964911,
+      "median_ms": 123.939,
+      "p95_ms": 136.30175
+    },
+    "VIO computeJacobianAndUpdateEKF": {
+      "n": 113,
+      "mean_ms": 1.178628318584071,
+      "median_ms": 1.132,
+      "p95_ms": 2.0421999999999993
+    },
+    "VIO Current Total Time": {
+      "n": 113,
+      "mean_ms": 3.6831415929203537,
+      "median_ms": 3.25,
+      "p95_ms": 6.590399999999997
+    },
+    "unused_boundary_extraction": {
+      "n": 114,
+      "mean_ms": 12.639436342105261,
+      "median_ms": 14.8916
+    }
+  }
+}

@@ -16,12 +16,12 @@ Established facts (each one tested on this machine, 2026-09-21):
 
 NEVER use strict=False here. If keys stop matching, the version pairing is wrong — fix that instead.
 """
-import sys, types, warnings
+import os, sys, types, warnings
 
-POINTCEPT_V151 = "/data/livo_sem/src/Pointcept_v151"
-WEIGHT_DIR     = "/data/livo_sem/weights/nuscenes-semseg-pt-v3m1-0-base"
-CONFIG_PATH    = WEIGHT_DIR + "/config.py"
-CKPT_PATH      = WEIGHT_DIR + "/model/model_best.pth"
+POINTCEPT_V151 = os.environ.get("PTV3_POINTCEPT", "/data/livo_sem/src/Pointcept_v151")
+WEIGHT_DIR     = os.environ.get("PTV3_WEIGHT_DIR", "/data/livo_sem/weights/nuscenes-semseg-pt-v3m1-0-base")
+CONFIG_PATH    = os.environ.get("PTV3_CONFIG", WEIGHT_DIR + "/config.py")
+CKPT_PATH      = os.environ.get("PTV3_CHECKPOINT", WEIGHT_DIR + "/model/model_best.pth")
 
 # The 16 nuScenes classes, in checkpoint order. Index == predicted class id.
 NUSCENES_CLASSES = [

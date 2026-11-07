@@ -1,0 +1,20 @@
+{
+  "reference_run": 40125959560,
+  "reason": "no accepted boundary rows with post-geometry-voxel input",
+  "dataset": "seq07 frames 0:120, now development data",
+  "arms": [
+    "geometry",
+    "full_B0",
+    "full_ZS"
+  ],
+  "repetitions": 1,
+  "change": "use deskewed pre-voxel points for semantic boundary extraction; geometric input and all gates unchanged",
+  "ground_truth": "not fetched or scored",
+  "criterion": "nonzero historical boundary constraints with complete paired timestamps; inspect bounded history and extraction cost",
+  "future_accuracy": "requires separately frozen unseen window",
+  "local_checks": {
+    "standalone_contracts": "passed",
+    "actual_estimator": "passed, including separate 0.5 m geometry input with dense semantic input"
+  },
+  "patch_sha256": "998a8b8d0606ed249d5da66dab13c9ad3426df4508f3bbcc1a47a32b9c6d9e8b"
+}

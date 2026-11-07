@@ -53,6 +53,44 @@ reliability gives 0.557178 m and trades loop translation against rotation accura
 These sub-millimetre RMSE differences do **not** establish a useful localization gain.
 All controls and trajectories are preserved; this experiment does not change the live frontend.
 
+The separate [semantic frontend implementation](frontend/README.md) now adds historical
+class-conditioned surface association and metric boundary observations directly to
+FAST-LIVO2's error-state update. Synthetic tests exercise pose, velocity cross covariance,
+and uncertainty updates in the actual estimator. The first short replay exposed
+zero active boundary rows; moving extraction before geometry voxelization restored
+activation on 112/115 B0 and 106/115 ZS updates, with paired timestamps.
+The subsequent frozen seq09 validation **did not pass accuracy admission**:
+full B0 mean ATE is 0.463 m versus geometry's 0.430 m across three repeats,
+despite active boundary rows on 233/235 updates. All five arms and failures are
+preserved in the [holdout results](results/semantic_frontend_20261025/holdout09/README.md).
+[Complete verification and the preserved failed admission](results/semantic_frontend_20261025/README.md).
+The enhanced implementation now adds motion-aware geometric/map admission,
+projected dynamic-pixel gating in both visual update paths, and direct categorical
+likelihood observations with boundary rows disabled. Actual-estimator integration
+tests and the frozen five-arm development replay pass: all arms retain the same
+91 pose timestamps; the combined arm activates categorical observations on 89
+updates, motion detection on 81, and moving-region image masks on 72. This checks
+mechanism activation, not accuracy improvement. The earlier failed result does
+not evaluate this enhanced profile. See [archived evidence](results/semantic_frontend_20261025/enhanced/README.md)
+and [implementation and limits](frontend/README.md).
+The subsequent frozen six-arm accuracy check also fails: mean ATE is 20.89 m for
+the combined arm versus 16.20 m for geometry, and both translation and rotation
+RPE worsen. No semantic arm passes every declared comparison rule. The baseline
+itself has large errors after starting at frame 240 without earlier initialization;
+this is not a normally initialized full-sequence benchmark. All eighteen runs,
+limitations and component timings are [preserved](results/semantic_frontend_20261025/enhanced/accuracy09/README.md).
+The local 5070 Ti now runs the strict B0 model: direct inference medians are
+63–70 ms over three fixed 20-frame timing rounds. The earlier default-middleware
+ROS probes failed scan delivery; controlled full-size geometry messages now pass
+with Cyclone DDS. Subsequent actual-scan best-effort replay still lost scans;
+an explicit reliable-input profile now passes three paired real-scan repetitions,
+with 26/26 scans in every arm and timely semantics on all 20 measured scans in
+each online run. The subsequent full 1x LIVO replay fails realtime admission:
+three repeats have 87–89% timely semantics and pose-delivery p95 of 3.28–3.36 s,
+with about 3 s of accumulating lag. All arms preserve the same 114 pose timestamps.
+[Online evidence and preserved transport failures](results/semantic_frontend_20261025/enhanced/online/README.md).
+[Local runtime checks and preserved failed probes](results/semantic_frontend_20261025/local_gpu/README.md).
+
 ![semantic map](docs/img/rviz_class_final.png)
 
 *The full 693 m loop of KITTI seq 07, coloured by predicted class. Cyan is `driveable_surface`,

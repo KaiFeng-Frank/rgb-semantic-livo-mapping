@@ -1,0 +1,12 @@
+[ptv3_worker] Pointcept v1.5.1 loader, strict=True, intensity_scale=0.20 grid=0.050 classes=16 | shuffle_orders=False weight_dtype=fp16 tf32=False fast_voxel=True shm=True
+[ptv3_worker] gpu_voxel=True fast_hilbert=True
+[ptv3_worker] shm attached psm_62ee6675 (4 slots x 200000 pts)
+W1025 11:54:19.866000 3219455 site-packages/torch/fx/_symbolic_trace.py:53] is_fx_tracing will return true for both fx.symbolic_trace and torch.export. Please use is_fx_tracing_symbolic_tracing() for specifically fx.symbolic_trace or torch.compiler.is_compiling() for specifically torch.export/compile.
+[ptv3_worker] warm
+Exception ignored in: <function SharedMemory.__del__ at 0x7738d256ede0>
+Traceback (most recent call last):
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/multiprocessing/shared_memory.py", line 187, in __del__
+    self.close()
+  File "/home/frank/miniconda3/envs/ctvggt/lib/python3.11/multiprocessing/shared_memory.py", line 230, in close
+    self._mmap.close()
+BufferError: cannot close exported pointers exist

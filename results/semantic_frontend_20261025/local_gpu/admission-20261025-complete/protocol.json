@@ -1,0 +1,44 @@
+{
+  "scope": "local GPU and ROS bridge admission, not full LIO accuracy",
+  "warm_frames": [
+    0,
+    20,
+    40,
+    60,
+    80,
+    100
+  ],
+  "measure_frames": [
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139
+  ],
+  "deadline_ms": 80,
+  "required_semantic_fraction": 0.95,
+  "raw_data_persisted": false,
+  "source_sha256": {
+    "frontend/online_admission.py": "ddcf9fbe1d3b2db1e95575f1018adc48fb87fd5ea5b43a0f1c7646c4d03282cb",
+    "frontend/input_bridge.py": "d89b6314023fcd1a29307d8075430dc793efaa5773ffbff735c5e44bc5b86c13",
+    "src/ptv3_client.py": "bd221934010c2e275cd2eebb969c9c0fce3ea99da76e36871383a638854da652",
+    "src/ptv3_worker.py": "aefb4706c7f0a53f8106acc23c8f1aba8a7a78a989f73d8ff31e44f7b4c7e51d",
+    "src/ptv3_loader_verified.py": "bc08e046f4c84a201f77f35fee0edb300d1292f3b0501b2a19a067b43d263e85",
+    "src/ptv3_fast.py": "496d2774bfb5010eef711d881f2260cd3d8eb164463f54ccc6f504a7cb222c00"
+  }
+}

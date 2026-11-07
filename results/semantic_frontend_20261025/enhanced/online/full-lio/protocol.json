@@ -1,0 +1,38 @@
+{
+  "sequence": "07",
+  "first_frame": 730,
+  "end_exclusive": 850,
+  "development": true,
+  "repetitions": 3,
+  "playback_rate": 1.0,
+  "modes": [
+    "geometry",
+    "online"
+  ],
+  "pre_roll": "six source scans with stamps shifted 120 seconds before estimator startup, 3 seconds apart; last three must have timely semantics",
+  "steady_excludes_first_scans": 20,
+  "deadline_ms": 80,
+  "minimum_semantic_fraction": 0.95,
+  "minimum_poses": 110,
+  "maximum_latency_drift_ms": 100,
+  "maximum_pose_delivery_p95_ms": 1000,
+  "coverage": "all original scans once in order, unchanged original point bytes; equal finite pose timestamps",
+  "timing": "observer monotonic receipt; pair Odometry publication order to sensor-time TUM only when counts/positions agree; time from arrival of the first complete scan containing the update time",
+  "caveat": "short warm-cache 1x replay, includes observer overhead; not a sustained deployment or accuracy result",
+  "raw_storage": "task-owned tmpfs only, removed at exit",
+  "source_sha256": {
+    "frontend/online_lio_validation.py": "26fdb212663bf6208a9538008b9f8170798fa06781d879199d4fbc604ac6a5b3",
+    "frontend/input_bridge.py": "cedfcf9c678ab1265a503bdf8e2b50ca4c39bf26885c7fe456950f8096ba8a42",
+    "frontend/enhanced.yaml": "76bc2e355e94308b46f642561232fdec0195024c2f42fcae9c4b78d0f9c4d75a",
+    "frontend/patches/fastlivo2-semantic.patch": "e7db1e0d3aa980d6f0583d03da5312662fb7d154ec61b751fb4c8e115358c026",
+    "src/kitti_to_ros2bag.py": "bdc8ce38da77549a08df0187916dbb43dc1313a93e1cf647db757c1e59bb2784",
+    "src/kitti_scan.py": "5fa4b91431450773684b8bfb76a3b697c94af5187ebb117d8755bf79984f7d03",
+    "config/kitti_velodyne64.yaml": "b868c5a7a0986e8448800d3ef6b9238e1bcde0ccac9dccfa5b0b32c1bc8ddebb",
+    "config/camera_kitti_cam2.yaml": "5748d60a5a867998c55b1cef1e1279199b3ec70945016ac3dc9f2ad7ee97e90f",
+    "frontend/include/semantic_frontend.hpp": "360ca3dc6a8087356568b6fd408a07b24a8bb0d9ae24641a801527e9c05cc25d",
+    "frontend/include/semantic_likelihood.hpp": "855aa7e5e9a00e29f42bdb1aa1e607f0862b4f14e881ff9644dc4b18f9a1cbd2",
+    "frontend/include/semantic_motion.hpp": "39df5e2172e9726e3da29d5654d7a3ccb0913c09f95a662402d284f009ef71a9",
+    "frontend/include/semantic_pcl.hpp": "ab5fd64cc5cd7fd0dfd6fc92e26bf27a97ac6e5da958593d4f317b890e6749db",
+    "frontend/include/semantic_visual.hpp": "fd7c95bb8ffac79bf270adc9a873f7679a0d86e69e4a678e05a7f7a208fa99ca"
+  }
+}

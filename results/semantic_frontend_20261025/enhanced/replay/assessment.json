@@ -1,0 +1,113 @@
+{
+  "status": "mechanism_activation_passed_not_accuracy_admission",
+  "run_url": "https://github.com/KaiFeng-Frank/rgb-semantic-livo-mapping/actions/runs/40162901816",
+  "code_commit": "0d279c7dd338a079e5a0887327f3684331c50f72",
+  "archive_sha256": "0f1fc28d8a03b72f51aba971969902e88d85d7f1363d268b8704716db2a3d5ff",
+  "archive_bytes": 295540,
+  "source_hashes_verified": 13,
+  "trajectory_hashes_verified": 5,
+  "identical_pose_timestamps": true,
+  "finite_trajectories": true,
+  "all_boundary_constraint_rows_zero": true,
+  "raw_point_identity": {
+    "armB0_s1": {
+      "scans": 96,
+      "points": 11630722,
+      "recomputed_order_disagreements": 34
+    },
+    "ZS": {
+      "scans": 96,
+      "points": 11630722,
+      "recomputed_order_disagreements": 121
+    }
+  },
+  "arms": [
+    {
+      "arm": "geometry",
+      "poses": 91,
+      "semantic_updates": 0,
+      "visual_updates": 0,
+      "categorical_updates": 0,
+      "categorical_rows": 0,
+      "moving_updates": 0,
+      "moving_point_observations": 0,
+      "uncertain_point_observations": 0,
+      "invalidated_map_nodes": 0,
+      "moving_mask_updates": 0,
+      "uncertain_mask_updates": 0,
+      "accepted_photometric_rows_over_iterations": 0
+    },
+    {
+      "arm": "motion_B0",
+      "poses": 91,
+      "semantic_updates": 91,
+      "visual_updates": 0,
+      "categorical_updates": 0,
+      "categorical_rows": 0,
+      "moving_updates": 78,
+      "moving_point_observations": 2076,
+      "uncertain_point_observations": 66549,
+      "invalidated_map_nodes": 5,
+      "moving_mask_updates": 0,
+      "uncertain_mask_updates": 0,
+      "accepted_photometric_rows_over_iterations": 0
+    },
+    {
+      "arm": "visual_B0",
+      "poses": 91,
+      "semantic_updates": 91,
+      "visual_updates": 90,
+      "categorical_updates": 0,
+      "categorical_rows": 0,
+      "moving_updates": 79,
+      "moving_point_observations": 2279,
+      "uncertain_point_observations": 66111,
+      "invalidated_map_nodes": 0,
+      "moving_mask_updates": 70,
+      "uncertain_mask_updates": 90,
+      "accepted_photometric_rows_over_iterations": 3165952
+    },
+    {
+      "arm": "likelihood_B0",
+      "poses": 91,
+      "semantic_updates": 91,
+      "visual_updates": 0,
+      "categorical_updates": 89,
+      "categorical_rows": 5528,
+      "moving_updates": 0,
+      "moving_point_observations": 0,
+      "uncertain_point_observations": 0,
+      "invalidated_map_nodes": 0,
+      "moving_mask_updates": 0,
+      "uncertain_mask_updates": 0,
+      "accepted_photometric_rows_over_iterations": 0
+    },
+    {
+      "arm": "enhanced_B0",
+      "poses": 91,
+      "semantic_updates": 91,
+      "visual_updates": 90,
+      "categorical_updates": 89,
+      "categorical_rows": 5592,
+      "moving_updates": 81,
+      "moving_point_observations": 2424,
+      "uncertain_point_observations": 66219,
+      "invalidated_map_nodes": 4,
+      "moving_mask_updates": 72,
+      "uncertain_mask_updates": 90,
+      "accepted_photometric_rows_over_iterations": 3226816
+    }
+  ],
+  "interpretation": {
+    "motion_counts": "frame-wise observations, not unique objects; visual-only also tracks motion but does not remove geometric residuals",
+    "visual_counts": "mask activation, not a dense 2D segmentation score or direct count of removed residuals; accepted rows include IEKF iterations",
+    "likelihood_counts": "final-iteration rows of each update, not statistically independent observations",
+    "accuracy": "not scored; one development repetition with cached labels supports mechanism activation only",
+    "online": "not validated; replay is 0.125x on a temporary GitHub CPU runner",
+    "motion_quality": "false positives/negatives not quantified by this replay",
+    "loop_closure": "off; non-rigid map rebuilding not validated",
+    "next_step": "separately freeze a bounded paired accuracy evaluation with repeated runs before considering a large experiment",
+    "unlogged_visual_updates": "visual_updates and accepted row counters are emitted only when semantic visual masking is enabled; zero in other arms does not mean VIO did not run",
+    "recomputed_order": "diagnostic only; disagreements are preserved. Annotation uses carried original raw_point_index checked against exact message xyz/intensity, never recomputed sort order"
+  }
+}

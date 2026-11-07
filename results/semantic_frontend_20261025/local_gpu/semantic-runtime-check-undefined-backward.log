@@ -1,0 +1,27 @@
+Processing /home/frank/semantic_livo_runtime/wheels/flash_attn-2.8.3-cp311-cp311-linux_x86_64.whl
+Installing collected packages: flash-attn
+Successfully installed flash-attn-2.8.3
+
+[notice] A new release of pip is available: 24.0 -> 26.2.2
+[notice] To update, run: /home/frank/semantic_livo_runtime/venv/bin/python -m pip install --upgrade pip
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/frank/桌面/rgb-semantic-livo-mapping/frontend/check_gpu_runtime.py", line 89, in <module>
+    result = check()
+             ^^^^^^^
+  File "/home/frank/桌面/rgb-semantic-livo-mapping/frontend/check_gpu_runtime.py", line 16, in check
+    from flash_attn import flash_attn_varlen_qkvpacked_func
+  File "/home/frank/semantic_livo_runtime/venv/lib/python3.11/site-packages/flash_attn/__init__.py", line 3, in <module>
+    from flash_attn.flash_attn_interface import (
+  File "/home/frank/semantic_livo_runtime/venv/lib/python3.11/site-packages/flash_attn/flash_attn_interface.py", line 15, in <module>
+    import flash_attn_2_cuda as flash_attn_gpu
+ImportError: /home/frank/semantic_livo_runtime/venv/lib/python3.11/site-packages/flash_attn_2_cuda.cpython-311-x86_64-linux-gnu.so: undefined symbol: _ZN5flash12run_mha_bwd_IN7cutlass10bfloat16_tELi96ELb1EEEvRNS_16Flash_bwd_paramsEP11CUstream_st
+Traceback (most recent call last):
+  File "/tmp/activate_semantic_runtime.py", line 14, in <module>
+    subprocess.run([str(root/'venv/bin/python'),'-m','frontend.check_gpu_runtime','--out',str(root/'runtime-ready.json')],cwd='/home/frank/桌面/rgb-semantic-livo-mapping',env=env,check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/frank/miniconda3/lib/python3.13/subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/home/frank/semantic_livo_runtime/venv/bin/python', '-m', 'frontend.check_gpu_runtime', '--out', '/home/frank/semantic_livo_runtime/runtime-ready.json']' returned non-zero exit status 1.

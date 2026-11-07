@@ -1,0 +1,35 @@
+Start testing: Oct 25 03:55 HKT
+----------------------------------------------------------
+1/1 Testing: semantic_lio_integration
+1/1 Test: semantic_lio_integration
+Command: "/home/frank/semantic_livo_clean_verify/build/fast_livo/semantic_lio_integration_test"
+Directory: /home/frank/semantic_livo_clean_verify/build/fast_livo
+"semantic_lio_integration" start time: Oct 25 03:55 HKT
+Output:
+----------------------------------------------------------
+[ LIO ] Raw feature num: 1281, downsampled feature num:1281 effective feature num: 1281 average residual: 0
+[ LIO ] Raw feature num: 1281, downsampled feature num:1281 effective feature num: 1281 average residual: 0
+[ Semantic input ] frame=2 dense=1281 geometric=1281 eligible=1281 no_other=549 sparse_or_nonadjacent=610 sparse_other=0 nonplanar=0 extraction_ms=0.990097
+[ LIO ] Raw feature num: 1281, downsampled feature num:1281 effective feature num: 1281 average residual: 0
+[ LIO ] Raw feature num: 1281, downsampled feature num:1281 effective feature num: 1281 average residual: 0
+[ Semantic input ] frame=2 dense=1281 geometric=1281 eligible=1281 no_other=549 sparse_or_nonadjacent=610 sparse_other=0 nonplanar=0 extraction_ms=0.977162
+[ LIO ] Raw feature num: 1281, downsampled feature num:1281 effective feature num: 1281 average residual: 0
+[ LIO ] Raw feature num: 1281, downsampled feature num:1281 effective feature num: 1281 average residual: 7.29485e-06
+[ LIO ] Raw feature num: 1281, downsampled feature num:1281 effective feature num: 1281 average residual: 7.29382e-06
+integration diagnostic off_y=0.2 on_y=0.0571592 rows=25
+[ LIO ] Raw feature num: 1281, downsampled feature num:65 effective feature num: 65 average residual: 0
+[ LIO ] Raw feature num: 1281, downsampled feature num:65 effective feature num: 65 average residual: 0
+[ Semantic input ] frame=2 dense=1281 geometric=65 eligible=1281 no_other=549 sparse_or_nonadjacent=610 sparse_other=0 nonplanar=0 extraction_ms=0.975258
+[ LIO ] Raw feature num: 1281, downsampled feature num:65 effective feature num: 65 average residual: 0
+[ LIO ] Raw feature num: 1281, downsampled feature num:65 effective feature num: 65 average residual: 0.00165188
+[ LIO ] Raw feature num: 1281, downsampled feature num:65 effective feature num: 65 average residual: 0.00165261
+PASS actual FAST-LIVO2: off_y=0.2 on_y=0.0571592 coupled_vy=-0.0285682 boundary_rows=25 off_variance=0.1 on_variance=0.0285796
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"semantic_lio_integration" end time: Oct 25 03:55 HKT
+"semantic_lio_integration" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 25 03:55 HKT

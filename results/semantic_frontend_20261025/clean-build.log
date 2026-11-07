@@ -1,0 +1,168 @@
+Starting >>> livox_ros_driver2
+--- stderr: livox_ros_driver2
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    Sophus_DIR
+
+
+---
+Finished <<< livox_ros_driver2 [0.74s]
+Starting >>> sophus
+--- stderr: sophus
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    Sophus_DIR
+
+
+---
+Finished <<< sophus [0.18s]
+Starting >>> vikit_common
+--- stderr: vikit_common
+CMake Warning (dev) at CMakeLists.txt:2 (PROJECT):
+  cmake_minimum_required() should be called prior to this top-level project()
+  call.  Please see the cmake-commands(7) manual for usage documentation of
+  both commands.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Deprecation Warning at CMakeLists.txt:3 (CMAKE_MINIMUM_REQUIRED):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+Current CPU archtecture: x86_64
+In file included from /home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/src/homography.cpp:12:
+In copy constructor ‘vk::HomographyDecomposition::HomographyDecomposition(const vk::HomographyDecomposition&)’,
+    inlined from ‘void std::__new_allocator<_Tp>::construct(_Up*, _Args&& ...) [with _Up = vk::HomographyDecomposition; _Args = {const vk::HomographyDecomposition&}; _Tp = vk::HomographyDecomposition]’ at /usr/include/c++/13/bits/new_allocator.h:191:4,
+    inlined from ‘static void std::allocator_traits<std::allocator<_CharT> >::construct(allocator_type&, _Up*, _Args&& ...) [with _Up = vk::HomographyDecomposition; _Args = {const vk::HomographyDecomposition&}; _Tp = vk::HomographyDecomposition]’ at /usr/include/c++/13/bits/alloc_traits.h:538:17,
+    inlined from ‘void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = vk::HomographyDecomposition; _Alloc = std::allocator<vk::HomographyDecomposition>]’ at /usr/include/c++/13/bits/stl_vector.h:1286:30,
+    inlined from ‘bool vk::Homography::decompose()’ at /home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/src/homography.cpp:164:29:
+/home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/include/vikit/homography.h:29:8: warning: ‘decomp.vk::HomographyDecomposition::score’ may be used uninitialized [-Wmaybe-uninitialized]
+   29 | struct HomographyDecomposition
+      |        ^~~~~~~~~~~~~~~~~~~~~~~
+/home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/src/homography.cpp: In member function ‘bool vk::Homography::decompose()’:
+/home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/src/homography.cpp:139:27: note: ‘decomp’ declared here
+  139 |   HomographyDecomposition decomp;
+      |                           ^~~~~~
+In copy constructor ‘vk::HomographyDecomposition::HomographyDecomposition(const vk::HomographyDecomposition&)’,
+    inlined from ‘void std::__new_allocator<_Tp>::construct(_Up*, _Args&& ...) [with _Up = vk::HomographyDecomposition; _Args = {const vk::HomographyDecomposition&}; _Tp = vk::HomographyDecomposition]’ at /usr/include/c++/13/bits/new_allocator.h:191:4,
+    inlined from ‘static void std::allocator_traits<std::allocator<_CharT> >::construct(allocator_type&, _Up*, _Args&& ...) [with _Up = vk::HomographyDecomposition; _Args = {const vk::HomographyDecomposition&}; _Tp = vk::HomographyDecomposition]’ at /usr/include/c++/13/bits/alloc_traits.h:538:17,
+    inlined from ‘void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = vk::HomographyDecomposition; _Alloc = std::allocator<vk::HomographyDecomposition>]’ at /usr/include/c++/13/bits/stl_vector.h:1286:30,
+    inlined from ‘bool vk::Homography::decompose()’ at /home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/src/homography.cpp:164:29:
+/home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/include/vikit/homography.h:29:8: warning: ‘decomp.vk::HomographyDecomposition::score’ may be used uninitialized [-Wmaybe-uninitialized]
+   29 | struct HomographyDecomposition
+      |        ^~~~~~~~~~~~~~~~~~~~~~~
+/home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/src/homography.cpp: In member function ‘bool vk::Homography::decompose()’:
+/home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/src/homography.cpp:139:27: note: ‘decomp’ declared here
+  139 |   HomographyDecomposition decomp;
+      |                           ^~~~~~
+In copy constructor ‘vk::HomographyDecomposition::HomographyDecomposition(const vk::HomographyDecomposition&)’,
+    inlined from ‘void std::__new_allocator<_Tp>::construct(_Up*, _Args&& ...) [with _Up = vk::HomographyDecomposition; _Args = {const vk::HomographyDecomposition&}; _Tp = vk::HomographyDecomposition]’ at /usr/include/c++/13/bits/new_allocator.h:191:4,
+    inlined from ‘static void std::allocator_traits<std::allocator<_CharT> >::construct(allocator_type&, _Up*, _Args&& ...) [with _Up = vk::HomographyDecomposition; _Args = {const vk::HomographyDecomposition&}; _Tp = vk::HomographyDecomposition]’ at /usr/include/c++/13/bits/alloc_traits.h:538:17,
+    inlined from ‘void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = vk::HomographyDecomposition; _Alloc = std::allocator<vk::HomographyDecomposition>]’ at /usr/include/c++/13/bits/stl_vector.h:1286:30,
+    inlined from ‘bool vk::Homography::decompose()’ at /home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/src/homography.cpp:164:29:
+/home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/include/vikit/homography.h:29:8: warning: ‘decomp.vk::HomographyDecomposition::score’ may be used uninitialized [-Wmaybe-uninitialized]
+   29 | struct HomographyDecomposition
+      |        ^~~~~~~~~~~~~~~~~~~~~~~
+/home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/src/homography.cpp: In member function ‘bool vk::Homography::decompose()’:
+/home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/src/homography.cpp:139:27: note: ‘decomp’ declared here
+  139 |   HomographyDecomposition decomp;
+      |                           ^~~~~~
+In copy constructor ‘vk::HomographyDecomposition::HomographyDecomposition(const vk::HomographyDecomposition&)’,
+    inlined from ‘void std::__new_allocator<_Tp>::construct(_Up*, _Args&& ...) [with _Up = vk::HomographyDecomposition; _Args = {const vk::HomographyDecomposition&}; _Tp = vk::HomographyDecomposition]’ at /usr/include/c++/13/bits/new_allocator.h:191:4,
+    inlined from ‘static void std::allocator_traits<std::allocator<_CharT> >::construct(allocator_type&, _Up*, _Args&& ...) [with _Up = vk::HomographyDecomposition; _Args = {const vk::HomographyDecomposition&}; _Tp = vk::HomographyDecomposition]’ at /usr/include/c++/13/bits/alloc_traits.h:538:17,
+    inlined from ‘void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = vk::HomographyDecomposition; _Alloc = std::allocator<vk::HomographyDecomposition>]’ at /usr/include/c++/13/bits/stl_vector.h:1286:30,
+    inlined from ‘bool vk::Homography::decompose()’ at /home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/src/homography.cpp:164:29:
+/home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/include/vikit/homography.h:29:8: warning: ‘decomp.vk::HomographyDecomposition::score’ may be used uninitialized [-Wmaybe-uninitialized]
+   29 | struct HomographyDecomposition
+      |        ^~~~~~~~~~~~~~~~~~~~~~~
+/home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/src/homography.cpp: In member function ‘bool vk::Homography::decompose()’:
+/home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/src/homography.cpp:139:27: note: ‘decomp’ declared here
+  139 |   HomographyDecomposition decomp;
+      |                           ^~~~~~
+In copy constructor ‘vk::HomographyDecomposition::HomographyDecomposition(const vk::HomographyDecomposition&)’,
+    inlined from ‘void std::__new_allocator<_Tp>::construct(_Up*, _Args&& ...) [with _Up = vk::HomographyDecomposition; _Args = {const vk::HomographyDecomposition&}; _Tp = vk::HomographyDecomposition]’ at /usr/include/c++/13/bits/new_allocator.h:191:4,
+    inlined from ‘static void std::allocator_traits<std::allocator<_CharT> >::construct(allocator_type&, _Up*, _Args&& ...) [with _Up = vk::HomographyDecomposition; _Args = {const vk::HomographyDecomposition&}; _Tp = vk::HomographyDecomposition]’ at /usr/include/c++/13/bits/alloc_traits.h:538:17,
+    inlined from ‘void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = vk::HomographyDecomposition; _Alloc = std::allocator<vk::HomographyDecomposition>]’ at /usr/include/c++/13/bits/stl_vector.h:1286:30,
+    inlined from ‘bool vk::Homography::decompose()’ at /home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/src/homography.cpp:190:29:
+/home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/include/vikit/homography.h:29:8: warning: ‘decomp.vk::HomographyDecomposition::score’ may be used uninitialized [-Wmaybe-uninitialized]
+   29 | struct HomographyDecomposition
+      |        ^~~~~~~~~~~~~~~~~~~~~~~
+/home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/src/homography.cpp: In member function ‘bool vk::Homography::decompose()’:
+/home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_common/src/homography.cpp:139:27: note: ‘decomp’ declared here
+  139 |   HomographyDecomposition decomp;
+      |                           ^~~~~~
+---
+Finished <<< vikit_common [8.59s]
+Starting >>> vikit_ros
+--- stderr: vikit_ros
+Current CPU architecture: x86_64
+Processor number: 32
+Cores for MP: 3
+In file included from /home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_ros/include/vikit/camera_loader.h:20,
+                 from /home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_ros/src/camera_loader.cpp:10:
+/home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_ros/include/vikit/params_helper.h: In function ‘T vk::getParam(const std::string&, const std::string&, const T&)’:
+/home/frank/semantic_livo_clean_verify/src/rpg_vikit/vikit_ros/include/vikit/params_helper.h:35:48: warning: ignoring attributes on template argument ‘int (*)(FILE*)’ [-Wignored-attributes]
+   35 |         std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(command.c_str(), "r"), pclose);
+      |                                                ^
+---
+Finished <<< vikit_ros [5.06s]
+Starting >>> fast_livo
+--- stderr: fast_livo
+CMake Warning (dev) at /usr/lib/x86_64-linux-gnu/cmake/pcl/Modules/FindFLANN.cmake:45 (find_package):
+  Policy CMP0144 is not set: find_package uses upper-case <PACKAGENAME>_ROOT
+  variables.  Run "cmake --help-policy CMP0144" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+
+  CMake variable FLANN_ROOT is set to:
+
+    /usr
+
+  For compatibility, find_package is ignoring the variable, but code in a
+  .cmake module might still use it.
+Call Stack (most recent call first):
+  /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:261 (find_package)
+  /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:306 (find_flann)
+  /usr/lib/x86_64-linux-gnu/cmake/pcl/PCLConfig.cmake:570 (find_external_library)
+  /opt/ros/jazzy/share/pcl_conversions/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)
+  /opt/ros/jazzy/share/pcl_conversions/cmake/pcl_conversionsConfig.cmake:41 (include)
+  /opt/ros/jazzy/share/pcl_ros/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)
+  /opt/ros/jazzy/share/pcl_ros/cmake/pcl_rosConfig.cmake:41 (include)
+  CMakeLists.txt:86 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at CMakeLists.txt:95 (find_package):
+  Policy CMP0074 is not set: find_package uses <PackageName>_ROOT variables.
+  Run "cmake --help-policy CMP0074" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  CMake variable PCL_ROOT is set to:
+
+    /usr
+
+  For compatibility, CMake is ignoring the variable.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+In file included from /home/frank/semantic_livo_clean_verify/install/vikit_ros/include/vikit/camera_loader.h:20,
+                 from /home/frank/semantic_livo_clean_verify/src/fast_livo/include/LIVMapper.h:28,
+                 from /home/frank/semantic_livo_clean_verify/src/fast_livo/src/LIVMapper.cpp:13:
+/home/frank/semantic_livo_clean_verify/install/vikit_ros/include/vikit/params_helper.h: In function ‘T vk::getParam(const std::string&, const std::string&, const T&)’:
+/home/frank/semantic_livo_clean_verify/install/vikit_ros/include/vikit/params_helper.h:35:48: warning: ignoring attributes on template argument ‘int (*)(FILE*)’ [-Wignored-attributes]
+   35 |         std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(command.c_str(), "r"), pclose);
+      |                                                ^
+In file included from /home/frank/semantic_livo_clean_verify/install/vikit_ros/include/vikit/camera_loader.h:20,
+                 from /home/frank/semantic_livo_clean_verify/src/fast_livo/include/LIVMapper.h:28,
+                 from /home/frank/semantic_livo_clean_verify/src/fast_livo/src/main.cpp:1:
+/home/frank/semantic_livo_clean_verify/install/vikit_ros/include/vikit/params_helper.h: In function ‘T vk::getParam(const std::string&, const std::string&, const T&)’:
+/home/frank/semantic_livo_clean_verify/install/vikit_ros/include/vikit/params_helper.h:35:48: warning: ignoring attributes on template argument ‘int (*)(FILE*)’ [-Wignored-attributes]
+   35 |         std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(command.c_str(), "r"), pclose);
+      |                                                ^
+---
+Finished <<< fast_livo [35.9s]
+
+Summary: 5 packages finished [50.5s]
+  5 packages had stderr output: fast_livo livox_ros_driver2 sophus vikit_common vikit_ros
