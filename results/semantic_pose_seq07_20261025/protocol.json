@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "sequence": "07",
+  "historical_frame": 10,
+  "current_frame": 1060,
+  "target_frames": [
+    10,
+    20,
+    30
+  ],
+  "source_history_frames": [
+    1040,
+    1050
+  ],
+  "models": [
+    "ZS",
+    "armB0_s1"
+  ],
+  "arms": [
+    "G",
+    "D",
+    "S",
+    "T"
+  ],
+  "source_trajectory": "results/kitti_seq07_fastlivo2_tum.txt",
+  "geometric_protocol": "tools/loop_closure/protocol.json",
+  "historical_results": "results/loop_closure_seq07_20261024",
+  "confidence_start": 0.5,
+  "movable_classes": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "movable_weight_floor": 0.25,
+  "incompatible_weight_floor": 0.35,
+  "compatibility_groups": [
+    [
+      0,
+      8,
+      14
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      2,
+      3,
+      4,
+      7,
+      9
+    ],
+    [
+      6
+    ],
+    [
+      10,
+      11,
+      12,
+      13
+    ],
+    [
+      15
+    ]
+  ],
+  "temporal_radius_m": 0.6,
+  "temporal_stable_distance_m": 0.3,
+  "temporal_minimum_other_frames": 2,
+  "temporal_weight_floor": 0.5,
+  "minimum_effective_correspondences": 500,
+  "maximum_normalized_condition": 100000000.0,
+  "maximum_semantic_delta_translation_m": 0.5,
+  "maximum_semantic_delta_rotation_deg": 2.0,
+  "unweighted_open3d_parity_translation_m": 0.02,
+  "unweighted_open3d_parity_rotation_deg": 0.1,
+  "historical_reproduction_matrix_tolerance": 1e-05,
+  "evaluation": "Official KITTI odometry GT only in score.py; full original timestamp support; one SE(3) alignment, no scale; translation and rotation RPE at 1 s; loop relative-transform errors; fixed held-out static revisit geometry.",
+  "selection": "One archived geometric loop, selected before this semantic experiment. Not a loop detector benchmark or an unseen sequence. Parameters committed before new scoring; no search or GT feedback. All four arms share geometry, downsampling, initialization, optimizer, robust kernel, gate and graph noise. ZS and B0 use frozen pass-1 predictions. G also checked against the original Open3D implementation.",
+  "scope": "Offline loop measurement refinement, not semantic odometry or online ROS integration. Temporal reliability measures local repeated observation agreement, not object tracking. No GT labels, corrected-map labels, future source frames or current-source observations enter the historical reference. No invented posterior from top-1 cache. Unknown evidence is neutral. Failed candidates fall back to G and are retained in diagnostics. No new training or full map replay."
+}

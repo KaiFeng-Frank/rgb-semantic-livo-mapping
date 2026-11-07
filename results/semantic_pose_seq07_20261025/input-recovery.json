@@ -1,0 +1,193 @@
+{
+  "registration_frames": [
+    10,
+    20,
+    30,
+    1040,
+    1050,
+    1060
+  ],
+  "diagnostic_frames": [
+    15,
+    25,
+    35,
+    45,
+    55,
+    65,
+    75,
+    85,
+    95,
+    1005,
+    1015,
+    1025,
+    1035,
+    1045,
+    1055,
+    1065,
+    1075,
+    1085,
+    1095
+  ],
+  "prediction_archives": {
+    "ZS": "c374541fda9017a0a57be23470a19eb8a8755fe6d4233338ee3c4d2903d5c656",
+    "armB0_s1": "64ce73cbf042b56a01aa2b1459b7d3715b6c032264645c9da8b1447b91717ed0"
+  },
+  "sources": [
+    {
+      "url": "https://s3.eu-central-1.amazonaws.com/avg-kitti/data_odometry_calib.zip",
+      "sha256": "fa45d2bbff828776e6df689b161415fb7cd719345454b6d3567c2ff81fa4d075"
+    },
+    {
+      "url": "https://s3.eu-central-1.amazonaws.com/avg-kitti/data_odometry_poses.zip",
+      "sha256": "a969190799bb3fc4a15f5f0675b1ee6b7067292599b3269bdafc1e5ba883b9e1"
+    },
+    {
+      "url": "https://s3.eu-central-1.amazonaws.com/avg-kitti/raw_data/2011_09_30_drive_0027/2011_09_30_drive_0027_sync.zip",
+      "range_bytes": 52540712
+    }
+  ],
+  "new_inference": false,
+  "raw_data_uploaded": false,
+  "scans_and_timestamps": [
+    {
+      "path": "velodyne_points/data/0000000010.bin",
+      "sha256": "4e1c2f10bf6d0d4d0915a11c8a9bec63a07257a9925e1dcc760906c9ee43af48",
+      "bytes": 1959584
+    },
+    {
+      "path": "velodyne_points/data/0000000030.bin",
+      "sha256": "b8a66bb23e0519d7d8b86ce2f0d2a07a0308bf8dc9e3a67d55035e14542372ec",
+      "bytes": 1955680
+    },
+    {
+      "path": "velodyne_points/data/0000000065.bin",
+      "sha256": "ee56eb7216283bd69f31e03d7a9605cba6595dff1b2482425d935db260caa2ac",
+      "bytes": 1824144
+    },
+    {
+      "path": "velodyne_points/data/0000001005.bin",
+      "sha256": "5066300851bef889043498db49dfc79ef7af021af71d7e0cd1ef2b6f8a5e355a",
+      "bytes": 1774592
+    },
+    {
+      "path": "velodyne_points/data/0000001040.bin",
+      "sha256": "51364d8017b2e38057837336003fc33a26fd383fe3237cf2b85d17d4bcb5df8f",
+      "bytes": 1830896
+    },
+    {
+      "path": "velodyne_points/data/0000001060.bin",
+      "sha256": "9fcd414e85ad7a02180bf700af583161641e4ae514bbbf01b3329a123675d984",
+      "bytes": 1899648
+    },
+    {
+      "path": "velodyne_points/data/0000001095.bin",
+      "sha256": "399792fd831c95fd1858a289db2a878a4982119463e4a76f9a1a8546aa360590",
+      "bytes": 1856896
+    },
+    {
+      "path": "velodyne_points/timestamps_start.txt",
+      "sha256": "82a717b547e98904db456f94332764c032da44834e6cdd1a8c1c345a0be96367",
+      "bytes": 33180
+    },
+    {
+      "path": "velodyne_points/timestamps_end.txt",
+      "sha256": "91803d21b00a90536deffc37031bcb47a34dc443086413231bd0379c167e3625",
+      "bytes": 33180
+    },
+    {
+      "path": "image_02/timestamps.txt",
+      "sha256": "33a7c7cd2024987067e56970beab44237a27865857a36f13a722ebafa8899a35",
+      "bytes": 33180
+    },
+    {
+      "path": "velodyne_points/data/0000000015.bin",
+      "sha256": "59b66ea3e380bc6797dbaaf3fc6468c5b08b7d5292a89e35a670bdfd2ed08607",
+      "bytes": 1969120
+    },
+    {
+      "path": "velodyne_points/data/0000000035.bin",
+      "sha256": "a9e99e59166e6403115dbc61423629a01771c313c94afa1aa5680c3e1c4f0db4",
+      "bytes": 1953072
+    },
+    {
+      "path": "velodyne_points/data/0000000075.bin",
+      "sha256": "495f39099361a281b9f739e1f9ab2db316206e79591b00d9409d9823b29d917c",
+      "bytes": 1892064
+    },
+    {
+      "path": "velodyne_points/data/0000001015.bin",
+      "sha256": "5b6ef8790bbb6b1b4a8f84f57cd6b407ff6306300d7ba6e4b46a09e9fed5ba4f",
+      "bytes": 1753408
+    },
+    {
+      "path": "velodyne_points/data/0000001045.bin",
+      "sha256": "6c14fe77e416fea304d625acede0b7881ea9c78051924e997077af265aa81ab4",
+      "bytes": 1844464
+    },
+    {
+      "path": "velodyne_points/data/0000001065.bin",
+      "sha256": "e6397ce6b28ef54bc8434ed04a93582c6d309cb53dab767a751c8b333413b608",
+      "bytes": 1913936
+    },
+    {
+      "path": "velodyne_points/data/0000000020.bin",
+      "sha256": "6fac05e9107b893159f81a8bcb5f5460f2eb19dc18b7357324bd5249b5c02d30",
+      "bytes": 1966480
+    },
+    {
+      "path": "velodyne_points/data/0000000045.bin",
+      "sha256": "06461f8701b896ea20f3613147f75c0a75c40bd8d7cb2b5018efae11c021a0a2",
+      "bytes": 1970512
+    },
+    {
+      "path": "velodyne_points/data/0000000085.bin",
+      "sha256": "4d7e71c02c629b8f2c26e603c65aaf6e43f57e623cd5fc943b90a70f4ee30867",
+      "bytes": 1812896
+    },
+    {
+      "path": "velodyne_points/data/0000001025.bin",
+      "sha256": "5842f824bb1b34411aa8170816429020027a6a82da297ad2933ab21f702b13b6",
+      "bytes": 1773232
+    },
+    {
+      "path": "velodyne_points/data/0000001050.bin",
+      "sha256": "0b46d749a67974a086d8f7b47ea68fe58b1d31722ae613f48e03569fe4be09e0",
+      "bytes": 1863536
+    },
+    {
+      "path": "velodyne_points/data/0000001075.bin",
+      "sha256": "2440ca70bb3b0b2d6c296a5a6d6171155251503f77d60327ceb1952f229ceec2",
+      "bytes": 1923040
+    },
+    {
+      "path": "velodyne_points/data/0000000025.bin",
+      "sha256": "887e7011993b17f5e566164378e8ad8ae43c696f2e204d4583af08136feaeccf",
+      "bytes": 1960960
+    },
+    {
+      "path": "velodyne_points/data/0000000055.bin",
+      "sha256": "1685882c00f69fd45c8126d32a354bdb1983ecdbf0b5ab4ff4c89629525a5c73",
+      "bytes": 1815344
+    },
+    {
+      "path": "velodyne_points/data/0000000095.bin",
+      "sha256": "8f62a7472825fceabd37aa5389f525307fe4260a9c555079b827240f7840cf45",
+      "bytes": 1991184
+    },
+    {
+      "path": "velodyne_points/data/0000001035.bin",
+      "sha256": "ed4a1a45dc8428a79d32027d303142fa52610c643f2af8fe042e5cbb83ed96a0",
+      "bytes": 1802944
+    },
+    {
+      "path": "velodyne_points/data/0000001055.bin",
+      "sha256": "ec27827177c4cfe9ab0c9369cfe656553850b70c7d25afd6d0fa832298070b3e",
+      "bytes": 1890432
+    },
+    {
+      "path": "velodyne_points/data/0000001085.bin",
+      "sha256": "359f8a9ac1fe521b2b53704f944988d49a83c620c21a44ac41202e8987749dee",
+      "bytes": 1869856
+    }
+  ]
+}

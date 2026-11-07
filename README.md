@@ -46,6 +46,13 @@ The tested group-balanced correction raises full-map common-9 mIoU from
 slightly worse per-visit normalization are retained in the linked report.
 This is one offline sequence comparison; the single-scan predictions are unchanged.
 
+The reverse direction is tested in [semantic-assisted pose refinement](docs/semantic_pose_results.md):
+fixed loop geometry, G/D/S/T weight ablations, and archived ZS/B0 predictions.
+B0 semantic compatibility changes ATE from 0.557214 to 0.556708 m; adding temporal
+reliability gives 0.557178 m and trades loop translation against rotation accuracy.
+These sub-millimetre RMSE differences do **not** establish a useful localization gain.
+All controls and trajectories are preserved; this experiment does not change the live frontend.
+
 ![semantic map](docs/img/rviz_class_final.png)
 
 *The full 693 m loop of KITTI seq 07, coloured by predicted class. Cyan is `driveable_surface`,
